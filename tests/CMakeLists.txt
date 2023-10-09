@@ -33,6 +33,6 @@ enable_testing()
 
 add_test(NAME ${BINARY} COMMAND ${BINARY})
 
-target_link_libraries(${CMAKE_PROJECT_NAME}_lib gtest)
+target_link_libraries(${BINARY} gtest)
 
 target_link_libraries(${BINARY} ${CMAKE_PROJECT_NAME}_lib)
