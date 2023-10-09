@@ -1,24 +1,28 @@
 
 stages:
-  - setup
+  - build
   - test
 
-setup:
-  stage: setup
+build:
+  stage: build
   tags:
     - all
   script:
     - apt-get update -qy
-    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev
+    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential
+    - cmake -B build
+    - cmake --build build
   artifacts:
     paths:
       - ./libs
     expire_in: 1 week
 
-test:
+GoogleTests:
   stage: test
   tags:
     - all
   script:
     - echo "Testing in progress..."
+    - .\build\tests\TestApp_test_run   
+
   environment: production
