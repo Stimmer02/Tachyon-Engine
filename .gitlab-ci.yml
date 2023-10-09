@@ -14,11 +14,13 @@ build:
     - cmake --build build
   artifacts:
     paths:
-      - ./libs
+      - build/
     expire_in: 1 week
 
 GoogleTests:
   stage: test
+  dependencies:
+    - build
   tags:
     - all
   script:
