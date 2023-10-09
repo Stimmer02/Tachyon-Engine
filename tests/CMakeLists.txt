@@ -29,9 +29,10 @@ add_dependencies(gtest_main googletest)
 target_link_libraries(gtest_main INTERFACE ${GTEST_INSTALL_PREFIX}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}gtest_main${CMAKE_STATIC_LIBRARY_SUFFIX})
 
 
-
 enable_testing()
 
 add_test(NAME ${BINARY} COMMAND ${BINARY})
 
-target_link_libraries(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib gtest gtest_main)
+target_link_libraries(${CMAKE_PROJECT_NAME}_lib gtest)
+
+target_link_libraries(${BINARY} ${CMAKE_PROJECT_NAME}_lib)
