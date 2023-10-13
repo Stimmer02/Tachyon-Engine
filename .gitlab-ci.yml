@@ -15,9 +15,11 @@ build:
     - echo "Building in progress..."
     - cmake -B build -G "Unix Makefiles"
     - cmake --build build
-  cache:
+  artifacts:
     paths:
       - build/
+    when: on_success
+    expire_in: 30 days
 
 GoogleTests:
   stage: test
@@ -25,6 +27,8 @@ GoogleTests:
   tags:
     - all
   script:
+    - cmake -B build -G "Unix Makefiles"
+    - cmake --build build
     - echo "Testing in progress..."
     - .\\build\\tests\\TachyonEngine_test 
   allow_failure: true
