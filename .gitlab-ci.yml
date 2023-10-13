@@ -9,7 +9,8 @@ build:
     - all
   script:
     - apt-get update -qy
-    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential cmake git googletest libgtest-dev opencl-c-headers opencl-clhpp-headers clinfo
+    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential cmake git googletest libgtest-dev opencl-c-headers opencl-clhpp-headers mesa-utils clinfo
+    - echo "Acquiring platform info in progress..."
     - clinfo
     - echo "Building in progress..."
     - cmake -B build -G "Unix Makefiles"
