@@ -2,3 +2,5 @@ build/CMakeCache.txt
 build/CMakeFiles
 build/src
 build/tests
+build/src/googletest-build
+build/src/googletest-stamp
