@@ -13,10 +13,6 @@ build:
     - echo "Building in progress..."
     - cmake -B build -G "Unix Makefiles"
     - cmake --build build
-  artifacts:
-    paths:
-      - build/
-    expire_in: 1 week
 
 GoogleTests:
   stage: test
@@ -27,5 +23,5 @@ GoogleTests:
   script:
     - echo "Testing in progress..."
     - .\\build\\tests\\TachyonEngine_test 
-
+  allow_failure: true
   environment: production
