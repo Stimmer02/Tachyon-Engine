@@ -26,6 +26,6 @@ GoogleTests:
     - all
   script:
     - echo "Testing in progress..."
-    - .\build\tests\TachyonEngine_test 
+    - .\\build\\tests\\TachyonEngine_test 
 
   environment: production
