@@ -572,8 +572,6 @@ _Python_EXECUTABLE:INTERNAL=C:/Users/Dawid/AppData/Local/Programs/Python/Python3
 //Python Properties
 _Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;4;64;;cp311-win_amd64;;C:\Users\Dawid\AppData\Local\Programs\Python\Python311\Lib;C:\Users\Dawid\AppData\Local\Programs\Python\Python311\Lib;C:\Users\Dawid\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Users\Dawid\AppData\Local\Programs\Python\Python311\Lib\site-packages
 _Python_INTERPRETER_SIGNATURE:INTERNAL=cafa9e36dc291115e8660d91c6d02284
-//Interpreter reason failure
-_Python_Interpreter_REASON_FAILURE:INTERNAL=
 //NumPy reason failure
 _Python_NumPy_REASON_FAILURE:INTERNAL=
 cmake_package_name:INTERNAL=GTest
