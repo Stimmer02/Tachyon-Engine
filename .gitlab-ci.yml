@@ -26,7 +26,9 @@ GoogleTests:
     - cmake -B build -G "Unix Makefiles"
     - cmake --build build
     - echo "Testing in progress..."
-    - .\\build\\tests\\TachyonEngine_test 
+    - cd build
+    - cd tests
+    - ./TachyonEngine_test
   allow_failure: true
   dependencies:
     - build
