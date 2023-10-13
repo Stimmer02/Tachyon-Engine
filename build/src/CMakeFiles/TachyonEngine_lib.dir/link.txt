@@ -1,2 +1,0 @@
-C:\msys64\mingw64\bin\ar.exe qc libTachyonEngine_lib.a CMakeFiles/TachyonEngine_lib.dir/main.cpp.obj
-C:\msys64\mingw64\bin\ranlib.exe libTachyonEngine_lib.a
