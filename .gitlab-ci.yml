@@ -9,19 +9,18 @@ build:
     - all
   script:
     - apt-get update -qy
-    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential cmake git googletest libgtest-dev opencl-clhpp-headers
+    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential cmake git googletest libgtest-dev opencl-c-headers opencl-clhpp-headers clinfo
+    - clinfo
     - echo "Building in progress..."
     - cmake -B build -G "Unix Makefiles"
     - cmake --build build
-  artifacts:
+  cache:
     paths:
       - build/
-    expire_in: 1 week
 
 GoogleTests:
   stage: test
-  dependencies:
-    - build
+  
   tags:
     - all
   script:
@@ -29,3 +28,5 @@ GoogleTests:
     - .\\build\\tests\\TachyonEngine_test 
   allow_failure: true
   environment: production
+  dependencies:
+    - build
