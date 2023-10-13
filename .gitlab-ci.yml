@@ -9,7 +9,7 @@ build:
     - all
   script:
     - apt-get update -qy
-    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential cmake git googletest
+    - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential cmake git googletest libgtest-dev
     - cmake -B build
     - cmake --build build
   artifacts:
