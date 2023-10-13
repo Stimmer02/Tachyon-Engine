@@ -129,20 +129,6 @@ TachyonEngine_test/fast:
 	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f tests\CMakeFiles\TachyonEngine_test.dir\build.make tests/CMakeFiles/TachyonEngine_test.dir/build
 .PHONY : TachyonEngine_test/fast
 
-# Convenience name for target.
-tests/CMakeFiles/googletest.dir/rule:
-	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 tests/CMakeFiles/googletest.dir/rule
-.PHONY : tests/CMakeFiles/googletest.dir/rule
-
-# Convenience name for target.
-googletest: tests/CMakeFiles/googletest.dir/rule
-.PHONY : googletest
-
-# fast build rule for target.
-googletest/fast:
-	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f tests\CMakeFiles\googletest.dir\build.make tests/CMakeFiles/googletest.dir/build
-.PHONY : googletest/fast
-
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -199,7 +185,6 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... googletest
 	@echo ... TachyonEngine_test
 	@echo ... main.obj
 	@echo ... main.i

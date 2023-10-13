@@ -116,6 +116,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named googletest
+
+# Build rule for target.
+googletest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 googletest
+.PHONY : googletest
+
+# fast build rule for target.
+googletest/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\googletest.dir\build.make CMakeFiles/googletest.dir/build
+.PHONY : googletest/fast
+
+#=============================================================================
 # Target rules for targets named TachyonEngine_run
 
 # Build rule for target.
@@ -153,19 +166,6 @@ TachyonEngine_test: cmake_check_build_system
 TachyonEngine_test/fast:
 	$(MAKE) $(MAKESILENT) -f tests\CMakeFiles\TachyonEngine_test.dir\build.make tests/CMakeFiles/TachyonEngine_test.dir/build
 .PHONY : TachyonEngine_test/fast
-
-#=============================================================================
-# Target rules for targets named googletest
-
-# Build rule for target.
-googletest: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 googletest
-.PHONY : googletest
-
-# fast build rule for target.
-googletest/fast:
-	$(MAKE) $(MAKESILENT) -f tests\CMakeFiles\googletest.dir\build.make tests/CMakeFiles/googletest.dir/build
-.PHONY : googletest/fast
 
 # Help Target
 help:

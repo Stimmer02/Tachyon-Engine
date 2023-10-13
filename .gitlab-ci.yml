@@ -10,7 +10,8 @@ build:
   script:
     - apt-get update -qy
     - apt-get install -y libglfw3 libglfw3-dev ocl-icd-libopencl1 ocl-icd-opencl-dev build-essential cmake git googletest libgtest-dev opencl-clhpp-headers
-    - cmake -B build
+    - echo "Building in progress..."
+    - cmake -B build -G "Unix Makefiles"
     - cmake --build build
   artifacts:
     paths:
@@ -25,6 +26,6 @@ GoogleTests:
     - all
   script:
     - echo "Testing in progress..."
-    - .\build\tests\TestApp_test_run   
+    - .\build\tests\TachyonEngine_test 
 
   environment: production

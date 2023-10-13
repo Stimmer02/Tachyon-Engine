@@ -1,6 +1,6 @@
 build/CMakeCache.txt
-build/CMakeFiles
-build/src
-build/tests
-build/src/googletest-build
-build/src/googletest-stamp
+build/CMakeFiles/
+build/src/
+build/tests/
+build/src/googletest-build/CMakeCache.txt
+build/src/googletest-stamp/
