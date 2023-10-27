@@ -36,6 +36,7 @@ build/googletest
 build/CMakeFiles
 build/src
 build/tests
+build/editor
 build/.cmake
 build/editor/CMakeFiles
 OpenCL
@@ -47,3 +48,4 @@ build/CMakeCache.txt
 build/cmake_install.cmake
 build/Makefile
 build/lib/googletest/lib/pkgconfig
+build/cmake_install.cmake
