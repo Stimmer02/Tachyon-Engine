@@ -1,10 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/TachyonEngine_editor.dir/main.cpp.obj"
-  "CMakeFiles/TachyonEngine_editor.dir/main.cpp.obj.d"
-  "TachyonEngine_editor.exe"
-  "TachyonEngine_editor.exe.manifest"
+  "CMakeFiles/TachyonEngine_editor.dir/main.cpp.o"
+  "CMakeFiles/TachyonEngine_editor.dir/main.cpp.o.d"
+  "TachyonEngine_editor"
   "TachyonEngine_editor.pdb"
-  "libTachyonEngine_editor.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.
