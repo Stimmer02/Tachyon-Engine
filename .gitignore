@@ -1,5 +1,45 @@
-build/CMakeCache.txt
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Directories
+build/googletest
 build/CMakeFiles
 build/src
 build/tests
-build/src/googletest
+build/.cmake
+.vscode
+
+# Files
+build/CMakeCache.txt
+build/cmake_install.cmake
+build/Makefile

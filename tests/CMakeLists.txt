@@ -6,6 +6,8 @@ set(SOURCES ${TEST_SOURCES})
 
 add_executable(${BINARY} ${TEST_SOURCES})
 
+set_property(TARGET ${BINARY} PROPERTY CXX_STANDARD 17)
+
 enable_testing()
 
 add_test(NAME ${BINARY} COMMAND ${BINARY})

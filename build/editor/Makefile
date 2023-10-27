@@ -86,14 +86,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build\CMakeFiles C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build\\CMakeFiles\progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build\CMakeFiles C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build\editor\\CMakeFiles\progress.marks
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 editor/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 clean
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 editor/clean
 .PHONY : clean
 
 # The main clean target
@@ -102,83 +102,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 preinstall
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 editor/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 preinstall
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 editor/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named googletest
+# Convenience name for target.
+editor/CMakeFiles/TachyonEngine_editor.dir/rule:
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 editor/CMakeFiles/TachyonEngine_editor.dir/rule
+.PHONY : editor/CMakeFiles/TachyonEngine_editor.dir/rule
 
-# Build rule for target.
-googletest: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 googletest
-.PHONY : googletest
-
-# fast build rule for target.
-googletest/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\googletest.dir\build.make CMakeFiles/googletest.dir/build
-.PHONY : googletest/fast
-
-#=============================================================================
-# Target rules for targets named TachyonEngine_run
-
-# Build rule for target.
-TachyonEngine_run: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TachyonEngine_run
-.PHONY : TachyonEngine_run
-
-# fast build rule for target.
-TachyonEngine_run/fast:
-	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\TachyonEngine_run.dir\build.make src/CMakeFiles/TachyonEngine_run.dir/build
-.PHONY : TachyonEngine_run/fast
-
-#=============================================================================
-# Target rules for targets named TachyonEngine_lib
-
-# Build rule for target.
-TachyonEngine_lib: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TachyonEngine_lib
-.PHONY : TachyonEngine_lib
-
-# fast build rule for target.
-TachyonEngine_lib/fast:
-	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\TachyonEngine_lib.dir\build.make src/CMakeFiles/TachyonEngine_lib.dir/build
-.PHONY : TachyonEngine_lib/fast
-
-#=============================================================================
-# Target rules for targets named TachyonEngine_editor
-
-# Build rule for target.
-TachyonEngine_editor: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TachyonEngine_editor
+# Convenience name for target.
+TachyonEngine_editor: editor/CMakeFiles/TachyonEngine_editor.dir/rule
 .PHONY : TachyonEngine_editor
 
 # fast build rule for target.
 TachyonEngine_editor/fast:
-	$(MAKE) $(MAKESILENT) -f editor\CMakeFiles\TachyonEngine_editor.dir\build.make editor/CMakeFiles/TachyonEngine_editor.dir/build
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f editor\CMakeFiles\TachyonEngine_editor.dir\build.make editor/CMakeFiles/TachyonEngine_editor.dir/build
 .PHONY : TachyonEngine_editor/fast
 
-#=============================================================================
-# Target rules for targets named TachyonEngine_test
+main.obj: main.cpp.obj
+.PHONY : main.obj
 
-# Build rule for target.
-TachyonEngine_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 TachyonEngine_test
-.PHONY : TachyonEngine_test
+# target to build an object file
+main.cpp.obj:
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f editor\CMakeFiles\TachyonEngine_editor.dir\build.make editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.obj
+.PHONY : main.cpp.obj
 
-# fast build rule for target.
-TachyonEngine_test/fast:
-	$(MAKE) $(MAKESILENT) -f tests\CMakeFiles\TachyonEngine_test.dir\build.make tests/CMakeFiles/TachyonEngine_test.dir/build
-.PHONY : TachyonEngine_test/fast
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f editor\CMakeFiles\TachyonEngine_editor.dir\build.make editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(MAKE) $(MAKESILENT) -f editor\CMakeFiles\TachyonEngine_editor.dir\build.make editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -188,11 +161,10 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... googletest
 	@echo ... TachyonEngine_editor
-	@echo ... TachyonEngine_lib
-	@echo ... TachyonEngine_run
-	@echo ... TachyonEngine_test
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 .PHONY : help
 
 
@@ -204,6 +176,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\Users\Dawid\Desktop\ProjektZespolowy\tachion-engine\build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

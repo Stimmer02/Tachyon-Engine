@@ -7,6 +7,12 @@ project(TachyonEngine VERSION 1.1)
 
 include(ExternalProject)
 
+if(WIN32)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lopengl32 -lglfw3 -lglew32 ")
+
+endif()
+
 set(GTEST_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/lib/googletest" CACHE PATH "Installation directory for Google Test")
 
 ExternalProject_Add(
@@ -31,4 +37,5 @@ target_link_libraries(gtest_main INTERFACE ${GTEST_INSTALL_PREFIX}/lib/${CMAKE_S
 include_directories(src)
 
 add_subdirectory(src)
+add_subdirectory(editor)
 add_subdirectory(tests)
