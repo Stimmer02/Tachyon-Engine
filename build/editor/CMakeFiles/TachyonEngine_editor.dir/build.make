@@ -94,6 +94,7 @@ editor/TachyonEngine_editor: editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp
 editor/TachyonEngine_editor: editor/CMakeFiles/TachyonEngine_editor.dir/build.make
 editor/TachyonEngine_editor: src/libTachyonEngine_lib.dylib
 editor/TachyonEngine_editor: /usr/local/lib/libglfw.3.3.dylib
+editor/TachyonEngine_editor: /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/OpenGL.framework/OpenGL.tbd
 editor/TachyonEngine_editor: /usr/local/lib/libGLEW.2.2.0.dylib
 editor/TachyonEngine_editor: editor/CMakeFiles/TachyonEngine_editor.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/solz/Desktop/ProjektZesp/tachion-engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable TachyonEngine_editor"
