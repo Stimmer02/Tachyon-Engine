@@ -37,6 +37,7 @@ build/CMakeFiles
 build/src
 build/tests
 build/.cmake
+OpenCL
 .vscode
 
 # Files

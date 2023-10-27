@@ -6,8 +6,9 @@
 #include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 #include <OpenGL/OpenGL.h>
-#include "OpenCL/include/CL/cl_gl.h"
-#include "OpenCL/include/CL/cl.hpp"
+#include <OpenCL/opencl.h>
+#include <OpenCL/cl_gl.h>
+#include "../OpenCL/include/CL/cl.hpp"
 
 #elif __WIN32__
 

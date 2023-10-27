@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_STANDARD 17)
 
 project(TachyonEngine VERSION 1.1)
 
@@ -19,7 +20,7 @@ ExternalProject_Add(
     googletest
     PREFIX "${CMAKE_BINARY_DIR}/googletest"
     GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG release-1.11.0 
+    GIT_TAG release-1.11.0
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${GTEST_INSTALL_PREFIX}
 )
 
@@ -32,7 +33,6 @@ target_link_libraries(gtest INTERFACE ${GTEST_INSTALL_PREFIX}/lib/${CMAKE_STATIC
 add_library(gtest_main INTERFACE IMPORTED GLOBAL)
 add_dependencies(gtest_main googletest)
 target_link_libraries(gtest_main INTERFACE ${GTEST_INSTALL_PREFIX}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}gtest_main${CMAKE_STATIC_LIBRARY_SUFFIX})
-
 
 include_directories(src)
 

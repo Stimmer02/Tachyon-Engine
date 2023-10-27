@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Dawid/Desktop/ProjektZespolowy/tachion-engine
+# Install script for directory: /Users/solz/Desktop/ProjektZesp/tachion-engine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/TachyonEngine")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,22 +34,22 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/msys64/mingw64/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/Dawid/Desktop/ProjektZespolowy/tachion-engine/build/src/cmake_install.cmake")
+  include("/Users/solz/Desktop/ProjektZesp/tachion-engine/build/src/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/Dawid/Desktop/ProjektZespolowy/tachion-engine/build/editor/cmake_install.cmake")
+  include("/Users/solz/Desktop/ProjektZesp/tachion-engine/build/editor/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/Dawid/Desktop/ProjektZespolowy/tachion-engine/build/tests/cmake_install.cmake")
+  include("/Users/solz/Desktop/ProjektZesp/tachion-engine/build/tests/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -60,5 +60,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Dawid/Desktop/ProjektZespolowy/tachion-engine/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/solz/Desktop/ProjektZesp/tachion-engine/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

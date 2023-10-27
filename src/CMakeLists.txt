@@ -4,7 +4,6 @@ find_package(OpenCL REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(GLEW REQUIRED)
 
-
 file(GLOB SOURCES LIST_DIRECTORIES true  *.cpp *.c)
 file(GLOB_RECURSE HEADER_FILES "*.h")
 file(GLOB_RECURSE SOURCE_FILES "*.cpp")
@@ -21,6 +20,8 @@ include_directories(${GLEW_INCLUDE_DIRS})
 
 target_link_libraries(${BINARY}_lib ${OpenCL_LIBRARIES})
 target_link_libraries(${BINARY}_lib glfw)
+if(WIN32)
 target_link_libraries(${BINARY}_lib OpenGL32)
-target_link_libraries(${BINARY}_lib ${GLEW_LIBRARIES})
+endif()
+target_link_libraries(${BINARY}_lib GLEW::GLEW)
 target_link_libraries(${BINARY}_run ${BINARY}_lib)

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/Dawid/Desktop/ProjektZespolowy/tachion-engine/editor/main.cpp" "editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.obj" "gcc" "editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.obj.d"
+  "/Users/solz/Desktop/ProjektZesp/tachion-engine/editor/main.cpp" "editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.o" "gcc" "editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
