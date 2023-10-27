@@ -37,10 +37,13 @@ build/CMakeFiles
 build/src
 build/tests
 build/.cmake
+build/editor/CMakeFiles
 OpenCL
+
 .vscode
 
 # Files
 build/CMakeCache.txt
 build/cmake_install.cmake
 build/Makefile
+build/lib/googletest/lib/pkgconfig
