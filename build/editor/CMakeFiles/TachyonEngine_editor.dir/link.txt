@@ -1,3 +1,1 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\TachyonEngine_editor.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\TachyonEngine_editor.dir/objects.a @CMakeFiles\TachyonEngine_editor.dir\objects1.rsp
-C:\msys64\mingw64\bin\g++.exe  -lopengl32 -lglfw3 -lglew32  -Wl,--whole-archive CMakeFiles\TachyonEngine_editor.dir/objects.a -Wl,--no-whole-archive -o TachyonEngine_editor.exe -Wl,--out-implib,libTachyonEngine_editor.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TachyonEngine_editor.dir\linkLibs.rsp
+/usr/bin/g++ CMakeFiles/TachyonEngine_editor.dir/main.cpp.o -o TachyonEngine_editor  -Wl,-rpath,"/home/stimmer02/Documents/UMCS/SEMESTR_5/projekt grupowy/v_A1/tachion-engine/build/src" ../src/libTachyonEngine_lib.so /usr/lib/libOpenCL.so /usr/lib/libglfw.so.3.3 /usr/lib/libGLX.so /usr/lib/libOpenGL.so /usr/lib/libGLEW.so 
