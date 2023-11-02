@@ -5,7 +5,7 @@ find_package(glfw3 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-file(GLOB SOURCES LIST_DIRECTORIES true  *.cpp *.c)
+file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true  *.cpp *.c)
 file(GLOB_RECURSE HEADER_FILES "*.h")
 file(GLOB_RECURSE SOURCE_FILES "*.cpp")
 
