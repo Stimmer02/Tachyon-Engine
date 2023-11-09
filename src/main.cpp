@@ -50,7 +50,6 @@ cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 void glfwErrorCallback(int error, const char* description);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
-// int width = 2160, height = 3840;
 int width = 1024, height = 1024;
 
 GLuint PBO;
