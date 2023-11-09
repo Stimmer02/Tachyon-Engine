@@ -6,20 +6,8 @@
 #include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 #include <OpenGL/OpenGL.h>
-#include <OpenCL/opencl.h>
-#include <OpenCL/cl_gl.h>
-#include "../OpenCL/include/CL/cl.hpp"
-
-#elif __WIN32__
-
-typedef unsigned int uint;
-
-#include <windows.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
-#include <CL/opencl.hpp>
-#include <CL/cl_gl.h>
+#include "OpenCL/include/CL/cl_gl.h"
+#include "OpenCL/include/CL/cl.hpp"
 
 #else
 
@@ -34,8 +22,6 @@ typedef unsigned int uint;
 #include <vector>
 #include <cstdio>
 
-#include "point.h" //Testowy include
-
 struct color{
     unsigned char R, G, B;
 };
@@ -49,8 +35,10 @@ cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 void glfwErrorCallback(int error, const char* description);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+uint localXsize = 16;
+uint localYsize = 16;
 // int width = 2160, height = 3840;
-int width = 1000, height = 1000;
+int width = 1024, height = 1024;
 
 GLuint PBO;
 GLuint texture;
@@ -61,11 +49,9 @@ bool FALLBACK = false;
 
 int main(){
 
-    Point testPoint(3, 3);
-
     //Initialize GLFW
 
-    GLFWwindow* window = initializeGLFW(width, height);
+    GLFWwindow* window = initializeGLFW(height, width);
 
     if (!window){
          glfwTerminate();
@@ -100,16 +86,6 @@ int main(){
         (cl_context_properties)shareGroup,
         0
     };
-
-#elif __WIN32__
-
-    cl_context_properties properties[] = {
-        CL_GL_CONTEXT_KHR, (cl_context_properties) wglGetCurrentContext(),
-        CL_WGL_HDC_KHR, (cl_context_properties) wglGetCurrentDC(),
-        CL_CONTEXT_PLATFORM, (cl_context_properties) platform,
-        0
-    };
-
 
 #else
 
@@ -187,6 +163,11 @@ int main(){
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
     //Main loop
+    if (!FALLBACK){
+        clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
+    } else {
+        glBindBuffer(GL_ARRAY_BUFFER, PBO);
+    }
 
     while (!glfwWindowShouldClose(window)){
         processInput(window);
@@ -194,20 +175,17 @@ int main(){
         dims[0] = width;
         dims[1] = height;
         anim++;
-        queue.enqueueWriteBuffer(buffer_dims, CL_TRUE, 0, sizeof(int)*2, dims);
-        queue.enqueueWriteBuffer(buffer_anim, CL_TRUE, 0, sizeof(int), &anim);
+        queue.enqueueWriteBuffer(buffer_dims, CL_FALSE, 0, sizeof(int)*2, dims);
+        queue.enqueueWriteBuffer(buffer_anim, CL_FALSE, 0, sizeof(int), &anim);
 
 
         if(!FALLBACK){
-            clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NullRange);
-            clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, localYsize));
             queue.finish();
         } else {
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NullRange);
-            clEnqueueReadBuffer(queue(), pbo_mem, CL_TRUE, 0, sizeof(color)*width*height, hostFallbackBuffer, 0, NULL, NULL);
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, localYsize));
+            queue.enqueueReadBuffer(pbo_buff, CL_FALSE, 0, sizeof(color)*width*height, hostFallbackBuffer, NULL, NULL);
             queue.finish();
-            glBindBuffer(GL_ARRAY_BUFFER, PBO);
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(color)*width*height, hostFallbackBuffer);
         }
 
@@ -228,17 +206,21 @@ int main(){
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    glDeleteBuffers(1, &PBO);
-    if(FALLBACK){
+    if (!FALLBACK){
+        clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
+    } else {
         delete[] hostFallbackBuffer;
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
+    glDeleteBuffers(1, &PBO);
+
     glDeleteTextures(1, &texture);
 
     glfwDestroyWindow(window);
 
 }
 
-GLFWwindow* initializeGLFW(uint height, uint width){
+GLFWwindow* initializeGLFW(uint width, uint height){
     if (!glfwInit()){
         std::printf("Failed to initialize GLFW!\n");
         return nullptr;
@@ -305,48 +287,28 @@ cl::Program compileCopyKernel(cl::Context context, cl::Device default_device){
         "   struct color {"
         "       unsigned char R, G, B;"
         "   };";
-
     std::string kernel_code =
-        "   void kernel create_gradient(global struct color* A, global const int* dims, global const int* anim){"
-        "       int ID, Nthreads, width, height;"
-        "       float gradientStepX, gradientStepY;"
-        ""
-        "       ID = get_global_id(0);"
-        "       Nthreads = get_global_size(0);"
-        "       width = dims[0];"
-        "       height = dims[1];"
-        ""
-        "       gradientStepX  = 3.14f / (float)width;"
-        "       gradientStepY  = 3.14f / (float)height;"
-        ""
-        "       for (int i = ID; i < height; i += Nthreads){"
-        "           for (int j = 0; j < width; j++){"
-        "               A[i*width + j].R = (sin((i+*anim)*gradientStepY) + 1) * 127;"
-        "               A[i*width + j].G = (cos((j+*anim*2)*gradientStepX) + 1) * 127;"
-        "               A[i*width + j].B = (sin(((i+*anim*3)*gradientStepY + (j+*anim)*gradientStepX)/2) + 1) * 127;"
-        "           }"
-        "       }"
-        "   }";
-    std::string kernel2_code =
         "   void kernel create_gradient(global struct color* A, global const int* dims, global const int* anim){"
         "       int IDX, IDY, global_ID, anim2;"
         "       float gradientStepX, gradientStepY;"
         ""
         "       IDX = get_global_id(0);"
         "       IDY = get_global_id(1);"
-        "       global_ID = IDX + IDY * get_global_size(0);"
+        "       if (IDX < dims[0] && IDY < dims[1]){"
+        "           global_ID = IDX + IDY * get_global_size(0);"
         ""
-        "       anim2 = *anim * (get_global_size(0) + get_global_size(1)) / 2 /1000;"
-        "       gradientStepX  = 3.14159263f / (float)get_global_size(0);"
-        "       gradientStepY  = 3.14159263f / (float)get_global_size(1);"
+        "           anim2 = *anim * (get_global_size(0) + get_global_size(1)) / 2 /1000;"
+        "           gradientStepX  = 3.14159263f / (float)get_global_size(0);"
+        "           gradientStepY  = 3.14159263f / (float)get_global_size(1);"
         ""
-        "       A[global_ID].R = (sin((IDY+anim2)*gradientStepY) + 1) * 127;"
-        "       A[global_ID].G = (cos((IDX+anim2*2)*gradientStepX) + 1) * 127;"
-        "       A[global_ID].B = (sin(((IDY-anim2*2)*gradientStepY + (IDX-anim2)*gradientStepX)/2) + 1) * 127;"
+        "           A[global_ID].R = (sin((IDY+anim2)*gradientStepY) + 1) * 127;"
+        "           A[global_ID].G = (cos((IDX+anim2*2)*gradientStepX) + 1) * 127;"
+        "           A[global_ID].B = (sin(((IDY-anim2*2)*gradientStepY + (IDX-anim2)*gradientStepX)/2) + 1) * 127;"
+        "       }"
         "   }";
 
     sources.push_back({color_structure.c_str(), color_structure.length()});
-    sources.push_back({kernel2_code.c_str(), kernel2_code.length()});
+    sources.push_back({kernel_code.c_str(), kernel_code.length()});
     cl::Program program(context, sources);
 
     if (program.build() != CL_SUCCESS) {
@@ -362,20 +324,10 @@ void glfwErrorCallback(int error, const char* description){
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int w, int h){
-#ifndef __APPLE__
-    for (; w%4; w++);
-#endif
-    width = w;
-    height = h;
+    width = localXsize*uint((w + localXsize-1)/localXsize);
+    height = localYsize*uint((h + localYsize-1)/localYsize);
 
     glViewport(0, 0, width, height);
-
-#ifdef __APPLE__
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-#endif
-
 }
 
 void processInput(GLFWwindow *window){
