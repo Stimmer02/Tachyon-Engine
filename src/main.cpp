@@ -51,7 +51,7 @@ void glfwErrorCallback(int error, const char* description);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 // int width = 2160, height = 3840;
-int width = 1000, height = 1000;
+int width = 1024, height = 1024;
 
 GLuint PBO;
 GLuint texture;
@@ -205,7 +205,7 @@ int main(){
             clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
             queue.finish();
         } else {
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(128, 1));
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(4, 1));
             clEnqueueReadBuffer(queue(), pbo_mem, CL_TRUE, 0, sizeof(color)*width*height, hostFallbackBuffer, 0, NULL, NULL);
             queue.finish();
             glBindBuffer(GL_ARRAY_BUFFER, PBO);
