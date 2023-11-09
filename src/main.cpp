@@ -33,6 +33,7 @@ typedef unsigned int uint;
 
 #include <vector>
 #include <cstdio>
+#include <cmath>
 
 #include "point.h" //Testowy include
 
@@ -200,11 +201,11 @@ int main(){
 
         if(!FALLBACK){
             clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NullRange);
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(128, 1));
             clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
             queue.finish();
         } else {
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NullRange);
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(128, 1));
             clEnqueueReadBuffer(queue(), pbo_mem, CL_TRUE, 0, sizeof(color)*width*height, hostFallbackBuffer, 0, NULL, NULL);
             queue.finish();
             glBindBuffer(GL_ARRAY_BUFFER, PBO);
@@ -362,9 +363,7 @@ void glfwErrorCallback(int error, const char* description){
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int w, int h){
-#ifndef __APPLE__
-    for (; w%4; w++);
-#endif
+    w = 128*uint((w + 127)/128);
     width = w;
     height = h;
 
