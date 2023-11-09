@@ -50,7 +50,9 @@ cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 void glfwErrorCallback(int error, const char* description);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+uint localXsize = 128;
 int width = 1024, height = 1024;
+
 
 GLuint PBO;
 GLuint texture;
@@ -60,7 +62,7 @@ GLuint fboId;
 bool FALLBACK = false;
 
 int main(){
-
+    width = localXsize*uint((width + localXsize-1)/localXsize);
     Point testPoint(3, 3);
 
     //Initialize GLFW
@@ -200,11 +202,11 @@ int main(){
 
         if(!FALLBACK){
             clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(128, 1));
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, 1));
             clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
             queue.finish();
         } else {
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(4, 1));
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, 1));
             clEnqueueReadBuffer(queue(), pbo_mem, CL_TRUE, 0, sizeof(color)*width*height, hostFallbackBuffer, 0, NULL, NULL);
             queue.finish();
             glBindBuffer(GL_ARRAY_BUFFER, PBO);
@@ -362,8 +364,7 @@ void glfwErrorCallback(int error, const char* description){
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int w, int h){
-    w = 128*uint((w + 127)/128);
-    width = w;
+    width = localXsize*uint((w + localXsize-1)/localXsize);
     height = h;
 
     glViewport(0, 0, width, height);
