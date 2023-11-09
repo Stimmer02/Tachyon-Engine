@@ -189,6 +189,7 @@ int main(){
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
     //Main loop
+    clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
 
     while (!glfwWindowShouldClose(window)){
         processInput(window);
@@ -201,9 +202,7 @@ int main(){
 
 
         if(!FALLBACK){
-            clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
             queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, 1));
-            clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
             queue.finish();
         } else {
             queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, 1));
@@ -226,6 +225,8 @@ int main(){
             std::printf("OpenGL error: %d\n", error);
         }
     }
+    clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
+
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
