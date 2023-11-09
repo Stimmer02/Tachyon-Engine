@@ -1,0 +1,6 @@
+kernel_header
+0
+void kernel TACHYON_ENGINE(constant struct config, global struct resources){
+    private int IDX, IDY;
+    IDX = get_global_id(0);
+    IDY = get_global_id(1);

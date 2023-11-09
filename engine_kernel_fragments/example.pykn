@@ -1,0 +1,8 @@
+name_of_kernel_fagment
+123
+    int a = 0;
+
+    //to sum up:
+    //name of kernel without any white signs
+    //priority that will determine where to put this QDomDocumentFragment
+    //and the rest of the file is code
