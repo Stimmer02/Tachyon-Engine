@@ -368,12 +368,6 @@ void framebuffer_size_callback(GLFWwindow* window, int w, int h){
     height = h;
 
     glViewport(0, 0, width, height);
-
-#ifdef __APPLE__
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-#endif
 }
 
 void processInput(GLFWwindow *window){
