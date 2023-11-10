@@ -1,5 +1,0 @@
-struct engineResources{
-    struct substanceTable substanceTable;
-    struct chunk* worldMap;
-    GLuint PBO;
-};
