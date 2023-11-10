@@ -1,17 +1,4 @@
-{
-    "servers": {
-        "bash": {
-            "command": ["bash-language-server", "start"],
-            "root": "",
-            "url": "https://github.com/bash-lsp/bash-language-server",
-            "highlightingModeRegex": "^Bash$"
-        },
-        "bibtex": {
-            "use": "latex",
-            "highlightingModeRegex": "^BibTeX$"
-        },
-        "c": {
-            "command": ["clangd", "-L/home/stimmer02/Documents/UMCS/SEMESTR_5/projekt_grupowy/v_A1/tachion-engine", "-log=error", "--background-index", "--limit-results=500", "--completion-style=bundled"],
+", "-log=error", "--background-index", "--limit-results=500", "--completion-style=bundled"],
             "commandDebug": ["clangd", "-log=verbose", "--background-index"],
             "url": "https://clang.llvm.org/extra/clangd/",
             "highlightingModeRegex": "^(C|ANSI C89|Objective-C)$"
