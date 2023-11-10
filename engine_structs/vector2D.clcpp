@@ -1,4 +1,0 @@
-struct vector2D{
-    unsigned int x;
-    unsigned int y;
-};
