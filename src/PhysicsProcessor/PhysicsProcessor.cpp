@@ -1,12 +1,14 @@
 #include "PhysicsProcessor.h"
 
 PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config){
-    this->openCLContext = openCLContext;
+    this->context = openCLContext;
     this->engine = engine;
     this->config = config;
     
     this->device = getDefaultClDevice();
     this->queue = queue(openCLContext, default_device);
+
+    cl_int error;
     
     this->pbo_mem = clCreateFromGLBuffer(context(), CL_MEM_WRITE_ONLY, PBO, &error);
     

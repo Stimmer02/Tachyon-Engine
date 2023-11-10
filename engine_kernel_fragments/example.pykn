@@ -1,6 +1,8 @@
-name_of_kernel_fagment
+example_name
 123
-    int a = 0;
+    local int a;
+    a = 1;
+
 
     //to sum up:
     //name of kernel without any white signs

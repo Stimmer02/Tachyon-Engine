@@ -17,6 +17,8 @@ private:
     cl::Context context;
     cl::Kernel engine;
     cl::CommandQueue queue;
+    cl::Device device;
+    cl_mem pbo_mem;
 };
 
 #endif
