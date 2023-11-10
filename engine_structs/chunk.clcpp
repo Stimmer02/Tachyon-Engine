@@ -1,0 +1,3 @@
+struct chunk{
+    voxel** voxels;
+};
