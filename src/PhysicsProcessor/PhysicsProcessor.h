@@ -20,8 +20,8 @@ private:
     cl::Device device;
     cl_mem pbo_mem;
     struct voxel* voxels;
-	uint size;
-	uint allocatedSize;
+    uint size;
+    uint allocatedSize;
 };
 
 #endif
