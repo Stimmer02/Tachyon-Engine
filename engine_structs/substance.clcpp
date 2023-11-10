@@ -1,7 +1,0 @@
-struct substance{
-    const char name;
-    color color;
-    float mass;
-    float jammingFactor;
-    // psisicStateVariables TODO next iteration
-};
