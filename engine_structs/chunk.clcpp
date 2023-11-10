@@ -1,3 +1,0 @@
-struct chunk{
-    struct voxel** voxels;
-};
