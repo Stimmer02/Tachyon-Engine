@@ -1,8 +1,0 @@
-struct color{
-    unsigned int simulationWidth;
-    unsigned int simulationHeight;
-    float gravity;
-    float airResistance;
-    float timeFactor;
-    NDRange* localDimensions;
-};
