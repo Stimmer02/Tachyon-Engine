@@ -1,0 +1,3 @@
+struct substanceTable{
+    substance* substances;
+};
