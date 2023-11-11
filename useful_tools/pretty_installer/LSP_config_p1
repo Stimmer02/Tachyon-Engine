@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "bash": {
+            "command": ["bash-language-server", "start"],
+            "root": "",
+            "url": "https://github.com/bash-lsp/bash-language-server",
+            "highlightingModeRegex": "^Bash$"
+        },
+        "bibtex": {
+            "use": "latex",
+            "highlightingModeRegex": "^BibTeX$"
+        },
+        "c": {
+            "command": ["clangd", "--compile-commands-dir=
