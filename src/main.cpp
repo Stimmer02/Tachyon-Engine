@@ -62,7 +62,7 @@ GLuint fboId;
 bool FALLBACK = false;
 
 int main(){
-    width = localXsize*uint((width + localXsize-1)/localXsize);
+
     Point testPoint(3, 3);
 
     //Initialize GLFW
