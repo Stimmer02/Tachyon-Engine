@@ -1,30 +1,4 @@
-#define CL_HPP_TARGET_OPENCL_VERSION 200
-
-#ifdef __APPLE__
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <OpenGL/gl3.h>
-#include <OpenGL/OpenGL.h>
-#include "OpenCL/include/CL/cl_gl.h"
-#include "OpenCL/include/CL/cl.hpp"
-
-#else
-
-#include <CL/opencl.hpp>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <CL/cl_gl.h>
-#include <GL/glx.h>
-
-#endif
-
-#include <vector>
-#include <cstdio>
-
-struct color{
-    unsigned char R, G, B;
-};
+#include "PhysicsProcessor/PhysicsProcessorBuilder.h"
 
 void processInput(GLFWwindow *window);
 
@@ -33,7 +7,7 @@ cl::Device getDefaultClDevice();
 cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 
 void glfwErrorCallback(int error, const char* description);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+// void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 uint localXsize = 16;
 uint localYsize = 16;
@@ -44,8 +18,9 @@ GLuint PBO;
 GLuint texture;
 GLuint fboId;
 
+IPhysicsProcessor* physicsProcessor;
 
-bool FALLBACK = false;
+
 
 int main(){
 
@@ -58,99 +33,18 @@ int main(){
          return -1;
     }
 
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     //Initialize glew
 
     if(glewInit() != GLEW_OK)
         return -1;
 
-    //Initialize OpenCL
-
-    cl::Device default_device = getDefaultClDevice();
-
-    if (!default_device()){
-        return 1;
-    }
-
-    cl_platform_id platform;
-    clGetPlatformIDs(1, &platform, NULL);
-
-#ifdef __APPLE__
-
-    CGLContextObj glContext = CGLGetCurrentContext();
-    CGLShareGroupObj shareGroup = CGLGetShareGroup(glContext);
-
-    cl_context_properties properties[] = {
-        CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE,
-        (cl_context_properties)shareGroup,
-        0
-    };
-
-#else
-
-     cl_context_properties properties[] = {
-        CL_GL_CONTEXT_KHR, (cl_context_properties) glXGetCurrentContext(),
-        CL_GLX_DISPLAY_KHR, (cl_context_properties) glXGetCurrentDisplay(),
-        CL_CONTEXT_PLATFORM, (cl_context_properties) platform,
-        0
-    };
-
-#endif
-
-
-    cl::Context context(default_device, properties);
-
-    cl::Program program = compileCopyKernel(context, default_device);
-
-    if(!program()){
-        context = cl::Context(default_device);
-        program = compileCopyKernel(context, default_device);
-        if(!program()){
-            printf("Error: not able to compile kernel!\n");
-            return 1;
-        }
-        FALLBACK = true;
-        printf("Warning: entering fallback mode\n");
-    }
-
-    size_t maxLocalWorkSize;
-    clGetDeviceInfo(default_device(), CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(size_t), &maxLocalWorkSize, NULL);
-    std::printf("max local work size: %ld\n", maxLocalWorkSize);
-
-    cl::CommandQueue queue(context, default_device);
-
-    int dims[2] = {width, height};
-    int anim = 0;
-
-    cl::Buffer buffer_dims(context, CL_MEM_READ_WRITE, sizeof(int)*2);
-    cl::Buffer buffer_anim(context, CL_MEM_READ_WRITE, sizeof(int));
-
-    queue.enqueueWriteBuffer(buffer_dims, CL_TRUE, 0, sizeof(int)*2, dims);
-    queue.enqueueWriteBuffer(buffer_anim, CL_TRUE, 0, sizeof(int), &anim);
-
-    int error = 0;
+    //Create PBO and texutres
 
     glGenBuffers(1, &PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, PBO);
     glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*3840*2160, NULL, GL_STATIC_DRAW);
-
-    cl_mem pbo_mem;
-    unsigned char* hostFallbackBuffer;
-    if (!FALLBACK){
-        pbo_mem = clCreateFromGLBuffer(context(), CL_MEM_WRITE_ONLY, PBO, &error);
-    } else {
-        pbo_mem = clCreateBuffer(context(), CL_MEM_WRITE_ONLY, sizeof(color)*3840*2160, NULL, NULL);
-        hostFallbackBuffer = new unsigned char[sizeof(color)*3840*2160];
-        // glBindBuffer(GL_COPY_WRITE_BUFFER, PBO); something to look at later
-    }
-    cl::Buffer pbo_buff(pbo_mem);
-
-    cl::Kernel create_gradient(program, "create_gradient");
-    create_gradient.setArg(0, pbo_buff);
-    create_gradient.setArg(1, buffer_dims);
-    create_gradient.setArg(2, buffer_anim);
-
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -162,32 +56,22 @@ int main(){
 
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
-    //Main loop
-    if (!FALLBACK){
-        clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
-    } else {
-        glBindBuffer(GL_ARRAY_BUFFER, PBO);
-    }
+    //Initialize PhysicsProcessor
+    engineConfig config;
+    config.atmosphereViscosity = 1;
+    config.gravity = 1;
+    config.timefactor = 1;
+    config.simulationHeight = height;
+    config.simulationWidth = width;
 
+    PhysicsProcessorBuilder PBB;
+    physicsProcessor = PBB.build("", "", PBO, config, 0, 0);
+
+    GLuint error = 0;
     while (!glfwWindowShouldClose(window)){
         processInput(window);
 
-        dims[0] = width;
-        dims[1] = height;
-        anim++;
-        queue.enqueueWriteBuffer(buffer_dims, CL_FALSE, 0, sizeof(int)*2, dims);
-        queue.enqueueWriteBuffer(buffer_anim, CL_FALSE, 0, sizeof(int), &anim);
-
-
-        if(!FALLBACK){
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, localYsize));
-            queue.finish();
-        } else {
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(localXsize, localYsize));
-            queue.enqueueReadBuffer(pbo_buff, CL_FALSE, 0, sizeof(color)*width*height, hostFallbackBuffer, NULL, NULL);
-            queue.finish();
-            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(color)*width*height, hostFallbackBuffer);
-        }
+        physicsProcessor->generateFrame();
 
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -203,21 +87,16 @@ int main(){
         }
     }
 
+    delete physicsProcessor;
+
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    if (!FALLBACK){
-        clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
-    } else {
-        delete[] hostFallbackBuffer;
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-    }
     glDeleteBuffers(1, &PBO);
 
     glDeleteTextures(1, &texture);
 
     glfwDestroyWindow(window);
-
 }
 
 GLFWwindow* initializeGLFW(uint width, uint height){
@@ -226,6 +105,7 @@ GLFWwindow* initializeGLFW(uint width, uint height){
         return nullptr;
     }
     glfwSetErrorCallback(glfwErrorCallback);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     GLFWwindow* window = glfwCreateWindow(width, height, "test", NULL, NULL);
     if (!window){
@@ -242,97 +122,30 @@ GLFWwindow* initializeGLFW(uint width, uint height){
 }
 
 
-cl::Device getDefaultClDevice(){
-    std::vector<cl::Platform> all_platforms;
-    cl::Platform::get(&all_platforms);
-
-    if (all_platforms.empty()){
-        std::fprintf(stderr, "No platforms found. Check OpenCL installation!\n");
-        return cl::Device();
-    }
-
-    int selection=0;
-
-    for(int i=0; i<all_platforms.size(); i++){
-        printf("[%d] :\t%s\n",i,all_platforms[i].getInfo<CL_PLATFORM_NAME>().c_str());
-    }
-    // scanf("%d", &selection);
-
-    cl::Platform default_platform = all_platforms[selection];
-    std::printf("Using platform:\t%s\n", default_platform.getInfo<CL_PLATFORM_NAME>().c_str());
-
-    std::vector<cl::Device> all_devices;
-    default_platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
-
-
-    if (all_devices.size() == 0){
-        std::fprintf(stderr, "No devices found. Check OpenCL installation!\n");
-        return cl::Device();
-    }
-
-    for(int i=0; i<all_devices.size(); i++){
-        printf("[%d] :\t%s\n",i,all_devices[i].getInfo<CL_DEVICE_NAME>().c_str());
-    }
-    // scanf("%d", &selection);
-
-    cl::Device default_device = all_devices[selection];
-    std::printf("Using device:\t%s\n", default_device.getInfo<CL_DEVICE_NAME>().c_str());
-
-    return default_device;
-}
-
-cl::Program compileCopyKernel(cl::Context context, cl::Device default_device){
-    cl::Program::Sources sources;
-    std::string color_structure =
-        "   struct color {"
-        "       unsigned char R, G, B;"
-        "   };";
-    std::string kernel_code =
-        "   void kernel create_gradient(global struct color* A, global const int* dims, global const int* anim){"
-        "       int IDX, IDY, global_ID, anim2;"
-        "       float gradientStepX, gradientStepY;"
-        ""
-        "       IDX = get_global_id(0);"
-        "       IDY = get_global_id(1);"
-        "       if (IDX < dims[0] && IDY < dims[1]){"
-        "           global_ID = IDX + IDY * get_global_size(0);"
-        ""
-        "           anim2 = *anim * (get_global_size(0) + get_global_size(1)) / 2 /1000;"
-        "           gradientStepX  = 3.14159263f / (float)get_global_size(0);"
-        "           gradientStepY  = 3.14159263f / (float)get_global_size(1);"
-        ""
-        "           A[global_ID].R = (sin((IDY+anim2)*gradientStepY) + 1) * 127;"
-        "           A[global_ID].G = (cos((IDX+anim2*2)*gradientStepX) + 1) * 127;"
-        "           A[global_ID].B = (sin(((IDY-anim2*2)*gradientStepY + (IDX-anim2)*gradientStepX)/2) + 1) * 127;"
-        "       }"
-        "   }";
-
-    sources.push_back({color_structure.c_str(), color_structure.length()});
-    sources.push_back({kernel_code.c_str(), kernel_code.length()});
-    cl::Program program(context, sources);
-
-    if (program.build() != CL_SUCCESS) {
-        std::printf("Error building: %s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(default_device).c_str());
-        return cl::Program();
-    }
-
-    return program;
-}
 
 void glfwErrorCallback(int error, const char* description){
     printf("Error: %s\n", description);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int w, int h){
-    width = localXsize*uint((w + localXsize-1)/localXsize);
-    height = localYsize*uint((h + localYsize-1)/localYsize);
+// void framebuffer_size_callback(GLFWwindow* window, int w, int h){
+//     width = localXsize*uint((w + localXsize-1)/localXsize);
+//     height = localYsize*uint((h + localYsize-1)/localYsize);
+//
+//     glViewport(0, 0, width, height);
+// }
 
-    glViewport(0, 0, width, height);
-}
 
+
+//HERE YOU CAN PUT ANYTHING TO TEST YOUR METHODS
+//IPhysicsProcessor is global so it is in this function's scoope
 void processInput(GLFWwindow *window){
     static bool pressed = false;
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
         glfwSetWindowShouldClose(window, true);
+    }
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS){
+        //test method 1 by pressing 1
+    } else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS){
+        //test method 2 by pressing 2
     }
 }

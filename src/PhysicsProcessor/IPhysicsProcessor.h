@@ -55,7 +55,7 @@ struct voxel{
 #include "engineConfig.h"
 
 class IPhysicsProcessor{
-protected:
+public:
     virtual ~IPhysicsProcessor() = 0;
     virtual void generateFrame() = 0;
     virtual void spawnVoxel(uint x, uint y, uint substanceID) = 0;
