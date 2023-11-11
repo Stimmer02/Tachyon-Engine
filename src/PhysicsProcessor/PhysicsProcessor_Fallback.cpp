@@ -1,12 +1,12 @@
 #include "PhysicsProcessor_Fallback.h"
 
-PhysicsProcessor::PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config){
+PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device){
     this->openCLContext = openCLContext;
     this->engine = engine;
     this->config = config;
     
-    this->device = getDefaultClDevice();
-    this->queue = queue(openCLContext, default_device);
+    this->device = device;
+    this->queue = cl::CommandQueue(openCLContext, device);
     
     this->pbo_mem = clCreateBuffer(context(), CL_MEM_WRITE_ONLY, sizeof(color)*3840*2160, NULL, NULL); // TODO
     this->hostFallbackBuffer = new unsigned char[sizeof(color)*3840*2160];
@@ -14,7 +14,7 @@ PhysicsProcessor::PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kerne
     glBindBuffer(GL_ARRAY_BUFFER, PBO);
 }
 
-PhysicsProcessor::~PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config){
+PhysicsProcessor_Fallback::~PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config){
     delete[] hostFallbackBuffer;
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

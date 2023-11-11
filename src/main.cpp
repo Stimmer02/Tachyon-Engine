@@ -3,7 +3,6 @@
 void processInput(GLFWwindow *window);
 
 GLFWwindow* initializeGLFW(uint height, uint width);
-cl::Device getDefaultClDevice();
 cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 
 void glfwErrorCallback(int error, const char* description);

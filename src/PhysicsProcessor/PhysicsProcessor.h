@@ -5,7 +5,7 @@
 
 class PhysicsProcessor : public IPhysicsProcessor{
 public:
-    PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config);
+    PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     ~PhysicsProcessor() override;
     void generateFrame() override;
     void spawnVoxel(uint x, uint y, uint substanceID) override;

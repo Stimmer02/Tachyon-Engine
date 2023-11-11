@@ -6,7 +6,7 @@
 
 class PhysicsProcessor_Fallback : public IPhysicsProcessor{
 public:
-    PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config);
+    PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     ~PhysicsProcessor_Fallback() override;
     void generateFrame() override;
     void spawnVoxel(uint x, uint y, uint substanceID) override;
