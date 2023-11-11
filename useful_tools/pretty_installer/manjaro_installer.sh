@@ -96,7 +96,9 @@ echo "All done!"
 
 echo ""
 echo "To apply LSP.json config you must open Kate Settings->Configure Kate->LSP Settings->Use Server Settings. Then select LSP.json file in field: Settings File."
-
 echo ""
-echo "To enable Kate to properly hilight .pykn files open Kate and select Tools->Highlighting->Sources->OpenCL."
+echo "To enable Kate to properly hilight .pykn and .clcpp files open Kate and select Settings->Configure Kate->Open/Save->Modes & Filetypes then in the Filetype field find Sources/OpenCL and add ;*.clcpp;*.pykn to the file extensions field"
+echo ""
+echo "You can also create custom Filetype, if so then .pykn MIME type is text/pykn"
+
 
