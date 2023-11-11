@@ -31,6 +31,8 @@ typedef unsigned int uint;
 
 #endif
 
+#include "InteractiveComponent.h"
+
 #include <vector>
 #include <cstdio>
 #include <cmath>
