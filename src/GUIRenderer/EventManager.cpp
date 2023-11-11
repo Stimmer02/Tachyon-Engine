@@ -2,6 +2,11 @@
 
 
 void EventManager::Subscribe(const EventType & event, IEventListener * listener){
+    if(listener==NULL){
+        fprintf(stderr, "Listener can't be null.\n");
+        return; 
+    }
+
     auto& eventListeners = listeners[event];
     for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it) {
         if (*it == listener) {
@@ -14,6 +19,11 @@ void EventManager::Subscribe(const EventType & event, IEventListener * listener)
 }
 
 void EventManager::Unsubscribe(const EventType & event, IEventListener * listener){
+    if(listener==NULL){
+        fprintf(stderr, "Listener can't be null.\n");
+        return; 
+    }
+
     auto& eventListeners = listeners[event];
     for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it) {
         if (*it == listener) {
@@ -26,6 +36,11 @@ void EventManager::Unsubscribe(const EventType & event, IEventListener * listene
 }
 
 void EventManager::Publish(const EventType & event, IEventListener * listener){
+    if(listener==NULL){
+        fprintf(stderr, "Listener can't be null.\n");
+        return; 
+    }
+
     auto& eventListeners = listeners[event];
     for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it) {
         if (*it == listener) {
