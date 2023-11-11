@@ -94,14 +94,12 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(KernelBuilder& kernelBuilder, 
         std::fprintf(stderr ,"WARNING: entering fallback mode\n");
         std::printf("Compillation successful!\n");
         cl::Kernel TACHYON_ENGINE(program, "TACHYON_ENGINE");
-        // return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config);
-        return nullptr;
+        return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config);
     }
 
 
     cl::Kernel TACHYON_ENGINE(program, "TACHYON_ENGINE");
-    // return PhysicsProcesor = new PhysicsProcessor(context, TACHYON_ENGINE, PBO, config);
-    return nullptr;
+    return PhysicsProcesor = new PhysicsProcessor(context, TACHYON_ENGINE, PBO, config);
 }
 
 IPhysicsProcessor* PhysicsProcessorBuilder::build(const std::string kernelFragmentsDirectory, const std::string structsDirectory, GLuint PBO, engineConfig config, uint platformID, uint deviceID){
