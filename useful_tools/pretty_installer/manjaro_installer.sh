@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PROJECT_NAME="tachion-engine"
-LSP_P1="0647f1fa233fffa14e938de99dbc4ff8  ./LSP_config_p1"
+LSP_P1="219c35052880ced1aa5bc57c32ba4db1  ./LSP_config_p1"
 LSP_P2="eea610f346f9a7551ce69e2a33362e4a  ./LSP_config_p2"
 
 if ! test -d  ~/.local/share/mime/packages/; then
@@ -23,6 +23,7 @@ echo "Updating MIME database..."
 update-mime-database ~/.local/share/mime
 xdg-mime default kate.desktop text/pykn
 echo "Updating done"
+echo ""
 
 
 echo "Searching for $PROJECT_NAME root directory..."
@@ -43,17 +44,19 @@ if [ "$ROOT_DIR" = "" ]; then
   exit 1
 fi
 echo "Root found in: $ROOT_DIR"
+echo ""
+
 echo "Creating LSP.json config file..."
 
 MD5_SUM=$(md5sum -z ./LSP_config_p1 | tr -d '\0')
 echo "$MD5_SUM"
 if [ "$MD5_SUM" != "$LSP_P1" ]; then
-  echo "Modified file may not work properly"
+  echo "WARNING: Modified file may not work properly"
 fi
 MD5_SUM=$(md5sum -z ./LSP_config_p2 | tr -d '\0')
 echo "$MD5_SUM"
 if [ "$MD5_SUM" != "$LSP_P2" ]; then
-  echo "Modified file may not work properly"
+  echo "WARNING: Modified file may not work properly"
 fi
 
 cat ./LSP_config_p1 > LSP.json

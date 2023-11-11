@@ -11,4 +11,4 @@
             "highlightingModeRegex": "^BibTeX$"
         },
         "c": {
-            "command": ["clangd", "-L
+            "command": ["clangd", "--compile-commands-dir=
