@@ -36,4 +36,4 @@ OpenCL
 build/CMakeCache.txt
 build/cmake_install.cmake
 build/Makefile
-usefull_tools/pretty_installer/LSP.json
+useful_tools/pretty_installer/LSP.json
