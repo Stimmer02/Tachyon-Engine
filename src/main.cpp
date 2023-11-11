@@ -34,8 +34,6 @@ typedef unsigned int uint;
 #include <vector>
 #include <cstdio>
 
-#include "point.h" //Testowy include
-
 struct color{
     unsigned char R, G, B;
 };
@@ -60,8 +58,6 @@ GLuint fboId;
 bool FALLBACK = false;
 
 int main(){
-
-    Point testPoint(3, 3);
 
     //Initialize GLFW
 
