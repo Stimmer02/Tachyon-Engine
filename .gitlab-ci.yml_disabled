@@ -4,7 +4,6 @@ stages:
   - test
 
 build:
-  stage: build
   tags:
     - all
   script:
@@ -17,7 +16,6 @@ build:
     - cmake --build build
 
 GoogleTests:
-  stage: test
   tags:
     - all
   script:
