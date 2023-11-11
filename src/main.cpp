@@ -6,7 +6,6 @@ GLFWwindow* initializeGLFW(uint height, uint width);
 cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 
 void glfwErrorCallback(int error, const char* description);
-// void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 uint localXsize = 16;
 uint localYsize = 16;
@@ -32,7 +31,6 @@ int main(){
          return -1;
     }
 
-    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     //Initialize glew
 
@@ -125,13 +123,6 @@ GLFWwindow* initializeGLFW(uint width, uint height){
 void glfwErrorCallback(int error, const char* description){
     printf("Error: %s\n", description);
 }
-
-// void framebuffer_size_callback(GLFWwindow* window, int w, int h){
-//     width = localXsize*uint((w + localXsize-1)/localXsize);
-//     height = localYsize*uint((h + localYsize-1)/localYsize);
-//
-//     glViewport(0, 0, width, height);
-// }
 
 
 
