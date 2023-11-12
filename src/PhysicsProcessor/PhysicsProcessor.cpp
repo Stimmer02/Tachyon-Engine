@@ -56,7 +56,7 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     
     cl::CommandQueue queue(openCLContext, device);
     
-    int dims[2] = {config.simulationWidth, config.simulationHeight};
+    int dims[2] = {(int)config.simulationWidth, (int)config.simulationHeight};
     int anim = 0;
     
     cl::Buffer buffer_dims(openCLContext, CL_MEM_READ_WRITE, sizeof(int)*2);
