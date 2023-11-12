@@ -16,10 +16,6 @@
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
 # Compiled Static libraries
 *.lai
 *.la
@@ -32,20 +28,13 @@
 *.app
 
 # Directories
-build/googletest
-build/CMakeFiles
-build/src
-build/tests
-build/editor
-build/.cmake
-build/editor/CMakeFiles
-OpenCL
-
+build
 .vscode
+OpenCL
+.cache
 
 # Files
 build/CMakeCache.txt
 build/cmake_install.cmake
 build/Makefile
-build/lib/googletest/lib/pkgconfig
-build/cmake_install.cmake
+useful_tools/pretty_installer/LSP.json
