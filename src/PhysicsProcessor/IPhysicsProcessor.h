@@ -9,8 +9,20 @@
 #include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 #include <OpenGL/OpenGL.h>
-#include "OpenCL/include/CL/cl_gl.h"
-#include "OpenCL/include/CL/cl.hpp"
+#include <OpenCL/opencl.h>
+#include <OpenCL/cl_gl.h>
+#include "../OpenCL/include/CL/cl.hpp"
+
+#elif __WIN32__
+
+typedef unsigned int uint;
+
+#include <windows.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <GL/gl.h>
+#include <CL/opencl.hpp>
+#include <CL/cl_gl.h>
 
 #else
 
@@ -21,6 +33,7 @@
 #include <GL/glx.h>
 
 #endif
+
 
 #include "engineConfig.h"
 
