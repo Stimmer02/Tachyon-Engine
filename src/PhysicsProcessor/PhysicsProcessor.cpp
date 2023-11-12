@@ -51,12 +51,12 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     }
     
     size_t maxLocalWorkSize;
-    clGetDeviceInfo(default_device(), CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(size_t), &maxLocalWorkSize, NULL);
+    clGetDeviceInfo(device(), CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(size_t), &maxLocalWorkSize, NULL);
     std::printf("max local work size: %ld\n", maxLocalWorkSize);
     
     cl::CommandQueue queue(openCLContext, device);
     
-    int dims[2] = {width, height};
+    int dims[2] = {config.simulationWidth, config.simulationHeight};
     int anim = 0;
     
     cl::Buffer buffer_dims(openCLContext, CL_MEM_READ_WRITE, sizeof(int)*2);
@@ -64,8 +64,6 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     
     queue.enqueueWriteBuffer(buffer_dims, CL_TRUE, 0, sizeof(int)*2, dims);
     queue.enqueueWriteBuffer(buffer_anim, CL_TRUE, 0, sizeof(int), &anim);
-    
-    int error = 0;
     
     glGenBuffers(1, &PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, PBO);
