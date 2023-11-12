@@ -1,36 +1,29 @@
-include(ExternalProject)
+cmake_minimum_required(VERSION 3.21)
 
-set(GTEST_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/lib/googletest" CACHE PATH "Installation directory for Google Test")
+set(CMAKE_C_COMPILER gcc)
+set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-ExternalProject_Add(
-    googletest
-    PREFIX "${CMAKE_BINARY_DIR}/googletest"
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG release-1.11.0
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${GTEST_INSTALL_PREFIX}
-    DOWNLOAD_ONLY true
-)
+project(TachyonEngine VERSION 1.1)
 
-add_library(gtest INTERFACE IMPORTED GLOBAL)
-add_dependencies(gtest googletest)
+if(WIN32)
 
-target_include_directories(gtest INTERFACE ${GTEST_INSTALL_PREFIX}/include)
-target_link_libraries(gtest INTERFACE ${GTEST_INSTALL_PREFIX}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}gtest${CMAKE_STATIC_LIBRARY_SUFFIX})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lopengl32 -lglfw3 -lglew32 ")
 
-add_library(gtest_main INTERFACE IMPORTED GLOBAL)
-add_dependencies(gtest_main googletest)
-target_link_libraries(gtest_main INTERFACE ${GTEST_INSTALL_PREFIX}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}gtest_main${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif()
 
-file(GLOB TEST_SOURCES  *.cpp)
+set(LIB_NAME ${PROJECT_NAME})
 
-add_executable(${LIB_NAME}_test ${TEST_SOURCES})
-target_include_directories(${LIB_NAME}_test PRIVATE ${GTEST_INSTALL_PREFIX}/include)
-set_property(TARGET ${LIB_NAME}_test PROPERTY CXX_STANDARD 17)
+add_subdirectory(src)
 
-enable_testing()
+target_include_directories(${LIB_NAME}_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-add_test(NAME ${LIB_NAME}_test COMMAND ${LIB_NAME}_test)
+add_subdirectory(tests)
 
-target_link_libraries(${LIB_NAME}_test gtest)
+add_subdirectory(editor)
 
-target_link_libraries(${LIB_NAME}_test ${LIB_NAME}_lib)
+add_dependencies(${LIB_NAME}_run ${LIB_NAME}_lib)
+
+target_link_libraries(${LIB_NAME}_run ${LIB_NAME}_lib)
+
