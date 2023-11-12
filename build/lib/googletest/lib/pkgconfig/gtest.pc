@@ -1,9 +1,0 @@
-libdir=/home/stimmer02/Documents/UMCS/SEMESTR_5/projekt grupowy/v_A1/tachion-engine/build/lib/googletest/lib
-includedir=/home/stimmer02/Documents/UMCS/SEMESTR_5/projekt grupowy/v_A1/tachion-engine/build/lib/googletest/include
-
-Name: gtest
-Description: GoogleTest (without main() function)
-Version: 1.11.0
-URL: https://github.com/google/googletest
-Libs: -L${libdir} -lgtest 
-Cflags: -I${includedir} -DGTEST_HAS_PTHREAD=1
