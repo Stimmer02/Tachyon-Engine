@@ -1,6 +1,6 @@
 set(BINARY ${CMAKE_PROJECT_NAME}_editor)
 
-file(GLOB_RECURSE EDITOR_SOURCES LIST_DIRECTORIES false *.hpp *.h *.cpp)
+file(GLOB_RECURSE EDITOR_SOURCES LIST_DIRECTORIES false *.hpp *.h *.cpp *.c)
 
 set(SOURCES ${EDITOR_SOURCES})
 

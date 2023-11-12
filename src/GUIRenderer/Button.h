@@ -5,7 +5,9 @@
 
 class Button : public InteractiveComponent{
 public:
+
     Button(const int& x, const int& y, const int& width, const int& height);
+    
     void Render();
 };
 
