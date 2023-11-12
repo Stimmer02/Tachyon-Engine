@@ -4,6 +4,7 @@ set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(TachyonEngine VERSION 1.1)
 
@@ -14,8 +15,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lopengl32 -lglfw3 -lglew32 ")
 endif()
 
 set(LIB_NAME ${PROJECT_NAME})
+set(LIB_NAME ${PROJECT_NAME})
 
 add_subdirectory(src)
+
+target_include_directories(${LIB_NAME}_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 
 target_include_directories(${LIB_NAME}_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
