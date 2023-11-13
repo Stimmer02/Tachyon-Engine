@@ -64,7 +64,7 @@ void PhysicsProcessor_Fallback::spawnVoxel(uint x, uint y, uint substanceID){
     spawn_voxelKernel.setArg(2, substanceID);
     spawn_voxelKernel.setArg(3, this->voxels);
     spawn_voxelKernel.setArg(4, this->config.simulationHeight);
-    queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NullRange(1, 1, 1), cl::NDRange(1, 1, 1));
+    queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.finish();
     
     ++size;
