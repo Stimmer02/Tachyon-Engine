@@ -8,73 +8,42 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     this->device = device;
     this->queue = cl::CommandQueue(openCLContext, device);
     
-    this->pbo_mem = clCreateBuffer(context(), CL_MEM_WRITE_ONLY, sizeof(color) * config.simulationWidth * config.simulationHeight, NULL, NULL);
     this->hostFallbackBuffer = new unsigned char[sizeof(color) * config.simulationWidth * config.simulationHeight];
+    this->pbo_mem = clCreateBuffer(context(), CL_MEM_WRITE_ONLY, sizeof(color) * config.simulationWidth * config.simulationHeight, NULL, NULL);
+    this->pbo_buff = cl::Buffer(pbo_mem);
     
     glBindBuffer(GL_ARRAY_BUFFER, PBO);
     
-    this->voxels = cl::Buffer buffer_dims(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
+    this->voxels = cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
     this->size = 0;
     
     cl::Program::Sources sources;
-    std::string color_structure =
-        "   struct color {"
-        "       unsigned char R, G, B;"
-        "   };";
+    std::string structures =
+        "struct vector2D{"
+        "    unsigned int x;"
+        "    unsigned int y;"
+        "};"
+        "struct voxel{"
+        "    unsigned int substanceID;"
+        "    struct vector2D forceVector;"
+        "};";
     std::string kernel_code =
-        "   void kernel create_gradient(global struct color* A, global const int* dims, global const int* anim){"
-        "       int IDX, IDY, global_ID, anim2;"
-        "       float gradientStepX, gradientStepY;"
-        ""
-        "       IDX = get_global_id(0);"
-        "       IDY = get_global_id(1);"
-        "       if (IDX < dims[0] && IDY < dims[1]){"
-        "           global_ID = IDX + IDY * get_global_size(0);"
-        ""
-        "           anim2 = *anim * (get_global_size(0) + get_global_size(1)) / 2 /1000;"
-        "           gradientStepX  = 3.14159263f / (float)get_global_size(0);"
-        "           gradientStepY  = 3.14159263f / (float)get_global_size(1);"
-        ""
-        "           A[global_ID].R = (sin((IDY+anim2)*gradientStepY) + 1) * 127;"
-        "           A[global_ID].G = (cos((IDX+anim2*2)*gradientStepX) + 1) * 127;"
-        "           A[global_ID].B = (sin(((IDY-anim2*2)*gradientStepY + (IDX-anim2)*gradientStepX)/2) + 1) * 127;"
-        "       }"
+        "   void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct voxel* matrix, uint dimX){"
+        "       matrix[y * dimX + x]->vector2D.x = 0;"
+        "       matrix[y * dimX + x]->vector2D.y = 0;"
+        "       matrix[y * dimX + x]->substanceID = substanceID;"
         "   }";
-
-    sources.push_back({color_structure.c_str(), color_structure.length()});
-    sources.push_back({kernel_code.c_str(), kernel_code.length()});
+    
+    sources.push_back(structures);
+    sources.push_back(kernel_code);
     cl::Program program(openCLContext, sources);
     
     if (program.build() != CL_SUCCESS) {
         std::printf("Error building: %s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device).c_str());
+        exit(1);
     }
     
-    size_t maxLocalWorkSize;
-    clGetDeviceInfo(device(), CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(size_t), &maxLocalWorkSize, NULL);
-    std::printf("max local work size: %ld\n", maxLocalWorkSize);
-    
-    cl::CommandQueue queue(openCLContext, device);
-    
-    int dims[2] = {(int)config.simulationWidth, (int)config.simulationHeight};
-    int anim = 0;
-    
-    cl::Buffer buffer_dims(openCLContext, CL_MEM_READ_WRITE, sizeof(int)*2);
-    cl::Buffer buffer_anim(openCLContext, CL_MEM_READ_WRITE, sizeof(int));
-    
-    queue.enqueueWriteBuffer(buffer_dims, CL_TRUE, 0, sizeof(int)*2, dims);
-    queue.enqueueWriteBuffer(buffer_anim, CL_TRUE, 0, sizeof(int), &anim);
-    
-    glGenBuffers(1, &PBO);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, PBO);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*3840*2160, NULL, GL_STATIC_DRAW);
-    
-    unsigned char* hostFallbackBuffer;
-    cl::Buffer pbo_buff(pbo_mem);
-    
-    cl::Kernel create_gradient(program, "create_gradient");
-    create_gradient.setArg(0, pbo_buff);
-    create_gradient.setArg(1, buffer_dims);
-    create_gradient.setArg(2, buffer_anim);
+    this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
 }
 
 PhysicsProcessor_Fallback::~PhysicsProcessor_Fallback(){
@@ -83,32 +52,22 @@ PhysicsProcessor_Fallback::~PhysicsProcessor_Fallback(){
 }
 
 void PhysicsProcessor_Fallback::generateFrame(){
-    queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(config.simulationWidth, config.simulationHeight));
-    queue.enqueueReadBuffer(pbo_buff, CL_FALSE, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer, NULL, NULL);
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(16, 16));
+    queue.enqueueReadBuffer(this->pbo_buff, CL_FALSE, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer, NULL, NULL);
     queue.finish();
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer);
 }
 
 void PhysicsProcessor_Fallback::spawnVoxel(uint x, uint y, uint substanceID){
-    struct vector2D{
-        cl_uint x;
-        cl_uint y;
-    } newVector2D;
-    newVector2D.x = 0;
-    newVector2D.y = 0;
-    
-    struct voxel{
-        cl_uint substanceID;
-        struct vector2D forceVector;
-        // psisicStateVariables TODO next iteration
-    } newVoxel;
-    newVoxel.substanceID = substanceID;
-    newVoxel.forceVector = newVector2D;
+    spawn_voxelKernel.setArg(0, x);
+    spawn_voxelKernel.setArg(1, y);
+    spawn_voxelKernel.setArg(2, substanceID);
+    spawn_voxelKernel.setArg(3, this->voxels);
+    spawn_voxelKernel.setArg(4, this->config.simulationHeight);
+    queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NullRange(1, 1, 1), cl::NDRange(1, 1, 1));
+    queue.finish();
     
     ++size;
-    
-    memcpy(voxels[config.simulationWidth * x + y], newVoxel, sizeof(struct voxel));
 }
 
 uint PhysicsProcessor_Fallback::countVoxels(){
