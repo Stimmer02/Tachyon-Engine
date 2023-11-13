@@ -17,6 +17,7 @@ private:
     cl::Context context;
     cl::Kernel engine;
     cl::CommandQueue queue;
+    cl::Kernel spawn_voxelKernel;
     cl::Device device;
     cl_mem pbo_mem;
     cl::Buffer pbo_buff;
