@@ -3,7 +3,7 @@
 
 #define CL_HPP_TARGET_OPENCL_VERSION 200
 
-#ifdef __APPLE__
+#ifdef APPLE
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -56,7 +56,7 @@ struct voxel{
 
 class IPhysicsProcessor{
 public:
-    virtual ~IPhysicsProcessor() = 0;
+    ~IPhysicsProcessor(){};
     virtual void generateFrame() = 0;
     virtual void spawnVoxel(uint x, uint y, uint substanceID) = 0;
     virtual uint countVoxels() = 0;
