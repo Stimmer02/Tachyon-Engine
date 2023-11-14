@@ -1,10 +1,15 @@
 #include "StructCollector.h"
 #include <algorithm>
 
-char StructCollector::loadAllFromDirectory(const std::string direcory){
+char StructCollector::loadAllFromDirectory(const std::string directoryPath){
     bool fileFound = false;
+    std::filesystem::path directory(directoryPath);
+    if (std::filesystem::is_directory(directory) == false){
+        std::fprintf(stderr, "ERROR: specified kernel structure directory does not exist:%s\n", directory.c_str());
+        return 2;
+    }
     std::vector<std::string> paths;
-    for (std::filesystem::directory_entry dirEntry : std::filesystem::directory_iterator(direcory)){
+    for (std::filesystem::directory_entry dirEntry : std::filesystem::directory_iterator(directory)){
         const std::filesystem::path& extension = dirEntry.path().extension();
         if (dirEntry.is_regular_file() && (extension.compare(".cl") == 0 || extension.compare(".clcpp") == 0)) {
             fileFound = true;
@@ -12,7 +17,7 @@ char StructCollector::loadAllFromDirectory(const std::string direcory){
         }
     }
     if (fileFound == false){
-        std::fprintf(stderr, "WARNING: specified kernel fragmet directory does not contain any '.pykn' files: %s\n", direcory.c_str());
+        std::fprintf(stderr, "WARNING: specified kernel structure directory does not contain any '.cl' or '.clcpp' files: %s\n", directory.c_str());
         return 1;
     }
     std::sort(paths.begin(), paths.end());
