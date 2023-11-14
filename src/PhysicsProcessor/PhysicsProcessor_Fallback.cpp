@@ -19,19 +19,19 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     
     cl::Program::Sources sources;
     std::string structures =
-        "struct vector2D{"
+        "struct __attribute__ ((aligned)) vector2D{"
         "    unsigned int x;"
         "    unsigned int y;"
         "};"
-        "struct voxel{"
+        "struct __attribute__ ((aligned)) voxel{"
         "    unsigned int substanceID;"
         "    struct vector2D forceVector;"
         "};";
     std::string kernel_code =
         "   void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct voxel* matrix, uint dimX){"
-        "       matrix[y * dimX + x]->vector2D.x = 0;"
-        "       matrix[y * dimX + x]->vector2D.y = 0;"
-        "       matrix[y * dimX + x]->substanceID = substanceID;"
+        "       matrix[y * dimX + x].forceVector.x = 0;"
+        "       matrix[y * dimX + x].forceVector.y = 0;"
+        "       matrix[y * dimX + x].substanceID = substanceID;"
         "   }";
     
     sources.push_back(structures);
@@ -44,6 +44,9 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     }
     
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+
+    this->engine.setArg(0, this->voxels);
+    this->engine.setArg(1, this->pbo_buff);
 }
 
 PhysicsProcessor_Fallback::~PhysicsProcessor_Fallback(){

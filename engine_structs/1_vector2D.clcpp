@@ -1,4 +1,4 @@
-struct vector2D{
+struct __attribute__ ((aligned)) vector2D{
     unsigned int x;
     unsigned int y;
 };

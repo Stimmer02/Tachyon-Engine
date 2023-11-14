@@ -24,7 +24,7 @@
 
 #ifndef _COLOR_H
 #ifndef COLOR_H
-struct color{
+struct __attribute__ ((packed)) color{
     unsigned char R;
     unsigned char G;
     unsigned char B;
@@ -35,17 +35,17 @@ struct color{
 
 #ifndef _VECTOR2D_H
 #ifndef VECTOR2D_H
-struct vector2D{
-    unsigned int x;
-    unsigned int y;
+struct __attribute__ ((aligned)) vector2D{
+    cl_uint x;
+    cl_uint y;
 };
 #endif
 #endif
 
 #ifndef _VOXEL_H
 #ifndef VOXEL_H
-struct voxel{
-    unsigned int substanceID;
+struct __attribute__ ((aligned)) voxel{
+    cl_uint substanceID;
     struct vector2D forceVector;
     // psisicStateVariables TODO next iteration
 };

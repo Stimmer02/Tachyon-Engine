@@ -1,4 +1,5 @@
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
+#include <filesystem>
 
 void processInput(GLFWwindow *window);
 
@@ -41,11 +42,11 @@ int main(){
 
     glGenBuffers(1, &PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, PBO);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*3840*2160, NULL, GL_STATIC_DRAW);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*width*height, NULL, GL_STATIC_DRAW);
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
     glGenFramebuffers(1, &fboId);
     glBindFramebuffer(GL_READ_FRAMEBUFFER, fboId);
@@ -61,6 +62,9 @@ int main(){
     config.simulationHeight = height;
     config.simulationWidth = width;
 
+    std::filesystem::path workingPath = std::filesystem::current_path();
+    std::printf("Running in direcory: %s\n", workingPath.c_str());
+
     PhysicsProcessorBuilder PBB;
     physicsProcessor = PBB.build("./engine_kernel_fragments", "./engine_structs", PBO, config, 0, 0);
     if (physicsProcessor == nullptr){
@@ -68,7 +72,9 @@ int main(){
         return 1;
     }
 
+
     GLuint error = 0;
+    uint x = 0, y = 0;
     while (!glfwWindowShouldClose(window)){
         processInput(window);
 
@@ -76,11 +82,21 @@ int main(){
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
         glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        physicsProcessor->spawnVoxel(x, y, 1);
+        x++;
+        if (x == width){
+            y++;
+            x = 0;
+            if (y == height){
+                y = 0;
+            }
+        }
 
         error = glGetError();
         if (error != GL_NO_ERROR) {

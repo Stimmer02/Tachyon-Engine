@@ -77,7 +77,7 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(KernelBuilder& kernelBuilder, 
     cl_int buildCode = program.build();
 
     if (buildCode != CL_SUCCESS) {
-        std::fprintf(stderr ,"Error building code: %d\n", buildCode);
+        std::fprintf(stderr ,"Error building TACHYON_ENGINE code: %d\n", buildCode);
         std::fprintf(stderr ,"Trying fallback settings...\n");
 
         context = cl::Context(defaultDevice);
@@ -85,13 +85,13 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(KernelBuilder& kernelBuilder, 
 
         buildCode = program.build();
         if (buildCode != CL_SUCCESS) {
-            std::fprintf(stderr ,"Error building code: %d\n", buildCode);
-            std::fprintf(stderr ,"Error building content:\n%s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(defaultDevice).c_str());
-            std::fprintf(stderr ,"ERROR: not able to compile kernel!\n");
+            std::fprintf(stderr ,"Error building TACHYON_ENGINE code: %d\n", buildCode);
+            std::fprintf(stderr ,"Error building TACHYON_ENGINE content:\n%s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(defaultDevice).c_str());
+            std::fprintf(stderr ,"ERROR: not able to compile TACHYON_ENGINE kernel!\n");
             return nullptr;
         }
         std::fprintf(stderr ,"WARNING: entering fallback mode\n");
-        std::printf("Compillation successful!\n");
+        std::printf("Compillation TACHYON_ENGINE successful!\n");
         cl::Kernel TACHYON_ENGINE(program, "TACHYON_ENGINE");
         return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config, defaultDevice);
     }

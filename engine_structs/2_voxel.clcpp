@@ -1,4 +1,4 @@
-struct voxel{
+struct __attribute__ ((aligned)) voxel{
     unsigned int substanceID;
     struct vector2D forceVector;
     // psisicStateVariables TODO next iteration
