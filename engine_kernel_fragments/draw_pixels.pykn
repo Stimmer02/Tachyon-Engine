@@ -2,7 +2,7 @@ draw_pixels
 -2
     local uchar temp;
     temp = (matrix->voxels[global_ID].substanceID > 0) * 255;
-    PBO[global_ID].R = 255;
+    PBO[global_ID].R = temp;
     PBO[global_ID].G = temp;
     PBO[global_ID].B = temp;
     PBO[global_ID].A = 255;

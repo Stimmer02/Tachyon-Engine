@@ -16,7 +16,9 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
 
     clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
 
-    this->allocatedGPUMemory.push_back(cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight));
+    cl::Buffer* voxels = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
+
+    this->allocatedGPUMemory.push_back(voxels);
 
     this->chunk = cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct chunk));
 
@@ -60,7 +62,7 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
 
     cl::Kernel set_chunkKernel(program, "set_chunk");
     set_chunkKernel.setArg(0, this->chunk);
-    set_chunkKernel.setArg(1, this->allocatedGPUMemory.back());
+    set_chunkKernel.setArg(1, *voxels);
     queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
 
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
@@ -71,6 +73,9 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
 
 PhysicsProcessor::~PhysicsProcessor(){
     clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
+    for (cl::Buffer* i :allocatedGPUMemory){
+        delete i;
+    }
 }
 
 void PhysicsProcessor::generateFrame(){

@@ -19,7 +19,7 @@ private:
     engineConfig config;
     cl::Device device;
 
-    std::vector<cl::Buffer> allocatedGPUMemory;
+    std::vector<cl::Buffer*> allocatedGPUMemory;
 
     cl::CommandQueue queue;
     cl_mem pbo_mem;
