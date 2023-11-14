@@ -2,6 +2,7 @@
 #define _PHYSICSPROCESSOR_H
 
 #include "IPhysicsProcessor.h"
+#include <CL/opencl.hpp>
 
 class PhysicsProcessor : public IPhysicsProcessor{
 public:
@@ -18,10 +19,12 @@ private:
     engineConfig config;
     cl::Device device;
 
+    std::vector<cl::Buffer> allocatedGPUMemory;
+
     cl::CommandQueue queue;
     cl_mem pbo_mem;
     cl::Buffer pbo_buff;
-    cl::Buffer voxels;
+    cl::Buffer chunk;
     uint size;
     cl::Kernel spawn_voxelKernel;
 };

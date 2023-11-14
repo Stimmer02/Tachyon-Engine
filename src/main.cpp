@@ -10,7 +10,7 @@ void glfwErrorCallback(int error, const char* description);
 
 uint localXsize = 16;
 uint localYsize = 16;
-// int width = 2160, height = 3840;
+
 int width = 1024, height = 1024;
 
 GLuint PBO;

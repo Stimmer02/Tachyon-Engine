@@ -52,6 +52,14 @@ struct __attribute__ ((aligned)) voxel{
 #endif
 #endif
 
+#ifndef _CHUNK_H
+#ifndef CHUNK_H
+struct __attribute__ ((aligned)) chunk{
+    struct voxel* voxels;
+};
+#endif
+#endif
+
 #include "engineConfig.h"
 
 class IPhysicsProcessor{

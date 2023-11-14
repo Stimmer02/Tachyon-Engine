@@ -1,6 +1,6 @@
 kernel_header
 0
-void kernel TACHYON_ENGINE(global struct voxel* matrix, global struct color* PBO){
+void kernel TACHYON_ENGINE(global struct chunk* matrix, global struct color* PBO){
     private int IDX, IDY, global_ID;
     IDX = get_global_id(0);
     IDY = get_global_id(1);
