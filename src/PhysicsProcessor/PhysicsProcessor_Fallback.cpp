@@ -4,8 +4,8 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     this->context = openCLContext;
     this->engine = engine;
     this->config = config;
-    
     this->device = device;
+    
     this->queue = cl::CommandQueue(openCLContext, device);
     
     this->hostFallbackBuffer = new unsigned char[sizeof(color) * config.simulationWidth * config.simulationHeight];
