@@ -12,17 +12,18 @@ public:
     uint countVoxels() override;
 
 private:
-    engineConfig config;
     //resources: need to think about it
     cl::Context context;
     cl::Kernel engine;
-    cl::CommandQueue queue;
-    cl::Kernel spawn_voxelKernel;
+    engineConfig config;
     cl::Device device;
+
+    cl::CommandQueue queue;
     cl_mem pbo_mem;
     cl::Buffer pbo_buff;
     cl::Buffer voxels;
     uint size;
+    cl::Kernel spawn_voxelKernel;
 };
 
 #endif
