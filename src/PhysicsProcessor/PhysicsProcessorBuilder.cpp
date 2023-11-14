@@ -105,11 +105,15 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(const std::string kernelFragme
 
     StructCollector structCollector;
     if (structsDirectory.empty() == false){
-        structCollector.loadAllFromDirectory(structsDirectory);
+        if (structCollector.loadAllFromDirectory(structsDirectory)){
+            return nullptr;
+        }
     }
 
     KernelBuilder kernelBuilder;
-    kernelBuilder.loadAllFromDirectory(kernelFragmentsDirectory);
+    if (kernelBuilder.loadAllFromDirectory(kernelFragmentsDirectory)){
+        return nullptr;
+    }
     std::string validationMessage;
     if (kernelBuilder.validateLoadedFragments(validationMessage)){
         std::fprintf(stderr,"%s\n", validationMessage.c_str());

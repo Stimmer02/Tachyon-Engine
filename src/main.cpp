@@ -62,7 +62,11 @@ int main(){
     config.simulationWidth = width;
 
     PhysicsProcessorBuilder PBB;
-    physicsProcessor = PBB.build("", "", PBO, config, 0, 0);
+    physicsProcessor = PBB.build("./engine_kernel_fragments", "./engine_structs", PBO, config, 0, 0);
+    if (physicsProcessor == nullptr){
+        std::printf("Something went wrong...\n");
+        return 1;
+    }
 
     GLuint error = 0;
     while (!glfwWindowShouldClose(window)){
