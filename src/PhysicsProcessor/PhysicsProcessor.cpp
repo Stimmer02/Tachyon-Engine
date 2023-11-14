@@ -5,8 +5,8 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     this->context = openCLContext;
     this->engine = engine;
     this->config = config;
-    
     this->device = device;
+    
     this->queue = cl::CommandQueue(openCLContext, device);
     
     cl_int error;
