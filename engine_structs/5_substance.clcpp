@@ -1,5 +1,5 @@
-struct substance{
-    const char name;
+struct __attribute__ ((aligned)) substance{
+//     const char name;IMPOSIBLE
     struct color color;
     float mass;
     float jammingFactor;

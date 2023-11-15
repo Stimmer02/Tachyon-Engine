@@ -1,8 +1,6 @@
 draw_pixels
 -2
-    local uchar temp;
-    temp = (matrix[global_ID].substanceID > 0) * 255;
-    PBO[global_ID].R = temp;
-    PBO[global_ID].G = temp;
-    PBO[global_ID].B = temp;
-    PBO[global_ID].A = 255;
+    local uchar tempID;
+    tempID = resources->worldMap->voxels[global_ID].substanceID;
+    resources->PBO[global_ID] = resources->substanceTable->substances[tempID].color;
+
