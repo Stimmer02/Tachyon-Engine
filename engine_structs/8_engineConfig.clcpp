@@ -1,4 +1,4 @@
-struct engineConfig{
+struct __attribute__ ((aligned)) engineConfig{
     unsigned int simulationWidth;
     unsigned int simulationHeight;
     float gravity;
