@@ -2,7 +2,12 @@
 #define _PHYSICSPROCESSOR_FALLBACK_H
 
 #include "IPhysicsProcessor.h"
+#ifdef __APPLE__
+#include "../OpenCL/include/CL/cl.hpp"
+#else
 #include <CL/opencl.hpp>
+#endif
+
 
 class PhysicsProcessor_Fallback : public IPhysicsProcessor{
 public:
@@ -18,9 +23,9 @@ private:
     cl::Kernel engine;
     engineConfig config;
     cl::Device device;
-    
+
     std::vector<cl::Buffer*> allocatedGPUMemory;
-    
+
     cl::CommandQueue queue;
     unsigned char* hostFallbackBuffer;
     cl_mem pbo_mem;

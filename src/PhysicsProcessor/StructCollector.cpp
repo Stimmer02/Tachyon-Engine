@@ -45,9 +45,9 @@ char StructCollector::addStruct(const std::string filePath){
 
 cl::Program::Sources StructCollector::get(){
     cl::Program::Sources sources;
-    sources.push_back(this->structures);
+    sources.push_back({this->structures.c_str(), this->structures.length()});
     return sources;
 }
 void StructCollector::get(cl::Program::Sources& sources){
-    sources.push_back(this->structures);
+    sources.push_back({this->structures.c_str(), this->structures.length()});
 }

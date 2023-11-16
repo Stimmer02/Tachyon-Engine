@@ -2,7 +2,11 @@
 #define _PHYSICSPROCESSOR_H
 
 #include "IPhysicsProcessor.h"
+#ifdef __APPLE__
+#include "../OpenCL/include/CL/cl.hpp"
+#else
 #include <CL/opencl.hpp>
+#endif
 
 class PhysicsProcessor : public IPhysicsProcessor{
 public:

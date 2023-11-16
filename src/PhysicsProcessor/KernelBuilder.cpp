@@ -122,9 +122,9 @@ std::string KernelBuilder::build(cl::Program::Sources& sources){
     std::string message = "Kernel fragments loadded in order:\n";
     std::sort(fragments.begin(), fragments.end(), kernelFragment::comp);
 
-    for (kernelFragment& fragent : fragments){
-        sources.push_back(fragent.rawKernel);
-        message += "   " + std::to_string(fragent.priority) + "\t" + fragent.name + "\n";
+    for (kernelFragment& fragment : fragments){
+        sources.push_back({fragment.rawKernel.c_str(), fragment.rawKernel.length()});
+        message += "   " + std::to_string(fragment.priority) + "\t" + fragment.name + "\n";
     }
 
     return message;

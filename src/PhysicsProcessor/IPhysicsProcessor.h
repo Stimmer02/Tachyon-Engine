@@ -3,7 +3,7 @@
 
 #define CL_HPP_TARGET_OPENCL_VERSION 200
 
-#ifdef APPLE
+#ifdef __APPLE__
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
