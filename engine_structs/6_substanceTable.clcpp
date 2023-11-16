@@ -1,0 +1,3 @@
+struct  __attribute__ ((aligned))  substanceTable{
+    struct substance* substances;
+};

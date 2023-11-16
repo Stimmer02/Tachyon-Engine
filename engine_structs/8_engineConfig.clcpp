@@ -1,0 +1,8 @@
+struct __attribute__ ((aligned)) engineConfig{
+    unsigned int simulationWidth;
+    unsigned int simulationHeight;
+    float gravity;
+    float airResistance;
+    float timeFactor;
+    // localDimensions TODO next iteration
+};

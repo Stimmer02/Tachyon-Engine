@@ -1,17 +1,25 @@
 #include "KernelBuilder.h"
+#include <filesystem>
 
-char KernelBuilder::loadAllFromDirectory(const std::string direcory){
+char KernelBuilder::loadAllFromDirectory(const std::string directoryPath){
     bool fileFound = false;
-    for (std::filesystem::directory_entry dirEntry : std::filesystem::directory_iterator(direcory)){
+    std::filesystem::path directory(directoryPath);
+    if (std::filesystem::is_directory(directory) == false){
+        std::fprintf(stderr, "ERROR: specified kernel fragmet directory does not exist:%s\n", directory.c_str());
+        return 2;
+    }
+    for (std::filesystem::directory_entry dirEntry : std::filesystem::directory_iterator(directory)){
         if(dirEntry.is_regular_file() && dirEntry.path().extension().compare(".pykn") == 0){
             fileFound = true;
-            this->addKernelFragment(dirEntry.path());
+            this->addKernelFragment(dirEntry.path().string());
+            std::printf("kernel found: %s\n", dirEntry.path().string().c_str());
         }
     }
     if (fileFound == false){
-        std::fprintf(stderr, "WARNING: specified kernel fragmet directory does not contain any '.pykn' files: %s\n", direcory.c_str());
+        std::fprintf(stderr, "WARNING: specified kernel fragmet directory does not contain any '.pykn' files: %s\n", directory.c_str());
         return 1;
     }
+    std::printf("\n");
     return 0;
 }
 
@@ -111,7 +119,7 @@ std::string KernelBuilder::to_string(){
 }
 
 std::string KernelBuilder::build(cl::Program::Sources& sources){
-    std::string message = "Kernel fragments added in order:\n";
+    std::string message = "Kernel fragments loadded in order:\n";
     std::sort(fragments.begin(), fragments.end(), kernelFragment::comp);
 
     for (kernelFragment& fragent : fragments){

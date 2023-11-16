@@ -1,4 +1,0 @@
-some_code
--2
-    private int golobal_ID;
-    global_ID = IDX + IDY * get_global_size(0);
