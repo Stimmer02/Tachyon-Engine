@@ -87,16 +87,34 @@ int main(){
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        physicsProcessor->spawnVoxel(x, y, 1);
-        x++;
-        if (x == width){
-            y++;
-            x = 0;
-            if (y == height){
-                y = 0;
+        for (uint i = 0; i < 21; ++i){
+            physicsProcessor->spawnVoxel(x, y, 1);
+            ++x;
+
+            if (x == width){
+                ++y;
+                x = 0;
+                
+                if (y == height){
+                    y = 0;
+                }
             }
         }
+        
+        for (uint i = 0; i < 34; ++i){
+            physicsProcessor->spawnVoxel(x, y, 2);
+            ++x;
 
+            if (x == width){
+                ++y;
+                x = 0;
+                
+                if (y == height){
+                    y = 0;
+                }
+            }
+        }
+        
         error = glGetError();
         if (error != GL_NO_ERROR) {
             std::printf("OpenGL error: %d\n", error);

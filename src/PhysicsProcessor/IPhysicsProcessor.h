@@ -47,35 +47,49 @@ struct __attribute__ ((packed)) color{
 #endif
 #endif
 
-#ifndef _VECTOR2D_H
-#ifndef VECTOR2D_H
 struct __attribute__ ((aligned)) vector2D{
     cl_uint x;
     cl_uint y;
 };
-#endif
-#endif
 
-#ifndef _VOXEL_H
-#ifndef VOXEL_H
 struct __attribute__ ((aligned)) voxel{
     cl_uint substanceID;
     struct vector2D forceVector;
-    // psisicStateVariables TODO next iteration
 };
-#endif
-#endif
 
-#ifndef _CHUNK_H
-#ifndef CHUNK_H
 struct __attribute__ ((aligned)) chunk{
     struct voxel* voxels;
 };
+<<<<<<< HEAD
 #endif
 #endif
 >>>>>>> TE-52-Physics_Processor_builder
+=======
+>>>>>>> TE-49-Implementation_Physics_Processor
 
-#include "engineConfig.h"
+struct __attribute__ ((aligned)) substance{
+    struct color color;
+    float mass;
+    float jammingFactor;
+};
+
+struct __attribute__ ((aligned)) engineResources{
+    struct substanceTable* substanceTable;
+    struct chunk* worldMap;
+    struct color* PBO;
+};
+
+struct __attribute__ ((aligned)) engineConfig{
+    cl_uint simulationWidth;
+    cl_uint simulationHeight;
+    float gravity;
+    float timefactor;
+    float atmosphereViscosity;
+};
+
+struct __attribute__ ((aligned)) substanceTable{
+    struct substance* substances;
+};
 
 class IPhysicsProcessor{
 public:
