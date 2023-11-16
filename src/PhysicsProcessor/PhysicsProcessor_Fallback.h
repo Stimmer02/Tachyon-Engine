@@ -2,7 +2,7 @@
 #define _PHYSICSPROCESSOR_FALLBACK_H
 
 #include "IPhysicsProcessor.h"
-
+#include <CL/opencl.hpp>
 
 class PhysicsProcessor_Fallback : public IPhysicsProcessor{
 public:
@@ -19,11 +19,14 @@ private:
     engineConfig config;
     cl::Device device;
     
+    std::vector<cl::Buffer*> allocatedGPUMemory;
+    
     cl::CommandQueue queue;
     unsigned char* hostFallbackBuffer;
     cl_mem pbo_mem;
     cl::Buffer pbo_buff;
-    cl::Buffer voxels;
+    cl::Buffer engineResources;
+    cl::Buffer eConfig;
     uint size;
     cl::Kernel spawn_voxelKernel;
 };
