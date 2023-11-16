@@ -34,8 +34,6 @@ typedef unsigned int uint;
 
 #endif
 
-<<<<<<< HEAD
-=======
 #ifndef _COLOR_H
 #ifndef COLOR_H
 struct __attribute__ ((packed)) color{
@@ -60,12 +58,6 @@ struct __attribute__ ((aligned)) voxel{
 struct __attribute__ ((aligned)) chunk{
     struct voxel* voxels;
 };
-<<<<<<< HEAD
-#endif
-#endif
->>>>>>> TE-52-Physics_Processor_builder
-=======
->>>>>>> TE-49-Implementation_Physics_Processor
 
 struct __attribute__ ((aligned)) substance{
     struct color color;
@@ -90,6 +82,7 @@ struct __attribute__ ((aligned)) engineConfig{
 struct __attribute__ ((aligned)) substanceTable{
     struct substance* substances;
 };
+
 
 class IPhysicsProcessor{
 public:
