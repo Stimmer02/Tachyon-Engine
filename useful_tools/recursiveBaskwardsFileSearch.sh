@@ -14,16 +14,17 @@ if test $# -lt 1; then
     echo "usage: $0 <file to execute> {arguments for file}"
     exit 1
 fi
+EXECUTABLE=$1
+shift
 
-ARGS=${*:2}
 
-testAndExecute "$1" "$ARGS"
+testAndExecute "$EXECUTABLE" "$@"
 while [ "$(pwd)" != "/" ]; do
     cd ..
-    testAndExecute "$1" "$ARGS"
+    testAndExecute "$EXECUTABLE" "$@"
 done
 
-echo "file not foud: $1"
+echo "file not foud: $EXECUTABLE"
 
 exit 1
 
