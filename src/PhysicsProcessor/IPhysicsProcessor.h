@@ -24,7 +24,7 @@
 
 #ifndef _COLOR_H
 #ifndef COLOR_H
-struct __attribute__ ((packed)) color{
+struct attribute ((packed)) color{
     unsigned char R;
     unsigned char G;
     unsigned char B;
@@ -33,34 +33,43 @@ struct __attribute__ ((packed)) color{
 #endif
 #endif
 
-#ifndef _VECTOR2D_H
-#ifndef VECTOR2D_H
-struct __attribute__ ((aligned)) vector2D{
+struct attribute ((aligned)) vector2D{
     cl_uint x;
     cl_uint y;
 };
-#endif
-#endif
 
-#ifndef _VOXEL_H
-#ifndef VOXEL_H
-struct __attribute__ ((aligned)) voxel{
+struct attribute ((aligned)) voxel{
     cl_uint substanceID;
     struct vector2D forceVector;
-    // psisicStateVariables TODO next iteration
 };
-#endif
-#endif
 
-#ifndef _CHUNK_H
-#ifndef CHUNK_H
-struct __attribute__ ((aligned)) chunk{
+struct attribute ((aligned)) chunk{
     struct voxel* voxels;
 };
-#endif
-#endif
 
-#include "engineConfig.h"
+struct attribute ((aligned)) substance{
+    struct color color;
+    float mass;
+    float jammingFactor;
+};
+
+struct attribute ((aligned)) engineResources{
+    struct substanceTable* substanceTable;
+    struct chunk* worldMap;
+    struct color* PBO;
+};
+
+struct attribute ((aligned)) engineConfig{
+    cl_uint simulationWidth;
+    cl_uint simulationHeight;
+    float gravity;
+    float timefactor;
+    float atmosphereViscosity;
+};
+
+struct attribute ((aligned)) substanceTable{
+    struct substance* substances;
+};
 
 class IPhysicsProcessor{
 public:
@@ -68,6 +77,22 @@ public:
     virtual void generateFrame() = 0;
     virtual void spawnVoxel(uint x, uint y, uint substanceID) = 0;
     virtual uint countVoxels() = 0;
+};
+
+#endif
+
+#ifndef _ENGINECONFIG_H
+#define _ENGINECONFIG_H
+
+#include <CL/opencl.hpp>
+typedef unsigned int uint;
+
+struct engineConfig{
+    uint simulationWidth;
+    uint simulationHeight;
+    float gravity;
+    float timefactor;
+    float atmosphereViscosity;
 };
 
 #endif
