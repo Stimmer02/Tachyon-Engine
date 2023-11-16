@@ -161,7 +161,7 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
 
 PhysicsProcessor_Fallback::~PhysicsProcessor_Fallback(){
     delete[] hostFallbackBuffer;
-    glBindBuffer(GL_ARRAY_BUFFER, 0)
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     for (cl::Buffer* i :allocatedGPUMemory){
         delete i;
     }
