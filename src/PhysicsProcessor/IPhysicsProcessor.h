@@ -24,7 +24,7 @@
 
 #ifndef _COLOR_H
 #ifndef COLOR_H
-struct attribute ((packed)) color{
+struct __attribute__ ((packed)) color{
     unsigned char R;
     unsigned char G;
     unsigned char B;
@@ -33,33 +33,33 @@ struct attribute ((packed)) color{
 #endif
 #endif
 
-struct attribute ((aligned)) vector2D{
+struct __attribute__ ((aligned)) vector2D{
     cl_uint x;
     cl_uint y;
 };
 
-struct attribute ((aligned)) voxel{
+struct __attribute__ ((aligned)) voxel{
     cl_uint substanceID;
     struct vector2D forceVector;
 };
 
-struct attribute ((aligned)) chunk{
+struct __attribute__ ((aligned)) chunk{
     struct voxel* voxels;
 };
 
-struct attribute ((aligned)) substance{
+struct __attribute__ ((aligned)) substance{
     struct color color;
     float mass;
     float jammingFactor;
 };
 
-struct attribute ((aligned)) engineResources{
+struct __attribute__ ((aligned)) engineResources{
     struct substanceTable* substanceTable;
     struct chunk* worldMap;
     struct color* PBO;
 };
 
-struct attribute ((aligned)) engineConfig{
+struct __attribute__ ((aligned)) engineConfig{
     cl_uint simulationWidth;
     cl_uint simulationHeight;
     float gravity;
@@ -67,7 +67,7 @@ struct attribute ((aligned)) engineConfig{
     float atmosphereViscosity;
 };
 
-struct attribute ((aligned)) substanceTable{
+struct __attribute__ ((aligned)) substanceTable{
     struct substance* substances;
 };
 
