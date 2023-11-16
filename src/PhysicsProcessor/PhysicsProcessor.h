@@ -24,7 +24,8 @@ private:
     cl::CommandQueue queue;
     cl_mem pbo_mem;
     cl::Buffer pbo_buff;
-    cl::Buffer chunk;
+    cl::Buffer engineResources;
+    cl::Buffer eConfig;
     uint size;
     cl::Kernel spawn_voxelKernel;
 };
