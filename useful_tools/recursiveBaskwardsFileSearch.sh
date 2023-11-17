@@ -2,8 +2,10 @@
 
 function testAndExecute(){
     if test -x "$1"; then
-        echo "executing $1 $2 in $(pwd)"
-        "$1" "$2"
+        FILE_NAME=$1
+        shift
+        echo "executing $FILE_NAME $* in $(pwd)"
+        "$FILE_NAME" "$@"
         exit 0
     elif test -f "$1"; then
         echo "file foud in $(pwd) but it is not executable"
