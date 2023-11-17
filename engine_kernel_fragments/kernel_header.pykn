@@ -1,0 +1,13 @@
+kernel_header
+0
+void kernel TACHYON_ENGINE(global struct engineConfig* config, global struct engineResources* resources){
+    private int IDX, IDY, global_ID;
+    local struct engineConfig localConfig;
+
+    IDX = get_global_id(0);
+    IDY = get_global_id(1);
+
+    localConfig.simulationWidth = config->simulationWidth;
+
+    global_ID = IDX + IDY * localConfig.simulationWidth;
+

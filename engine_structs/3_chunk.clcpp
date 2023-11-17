@@ -1,0 +1,3 @@
+struct __attribute__ ((aligned)) chunk{
+    struct voxel* voxels;
+};
