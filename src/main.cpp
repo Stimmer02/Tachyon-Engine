@@ -1,8 +1,6 @@
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
 #include <filesystem>
 
-void processInput(GLFWwindow *window);
-
 GLFWwindow* initializeGLFW(uint height, uint width);
 cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 
@@ -75,7 +73,6 @@ int main(){
     GLuint error = 0;
     uint x = 0, y = 0;
     while (!glfwWindowShouldClose(window)){
-        processInput(window);
 
         physicsProcessor->generateFrame();
 
