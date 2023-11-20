@@ -77,10 +77,14 @@ int main(){
     //     physicsProcessor->spawnVoxelInArea(i, 30, 64, 8, 1);
     // }
 
+    physicsProcessor->generateFrame();
+    glClear(GL_COLOR_BUFFER_BIT);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+    std::printf("PRESS 2 TO REASUME SIMULATION\n");
 
     GLuint error = 0;
     uint x = 0;
-
     while (!glfwWindowShouldClose(window)){
         processInput(window);
 
