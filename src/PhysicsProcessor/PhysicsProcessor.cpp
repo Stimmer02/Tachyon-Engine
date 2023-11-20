@@ -72,8 +72,8 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
         "    unsigned char A;"
         "};"
         "struct __attribute__ ((aligned)) vector2D{"
-        "    unsigned int x;"
-        "    unsigned int y;"
+        "    int x;"
+        "    int y;"
         "};"
         "struct __attribute__ ((aligned)) voxel{"
         "    unsigned int substanceID;"
@@ -104,10 +104,23 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
         "};";
     std::string kernel_code =
         "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
-        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
-        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;"
-        "        resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
+        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
+        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;"
+        "       resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
         "    }"
+        ""
+        "    void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "       uint globalID, IDX, IDY;"
+        "       IDX = x + get_global_id(0);"
+        "       IDY = y + get_global_id(1);"
+        "       globalID = IDY * config->simulationWidth + IDX;"
+        ""
+        "        if (config->simulationWidth > IDX && config->simulationHeight > IDY){"
+        "           resources->worldMap->voxels[globalID].forceVector.x = 0;"
+        "           resources->worldMap->voxels[globalID].forceVector.y = 0;"
+        "           resources->worldMap->voxels[globalID].substanceID = substanceID;"
+        "        }"
+        "   }"
         ""
         "    void kernel set_chunk(global struct chunk* matrix, global struct voxel* voxels){"
         "        matrix->voxels = voxels;"
@@ -116,9 +129,9 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
         "        table->substances = substances;"
         "    }"
         "    void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){"
-        "    resources->substanceTable = table;"
-        "    resources->worldMap = matrix;"
-        "    resources->PBO = PBO;"
+        "       resources->substanceTable = table;"
+        "     resources->worldMap = matrix;"
+        "       resources->PBO = PBO;"
         "    }";
 
     sources.push_back({structures.c_str(), structures.length()});
@@ -153,6 +166,7 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     queue.finish();
 
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+    this->spawn_voxel_in_area = cl::Kernel(program, "spawn_voxel_in_area");
 
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
@@ -169,7 +183,7 @@ PhysicsProcessor::~PhysicsProcessor(){
 }
 
 void PhysicsProcessor::generateFrame(){
-    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(16, 16));
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(1, 256));
     queue.finish();
 }
 
@@ -180,6 +194,18 @@ void PhysicsProcessor::spawnVoxel(uint x, uint y, uint substanceID){
     spawn_voxelKernel.setArg(3, this->engineResources);
     spawn_voxelKernel.setArg(4, this->eConfig);
     queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
+    queue.finish();
+
+    ++size;
+}
+
+void PhysicsProcessor::spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID){
+    spawn_voxel_in_area.setArg(0, x);
+    spawn_voxel_in_area.setArg(1, y);
+    spawn_voxel_in_area.setArg(2, substanceID);
+    spawn_voxel_in_area.setArg(3, this->engineResources);
+    spawn_voxel_in_area.setArg(4, this->eConfig);
+    queue.enqueueNDRangeKernel(spawn_voxel_in_area, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(8, 8));
     queue.finish();
 
     ++size;

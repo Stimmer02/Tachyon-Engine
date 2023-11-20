@@ -9,8 +9,7 @@ void kernel TACHYON_ENGINE(global struct engineConfig* config, global struct eng
     IDX = get_global_id(0);
     IDY = get_global_id(1);
 
-    localConfig.simulationWidth = config->simulationWidth;
-    localConfig.simulationHeight = config->simulationHeight;
+    localConfig = *config;
     global_ID = IDX + IDY * localConfig.simulationWidth;
     thisVoxel = &resources->worldMap->voxels[global_ID];
     thisVoxelCopy = *thisVoxel;

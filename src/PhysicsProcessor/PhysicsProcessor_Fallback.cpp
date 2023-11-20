@@ -66,8 +66,8 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
         "    unsigned char A;"
         "};"
         "struct __attribute__ ((aligned)) vector2D{"
-        "    unsigned int x;"
-        "    unsigned int y;"
+        "    int x;"
+        "    int y;"
         "};"
         "struct __attribute__ ((aligned)) voxel{"
         "    unsigned int substanceID;"
@@ -103,6 +103,16 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
         "        resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
         "    }"
         ""
+        "    void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "       uint globalID;"
+        "       globalID = (y + get_global_id(1)) * config->simulationWidth + x + get_global_id(0);"
+        ""
+        "        if (config->simulationWidth > IDX && config->simulationHeight > IDY){"
+        "           resources->worldMap->voxels[globalID].forceVector.x = 0;"
+        "           resources->worldMap->voxels[globalID].forceVector.y = 0;"
+        "           resources->worldMap->voxels[globalID].substanceID = substanceID;"
+        "        }"
+        ""
         "    void kernel set_chunk(global struct chunk* matrix, global struct voxel* voxels){"
         "        matrix->voxels = voxels;"
         "    }"
@@ -110,9 +120,9 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
         "        table->substances = substances;"
         "    }"
         "    void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){"
-        "    resources->substanceTable = table;"
-        "    resources->worldMap = matrix;"
-        "    resources->PBO = PBO;"
+        "       resources->substanceTable = table;"
+        "       resources->worldMap = matrix;"
+        "       resources->PBO = PBO;"
         "    }";
 
     sources.push_back({structures.c_str(), structures.length()});
@@ -150,6 +160,7 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer);
 
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+    this->spawn_voxel_in_area = cl::Kernel(program, "spawn_voxel_in_area");
 
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
@@ -168,7 +179,7 @@ PhysicsProcessor_Fallback::~PhysicsProcessor_Fallback(){
 }
 
 void PhysicsProcessor_Fallback::generateFrame(){
-    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(16, 16));
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(1, 256));
     queue.enqueueReadBuffer(this->pbo_buff, CL_FALSE, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer, NULL, NULL);
     queue.finish();
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer);
@@ -181,6 +192,18 @@ void PhysicsProcessor_Fallback::spawnVoxel(uint x, uint y, uint substanceID){
     spawn_voxelKernel.setArg(3, this->engineResources);
     spawn_voxelKernel.setArg(4, this->eConfig);
     queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
+    queue.finish();
+
+    ++size;
+}
+
+void PhysicsProcessor_Fallback::spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID){
+    spawn_voxel_in_area.setArg(0, x);
+    spawn_voxel_in_area.setArg(1, y);
+    spawn_voxel_in_area.setArg(2, substanceID);
+    spawn_voxel_in_area.setArg(3, this->engineResources);
+    spawn_voxel_in_area.setArg(4, this->eConfig);
+    queue.enqueueNDRangeKernel(spawn_voxel_in_area, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(16, 16));
     queue.finish();
 
     ++size;
