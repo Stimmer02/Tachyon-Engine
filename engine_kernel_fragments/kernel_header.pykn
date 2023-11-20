@@ -3,11 +3,14 @@ kernel_header
 void kernel TACHYON_ENGINE(global struct engineConfig* config, global struct engineResources* resources){
     private int IDX, IDY, global_ID;
     local struct engineConfig localConfig;
+    struct voxel* thisVoxel;
+    private struct voxel thisVoxelCopy;
 
     IDX = get_global_id(0);
     IDY = get_global_id(1);
 
     localConfig.simulationWidth = config->simulationWidth;
-
+    localConfig.simulationHeight = config->simulationHeight;
     global_ID = IDX + IDY * localConfig.simulationWidth;
-
+    thisVoxel = &resources->worldMap->voxels[global_ID];
+    thisVoxelCopy = *thisVoxel;

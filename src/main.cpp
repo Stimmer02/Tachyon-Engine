@@ -10,7 +10,7 @@ void glfwErrorCallback(int error, const char* description);
 
 uint localXsize = 16;
 uint localYsize = 16;
-int width = 1024, height = 1024;
+int width = 1024, height = 1024*2;
 
 GLuint PBO;
 GLuint texture;
@@ -24,7 +24,7 @@ int main(){
 
     //Initialize GLFW
 
-    GLFWwindow* window = initializeGLFW(height, width);
+    GLFWwindow* window = initializeGLFW(width, height);
 
     if (!window){
          glfwTerminate();
@@ -72,6 +72,13 @@ int main(){
     }
 
 
+    for (uint i = 0; i < config.simulationWidth; i++){
+        physicsProcessor->spawnVoxel(i, config.simulationHeight-4, 2);
+    }
+    for (uint i = 0; i < config.simulationHeight; i++){
+        physicsProcessor->spawnVoxel(config.simulationWidth/2, i, 2);
+    }
+
     GLuint error = 0;
     uint x = 0, y = 0;
     while (!glfwWindowShouldClose(window)){
@@ -86,34 +93,35 @@ int main(){
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+        // system("sleep 1");
 
-        for (uint i = 0; i < 21; ++i){
-            physicsProcessor->spawnVoxel(x, y, 1);
-            ++x;
-
-            if (x == width){
-                ++y;
-                x = 0;
-                
-                if (y == height){
-                    y = 0;
-                }
-            }
-        }
-        
-        for (uint i = 0; i < 34; ++i){
-            physicsProcessor->spawnVoxel(x, y, 2);
-            ++x;
-
-            if (x == width){
-                ++y;
-                x = 0;
-                
-                if (y == height){
-                    y = 0;
-                }
-            }
-        }
+        // for (uint i = 0; i < 21; i++){
+        //     physicsProcessor->spawnVoxel(x, y, 1);
+        //     ++x;
+        //
+        //     if (x == width){
+        //         ++y;
+        //         x = 0;
+        //
+        //         if (y == height){
+        //             y = 0;
+        //         }
+        //     }
+        // }
+//
+//         for (uint i = 0; i < 34; i++){
+//             physicsProcessor->spawnVoxel(x, y, 2);
+//             ++x;
+//
+//             if (x == width){
+//                 ++y;
+//                 x = 0;
+//
+//                 if (y == height){
+//                     y = 0;
+//                 }
+//             }
+//         }
         
         error = glGetError();
         if (error != GL_NO_ERROR) {

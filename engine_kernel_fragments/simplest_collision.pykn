@@ -1,0 +1,39 @@
+simplest_collision
+3
+//         private bool yBigger;
+//         private uint vectorLength;
+//         yBigger = thisVoxelCopy.forceVector.y > thisVoxelCopy.forceVector.x;
+//         vectorLength = thisVoxelCopy.forceVector.y*yBigger + thisVoxelCopy.forceVector.x*(!yBigger);
+//         for (private uint i = 0; i < vectorLength; i++){}
+
+
+        private int tempX, tempY, rest;
+        struct voxel* prevVoxelPlacement;
+        tempX = IDX;
+        tempY = IDY;
+        prevVoxelPlacement = &resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth];
+        rest = 0;
+        if (thisVoxelCopy.forceVector.y > thisVoxelCopy.forceVector.x){
+            for (private uint i = 0; i < -thisVoxelCopy.forceVector.y; i++){
+                tempY--;
+                rest += thisVoxelCopy.forceVector.x;
+//                 tempX += rest >= thisVoxelCopy.forceVector.y;
+                rest -= rest/thisVoxelCopy.forceVector.y * thisVoxelCopy.forceVector.x;
+                if (resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth].substanceID != 0){
+                    prevVoxelPlacement->forceVector.x = 0;
+                    prevVoxelPlacement->forceVector.y = 0;
+                    break;
+                }
+                if (tempX >= localConfig.simulationWidth || tempY >= localConfig.simulationHeight || tempX < 0 || tempY < 0){
+                    prevVoxelPlacement->forceVector.x = 0;
+                    prevVoxelPlacement->forceVector.y = 0;
+                    break;
+                }
+                prevVoxelPlacement->substanceID = 0;
+                prevVoxelPlacement = &resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth];
+                *prevVoxelPlacement = thisVoxelCopy;
+            }
+        } else {
+
+        }
+

@@ -1,0 +1,3 @@
+apply_gravity
+2
+        thisVoxelCopy.forceVector.y = -1;/*(thisVoxel->forceVector.y + localConfig.gravity*10) / 2;*/
