@@ -71,7 +71,7 @@ int main(){
     }
 
 
-
+    //Prepare simulation
     physicsProcessor->spawnVoxelInArea(0, 512, 1024, 512, 2);
     // for (uint i = 0; i+64 < config.simulationWidth; i+= 128){
     //     physicsProcessor->spawnVoxelInArea(i, 30, 64, 8, 1);
