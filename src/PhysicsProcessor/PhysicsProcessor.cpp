@@ -104,8 +104,8 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
         "};";
     std::string kernel_code =
         "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
-        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
-        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;"
+        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 4;"
+        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 5;"
         "       resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
         "    }"
         ""
@@ -183,7 +183,7 @@ PhysicsProcessor::~PhysicsProcessor(){
 }
 
 void PhysicsProcessor::generateFrame(){
-    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(1024), cl::NDRange(1024));
     queue.finish();
 }
 

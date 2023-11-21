@@ -72,10 +72,12 @@ int main(){
 
 
     //Prepare simulation
-    physicsProcessor->spawnVoxelInArea(0, 512, 1024, 512, 2);
-    // for (uint i = 0; i+64 < config.simulationWidth; i+= 128){
-    //     physicsProcessor->spawnVoxelInArea(i, 30, 64, 8, 1);
-    // }
+    physicsProcessor->spawnVoxelInArea(0, 0, 8, config.simulationWidth, 1);
+    physicsProcessor->spawnVoxelInArea(0, 0, config.simulationHeight, 8, 1);
+    physicsProcessor->spawnVoxelInArea(config.simulationHeight-8, 0, 8, config.simulationWidth, 1);
+    physicsProcessor->spawnVoxelInArea(0, config.simulationWidth-8, config.simulationHeight, 8, 1);
+
+
 
     physicsProcessor->generateFrame();
     glClear(GL_COLOR_BUFFER_BIT);
@@ -84,7 +86,6 @@ int main(){
     std::printf("PRESS 2 TO REASUME SIMULATION\n");
 
     GLuint error = 0;
-    uint x = 0;
     while (!glfwWindowShouldClose(window)){
         processInput(window);
 
@@ -93,13 +94,7 @@ int main(){
             glClear(GL_COLOR_BUFFER_BIT);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
             glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-            // for (uint i = 0; i < 3; i++){
-            //     physicsProcessor->spawnVoxelInArea(x, config.simulationHeight-4, 8, 8, 2);
-            //     ++x;
-            //     if (x + 8 >= width){
-            //         x = 0;
-            //     }
-            // }
+            physicsProcessor->spawnVoxel(16, 16, 2);
         }
 
         glfwSwapBuffers(window);
