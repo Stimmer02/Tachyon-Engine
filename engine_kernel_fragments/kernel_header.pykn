@@ -11,12 +11,22 @@ void kernel TACHYON_ENGINE(global struct engineConfig* config, global struct eng
     localConfig = *config;
 
 
-    toComputeX = localConfig.simulationWidth / get_global_size(0);
-    toComputeY = localConfig.simulationHeight / get_global_size(1);
-    for (private uint kernelIterator = 0; kernelIterator < toComputeX*toComputeY; kernelIterator++){
-        IDX = get_global_id(0) * toComputeX + kernelIterator%toComputeX;
-        IDY = get_global_id(1) * toComputeY + kernelIterator/toComputeX;
-        global_ID = IDX + IDY * localConfig.simulationWidth;
+//     toComputeX = localConfig.simulationWidth / get_global_size(0);
+//     toComputeY = localConfig.simulationHeight / get_global_size(1);
+//     for (private uint kernelIterator = 0; kernelIterator < toComputeX*toComputeY; kernelIterator++){
+//         IDX = get_global_id(0) * toComputeX + kernelIterator%toComputeX;
+//         IDY = get_global_id(1) * toComputeY + kernelIterator/toComputeX;
+//         global_ID = IDX + IDY * localConfig.simulationWidth;
+//
+//         thisVoxel = &resources->worldMap->voxels[global_ID];
+//         thisVoxelCopy = *thisVoxel;
+    private uint globalSize;
+    globalSize = get_global_size(0);
+    toComputeX = localConfig.simulationWidth*localConfig.simulationHeight / get_global_size(0);
+    for (private uint kernelIterator = 0; kernelIterator < toComputeX; kernelIterator++){
+        global_ID = kernelIterator * globalSize + get_global_id(0);
+        IDX = global_ID % localConfig.simulationWidth;
+        IDY = global_ID / localConfig.simulationWidth;
 
         thisVoxel = &resources->worldMap->voxels[global_ID];
         thisVoxelCopy = *thisVoxel;
