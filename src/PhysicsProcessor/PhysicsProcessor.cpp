@@ -183,7 +183,7 @@ PhysicsProcessor::~PhysicsProcessor(){
 }
 
 void PhysicsProcessor::generateFrame(){
-    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(1, 256));
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(16, 16), cl::NDRange(16, 16));
     queue.finish();
 }
 
