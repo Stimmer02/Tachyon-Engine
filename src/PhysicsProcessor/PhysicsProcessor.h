@@ -10,7 +10,7 @@
 
 class PhysicsProcessor : public IPhysicsProcessor{
 public:
-    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device);
+    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     std::string structuresAsString();
     std::string kernelCodeAsString();
     PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
