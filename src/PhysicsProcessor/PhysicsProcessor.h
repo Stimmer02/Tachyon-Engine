@@ -10,9 +10,9 @@
 
 class PhysicsProcessor : public IPhysicsProcessor{
 public:
-    void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device);
-    std::string PhysicsProcessor::structuresAsString();
-    std::string PhysicsProcessor::kernelCodeAsString();
+    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device);
+    std::string structuresAsString();
+    std::string kernelCodeAsString();
     PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     ~PhysicsProcessor();
     void generateFrame() override;
