@@ -1,7 +1,7 @@
 #include "PhysicsProcessor_Fallback.h"
 #include "IPhysicsProcessor.h"
 
-void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
+void PhysicsProcessor_Fallback::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
     // Setting class variables.
     this->context = openCLContext;
     this->engine = engine;
@@ -20,7 +20,7 @@ void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel 
     glBindBuffer(GL_ARRAY_BUFFER, PBO);
 }
 
-std::string PhysicsProcessor::structuresAsString(){
+std::string PhysicsProcessor_Fallback::structuresAsString(){
     // Defining data structures as a string.
     std::string structures =
         "struct __attribute__ ((packed)) color{"
@@ -64,7 +64,7 @@ std::string PhysicsProcessor::structuresAsString(){
 	return structures;
 }
 
-std::string PhysicsProcessor::kernelCodeAsString(){
+std::string PhysicsProcessor_Fallback::kernelCodeAsString(){
     // Creating OpenCL kernel code as a string.
     std::string kernel_code =
         "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
