@@ -11,6 +11,9 @@
 
 class PhysicsProcessor_Fallback : public IPhysicsProcessor{
 public:
+    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
+    std::string structuresAsString();
+    std::string kernelCodeAsString();
     PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     ~PhysicsProcessor_Fallback();
     void generateFrame() override;
