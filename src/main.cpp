@@ -196,9 +196,7 @@ int main(){
 
         EventInfo info = input.Query();
 
-        if(info.type!=0){
-            fprintf(stdout, "Event : %d\n", info.type);
-        }
+        fprintf(stdout, "Event : %d\tPosition : (%f, %f)\n", info.type, info.x, info.y);
 
         dims[0] = width;
         dims[1] = height;

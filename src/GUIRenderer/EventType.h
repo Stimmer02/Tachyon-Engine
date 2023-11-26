@@ -2,11 +2,10 @@
 #define EVENTTYPE_H
 
 enum EventType{
-    NONE,
+    ONHOVER,
+    ONMOVE,
     ONCLICK,
     ONPRESS,
-    ONFOCUS,
-    ONMOVE,
     ONLOAD,
     EVENTCOUNT
     //Etc...

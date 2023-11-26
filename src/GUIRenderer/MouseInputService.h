@@ -1,9 +1,10 @@
 #ifndef MOUSEINPUTSERVICE_H
 #define MOUSEINPUTSERVICE_H
 
-#include "IInputHandlingService.h"
+#include "IInputHandler.h"
+#include "cmath"
 
-class MouseInputService : public IInputHandlingService {
+class MouseInputService : public IInputHandler {
 
     GLFWwindow * window;
 

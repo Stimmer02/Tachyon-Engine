@@ -1,11 +1,11 @@
-#ifndef IINPUTHANDLINGSERVICE_H
-#define IINPUTHANDLINGSERVICE_H
+#ifndef IINPUTHANDLER_H
+#define IINPUTHANDLER_H
 
 #include <GLFW/glfw3.h>
 
 #include "EventInfo.h"
 
-class IInputHandlingService {
+class IInputHandler {
 
 public:
 
