@@ -31,6 +31,9 @@ typedef unsigned int uint;
 
 #endif
 
+#include "MouseInputService.h"
+
+#include <string>
 #include <vector>
 #include <cstdio>
 
@@ -58,7 +61,7 @@ GLuint fboId;
 bool FALLBACK = false;
 
 int main(){
-
+    
     //Initialize GLFW
 
     GLFWwindow* window = initializeGLFW(width, height);
@@ -184,8 +187,18 @@ int main(){
 
     //Main loop
 
+    MouseInputService input;
+    input.BindWindow(window);
+
     while (!glfwWindowShouldClose(window)){
         processInput(window);
+
+
+        EventInfo info = input.Query();
+
+        if(info.type!=0){
+            fprintf(stdout, "Event : %d\n", info.type);
+        }
 
         dims[0] = width;
         dims[1] = height;
@@ -196,11 +209,11 @@ int main(){
 
         if(!FALLBACK){
             clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NullRange);
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NDRange(16, 16));
             clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
             queue.finish();
         } else {
-            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height), cl::NullRange);
+            queue.enqueueNDRangeKernel(create_gradient, cl::NullRange, cl::NDRange(width, height));
             clEnqueueReadBuffer(queue(), pbo_mem, CL_TRUE, 0, sizeof(color)*width*height, hostFallbackBuffer, 0, NULL, NULL);
             queue.finish();
             glBindBuffer(GL_ARRAY_BUFFER, PBO);
