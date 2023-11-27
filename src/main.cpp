@@ -300,7 +300,7 @@ cl::Device getDefaultClDevice(){
     }
     // scanf("%d", &selection);
 
-    cl::Device default_device = all_devices[selection];
+    cl::Device default_device = all_devices[2];
     std::printf("Using device:\t%s\n", default_device.getInfo<CL_DEVICE_NAME>().c_str());
 
     return default_device;

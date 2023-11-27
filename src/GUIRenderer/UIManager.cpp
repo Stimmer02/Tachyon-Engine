@@ -21,7 +21,7 @@ UIManager::~UIManager(){
 void UIManager::AssignEventHandlingService(IEventHandlingService* _eventHandling){
 	eventHandlingService = _eventHandling;
 }
-void UIManager::AssignInputHandlingService(IInputHandlingService* _inputHandler){
+void UIManager::AssignInputHandlingService(IInputHandler* _inputHandler){
 	inputHandlingService = _inputHandler;
 }
 void UIManager::AddComponentToScene(Component* component){

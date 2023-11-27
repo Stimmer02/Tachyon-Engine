@@ -18,14 +18,14 @@
 #endif
 
 #include "IEventHandlingService.h"
-#include "IInputHandlingService.h"
+#include "IInputHandler.h"
 #include "Scene.h"
 #include "EventType.h"
 
 class UIManager{
 private:
 	IEventHandlingService* eventHandlingService;
-	IInputHandlingService* inputHandlingService;
+	IInputHandler* inputHandlingService;
 	GLFWwindow* window;
 	Scene* scene;
 	int mouseXPosition,mouseYPosition;
@@ -35,7 +35,7 @@ public:
 	UIManager();
 	~UIManager();
 	void AssignEventHandlingService(IEventHandlingService* _eventHandling);
-	void AssignInputHandlingService(IInputHandlingService* _inputHandler);
+	void AssignInputHandlingService(IInputHandler* _inputHandler);
 	void AddComponentToScene(Component* component);
 	void HandleEvents();
 	void Update();
