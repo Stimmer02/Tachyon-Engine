@@ -61,7 +61,7 @@ GLuint fboId;
 bool FALLBACK = false;
 
 int main(){
-    
+
     //Initialize GLFW
 
     GLFWwindow* window = initializeGLFW(width, height);
