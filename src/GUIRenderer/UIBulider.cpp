@@ -1,6 +1,6 @@
 #include "Text.h"
 #include "UIBuilder.h"
-	
+
 UIBuilder* UIBuilder::AssignEventManager(IEventHandlingService* _eventManager){
 	eventManager = _eventManager;
 	return this;
@@ -14,7 +14,7 @@ UIBuilder* UIBuilder::AssignEvent(const EventType &_event,std::function<void()> 
 		std::cout<<"Error: it's possible to assing event only to interactive componnents\n";
 		//czy tutaj powinien być taki komunikat? czy to jest potrzebne?
 		//jak to rozwiącać?
-		return this; 
+		return this;
 	}
 	*/
 	events[_event] = _delegate;
@@ -47,13 +47,12 @@ UIBuilder* UIBuilder::SetText(char* _text, const int &_textLen){
 //	TODO
 // }
 Component* UIBuilder::Build(){
-	
+
 	Button* newButtonComponent;
 	Canvas* newCanvasComponent;
 	Text* textComponent;
 	if(type == BUTTON){
 		newButtonComponent = new Button(x, y, width, height);
-		//newButtonComponent->SetEventManager(eventManager);
 		//there is no SetEventManager methot in InteractiveComponent
 		for(auto i = events.begin(); i != events.end(); ++i){
 			newButtonComponent->AssignEvent(i->first, i->second);
@@ -63,7 +62,6 @@ Component* UIBuilder::Build(){
 	}
 	else if(type == CANVAS){
 		newCanvasComponent = new Canvas(x, y, width, height);
-		newCanvasComponent->SetEventManager(eventManager);
 		//there is no SetEventManager methot in InteractiveComponent
 		for(auto i = events.begin(); i != events.end(); ++i){
 			newCanvasComponent->AssignEvent(i->first, i->second);

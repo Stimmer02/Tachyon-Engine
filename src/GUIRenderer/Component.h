@@ -29,7 +29,7 @@ public:
 	Component(const float &_x, const float &_y, const float &_width, const float &_height);
 	bool IsInBound(const float &_x,const float &_y);
 	void SetColor(const Color &_color);
-	virtual void Render();
+	virtual void Render() = 0;
 	GLuint GetTextureID();
 	GLuint GetPBO();
 };

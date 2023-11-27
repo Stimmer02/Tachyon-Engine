@@ -10,7 +10,7 @@ UIManager::UIManager(){
 	const char* deatfullWindowTitle = "Tachion Engine";
 	GLFWmonitor* deatfullWindowMonitor = NULL;
 	GLFWwindow* deatfullWindowShare = NULL;
-	window = glfwCreateWindow(deatfullWindowWidth, deatfullWindowHeigth, deatfullWindowTitle, deatfullWindowMonitor, deatfullWindowShare);	
+	window = glfwCreateWindow(deatfullWindowWidth, deatfullWindowHeigth, deatfullWindowTitle, deatfullWindowMonitor, deatfullWindowShare);
 	scene = new Scene();
 }
 UIManager::~UIManager(){
@@ -41,15 +41,13 @@ void UIManager::HandleEvents(){
 		mouseYPosition=0;
 		eventType=ONCLICK;
 	}
-	eventHandlingService->publish(eventType, scene->GetComponent(mouseXPosition,mouseYPosition));
+	eventHandlingService->Publish(eventType, (IEventListener*)scene->GetComponent(mouseXPosition,mouseYPosition));
 }
 void UIManager::Update(){
-	
-	specialName = inputHandlingService->getSpecialName();
-	
-	if(specialName!=NULL){
-		HandleEvents();
-	}
+
+	// if(specialName!=NULL){
+	// 	HandleEvents();
+	// }
 }
 void UIManager::Render(){
 	scene->Render();

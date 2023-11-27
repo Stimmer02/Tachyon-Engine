@@ -28,7 +28,6 @@ private:
 	IInputHandlingService* inputHandlingService;
 	GLFWwindow* window;
 	Scene* scene;
-	SpecialStruct specialName;
 	int mouseXPosition,mouseYPosition;
 	EventType eventType;
 public:
