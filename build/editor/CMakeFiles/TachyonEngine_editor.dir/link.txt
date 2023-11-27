@@ -1,0 +1,1 @@
+/usr/bin/g++ CMakeFiles/TachyonEngine_editor.dir/main.cpp.o -o TachyonEngine_editor  -Wl,-rpath,/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src ../src/libTachyonEngine_lib.so /usr/lib/libOpenCL.so /usr/lib/libGLX.so /usr/lib/libOpenGL.so /usr/lib/libglfw.so.3.3 /usr/lib/libGLEW.so 

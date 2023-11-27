@@ -1,0 +1,1 @@
+/usr/bin/g++ CMakeFiles/TachyonEngine_test.dir/unit_test.cpp.o -o TachyonEngine_test  -Wl,-rpath,/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src ../src/libTachyonEngine_lib.so ../lib/googletest/lib/libgtest.a /usr/lib/libOpenCL.so /usr/lib/libGLX.so /usr/lib/libOpenGL.so /usr/lib/libglfw.so.3.3 /usr/lib/libGLEW.so 

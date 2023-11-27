@@ -1,0 +1,86 @@
+[
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Button.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Button.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Button.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Button.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Canvas.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Canvas.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Canvas.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Canvas.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Color.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Color.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Color.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Color.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Component.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Component.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Component.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Component.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/EventManager.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/EventManager.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/EventManager.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/EventManager.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/InteractiveComponent.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/InteractiveComponent.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/InteractiveComponent.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/InteractiveComponent.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Scene.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Scene.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Scene.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Scene.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Text.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Text.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/Text.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/Text.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/UIBulider.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/UIBulider.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/UIBulider.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/UIBulider.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/UIManager.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/UIManager.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer/UIManager.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/GUIRenderer/UIManager.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++ -DTachyonEngine_lib_EXPORTS -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -fPIC -o CMakeFiles/TachyonEngine_lib.dir/main.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/main.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/main.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_lib.dir/main.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/src",
+  "command": "/usr/bin/g++  -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -o CMakeFiles/TachyonEngine_run.dir/main.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/src/main.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/main.cpp",
+  "output": "src/CMakeFiles/TachyonEngine_run.dir/main.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/tests",
+  "command": "/usr/bin/g++  -isystem /home/gandhi/Projects/ZespolowyGit/tachion-engine/build/lib/googletest/include -std=gnu++17 -o CMakeFiles/TachyonEngine_test.dir/unit_test.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/tests/unit_test.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/tests/unit_test.cpp",
+  "output": "tests/CMakeFiles/TachyonEngine_test.dir/unit_test.cpp.o"
+},
+{
+  "directory": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/build/editor",
+  "command": "/usr/bin/g++  -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/GUIRenderer -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src/PhysicsProcessor -I/home/gandhi/Projects/ZespolowyGit/tachion-engine/src -std=gnu++17 -o CMakeFiles/TachyonEngine_editor.dir/main.cpp.o -c /home/gandhi/Projects/ZespolowyGit/tachion-engine/editor/main.cpp",
+  "file": "/home/gandhi/Projects/ZespolowyGit/tachion-engine/editor/main.cpp",
+  "output": "editor/CMakeFiles/TachyonEngine_editor.dir/main.cpp.o"
+}
+]
