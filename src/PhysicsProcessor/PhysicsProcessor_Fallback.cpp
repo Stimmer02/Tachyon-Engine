@@ -90,7 +90,7 @@ std::string PhysicsProcessor_Fallback::kernelCodeAsString(){
 }
 
 // Main construtror operations.
-void PhysicsProcessor_Fallback::constructorMain() {
+void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struct engineConfig config, cl::Device device) {
     // Allocating GPU memory for various structures.
     cl::Buffer* voxels = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
     this->allocatedGPUMemory.push_back(voxels);
@@ -192,7 +192,7 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     allocateHostMemory(openCLContext, engine, PBO, config, device);
 	
 	// Main construtror operations.
-	constructorMain();
+	constructorMain(openCLContext, config, device);
 	
     // Setting arguments for the main (engine) kernel.
     configureMainKernel();
