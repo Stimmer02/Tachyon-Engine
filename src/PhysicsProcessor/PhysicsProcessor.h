@@ -13,6 +13,8 @@ public:
     void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     std::string structuresAsString();
     std::string kernelCodeAsString();
+	void constructorMain();
+	void configureMainKernel();
     PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     ~PhysicsProcessor();
     void generateFrame() override;
