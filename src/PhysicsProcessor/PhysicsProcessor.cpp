@@ -6,12 +6,13 @@
 #include <CL/opencl.hpp>
 #endif
 
+// Initializing GPU memory and allocating GPU.
 void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
 	// Setting class variables.
     this->context = openCLContext;
+    this->engine = engine;
     this->config = config;
     this->device = device;
-    this->engine = engine;
     
     // Creating an OpenCL command queue.
     this->queue = cl::CommandQueue(openCLContext, device);
@@ -21,12 +22,12 @@ void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel 
     this->pbo_mem = clCreateFromGLBuffer(context(), CL_MEM_WRITE_ONLY, PBO, &error);
     this->pbo_buff = cl::Buffer(pbo_mem);
 
-    // Acquiring OpenGL objects by OpenCL.
+    // Acquiring OpenGL objects by OpenCL. - Fallback exclusive
     clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
 }
 
+// Defining data structures as a string.
 std::string PhysicsProcessor::structuresAsString(){
-    // Defining data structures as a string.
     std::string structures =
         "struct __attribute__ ((packed)) color{"
         "    unsigned char R;"
@@ -69,8 +70,8 @@ std::string PhysicsProcessor::structuresAsString(){
 	return structures;
 }
 
+// Creating OpenCL kernel code as a string.
 std::string PhysicsProcessor::kernelCodeAsString(){
-    // Creating OpenCL kernel code as a string.
     std::string kernel_code =
         "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
         "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
@@ -93,10 +94,8 @@ std::string PhysicsProcessor::kernelCodeAsString(){
 	return kernel_code;
 }
 
-PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
-    // Initializing GPU memory and allocating GPU.
-    allocateHostMemory(openCLContext, engine, PBO, config, device);
-    
+// Main construtror operations.
+void PhysicsProcessor::constructorMain() {
     // Allocating GPU memory for various structures.
     cl::Buffer* voxels = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
     this->allocatedGPUMemory.push_back(voxels);
@@ -178,13 +177,26 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     // Initializing the spawn_voxel kernel.
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
 
-    // Setting arguments for the main (engine) kernel.
+    // Freeing temporary memory.
+    delete[] tempSubstanceTable;
+}
+
+// Setting arguments for the main (engine) kernel.
+void PhysicsProcessor::configureMainKernel(){
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
     this->size = 0;
+}
 
-    // Freeing temporary memory.
-    delete[] tempSubstanceTable;
+PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
+    // Initializing GPU memory and allocating GPU.
+    allocateHostMemory(openCLContext, engine, PBO, config, device);
+	
+	// Main construtror operations.
+	constructorMain();
+	
+    // Setting arguments for the main (engine) kernel.
+    configureMainKernel();
 }
 
 PhysicsProcessor::~PhysicsProcessor(){
