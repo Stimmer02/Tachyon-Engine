@@ -19,6 +19,7 @@ public:
     ~PhysicsProcessor();
     void generateFrame() override;
     void spawnVoxel(uint x, uint y, uint substanceID) override;
+    void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) override;
     uint countVoxels() override;
 
 private:
@@ -36,6 +37,7 @@ private:
     cl::Buffer eConfig;
     uint size;
     cl::Kernel spawn_voxelKernel;
+    cl::Kernel spawn_voxel_in_area;
 };
 
 #endif
