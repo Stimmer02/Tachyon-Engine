@@ -12,12 +12,12 @@ void PhysicsProcessor_Fallback::allocateHostMemory(cl::Context openCLContext, cl
     // Creating an OpenCL command queue.
     this->queue = cl::CommandQueue(openCLContext, device);
 
-    // Creating an OpenCL memory object associated with OpenGL PBO (Pixel Buffer Object). - Fallback exclusive difference with PhysicsProcessor.
+    // Creating an OpenCL memory object associated with OpenGL PBO (Pixel Buffer Object). Fallback exclusive difference with PhysicsProcessor.
     this->hostFallbackBuffer = new unsigned char[sizeof(color) * config.simulationWidth * config.simulationHeight];
     this->pbo_mem = clCreateBuffer(context(), CL_MEM_WRITE_ONLY, sizeof(color) * config.simulationWidth * config.simulationHeight, NULL, NULL);
     this->pbo_buff = cl::Buffer(pbo_mem);
 
-    // Bind OpenGL buffer object (PBO) to the GL_ARRAY_BUFFER target. - Fallback exclusive difference with PhysicsProcessor.
+    // Bind OpenGL buffer object (PBO) to the GL_ARRAY_BUFFER target. Fallback exclusive difference with PhysicsProcessor.
     glBindBuffer(GL_ARRAY_BUFFER, PBO);
 }
 
@@ -191,8 +191,8 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     // Initializing GPU memory and allocating GPU.
     allocateHostMemory(openCLContext, engine, PBO, config, device);
 	
-	// Main construtror operations.
-	constructorMain(openCLContext, config, device);
+    // Main construtror operations.
+    constructorMain(openCLContext, config, device);
 	
     // Setting arguments for the main (engine) kernel.
     configureMainKernel();
