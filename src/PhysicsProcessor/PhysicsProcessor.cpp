@@ -8,7 +8,7 @@
 
 // Initializing GPU memory and allocating GPU.
 void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
-	// Setting class variables.
+    // Setting class variables.
     this->context = openCLContext;
     this->engine = engine;
     this->config = config;
@@ -191,10 +191,10 @@ void PhysicsProcessor::configureMainKernel(){
 PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
     // Initializing GPU memory and allocating GPU.
     allocateHostMemory(openCLContext, engine, PBO, config, device);
-	
-	// Main construtror operations.
-	constructorMain(openCLContext, config, device);
-	
+
+    // Main construtror operations.
+    constructorMain(openCLContext, config, device);
+
     // Setting arguments for the main (engine) kernel.
     configureMainKernel();
 }
