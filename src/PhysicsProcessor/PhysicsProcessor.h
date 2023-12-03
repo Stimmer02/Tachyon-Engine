@@ -20,7 +20,6 @@ public:
     uint countVoxels() override;
 
 private:
-    //resources: need to think about it
     cl::Context context;
     cl::Kernel engine;
     engineConfig config;
