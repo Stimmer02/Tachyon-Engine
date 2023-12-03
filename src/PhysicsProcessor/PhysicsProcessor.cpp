@@ -95,7 +95,7 @@ std::string PhysicsProcessor::kernelCodeAsString(){
 }
 
 // Main construtror operations.
-void PhysicsProcessor::constructorMain() {
+void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineConfig config, cl::Device device) {
     // Allocating GPU memory for various structures.
     cl::Buffer* voxels = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
     this->allocatedGPUMemory.push_back(voxels);
@@ -193,7 +193,7 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     allocateHostMemory(openCLContext, engine, PBO, config, device);
 	
 	// Main construtror operations.
-	constructorMain();
+	constructorMain(openCLContext, config, device);
 	
     // Setting arguments for the main (engine) kernel.
     configureMainKernel();
