@@ -1,6 +1,7 @@
 #include "PhysicsProcessor_Fallback.h"
 #include "IPhysicsProcessor.h"
 
+// Initializing GPU memory and allocating GPU.
 void PhysicsProcessor_Fallback::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
     // Setting class variables.
     this->context = openCLContext;
@@ -11,17 +12,17 @@ void PhysicsProcessor_Fallback::allocateHostMemory(cl::Context openCLContext, cl
     // Creating an OpenCL command queue.
     this->queue = cl::CommandQueue(openCLContext, device);
 
-    // Creating an OpenCL memory object associated with OpenGL PBO (Pixel Buffer Object).
+    // Creating an OpenCL memory object associated with OpenGL PBO (Pixel Buffer Object). - Fallback exclusive difference with PhysicsProcessor.
     this->hostFallbackBuffer = new unsigned char[sizeof(color) * config.simulationWidth * config.simulationHeight];
     this->pbo_mem = clCreateBuffer(context(), CL_MEM_WRITE_ONLY, sizeof(color) * config.simulationWidth * config.simulationHeight, NULL, NULL);
     this->pbo_buff = cl::Buffer(pbo_mem);
 
-    // Bind OpenGL buffer object (PBO) to the GL_ARRAY_BUFFER target.
+    // Bind OpenGL buffer object (PBO) to the GL_ARRAY_BUFFER target. - Fallback exclusive difference with PhysicsProcessor.
     glBindBuffer(GL_ARRAY_BUFFER, PBO);
 }
 
+// Defining data structures as a string.
 std::string PhysicsProcessor_Fallback::structuresAsString(){
-    // Defining data structures as a string.
     std::string structures =
         "struct __attribute__ ((packed)) color{"
         "    unsigned char R;"
@@ -64,8 +65,8 @@ std::string PhysicsProcessor_Fallback::structuresAsString(){
 	return structures;
 }
 
+// Creating OpenCL kernel code as a string.
 std::string PhysicsProcessor_Fallback::kernelCodeAsString(){
-    // Creating OpenCL kernel code as a string.
     std::string kernel_code =
         "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
         "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
@@ -88,10 +89,8 @@ std::string PhysicsProcessor_Fallback::kernelCodeAsString(){
 	return kernel_code;
 }
 
-PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
-    // Initializing GPU memory and allocating GPU.
-    allocateHostMemory(openCLContext, engine, PBO, config, device);
-
+// Main construtror operations.
+void PhysicsProcessor_Fallback::constructorMain() {
     // Allocating GPU memory for various structures.
     cl::Buffer* voxels = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
     this->allocatedGPUMemory.push_back(voxels);
@@ -142,7 +141,7 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     sources.push_back({kernel_code.c_str(), kernel_code.length()});
     cl::Program program(openCLContext, sources);
 
-    if (program.build() != CL_SUCCESS) {
+    if (program.build() != CL_SUCCESS) { // Fallback exclusive difference with PhysicsProcessor.
         std::printf("Error building: %s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device).c_str());
         delete[] hostFallbackBuffer;
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -166,6 +165,7 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     set_engineResourcesKernel.setArg(2, *chunk);
     set_engineResourcesKernel.setArg(3, this->pbo_buff);
 
+    // Fallback exclusive difference with PhysicsProcessor.
     queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.enqueueNDRangeKernel(set_substanceTableKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.enqueueNDRangeKernel(set_engineResourcesKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
@@ -176,13 +176,26 @@ PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, 
     // Initializing the spawn_voxel kernel.
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
 
-    // Setting arguments for the main (engine) kernel.
+    // Freeing temporary memory.
+    delete[] tempSubstanceTable;
+}
+
+// Setting arguments for the main (engine) kernel.
+void PhysicsProcessor_Fallback::configureMainKernel(){
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
     this->size = 0;
+}
 
-    // Freeing temporary memory.
-    delete[] tempSubstanceTable;
+PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
+    // Initializing GPU memory and allocating GPU.
+    allocateHostMemory(openCLContext, engine, PBO, config, device);
+	
+	// Main construtror operations.
+	constructorMain();
+	
+    // Setting arguments for the main (engine) kernel.
+    configureMainKernel();
 }
 
 PhysicsProcessor_Fallback::~PhysicsProcessor_Fallback(){
