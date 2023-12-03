@@ -19,7 +19,6 @@ public:
     ~PhysicsProcessor_Fallback();
     void generateFrame() override;
     void spawnVoxel(uint x, uint y, uint substanceID) override;
-    void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) override;
     uint countVoxels() override;
 
 private:

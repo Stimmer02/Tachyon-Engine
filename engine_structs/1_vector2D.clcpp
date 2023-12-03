@@ -1,4 +1,4 @@
 struct __attribute__ ((aligned)) vector2D{
-    int x;
-    int y;
+    unsigned int x;
+    unsigned int y;
 };

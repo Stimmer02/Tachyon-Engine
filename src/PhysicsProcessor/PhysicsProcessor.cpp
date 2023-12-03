@@ -113,18 +113,18 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
     tempSubstanceTable[0].color.B = 0;
     tempSubstanceTable[0].color.A = 0;
 
-    tempSubstanceTable[1].jammingFactor = 0;
-    tempSubstanceTable[1].mass = 0;
-    tempSubstanceTable[1].color.R = 100;
-    tempSubstanceTable[1].color.G = 100;
-    tempSubstanceTable[1].color.B = 110;
+    tempSubstanceTable[1].jammingFactor = 1;
+    tempSubstanceTable[1].mass = 1;
+    tempSubstanceTable[1].color.R = 0;
+    tempSubstanceTable[1].color.G = 128;
+    tempSubstanceTable[1].color.B = 255;
     tempSubstanceTable[1].color.A = 255;
 
     tempSubstanceTable[2].jammingFactor = 1;
     tempSubstanceTable[2].mass = 1;
     tempSubstanceTable[2].color.R = 255;
-    tempSubstanceTable[2].color.G = 250;
-    tempSubstanceTable[2].color.B = 162;
+    tempSubstanceTable[2].color.G = 255;
+    tempSubstanceTable[2].color.B = 0;
     tempSubstanceTable[2].color.A = 255;
 
     cl::Buffer* substances = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct substance) * substanceCount);
@@ -176,7 +176,6 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
 
     // Initializing the spawn_voxel kernel.
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
-    this->spawn_voxel_in_area = cl::Kernel(program, "spawn_voxel_in_area");
 
     // Freeing temporary memory.
     delete[] tempSubstanceTable;
@@ -208,7 +207,7 @@ PhysicsProcessor::~PhysicsProcessor(){
 }
 
 void PhysicsProcessor::generateFrame(){
-    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(1, 256));
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(16, 16));
     queue.finish();
 }
 
@@ -219,18 +218,6 @@ void PhysicsProcessor::spawnVoxel(uint x, uint y, uint substanceID){
     spawn_voxelKernel.setArg(3, this->engineResources);
     spawn_voxelKernel.setArg(4, this->eConfig);
     queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
-    queue.finish();
-
-    ++size;
-}
-
-void PhysicsProcessor::spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID){
-    spawn_voxel_in_area.setArg(0, x);
-    spawn_voxel_in_area.setArg(1, y);
-    spawn_voxel_in_area.setArg(2, substanceID);
-    spawn_voxel_in_area.setArg(3, this->engineResources);
-    spawn_voxel_in_area.setArg(4, this->eConfig);
-    queue.enqueueNDRangeKernel(spawn_voxel_in_area, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(8, 8));
     queue.finish();
 
     ++size;

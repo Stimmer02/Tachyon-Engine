@@ -1,3 +1,0 @@
-if_movable_object_start
-1
-    if (thisVoxel->substanceID > 1){

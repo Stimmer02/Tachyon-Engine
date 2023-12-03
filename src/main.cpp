@@ -6,6 +6,8 @@ cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 
 void glfwErrorCallback(int error, const char* description);
 
+uint localXsize = 16;
+uint localYsize = 16;
 int width = 1024, height = 1024;
 
 GLuint PBO;
@@ -15,13 +17,12 @@ GLuint fboId;
 IPhysicsProcessor* physicsProcessor;
 
 
-bool pause = true;
 
 int main(){
 
     //Initialize GLFW
 
-    GLFWwindow* window = initializeGLFW(width, height);
+    GLFWwindow* window = initializeGLFW(height, width);
 
     if (!window){
          glfwTerminate();
@@ -69,42 +70,48 @@ int main(){
     }
 
 
-    //Prepare simulation
-    physicsProcessor->spawnVoxelInArea(0, 512, 1024, 512, 2);
-    // for (uint i = 0; i+64 < config.simulationWidth; i+= 128){
-    //     physicsProcessor->spawnVoxelInArea(i, 30, 64, 8, 1);
-    // }
-
-    physicsProcessor->generateFrame();
-    glClear(GL_COLOR_BUFFER_BIT);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-    std::printf("PRESS 2 TO REASUME SIMULATION\n");
-
     GLuint error = 0;
-    uint x = 0;
+    uint x = 0, y = 0;
     while (!glfwWindowShouldClose(window)){
 
-        if (!pause){
-            physicsProcessor->generateFrame();
-            glClear(GL_COLOR_BUFFER_BIT);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-            glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-            // for (uint i = 0; i < 3; i++){
-            //     physicsProcessor->spawnVoxelInArea(x, config.simulationHeight-4, 8, 8, 2);
-            //     ++x;
-            //     if (x + 8 >= width){
-            //         x = 0;
-            //     }
-            // }
-        }
+        physicsProcessor->generateFrame();
+
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+        glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
 
+        for (uint i = 0; i < 21; ++i){
+            physicsProcessor->spawnVoxel(x, y, 1);
+            ++x;
 
+            if (x == width){
+                ++y;
+                x = 0;
+                
+                if (y == height){
+                    y = 0;
+                }
+            }
+        }
+        
+        for (uint i = 0; i < 34; ++i){
+            physicsProcessor->spawnVoxel(x, y, 2);
+            ++x;
 
-
+            if (x == width){
+                ++y;
+                x = 0;
+                
+                if (y == height){
+                    y = 0;
+                }
+            }
+        }
+        
         error = glGetError();
         if (error != GL_NO_ERROR) {
             std::printf("OpenGL error: %d\n", error);
@@ -149,21 +156,4 @@ GLFWwindow* initializeGLFW(uint width, uint height){
 
 void glfwErrorCallback(int error, const char* description){
     printf("Error: %s\n", description);
-}
-
-
-
-//HERE YOU CAN PUT ANYTHING TO TEST YOUR METHODS
-//IPhysicsProcessor is global so it is in this function's scoope
-
-void processInput(GLFWwindow *window){
-    static bool pressed = false;
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
-        glfwSetWindowShouldClose(window, true);
-    }
-    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS){
-        pause = true;
-    } else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS){
-        pause = false;
-    }
 }
