@@ -58,9 +58,24 @@ int main(){
 
     const Color pixels[] = {
         (Color){255, 0, 0, 255},
-        (Color){0, 255, 0, 255},
         (Color){0, 0, 255, 255},
-        (Color){255, 0, 0, 255}
+        (Color){255, 0, 0, 255},
+        (Color){0, 0, 255, 255},
+
+        (Color){0, 255, 0, 255},
+        (Color){255, 255, 0, 255},
+        (Color){0, 255, 0, 255},
+        (Color){255, 255, 0, 255},
+
+        (Color){255, 0, 0, 255},
+        (Color){0, 0, 255, 255},
+        (Color){255, 0, 0, 255},
+        (Color){0, 0, 255, 255},
+
+        (Color){0, 255, 0, 255},
+        (Color){255, 255, 0, 255},
+        (Color){0, 255, 0, 255},
+        (Color){255, 255, 0, 255}
     };
 
     float vertex[] ={
@@ -70,7 +85,7 @@ int main(){
         0.5, -0.5, 0.0
     };
 
-    Sprite *s = Sprite::Create(pixels, 2, 2);
+    Sprite *s = Sprite::Create(pixels, 4, 4);
 
     if(!s){
         glfwDestroyWindow(window);
@@ -110,8 +125,8 @@ int main(){
         vertex[6] = cos(angle + 2*diff);
         vertex[7] = sin(angle + 2*diff);
 
-        vertex[9] = cos(angle + 3*diff);
-        vertex[10] = sin(angle + 3*diff);
+        vertex[9] = cos(angle - diff);
+        vertex[10] = sin(angle - diff);
 
 
         angle = (angle+0.01f) * (angle < 360.0f);
