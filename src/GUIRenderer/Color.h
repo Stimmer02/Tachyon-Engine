@@ -2,10 +2,10 @@
 #define COLOR_H
 
 struct Color{
-public:
-	//those variables describe color in RGBA format
-	unsigned char R,G,B,A;
-	
+	unsigned char R;
+	unsigned char G;
+	unsigned char B;
+	unsigned char A;
 };
 
 #endif
