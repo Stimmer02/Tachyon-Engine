@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include <cmath>
 
 #ifdef __APPLE__
 
@@ -62,6 +63,13 @@ int main(){
         (Color){255, 0, 0, 255}
     };
 
+    float vertex[] ={
+        -0.5, -0.5, 0.0,
+        -0.5, 0.5, 0.0,
+        0.5, 0.5, 0.0,
+        0.5, -0.5, 0.0
+    };
+
     Sprite *s = Sprite::Create(pixels, 2, 2);
 
     if(!s){
@@ -71,6 +79,9 @@ int main(){
         return -1;
     }
 
+    float angle = 0.0f;
+    float diff = 2 * M_PI/4.0f;
+
     while(!glfwWindowShouldClose(window)){
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -79,16 +90,31 @@ int main(){
         s->Load();
 
         glBegin(GL_QUADS);
-         glTexCoord2d(1, 1); glVertex3f(0.0, 0.0, 0.0);
-         glTexCoord2d(1, 0); glVertex3f(0.0, 1.0, 0.0);
-         glTexCoord2d(0, 0); glVertex3f(1.0, 1.0, 0.0);
-         glTexCoord2d(0, 1); glVertex3f(1.0, 0.0, 0.0);
+         glTexCoord2d(1, 1); glVertex3f(vertex[0], vertex[1], vertex[2]);
+         glTexCoord2d(1, 0); glVertex3f(vertex[3], vertex[4], vertex[5]);
+         glTexCoord2d(0, 0); glVertex3f(vertex[6], vertex[7], vertex[8]);
+         glTexCoord2d(0, 1); glVertex3f(vertex[9], vertex[10], vertex[11]);
         glEnd();
 
         s->UnLoad();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        vertex[0] = cos(angle);
+        vertex[1] = sin(angle);
+
+        vertex[3] = cos(angle + diff);
+        vertex[4] = sin(angle + diff);
+
+        vertex[6] = cos(angle + 2*diff);
+        vertex[7] = sin(angle + 2*diff);
+
+        vertex[9] = cos(angle + 3*diff);
+        vertex[10] = sin(angle + 3*diff);
+
+
+        angle = (angle+0.01f) * (angle < 360.0f);
 
         GLenum error = glGetError();
         if (error != GL_NO_ERROR) {
