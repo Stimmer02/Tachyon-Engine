@@ -8,4 +8,4 @@ add_executable(${BINARY} ${EDITOR_SOURCES})
 
 set_property(TARGET ${BINARY} PROPERTY CXX_STANDARD 17)
 
-target_link_libraries(${BINARY} ${CMAKE_PROJECT_NAME}_lib)
+target_link_libraries(${BINARY} ${LIB_NAME}_lib)

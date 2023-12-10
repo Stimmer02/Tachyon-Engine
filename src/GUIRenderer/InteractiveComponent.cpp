@@ -1,7 +1,7 @@
 #include "InteractiveComponent.h"
 
 
-InteractiveComponent::InteractiveComponent(const int& x, const int& y, const int& width, const int& height){
+InteractiveComponent::InteractiveComponent(const int& x, const int& y, const int& width, const int& height) : Component(x, y, width, height){
     //TODO
 }
 

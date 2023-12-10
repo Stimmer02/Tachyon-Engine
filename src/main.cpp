@@ -91,13 +91,13 @@ int main(){
             if (x == width){
                 ++y;
                 x = 0;
-                
+
                 if (y == height){
                     y = 0;
                 }
             }
         }
-        
+
         for (uint i = 0; i < 34; ++i){
             physicsProcessor->spawnVoxel(x, y, 2);
             ++x;
@@ -105,13 +105,13 @@ int main(){
             if (x == width){
                 ++y;
                 x = 0;
-                
+
                 if (y == height){
                     y = 0;
                 }
             }
         }
-        
+
         error = glGetError();
         if (error != GL_NO_ERROR) {
             std::printf("OpenGL error: %d\n", error);
