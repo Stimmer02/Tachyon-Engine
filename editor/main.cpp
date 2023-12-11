@@ -94,6 +94,8 @@ int main(){
         return -1;
     }
 
+    fprintf(stdout, "Sprite Checksum : 0x%08X \n", s->GetChecksum());
+
     float angle = 0.0f;
     float diff = 2 * M_PI/4.0f;
 

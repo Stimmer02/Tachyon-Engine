@@ -22,11 +22,11 @@ class Sprite {
 
 public:
 
-    static Sprite* Create(const Color * pixels, const int& width, const int &height);
+    static Sprite* Create(const Color * pixels, const uint32_t& width, const uint32_t& height);
 
-    unsigned int GetWidth();
-    unsigned int GetHeight();
-    char * GetChecksum();
+    uint32_t GetWidth();
+    uint32_t GetHeight();
+    uint32_t GetChecksum();
 
     void Load();
     void UnLoad();
@@ -41,14 +41,14 @@ private:
 
     Sprite();
 
-    void CalculateChecksum(const Color * pixels, const int& width, const int &height);
+    void CalculateChecksum(const Color * pixels, const uint32_t& width, const uint32_t& height);
 
-    unsigned int width;
-    unsigned int height;
+    uint32_t width;
+    uint32_t height;
 
     GLuint textureID;
 
-    unsigned int checksum[4];
+    uint32_t checksum;
 
 };
 

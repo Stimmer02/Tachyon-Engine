@@ -1,6 +1,7 @@
 #include "Sprite.h"
+#include <stdio.h>
 
-Sprite* Sprite::Create(const Color * pixels, const int& width, const int &height){
+Sprite* Sprite::Create(const Color * pixels, const uint32_t& width, const uint32_t& height){
 
     Sprite *sprite = NULL;
 
@@ -42,11 +43,11 @@ Sprite* Sprite::Create(const Color * pixels, const int& width, const int &height
     return sprite;
 }
 
-unsigned int Sprite::GetWidth(){
+uint32_t Sprite::GetWidth(){
     return width;
 }
 
-unsigned int Sprite::GetHeight(){
+uint32_t Sprite::GetHeight(){
     return height;
 }
 
@@ -66,21 +67,14 @@ void Sprite::Destroy(){
 
 bool Sprite::operator==(const Sprite& sprite){
 
-    char *check_other = ((Sprite)sprite).GetChecksum();
+    uint32_t checksumOther = ((Sprite)sprite).GetChecksum();
 
-    unsigned char result = 0;
-
-    result |= check_other[0] ^ checksum[0];
-    result |= check_other[1] ^ checksum[1];
-    result |= check_other[2] ^ checksum[2];
-    result |= check_other[3] ^ checksum[3];
-
-    return result==0;
+    return !(checksumOther^checksum);
 
 }
 
-char * Sprite::GetChecksum(){
-    return (char*)checksum;
+uint32_t Sprite::GetChecksum(){
+    return checksum;
 }
 
 Sprite::~Sprite(){
@@ -88,19 +82,42 @@ Sprite::~Sprite(){
 }
 
 Sprite::Sprite(){
-
+    this->checksum = 0;
 }
 
-void Sprite::CalculateChecksum(const Color * pixels, const int& width, const int &height){
+void Sprite::CalculateChecksum(const Color * pixels, const uint32_t& width, const uint32_t& height){
 
-    for(int y=0; y<height; y++){
-        for(int x=0; x<width; x++){
+    const uint8_t corners[8] = {1, 2, 4, 8, 16, 32, 64, 128};
 
-            unsigned int index = y * width + x;
+    uint32_t tempChecksum = 0;
 
-            //Some checksum magic;
+    for(uint32_t index=0; index<(width*height); index++){
+
+        uint8_t * bytes = (uint8_t *)&pixels[index];
+
+        for(uint8_t byteIndex=0; byteIndex<4; ++byteIndex){
+
+            uint8_t minDifference = 255;
+            uint8_t minDifferenceIndex = 0;
+
+            for(uint8_t i=0; i < 8; i++){
+
+                uint8_t difference = corners[i] & bytes[byteIndex];
+
+                if(difference < minDifference){
+                    minDifference = difference;
+                    minDifferenceIndex = i;
+                }
+
+            }
+
+            tempChecksum ^= bytes[byteIndex];
+            tempChecksum <<= corners[minDifferenceIndex];
+            tempChecksum |= bytes[byteIndex];
 
         }
+
+        checksum ^= tempChecksum;
     }
 
 }
