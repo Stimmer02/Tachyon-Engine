@@ -1,7 +1,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "Color.h"
+#include "Image.h"
 
 #ifdef __APPLE__
 
@@ -22,15 +22,38 @@ class Sprite {
 
 public:
 
-    static Sprite* Create(const Color * pixels, const int& width, const int &height);
+    /// @brief Method creates a new Sprite within OpenGL graphic context.
+    /// @param pixels
+    /// @param width
+    /// @param height
+    /// @return Sprite object
+    static Sprite* Create(const Color * pixels, const uint32_t& width, const uint32_t& height);
 
-    unsigned int GetWidth();
-    unsigned int GetHeight();
-    char * GetChecksum();
+    /// @brief Method creates a new Sprite within OpenGL graphic context.
+    /// @param image
+    /// @return Sprite object
+    static Sprite* Create(const Image * image);
 
+
+    /// @brief Method returns width of sprite.
+    /// @return Sprite width
+    uint32_t GetWidth();
+
+    /// @brief Method returns height of sprite.
+    /// @return Sprite height
+    uint32_t GetHeight();
+
+    /// @brief Method returns sprite cheksum.
+    /// @return Sprite checksum
+    uint32_t GetChecksum();
+
+    /// @brief Method loads current sprite to texture buffer.
     void Load();
+
+    /// @brief Method unloads current sprite from texture buffer.
     void UnLoad();
 
+    /// @brief Method deletes texture from OpenGL graphic context.
     void Destroy();
 
     bool operator==(const Sprite& sprite);
@@ -41,14 +64,18 @@ private:
 
     Sprite();
 
-    void CalculateChecksum(const Color * pixels, const int& width, const int &height);
+    /// @brief Method calculate code image within uint32_t range
+    /// @param pixels
+    /// @param width
+    /// @param height
+    void CalculateChecksum(const Color * pixels, const uint32_t& width, const uint32_t& height);
 
-    unsigned int width;
-    unsigned int height;
+    uint32_t width;
+    uint32_t height;
 
     GLuint textureID;
 
-    unsigned int checksum[4];
+    uint32_t checksum;
 
 };
 

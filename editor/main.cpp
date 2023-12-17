@@ -1,33 +1,21 @@
+#define CL_HPP_TARGET_OPENCL_VERSION 200
+
 #include "Sprite.h"
+#include "BitmapReader.h"
+
+#include <stdio.h>
 #include <cmath>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #ifdef __APPLE__
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 #include <OpenGL/OpenGL.h>
-#include <OpenCL/opencl.h>
-#include <OpenCL/cl_gl.h>
-#include "../OpenCL/include/CL/cl.hpp"
-
-#elif __WIN32__
-
-typedef unsigned int uint;
-
-#include <windows.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
-#include <CL/opencl.hpp>
-#include <CL/cl_gl.h>
 
 #else
 
-#include <CL/opencl.hpp>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <CL/cl_gl.h>
 #include <GL/glx.h>
 
 #endif
@@ -37,7 +25,7 @@ int main(){
     const unsigned width = 640, height = 480;
 
     if (!glfwInit()){
-        std::printf("Failed to initialize GLFW!\n");
+        printf("Failed to initialize GLFW!\n");
         return -1;
     }
 
@@ -56,27 +44,9 @@ int main(){
     if(glewInit() != GLEW_OK)
         return -1;
 
-    const Color pixels[] = {
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
+    BitmapReader reader;
 
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255},
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255},
-
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
-
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255},
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255}
-    };
+    Image im = reader.ReadFile("../../resources/sprites/test.bmp");
 
     float vertex[] ={
         -0.5, -0.5, 0.0,
@@ -85,7 +55,9 @@ int main(){
         0.5, -0.5, 0.0
     };
 
-    Sprite *s = Sprite::Create(pixels, 4, 4);
+    Sprite *s = Sprite::Create(&im);
+
+    delete[] im.pixels;
 
     if(!s){
         glfwDestroyWindow(window);
@@ -93,6 +65,8 @@ int main(){
 
         return -1;
     }
+
+    fprintf(stdout, "Sprite Checksum : 0x%08X \n", s->GetChecksum());
 
     float angle = 0.0f;
     float diff = 2 * M_PI/4.0f;
@@ -133,7 +107,7 @@ int main(){
 
         GLenum error = glGetError();
         if (error != GL_NO_ERROR) {
-            std::printf("OpenGL error: %d\n", error);
+            printf("OpenGL error: %d\n", error);
         }
     }
 
