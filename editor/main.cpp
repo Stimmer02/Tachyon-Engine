@@ -1,6 +1,8 @@
 #define CL_HPP_TARGET_OPENCL_VERSION 200
 
 #include "Sprite.h"
+#include "BitmapReader.h"
+
 #include <stdio.h>
 #include <cmath>
 
@@ -42,27 +44,9 @@ int main(){
     if(glewInit() != GLEW_OK)
         return -1;
 
-    const Color pixels[] = {
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
+    BitmapReader reader;
 
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255},
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255},
-
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
-        (Color){255, 0, 0, 255},
-        (Color){0, 0, 255, 255},
-
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255},
-        (Color){0, 255, 0, 255},
-        (Color){255, 255, 0, 255}
-    };
+    Image im = reader.ReadFile("../../resources/sprites/test.bmp");
 
     float vertex[] ={
         -0.5, -0.5, 0.0,
@@ -71,7 +55,9 @@ int main(){
         0.5, -0.5, 0.0
     };
 
-    Sprite *s = Sprite::Create(pixels, 4, 4);
+    Sprite *s = Sprite::Create(&im);
+
+    delete[] im.pixels;
 
     if(!s){
         glfwDestroyWindow(window);
