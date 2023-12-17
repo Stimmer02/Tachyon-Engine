@@ -1,35 +1,19 @@
 #define CL_HPP_TARGET_OPENCL_VERSION 200
 
 #include "Sprite.h"
+#include <stdio.h>
 #include <cmath>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #ifdef __APPLE__
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 #include <OpenGL/OpenGL.h>
-#include <OpenCL/opencl.h>
-#include <OpenCL/cl_gl.h>
-#include "../OpenCL/include/CL/cl.hpp"
-
-#elif __WIN32__
-
-typedef unsigned int uint;
-
-#include <windows.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
-#include <CL/opencl.hpp>
-#include <CL/cl_gl.h>
 
 #else
 
-#include <CL/opencl.hpp>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <CL/cl_gl.h>
 #include <GL/glx.h>
 
 #endif
@@ -39,7 +23,7 @@ int main(){
     const unsigned width = 640, height = 480;
 
     if (!glfwInit()){
-        std::printf("Failed to initialize GLFW!\n");
+        printf("Failed to initialize GLFW!\n");
         return -1;
     }
 
@@ -137,7 +121,7 @@ int main(){
 
         GLenum error = glGetError();
         if (error != GL_NO_ERROR) {
-            std::printf("OpenGL error: %d\n", error);
+            printf("OpenGL error: %d\n", error);
         }
     }
 
