@@ -43,6 +43,47 @@ Sprite* Sprite::Create(const Color * pixels, const uint32_t& width, const uint32
     return sprite;
 }
 
+Sprite* Sprite::Create(const Image * image){
+    Sprite *sprite = NULL;
+
+    if(!image->pixels)
+        return NULL;
+
+    sprite = new Sprite();
+
+    // Write texture informations
+    sprite->width = image->width;
+    sprite->height = image->height;
+
+    // Calculate texture checksum
+    sprite->CalculateChecksum(image->pixels, image->width, image->height);
+
+    // Create texture name
+    glGenTextures(1, &sprite->textureID);
+
+    // Select current texture
+    glBindTexture(GL_TEXTURE_2D, sprite->textureID);
+
+    // Set texture wrapping mode
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+    // Fill texture buffer with pixels
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char *)image->pixels);
+
+    // Set texture filtering mode
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    // Generate mipmaps
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    // Unbind texture
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    return sprite;
+}
+
 uint32_t Sprite::GetWidth(){
     return width;
 }

@@ -1,7 +1,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "Color.h"
+#include "Image.h"
 
 #ifdef __APPLE__
 
@@ -28,6 +28,12 @@ public:
     /// @param height
     /// @return Sprite object
     static Sprite* Create(const Color * pixels, const uint32_t& width, const uint32_t& height);
+
+    /// @brief Method creates a new Sprite within OpenGL graphic context.
+    /// @param image
+    /// @return Sprite object
+    static Sprite* Create(const Image * image);
+
 
     /// @brief Method returns width of sprite.
     /// @return Sprite width

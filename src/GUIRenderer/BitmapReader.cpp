@@ -73,25 +73,27 @@ void BitmapReader::ParseInfo(const char * source, unsigned int & offset){
 }
 
 
-void BitmapReader::ReadFile(const char * filename){
+Image BitmapReader::ReadFile(const char * filename){
 
     std::fstream input;
     input.open(filename, std::ios::in | std::ios::binary);
 
     if(!input){
         fprintf(stderr, "File can't be opened.\n");
-        return;
+
+        // Return empty image
+        return Image();
     }
 
-    //Determine file length
+    // Determine file length
     input.seekg(0, std::ios::end);
     unsigned int file_size = input.tellg();
     input.seekg(0, std::ios::beg);
 
-    //Allocate required space
+    // Allocate required space
     char * raw_data = new char[file_size];
 
-    //Read whole file and close stream
+    // Read whole file and close stream
     input.read(raw_data, file_size);
     input.close();
 
@@ -110,22 +112,18 @@ void BitmapReader::ReadFile(const char * filename){
         delete[] raw_data;
     }
 
-    Color **pixels = new Color*[infoHeader.width];
+    Color *pixels = new Color[infoHeader.height * infoHeader.width];
 
-    for(int i=0; i< infoHeader.width; i++)
-        pixels[i] = new Color[infoHeader.height];
-
-    for(int y = 0; y<infoHeader.height; y++){
-        for(int x = 0; x<infoHeader.width; x++){
-            ParseData((char*)&pixels[x][y], raw_data, offset, sizeof(Color));
-        }
+    for(int i = 0; i < infoHeader.height * infoHeader.width; i++){
+        ParseData((char*)&pixels[i], raw_data, offset, 3);
     }
 
-
-    for(int i=0; i< infoHeader.width; i++)
-        delete[] pixels[i];
-
-    delete[] pixels;
     delete[] raw_data;
 
+    Image image;
+    image.width = infoHeader.width;
+    image.height = infoHeader.height;
+    image.pixels = pixels;
+
+    return image;
 }

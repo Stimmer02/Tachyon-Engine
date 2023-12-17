@@ -52,7 +52,7 @@ class BitmapReader {
 
 public:
 
-    void ReadFile(const char * filename);
+    Image ReadFile(const char * filename);
 
 
 private:
