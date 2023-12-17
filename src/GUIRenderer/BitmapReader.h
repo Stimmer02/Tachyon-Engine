@@ -4,23 +4,6 @@
 #include <fstream>
 #include "Image.h"
 
-class BitmapReader {
-
-public:
-
-    void ReadFile(const char * filename);
-
-
-private:
-
-    void ParseData(char * destintation, const char * source, uint32_t & offset, const int32_t length);
-    void ParseHeader(const char * source, uint32_t & offset);
-    void ParseInfo(const char * source, uint32_t & offset);
-    void ChangeEndianess(char *data, const int & length);
-
-    Header header;
-    Info infoHeader;
-};
 
 struct Header{
     uint16_t signature;
@@ -63,5 +46,24 @@ struct Info{
     uint32_t profile_size;
     uint32_t reserved;
 };
+
+class BitmapReader {
+
+public:
+
+    void ReadFile(const char * filename);
+
+
+private:
+
+    void ParseData(char * destintation, const char * source, uint32_t & offset, const int32_t length);
+    void ParseHeader(const char * source, uint32_t & offset);
+    void ParseInfo(const char * source, uint32_t & offset);
+    void ChangeEndianess(char *data, const int & length);
+
+    Header header;
+    Info infoHeader;
+};
+
 
 #endif
