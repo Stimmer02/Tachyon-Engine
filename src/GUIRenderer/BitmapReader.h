@@ -2,6 +2,7 @@
 #define BITMAPREADER_H
 
 #include <fstream>
+#include <cstring>
 #include "Image.h"
 
 

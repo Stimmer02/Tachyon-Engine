@@ -21,7 +21,7 @@ void BitmapReader::ParseData(char * destination, const char *source, unsigned in
 }
 
 void BitmapReader::ParseHeader(const char * source, unsigned int & offset){
-    
+
     ParseData((char*)&header.signature, source, offset, 2);
     ParseData((char*)&header.fileSize, source, offset, 4);
     ParseData((char*)&header.reserved, source, offset, 4);
@@ -30,7 +30,7 @@ void BitmapReader::ParseHeader(const char * source, unsigned int & offset){
 }
 
 void BitmapReader::ParseInfo(const char * source, unsigned int & offset){
-    
+
     ParseData((char*)&infoHeader.size, source, offset, 4);
 
     if(infoHeader.size!=124){
@@ -111,7 +111,7 @@ void BitmapReader::ReadFile(const char * filename){
     }
 
     Color **pixels = new Color*[infoHeader.width];
-    
+
     for(int i=0; i< infoHeader.width; i++)
         pixels[i] = new Color[infoHeader.height];
 
@@ -120,8 +120,8 @@ void BitmapReader::ReadFile(const char * filename){
             ParseData((char*)&pixels[x][y], raw_data, offset, sizeof(Color));
         }
     }
-    
-    
+
+
     for(int i=0; i< infoHeader.width; i++)
         delete[] pixels[i];
 
