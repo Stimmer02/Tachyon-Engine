@@ -2,6 +2,7 @@
 
 #include "Sprite.h"
 #include "BitmapReader.h"
+#include "MouseInputService.h"
 
 #include <stdio.h>
 #include <cmath>
@@ -45,8 +46,12 @@ int main(){
         return -1;
 
     BitmapReader reader;
+    MouseInputService iohandler;
+    iohandler.BindWindow(window);
 
     Image im = reader.ReadFile("../../resources/sprites/test.bmp");
+    Image cursor_idle = reader.ReadFile("../../resources/sprites/cursor_idle.bmp");
+
 
     float vertex[] ={
         -0.5, -0.5, 0.0,
@@ -55,18 +60,36 @@ int main(){
         0.5, -0.5, 0.0
     };
 
-    Sprite *s = Sprite::Create(&im);
+    Sprite *smiley_face = Sprite::Create(&im);
 
     delete[] im.pixels;
 
-    if(!s){
+    GLFWcursor *cursor;
+
+    if(cursor_idle.pixels!=NULL){
+        GLFWimage temp_cursor;
+        temp_cursor.width = cursor_idle.width;
+        temp_cursor.height = cursor_idle.height;
+        temp_cursor.pixels = (unsigned char*)cursor_idle.pixels;
+
+        cursor = glfwCreateCursor(&temp_cursor, 0, 0);
+
+        delete[] cursor_idle.pixels;
+
+        glfwSetCursor(window, cursor);
+    }
+
+
+
+
+    if(!smiley_face){
         glfwDestroyWindow(window);
         glfwTerminate();
 
         return -1;
     }
 
-    fprintf(stdout, "Sprite Checksum : 0x%08X \n", s->GetChecksum());
+    fprintf(stdout, "Sprite Checksum : 0x%08X \n", smiley_face->GetChecksum());
 
     float angle = 0.0f;
     float diff = 2 * M_PI/4.0f;
@@ -76,7 +99,7 @@ int main(){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        s->Load();
+        smiley_face->Load();
 
         glBegin(GL_QUADS);
          glTexCoord2d(1, 1); glVertex3f(vertex[0], vertex[1], vertex[2]);
@@ -85,7 +108,7 @@ int main(){
          glTexCoord2d(0, 1); glVertex3f(vertex[9], vertex[10], vertex[11]);
         glEnd();
 
-        s->UnLoad();
+        smiley_face->UnLoad();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -105,13 +128,17 @@ int main(){
 
         angle = (angle+0.01f) * (angle < 360.0f);
 
+        EventInfo info = iohandler.Query();
+
         GLenum error = glGetError();
         if (error != GL_NO_ERROR) {
             printf("OpenGL error: %d\n", error);
         }
     }
 
-    delete s;
+    delete smiley_face;
+
+    glfwDestroyCursor(cursor);
 
     glfwDestroyWindow(window);
     glfwTerminate();

@@ -102,21 +102,43 @@ Image BitmapReader::ReadFile(const char * filename){
     ParseHeader(raw_data, offset);
     ParseInfo(raw_data, offset);
 
-    fprintf(stdout, "Image dimensions: %d x %d\n", infoHeader.width, infoHeader.height);
+    size_t bytes_per_pixel = infoHeader.bits_per_pixel/8;
+    size_t pixel_count = infoHeader.width * infoHeader.height;
 
-    unsigned int bytes_per_pixel = infoHeader.bits_per_pixel/8;
-    unsigned int pixel_count = infoHeader.width * infoHeader.height;
+    fprintf(stdout, "Image dimensions: %d x %d\t Bytes per pixel : %d\n", infoHeader.width, infoHeader.height, bytes_per_pixel);
 
-    if(bytes_per_pixel!=3){
+    if(bytes_per_pixel<3 || bytes_per_pixel>4){
         fprintf(stderr, "Invalid pixel format.\n");
         delete[] raw_data;
     }
 
     Color *pixels = new Color[infoHeader.height * infoHeader.width];
 
-    for(int i = 0; i < infoHeader.height * infoHeader.width; i++){
-        ParseData((char*)&pixels[i], raw_data, offset, 3);
+    // Read data in reverse, with color order BGRA
+    for(size_t i = 0; i < pixel_count; i++){
+        ParseData((char*)&pixels[pixel_count - i - 1], raw_data, offset, bytes_per_pixel);
     }
+
+    // Flip image horizontaly
+
+    // Iterate through each row
+    for (size_t row = 0; row < infoHeader.height; ++row) {
+        // Iterate from the beginning towards the center of the row
+        for (size_t col = 0; col < infoHeader.width>>1 ; ++col) {
+            // Calculate the corresponding indices for the pixels to be swapped
+            int leftIndex = row * infoHeader.width + col;
+            int rightIndex = row * infoHeader.width + (infoHeader.width - 1 - col);
+
+            // Swap the pixels
+
+            Color temp = pixels[leftIndex];
+            pixels[leftIndex] = pixels[rightIndex];
+            pixels[rightIndex] = temp;
+
+        }
+    }
+
+
 
     delete[] raw_data;
 
