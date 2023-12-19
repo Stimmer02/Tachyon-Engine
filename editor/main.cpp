@@ -46,12 +46,14 @@ int main(){
         return -1;
 
     BitmapReader reader;
-    MouseInputService iohandler;
-    iohandler.BindWindow(window);
+    MouseInputService iohandler(window);
 
     Image im = reader.ReadFile("../../resources/sprites/test.bmp");
     Image cursor_idle = reader.ReadFile("../../resources/sprites/cursor_idle.bmp");
 
+    iohandler.SetNormalCursor((unsigned char*)cursor_idle.pixels, cursor_idle.width, cursor_idle.height);
+
+    delete[] cursor_idle.pixels;
 
     float vertex[] ={
         -0.5, -0.5, 0.0,
@@ -63,23 +65,6 @@ int main(){
     Sprite *smiley_face = Sprite::Create(&im);
 
     delete[] im.pixels;
-
-    GLFWcursor *cursor;
-
-    if(cursor_idle.pixels!=NULL){
-        GLFWimage temp_cursor;
-        temp_cursor.width = cursor_idle.width;
-        temp_cursor.height = cursor_idle.height;
-        temp_cursor.pixels = (unsigned char*)cursor_idle.pixels;
-
-        cursor = glfwCreateCursor(&temp_cursor, 0, 0);
-
-        delete[] cursor_idle.pixels;
-
-        glfwSetCursor(window, cursor);
-    }
-
-
 
 
     if(!smiley_face){
@@ -138,7 +123,6 @@ int main(){
 
     delete smiley_face;
 
-    glfwDestroyCursor(cursor);
 
     glfwDestroyWindow(window);
     glfwTerminate();

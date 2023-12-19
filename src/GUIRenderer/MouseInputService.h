@@ -5,7 +5,26 @@
 
 class MouseInputService : public IInputHandler {
 
+public:
+
+    MouseInputService(const GLFWwindow * _window);
+
+    void BindWindow(GLFWwindow * _window);
+
+    void SetNormalCursor(const unsigned char* pixels, const size_t & width, const size_t & height);
+
+    void SetActiveCursor(const unsigned char* pixels, const size_t & width, const size_t & height);
+
+    EventInfo Query();
+
+    ~MouseInputService();
+
+private:
+
     GLFWwindow * window;
+
+    GLFWcursor * normal;
+    GLFWcursor * active;
 
     double lastXPosition;
     double lastYPosition;
@@ -13,11 +32,6 @@ class MouseInputService : public IInputHandler {
     int width;
     int height;
 
-public:
-
-    void BindWindow(GLFWwindow * _window);
-
-    EventInfo Query();
 
 };
 
