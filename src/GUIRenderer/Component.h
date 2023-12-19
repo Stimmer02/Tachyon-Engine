@@ -32,6 +32,15 @@ public:
 	virtual void Render() = 0;
 	GLuint GetTextureID();
 	GLuint GetPBO();
+
+
+
+
+	float getWidth();
+	float getHeight();
+	float getX();
+	float getY();
+	Color getColor();
 };
 
 #endif

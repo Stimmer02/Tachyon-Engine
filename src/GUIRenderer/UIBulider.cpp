@@ -43,9 +43,6 @@ UIBuilder* UIBuilder::SetText(char* _text, const int &_textLen){
 	textLen = _textLen;
 	return this;
 }
-// UIBuilder* UIBuilder::SetText(const std::string &_text){
-//	TODO
-// }
 Component* UIBuilder::Build(){
 
 	Button* newButtonComponent;

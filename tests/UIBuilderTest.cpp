@@ -1,14 +1,31 @@
 #include "gtest/gtest.h"
+#include <cassert>
 #include <functional>
 #include <cstring>
 
 #include "Color.h"
+#include "Component.h"
 #include "ComponentType.h"
 #include "EventType.h"
 #include "UIBuilder.h"
 #include "IEventHandlingService.h"
 #include "EventManager.h"
 #include "Button.h"
+
+int integerForTesting;
+int integerForTesting2;
+void onEventFunc(){
+    integerForTesting++;
+};
+void event1(){
+    integerForTesting2++;
+};
+void event2(){
+    integerForTesting2 *= 2;
+};
+void event3(){
+    integerForTesting2 = 0;
+};
 
 TEST(UIBuilderTests, AssignEventManagerTest1){
     //UIBuilder::AssignEventManager() test
@@ -23,12 +40,6 @@ TEST(UIBuilderTests, AssignEventManagerTest1){
     ASSERT_EQ(eventManager, uIBuilder.getEventManager());
 }
 
-
-
-int integerForTesting;
-void onEventFunc(){
-    integerForTesting++;
-};
 TEST(UIBuilderTests, AssignEventTest1){
     //UIBuilder::AssignEvent() test
 
@@ -123,5 +134,160 @@ TEST(UIBuilderTests, SetTextTest1){
     ASSERT_EQ(isEqueal, 0);
     ASSERT_EQ(strLen, uIBuilder.getTextLen());
 
+
+}
+
+
+
+
+TEST(UIBuilderTests, BuildTest1){
+    //UIBuilder::Build(() test
+
+    UIBuilder uIBuilder;
+    Component* createdComponent;
+
+    EventManager* iEventHandlingService;
+    EventType newEventType1;
+    EventType newEventType2;
+    ComponentType componentType;
+    float width, height, x, y;
+    Color color;
+
+    iEventHandlingService = new EventManager();
+    componentType = BUTTON;
+    width = 42;
+    height = 44;
+    x = 404;
+    y = 4;
+
+    color.R = 2;
+    color.G = 3;
+    color.B = 5;
+    color.A = 7;
+
+    newEventType1 = ONCLICK;
+    newEventType2 = ONHOVER;
+
+    uIBuilder.AssignEventManager(iEventHandlingService);
+    uIBuilder.AssignEvent(newEventType1, event1);
+    uIBuilder.AssignEvent(newEventType2, event2);
+    uIBuilder.SetComponentType(componentType);
+    uIBuilder.SetPosition(x, y);
+    uIBuilder.SetColor(color);
+    uIBuilder.SetDimensions(width, height);
+
+    createdComponent = uIBuilder.Build();
+
+
+    ASSERT_EQ(width, createdComponent->getWidth());
+    ASSERT_EQ(height, createdComponent->getHeight() );
+    ASSERT_EQ(x, createdComponent->getX());
+    ASSERT_EQ(y, createdComponent->getY());
+    ASSERT_EQ(color.R, createdComponent->getColor().R);
+    ASSERT_EQ(color.G, createdComponent->getColor().G);
+    ASSERT_EQ(color.B, createdComponent->getColor().B);
+    ASSERT_EQ(color.A, createdComponent->getColor().A);
+}
+
+
+TEST(UIBuilderTests, BuildTest2){
+    //UIBuilder::Build(() test
+
+    UIBuilder uIBuilder;
+    Component* createdComponent;
+
+    EventManager* iEventHandlingService;
+    EventType newEventType1;
+    ComponentType componentType;
+    float width, height, x, y;
+    Color color;
+
+    iEventHandlingService = new EventManager();
+    componentType = CANVAS;
+    width = 11;
+    height = 13;
+    x = 17;
+    y = 19;
+
+    color.R = 6;
+    color.G = 6;
+    color.B = 6;
+    color.A = 6;
+
+    newEventType1 = ONMOVE;
+
+    uIBuilder.AssignEventManager(iEventHandlingService);
+    uIBuilder.AssignEvent(newEventType1, event1);
+    uIBuilder.SetComponentType(componentType);
+    uIBuilder.SetPosition(x, y);
+    uIBuilder.SetColor(color);
+    uIBuilder.SetDimensions(width, height);
+
+    createdComponent = uIBuilder.Build();
+
+
+    ASSERT_EQ(width, createdComponent->getWidth());
+    ASSERT_EQ(height, createdComponent->getHeight() );
+    ASSERT_EQ(x, createdComponent->getX());
+    ASSERT_EQ(y, createdComponent->getY());
+    ASSERT_EQ(color.R, createdComponent->getColor().R);
+    ASSERT_EQ(color.G, createdComponent->getColor().G);
+    ASSERT_EQ(color.B, createdComponent->getColor().B);
+    ASSERT_EQ(color.A, createdComponent->getColor().A);
+}
+
+
+TEST(UIBuilderTests, BuildTest3){
+    //UIBuilder::Build(() test
+    UIBuilder uIBuilder;
+    Component* createdComponent;
+
+    EventManager* iEventHandlingService;
+    EventType newEventType1;
+    EventType newEventType2;
+    ComponentType componentType;
+    float width, height, x, y;
+    Color color;
+    char* text;
+    int textLen;
+
+    text = "Ala ma kota.";
+    textLen = strlen(text);
+    iEventHandlingService = new EventManager();
+    componentType = TEXT;
+    width = 10000010;
+    height = 10001000;
+    x = 4;
+    y = 1000;
+
+    color.R = 2;
+    color.G = 3;
+    color.B = 5;
+    color.A = 7;
+
+    newEventType1 = ONCLICK;
+    newEventType2 = ONHOVER;
+
+    uIBuilder.AssignEventManager(iEventHandlingService);
+    uIBuilder.AssignEvent(newEventType1, event1);
+    uIBuilder.AssignEvent(newEventType2, event2);
+    uIBuilder.SetComponentType(componentType);
+    uIBuilder.SetPosition(x, y);
+    uIBuilder.SetColor(color);
+    uIBuilder.SetDimensions(width, height);
+    uIBuilder.SetText(text, textLen);
+
+    createdComponent = uIBuilder.Build();
+
+
+    bool isCreatedComponentClear = (createdComponent == NULL);
+    ASSERT_EQ(width, createdComponent->getWidth());
+    ASSERT_EQ(height, createdComponent->getHeight() );
+    ASSERT_EQ(x, createdComponent->getX());
+    ASSERT_EQ(y, createdComponent->getY());
+    ASSERT_EQ(color.R, createdComponent->getColor().R);
+    ASSERT_EQ(color.G, createdComponent->getColor().G);
+    ASSERT_EQ(color.B, createdComponent->getColor().B);
+    ASSERT_EQ(color.A, createdComponent->getColor().A);
 
 }

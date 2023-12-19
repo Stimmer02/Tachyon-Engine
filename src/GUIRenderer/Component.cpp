@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "Color.h"
 
 Component::Component(const float &_x, const float &_y, const float &_width, const float &_height)
 	:x(_x), y(_y), width(_width), height(_height){
@@ -15,6 +16,22 @@ GLuint Component::GetTextureID(){
 
 GLuint Component::GetPBO(){
 	return PBO;
+}
+
+float Component::getWidth(){
+	return width;
+}
+float Component::getHeight(){
+	return height;
+}
+float Component::getX(){
+	return x;
+}
+float Component::getY(){
+	return y;
+}
+Color Component::getColor(){
+	return color;
 }
 
 
