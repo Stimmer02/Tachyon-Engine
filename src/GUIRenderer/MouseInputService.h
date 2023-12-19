@@ -2,7 +2,6 @@
 #define MOUSEINPUTSERVICE_H
 
 #include "IInputHandler.h"
-#include "cmath"
 
 class MouseInputService : public IInputHandler {
 

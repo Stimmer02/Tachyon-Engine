@@ -5,6 +5,7 @@ enum EventType{
     ONHOVER,
     ONMOVE,
     ONCLICK,
+    ONSLIDE,
     ONPRESS,
     ONLOAD,
     EVENTCOUNT
