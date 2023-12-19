@@ -79,3 +79,36 @@ Component* UIBuilder::Build(){
 		return NULL;
 	}
 }
+
+
+IEventHandlingService* UIBuilder::getEventManager(){
+	return eventManager;
+}
+ComponentType UIBuilder::getType(){
+	return type;
+}
+float UIBuilder::getHeight(){
+	return height;
+}
+float UIBuilder::getWidth(){
+	return width;
+}
+float UIBuilder::getX(){
+	return x;
+}
+float UIBuilder::getY(){
+	return y;
+}
+Color UIBuilder::getColor(){
+	return color;
+}
+std::map <EventType, std::function<void()> > UIBuilder::getEvents(){
+	return events;
+}
+char* UIBuilder::getText(){
+	return text;
+}
+int UIBuilder::getTextLen(){
+	return textLen;
+}
+

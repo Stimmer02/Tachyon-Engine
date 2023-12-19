@@ -8,6 +8,7 @@
 #include "Color.h"
 #include "Button.h"
 #include "Canvas.h"
+#include "EventType.h"
 #include "Text.h"
 #include "IEventHandlingService.h"
 #include "InteractiveComponent.h"
@@ -38,6 +39,19 @@ public:
 	UIBuilder* SetText(char* _text, const int &_textLen);
 	// UIBuilder* SetText(const std::string &_text); //TODO
 	Component* Build();
+
+	//getters added for testing
+	IEventHandlingService* getEventManager();
+	ComponentType getType();
+	float getHeight();
+	float getWidth();
+	float getX();
+	float getY();
+	Color getColor();
+	std::map <EventType, std::function<void()> > getEvents();
+	char* getText();
+	int getTextLen();
+
 };
 
 #endif
