@@ -64,78 +64,89 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     queue.enqueueWriteBuffer(eConfig, true, 0, sizeof(struct engineConfig), &config);
 
     cl::Program::Sources sources;
-    std::string structures =
-        "struct __attribute__ ((packed)) color{"
-        "    unsigned char R;"
-        "    unsigned char G;"
-        "    unsigned char B;"
-        "    unsigned char A;"
-        "};"
-        "struct __attribute__ ((aligned)) vector2D{"
-        "    int x;"
-        "    int y;"
-        "};"
-        "struct __attribute__ ((aligned)) voxel{"
-        "    unsigned int substanceID;"
-        "    struct vector2D forceVector;"
-        "};"
-        "struct __attribute__ ((aligned)) chunk{"
-        "    struct voxel* voxels;"
-        "};"
-        "struct __attribute__ ((aligned)) substance{"
-        "    struct color color;"
-        "    float mass;"
-        "    float jammingFactor;"
-        "};"
-        "struct __attribute__ ((aligned)) substanceTable{"
-        "    struct substance* substances;"
-        "};"
-        "struct __attribute__ ((aligned)) engineResources{"
-        "    struct substanceTable* substanceTable;"
-        "    struct chunk* worldMap;"
-        "    struct color* PBO;"
-        "};"
-        "struct __attribute__ ((aligned)) engineConfig{"
-        "    uint simulationWidth;"
-        "    uint simulationHeight;"
-        "    float gravity;"
-        "    float timefactor;"
-        "    float atmosphereViscosity;"
-        "};";
-    std::string kernel_code =
-        "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
-        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
-        "       resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;"
-        "       resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
-        "    }"
-        ""
-        "    void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
-        "       uint globalID, IDX, IDY;"
-        "       IDX = x + get_global_id(0);"
-        "       IDY = y + get_global_id(1);"
-        "       globalID = IDY * config->simulationWidth + IDX;"
-        ""
-        "        if (config->simulationWidth > IDX && config->simulationHeight > IDY){"
-        "           resources->worldMap->voxels[globalID].forceVector.x = 0;"
-        "           resources->worldMap->voxels[globalID].forceVector.y = 0;"
-        "           resources->worldMap->voxels[globalID].substanceID = substanceID;"
-        "        }"
-        "   }"
-        ""
-        "    void kernel set_chunk(global struct chunk* matrix, global struct voxel* voxels){"
-        "        matrix->voxels = voxels;"
-        "    }"
-        "    void kernel set_substanceTable(global struct substanceTable* table, global struct substance* substances){"
-        "        table->substances = substances;"
-        "    }"
-        "    void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){"
-        "       resources->substanceTable = table;"
-        "     resources->worldMap = matrix;"
-        "       resources->PBO = PBO;"
-        "    }";
+    std::string structures = R"(
 
-    sources.push_back({structures.c_str(), structures.length()});
-    sources.push_back({kernel_code.c_str(), kernel_code.length()});
+        struct __attribute__ ((packed)) color{
+            unsigned char R;
+            unsigned char G;
+            unsigned char B;
+            unsigned char A;
+        };
+        struct __attribute__ ((aligned)) vector2D{
+            int x;
+            int y;
+        };
+        struct __attribute__ ((aligned)) voxel{
+            unsigned int substanceID;
+            struct vector2D forceVector;
+        };
+        struct __attribute__ ((aligned)) chunk{
+            global struct voxel* voxels;
+        };
+        struct __attribute__ ((aligned)) substance{
+            struct color color;
+            float mass;
+            float jammingFactor;
+        };
+        struct __attribute__ ((aligned)) substanceTable{
+            global struct substance* substances;
+        };
+        struct __attribute__ ((aligned)) engineResources{
+            global struct substanceTable* substanceTable;
+            global struct chunk* worldMap;
+            global struct color* PBO;
+        };
+        struct __attribute__ ((aligned)) engineConfig{
+            uint simulationWidth;
+            uint simulationHeight;
+            float gravity;
+            float timefactor;
+            float atmosphereViscosity;
+        };
+
+    )";
+
+
+    std::string kernel_code = R"(
+
+            void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){
+               resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;
+               resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;
+               resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;
+            }
+
+            void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){
+               uint globalID, IDX, IDY;
+               IDX = x + get_global_id(0);
+               IDY = y + get_global_id(1);
+               globalID = IDY * config->simulationWidth + IDX;
+
+                if (config->simulationWidth > IDX && config->simulationHeight > IDY){
+                   resources->worldMap->voxels[globalID].forceVector.x = 0;
+                   resources->worldMap->voxels[globalID].forceVector.y = 0;
+                   resources->worldMap->voxels[globalID].substanceID = substanceID;
+                }
+           }
+
+            void kernel set_chunk(global struct chunk* matrix, global struct voxel* voxels){
+                matrix->voxels = voxels;
+            }
+            void kernel set_substanceTable(global struct substanceTable* table, global struct substance* substances){
+                table->substances = substances;
+            }
+            void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){
+               resources->substanceTable = table;
+               resources->worldMap = matrix;
+               resources->PBO = PBO;
+            };
+
+
+    )";
+
+
+    sources.push_back({structures.c_str(), structures.size()});
+    sources.push_back({kernel_code.c_str(), kernel_code.size()});
+
     cl::Program program(openCLContext, sources);
 
     if (program.build() != CL_SUCCESS) {

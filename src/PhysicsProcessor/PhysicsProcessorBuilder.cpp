@@ -114,6 +114,8 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(const std::string kernelFragme
     if (kernelBuilder.loadAllFromDirectory(kernelFragmentsDirectory)){
         return nullptr;
     }
+
+
     std::string validationMessage;
     if (kernelBuilder.validateLoadedFragments(validationMessage)){
         std::fprintf(stderr,"%s\n", validationMessage.c_str());

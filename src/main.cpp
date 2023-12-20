@@ -17,7 +17,7 @@ GLuint fboId;
 IPhysicsProcessor* physicsProcessor;
 
 
-bool pause = true;
+bool ause = true;
 
 int main(){
 
@@ -69,7 +69,6 @@ int main(){
         std::printf("Something went wrong...\n");
         return 1;
     }
-
 
     //Prepare simulation
     physicsProcessor->spawnVoxelInArea(0, 512, 1024, 512, 2);
@@ -165,8 +164,8 @@ void processInput(GLFWwindow *window){
         glfwSetWindowShouldClose(window, true);
     }
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS){
-        pause = true;
+        ause = true;
     } else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS){
-        pause = false;
+        ause = false;
     }
 }
