@@ -97,15 +97,15 @@ Image BitmapReader::ReadFile(const char * filename){
     input.read(raw_data, file_size);
     input.close();
 
-    unsigned int offset = 0;
+    uint32_t offset = 0;
 
     ParseHeader(raw_data, offset);
     ParseInfo(raw_data, offset);
 
     fprintf(stdout, "Image dimensions: %d x %d\n", infoHeader.width, infoHeader.height);
 
-    unsigned int bytes_per_pixel = infoHeader.bits_per_pixel/8;
-    unsigned int pixel_count = infoHeader.width * infoHeader.height;
+    uint32_t bytes_per_pixel = infoHeader.bits_per_pixel/8;
+    uint32_t pixel_count = infoHeader.width * infoHeader.height;
 
     if(bytes_per_pixel!=3){
         fprintf(stderr, "Invalid pixel format.\n");
@@ -114,7 +114,7 @@ Image BitmapReader::ReadFile(const char * filename){
 
     Color *pixels = new Color[infoHeader.height * infoHeader.width];
 
-    for(int i = 0; i < infoHeader.height * infoHeader.width; i++){
+    for(uint32_t i = 0; i < infoHeader.height * infoHeader.width; i++){
         ParseData((char*)&pixels[i], raw_data, offset, 3);
         uint8_t temp = pixels[i].R;
         pixels[i].R = pixels[i].B;
