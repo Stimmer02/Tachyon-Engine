@@ -120,26 +120,23 @@ Image BitmapReader::ReadFile(const char * filename){
         pixels[i].B = temp;
     }
 
-    // Flip image horizontaly
+    // Flip image vertically
 
-    // Iterate through each row
-    for (size_t row = 0; row < infoHeader.height; ++row) {
-        // Iterate from the beginning towards the center of the row
-        for (size_t col = 0; col < infoHeader.width>>1 ; ++col) {
+    // Iterate through each column
+    for (size_t col = 0; col < infoHeader.width; ++col) {
+        // Iterate from the top towards the center of the column
+        for (size_t row = 0; row < infoHeader.height >> 1; ++row) {
             // Calculate the corresponding indices for the pixels to be swapped
-            int leftIndex = row * infoHeader.width + col;
-            int rightIndex = row * infoHeader.width + (infoHeader.width - 1 - col);
+            int topIndex = row * infoHeader.width + col;
+            int bottomIndex = (infoHeader.height - 1 - row) * infoHeader.width + col;
 
             // Swap the pixels
 
-            Color temp = pixels[leftIndex];
-            pixels[leftIndex] = pixels[rightIndex];
-            pixels[rightIndex] = temp;
-
+            Color temp = pixels[topIndex];
+            pixels[topIndex] = pixels[bottomIndex];
+            pixels[bottomIndex] = temp;
         }
     }
-
-
 
     delete[] raw_data;
 
