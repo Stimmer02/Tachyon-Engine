@@ -102,9 +102,6 @@ Image BitmapReader::ReadFile(const char * filename){
     ParseHeader(raw_data, offset);
     ParseInfo(raw_data, offset);
 
-    size_t bytes_per_pixel = infoHeader.bits_per_pixel/8;
-    size_t pixel_count = infoHeader.width * infoHeader.height;
-
     uint32_t bytes_per_pixel = infoHeader.bits_per_pixel/8;
     uint32_t pixel_count = infoHeader.width * infoHeader.height;
 
@@ -113,11 +110,11 @@ Image BitmapReader::ReadFile(const char * filename){
         delete[] raw_data;
     }
 
-    Color *pixels = new Color[infoHeader.height * infoHeader.width];
+    Color *pixels = new Color[pixel_count];
 
     // Read data
-    for(uint32_t i = 0; i < infoHeader.height * infoHeader.width; i++){
-        ParseData((char*)&pixels[i], raw_data, offset, 3);
+    for(uint32_t i = 0; i < pixel_count; i++){
+        ParseData((char*)&pixels[i], raw_data, offset, bytes_per_pixel);
         uint8_t temp = pixels[i].R;
         pixels[i].R = pixels[i].B;
         pixels[i].B = temp;
