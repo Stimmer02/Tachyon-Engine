@@ -60,7 +60,7 @@ private:
     void ParseData(char * destintation, const char * source, uint32_t & offset, const int32_t length);
     void ParseHeader(const char * source, uint32_t & offset);
     void ParseInfo(const char * source, uint32_t & offset);
-    void ChangeEndianess(char *data, const int & length);
+    void ChangeEndianess(char *data, const uint32_t & length);
 
     Header header;
     Info infoHeader;

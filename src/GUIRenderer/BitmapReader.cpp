@@ -1,7 +1,7 @@
 #include "BitmapReader.h"
 
 
-void BitmapReader::ChangeEndianess(char *data, const int & length){
+void BitmapReader::ChangeEndianess(char *data, const uint32_t & length){
 
   for(int i=0; i < (length>>1); i++){
     char temp = data[length-1-i];
@@ -116,6 +116,9 @@ Image BitmapReader::ReadFile(const char * filename){
 
     for(int i = 0; i < infoHeader.height * infoHeader.width; i++){
         ParseData((char*)&pixels[i], raw_data, offset, 3);
+        uint8_t temp = pixels[i].R;
+        pixels[i].R = pixels[i].B;
+        pixels[i].B = temp;
     }
 
     delete[] raw_data;
