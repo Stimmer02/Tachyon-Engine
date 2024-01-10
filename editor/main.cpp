@@ -4,16 +4,24 @@
 #include "BitmapReader.h"
 #include "MouseInputService.h"
 
+#include <filesystem>
 #include <stdio.h>
 #include <cmath>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
 #ifdef __APPLE__
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 #include <OpenGL/OpenGL.h>
+
+#elif _WIN32
+
+#include <windows.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <GL/gl.h>
 
 #else
 
@@ -26,15 +34,16 @@ int main(){
     const unsigned width = 640, height = 480;
 
     if (!glfwInit()){
-        printf("Failed to initialize GLFW!\n");
-        return -1;
+        fprintf(stderr, "Failed to initialize GLFW!\n");
+        return EXIT_FAILURE;
     }
 
     GLFWwindow *window = glfwCreateWindow(width, height, "Editor", NULL, NULL);
 
     if (!window){
         glfwTerminate();
-        return -1;
+        fprintf(stderr, "Failed to create new window!\n");
+        return EXIT_FAILURE;
     }
 
     glfwMakeContextCurrent(window);
@@ -42,18 +51,22 @@ int main(){
     glViewport(0, 0, width, height);
     glfwSwapInterval(1);
 
-    if(glewInit() != GLEW_OK)
-        return -1;
+    if(glewInit() != GLEW_OK){
+        glfwTerminate();
+        fprintf(stderr, "Failed to initialize GLEW!\n");
+        return EXIT_FAILURE;
+    }
+        
 
     BitmapReader reader;
     MouseInputService iohandler(window);
 
-    Image im = reader.ReadFile("../../resources/sprites/test.bmp");
-    Image cursor_idle = reader.ReadFile("../../resources/sprites/cursor_idle.bmp");
+    // Image im = reader.ReadFile("../../resources/sprites/test.bmp");
+    // Image cursor_idle = reader.ReadFile("../../resources/sprites/cursor_idle.bmp");
 
-    iohandler.SetNormalCursor((unsigned char*)cursor_idle.pixels, cursor_idle.width, cursor_idle.height);
+    // iohandler.SetNormalCursor((unsigned char*)cursor_idle.pixels, cursor_idle.width, cursor_idle.height);
 
-    delete[] cursor_idle.pixels;
+    // delete[] cursor_idle.pixels;
 
     float vertex[] ={
         -0.5, -0.5, 0.0,
@@ -62,19 +75,19 @@ int main(){
         0.5, -0.5, 0.0
     };
 
-    Sprite *smiley_face = Sprite::Create(&im);
+    // Sprite *smiley_face = Sprite::Create(&im);
 
-    delete[] im.pixels;
+    // delete[] im.pixels;
 
 
-    if(!smiley_face){
-        glfwDestroyWindow(window);
-        glfwTerminate();
+    // if(!smiley_face){
+    //     glfwDestroyWindow(window);
+    //     glfwTerminate();
 
-        return -1;
-    }
+    //     return EXIT_FAILURE;
+    // }
 
-    fprintf(stdout, "Sprite Checksum : 0x%08X \n", smiley_face->GetChecksum());
+    //fprintf(stdout, "Sprite Checksum : 0x%08X \n", smiley_face->GetChecksum());
 
     float angle = 0.0f;
     float diff = 2 * M_PI/4.0f;
@@ -84,7 +97,7 @@ int main(){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        smiley_face->Load();
+        //smiley_face->Load();
 
         glBegin(GL_QUADS);
          glTexCoord2d(1, 1); glVertex3f(vertex[0], vertex[1], vertex[2]);
@@ -93,7 +106,7 @@ int main(){
          glTexCoord2d(0, 1); glVertex3f(vertex[9], vertex[10], vertex[11]);
         glEnd();
 
-        smiley_face->UnLoad();
+        //smiley_face->UnLoad();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -121,11 +134,10 @@ int main(){
         }
     }
 
-    delete smiley_face;
-
+    //delete smiley_face;
 
     glfwDestroyWindow(window);
     glfwTerminate();
 
-    return 0;
+    return EXIT_SUCCESS;
 }

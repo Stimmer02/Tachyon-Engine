@@ -18,6 +18,7 @@ typedef unsigned int uint;
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <GL/gl.h>
+#include <CL/cl.hpp>
 #include <CL/opencl.hpp>
 #include <CL/cl_gl.h>
 
@@ -156,7 +157,7 @@ int main(){
 
     glGenBuffers(1, &PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, PBO);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*3840*2160, NULL, GL_STATIC_DRAW);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*3840*2160, NULL, GL_DYNAMIC_DRAW);
 
     cl_mem pbo_mem;
     unsigned char* hostFallbackBuffer;
@@ -195,7 +196,7 @@ int main(){
 
         EventInfo info = input.Query();
 
-        fprintf(stdout, "Event : %d\tPosition : (%f, %f)\n", info.type, info.x, info.y);
+        fprintf(stdout, "Event : %d\tPosition : (%f, %f)\r", info.type, info.x, info.y);
 
         dims[0] = width;
         dims[1] = height;
