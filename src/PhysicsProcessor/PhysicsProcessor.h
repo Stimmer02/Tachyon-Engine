@@ -10,15 +10,18 @@
 
 class PhysicsProcessor : public IPhysicsProcessor{
 public:
+    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
+    std::string structuresAsString();
+    std::string kernelCodeAsString();
+    void constructorMain(cl::Context openCLContext, engineConfig config, cl::Device device);
+    void configureMainKernel();
     PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     ~PhysicsProcessor();
     void generateFrame() override;
     void spawnVoxel(uint x, uint y, uint substanceID) override;
-    void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) override;
     uint countVoxels() override;
 
 private:
-    //resources: need to think about it
     cl::Context context;
     cl::Kernel engine;
     engineConfig config;
@@ -33,7 +36,6 @@ private:
     cl::Buffer eConfig;
     uint size;
     cl::Kernel spawn_voxelKernel;
-    cl::Kernel spawn_voxel_in_area;
 };
 
 #endif

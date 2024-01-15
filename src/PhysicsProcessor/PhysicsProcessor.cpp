@@ -6,23 +6,98 @@
 #include <CL/opencl.hpp>
 #endif
 
-PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
+// Initializing GPU memory and allocating GPU.
+void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
+    // Setting class variables.
     this->context = openCLContext;
+    this->engine = engine;
     this->config = config;
     this->device = device;
-    this->engine = engine;
 
+    // Creating an OpenCL command queue.
     this->queue = cl::CommandQueue(openCLContext, device);
 
+    // Creating an OpenCL memory object associated with OpenGL PBO (Pixel Buffer Object).
     cl_int error;
-
     this->pbo_mem = clCreateFromGLBuffer(context(), CL_MEM_WRITE_ONLY, PBO, &error);
     this->pbo_buff = cl::Buffer(pbo_mem);
 
+    // Acquiring OpenGL objects by OpenCL. - Fallback exclusive
     clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
+}
 
+// Defining data structures as a string.
+std::string PhysicsProcessor::structuresAsString(){
+    std::string structures =
+        "struct __attribute__ ((packed)) color{"
+        "    unsigned char R;"
+        "    unsigned char G;"
+        "    unsigned char B;"
+        "    unsigned char A;"
+        "};"
+        "struct __attribute__ ((aligned)) vector2D{"
+        "    unsigned int x;"
+        "    unsigned int y;"
+        "};"
+        "struct __attribute__ ((aligned)) voxel{"
+        "    unsigned int substanceID;"
+        "    struct vector2D forceVector;"
+        "};"
+        "struct __attribute__ ((aligned)) chunk{"
+        "    struct voxel* voxels;"
+        "};"
+        "struct __attribute__ ((aligned)) substance{"
+        "    struct color color;"
+        "    float mass;"
+        "    float jammingFactor;"
+        "};"
+        "struct __attribute__ ((aligned)) substanceTable{"
+        "    struct substance* substances;"
+        "};"
+        "struct __attribute__ ((aligned)) engineResources{"
+        "    struct substanceTable* substanceTable;"
+        "    struct chunk* worldMap;"
+        "    struct color* PBO;"
+        "};"
+        "struct __attribute__ ((aligned)) engineConfig{"
+        "    uint simulationWidth;"
+        "    uint simulationHeight;"
+        "    float gravity;"
+        "    float timefactor;"
+        "    float atmosphereViscosity;"
+        "};";
+
+	return structures;
+}
+
+// Creating OpenCL kernel code as a string.
+std::string PhysicsProcessor::kernelCodeAsString(){
+    std::string kernel_code =
+        "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
+        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;"
+        "        resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
+        "    }"
+        ""
+        "    void kernel set_chunk(global struct chunk* matrix, global struct voxel* voxels){"
+        "        matrix->voxels = voxels;"
+        "    }"
+        "    void kernel set_substanceTable(global struct substanceTable* table, global struct substance* substances){"
+        "        table->substances = substances;"
+        "    }"
+        "    void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){"
+        "    resources->substanceTable = table;"
+        "    resources->worldMap = matrix;"
+        "    resources->PBO = PBO;"
+        "    }";
+
+	return kernel_code;
+}
+
+// Main construtror operations.
+void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineConfig config, cl::Device device) {
+    // Allocating GPU memory for various structures.
     cl::Buffer* voxels = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct voxel) * config.simulationWidth * config.simulationHeight);
-
     this->allocatedGPUMemory.push_back(voxels);
 
     cl::Buffer* chunk = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct chunk));
@@ -38,18 +113,18 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     tempSubstanceTable[0].color.B = 0;
     tempSubstanceTable[0].color.A = 0;
 
-    tempSubstanceTable[1].jammingFactor = 0;
-    tempSubstanceTable[1].mass = 0;
-    tempSubstanceTable[1].color.R = 100;
-    tempSubstanceTable[1].color.G = 100;
-    tempSubstanceTable[1].color.B = 110;
+    tempSubstanceTable[1].jammingFactor = 1;
+    tempSubstanceTable[1].mass = 1;
+    tempSubstanceTable[1].color.R = 0;
+    tempSubstanceTable[1].color.G = 128;
+    tempSubstanceTable[1].color.B = 255;
     tempSubstanceTable[1].color.A = 255;
 
     tempSubstanceTable[2].jammingFactor = 1;
     tempSubstanceTable[2].mass = 1;
     tempSubstanceTable[2].color.R = 255;
-    tempSubstanceTable[2].color.G = 250;
-    tempSubstanceTable[2].color.B = 162;
+    tempSubstanceTable[2].color.G = 255;
+    tempSubstanceTable[2].color.B = 0;
     tempSubstanceTable[2].color.A = 255;
 
     cl::Buffer* substances = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct substance) * substanceCount);
@@ -64,85 +139,8 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     queue.enqueueWriteBuffer(eConfig, true, 0, sizeof(struct engineConfig), &config);
 
     cl::Program::Sources sources;
-    std::string structures = R"(
-
-        struct __attribute__ ((packed)) color{
-            unsigned char R;
-            unsigned char G;
-            unsigned char B;
-            unsigned char A;
-        };
-        struct __attribute__ ((aligned)) vector2D{
-            int x;
-            int y;
-        };
-        struct __attribute__ ((aligned)) voxel{
-            unsigned int substanceID;
-            struct vector2D forceVector;
-        };
-        struct __attribute__ ((aligned)) chunk{
-            global struct voxel* voxels;
-        };
-        struct __attribute__ ((aligned)) substance{
-            struct color color;
-            float mass;
-            float jammingFactor;
-        };
-        struct __attribute__ ((aligned)) substanceTable{
-            global struct substance* substances;
-        };
-        struct __attribute__ ((aligned)) engineResources{
-            global struct substanceTable* substanceTable;
-            global struct chunk* worldMap;
-            global struct color* PBO;
-        };
-        struct __attribute__ ((aligned)) engineConfig{
-            uint simulationWidth;
-            uint simulationHeight;
-            float gravity;
-            float timefactor;
-            float atmosphereViscosity;
-        };
-
-    )";
-
-
-    std::string kernel_code = R"(
-
-            void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){
-               resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;
-               resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;
-               resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;
-            }
-
-            void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){
-               uint globalID, IDX, IDY;
-               IDX = x + get_global_id(0);
-               IDY = y + get_global_id(1);
-               globalID = IDY * config->simulationWidth + IDX;
-
-                if (config->simulationWidth > IDX && config->simulationHeight > IDY){
-                   resources->worldMap->voxels[globalID].forceVector.x = 0;
-                   resources->worldMap->voxels[globalID].forceVector.y = 0;
-                   resources->worldMap->voxels[globalID].substanceID = substanceID;
-                }
-           }
-
-            void kernel set_chunk(global struct chunk* matrix, global struct voxel* voxels){
-                matrix->voxels = voxels;
-            }
-            void kernel set_substanceTable(global struct substanceTable* table, global struct substance* substances){
-                table->substances = substances;
-            }
-            void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){
-               resources->substanceTable = table;
-               resources->worldMap = matrix;
-               resources->PBO = PBO;
-            };
-
-
-    )";
-
+    std::string structures = structuresAsString();
+    std::string kernel_code = kernelCodeAsString();
 
     sources.push_back({structures.c_str(), structures.size()});
     sources.push_back({kernel_code.c_str(), kernel_code.size()});
@@ -155,6 +153,7 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
         exit(1);
     }
 
+    // Setting OpenCL kernel arguments.
     cl::Kernel set_chunkKernel(program, "set_chunk");
     set_chunkKernel.setArg(0, *chunk);
     set_chunkKernel.setArg(1, *voxels);
@@ -176,14 +175,29 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
     queue.enqueueNDRangeKernel(set_engineResourcesKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.finish();
 
+    // Initializing the spawn_voxel kernel.
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
-    this->spawn_voxel_in_area = cl::Kernel(program, "spawn_voxel_in_area");
 
+    // Freeing temporary memory.
+    delete[] tempSubstanceTable;
+}
+
+// Setting arguments for the main (engine) kernel.
+void PhysicsProcessor::configureMainKernel(){
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
     this->size = 0;
+}
 
-    delete[] tempSubstanceTable;
+PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
+    // Initializing GPU memory and allocating GPU.
+    allocateHostMemory(openCLContext, engine, PBO, config, device);
+
+    // Main construtror operations.
+    constructorMain(openCLContext, config, device);
+
+    // Setting arguments for the main (engine) kernel.
+    configureMainKernel();
 }
 
 PhysicsProcessor::~PhysicsProcessor(){
@@ -194,7 +208,7 @@ PhysicsProcessor::~PhysicsProcessor(){
 }
 
 void PhysicsProcessor::generateFrame(){
-    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(1, 256));
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(16, 16));
     queue.finish();
 }
 
@@ -205,18 +219,6 @@ void PhysicsProcessor::spawnVoxel(uint x, uint y, uint substanceID){
     spawn_voxelKernel.setArg(3, this->engineResources);
     spawn_voxelKernel.setArg(4, this->eConfig);
     queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
-    queue.finish();
-
-    ++size;
-}
-
-void PhysicsProcessor::spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID){
-    spawn_voxel_in_area.setArg(0, x);
-    spawn_voxel_in_area.setArg(1, y);
-    spawn_voxel_in_area.setArg(2, substanceID);
-    spawn_voxel_in_area.setArg(3, this->engineResources);
-    spawn_voxel_in_area.setArg(4, this->eConfig);
-    queue.enqueueNDRangeKernel(spawn_voxel_in_area, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(8, 8));
     queue.finish();
 
     ++size;

@@ -46,8 +46,8 @@ struct __attribute__ ((packed)) color{
 #endif
 
 struct __attribute__ ((aligned)) vector2D{
-    cl_int x;
-    cl_int y;
+    cl_uint x;
+    cl_uint y;
 };
 
 struct __attribute__ ((aligned)) voxel{
@@ -89,7 +89,6 @@ public:
     ~IPhysicsProcessor(){};
     virtual void generateFrame() = 0;
     virtual void spawnVoxel(uint x, uint y, uint substanceID) = 0;
-    virtual void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) = 0;
     virtual uint countVoxels() = 0;
 };
 

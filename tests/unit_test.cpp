@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+#include "InteractiveComponent.h"
+
 TEST(MyTestSuite, MyTest) {
 
     ASSERT_TRUE(true);
