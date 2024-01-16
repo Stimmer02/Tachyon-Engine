@@ -34,8 +34,9 @@ private:
     cl::Buffer pbo_buff;
     cl::Buffer engineResources;
     cl::Buffer eConfig;
-    uint size;
+    cl::Buffer sumReturnValue;
     cl::Kernel spawn_voxelKernel;
+    cl::Kernel sum_voxelKernel;
 
     unsigned char* hostFallbackBuffer;
 };

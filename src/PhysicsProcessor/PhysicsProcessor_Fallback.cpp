@@ -81,10 +81,56 @@ std::string PhysicsProcessor_Fallback::kernelCodeAsString(){
         "        table->substances = substances;"
         "    }"
         "    void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){"
-        "    resources->substanceTable = table;"
-        "    resources->worldMap = matrix;"
-        "    resources->PBO = PBO;"
-        "    }";
+        "        resources->substanceTable = table;"
+        "        resources->worldMap = matrix;"
+        "       resources->PBO = PBO;"
+        "    }"
+        "void kernel sum_voxel(global struct engineResources* resources, global uint* workArr, uint size, global uint* returnValue){"
+        "    private uint id = get_global_id(0);"
+        "    private uint dim = get_local_size(0);"
+        "    private char dividionRest = size & 0x1;"
+        "    private uint currentSize = size >> 1;"
+        "    private uint index;"
+        ""
+        "    for (private uint i = id; i < currentSize; i += dim){"
+        "        index = i << 1;"
+        "        workArr[i] = (resources->worldMap->voxels[index].substanceID > 0) + (resources->worldMap->voxels[index+1].substanceID > 0);"
+        "    }"
+        "    barrier(CLK_LOCAL_MEM_FENCE);"
+        "    if (dividionRest){"
+        "        if (id == 0){"
+        "            workArr[currentSize] = (resources->worldMap->voxels[currentSize << 1].substanceID > 0);"
+        "        }"
+        "        currentSize++;"
+        "    }"
+        "    barrier(CLK_LOCAL_MEM_FENCE);"
+        "    dividionRest = currentSize & 0x1;"
+        "    currentSize >>= 1;"
+        ""
+        "    while (currentSize > 1){"
+        "        for (private uint i = id; i < currentSize; i += dim){"
+        "            index = i << 1;"
+        "            workArr[i] = workArr[index] + workArr[index+1];"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        if (dividionRest){"
+        "            if (id == 0){"
+        "                workArr[currentSize] = workArr[currentSize << 1];"
+        "            }"
+        "            currentSize++;"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        dividionRest = currentSize & 0x1;"
+        "        currentSize >>= 1;"
+        "    }"
+        "    barrier(CLK_LOCAL_MEM_FENCE);"
+        "    if (id == 0){"
+        "        *returnValue = workArr[0] + workArr[1];"
+        "        if (dividionRest == 1){"
+        "            *returnValue += workArr[2];"
+        "        }"
+        "    }"
+        "}";
 	
 	return kernel_code;
 }
@@ -176,6 +222,18 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
     // Initializing the spawn_voxel kernel.
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
 
+    // Initializing and seting up the sum_voxel kernel.
+    cl::Buffer* sumWorkMemory = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(cl_uint)*config.simulationHeight*config.simulationWidth/2+((config.simulationHeight*config.simulationWidth)&0x1));
+    this->sumReturnValue = cl::Buffer(context, CL_MEM_READ_WRITE, sizeof(cl_uint));
+    this->allocatedGPUMemory.push_back(sumWorkMemory);
+
+    this->sum_voxelKernel = cl::Kernel(program, "sum_voxel");
+    sum_voxelKernel.setArg(0, this->engineResources);
+    sum_voxelKernel.setArg(1, *sumWorkMemory);
+    sum_voxelKernel.setArg(2, config.simulationHeight * config.simulationWidth);
+    sum_voxelKernel.setArg(3, this->sumReturnValue);
+
+
     // Freeing temporary memory.
     delete[] tempSubstanceTable;
 }
@@ -184,7 +242,6 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
 void PhysicsProcessor_Fallback::configureMainKernel(){
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
-    this->size = 0;
 }
 
 PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
@@ -222,10 +279,13 @@ void PhysicsProcessor_Fallback::spawnVoxel(uint x, uint y, uint substanceID){
     spawn_voxelKernel.setArg(4, this->eConfig);
     queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.finish();
-
-    ++size;
 }
 
 uint PhysicsProcessor_Fallback::countVoxels(){
-	return size;
+    cl_uint returnValue;
+    queue.enqueueNDRangeKernel(sum_voxelKernel, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
+    queue.enqueueReadBuffer(sumReturnValue, CL_TRUE, 0, sizeof(cl_uint), &returnValue);
+    queue.finish();
+
+    return returnValue;
 }

@@ -84,6 +84,9 @@ int main(){
         glfwSwapBuffers(window);
         glfwPollEvents();
 
+        uint voxelCount = physicsProcessor->countVoxels();
+        std::printf("V: %d\n", voxelCount);
+
         for (uint i = 0; i < 21; ++i){
             physicsProcessor->spawnVoxel(x, y, 1);
             ++x;
