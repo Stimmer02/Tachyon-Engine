@@ -188,7 +188,8 @@ int main(){
 
     //Main loop
 
-    MouseInputService input(window);
+    MouseInputService input;
+    input.BindWindow(window);
 
     while (!glfwWindowShouldClose(window)){
         processInput(window);

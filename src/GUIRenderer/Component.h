@@ -33,19 +33,25 @@ protected:
 	GLuint PBO;
 public:
 	Component(const float &_x, const float &_y, const float &_width, const float &_height);
+
 	bool IsInBound(const float &_x,const float &_y);
+
 	void SetColor(const Color &_color);
-	virtual void Render() = 0;
+
+	virtual void Render();
+
 	GLuint GetTextureID();
+
 	GLuint GetPBO();
 
-
-
-
 	float getWidth();
+
 	float getHeight();
+
 	float getX();
+
 	float getY();
+
 	Color getColor();
 };
 

@@ -7,8 +7,6 @@ class MouseInputService : public IInputHandler {
 
 public:
 
-    MouseInputService(const GLFWwindow * _window);
-
     void BindWindow(GLFWwindow * _window);
 
     void SetNormalCursor(const unsigned char* pixels, const size_t & width, const size_t & height);

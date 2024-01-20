@@ -1,9 +1,5 @@
 #include "MouseInputService.h"
 
-MouseInputService::MouseInputService(const GLFWwindow * _window){
-    this->window = (GLFWwindow*)_window;
-}
-
 void MouseInputService::BindWindow(GLFWwindow * _window){
     this->window = _window;
 
