@@ -27,7 +27,7 @@ int main(){
         counter++;
     };
 
-    Image temp = BitmapReader::ReadFile("resources/sprites/button.bmp");
+    Image temp = BitmapReader::ReadFile("../../resources/sprites/button.bmp");
     Sprite * buttonImg = Sprite::Create(&temp);
 
     Component * button = builder
