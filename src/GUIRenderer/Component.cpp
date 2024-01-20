@@ -1,5 +1,4 @@
 #include "Component.h"
-#include "Color.h"
 
 Component::Component(const float &_x, const float &_y, const float &_width, const float &_height){
 	this->x = _x;
@@ -9,7 +8,7 @@ Component::Component(const float &_x, const float &_y, const float &_width, cons
 }
 
 bool Component::IsInBound(const float & _x, const float & _y){
-	
+
 	float w_2 = width/2.0f;
 	float h_2 = height/2.0f;
 
@@ -21,28 +20,12 @@ void Component::SetColor(const Color &_color){
 	color = _color;
 }
 
-void Component::Render(){
-
-	glColor3b(255, 255, 255);
-
-	float w_2 = width/2.0f;
-	float h_2 = height/2.0f;
-
-	glBegin(GL_QUADS);
-		glVertex2f( x - w_2, y - h_2);
-		glVertex2f( x + w_2, y - h_2);
-		glVertex2f( x + w_2, y + h_2);
-		glVertex2f( x - w_2, y + h_2);
-	glEnd();
-
+void Component::SetTexture( const Sprite * _sprite){
+	sprite = (Sprite*)_sprite;;
 }
 
-GLuint Component::GetTextureID(){
-	return texture;
-}
-
-GLuint Component::GetPBO(){
-	return PBO;
+Sprite Component::GetTexture(){
+	return *sprite;
 }
 
 float Component::getWidth(){

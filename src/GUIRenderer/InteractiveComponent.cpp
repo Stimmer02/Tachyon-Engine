@@ -2,12 +2,12 @@
 
 
 InteractiveComponent::InteractiveComponent(const int& x, const int& y, const int& width, const int& height) : Component(x, y, width, height){
-    //TODO
+    this->UID = GUID++;
 }
 
-void InteractiveComponent::Render(){
-    //TODO
-}
+// void InteractiveComponent::Render(){
+//     this->Render();
+// }
 
 void InteractiveComponent::AssignEvent(const EventType& event, Function delegate){
     if(events.find(event)!=events.end()){
@@ -16,6 +16,10 @@ void InteractiveComponent::AssignEvent(const EventType& event, Function delegate
     }
 
     events[event] = delegate;
+}
+
+uint32_t InteractiveComponent::GetGUID(){
+    return UID;
 }
 
 void InteractiveComponent::OnEvent(const EventType& event){
@@ -30,3 +34,5 @@ void InteractiveComponent::OnEvent(const EventType& event){
     function();
 
 }
+
+

@@ -51,13 +51,17 @@ public:
     /// @return Sprite width
     uint32_t GetWidth();
 
+    /// @brief Method returns height of sprite.
+    /// @return Sprite height
+    uint32_t GetHeight();
+
     /// @brief Method returns pbo of current sprite
     /// @return Sprite pbo
     GLuint GetPixelBuffer();
 
-    /// @brief Method returns height of sprite.
-    /// @return Sprite height
-    uint32_t GetHeight();
+    /// @brief Method returns texture id of current sprite
+    /// @return Sprite texture id
+    GLuint GetTextureID();
 
     /// @brief Method returns sprite cheksum.
     /// @return Sprite checksum

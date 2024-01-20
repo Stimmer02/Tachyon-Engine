@@ -52,7 +52,11 @@ void UIManager::AddComponentToScene(Component * component){
 }
 
 void UIManager::HandleEvents(){
-	
+
+    if( inputHandlingService == nullptr )
+        return;
+
+
     static float lastX, lastY;
 
 	EventInfo info = inputHandlingService->Query();
@@ -60,21 +64,20 @@ void UIManager::HandleEvents(){
 	if(info.type == EventType::ONCLICK && lastX!=info.x && lastY != info.y){
         Component * component = scene.GetComponent(info.x, info.y);
 
-        if(component == nullptr)
-            fprintf(stdout, "No component at positon %.3f %.3f\n", info.x, info.y);
-        else
-            fprintf(stdout, "Found component at positon %.3f %.3f\n", info.x, info.y);
+        if(component != nullptr){
+            InteractiveComponent * interactive = dynamic_cast<InteractiveComponent*>(component);
+
+            eventHandlingService->Publish( info.type, interactive );
+        }
 
         lastX = info.x;
         lastY = info.y;
     }
-    
 
-	//eventHandlingService->Publish(eventType, (IEventListener*)scene->GetComponent(mouseXPosition,mouseYPosition));
 }
 
 void UIManager::Update(){
-    
+
     glClear(GL_COLOR_BUFFER_BIT);
 
 	HandleEvents();
@@ -99,6 +102,7 @@ bool UIManager::ShouldClose(){
 }
 
 UIManager::~UIManager(){
+
 	glfwDestroyWindow(window);
 	glfwTerminate();
 

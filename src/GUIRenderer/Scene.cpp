@@ -7,25 +7,31 @@ void Scene::RemoveComponents(Component* _object){
 		}
 }
 void Scene::AddComponent(Component* _object){
-	components.emplace_back(_object);
+	components.push_back(_object);
 }
 
 //this returns only one component, if there is more components on that position, this funcion will not return them all
-Component* Scene::GetComponent(const float &_x, const float &_y){
+Component* Scene::GetComponent(const float &_x, const float &_y) const{
 
 	for(unsigned int i = 0; i < components.size(); ++i){
 
 		if(components[i]->IsInBound(_x, _y))
 			return components[i];
-		
+
 	}
 
 	return NULL;
 }
-void Scene::Render(){
+void Scene::Render() const{
 
 	for(unsigned int i = 0; i < components.size(); ++i){
 		components[i]->Render();
 	}
-	
+
+}
+
+Scene::~Scene(){
+
+	//TODO
+
 }

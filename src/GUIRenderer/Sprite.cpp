@@ -107,6 +107,10 @@ GLuint Sprite::GetPixelBuffer(){
     return pixelBuffer;
 }
 
+GLuint Sprite::GetTextureID(){
+    return textureID;
+}
+
 uint32_t Sprite::GetWidth(){
     return width;
 }

@@ -22,15 +22,20 @@
 
 #endif
 
-
 #include "Color.h"
+#include "Sprite.h"
 
 class Component{
 protected:
-	float height, width, x, y;
+
+	float height;
+	float width;
+	float x;
+	float y;
+
 	Color color;
-	GLuint texture;
-	GLuint PBO;
+	Sprite * sprite;
+
 public:
 	Component(const float &_x, const float &_y, const float &_width, const float &_height);
 
@@ -38,11 +43,11 @@ public:
 
 	void SetColor(const Color &_color);
 
-	virtual void Render();
+	virtual void Render() = 0;
 
-	GLuint GetTextureID();
+	void SetTexture( const Sprite * _sprite);
 
-	GLuint GetPBO();
+	Sprite GetTexture();
 
 	float getWidth();
 

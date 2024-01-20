@@ -1,5 +1,7 @@
 #include "BitmapReader.h"
 
+static Header header;
+static Info infoHeader;
 
 void BitmapReader::ChangeEndianess(char *data, const uint32_t & length){
 

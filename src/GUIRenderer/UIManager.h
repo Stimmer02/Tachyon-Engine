@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include "IEventHandlingService.h"
 #include "IInputHandler.h"
+#include "InteractiveComponent.h"
 #include "Scene.h"
 
 class UIManager{
@@ -38,7 +39,7 @@ private:
 	GLFWwindow* window;
 
 	Scene scene;
-	
+
 	EventType eventType;
 
 	void HandleEvents();
@@ -46,15 +47,15 @@ private:
 
 public:
 	UIManager(const int &windowWidth, const int &windowHeight, const char* windowTitle, const bool & enableVSync);
-	
+
 	void AssignEventHandlingService(IEventHandlingService* _eventHandling);
-	
+
 	void AssignInputHandlingService(IInputHandler* _inputHandler);
-	
+
 	void AddComponentToScene(Component* component);
-	
+
 	void Update();
-	
+
 	bool ShouldClose();
 
 	~UIManager();

@@ -1,10 +1,16 @@
 #include "MouseInputService.h"
 
+MouseInputService::MouseInputService(){
+    this->window = nullptr;
+    this->normal = nullptr;
+    this->active = nullptr;
+}
+
 void MouseInputService::BindWindow(GLFWwindow * _window){
     this->window = _window;
 
     // Enable custom cursor within current window scope
-    if(normal)
+    if( normal != nullptr )
         glfwSetCursor(window, normal);
 
 }
