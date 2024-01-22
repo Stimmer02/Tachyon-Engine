@@ -76,10 +76,14 @@ int main(){
     physicsProcessor->spawnVoxelInArea(config.simulationHeight-8, 0, 8, config.simulationWidth, 1);
     physicsProcessor->spawnVoxelInArea(0, config.simulationWidth-8, config.simulationHeight, 8, 1);
 
+    physicsProcessor->spawnVoxelInArea(0, config.simulationWidth/3, config.simulationHeight, 8, 1);
+    physicsProcessor->spawnVoxelInArea(0, config.simulationWidth/3*2, config.simulationHeight, 8, 1);
+
+
+
     GLuint error = 0;
     uint x = 0, y = 0;
     uint frames = 0;
-            physicsProcessor->spawnVoxel(width>>1, 128, 2);
     while (!glfwWindowShouldClose(window)){
 
         physicsProcessor->generateFrame();
@@ -94,6 +98,9 @@ int main(){
 
 
         if (frames % 10 == 0){
+            physicsProcessor->spawnVoxel(config.simulationWidth>>1, config.simulationHeight>>1, 2);
+            physicsProcessor->spawnVoxel(config.simulationWidth>>1, (config.simulationHeight>>1) - config.simulationHeight/3, 3);
+            physicsProcessor->spawnVoxel(config.simulationWidth>>1, (config.simulationHeight>>1) + config.simulationHeight/3, 4);
             uint voxelCount = physicsProcessor->countVoxels();
             std::printf("\33[2\rKF: %5d; V: %d", frames, voxelCount);
             fflush(stdout);

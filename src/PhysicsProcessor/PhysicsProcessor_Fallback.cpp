@@ -156,7 +156,7 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
     cl::Buffer* chunk = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct chunk));
     this->allocatedGPUMemory.push_back(chunk);
 
-    const uint substanceCount = 3;
+    const uint substanceCount = 5;
     substance* tempSubstanceTable = new substance[substanceCount];
 
     tempSubstanceTable[0].jammingFactor = 0;
@@ -168,17 +168,31 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
 
     tempSubstanceTable[1].jammingFactor = 1;
     tempSubstanceTable[1].mass = 1;
-    tempSubstanceTable[1].color.R = 0;
+    tempSubstanceTable[1].color.R = 128;
     tempSubstanceTable[1].color.G = 128;
-    tempSubstanceTable[1].color.B = 255;
+    tempSubstanceTable[1].color.B = 140;
     tempSubstanceTable[1].color.A = 255;
 
     tempSubstanceTable[2].jammingFactor = 1;
     tempSubstanceTable[2].mass = 1;
     tempSubstanceTable[2].color.R = 255;
     tempSubstanceTable[2].color.G = 255;
-    tempSubstanceTable[2].color.B = 0;
+    tempSubstanceTable[2].color.B = 255;
     tempSubstanceTable[2].color.A = 255;
+
+    tempSubstanceTable[3].jammingFactor = 0.5;
+    tempSubstanceTable[3].mass = 1;
+    tempSubstanceTable[3].color.R = 255;
+    tempSubstanceTable[3].color.G = 255;
+    tempSubstanceTable[3].color.B = 0;
+    tempSubstanceTable[3].color.A = 255;
+
+    tempSubstanceTable[4].jammingFactor = 0;
+    tempSubstanceTable[4].mass = 1;
+    tempSubstanceTable[4].color.R = 128;
+    tempSubstanceTable[4].color.G = 128;
+    tempSubstanceTable[4].color.B = 255;
+    tempSubstanceTable[4].color.A = 255;
 
     cl::Buffer* substances = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct substance) * substanceCount);
     queue.enqueueWriteBuffer(*substances, true, 0, sizeof(struct substance) * substanceCount, tempSubstanceTable);
