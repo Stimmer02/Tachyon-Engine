@@ -4,11 +4,13 @@
 GLFWwindow* initializeGLFW(uint height, uint width);
 cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 
+void processInput(GLFWwindow *window);
 void glfwErrorCallback(int error, const char* description);
 
 uint localXsize = 16;
 uint localYsize = 16;
 int width = 1024, height = 1024;
+bool pause = true;
 
 GLuint PBO;
 GLuint texture;
@@ -80,33 +82,40 @@ int main(){
     physicsProcessor->spawnVoxelInArea(0, config.simulationWidth/3*2, config.simulationHeight, 8, 1);
 
 
-    physicsProcessor->generateFrame();
+    std::printf("play: 2; pause: 1\n");
+    if (pause){
+        physicsProcessor->generateFrame();
+        std::printf("simulation paused\n");
+    }
+
+
 
     GLuint error = 0;
     uint frames = 0;
     while (!glfwWindowShouldClose(window)){
+        processInput(window);
 
-        physicsProcessor->generateFrame();
+        if (pause == false){
+            physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, config.simulationHeight>>1, 8, 8, 2);
+            physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) - config.simulationHeight/3, 8, 8, 3);
+            physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) + config.simulationHeight/3, 8, 8, 4);
+            if (frames % 10 == 0){
+                uint voxelCount = physicsProcessor->countVoxels();
+                std::printf("\33[2\rKF: %5d; V: %d", frames, voxelCount);
+                fflush(stdout);
+            }
+            frames++;
 
-        glClear(GL_COLOR_BUFFER_BIT);
+            physicsProcessor->generateFrame();
 
+            glClear(GL_COLOR_BUFFER_BIT);
+
+        }
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
         glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-
-
-        physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, config.simulationHeight>>1, 8, 8, 2);
-        physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) - config.simulationHeight/3, 8, 8, 3);
-        physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) + config.simulationHeight/3, 8, 8, 4);
-        if (frames % 10 == 0){
-            uint voxelCount = physicsProcessor->countVoxels();
-            std::printf("\33[2\rKF: %5d; V: %d", frames, voxelCount);
-            fflush(stdout);
-        }
-        frames++;
-
 
         error = glGetError();
         if (error != GL_NO_ERROR) {
@@ -149,7 +158,17 @@ GLFWwindow* initializeGLFW(uint width, uint height){
     return window;
 }
 
-
+void processInput(GLFWwindow *window){
+    static bool pressed = false;
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+        glfwSetWindowShouldClose(window, true);
+    }
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS){
+        pause = true;
+    } else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS){
+        pause = false;
+    }
+}
 
 void glfwErrorCallback(int error, const char* description){
     printf("Error: %s\n", description);
