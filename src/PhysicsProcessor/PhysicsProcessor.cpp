@@ -67,7 +67,7 @@ std::string PhysicsProcessor::structuresAsString(){
         "    float atmosphereViscosity;"
         "};";
 
-	return structures;
+    return structures;
 }
 
 // Creating OpenCL kernel code as a string.
@@ -90,54 +90,66 @@ std::string PhysicsProcessor::kernelCodeAsString(){
         "       resources->worldMap = matrix;"
         "       resources->PBO = PBO;"
         "    }"
-        "void kernel sum_voxel(global struct engineResources* resources, global uint* workArr, uint size, global uint* returnValue){"
-        "    private uint id = get_global_id(0);"
-        "    private uint dim = get_local_size(0);"
-        "    private char dividionRest = size & 0x1;"
-        "    private uint currentSize = size >> 1;"
-        "    private uint index;"
+        "    void kernel sum_voxel(global struct engineResources* resources, global uint* workArr, uint size, global uint* returnValue){"
+        "        private uint id = get_global_id(0);"
+        "        private uint dim = get_local_size(0);"
+        "        private char dividionRest = size & 0x1;"
+        "        private uint currentSize = size >> 1;"
+        "        private uint index;"
         ""
-        "    for (private uint i = id; i < currentSize; i += dim){"
-        "        index = i << 1;"
-        "        workArr[i] = (resources->worldMap->voxels[index].substanceID > 0) + (resources->worldMap->voxels[index+1].substanceID > 0);"
-        "    }"
-        "    barrier(CLK_LOCAL_MEM_FENCE);"
-        "    if (dividionRest){"
-        "        if (id == 0){"
-        "            workArr[currentSize] = (resources->worldMap->voxels[currentSize << 1].substanceID > 0);"
-        "        }"
-        "        currentSize++;"
-        "    }"
-        "    barrier(CLK_LOCAL_MEM_FENCE);"
-        "    dividionRest = currentSize & 0x1;"
-        "    currentSize >>= 1;"
-        ""
-        "    while (currentSize > 1){"
         "        for (private uint i = id; i < currentSize; i += dim){"
-        "            index = i << 1;"
-        "            workArr[i] = workArr[index] + workArr[index+1];"
+        "           index = i << 1;"
+        "            workArr[i] = (resources->worldMap->voxels[index].substanceID > 0) + (resources->worldMap->voxels[index+1].substanceID > 0);"
         "        }"
         "        barrier(CLK_LOCAL_MEM_FENCE);"
         "        if (dividionRest){"
         "            if (id == 0){"
-        "                workArr[currentSize] = workArr[currentSize << 1];"
-        "            }"
-        "            currentSize++;"
+        "               workArr[currentSize] = (resources->worldMap->voxels[currentSize << 1].substanceID > 0);"
+        "           }"
+        "           currentSize++;"
         "        }"
         "        barrier(CLK_LOCAL_MEM_FENCE);"
         "        dividionRest = currentSize & 0x1;"
         "        currentSize >>= 1;"
-        "    }"
-        "    barrier(CLK_LOCAL_MEM_FENCE);"
-        "    if (id == 0){"
-        "        *returnValue = workArr[0] + workArr[1];"
-        "        if (dividionRest == 1){"
-        "            *returnValue += workArr[2];"
+        ""
+        "        while (currentSize > 1){"
+        "            for (private uint i = id; i < currentSize; i += dim){"
+        "               index = i << 1;"
+        "               workArr[i] = workArr[index] + workArr[index+1];"
+        "            }"
+        "            barrier(CLK_LOCAL_MEM_FENCE);"
+        "            if (dividionRest){"
+        "               if (id == 0){"
+        "                   workArr[currentSize] = workArr[currentSize << 1];"
+        "               }"
+        "               currentSize++;"
+        "           }"
+        "            barrier(CLK_LOCAL_MEM_FENCE);"
+        "            dividionRest = currentSize & 0x1;"
+        "            currentSize >>= 1;"
         "        }"
-        "    }"
-        "}";
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        if (id == 0){"
+        "            *returnValue = workArr[0] + workArr[1];"
+        "            if (dividionRest == 1){"
+        "               *returnValue += workArr[2];"
+        "            }"
+        "       }"
+        "   }"
+        "    void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "       uint globalID, IDX, IDY;"
+        "       IDX = x + get_global_id(0);"
+        "       IDY = y + get_global_id(1);"
+        "       globalID = IDY * config->simulationWidth + IDX;"
+        ""
+        "        if (config->simulationWidth > IDX && config->simulationHeight > IDY){"
+        "           resources->worldMap->voxels[globalID].forceVector.x = 0;"
+        "           resources->worldMap->voxels[globalID].forceVector.y = 0;"
+        "           resources->worldMap->voxels[globalID].substanceID = substanceID;"
+        "        }"
+        "   }";
 
-	return kernel_code;
+    return kernel_code;
 }
 
 // Main construtror operations.
@@ -220,6 +232,10 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
     queue.enqueueNDRangeKernel(set_substanceTableKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.enqueueNDRangeKernel(set_engineResourcesKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.finish();
+
+    //Initializing the spawn_voxel_in_area kernel.
+    this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+    this->spawn_voxel_in_areaKernel= cl::Kernel(program, "spawn_voxel_in_area");
 
     // Initializing the spawn_voxel kernel.
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
