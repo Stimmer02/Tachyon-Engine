@@ -78,6 +78,8 @@ int main(){
 
     GLuint error = 0;
     uint x = 0, y = 0;
+    uint frames = 0;
+            physicsProcessor->spawnVoxel(width>>1, 128, 2);
     while (!glfwWindowShouldClose(window)){
 
         physicsProcessor->generateFrame();
@@ -90,8 +92,13 @@ int main(){
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        uint voxelCount = physicsProcessor->countVoxels();
-        std::printf("V: %d\n", voxelCount);
+
+        if (frames % 10 == 0){
+            uint voxelCount = physicsProcessor->countVoxels();
+            std::printf("\33[2\rKF: %5d; V: %d", frames, voxelCount);
+            fflush(stdout);
+        }
+        frames++;
 
 
         error = glGetError();
@@ -99,6 +106,7 @@ int main(){
             std::printf("OpenGL error: %d\n", error);
         }
     }
+    std::printf("\n");
 
     delete physicsProcessor;
 

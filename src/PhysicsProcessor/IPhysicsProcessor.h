@@ -86,11 +86,11 @@ struct __attribute__ ((aligned)) substanceTable{
 
 class IPhysicsProcessor{
 public:
-    ~IPhysicsProcessor(){};
+    virtual ~IPhysicsProcessor(){};
     virtual void generateFrame() = 0;
     virtual void spawnVoxel(uint x, uint y, uint substanceID) = 0;
     virtual uint countVoxels() = 0;
-    virtual void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID);
+    virtual void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) = 0;
 
 };
 
