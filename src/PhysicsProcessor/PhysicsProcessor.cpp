@@ -185,11 +185,11 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
     tempSubstanceTable[2].color.B = 255;
     tempSubstanceTable[2].color.A = 255;
 
-    tempSubstanceTable[3].jammingFactor = 0.5;
+    tempSubstanceTable[3].jammingFactor = 0.995;
     tempSubstanceTable[3].mass = 1;
     tempSubstanceTable[3].color.R = 255;
     tempSubstanceTable[3].color.G = 255;
-    tempSubstanceTable[3].color.B = 0;
+    tempSubstanceTable[3].color.B = 100;
     tempSubstanceTable[3].color.A = 255;
 
     tempSubstanceTable[4].jammingFactor = 0;

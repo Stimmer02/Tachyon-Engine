@@ -180,17 +180,17 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
     tempSubstanceTable[2].color.B = 255;
     tempSubstanceTable[2].color.A = 255;
 
-    tempSubstanceTable[3].jammingFactor = 0.5;
+    tempSubstanceTable[3].jammingFactor = 0.995;
     tempSubstanceTable[3].mass = 1;
     tempSubstanceTable[3].color.R = 255;
     tempSubstanceTable[3].color.G = 255;
-    tempSubstanceTable[3].color.B = 0;
+    tempSubstanceTable[3].color.B = 100;
     tempSubstanceTable[3].color.A = 255;
 
     tempSubstanceTable[4].jammingFactor = 0;
     tempSubstanceTable[4].mass = 1;
-    tempSubstanceTable[4].color.R = 128;
-    tempSubstanceTable[4].color.G = 128;
+    tempSubstanceTable[4].color.R = 23;
+    tempSubstanceTable[4].color.G = 148;
     tempSubstanceTable[4].color.B = 255;
     tempSubstanceTable[4].color.A = 255;
 

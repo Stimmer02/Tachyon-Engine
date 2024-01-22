@@ -1,14 +1,12 @@
 simplest_collision
-3
+4
 
-        private int tempX, tempY;
         private int error, doubleError;
         private short scalarVectorX, scalarVectorY;
         private int absVectorX, absVectorY, loopLength;
         private bool tempLogic;
         struct voxel* prevVoxel, *currentVoxel;
-        tempX = IDX;
-        tempY = IDY;
+
         prevVoxel = thisVoxel;
 
         scalarVectorX = (thisVoxelCopy.forceVector.x > 0) ? 1 : -1;
@@ -81,10 +79,3 @@ simplest_collision
 
 
 //         global_ID = IDX + IDY * localConfig.simulationWidth;
-
-    //DUMB FIX:
-        resources->PBO[tempX + tempY * localConfig.simulationWidth] = resources->substanceTable->substances[thisVoxelCopy.substanceID].color;
-
-
-
-
