@@ -70,6 +70,12 @@ int main(){
     }
 
 
+    //Prepare simulation
+    physicsProcessor->spawnVoxelInArea(0, 0, 8, config.simulationWidth, 1);
+    physicsProcessor->spawnVoxelInArea(0, 0, config.simulationHeight, 8, 1);
+    physicsProcessor->spawnVoxelInArea(config.simulationHeight-8, 0, 8, config.simulationWidth, 1);
+    physicsProcessor->spawnVoxelInArea(0, config.simulationWidth-8, config.simulationHeight, 8, 1);
+
     GLuint error = 0;
     uint x = 0, y = 0;
     while (!glfwWindowShouldClose(window)){

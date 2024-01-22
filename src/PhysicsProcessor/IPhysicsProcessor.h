@@ -90,6 +90,8 @@ public:
     virtual void generateFrame() = 0;
     virtual void spawnVoxel(uint x, uint y, uint substanceID) = 0;
     virtual uint countVoxels() = 0;
+    virtual void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID);
+
 };
 
 #endif

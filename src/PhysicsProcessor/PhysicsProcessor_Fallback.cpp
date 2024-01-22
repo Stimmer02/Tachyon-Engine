@@ -289,3 +289,13 @@ uint PhysicsProcessor_Fallback::countVoxels(){
 
     return returnValue;
 }
+
+void PhysicsProcessor_Fallback::spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID){
+    spawn_voxel_in_areaKernel.setArg(0, x);
+    spawn_voxel_in_areaKernel.setArg(1, y);
+    spawn_voxel_in_areaKernel.setArg(2, substanceID);
+    spawn_voxel_in_areaKernel.setArg(3, this->engineResources);
+    spawn_voxel_in_areaKernel.setArg(4, this->eConfig);
+    queue.enqueueNDRangeKernel(spawn_voxel_in_areaKernel, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(8, 8));
+    queue.finish();
+}
