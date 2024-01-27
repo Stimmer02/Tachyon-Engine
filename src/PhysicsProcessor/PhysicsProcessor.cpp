@@ -33,7 +33,6 @@ std::string PhysicsProcessor::structuresAsString(){
         "    unsigned char R;"
         "    unsigned char G;"
         "    unsigned char B;"
-        "    unsigned char A;"
         "};"
         "struct __attribute__ ((aligned)) vector2D{"
         "    unsigned int x;"
@@ -169,35 +168,30 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
     tempSubstanceTable[0].color.R = 0;
     tempSubstanceTable[0].color.G = 0;
     tempSubstanceTable[0].color.B = 0;
-    tempSubstanceTable[0].color.A = 0;
 
     tempSubstanceTable[1].jammingFactor = 1;
     tempSubstanceTable[1].mass = 1;
     tempSubstanceTable[1].color.R = 128;
     tempSubstanceTable[1].color.G = 128;
     tempSubstanceTable[1].color.B = 140;
-    tempSubstanceTable[1].color.A = 255;
 
     tempSubstanceTable[2].jammingFactor = 1;
     tempSubstanceTable[2].mass = 1;
     tempSubstanceTable[2].color.R = 255;
     tempSubstanceTable[2].color.G = 255;
     tempSubstanceTable[2].color.B = 255;
-    tempSubstanceTable[2].color.A = 255;
 
     tempSubstanceTable[3].jammingFactor = 0.995;
     tempSubstanceTable[3].mass = 1;
     tempSubstanceTable[3].color.R = 255;
     tempSubstanceTable[3].color.G = 255;
     tempSubstanceTable[3].color.B = 100;
-    tempSubstanceTable[3].color.A = 255;
 
     tempSubstanceTable[4].jammingFactor = 0;
     tempSubstanceTable[4].mass = 1;
     tempSubstanceTable[4].color.R = 23;
     tempSubstanceTable[4].color.G = 148;
     tempSubstanceTable[4].color.B = 255;
-    tempSubstanceTable[4].color.A = 255;
 
     cl::Buffer* substances = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct substance) * substanceCount);
     queue.enqueueWriteBuffer(*substances, true, 0, sizeof(struct substance) * substanceCount, tempSubstanceTable);
