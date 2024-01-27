@@ -30,6 +30,9 @@ int main(){
     Image temp = BitmapReader::ReadFile("resources/sprites/button.bmp");
     Sprite * buttonImg = Sprite::Create(&temp);
 
+    // Create PBO transfer pipe
+    GLuint pixelBuffer = buttonImg->GetPixelBuffer();
+
     Component * button = builder
                         .SetComponentType(BUTTON)
                         ->SetPosition(width/2.0f, height/2.0f)
