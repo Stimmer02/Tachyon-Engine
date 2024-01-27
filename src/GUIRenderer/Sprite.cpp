@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include <stdio.h>
 
+
 Sprite* Sprite::Create(const Color * pixels, const uint32_t& width, const uint32_t& height){
 
     Sprite *sprite = NULL;
@@ -14,31 +15,8 @@ Sprite* Sprite::Create(const Color * pixels, const uint32_t& width, const uint32
     sprite->width = width;
     sprite->height = height;
 
-    // Calculate texture checksum
-    sprite->CalculateChecksum(pixels, width, height);
-
-    // Create texture name
-    glGenTextures(1, &sprite->textureID);
-
-    // Select current texture
-    glBindTexture(GL_TEXTURE_2D, sprite->textureID);
-
-    // Set texture wrapping mode
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-    // Fill texture buffer with pixels
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char *)pixels);
-
-    // Set texture filtering mode
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    // Generate mipmaps
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    // Unbind texture
-    glBindTexture(GL_TEXTURE_2D, 0);
+    // Load data
+    sprite->UpdateTexture(pixels, width, height);
 
     return sprite;
 }
@@ -55,21 +33,59 @@ Sprite* Sprite::Create(const Image * image){
     sprite->width = image->width;
     sprite->height = image->height;
 
-    // Calculate texture checksum
-    sprite->CalculateChecksum(image->pixels, image->width, image->height);
+    // Load data
+    sprite->UpdateTexture(image->pixels, image->width, image->height);
+
+    return sprite;
+}
+
+void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height){
+
+    // Destroy old texture
+    this->Destroy();
+
+    // Calculate new texture checksum
+    CalculateChecksum(pixels, width, height);
 
     // Create texture name
-    glGenTextures(1, &sprite->textureID);
+    glGenTextures(1, &textureID);
 
     // Select current texture
-    glBindTexture(GL_TEXTURE_2D, sprite->textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
 
     // Set texture wrapping mode
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-    // Fill texture buffer with pixels
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char *)image->pixels);
+    // Allocate texture buffer for pixels
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+    // Create PBO transfer pipe
+    glGenBuffers(1, &pixelBuffer);
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBuffer);
+
+    // Allocate storage for PBO
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * sizeof(Color), nullptr, GL_STREAM_DRAW);
+
+    // Transfer data
+    GLubyte* ptr = (GLubyte*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
+
+    if (ptr) {
+        // Transfer data from host to device
+        memcpy(ptr, pixels, width * height * sizeof(Color));
+
+        // Unmap PBO
+        glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
+    }
+
+    // Bind texture buffer
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, textureID);
+
+    // Update old texture with new data
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+    // Unbind texture buffer
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
     // Set texture filtering mode
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -78,10 +94,21 @@ Sprite* Sprite::Create(const Image * image){
     // Generate mipmaps
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    // Unbind texture
+    // Unselect current texture
     glBindTexture(GL_TEXTURE_2D, 0);
+}
 
-    return sprite;
+
+GLuint Sprite::GetPixelBuffer(){
+
+    // Bind PBO to current texture
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    return pixelBuffer;
+}
+
+GLuint Sprite::GetTextureID(){
+    return textureID;
 }
 
 uint32_t Sprite::GetWidth(){
@@ -104,6 +131,7 @@ void Sprite::UnLoad(){
 
 void Sprite::Destroy(){
     glDeleteTextures(1, &textureID);
+    glDeleteBuffers(1, &pixelBuffer);
 }
 
 bool Sprite::operator==(const Sprite& sprite){
@@ -119,7 +147,7 @@ uint32_t Sprite::GetChecksum(){
 }
 
 Sprite::~Sprite(){
-    glDeleteTextures(1, &textureID);
+    this->Destroy();
 }
 
 Sprite::Sprite(){

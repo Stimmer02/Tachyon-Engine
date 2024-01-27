@@ -1,13 +1,14 @@
 #include "EventManager.h"
 
 
-void EventManager::Subscribe(const EventType & event, IEventListener * listener){
+void EventManager::Subscribe(const EventType & event, const IEventListener * listener){
     if(listener==NULL){
         fprintf(stderr, "Listener can't be null.\n");
-        return; 
+        return;
     }
 
     auto& eventListeners = listeners[event];
+
     for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it) {
         if (*it == listener) {
             fprintf(stderr, "Listener is already attached to this event.\n");
@@ -18,13 +19,14 @@ void EventManager::Subscribe(const EventType & event, IEventListener * listener)
     eventListeners.push_back(listener);
 }
 
-void EventManager::Unsubscribe(const EventType & event, IEventListener * listener){
+void EventManager::Unsubscribe(const EventType & event, const IEventListener * listener){
     if(listener==NULL){
         fprintf(stderr, "Listener can't be null.\n");
-        return; 
+        return;
     }
 
     auto& eventListeners = listeners[event];
+
     for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it) {
         if (*it == listener) {
             it = eventListeners.erase(it);  // Use the iterator to erase the element
@@ -35,16 +37,17 @@ void EventManager::Unsubscribe(const EventType & event, IEventListener * listene
     fprintf(stderr, "Listener is not attached to this event system.\n");
 }
 
-void EventManager::Publish(const EventType & event, IEventListener * listener){
+void EventManager::Publish(const EventType & event, const IEventListener * listener){
     if(listener==NULL){
         fprintf(stderr, "Listener can't be null.\n");
-        return; 
+        return;
     }
 
     auto& eventListeners = listeners[event];
+
     for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it) {
         if (*it == listener) {
-            listener->OnEvent(event);
+            ((IEventListener *)listener)->OnEvent(event);
             return;
         }
     }
@@ -56,7 +59,7 @@ void EventManager::Publish(const EventType & event){
 
     auto& eventListeners = listeners[event];
     for (auto& element : eventListeners) {
-        element->OnEvent(event);
+        ((IEventListener *)element)->OnEvent(event);
     }
 
 }

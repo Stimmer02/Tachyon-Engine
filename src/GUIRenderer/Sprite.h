@@ -2,6 +2,7 @@
 #define SPRITE_H
 
 #include "Image.h"
+#include <cstring>
 
 #ifdef __APPLE__
 
@@ -9,6 +10,12 @@
 #include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 #include <OpenGL/OpenGL.h>
+
+#elif _WIN32
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <GL/gl.h>
 
 #else
 
@@ -34,6 +41,11 @@ public:
     /// @return Sprite object
     static Sprite* Create(const Image * image);
 
+    /// @brief Method creates a new texture for current object.
+    /// @param pixels
+    /// @param width
+    /// @param height
+    void UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height);
 
     /// @brief Method returns width of sprite.
     /// @return Sprite width
@@ -42,6 +54,14 @@ public:
     /// @brief Method returns height of sprite.
     /// @return Sprite height
     uint32_t GetHeight();
+
+    /// @brief Method returns pbo of current sprite
+    /// @return Sprite pbo
+    GLuint GetPixelBuffer();
+
+    /// @brief Method returns texture id of current sprite
+    /// @return Sprite texture id
+    GLuint GetTextureID();
 
     /// @brief Method returns sprite cheksum.
     /// @return Sprite checksum
@@ -64,7 +84,7 @@ private:
 
     Sprite();
 
-    /// @brief Method calculate code image within uint32_t range
+    /// @brief Method calculate image checksum within uint32_t range.
     /// @param pixels
     /// @param width
     /// @param height
@@ -74,6 +94,7 @@ private:
     uint32_t height;
 
     GLuint textureID;
+    GLuint pixelBuffer;
 
     uint32_t checksum;
 

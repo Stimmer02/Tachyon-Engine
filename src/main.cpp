@@ -1,5 +1,50 @@
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
 #include <filesystem>
+#define CL_HPP_TARGET_OPENCL_VERSION 200
+
+#ifdef __APPLE__
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <OpenGL/gl3.h>
+#include <OpenGL/OpenGL.h>
+#include <OpenCL/opencl.h>
+#include <OpenCL/cl_gl.h>
+#include "../OpenCL/include/CL/cl.hpp"
+
+#elif __WIN32__
+
+typedef unsigned int uint;
+
+#include <windows.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <GL/gl.h>
+#include <CL/cl.hpp>
+#include <CL/opencl.hpp>
+#include <CL/cl_gl.h>
+
+#else
+
+#include <CL/opencl.hpp>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <CL/cl_gl.h>
+#include <GL/glx.h>
+
+#endif
+
+#include "MouseInputService.h"
+
+#include <string>
+#include <vector>
+#include <cstdio>
+
+struct color{
+    unsigned char R, G, B;
+};
+
+void processInput(GLFWwindow *window);
 
 GLFWwindow* initializeGLFW(uint height, uint width);
 cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
@@ -39,7 +84,7 @@ int main(){
 
     glGenBuffers(1, &PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, PBO);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*width*height, NULL, GL_STATIC_DRAW);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*3840*2160, NULL, GL_DYNAMIC_DRAW);
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -77,12 +122,6 @@ int main(){
         physicsProcessor->generateFrame();
 
         glClear(GL_COLOR_BUFFER_BIT);
-
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-        glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
 
         for (uint i = 0; i < 21; ++i){
             physicsProcessor->spawnVoxel(x, y, 1);

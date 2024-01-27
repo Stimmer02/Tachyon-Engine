@@ -8,7 +8,7 @@ UIBuilder* UIBuilder::AssignEventManager(IEventHandlingService* _eventManager){
 // UIBuilder* UIBuilder::AssignTextAssembler(const TextAssembler &_textAssembler){
 //	TODO
 // }
-UIBuilder* UIBuilder::AssignEvent(const EventType &_event,std::function<void()> _delegate){
+UIBuilder* UIBuilder::AssignEvent(const EventType &_event, std::function<void()> _delegate){
 	/*
 	if(type != Button || type != Canvas){
 		std::cout<<"Error: it's possible to assing event only to interactive componnents\n";
@@ -20,6 +20,13 @@ UIBuilder* UIBuilder::AssignEvent(const EventType &_event,std::function<void()> 
 	events[_event] = _delegate;
 	return this;
 }
+
+UIBuilder* UIBuilder::SetTexture(const Sprite * _sprite){
+	sprite = (Sprite *)_sprite;
+	return this;
+}
+
+
 UIBuilder* UIBuilder::SetComponentType(const ComponentType &_type){
 	type = _type;
 	return this;
@@ -38,44 +45,93 @@ UIBuilder* UIBuilder::SetColor(const Color &_color){
 	color = _color;
 	return this;
 }
+
 UIBuilder* UIBuilder::SetText(char* _text, const int &_textLen){
 	text = _text;
 	textLen = _textLen;
 	return this;
 }
-// UIBuilder* UIBuilder::SetText(const std::string &_text){
-//	TODO
-// }
+
 Component* UIBuilder::Build(){
 
-	Button* newButtonComponent;
-	Canvas* newCanvasComponent;
-	Text* textComponent;
+	Component * component = nullptr;
+
 	if(type == BUTTON){
-		newButtonComponent = new Button(x, y, width, height);
-		//there is no SetEventManager methot in InteractiveComponent
-		for(auto i = events.begin(); i != events.end(); ++i){
-			newButtonComponent->AssignEvent(i->first, i->second);
+		Button * b = new Button(x, y, width, height);
+
+		IEventListener * listener = b;
+
+		if( eventManager != nullptr){
+
+			for(auto i = events.begin(); i != events.end(); ++i){
+				eventManager->Subscribe(i->first, listener);
+				b->AssignEvent(i->first, i->second);
+			}
+
 		}
-		newButtonComponent->SetColor(color);
-		return newButtonComponent;
+
+		component = b;
 	}
 	else if(type == CANVAS){
-		newCanvasComponent = new Canvas(x, y, width, height);
-		//there is no SetEventManager methot in InteractiveComponent
-		for(auto i = events.begin(); i != events.end(); ++i){
-			newCanvasComponent->AssignEvent(i->first, i->second);
+		Canvas * c = new Canvas(x, y, width, height);
+
+		IEventListener * listener = c;
+
+		if( eventManager != nullptr){
+
+			for(auto i = events.begin(); i != events.end(); ++i){
+				eventManager->Subscribe(i->first, listener);
+				c->AssignEvent(i->first, i->second);
+			}
+
 		}
-		newCanvasComponent->SetColor(color);
-		return newCanvasComponent;
+
+		component = c;
 	}
 	else if(type == TEXT){
-		textComponent = new Text(x, y, width, height, text, textLen);
-		textComponent->SetColor(color);
-		return textComponent;
+		component = new Text(x, y, width, height, text, textLen);
 	}
-	else{
-		///czy tu też dodać komunikat że typ jest błędny?
-		return NULL;
-	}
+
+	if(sprite != nullptr)
+		component->SetTexture(sprite);
+
+
+	component->SetColor(color);
+
+	events.clear();
+
+	return component;
 }
+
+
+IEventHandlingService* UIBuilder::getEventManager(){
+	return eventManager;
+}
+ComponentType UIBuilder::getType(){
+	return type;
+}
+float UIBuilder::getHeight(){
+	return height;
+}
+float UIBuilder::getWidth(){
+	return width;
+}
+float UIBuilder::getX(){
+	return x;
+}
+float UIBuilder::getY(){
+	return y;
+}
+Color UIBuilder::getColor(){
+	return color;
+}
+std::map <EventType, std::function<void()> > UIBuilder::getEvents(){
+	return events;
+}
+char* UIBuilder::getText(){
+	return text;
+}
+int UIBuilder::getTextLen(){
+	return textLen;
+}
+
