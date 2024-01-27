@@ -40,10 +40,6 @@ typedef unsigned int uint;
 #include <vector>
 #include <cstdio>
 
-struct color{
-    unsigned char R, G, B;
-};
-
 void processInput(GLFWwindow *window);
 
 GLFWwindow* initializeGLFW(uint height, uint width);
