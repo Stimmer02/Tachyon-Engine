@@ -1,0 +1,8 @@
+drown_voxel
+7
+            private struct substance substanceBelow = resources->substanceTable->substances[resources->worldMap->voxels[tempX + (tempY - 1) * localConfig.simulationWidth].substanceID];
+            if (substanceBelow.mass < resources->substanceTable->substances[thisVoxelCopy.substanceID].mass && substanceBelow.jammingFactor){
+                private struct voxel tempVoxel = resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth];
+                resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth] = resources->worldMap->voxels[tempX + (tempY - 1) * localConfig.simulationWidth];
+                resources->worldMap->voxels[tempX + (tempY - 1) * localConfig.simulationWidth] = tempVoxel;
+            }

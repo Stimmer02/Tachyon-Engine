@@ -1,7 +1,5 @@
 jamm_voxel
-5
-
-        if (resources->worldMap->voxels[tempX + (tempY - 1) * localConfig.simulationWidth].substanceID > 0){
+6
             private int iterL = 1000 * (1 - resources->substanceTable->substances[thisVoxelCopy.substanceID].jammingFactor);
             private int iterR = iterL;
             iterL = (0 > tempX - iterL) ? tempX : iterL;
@@ -13,16 +11,21 @@ jamm_voxel
                         resources->worldMap->voxels[tempX - i + (tempY - 1) * localConfig.simulationWidth] = resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth];
                         resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth].substanceID = 0;
                         break;
+                    } else if (resources->worldMap->voxels[tempX - i + (tempY - 1) * localConfig.simulationWidth].substanceID == thisVoxelCopy.substanceID){
+                        iterL--;
+                    } else {
+                        iterL = 0;
                     }
-                    iterL--;
                 }
                 if (iterR){
                     if (resources->worldMap->voxels[tempX + i + (tempY - 1) * localConfig.simulationWidth].substanceID == 0){
                         resources->worldMap->voxels[tempX + i + (tempY - 1) * localConfig.simulationWidth] = resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth];
                         resources->worldMap->voxels[tempX + tempY * localConfig.simulationWidth].substanceID = 0;
                         break;
+                    } else if (resources->worldMap->voxels[tempX + i + (tempY - 1) * localConfig.simulationWidth].substanceID == thisVoxelCopy.substanceID){
+                        iterR--;
+                    } else {
+                        iterR = 0;
                     }
-                    iterR--;
                 }
             }
-        }
