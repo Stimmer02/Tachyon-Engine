@@ -38,7 +38,12 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(KernelBuilder& kernelBuilder, 
         deviceID = 0;
     }
 
+#ifdef __APPLE__
+    cl::Device defaultDevice = allDevices[2];
+#else
     cl::Device defaultDevice = allDevices[deviceID];
+#endif
+
     std::printf("Using device:\t%s\n", defaultDevice.getInfo<CL_DEVICE_NAME>().c_str());
 
     cl_platform_id platform;

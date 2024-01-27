@@ -5,7 +5,7 @@ simplest_collision
         private short scalarVectorX, scalarVectorY;
         private int absVectorX, absVectorY, loopLength;
         private bool tempLogic;
-        struct voxel* prevVoxel, *currentVoxel;
+        __global struct voxel* prevVoxel, *currentVoxel;
 
         prevVoxel = thisVoxel;
 

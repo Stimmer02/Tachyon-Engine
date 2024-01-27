@@ -3,7 +3,7 @@ kernel_header
 void kernel TACHYON_ENGINE(global struct engineConfig* config, global struct engineResources* resources){
     private int IDX, IDY, global_ID;
     local struct engineConfig localConfig;
-    struct voxel* thisVoxel;
+    __global struct voxel* thisVoxel;
     private struct voxel thisVoxelCopy;
 
     IDX = get_global_id(0);

@@ -1,3 +1,4 @@
+#define GL_SILENCE_DEPRECATION
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
 #include <filesystem>
 
@@ -10,7 +11,7 @@ void glfwErrorCallback(int error, const char* description);
 uint localXsize = 16;
 uint localYsize = 16;
 int width = 1024, height = 1024;
-bool pause = true;
+bool isPaused = false;
 
 GLuint PBO;
 GLuint texture;
@@ -27,15 +28,16 @@ int main(){
     GLFWwindow* window = initializeGLFW(height, width);
 
     if (!window){
-         glfwTerminate();
-         return -1;
+        glfwTerminate();
+        return EXIT_FAILURE;
     }
-
-
     //Initialize glew
 
-    if(glewInit() != GLEW_OK)
-        return -1;
+    if(glewInit() != GLEW_OK){
+        glfwDestroyWindow(window);
+        glfwTerminate();
+        return EXIT_FAILURE;
+    }
 
     //Create PBO and texutres
 
@@ -48,10 +50,16 @@ int main(){
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
     glGenFramebuffers(1, &fboId);
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, fboId);
-    glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, fboId);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
 
-    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    if (status != GL_FRAMEBUFFER_COMPLETE) {
+        fprintf(stderr, "Framebuffer is not complete\n");
+        return -1;
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     //Initialize PhysicsProcessor
     engineConfig config;
@@ -83,11 +91,10 @@ int main(){
 
 
     std::printf("play: 2; pause: 1\n");
-    if (pause){
+    if (isPaused){
         physicsProcessor->generateFrame();
         std::printf("simulation paused\n");
     }
-
 
 
     GLuint error = 0;
@@ -95,7 +102,10 @@ int main(){
     while (!glfwWindowShouldClose(window)){
         processInput(window);
 
-        if (pause == false){
+        if (!isPaused){
+            glClear(GL_COLOR_BUFFER_BIT);
+
+
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, config.simulationHeight>>1, 8, 8, 2);
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) - config.simulationHeight/3, 8, 8, 3);
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) + config.simulationHeight/3, 8, 8, 4);
@@ -106,11 +116,11 @@ int main(){
             }
             frames++;
 
+            glBindFramebuffer(GL_FRAMEBUFFER, fboId);
             physicsProcessor->generateFrame();
-
-            glClear(GL_COLOR_BUFFER_BIT);
-
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
+
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
         glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
@@ -119,7 +129,8 @@ int main(){
 
         error = glGetError();
         if (error != GL_NO_ERROR) {
-            std::printf("OpenGL error: %d\n", error);
+            fprintf(stderr, "OpenGL error: %d\n", error);
+            break;
         }
     }
     std::printf("\n");
@@ -128,12 +139,14 @@ int main(){
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
-
     glDeleteBuffers(1, &PBO);
-
     glDeleteTextures(1, &texture);
+    glDeleteFramebuffers(1, &fboId);
 
     glfwDestroyWindow(window);
+    glfwTerminate();
+
+    return EXIT_SUCCESS;
 }
 
 GLFWwindow* initializeGLFW(uint width, uint height){
@@ -142,6 +155,7 @@ GLFWwindow* initializeGLFW(uint width, uint height){
         return nullptr;
     }
     glfwSetErrorCallback(glfwErrorCallback);
+    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GL_FALSE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     GLFWwindow* window = glfwCreateWindow(width, height, "test", NULL, NULL);
@@ -152,7 +166,8 @@ GLFWwindow* initializeGLFW(uint width, uint height){
     }
 
     glfwMakeContextCurrent(window);
-    glViewport(0,0, width, height);
+    glOrtho(0, width, 0, height, -1.0f, 1.0f);
+    glViewport(0, 0, width, height);
     glfwSwapInterval(1);
 
     return window;
@@ -164,9 +179,9 @@ void processInput(GLFWwindow *window){
         glfwSetWindowShouldClose(window, true);
     }
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS){
-        pause = true;
+        isPaused = true;
     } else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS){
-        pause = false;
+        isPaused = false;
     }
 }
 
