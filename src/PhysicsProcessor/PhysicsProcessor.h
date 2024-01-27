@@ -20,6 +20,8 @@ public:
     void generateFrame() override;
     void spawnVoxel(uint x, uint y, uint substanceID) override;
     uint countVoxels() override;
+    void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) override;
+
 
 private:
     cl::Context context;
@@ -34,8 +36,11 @@ private:
     cl::Buffer pbo_buff;
     cl::Buffer engineResources;
     cl::Buffer eConfig;
-    uint size;
+    cl::Buffer sumReturnValue;
     cl::Kernel spawn_voxelKernel;
+    cl::Kernel sum_voxelKernel;
+    cl::Kernel spawn_voxel_in_areaKernel;
+
 };
 
 #endif

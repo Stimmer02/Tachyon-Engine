@@ -61,8 +61,8 @@ std::string PhysicsProcessor_Fallback::structuresAsString(){
         "    float timefactor;"
         "    float atmosphereViscosity;"
         "};";
-	
-	return structures;
+
+    return structures;
 }
 
 // Creating OpenCL kernel code as a string.
@@ -81,12 +81,70 @@ std::string PhysicsProcessor_Fallback::kernelCodeAsString(){
         "        table->substances = substances;"
         "    }"
         "    void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){"
-        "    resources->substanceTable = table;"
-        "    resources->worldMap = matrix;"
-        "    resources->PBO = PBO;"
-        "    }";
-	
-	return kernel_code;
+        "        resources->substanceTable = table;"
+        "        resources->worldMap = matrix;"
+        "       resources->PBO = PBO;"
+        "    }"
+                "    void kernel sum_voxel(global struct engineResources* resources, global uint* workArr, uint size, global uint* returnValue){"
+        "        private uint id = get_global_id(0);"
+        "        private uint dim = get_local_size(0);"
+        "        private char dividionRest = size & 0x1;"
+        "        private uint currentSize = size >> 1;"
+        "        private uint index;"
+        ""
+        "        for (private uint i = id; i < currentSize; i += dim){"
+        "           index = i << 1;"
+        "            workArr[i] = (resources->worldMap->voxels[index].substanceID > 0) + (resources->worldMap->voxels[index+1].substanceID > 0);"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        if (dividionRest){"
+        "            if (id == 0){"
+        "               workArr[currentSize] = (resources->worldMap->voxels[currentSize << 1].substanceID > 0);"
+        "           }"
+        "           currentSize++;"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        dividionRest = currentSize & 0x1;"
+        "        currentSize >>= 1;"
+        ""
+        "        while (currentSize > 1){"
+        "            for (private uint i = id; i < currentSize; i += dim){"
+        "               index = i << 1;"
+        "               workArr[i] = workArr[index] + workArr[index+1];"
+        "            }"
+        "            barrier(CLK_LOCAL_MEM_FENCE);"
+        "            if (dividionRest){"
+        "               if (id == 0){"
+        "                   workArr[currentSize] = workArr[currentSize << 1];"
+        "               }"
+        "               currentSize++;"
+        "           }"
+        "            barrier(CLK_LOCAL_MEM_FENCE);"
+        "            dividionRest = currentSize & 0x1;"
+        "            currentSize >>= 1;"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        if (id == 0){"
+        "            *returnValue = workArr[0] + workArr[1];"
+        "            if (dividionRest == 1){"
+        "               *returnValue += workArr[2];"
+        "            }"
+        "       }"
+        "   }"
+        "    void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "       uint globalID, IDX, IDY;"
+        "       IDX = x + get_global_id(0);"
+        "       IDY = y + get_global_id(1);"
+        "       globalID = IDY * config->simulationWidth + IDX;"
+        ""
+        "        if (config->simulationWidth > IDX && config->simulationHeight > IDY){"
+        "           resources->worldMap->voxels[globalID].forceVector.x = 0;"
+        "           resources->worldMap->voxels[globalID].forceVector.y = 0;"
+        "           resources->worldMap->voxels[globalID].substanceID = substanceID;"
+        "        }"
+        "   }";
+
+    return kernel_code;
 }
 
 // Main construtror operations.
@@ -98,7 +156,7 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
     cl::Buffer* chunk = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct chunk));
     this->allocatedGPUMemory.push_back(chunk);
 
-    const uint substanceCount = 3;
+    const uint substanceCount = 5;
     substance* tempSubstanceTable = new substance[substanceCount];
 
     tempSubstanceTable[0].jammingFactor = 0;
@@ -110,17 +168,31 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
 
     tempSubstanceTable[1].jammingFactor = 1;
     tempSubstanceTable[1].mass = 1;
-    tempSubstanceTable[1].color.R = 0;
+    tempSubstanceTable[1].color.R = 128;
     tempSubstanceTable[1].color.G = 128;
-    tempSubstanceTable[1].color.B = 255;
+    tempSubstanceTable[1].color.B = 140;
     tempSubstanceTable[1].color.A = 255;
 
     tempSubstanceTable[2].jammingFactor = 1;
     tempSubstanceTable[2].mass = 1;
     tempSubstanceTable[2].color.R = 255;
     tempSubstanceTable[2].color.G = 255;
-    tempSubstanceTable[2].color.B = 0;
+    tempSubstanceTable[2].color.B = 255;
     tempSubstanceTable[2].color.A = 255;
+
+    tempSubstanceTable[3].jammingFactor = 0.995;
+    tempSubstanceTable[3].mass = 1;
+    tempSubstanceTable[3].color.R = 255;
+    tempSubstanceTable[3].color.G = 255;
+    tempSubstanceTable[3].color.B = 100;
+    tempSubstanceTable[3].color.A = 255;
+
+    tempSubstanceTable[4].jammingFactor = 0;
+    tempSubstanceTable[4].mass = 1;
+    tempSubstanceTable[4].color.R = 23;
+    tempSubstanceTable[4].color.G = 148;
+    tempSubstanceTable[4].color.B = 255;
+    tempSubstanceTable[4].color.A = 255;
 
     cl::Buffer* substances = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct substance) * substanceCount);
     queue.enqueueWriteBuffer(*substances, true, 0, sizeof(struct substance) * substanceCount, tempSubstanceTable);
@@ -173,8 +245,24 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
     queue.finish();
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(color) * config.simulationWidth * config.simulationHeight, hostFallbackBuffer);
 
+    //Initializing the spawn_voxel_in_area kernel.
+    this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+    this->spawn_voxel_in_areaKernel= cl::Kernel(program, "spawn_voxel_in_area");
+
     // Initializing the spawn_voxel kernel.
     this->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+
+    // Initializing and seting up the sum_voxel kernel.
+    cl::Buffer* sumWorkMemory = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(cl_uint)*config.simulationHeight*config.simulationWidth/2+((config.simulationHeight*config.simulationWidth)&0x1));
+    this->sumReturnValue = cl::Buffer(context, CL_MEM_READ_WRITE, sizeof(cl_uint));
+    this->allocatedGPUMemory.push_back(sumWorkMemory);
+
+    this->sum_voxelKernel = cl::Kernel(program, "sum_voxel");
+    sum_voxelKernel.setArg(0, this->engineResources);
+    sum_voxelKernel.setArg(1, *sumWorkMemory);
+    sum_voxelKernel.setArg(2, config.simulationHeight * config.simulationWidth);
+    sum_voxelKernel.setArg(3, this->sumReturnValue);
+
 
     // Freeing temporary memory.
     delete[] tempSubstanceTable;
@@ -184,16 +272,15 @@ void PhysicsProcessor_Fallback::constructorMain(cl::Context openCLContext, struc
 void PhysicsProcessor_Fallback::configureMainKernel(){
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
-    this->size = 0;
 }
 
 PhysicsProcessor_Fallback::PhysicsProcessor_Fallback(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
     // Initializing GPU memory and allocating GPU.
     allocateHostMemory(openCLContext, engine, PBO, config, device);
-	
+
     // Main construtror operations.
     constructorMain(openCLContext, config, device);
-	
+
     // Setting arguments for the main (engine) kernel.
     configureMainKernel();
 }
@@ -222,10 +309,23 @@ void PhysicsProcessor_Fallback::spawnVoxel(uint x, uint y, uint substanceID){
     spawn_voxelKernel.setArg(4, this->eConfig);
     queue.enqueueNDRangeKernel(spawn_voxelKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
     queue.finish();
-
-    ++size;
 }
 
 uint PhysicsProcessor_Fallback::countVoxels(){
-	return size;
+    cl_uint returnValue;
+    queue.enqueueNDRangeKernel(sum_voxelKernel, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
+    queue.enqueueReadBuffer(sumReturnValue, CL_TRUE, 0, sizeof(cl_uint), &returnValue);
+    queue.finish();
+
+    return returnValue;
+}
+
+void PhysicsProcessor_Fallback::spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID){
+    spawn_voxel_in_areaKernel.setArg(0, x);
+    spawn_voxel_in_areaKernel.setArg(1, y);
+    spawn_voxel_in_areaKernel.setArg(2, substanceID);
+    spawn_voxel_in_areaKernel.setArg(3, this->engineResources);
+    spawn_voxel_in_areaKernel.setArg(4, this->eConfig);
+    queue.enqueueNDRangeKernel(spawn_voxel_in_areaKernel, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(8, 8));
+    queue.finish();
 }

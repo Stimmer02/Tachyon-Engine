@@ -11,7 +11,7 @@ char StructCollector::loadAllFromDirectory(const std::string directoryPath){
     std::vector<std::string> paths;
     for (std::filesystem::directory_entry dirEntry : std::filesystem::directory_iterator(directory)){
         const std::filesystem::path& extension = dirEntry.path().extension();
-        if (dirEntry.is_regular_file() && (extension.compare(".cl") == 0 || extension.compare(".clcpp") == 0)) {
+        if (dirEntry.is_regular_file() && ( extension.compare(".cl") == 0 || extension.compare(".clcpp") == 0)) {
             fileFound = true;
             paths.push_back(dirEntry.path().string());
         }
