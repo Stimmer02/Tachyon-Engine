@@ -11,7 +11,7 @@ void glfwErrorCallback(int error, const char* description);
 uint localXsize = 16;
 uint localYsize = 16;
 int width = 1024, height = 1024;
-bool isPaused = false;
+bool isPaused = true;
 
 GLuint PBO;
 GLuint texture;
@@ -50,16 +50,18 @@ int main(){
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
     glGenFramebuffers(1, &fboId);
-    glBindFramebuffer(GL_FRAMEBUFFER, fboId);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, fboId);
+    glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
 
-    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    GLenum status = glCheckFramebufferStatus(GL_READ_FRAMEBUFFER);
     if (status != GL_FRAMEBUFFER_COMPLETE) {
         fprintf(stderr, "Framebuffer is not complete\n");
         return -1;
     }
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    // glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
 
     //Initialize PhysicsProcessor
     engineConfig config;
@@ -116,9 +118,7 @@ int main(){
             }
             frames++;
 
-            glBindFramebuffer(GL_FRAMEBUFFER, fboId);
             physicsProcessor->generateFrame();
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
 
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
