@@ -103,22 +103,19 @@ TEST(UIBuilderTests, SetColorTest1){
 
     UIBuilder uIBuilder;
     Color color;
-    int r,g,b,a;
+    int r,g,b;
     color.R = 2;
     color.G = 1;
     color.B = 3;
-    color.A = 7;
 
     uIBuilder.SetColor(color);
 
     r = uIBuilder.getColor().R;
     g = uIBuilder.getColor().G;
     b = uIBuilder.getColor().B;
-    a = uIBuilder.getColor().A;
     ASSERT_EQ(r, color.R);
     ASSERT_EQ(g, color.G);
     ASSERT_EQ(b, color.B);
-    ASSERT_EQ(a, color.A);
 }
 
 TEST(UIBuilderTests, SetTextTest1){
@@ -163,7 +160,6 @@ TEST(UIBuilderTests, BuildTest1){
     color.R = 2;
     color.G = 3;
     color.B = 5;
-    color.A = 7;
 
     newEventType1 = ONCLICK;
     newEventType2 = ONHOVER;
@@ -186,7 +182,6 @@ TEST(UIBuilderTests, BuildTest1){
     ASSERT_EQ(color.R, createdComponent->getColor().R);
     ASSERT_EQ(color.G, createdComponent->getColor().G);
     ASSERT_EQ(color.B, createdComponent->getColor().B);
-    ASSERT_EQ(color.A, createdComponent->getColor().A);
 }
 
 
@@ -212,7 +207,6 @@ TEST(UIBuilderTests, BuildTest2){
     color.R = 6;
     color.G = 6;
     color.B = 6;
-    color.A = 6;
 
     newEventType1 = ONMOVE;
 
@@ -233,7 +227,6 @@ TEST(UIBuilderTests, BuildTest2){
     ASSERT_EQ(color.R, createdComponent->getColor().R);
     ASSERT_EQ(color.G, createdComponent->getColor().G);
     ASSERT_EQ(color.B, createdComponent->getColor().B);
-    ASSERT_EQ(color.A, createdComponent->getColor().A);
 }
 
 
@@ -263,7 +256,6 @@ TEST(UIBuilderTests, BuildTest3){
     color.R = 2;
     color.G = 3;
     color.B = 5;
-    color.A = 7;
 
     newEventType1 = ONCLICK;
     newEventType2 = ONHOVER;
@@ -288,6 +280,5 @@ TEST(UIBuilderTests, BuildTest3){
     ASSERT_EQ(color.R, createdComponent->getColor().R);
     ASSERT_EQ(color.G, createdComponent->getColor().G);
     ASSERT_EQ(color.B, createdComponent->getColor().B);
-    ASSERT_EQ(color.A, createdComponent->getColor().A);
 
 }

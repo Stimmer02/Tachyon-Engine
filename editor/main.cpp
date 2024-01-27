@@ -39,7 +39,7 @@ int main(){
                         ->SetDimensions(100.0f, 50.0f)
                         ->SetTexture(buttonImg)
                         ->AssignEvent(ONCLICK, Hello)
-                        ->SetColor((Color){27, 54, 56, 255})
+                        ->SetColor((Color){27, 54, 56})
                         ->Build();
 
     app.AddComponentToScene(button);
