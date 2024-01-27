@@ -133,7 +133,6 @@ Image BitmapReader::ReadFile(const char * filename){
             int bottomIndex = (infoHeader.height - 1 - row) * infoHeader.width + col;
 
             // Swap the pixels
-
             Color temp = pixels[topIndex];
             pixels[topIndex] = pixels[bottomIndex];
             pixels[bottomIndex] = temp;
