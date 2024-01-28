@@ -42,7 +42,12 @@ private:
 
 	EventType eventType;
 
+	GLuint vertexShader, fragmentShader, shaderProgram;
+
+	void CompileShaders();
+
 	void HandleEvents();
+
 	void Render();
 
 public:

@@ -32,21 +32,21 @@ int main(){
 
     Image temp = BitmapReader::ReadFile("resources/sprites/button.bmp");
 
-    //Sprite * buttonImg = Sprite::Create(temp.pixels, temp.width, temp.height);
+    Sprite * buttonImg = Sprite::Create(temp.pixels, temp.width, temp.height);
 
-    // if( buttonImg != nullptr){
+    if( buttonImg != nullptr){
 
-    //     Component * button = builder
-    //                     .SetComponentType(BUTTON)
-    //                     ->SetPosition(width/2.0f, height/2.0f)
-    //                     ->SetDimensions(100.0f, 50.0f)
-    //                     ->SetTexture(buttonImg)
-    //                     ->AssignEvent(ONCLICK, Hello)
-    //                     ->SetColor((Color){27, 54, 56})
-    //                     ->Build();
+        Component * button = builder
+                        .SetComponentType(BUTTON)
+                        ->SetPosition(width/2.0f, height/2.0f)
+                        ->SetDimensions(100.0f, 50.0f)
+                        ->SetTexture(buttonImg)
+                        ->AssignEvent(ONCLICK, Hello)
+                        ->SetColor((Color){27, 54, 56})
+                        ->Build();
 
-    //     app.AddComponentToScene(button);
-    // }
+        app.AddComponentToScene(button);
+    }
 
     while( !app.ShouldClose() ){
 

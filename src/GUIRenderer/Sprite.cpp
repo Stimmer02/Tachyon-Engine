@@ -54,49 +54,15 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     glBindTexture(GL_TEXTURE_2D, textureID);
 
     // Set texture wrapping mode
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-    glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
-    glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
-
-    // Allocate texture buffer for pixels
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-
-    // Create PBO transfer pipe
-    glGenBuffers(1, &pixelBuffer);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBuffer);
-
-    // Allocate storage for PBO
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * sizeof(Color), nullptr, GL_STATIC_DRAW);
-
-    fprintf(stdout, "Image size : %d x %d\n", width, height);
-
-    // Transfer data
-    GLubyte* ptr = (GLubyte*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
-
-    if ( ptr != nullptr ) {
-        // Transfer data from host to device
-        memcpy(ptr, pixels, width * height * sizeof(Color));
-
-        // Unmap PBO
-        glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
-    }
-
-    // Bind texture buffer
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBuffer);
-
-    // Update old texture with new data
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-
-    // Unbind texture buffer
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     // Set texture filtering mode
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Allocate texture buffer for pixels
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
     // Generate mipmaps
     glGenerateMipmap(GL_TEXTURE_2D);
@@ -130,18 +96,15 @@ uint32_t Sprite::GetHeight(){
 }
 
 void Sprite::Load(){
-    glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, textureID);
 }
 
 void Sprite::UnLoad(){
     glBindTexture(GL_TEXTURE_2D, 0);
-    glDisable(GL_TEXTURE_2D);
 }
 
 void Sprite::Destroy(){
     glDeleteTextures(1, &textureID);
-    glDeleteBuffers(1, &pixelBuffer);
 }
 
 bool Sprite::operator==(const Sprite& sprite){
