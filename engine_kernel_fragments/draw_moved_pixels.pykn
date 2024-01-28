@@ -1,4 +1,6 @@
 draw_moved_pixels
 9
 
-        resources->PBO[tempX + tempY * localConfig.simulationWidth] = resources->substanceTable->substances[thisVoxelCopy.substanceID].color;
+        struct color tempColor = resources->substanceTable->substances[thisVoxelCopy.substanceID].color;
+        write_imagef(texture, (int2)(tempX, tempY), (float4)(tempColor.R, tempColor.G, tempColor.B, 1.0f));
+

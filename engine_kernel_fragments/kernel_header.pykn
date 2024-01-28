@@ -1,10 +1,10 @@
 kernel_header
 0
-void kernel TACHYON_ENGINE(global struct engineConfig* config, global struct engineResources* resources){
-    private int IDX, IDY, global_ID;
+void kernel TACHYON_ENGINE(global struct engineConfig* config, global struct engineResources* resources, __write_only image2d_t texture){
+    uint IDX, IDY, global_ID;
     local struct engineConfig localConfig;
     __global struct voxel* thisVoxel;
-    private struct voxel thisVoxelCopy;
+    struct voxel thisVoxelCopy;
 
     IDX = get_global_id(0);
     IDY = get_global_id(1);

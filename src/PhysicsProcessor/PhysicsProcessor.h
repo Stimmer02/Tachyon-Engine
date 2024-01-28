@@ -1,6 +1,8 @@
 #ifndef _PHYSICSPROCESSOR_H
 #define _PHYSICSPROCESSOR_H
 
+#include <stdint.h>
+
 #include "IPhysicsProcessor.h"
 #ifdef __APPLE__
 #include "../OpenCL/include/CL/cl.hpp"
@@ -10,7 +12,7 @@
 
 class PhysicsProcessor : public IPhysicsProcessor{
 public:
-    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
+    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, uint32_t texture, engineConfig config, cl::Device device);
     std::string structuresAsString();
     std::string kernelCodeAsString();
     void constructorMain(cl::Context openCLContext, engineConfig config, cl::Device device);
@@ -33,7 +35,6 @@ private:
 
     cl::CommandQueue queue;
     cl_mem pbo_mem;
-    cl::Buffer pbo_buff;
     cl::Buffer engineResources;
     cl::Buffer eConfig;
     cl::Buffer sumReturnValue;

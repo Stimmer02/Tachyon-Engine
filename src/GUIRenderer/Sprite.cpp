@@ -28,7 +28,7 @@ Sprite* Sprite::Create(const Color * pixels, const uint32_t& width, const uint32
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
     // Fill texture buffer with pixels
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char *)pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, (unsigned char *)pixels);
 
     // Set texture filtering mode
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -69,7 +69,7 @@ Sprite* Sprite::Create(const Image * image){
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
     // Fill texture buffer with pixels
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char *)image->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char *)image->pixels);
 
     // Set texture filtering mode
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -90,6 +90,10 @@ uint32_t Sprite::GetWidth(){
 
 uint32_t Sprite::GetHeight(){
     return height;
+}
+
+uint32_t Sprite::GetTexture(){
+    return textureID;
 }
 
 void Sprite::Load(){

@@ -3,33 +3,36 @@
 
 #define CL_HPP_TARGET_OPENCL_VERSION 200
 
-#ifdef __APPLE__
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#ifdef __APPLE__
+
 #include <OpenGL/gl3.h>
-#include <OpenGL/OpenGL.h>
 #include <OpenCL/opencl.h>
-#include <OpenCL/cl_gl.h>
+#include <OpenGL/OpenGL.h>
 #include "../OpenCL/include/CL/cl.hpp"
+#include <OpenCL/cl_gl.h>
+#include <OpenCL/cl_gl_ext.h>
 
 #elif __WIN32__
 
 typedef unsigned int uint;
 
 #include <windows.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <GL/gl.h>
+#include <GL/wglew.h>
 #include <CL/opencl.hpp>
+#include <CL/cl.h>
 #include <CL/cl_gl.h>
+#include <CL/cl_gl_ext.h>
 
 #else
 
 #include <CL/opencl.hpp>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <CL/cl.h>
 #include <CL/cl_gl.h>
+#include <CL/cl_gl_ext.h>
 #include <GL/glx.h>
 
 #endif

@@ -1,5 +1,6 @@
+
+
 struct __attribute__ ((aligned)) engineResources{
-    __global struct substanceTable* substanceTable;
-    __global struct chunk* worldMap;
-    __global struct color* PBO;
+    __global struct substanceTable * substanceTable;
+    __global struct chunk * worldMap;
 };

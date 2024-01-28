@@ -1,6 +1,7 @@
 draw_pixels
 -2
-    private uchar tempID;
+    uchar tempID;
     tempID = resources->worldMap->voxels[global_ID].substanceID;
-    resources->PBO[global_ID] = resources->substanceTable->substances[tempID].color;
+    struct color tempColor = resources->substanceTable->substances[tempID].color;
+    write_imagef(texture, (int2)(IDX, IDY), (float4)(tempColor.R, tempColor.G, IDX/(float)config->simulationWidth, 1.0f));
 

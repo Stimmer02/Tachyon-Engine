@@ -43,6 +43,10 @@ public:
     /// @return Sprite height
     uint32_t GetHeight();
 
+    /// @brief Method returns name of sprite
+    /// @return Texture buffer name
+    uint32_t GetTexture();
+
     /// @brief Method returns sprite cheksum.
     /// @return Sprite checksum
     uint32_t GetChecksum();

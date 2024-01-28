@@ -1,7 +1,6 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <stdint.h>
 #include "Color.h"
 
 struct Image {

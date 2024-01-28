@@ -2,66 +2,36 @@
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
 #include <filesystem>
 
+#include "Sprite.h"
+
 GLFWwindow* initializeGLFW(uint height, uint width);
 cl::Program compileCopyKernel(cl::Context context, cl::Device default_device);
 
 void processInput(GLFWwindow *window);
 void glfwErrorCallback(int error, const char* description);
 
-uint localXsize = 16;
-uint localYsize = 16;
-int width = 1024, height = 1024;
-bool isPaused = true;
 
-GLuint PBO;
-GLuint texture;
-GLuint fboId;
+bool isPaused = true;
 
 IPhysicsProcessor* physicsProcessor;
 
-
-
 int main(){
+
+    const int width = 512;
+    const int height = 512;
+
+    const int texture_width = 512;
+    const int texture_height = 512;
 
     //Initialize GLFW
 
     GLFWwindow* window = initializeGLFW(height, width);
 
-    if (!window){
-        glfwTerminate();
-        return EXIT_FAILURE;
-    }
-    //Initialize glew
+    //Create texutre
 
-    if(glewInit() != GLEW_OK){
-        glfwDestroyWindow(window);
-        glfwTerminate();
-        return EXIT_FAILURE;
-    }
+    Color pixels[texture_width * texture_height] = {0};
 
-    //Create PBO and texutres
-
-    glGenBuffers(1, &PBO);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, PBO);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, sizeof(color)*width*height, NULL, GL_STATIC_DRAW);
-
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-
-    glGenFramebuffers(1, &fboId);
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, fboId);
-    glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
-
-    GLenum status = glCheckFramebufferStatus(GL_READ_FRAMEBUFFER);
-    if (status != GL_FRAMEBUFFER_COMPLETE) {
-        fprintf(stderr, "Framebuffer is not complete\n");
-        return -1;
-    }
-
-    // glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
+    Sprite * texture = Sprite::Create(pixels, texture_width, texture_height);
 
     //Initialize PhysicsProcessor
     engineConfig config;
@@ -71,11 +41,8 @@ int main(){
     config.simulationHeight = height;
     config.simulationWidth = width;
 
-    std::filesystem::path workingPath = std::filesystem::current_path();
-    std::printf("Running in direcory: %s\n", workingPath.c_str());
-
     PhysicsProcessorBuilder PBB;
-    physicsProcessor = PBB.build("./engine_kernel_fragments", "./engine_structs", PBO, config, 0, 0);
+    physicsProcessor = PBB.build("./engine_kernel_fragments", "./engine_structs", texture->GetTexture(), config, 0, 0);
     if (physicsProcessor == nullptr){
         std::printf("Something went wrong...\n");
         return 1;
@@ -94,6 +61,8 @@ int main(){
 
     std::printf("play: 2; pause: 1\n");
     if (isPaused){
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
         physicsProcessor->generateFrame();
         std::printf("simulation paused\n");
     }
@@ -105,6 +74,7 @@ int main(){
         processInput(window);
 
         if (!isPaused){
+            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
 
@@ -119,12 +89,21 @@ int main(){
             frames++;
 
             physicsProcessor->generateFrame();
+
+            texture->Load();
+
+            glBegin(GL_QUADS);
+            glTexCoord2i(0, 0); glVertex2f(0, 0);
+            glTexCoord2i(1, 0); glVertex2f(width, 0);
+            glTexCoord2i(1, 1); glVertex2f(width, height);
+            glTexCoord2i(0, 1); glVertex2f(0, height);
+            glEnd();
+
+            texture->UnLoad();
+
+            glfwSwapBuffers(window);
         }
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-        glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-
-        glfwSwapBuffers(window);
         glfwPollEvents();
 
         error = glGetError();
@@ -137,11 +116,7 @@ int main(){
 
     delete physicsProcessor;
 
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    glDeleteBuffers(1, &PBO);
-    glDeleteTextures(1, &texture);
-    glDeleteFramebuffers(1, &fboId);
+    delete texture;
 
     glfwDestroyWindow(window);
     glfwTerminate();
@@ -155,10 +130,16 @@ GLFWwindow* initializeGLFW(uint width, uint height){
         return nullptr;
     }
     glfwSetErrorCallback(glfwErrorCallback);
-    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GL_FALSE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+
+    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
     GLFWwindow* window = glfwCreateWindow(width, height, "test", NULL, NULL);
+
     if (!window){
         std::printf("Failed to create GLFW window!\n");
         glfwTerminate();
@@ -166,9 +147,19 @@ GLFWwindow* initializeGLFW(uint width, uint height){
     }
 
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
+    glLoadIdentity();
     glOrtho(0, width, 0, height, -1.0f, 1.0f);
     glViewport(0, 0, width, height);
-    glfwSwapInterval(1);
+
+    //Initialize glew
+
+    if(glewInit() != GLEW_OK){
+        glfwDestroyWindow(window);
+        glfwTerminate();
+        return nullptr;
+    }
 
     return window;
 }

@@ -7,7 +7,7 @@
 #endif
 
 // Initializing GPU memory and allocating GPU.
-void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
+void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, uint32_t texture, struct engineConfig config, cl::Device device){
     // Setting class variables.
     this->context = openCLContext;
     this->engine = engine;
@@ -19,10 +19,14 @@ void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel 
 
     // Creating an OpenCL memory object associated with OpenGL PBO (Pixel Buffer Object).
     cl_int error;
-    this->pbo_mem = clCreateFromGLBuffer(context(), CL_MEM_WRITE_ONLY, PBO, &error);
-    this->pbo_buff = cl::Buffer(pbo_mem);
+    this->pbo_mem = clCreateFromGLTexture2D(context(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, texture, &error);
 
-    // Acquiring OpenGL objects by OpenCL. - Fallback exclusive
+    if(error != CL_SUCCESS){
+        fprintf(stderr, "Sharing failed!\n");
+        return ;
+    }
+
+    fprintf(stdout, "Successfully shared!\n");
     clEnqueueAcquireGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
 }
 
@@ -54,9 +58,8 @@ std::string PhysicsProcessor::structuresAsString(){
         "     __global struct substance* substances;"
         "};"
         "struct __attribute__ ((aligned)) engineResources{"
-        "     __global struct substanceTable* substanceTable;"
-        "     __global struct chunk* worldMap;"
-        "     __global struct color* PBO;"
+        "     __global struct substanceTable * substanceTable;"
+        "     __global struct chunk * worldMap;"
         "};"
         "struct __attribute__ ((aligned)) engineConfig{"
         "    uint simulationWidth;"
@@ -84,10 +87,9 @@ std::string PhysicsProcessor::kernelCodeAsString(){
         "    void kernel set_substanceTable(global struct substanceTable* table, global struct substance* substances){"
         "        table->substances = substances;"
         "    }"
-        "    void kernel set_engineResources(global struct engineResources* resources, global struct substanceTable* table, global struct chunk* matrix, global struct color* PBO){"
+        "    void kernel set_engineResources(global struct engineResources * resources, global struct substanceTable* table, global struct chunk* matrix){"
         "       resources->substanceTable = table;"
         "       resources->worldMap = matrix;"
-        "       resources->PBO = PBO;"
         "    }"
         "    void kernel sum_voxel(global struct engineResources* resources, global uint* workArr, uint size, global uint* returnValue){"
         "        private uint id = get_global_id(0);"
@@ -193,6 +195,7 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
     tempSubstanceTable[4].color.G = 148;
     tempSubstanceTable[4].color.B = 255;
 
+
     cl::Buffer* substances = new cl::Buffer(openCLContext, CL_MEM_READ_WRITE, sizeof(struct substance) * substanceCount);
     queue.enqueueWriteBuffer(*substances, true, 0, sizeof(struct substance) * substanceCount, tempSubstanceTable);
     this->allocatedGPUMemory.push_back(substances);
@@ -223,22 +226,21 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
     cl::Kernel set_chunkKernel(program, "set_chunk");
     set_chunkKernel.setArg(0, *chunk);
     set_chunkKernel.setArg(1, *voxels);
-    queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
+    queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1));
 
     cl::Kernel set_substanceTableKernel(program, "set_substanceTable");
     set_substanceTableKernel.setArg(0, *substanceTable);
     set_substanceTableKernel.setArg(1, *substances);
-    queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
+    queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1));
 
     cl::Kernel set_engineResourcesKernel(program, "set_engineResources");
     set_engineResourcesKernel.setArg(0, this->engineResources);
     set_engineResourcesKernel.setArg(1, *substanceTable);
     set_engineResourcesKernel.setArg(2, *chunk);
-    set_engineResourcesKernel.setArg(3, this->pbo_buff);
 
-    queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
-    queue.enqueueNDRangeKernel(set_substanceTableKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
-    queue.enqueueNDRangeKernel(set_engineResourcesKernel, cl::NullRange, cl::NDRange(1, 1, 1), cl::NDRange(1, 1, 1));
+    queue.enqueueNDRangeKernel(set_chunkKernel, cl::NullRange, cl::NDRange(1, 1, 1));
+    queue.enqueueNDRangeKernel(set_substanceTableKernel, cl::NullRange, cl::NDRange(1, 1, 1));
+    queue.enqueueNDRangeKernel(set_engineResourcesKernel, cl::NullRange, cl::NDRange(1, 1, 1));
     queue.finish();
 
     //Initializing the spawn_voxel_in_area kernel.
@@ -259,7 +261,6 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
     sum_voxelKernel.setArg(2, config.simulationHeight * config.simulationWidth);
     sum_voxelKernel.setArg(3, this->sumReturnValue);
 
-
     // Freeing temporary memory.
     delete[] tempSubstanceTable;
 }
@@ -268,6 +269,7 @@ void PhysicsProcessor::constructorMain(cl::Context openCLContext, struct engineC
 void PhysicsProcessor::configureMainKernel(){
     this->engine.setArg(0, this->eConfig);
     this->engine.setArg(1, this->engineResources);
+    this->engine.setArg(2, sizeof(cl_mem), &pbo_mem);
 }
 
 PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
@@ -283,13 +285,14 @@ PhysicsProcessor::PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine,
 
 PhysicsProcessor::~PhysicsProcessor(){
     clEnqueueReleaseGLObjects(queue(), 1, &pbo_mem, 0, NULL, NULL);
+    clReleaseMemObject(pbo_mem);
     for (cl::Buffer* i :allocatedGPUMemory){
         delete i;
     }
 }
 
 void PhysicsProcessor::generateFrame(){
-    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight), cl::NDRange(16, 16));
+    queue.enqueueNDRangeKernel(engine, cl::NullRange, cl::NDRange(config.simulationWidth, config.simulationHeight));
     queue.finish();
 }
 
