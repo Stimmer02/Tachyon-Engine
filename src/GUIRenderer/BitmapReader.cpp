@@ -80,11 +80,15 @@ Image BitmapReader::ReadFile(const char * filename){
     std::fstream input;
     input.open(filename, std::ios::in | std::ios::binary);
 
-    if(!input){
+    Image image;
+
+    if( input.is_open() == false ){
         fprintf(stderr, "File can't be opened.\n");
 
+        image.pixels = nullptr;
+
         // Return empty image
-        return Image();
+        return image;
     }
 
     // Determine file length
@@ -112,7 +116,7 @@ Image BitmapReader::ReadFile(const char * filename){
         delete[] raw_data;
     }
 
-    Color *pixels = new Color[pixel_count];
+    Color * pixels = new Color[pixel_count];
 
     // Read data
     for(uint32_t i = 0; i < pixel_count; i++){
@@ -141,7 +145,6 @@ Image BitmapReader::ReadFile(const char * filename){
 
     delete[] raw_data;
 
-    Image image;
     image.width = infoHeader.width;
     image.height = infoHeader.height;
     image.pixels = pixels;

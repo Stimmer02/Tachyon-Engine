@@ -45,7 +45,6 @@ int main(){
 
     app.AddComponentToScene(button);
 
-
     while( !app.ShouldClose() ){
 
         app.Update();
