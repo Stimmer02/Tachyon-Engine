@@ -7,6 +7,11 @@ UIManager::UIManager(const int &windowWidth, const int &windowHeight, const char
         return;
     }
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
     glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
@@ -21,17 +26,14 @@ UIManager::UIManager(const int &windowWidth, const int &windowHeight, const char
     glfwMakeContextCurrent(window);
     glfwSwapInterval(enableVSync);
 
-	glLoadIdentity();
-    glOrtho(0, windowWidth, 0, windowHeight, -1.0f, 1.0f);
-    glViewport(0, 0, windowWidth, windowHeight);
+    glViewport(0, windowWidth, 0, windowHeight);
 
-	if (glewInit() != GLEW_OK) {
+    if (glewInit() != GLEW_OK) {
         glfwDestroyWindow(window);
         glfwTerminate();
         fprintf(stderr, "Failed to initialize GLEW\n");
         return;
     }
-
 }
 
 void UIManager::AssignEventHandlingService(IEventHandlingService * _eventHandling){

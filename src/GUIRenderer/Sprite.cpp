@@ -63,7 +63,7 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
 
     // Allocate texture buffer for pixels
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
     // Create PBO transfer pipe
     glGenBuffers(1, &pixelBuffer);
