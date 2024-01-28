@@ -26,7 +26,7 @@ UIManager::UIManager(const int &windowWidth, const int &windowHeight, const char
     glfwMakeContextCurrent(window);
     glfwSwapInterval(enableVSync);
 
-    glViewport(0, windowWidth, 0, windowHeight);
+    //glViewport(0, windowWidth, 0, windowHeight);
 
     if (glewInit() != GLEW_OK) {
         glfwDestroyWindow(window);
@@ -43,37 +43,26 @@ void UIManager::CompileShaders(){
 
     const char* vertexShaderSource = R"(
             #version 330 core
-            layout (location = 0) in vec2 aPos;
-            layout (location = 1) in vec2 aTexCoord;
-
-            out vec2 TexCoord;
+            in vec3 pos;
 
             void main() {
-                gl_Position = vec4(aPos, 0.0, 1.0);
-                TexCoord = aTexCoord;
+                gl_Position = vec4(pos, 1);
             }
         )";
 
     const char* fragmentShaderSource = R"(
             #version 330 core
-            in vec2 TexCoord;
-            out vec4 FragColor;
+            out vec4 color;
 
-            uniform sampler2D ourTexture;
-
-            void main() {
-                FragColor = texture(ourTexture, TexCoord);
+            void main(){
+                color = vec4(1, 0, 0, 1);
             }
         )";
 
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-
     glCompileShader(vertexShader);
-    glCompileShader(fragmentShader);
 
     GLint success;
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
@@ -82,6 +71,11 @@ void UIManager::CompileShaders(){
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
         fprintf(stderr, "Vertex shader compilation failed:\n%s\n", infoLog);
     }
+
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
 
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if (!success) {
@@ -153,12 +147,12 @@ void UIManager::Update(){
 
     glUseProgram(shaderProgram);
 
-    glUniform1i(glGetUniformLocation(shaderProgram, "ourTexture"), 0);
-
-    glActiveTexture(GL_TEXTURE0);
+    glUniform3f(glGetUniformLocation(shaderProgram, "pos"), 0.0f, 0.0f, 0.0f);
 
 	HandleEvents();
 	Render();
+
+    glUseProgram(0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();

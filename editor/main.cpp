@@ -34,6 +34,8 @@ int main(){
 
     Sprite * buttonImg = Sprite::Create(temp.pixels, temp.width, temp.height);
 
+    delete[] temp.pixels;
+
     if( buttonImg != nullptr){
 
         Component * button = builder
@@ -54,7 +56,7 @@ int main(){
 
     }
 
-
+    delete buttonImg;
 
     return 0;
 }
