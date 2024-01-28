@@ -6,8 +6,8 @@ Sprite* Sprite::Create(const Color * pixels, const uint32_t& width, const uint32
 
     Sprite *sprite = NULL;
 
-    if(!pixels)
-        return NULL;
+    if( pixels == nullptr)
+        return nullptr;
 
     sprite = new Sprite();
 
@@ -24,8 +24,8 @@ Sprite* Sprite::Create(const Color * pixels, const uint32_t& width, const uint32
 Sprite* Sprite::Create(const Image * image){
     Sprite *sprite = NULL;
 
-    if(!image->pixels)
-        return NULL;
+    if( image->pixels == nullptr )
+        return nullptr;
 
     sprite = new Sprite();
 
@@ -42,7 +42,7 @@ Sprite* Sprite::Create(const Image * image){
 void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height){
 
     // Destroy old texture
-    this->Destroy();
+    Destroy();
 
     // Calculate new texture checksum
     CalculateChecksum(pixels, width, height);
@@ -65,12 +65,12 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBuffer);
 
     // Allocate storage for PBO
-    glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * sizeof(Color), nullptr, GL_STREAM_DRAW);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * sizeof(Color), nullptr, GL_STATIC_DRAW);
 
     // Transfer data
     GLubyte* ptr = (GLubyte*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
 
-    if (ptr) {
+    if ( ptr != nullptr ) {
         // Transfer data from host to device
         memcpy(ptr, pixels, width * height * sizeof(Color));
 
@@ -88,11 +88,11 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
     // Set texture filtering mode
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // Generate mipmaps
-    glGenerateMipmap(GL_TEXTURE_2D);
+    //glGenerateMipmap(GL_TEXTURE_2D);
 
     // Unselect current texture
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -100,6 +100,9 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
 
 
 GLuint Sprite::GetPixelBuffer(){
+
+    // Unbind PBO from other texture
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     // Bind PBO to current texture
     glBindTexture(GL_TEXTURE_2D, textureID);

@@ -34,7 +34,9 @@ int main(){
 
     Sprite * buttonImg = Sprite::Create(&temp);
 
-    Component * button = builder
+    if( buttonImg != nullptr){
+
+        Component * button = builder
                         .SetComponentType(BUTTON)
                         ->SetPosition(width/2.0f, height/2.0f)
                         ->SetDimensions(100.0f, 50.0f)
@@ -43,7 +45,8 @@ int main(){
                         ->SetColor((Color){27, 54, 56})
                         ->Build();
 
-    app.AddComponentToScene(button);
+        app.AddComponentToScene(button);
+    }
 
     while( !app.ShouldClose() ){
 
