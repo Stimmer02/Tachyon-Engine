@@ -30,7 +30,7 @@ int main(){
         counter++;
     };
 
-    Image temp = BitmapReader::ReadFile("../../resources/sprites/charmap-oldschool_white.bmp");
+    Image temp = BitmapReader::ReadFile("resources/sprites/charmap-oldschool_white.bmp");
 
     ImageEditor ie;
 
