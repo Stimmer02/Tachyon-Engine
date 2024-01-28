@@ -32,7 +32,7 @@ int main(){
 
     Image temp = BitmapReader::ReadFile("resources/sprites/button.bmp");
 
-    Sprite * buttonImg = Sprite::Create(&temp);
+    Sprite * buttonImg = Sprite::Create(temp.pixels, temp.width, temp.height);
 
     if( buttonImg != nullptr){
 

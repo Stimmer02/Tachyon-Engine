@@ -54,8 +54,13 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     glBindTexture(GL_TEXTURE_2D, textureID);
 
     // Set texture wrapping mode
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+    glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
+    glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
 
     // Allocate texture buffer for pixels
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
@@ -66,6 +71,8 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
 
     // Allocate storage for PBO
     glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * sizeof(Color), nullptr, GL_STATIC_DRAW);
+
+    fprintf(stdout, "Image size : %d x %d\n", width, height);
 
     // Transfer data
     GLubyte* ptr = (GLubyte*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
@@ -79,7 +86,7 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     }
 
     // Bind texture buffer
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, textureID);
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pixelBuffer);
 
     // Update old texture with new data
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
@@ -92,7 +99,7 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // Generate mipmaps
-    //glGenerateMipmap(GL_TEXTURE_2D);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
     // Unselect current texture
     glBindTexture(GL_TEXTURE_2D, 0);
