@@ -4,6 +4,3 @@ Canvas::Canvas(const int& x, const int& y, const int& width, const int& height) 
 
 }
 
-void Canvas::Render(){
-    //TODO
-}

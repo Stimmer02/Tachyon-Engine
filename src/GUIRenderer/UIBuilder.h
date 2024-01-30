@@ -12,6 +12,7 @@
 #include "Text.h"
 #include "IEventHandlingService.h"
 #include "InteractiveComponent.h"
+#include "BitmapReader.h"
 //#include <TextAssembler.h> //TODO
 
 
@@ -38,6 +39,7 @@ public:
 	UIBuilder* SetPosition(const float & _x, const float & _y);
 	UIBuilder* SetColor(const Color & _color);
 	UIBuilder* SetTexture(const Sprite * _sprite);
+	UIBuilder* SetTexture(const char * _sprite_path);
 	UIBuilder* SetText(char * _text, const int & _textLen);
 	// UIBuilder* SetText(const std::string &_text); //TODO
 	Component* Build();

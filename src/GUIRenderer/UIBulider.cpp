@@ -26,6 +26,14 @@ UIBuilder* UIBuilder::SetTexture(const Sprite * _sprite){
 	return this;
 }
 
+UIBuilder * UIBuilder::SetTexture(const char * _sprite_path){
+	Image temp = BitmapReader::ReadFile(_sprite_path);
+    Sprite * sprite = Sprite::Create(&temp);
+	delete[] temp.pixels;
+	this->sprite = sprite;
+	return this;
+}
+
 
 UIBuilder* UIBuilder::SetComponentType(const ComponentType &_type){
 	type = _type;

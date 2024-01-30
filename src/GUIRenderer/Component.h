@@ -39,11 +39,13 @@ protected:
 public:
 	Component(const float &_x, const float &_y, const float &_width, const float &_height);
 
+	~Component();
+
 	bool IsInBound(const float &_x,const float &_y);
 
 	void SetColor(const Color &_color);
 
-	virtual void Render() = 0;
+	virtual void Render();
 
 	void SetTexture( const Sprite * _sprite);
 

@@ -29,12 +29,11 @@ void EventManager::Unsubscribe(const EventType & event, const IEventListener * l
 
     for (auto it = eventListeners.begin(); it != eventListeners.end(); ++it) {
         if (*it == listener) {
-            it = eventListeners.erase(it);  // Use the iterator to erase the element
+            it = eventListeners.erase(it);
             return;
         }
     }
 
-    fprintf(stderr, "Listener is not attached to this event system.\n");
 }
 
 void EventManager::Publish(const EventType & event, const IEventListener * listener){
@@ -52,7 +51,6 @@ void EventManager::Publish(const EventType & event, const IEventListener * liste
         }
     }
 
-    fprintf(stderr, "Listener is not attached to this event system.\n");
 }
 
 void EventManager::Publish(const EventType & event){

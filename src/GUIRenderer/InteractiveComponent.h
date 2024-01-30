@@ -31,8 +31,8 @@ public:
     /// @brief Returns GUID of current object
     uint32_t GetGUID();
 
-    /// @brief Renders current component on screen
-    virtual void Render() = 0;
+    // /// @brief Renders current component on screen
+    // virtual void Render() = 0;
 };
 
 
