@@ -46,6 +46,12 @@ void Component::SetTexture( const Sprite * _sprite){
 	sprite = (Sprite*)_sprite;;
 }
 
+void Component::SetPosition(const float & _x, const float & _y){
+	this->x = _x;
+	this->y = _y;
+}
+
+
 Sprite Component::GetTexture(){
 	return *sprite;
 }

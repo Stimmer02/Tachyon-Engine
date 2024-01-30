@@ -5,6 +5,7 @@
 #include "EventManager.h"
 #include "ImageEditor.h"
 #include <unistd.h>
+#include <cmath>
 
 int main(){
 
@@ -26,12 +27,13 @@ int main(){
 
     Image image = BitmapReader::ReadFile("resources/sprites/charset.bmp");
     std::vector<Image> letters = ImageEditor::Split(image, 7, 9);
+    std::vector<Component *> handle;
     delete[] image.pixels;
     assembler.CreateCharset(letters.data(), letters.size());
 
     bool done = false;
 
-    auto counterFunc = [&app, &assembler, &done, &builder, aspectRatio, height](){
+    auto counterFunc = [&app, &assembler, &done, &builder, &handle, aspectRatio, height](){
         if( done == true )
             return;
 
@@ -49,6 +51,7 @@ int main(){
                                 ->Build();
 
             app.AddComponentToScene(letter);
+            handle.emplace_back(letter);
         }
 
         done = true;
@@ -87,11 +90,25 @@ int main(){
 
     app.AddComponentToScene(canvas);
 
+    float angle = 0.0f;
 
     while( !app.ShouldClose() ){
 
         app.Update();
 
+        float offset = 0.0f;
+
+        for( auto comp : handle){
+            float x = comp->getX();
+
+            float y = sin(angle * 3.1415926535f/180.0f + offset)*5 + height-20.0f;
+
+            comp->SetPosition(x, y);
+
+            offset+=45.0f;
+        }
+
+        angle = (angle<360.0f)*(angle+5.0f);
     }
 
     return 0;

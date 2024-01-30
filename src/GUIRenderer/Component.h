@@ -49,6 +49,8 @@ public:
 
 	void SetTexture( const Sprite * _sprite);
 
+	void SetPosition(const float & _x, const float & _y);
+
 	Sprite GetTexture();
 
 	float getWidth();
