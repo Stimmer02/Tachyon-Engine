@@ -97,6 +97,10 @@ void UIManager::Render(){
 	scene.Render();
 }
 
+void UIManager::Close(){
+    glfwSetWindowShouldClose(window, true);
+}
+
 bool UIManager::ShouldClose(){
     return glfwWindowShouldClose(window);
 }

@@ -56,6 +56,8 @@ public:
 
 	void Update();
 
+	void Close();
+
 	bool ShouldClose();
 
 	~UIManager();

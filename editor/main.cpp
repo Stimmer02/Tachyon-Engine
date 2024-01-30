@@ -4,7 +4,7 @@
 #include "UIBuilder.h"
 #include "EventManager.h"
 #include "ImageEditor.h"
-#include <algorithm>
+#include <unistd.h>
 
 int main(){
 
@@ -22,22 +22,61 @@ int main(){
     UIBuilder builder;
     builder.AssignEventManager( (IEventHandlingService*)&eventSystem );
 
-    uint32_t counter = 0;
+    TextAssembler assembler;
 
-    auto Hello = [&counter](){
-        fprintf(stdout, "Hello World : %d\n", counter);
-        counter++;
+    Image image = BitmapReader::ReadFile("resources/sprites/charset.bmp");
+    std::vector<Image> letters = ImageEditor::Split(image, 7, 9);
+    delete[] image.pixels;
+    assembler.CreateCharset(letters.data(), letters.size());
+
+    bool done = false;
+
+    auto counterFunc = [&app, &assembler, &done, &builder, aspectRatio, height](){
+        if( done == true )
+            return;
+
+        const char * text = "> What should i do ?";
+
+        std::vector<Sprite *> textSprites = assembler.BuildText(text);
+
+        for(uint32_t i = 0; i< textSprites.size(); ++i){
+
+            Component * letter = builder
+                                .SetComponentType(CANVAS)
+                                ->SetPosition(20.0f + i * 15, height-20.0f)
+                                ->SetDimensions(aspectRatio * 10.0f, aspectRatio * 20.0f)
+                                ->SetTexture(textSprites[i])
+                                ->Build();
+
+            app.AddComponentToScene(letter);
+        }
+
+        done = true;
     };
 
-    Component * button = builder
+    auto exitFunc = [&app](){
+        app.Close();
+    };
+
+    Component * load = builder
                         .SetComponentType(BUTTON)
                         ->SetPosition(width/2.0f, height/2.0f)
                         ->SetDimensions(aspectRatio * 100.0f, aspectRatio * 50.0f)
-                        ->SetTexture("resources/sprites/button.bmp")
-                        ->AssignEvent(ONCLICK, Hello)
+                        ->SetTexture("resources/sprites/button_load.bmp")
+                        ->AssignEvent(ONCLICK, counterFunc)
                         ->Build();
 
-        app.AddComponentToScene(button);
+     app.AddComponentToScene(load);
+
+     Component * exit = builder
+                        .SetComponentType(BUTTON)
+                        ->SetPosition(width/2.0f, height/2.0f - aspectRatio * 50.0f - 30.0f)
+                        ->SetDimensions(aspectRatio * 100.0f, aspectRatio * 50.0f)
+                        ->SetTexture("resources/sprites/button_exit.bmp")
+                        ->AssignEvent(ONCLICK, exitFunc)
+                        ->Build();
+
+     app.AddComponentToScene(exit);
 
     Component * canvas = builder
                         .SetComponentType(CANVAS)
@@ -47,6 +86,7 @@ int main(){
                         ->Build();
 
     app.AddComponentToScene(canvas);
+
 
     while( !app.ShouldClose() ){
 

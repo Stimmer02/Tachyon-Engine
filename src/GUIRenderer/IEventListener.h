@@ -11,9 +11,6 @@ public:
     /// @param event type of event
     virtual void OnEvent(const EventType& event) = 0;
 
-    /// @brief Returns GUID of current listener
-    virtual uint32_t GetGUID() = 0;
-
 };
 
 #endif

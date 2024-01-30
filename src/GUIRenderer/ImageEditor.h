@@ -1,14 +1,13 @@
 #ifndef IMAGEEDITOR_H
 #define IMAGEEDITOR_H
 
-#include "Component.h"
 #include "Image.h"
 #include <iostream>
+#include <vector>
 
 class ImageEditor{
-private:
 public:
-    Image* Split(const Image &lettersInOneImage, const uint32_t &slice_width, const uint32_t &slice_height, uint32_t &lettersArraySize);
+    static std::vector<Image> Split(const Image & image, const uint32_t & slice_width, const uint32_t & slice_height);
 };
 
 #endif

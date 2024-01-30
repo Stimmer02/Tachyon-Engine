@@ -13,7 +13,7 @@
 #include "IEventHandlingService.h"
 #include "InteractiveComponent.h"
 #include "BitmapReader.h"
-//#include <TextAssembler.h> //TODO
+#include "TextAssembler.h"
 
 
 class UIBuilder{

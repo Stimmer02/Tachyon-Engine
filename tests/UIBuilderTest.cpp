@@ -125,10 +125,10 @@ TEST(UIBuilderTests, SetTextTest1){
     //UIBuilder::SetText(() test
 
     UIBuilder uIBuilder;
-    char* str = "Bajtolina_ma_bitkota";
+    const char * str = "Bajtolina_ma_bitkota";
     int strLen = std::strlen(str);
 
-    uIBuilder.SetText(str , strLen);
+    uIBuilder.SetText((char*)str , strLen);
 
     int isEqueal = std::strcmp(str, uIBuilder.getText());
     ASSERT_EQ(isEqueal, 0);
@@ -248,10 +248,9 @@ TEST(UIBuilderTests, BuildTest3){
     ComponentType componentType;
     float width, height, x, y;
     Color color;
-    char* text;
     int textLen;
 
-    text = "Ala ma kota.";
+    const char * text = "Ala ma kota.";
     textLen = strlen(text);
     iEventHandlingService = new EventManager();
     componentType = TEXT;
@@ -275,7 +274,7 @@ TEST(UIBuilderTests, BuildTest3){
     uIBuilder.SetPosition(x, y);
     uIBuilder.SetColor(color);
     uIBuilder.SetDimensions(width, height);
-    uIBuilder.SetText(text, textLen);
+    uIBuilder.SetText((char*)text, textLen);
 
     createdComponent = uIBuilder.Build();
 
