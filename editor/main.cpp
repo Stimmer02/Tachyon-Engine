@@ -1,7 +1,10 @@
+#include "Sprite.h"
 #include "UIManager.h"
 #include "MouseInputService.h"
 #include "UIBuilder.h"
 #include "EventManager.h"
+#include "ImageEditor.h"
+#include <algorithm>
 
 int main(){
 
@@ -34,7 +37,7 @@ int main(){
                         ->AssignEvent(ONCLICK, Hello)
                         ->Build();
 
-    app.AddComponentToScene(button);
+        app.AddComponentToScene(button);
 
     Component * canvas = builder
                         .SetComponentType(CANVAS)
