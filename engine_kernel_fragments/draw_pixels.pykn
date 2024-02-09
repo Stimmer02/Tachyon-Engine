@@ -3,5 +3,5 @@ draw_pixels
     uchar tempID;
     tempID = resources->worldMap->voxels[global_ID].substanceID;
     struct color tempColor = resources->substanceTable->substances[tempID].color;
-    write_imagef(texture, (int2)(IDX, IDY), (float4)(tempColor.R, tempColor.G, IDX/(float)config->simulationWidth, 1.0f));
+    write_imagef(texture, (int2)(IDX, IDY), (float4)(tempColor.R, tempColor.G, tempColor.B, 1.0f));
 

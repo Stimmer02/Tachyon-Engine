@@ -321,6 +321,6 @@ void PhysicsProcessor::spawnVoxelInArea(uint x, uint y, uint width, uint height,
     spawn_voxel_in_areaKernel.setArg(2, substanceID);
     spawn_voxel_in_areaKernel.setArg(3, this->engineResources);
     spawn_voxel_in_areaKernel.setArg(4, this->eConfig);
-    queue.enqueueNDRangeKernel(spawn_voxel_in_areaKernel, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(8, 8));
+    queue.enqueueNDRangeKernel(spawn_voxel_in_areaKernel, cl::NullRange, cl::NDRange(width, height));
     queue.finish();
 }
