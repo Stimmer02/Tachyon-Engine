@@ -1,4 +1,9 @@
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
+#include "PhysicsProcessor/Scenatrios/AScenario.h"
+#include "PhysicsProcessor/Scenatrios/Scenario_WaterMaze.h"
+#include "PhysicsProcessor/Scenatrios/Scenario_DifferentSubstances.h"
+#include "PhysicsProcessor/Scenatrios/Scenario_Block.h"
+#include "PhysicsProcessor/Scenatrios/Scenario_NormalDistribution.h"
 #include <filesystem>
 
 GLFWwindow* initializeGLFW(uint height, uint width);
@@ -73,13 +78,9 @@ int main(){
 
 
     //Prepare simulation
-    physicsProcessor->spawnVoxelInArea(0, 0, 8, config.simulationWidth, 1);
-    physicsProcessor->spawnVoxelInArea(0, 0, config.simulationHeight, 8, 1);
-    physicsProcessor->spawnVoxelInArea(config.simulationHeight-8, 0, 8, config.simulationWidth, 1);
-    physicsProcessor->spawnVoxelInArea(0, config.simulationWidth-8, config.simulationHeight, 8, 1);
+    AScenario* scenario = new Scenario_Block(physicsProcessor, config.simulationWidth, config.simulationHeight, 4);
+    scenario->init();
 
-    physicsProcessor->spawnVoxelInArea(0, config.simulationWidth/3, config.simulationHeight, 8, 1);
-    physicsProcessor->spawnVoxelInArea(0, config.simulationWidth/3*2, config.simulationHeight, 8, 1);
 
 
     std::printf("play: 2; pause: 1\n");
@@ -96,9 +97,7 @@ int main(){
         processInput(window);
 
         if (pause == false){
-            physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, config.simulationHeight>>1, 8, 8, 2);
-            physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) - config.simulationHeight/3, 8, 8, 3);
-            physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) + config.simulationHeight/3, 8, 8, 4);
+            scenario->repeat();
             if (frames % 10 == 0){
                 uint voxelCount = physicsProcessor->countVoxels();
                 std::printf("\33[2\rKF: %5d; V: %d", frames, voxelCount);
@@ -106,6 +105,7 @@ int main(){
             }
             frames++;
 
+            physicsProcessor->generateFrame();
             physicsProcessor->generateFrame();
 
             glClear(GL_COLOR_BUFFER_BIT);
