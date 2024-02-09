@@ -1,6 +1,7 @@
 #define GL_SILENCE_DEPRECATION
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
 #include <filesystem>
+#include "UIManager.h"
 
 #include "Sprite.h"
 
@@ -25,7 +26,7 @@ int main(){
 
     //Initialize GLFW
 
-    GLFWwindow * window = initializeGLFW(height, width);
+    UIManager manager(width, height, "Engine", 0);
 
     //Create texutre
 
@@ -70,8 +71,7 @@ int main(){
 
     GLuint error = 0;
     uint frames = 0;
-    while (!glfwWindowShouldClose(window)){
-        processInput(window);
+    while (!manager.ShouldClose()){
 
         if (!isPaused){
             glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -101,7 +101,7 @@ int main(){
 
             texture->UnLoad();
 
-            glfwSwapBuffers(window);
+            manager.Update();
         }
 
         glfwPollEvents();
@@ -109,7 +109,6 @@ int main(){
         error = glGetError();
         if (error != GL_NO_ERROR) {
             fprintf(stderr, "OpenGL error: %d\n", error);
-            break;
         }
     }
     std::printf("\n");
@@ -117,9 +116,6 @@ int main(){
     delete physicsProcessor;
 
     delete texture;
-
-    glfwDestroyWindow(window);
-    glfwTerminate();
 
     return EXIT_SUCCESS;
 }

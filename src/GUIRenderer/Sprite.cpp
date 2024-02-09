@@ -53,9 +53,9 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
     // Select current texture
     glBindTexture(GL_TEXTURE_2D, textureID);
 
-    // Set texture wrapping mode
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    // Set texture filtering mode
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // Allocate texture buffer for pixels
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
@@ -86,10 +86,6 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
 
     // Unbind texture buffer
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-
-    // Set texture filtering mode
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // Generate mipmaps
     glGenerateMipmap(GL_TEXTURE_2D);
