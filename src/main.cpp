@@ -1,4 +1,5 @@
 #define GL_SILENCE_DEPRECATION
+#define CL_HPP_TARGET_OPENCL_VERSION 200
 #include "PhysicsProcessor/PhysicsProcessorBuilder.h"
 #include <filesystem>
 #include "UIManager.h"
@@ -26,7 +27,7 @@ int main(){
 
     //Initialize GLFW
 
-    UIManager manager(width, height, "Engine", 0);
+    GLFWwindow * window = initializeGLFW(width, height);
 
     //Create texutre
 
@@ -62,7 +63,8 @@ int main(){
 
     std::printf("play: 2; pause: 1\n");
     if (isPaused){
-        manager.Update();
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
         physicsProcessor->generateFrame();
         std::printf("simulation paused\n");
     }
@@ -70,11 +72,14 @@ int main(){
 
     GLuint error = 0;
     uint frames = 0;
-    while (!manager.ShouldClose()){
+    while (!glfwWindowShouldClose(window)){
+
+        processInput(window);
 
         if (!isPaused){
 
-            manager.Update();
+            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
 
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, config.simulationHeight>>1, 8, 8, 2);
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) - config.simulationHeight/3, 8, 8, 3);
@@ -99,6 +104,15 @@ int main(){
 
             texture->UnLoad();
 
+            glfwSwapBuffers(window);
+        }
+
+        glfwPollEvents();
+
+        error = glGetError();
+        if (error != GL_NO_ERROR) {
+            fprintf(stderr, "OpenGL error: %d\n", error);
+            break;
         }
     }
     std::printf("\n");
@@ -106,6 +120,9 @@ int main(){
     delete physicsProcessor;
 
     delete texture;
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
 
     return EXIT_SUCCESS;
 }
