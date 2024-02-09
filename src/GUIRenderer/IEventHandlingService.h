@@ -5,19 +5,19 @@
 
 class IEventHandlingService{
 public:
-    
+
     /// @brief Function attach listener to listeners collection
     /// @param listener
-    virtual void Subscribe(const EventType & event, IEventListener * listener) = 0;
+    virtual void Subscribe(const EventType & event, const IEventListener * listener) = 0;
 
     /// @brief Function removes listener from listeners collection
     /// @param listener
-    virtual void Unsubscribe(const EventType & event,IEventListener * listener) = 0;
+    virtual void Unsubscribe(const EventType & event, const IEventListener * listener) = 0;
 
-    /// @brief Function invokes specified event on concrete listener 
+    /// @brief Function invokes specified event on concrete listener
     /// @param event type of event
     /// @param listener pointer to concrete listener
-    virtual void Publish(const EventType & event, IEventListener * listener) = 0;
+    virtual void Publish(const EventType & event, const IEventListener * listener) = 0;
 
     /// @brief Function calls all assigned members of specified event
     /// @param event type of event

@@ -2,9 +2,6 @@
 
 
 Button::Button(const int& x, const int& y, const int& width, const int& height) : InteractiveComponent(x,y,width,height){
-
+    this->state = RELEASED;
 }
 
-void Button::Render(){
-    //TODO
-}

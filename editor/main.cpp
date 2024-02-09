@@ -1,120 +1,115 @@
-#define CL_HPP_TARGET_OPENCL_VERSION 200
-
 #include "Sprite.h"
-#include "BitmapReader.h"
-
-#include <stdio.h>
+#include "UIManager.h"
+#include "MouseInputService.h"
+#include "UIBuilder.h"
+#include "EventManager.h"
+#include "ImageEditor.h"
+#include <unistd.h>
 #include <cmath>
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-#ifdef __APPLE__
-
-#include <OpenGL/gl3.h>
-#include <OpenGL/OpenGL.h>
-
-#else
-
-#include <GL/glx.h>
-
-#endif
 
 int main(){
 
-    const unsigned width = 640, height = 480;
+    int width = 800, height = 600;
+    float aspectRatio = width/(float)height;
+    const char * title = "Tachyon Engine";
 
-    if (!glfwInit()){
-        printf("Failed to initialize GLFW!\n");
-        return -1;
-    }
+    UIManager app(width, height, title, true);
+    MouseInputService mouse;
+    EventManager eventSystem;
 
-    GLFWwindow *window = glfwCreateWindow(width, height, "Editor", NULL, NULL);
+    app.AssignInputHandlingService( (IInputHandler*)&mouse );
+    app.AssignEventHandlingService( (IEventHandlingService*)&eventSystem );
 
-    if (!window){
-        glfwTerminate();
-        return -1;
-    }
+    UIBuilder builder;
+    builder.AssignEventManager( (IEventHandlingService*)&eventSystem );
 
-    glfwMakeContextCurrent(window);
+    TextAssembler assembler;
 
-    glViewport(0, 0, width, height);
-    glfwSwapInterval(1);
+    Image image = BitmapReader::ReadFile("resources/sprites/charset.bmp");
+    std::vector<Image> letters = ImageEditor::Split(image, 7, 9);
+    std::vector<Component *> handle;
+    delete[] image.pixels;
+    assembler.CreateCharset(letters.data(), letters.size());
 
-    if(glewInit() != GLEW_OK)
-        return -1;
+    bool done = false;
 
-    BitmapReader reader;
+    auto counterFunc = [&app, &assembler, &done, &builder, &handle, aspectRatio, height](){
+        if( done == true )
+            return;
 
-    Image im = reader.ReadFile("../../resources/sprites/test.bmp");
+        const char * text = "> What should i do ?";
 
-    float vertex[] ={
-        -0.5, -0.5, 0.0,
-        -0.5, 0.5, 0.0,
-        0.5, 0.5, 0.0,
-        0.5, -0.5, 0.0
+        std::vector<Sprite *> textSprites = assembler.BuildText(text);
+
+        for(uint32_t i = 0; i< textSprites.size(); ++i){
+
+            Component * letter = builder
+                                .SetComponentType(CANVAS)
+                                ->SetPosition(20.0f + i * 15, height-20.0f)
+                                ->SetDimensions(aspectRatio * 10.0f, aspectRatio * 20.0f)
+                                ->SetTexture(textSprites[i])
+                                ->Build();
+
+            app.AddComponentToScene(letter);
+            handle.emplace_back(letter);
+        }
+
+        done = true;
     };
 
-    Sprite *s = Sprite::Create(&im);
+    auto exitFunc = [&app](){
+        app.Close();
+    };
 
-    delete[] im.pixels;
+    Component * load = builder
+                        .SetComponentType(BUTTON)
+                        ->SetPosition(width/2.0f, height/2.0f)
+                        ->SetDimensions(aspectRatio * 100.0f, aspectRatio * 50.0f)
+                        ->SetTexture("resources/sprites/button_load.bmp")
+                        ->AssignEvent(ONCLICK, counterFunc)
+                        ->Build();
 
-    if(!s){
-        glfwDestroyWindow(window);
-        glfwTerminate();
+     app.AddComponentToScene(load);
 
-        return -1;
-    }
+     Component * exit = builder
+                        .SetComponentType(BUTTON)
+                        ->SetPosition(width/2.0f, height/2.0f - aspectRatio * 50.0f - 30.0f)
+                        ->SetDimensions(aspectRatio * 100.0f, aspectRatio * 50.0f)
+                        ->SetTexture("resources/sprites/button_exit.bmp")
+                        ->AssignEvent(ONCLICK, exitFunc)
+                        ->Build();
 
-    fprintf(stdout, "Sprite Checksum : 0x%08X \n", s->GetChecksum());
+     app.AddComponentToScene(exit);
+
+    Component * canvas = builder
+                        .SetComponentType(CANVAS)
+                        ->SetPosition(width/2.0f, 3*height/4.0f)
+                        ->SetDimensions(aspectRatio * 340.0f, aspectRatio * 80.0f)
+                        ->SetTexture("resources/sprites/editor_logo.bmp")
+                        ->Build();
+
+    app.AddComponentToScene(canvas);
 
     float angle = 0.0f;
-    float diff = 2 * M_PI/4.0f;
 
-    while(!glfwWindowShouldClose(window)){
+    while( !app.ShouldClose() ){
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        app.Update();
 
-        s->Load();
+        float offset = 0.0f;
 
-        glBegin(GL_QUADS);
-         glTexCoord2d(1, 1); glVertex3f(vertex[0], vertex[1], vertex[2]);
-         glTexCoord2d(1, 0); glVertex3f(vertex[3], vertex[4], vertex[5]);
-         glTexCoord2d(0, 0); glVertex3f(vertex[6], vertex[7], vertex[8]);
-         glTexCoord2d(0, 1); glVertex3f(vertex[9], vertex[10], vertex[11]);
-        glEnd();
+        for( auto comp : handle){
+            float x = comp->getX();
 
-        s->UnLoad();
+            float y = sin(angle * 3.1415926535f/180.0f + offset)*5 + height-20.0f;
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+            comp->SetPosition(x, y);
 
-        vertex[0] = cos(angle);
-        vertex[1] = sin(angle);
-
-        vertex[3] = cos(angle + diff);
-        vertex[4] = sin(angle + diff);
-
-        vertex[6] = cos(angle + 2*diff);
-        vertex[7] = sin(angle + 2*diff);
-
-        vertex[9] = cos(angle - diff);
-        vertex[10] = sin(angle - diff);
-
-
-        angle = (angle+0.01f) * (angle < 360.0f);
-
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR) {
-            printf("OpenGL error: %d\n", error);
+            offset+=45.0f;
         }
+
+        angle = (angle<360.0f)*(angle+5.0f);
     }
-
-    delete s;
-
-    glfwDestroyWindow(window);
-    glfwTerminate();
 
     return 0;
 }

@@ -25,7 +25,7 @@ int main(){
 
     //Initialize GLFW
 
-    GLFWwindow* window = initializeGLFW(height, width);
+    GLFWwindow * window = initializeGLFW(height, width);
 
     //Create texutre
 
@@ -42,7 +42,7 @@ int main(){
     config.simulationWidth = width;
 
     PhysicsProcessorBuilder PBB;
-    physicsProcessor = PBB.build("./engine_kernel_fragments", "./engine_structs", texture->GetTexture(), config, 0, 0);
+    physicsProcessor = PBB.build("./engine_kernel_fragments", "./engine_structs", texture->GetTextureID(), config, 0, 0);
     if (physicsProcessor == nullptr){
         std::printf("Something went wrong...\n");
         return 1;

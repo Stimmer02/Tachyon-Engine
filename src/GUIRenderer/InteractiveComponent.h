@@ -9,6 +9,7 @@
 
 using Function = std::function<void()>;
 
+
 class InteractiveComponent : public IEventListener, public Component{
 private:
     std::map<EventType, Function> events;
@@ -25,8 +26,6 @@ public:
     /// @param event type of event
     void OnEvent(const EventType& event);
 
-    /// @brief Renders current component on screen
-    virtual void Render();
 };
 
 

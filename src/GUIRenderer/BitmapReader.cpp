@@ -1,7 +1,9 @@
 #include "BitmapReader.h"
 
+static Header header;
+static Info infoHeader;
 
-void BitmapReader::ChangeEndianess(char *data, const int & length){
+void BitmapReader::ChangeEndianess(char *data, const uint32_t & length){
 
   for(int i=0; i < (length>>1); i++){
     char temp = data[length-1-i];
@@ -97,25 +99,45 @@ Image BitmapReader::ReadFile(const char * filename){
     input.read(raw_data, file_size);
     input.close();
 
-    unsigned int offset = 0;
+    uint32_t offset = 0;
 
     ParseHeader(raw_data, offset);
     ParseInfo(raw_data, offset);
 
-    fprintf(stdout, "Image dimensions: %d x %d\n", infoHeader.width, infoHeader.height);
+    uint32_t bytes_per_pixel = infoHeader.bits_per_pixel/8;
+    uint32_t pixel_count = infoHeader.width * infoHeader.height;
 
-    unsigned int bytes_per_pixel = infoHeader.bits_per_pixel/8;
-    unsigned int pixel_count = infoHeader.width * infoHeader.height;
-
-    if(bytes_per_pixel!=3){
+    if(bytes_per_pixel<3 || bytes_per_pixel>4){
         fprintf(stderr, "Invalid pixel format.\n");
         delete[] raw_data;
     }
 
-    Color *pixels = new Color[infoHeader.height * infoHeader.width];
+    Color *pixels = new Color[pixel_count];
 
-    for(int i = 0; i < infoHeader.height * infoHeader.width; i++){
-        ParseData((char*)&pixels[i], raw_data, offset, 3);
+    // Read data
+    for(uint32_t i = 0; i < pixel_count; i++){
+        ParseData((char*)&pixels[i], raw_data, offset, bytes_per_pixel);
+        uint8_t temp = pixels[i].R;
+        pixels[i].R = pixels[i].B;
+        pixels[i].B = temp;
+    }
+
+    // Flip image vertically
+
+    // Iterate through each column
+    for (size_t col = 0; col < infoHeader.width; ++col) {
+        // Iterate from the top towards the center of the column
+        for (size_t row = 0; row < infoHeader.height >> 1; ++row) {
+            // Calculate the corresponding indices for the pixels to be swapped
+            int topIndex = row * infoHeader.width + col;
+            int bottomIndex = (infoHeader.height - 1 - row) * infoHeader.width + col;
+
+            // Swap the pixels
+
+            Color temp = pixels[topIndex];
+            pixels[topIndex] = pixels[bottomIndex];
+            pixels[bottomIndex] = temp;
+        }
     }
 
     delete[] raw_data;

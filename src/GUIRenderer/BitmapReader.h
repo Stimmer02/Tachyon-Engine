@@ -52,18 +52,15 @@ class BitmapReader {
 
 public:
 
-    Image ReadFile(const char * filename);
+    static Image ReadFile(const char * filename);
 
 
 private:
 
-    void ParseData(char * destintation, const char * source, uint32_t & offset, const int32_t length);
-    void ParseHeader(const char * source, uint32_t & offset);
-    void ParseInfo(const char * source, uint32_t & offset);
-    void ChangeEndianess(char *data, const int & length);
-
-    Header header;
-    Info infoHeader;
+    static void ParseData(char * destintation, const char * source, uint32_t & offset, const int32_t length);
+    static void ParseHeader(const char * source, uint32_t & offset);
+    static void ParseInfo(const char * source, uint32_t & offset);
+    static void ChangeEndianess(char *data, const uint32_t & length);
 };
 
 

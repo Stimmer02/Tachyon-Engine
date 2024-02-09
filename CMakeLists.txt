@@ -13,6 +13,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lopengl32 -lglfw3 -lglew32 ")
 
 endif()
 
+set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(LIB_NAME ${PROJECT_NAME})
 set(LIB_NAME ${PROJECT_NAME})
 
@@ -27,5 +28,7 @@ add_subdirectory(tests)
 add_subdirectory(editor)
 
 add_dependencies(${LIB_NAME}_run ${LIB_NAME}_lib)
+
+target_compile_definitions(${LIB_NAME}_run PRIVATE PROJECT_ROOT_DIR="${PROJECT_ROOT_DIR}")
 
 target_link_libraries(${LIB_NAME}_run ${LIB_NAME}_lib)

@@ -2,16 +2,12 @@
 
 
 InteractiveComponent::InteractiveComponent(const int& x, const int& y, const int& width, const int& height) : Component(x, y, width, height){
-    //TODO
-}
 
-void InteractiveComponent::Render(){
-    //TODO
 }
 
 void InteractiveComponent::AssignEvent(const EventType& event, Function delegate){
     if(events.find(event)!=events.end()){
-        fprintf(stderr, "Function is already assigend.\n");
+        fprintf(stderr, "Function is already assigned.\n");
         return ;
     }
 
@@ -30,3 +26,5 @@ void InteractiveComponent::OnEvent(const EventType& event){
     function();
 
 }
+
+
