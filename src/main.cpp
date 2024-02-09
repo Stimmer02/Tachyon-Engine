@@ -12,7 +12,7 @@ void processInput(GLFWwindow *window);
 void glfwErrorCallback(int error, const char* description);
 
 
-bool isPaused = true;
+bool isPaused = false;
 
 IPhysicsProcessor* physicsProcessor;
 
@@ -62,8 +62,7 @@ int main(){
 
     std::printf("play: 2; pause: 1\n");
     if (isPaused){
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        manager.Update();
         physicsProcessor->generateFrame();
         std::printf("simulation paused\n");
     }
@@ -74,9 +73,8 @@ int main(){
     while (!manager.ShouldClose()){
 
         if (!isPaused){
-            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
 
+            manager.Update();
 
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, config.simulationHeight>>1, 8, 8, 2);
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) - config.simulationHeight/3, 8, 8, 3);
@@ -101,14 +99,6 @@ int main(){
 
             texture->UnLoad();
 
-            manager.Update();
-        }
-
-        glfwPollEvents();
-
-        error = glGetError();
-        if (error != GL_NO_ERROR) {
-            fprintf(stderr, "OpenGL error: %d\n", error);
         }
     }
     std::printf("\n");
