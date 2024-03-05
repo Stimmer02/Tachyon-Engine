@@ -21,7 +21,7 @@ protected:
 
 public:
     RedBlackTree() {
-        nodeNull = new Node()
+        nodeNull = new Node();
         nodeNull->left = nullptr;
         nodeNull->right = nullptr;
         // Black. Root and leaves are always black (will make sense in a few lines).
