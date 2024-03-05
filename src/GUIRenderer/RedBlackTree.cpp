@@ -130,14 +130,14 @@ public:
         Node* leaf = this->root;
         Node* leafParent = nullptr;
         while (leaf != nodeNull) {
-        leafParent = leaf;
+            leafParent = leaf;
 
-        if (leaf->component.getX() < newNode->component.getX()) {
-            leaf = leaf->right;
-        }
-        else {
-            leaf = leaf->left;
-        }
+            if (leaf->component.getX() < newNode->component.getX()) {
+                leaf = leaf->right;
+            }
+            else {
+                leaf = leaf->left;
+            }
         }
 
         // Placing new node on this leaf.
@@ -146,26 +146,26 @@ public:
         // And other way around.
         // Root.
         if (leafParent == nullptr) {
-        root = newNode;
+            root = newNode;
         }
         // Not root.
         else if (leafParent->component.getX() < newNode->component.getX()) {
-        leafParent->right = newNode;
+            leafParent->right = newNode;
         }
         else {
-        leafParent->left = newNode;
+            leafParent->left = newNode;
         }
 
         // No problems with colors - can be just black. (root has to be black)
         if (newNode->parent == nullptr) {
-        // Black.
-        newNode->color = 0;
-        return;
+            // Black.
+            newNode->color = 0;
+            return;
         }
 
         // Root is always black, so red is fine.
         if (newNode->parent->parent == nullptr) {
-        return;
+            return;
         }
 
         // Harder to solve problems with colors.
