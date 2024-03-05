@@ -37,6 +37,10 @@ protected:
 	Sprite * sprite;
 
 public:
+    Component();
+
+    Component(float _x, float _y, float _width, float _height, float xyz);
+
 	Component(const float &_x, const float &_y, const float &_width, const float &_height);
 
 	bool IsInBound(const float &_x,const float &_y);
