@@ -11,3 +11,14 @@ struct Node {
     
     int color;
 };
+
+class RedBlackTree {
+protected:
+    // Root.
+    Node* root;
+    // Sneaky way of having node-like None.
+    Node* nodeNull;
+
+public:
+
+}
