@@ -37,9 +37,9 @@ protected:
 	Sprite * sprite;
 
 public:
-    Component();
+	Component();
 
-    Component(float _x, float _y, float _width, float _height, float xyz);
+	Component(float _x, float _y, float _width, float _height, float xyz);
 
 	Component(const float &_x, const float &_y, const float &_width, const float &_height);
 
