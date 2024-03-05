@@ -41,6 +41,70 @@ protected:
         }
     }
 
+    void harderPaintingProblems(Node* repaintingNode) {
+        Node* family;
+        // Problem is that repaintingNode is red (add function default paint) and parent can't be red.
+        while(repaintingNode->parent->color == 1) {
+            if (repaintingNode->parent == repaintingNode->parent->parent->left) {
+                family = repaintingNode->parent->parent->right;
+
+                // Family color is black.
+                if (family->color == 0) {
+                    if (repaintingNode == repaintingNode->parent->right) {
+                        // We need left rotation so black family is in center. (every path needs same number of black nodes)
+
+                        repaintingNode = repaintingNode->parent;
+                        rotationLeft(repaintingNode);
+                    }
+
+                    repaintingNode->parent->color = 0;
+                    repaintingNode->parent->parent->color = 1;
+                    rotationRight(repaintingNode->parent->parent);
+                }
+                // Family color is red.
+                else {
+                    // We paint fathers black and grandfather red and recurrency (while loop) handles rest.
+                    family->color = 0;
+                    repaintingNode->parent->color = 0;
+                    repaintingNode->parent->parent->color = 1;
+
+                    repaintingNode = repaintingNode->parent->parent;
+                }
+            }
+            // Everything the same here, but other way around.
+            else {
+                family = repaintingNode->parent->parent->left;
+
+                if (family->color == 0) {
+                    if (repaintingNode == repaintingNode->parent->left) {
+                        repaintingNode = repaintingNode->parent;
+                        rotationRight(repaintingNode);
+                    }
+
+                    repaintingNode->parent->color = 0;
+                    repaintingNode->parent->parent->color = 1;
+                    rotationLeft(repaintingNode->parent->parent);
+
+                }
+                else {
+                    family->color = 0;
+                    repaintingNode->parent->color = 0;
+                    repaintingNode->parent->parent->color = 1;
+
+                    repaintingNode = repaintingNode->parent->parent;
+                }
+            }
+
+            // End of "recurrency" - everything is great, just need to set root to black.
+            if (repaintingNode == root) {
+                break;
+            }
+        }
+
+        // Root is always black.
+        root->color = 0;
+    }
+
 public:
     RedBlackTree() {
         nodeNull = new Node();
