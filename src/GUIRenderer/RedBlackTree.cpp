@@ -34,10 +34,10 @@ protected:
 
         // Reccurency. (Red Black Tree is BST tree)
         if (suspect->component.getX() < comp.getX()) {
-            return query_rec(comp, suspert->right);
+            return query_rec(comp, suspect->right);
         }
         else {
-            return query_rec(comp, suspert->left);
+            return query_rec(comp, suspect->left);
         }
     }
 
