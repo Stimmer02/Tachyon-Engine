@@ -235,4 +235,4 @@ public:
         // Harder to solve problems with colors.
         harderPaintingProblems(newNode);
     }
-}
+};
