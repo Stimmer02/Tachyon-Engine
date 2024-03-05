@@ -47,7 +47,7 @@ public:
 
 	void SetColor(const Color &_color);
 
-	virtual void Render() = 0;
+	//virtual void Render() = 0;
 
 	void SetTexture( const Sprite * _sprite);
 
