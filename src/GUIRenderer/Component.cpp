@@ -34,6 +34,10 @@ void Component::SetColor(const Color &_color){
 	color = _color;
 }
 
+void Component::Render(){
+
+}
+
 void Component::SetTexture( const Sprite * _sprite){
 	sprite = (Sprite*)_sprite;;
 }
