@@ -115,4 +115,60 @@ public:
         leftNode->right = center;
         center->parent = leftNode;
     }
+
+    void add(Component comp) {
+        Node* newNode = new Node;
+
+        newNode->component = comp;
+        newNode->parent = nullptr;
+        newNode->left = nodeNull;
+        newNode->right = nodeNull;
+        // Red.
+        newNode->color = 1;
+
+        // Looking for correct leaf and it's parent.
+        Node* leaf = this->root;
+        Node* leafParent = nullptr;
+        while (leaf != nodeNull) {
+        leafParent = leaf;
+
+        if (leaf->component.getX() < newNode->component.getX()) {
+            leaf = leaf->right;
+        }
+        else {
+            leaf = leaf->left;
+        }
+        }
+
+        // Placing new node on this leaf.
+        newNode->parent = leafParent;
+
+        // And other way around.
+        // Root.
+        if (leafParent == nullptr) {
+        root = newNode;
+        }
+        // Not root.
+        else if (leafParent->component.getX() < newNode->component.getX()) {
+        leafParent->right = newNode;
+        }
+        else {
+        leafParent->left = newNode;
+        }
+
+        // No problems with colors - can be just black. (root has to be black)
+        if (newNode->parent == nullptr) {
+        // Black.
+        newNode->color = 0;
+        return;
+        }
+
+        // Root is always black, so red is fine.
+        if (newNode->parent->parent == nullptr) {
+        return;
+        }
+
+        // Harder to solve problems with colors.
+        harderPaintingProblems(newNode);
+    }
 }
