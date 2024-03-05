@@ -19,6 +19,28 @@ protected:
     // Sneaky way of having node-like None.
     Node* nodeNull;
 
+
+    Node* query_rec(Component comp, Node* suspect) {
+        // If we found nothing we return nodeNull.
+        if (suspect == nodeNull) {
+            return suspect;
+        }
+
+
+        // If suspect is guilty of being Node we search for.
+        if (suspect->component.getX() == comp.getX()) {
+            return suspect;
+        }
+
+        // Reccurency. (Red Black Tree is BST tree)
+        if (suspect->component.getX() < comp.getX()) {
+            return query_rec(comp, suspert->right);
+        }
+        else {
+            return query_rec(comp, suspert->left);
+        }
+    }
+
 public:
     RedBlackTree() {
         nodeNull = new Node();
@@ -29,6 +51,10 @@ public:
 
         // We want to have an empty root, but no irritating errors.
         root = nodeNull;
+    }
+
+    Node* query(Component comp) {
+        return query_rec(comp, this->root);
     }
 
     void rotationLeft(Node* center) {
