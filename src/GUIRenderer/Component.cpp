@@ -1,19 +1,5 @@
 #include "Component.h"
 
-Component::Component(){
-	this->x = 0;
-	this->y = 0;
-	this->width= 0;
-	this->height = 0;
-}
-
-Component::Component(float _x, float _y, float _width, float _height, float xyx){
- 	this->x = _x;
-	this->y = _y;
-	this->width= _width;
-	this->height = _height;
-}
-
 Component::Component(const float &_x, const float &_y, const float &_width, const float &_height){
 	this->x = _x;
 	this->y = _y;
@@ -32,10 +18,6 @@ bool Component::IsInBound(const float & _x, const float & _y){
 
 void Component::SetColor(const Color &_color){
 	color = _color;
-}
-
-void Component::Render(){
-
 }
 
 void Component::SetTexture( const Sprite * _sprite){
