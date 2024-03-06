@@ -13,52 +13,51 @@ int main(){
     const char * title = "Tachyon Engine";
 
     UIManager app(width, height, title, true);
-    MouseInputService mouse;
-    EventManager eventSystem;
+    // MouseInputService mouse;
+    // EventManager eventSystem;
 
-    app.AssignInputHandlingService( (IInputHandler*)&mouse );
-    app.AssignEventHandlingService( (IEventHandlingService*)&eventSystem );
-
-
-    UIBuilder builder;
-    builder.AssignEventManager( (IEventHandlingService*)&eventSystem );
-
-    uint32_t counter = 0;
-
-    auto Hello = [&counter](){
-        fprintf(stdout, "Hello World : %d\n", counter);
-        counter++;
-    };
-
-    Image temp = BitmapReader::ReadFile("../../resources/sprites/charmap-oldschool_white.bmp");
-
-    ImageEditor ie;
-
-    uint32_t helperSize;
-    Image* helper = ie.Split(temp, 7, 9, helperSize);
-
-    Sprite** buttonImg = new Sprite*[helperSize];
+    // app.AssignInputHandlingService( (IInputHandler*)&mouse );
+    // app.AssignEventHandlingService( (IEventHandlingService*)&eventSystem );
 
 
-    for(int i = 0; i < helperSize; ++i){
+    // UIBuilder builder;
+    // builder.AssignEventManager( (IEventHandlingService*)&eventSystem );
 
-        buttonImg[i] = Sprite::Create(helper + i);
-    }
+    // uint32_t counter = 0;
+
+    // auto Hello = [&counter](){
+    //     fprintf(stdout, "Hello World : %d\n", counter);
+    //     counter++;
+    // };
+
+    //Image temp = BitmapReader::ReadFile("resources/sprites/charmap-oldschool_white.bmp");
+
+    // ImageEditor ie;
+
+    // uint32_t helperSize;
+    // Image* helper = ie.Split(temp, 7, 9, helperSize);
+
+    // Sprite ** buttonImg = new Sprite*[helperSize];
 
 
-    for(int i = 0; i < helperSize; ++i){
+    // for(int i = 0; i < helperSize; ++i)
+    //     buttonImg[i] = Sprite::Create(helper + i);
+    
 
-            Component * button = builder
-                        .SetComponentType(BUTTON)
-                        ->SetPosition((i%18) * 30.0f + 100, -(i/18) * 40.0f  + 400)
-                        ->SetDimensions(28.0f, 36.0f)
-                        ->SetTexture(buttonImg[i])
-                        ->AssignEvent(ONCLICK, Hello)
-                        ->SetColor((Color){27, 54, 56})
-                        ->Build();
 
-        app.AddComponentToScene(button);
-    }
+    // for(int i = 0; i < helperSize; ++i){
+
+    //         Component * button = builder
+    //                     .SetComponentType(BUTTON)
+    //                     ->SetPosition((i%18) * 30.0f + 100, -(i/18) * 40.0f  + 400)
+    //                     ->SetDimensions(28.0f, 36.0f)
+    //                     ->SetTexture(buttonImg[i])
+    //                     ->AssignEvent(ONCLICK, Hello)
+    //                     ->SetColor((Color){27, 54, 56})
+    //                     ->Build();
+
+    //     app.AddComponentToScene(button);
+    // }
     // Sprite* buttonImg2 = Sprite::Create(&temp);
     //         Component * button = builder
     //                     .SetComponentType(BUTTON)
@@ -91,10 +90,10 @@ int main(){
 
     }
 
-    for(int i = 0; i < helperSize; ++i){
-        delete buttonImg[i];
-    }
-    delete [] buttonImg;
+    // for(int i = 0; i < helperSize; ++i){
+    //     delete buttonImg[i];
+    // }
+    // delete [] buttonImg;
 
 
 

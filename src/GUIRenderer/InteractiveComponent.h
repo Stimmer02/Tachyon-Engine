@@ -9,11 +9,9 @@
 
 using Function = std::function<void()>;
 
-static uint32_t GUID = 0;
 
 class InteractiveComponent : public IEventListener, public Component{
 private:
-    uint32_t UID;
     std::map<EventType, Function> events;
 public:
 
@@ -27,9 +25,6 @@ public:
     /// @brief Invokes action assigned with specified event
     /// @param event type of event
     void OnEvent(const EventType& event);
-
-    /// @brief Returns GUID of current object
-    uint32_t GetGUID();
 
     /// @brief Renders current component on screen
     virtual void Render() = 0;

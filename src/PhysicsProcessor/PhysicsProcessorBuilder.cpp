@@ -44,6 +44,7 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(KernelBuilder& kernelBuilder, 
     cl_platform_id platform;
     clGetPlatformIDs(1, &platform, NULL);
 
+
 #ifdef __APPLE__
 
     CGLContextObj glContext = CGLGetCurrentContext();
@@ -52,6 +53,15 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(KernelBuilder& kernelBuilder, 
     cl_context_properties properties[] = {
         CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE,
         (cl_context_properties)shareGroup,
+        0
+    };
+
+#elif __WIN32__
+
+    cl_context_properties properties[] = {
+        CL_CONTEXT_PLATFORM, (cl_context_properties)platform,
+        CL_GL_CONTEXT_KHR, (cl_context_properties)wglGetCurrentContext(),
+        CL_WGL_HDC_KHR, (cl_context_properties)wglGetCurrentDC(),
         0
     };
 

@@ -15,10 +15,9 @@ void BitmapReader::ChangeEndianess(char *data, const uint32_t & length){
 
 void BitmapReader::ParseData(char * destination, const char *source, unsigned int & offset, const int length){
 
-  memcpy(destination, source + offset, length);
-  //ChangeEndianess(destination, length);
-
-  offset += length;
+  const char * localData = source + offset;
+    memcpy(destination, localData, length);
+    offset += length;
 
 }
 
@@ -106,20 +105,34 @@ Image BitmapReader::ReadFile(const char * filename){
 
     uint32_t bytes_per_pixel = infoHeader.bits_per_pixel/8;
     uint32_t pixel_count = infoHeader.width * infoHeader.height;
+    uint32_t row_size = (infoHeader.width * bytes_per_pixel + 3) & ~3;
 
     if(bytes_per_pixel<3 || bytes_per_pixel>4){
         fprintf(stderr, "Invalid pixel format.\n");
         delete[] raw_data;
+        return Image();
     }
 
-    Color *pixels = new Color[pixel_count];
+    Color * pixels = new Color[pixel_count];
+
+    unsigned char tempColor[4] = {0};
 
     // Read data
-    for(uint32_t i = 0; i < pixel_count; i++){
-        ParseData((char*)&pixels[i], raw_data, offset, bytes_per_pixel);
-        uint8_t temp = pixels[i].R;
-        pixels[i].R = pixels[i].B;
-        pixels[i].B = temp;
+    for (uint32_t y = 0; y < infoHeader.height; ++y) {
+        for (uint32_t x = 0; x < infoHeader.width; ++x) {
+            ParseData((char*)tempColor, raw_data, offset, bytes_per_pixel);
+
+            uint32_t id = y * infoHeader.width + x;
+
+            unsigned char * data = (unsigned char *)&pixels[id];
+
+            data[0] = tempColor[2];
+            data[1] = tempColor[1];
+            data[2] = tempColor[0];
+            data[3] = 255;
+        }
+
+        offset += (row_size - infoHeader.width * bytes_per_pixel);
     }
 
     // Flip image vertically
