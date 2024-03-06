@@ -56,7 +56,6 @@ void UIManager::HandleEvents(){
     if( inputHandlingService == nullptr )
         return;
 
-
     static float lastX, lastY;
 
 	EventInfo info = inputHandlingService->Query();

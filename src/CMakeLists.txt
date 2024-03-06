@@ -34,6 +34,7 @@ target_include_directories(${LIB_NAME}_lib PUBLIC
     ${GLEW_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/GUIRenderer  
     ${CMAKE_CURRENT_SOURCE_DIR}/PhysicsProcessor 
+    ${CMAKE_CURRENT_SOURCE_DIR}/ECSystem
 )
 
 target_link_libraries(${LIB_NAME}_lib 
