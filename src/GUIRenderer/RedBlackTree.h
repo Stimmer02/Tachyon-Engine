@@ -14,16 +14,6 @@ struct Node {
     int color;
 };
 
-struct Node {
-    Component* component;
-
-    Node* parent;
-    Node* left;
-    Node* right;
-
-    int color;
-};
-
 class RedBlackTree {
 protected:
     // Root.
