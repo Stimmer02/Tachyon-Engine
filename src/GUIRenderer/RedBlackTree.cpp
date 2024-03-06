@@ -3,7 +3,7 @@
 using namespace std;
 
 struct Node {
-    Component component;
+    Component* component;
 
     Node* parent;
     Node* left;
@@ -20,7 +20,7 @@ protected:
     Node* nodeNull;
 
 
-    Node* query_rec(Component comp, Node* suspect) {
+    Node* query_rec(Component* comp, Node* suspect) {
         // If we found nothing we return nodeNull.
         if (suspect == nodeNull) {
             return suspect;
@@ -28,12 +28,12 @@ protected:
 
 
         // If suspect is guilty of being Node we search for.
-        if (suspect->component.getX() == comp.getX()) {
+        if ((*(suspect->component)).getX() == (*(comp)).getX()) {
             return suspect;
         }
 
         // Reccurency. (Red Black Tree is BST tree)
-        if (suspect->component.getX() < comp.getX()) {
+        if ((*(suspect->component)).getX() < (*(comp)).getX()) {
             return query_rec(comp, suspect->right);
         }
         else {
@@ -117,7 +117,7 @@ public:
         root = nodeNull;
     }
 
-    Node* query(Component comp) {
+    Node* query(Component* comp) {
         return query_rec(comp, this->root);
     }
 
@@ -180,7 +180,7 @@ public:
         center->parent = leftNode;
     }
 
-    void add(Component comp) {
+    void add(Component* comp) {
         Node* newNode = new Node;
 
         newNode->component = comp;
@@ -196,7 +196,7 @@ public:
         while (leaf != nodeNull) {
             leafParent = leaf;
 
-            if (leaf->component.getX() < newNode->component.getX()) {
+            if ((*(leaf->component)).getX() < (*(newNode->component)).getX()) {
                 leaf = leaf->right;
             }
             else {
@@ -213,7 +213,7 @@ public:
             root = newNode;
         }
         // Not root.
-        else if (leafParent->component.getX() < newNode->component.getX()) {
+        else if ((*(leafParent->component)).getX() < (*(newNode->component)).getX()) {
             leafParent->right = newNode;
         }
         else {
