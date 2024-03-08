@@ -5,10 +5,16 @@
 
 class IClient;
 
+enum MessageType{
+    GET,
+    DROP
+};
+
+
 struct Message {
-    std::string channel_name;
     IClient * sender;
     IClient * receiver;
+    MessageType type;
     void * data;
 };
 

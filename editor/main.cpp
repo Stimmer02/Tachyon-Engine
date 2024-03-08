@@ -1,12 +1,14 @@
-#include "Message.h"
+#include "MessageBus.h"
 
 #include <stdio.h>
 
 int main(){
 
-    Message m;
-   
-    printf("New message!\n");
+    MessageBus bus;
+
+    Message mess; 
+    
+    bus.SendToChannel("Hello", mess);
 
     return 0;
 }

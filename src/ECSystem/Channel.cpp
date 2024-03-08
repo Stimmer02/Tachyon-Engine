@@ -6,7 +6,7 @@ Channel::Channel(const std::string _name){
 }
 
 void Channel::BindClient(IClient * _client){
-    this->clients.emplace_back(_client);
+    this->clients.emplace_back( _client );
 }
 
 void Channel::EmplaceMessage(const Message & _message){
@@ -36,4 +36,8 @@ void Channel::Send(){
     }
 
     messages.pop();
+}
+
+int32_t Channel::GetClientCount(){
+    return clients.size();
 }
