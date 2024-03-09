@@ -18,10 +18,10 @@ public:
     KDTElement* getLeftSon();
     KDTElement* getRightSon();
     Component* getValue();
-    static bool comparatorXsmaller(KDTElement &element, KDTElement &other);
-    static bool comparatorXsmallerOrEqueql(KDTElement &element, KDTElement &other);
-    static bool comparatorYsmaller(KDTElement &element, KDTElement &other);
-    static bool comparatorYsmallerOrEqueql(KDTElement &element, KDTElement &other);
+    static bool comparatorXsmaller(KDTElement* &element, KDTElement* &other);
+    static bool comparatorXsmallerOrEqueql(KDTElement* &element, KDTElement* &other);
+    static bool comparatorYsmaller(KDTElement* &element, KDTElement* &other);
+    static bool comparatorYsmallerOrEqueql(KDTElement* &element, KDTElement* &other);
 };
 
 #endif

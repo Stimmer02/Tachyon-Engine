@@ -48,18 +48,18 @@ Component* KDTElement::getValue(){
     return value;
 }
 
-bool KDTElement::comparatorXsmaller(KDTElement &element, KDTElement &other){
-    return element.getValue()->getX() < other.getValue()->getX();
+bool KDTElement::comparatorXsmaller(KDTElement* &element, KDTElement* &other){
+    return element->getValue()->getX() < other->getValue()->getX();
 }
 
-bool KDTElement::comparatorXsmallerOrEqueql(KDTElement &element, KDTElement &other){
-    return element.getValue()->getX() <= other.getValue()->getX();
+bool KDTElement::comparatorXsmallerOrEqueql(KDTElement* &element, KDTElement* &other){
+    return element->getValue()->getX() <= other->getValue()->getX();
 }
 
-bool KDTElement::comparatorYsmaller(KDTElement &element, KDTElement &other){
-    return element.getValue()->getX() < other.getValue()->getX();
+bool KDTElement::comparatorYsmaller(KDTElement* &element, KDTElement* &other){
+    return element->getValue()->getX() < other->getValue()->getX();
 }
 
-bool KDTElement::comparatorYsmallerOrEqueql(KDTElement &element, KDTElement &other){
-    return element.getValue()->getX() >= other.getValue()->getX();
+bool KDTElement::comparatorYsmallerOrEqueql(KDTElement* &element, KDTElement* &other){
+    return element->getValue()->getX() >= other->getValue()->getX();
 }
