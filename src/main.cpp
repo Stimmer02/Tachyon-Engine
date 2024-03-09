@@ -51,7 +51,7 @@ void glfwErrorCallback(int error, const char* description);
 uint localXsize = 16;
 uint localYsize = 16;
 int width = 1024, height = 1024;
-bool pause = true;
+bool isPaused = true;
 
 GLuint PBO;
 GLuint texture;
@@ -124,7 +124,7 @@ int main(){
 
 
     std::printf("play: 2; pause: 1\n");
-    if (pause){
+    if (isPaused){
         physicsProcessor->generateFrame();
         std::printf("simulation paused\n");
     }
@@ -136,7 +136,7 @@ int main(){
     while (!glfwWindowShouldClose(window)){
         processInput(window);
 
-        if (pause == false){
+        if (isPaused == false){
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, config.simulationHeight>>1, 8, 8, 2);
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) - config.simulationHeight/3, 8, 8, 3);
             physicsProcessor->spawnVoxelInArea((config.simulationWidth>>1)-4, (config.simulationHeight>>1) + config.simulationHeight/3, 8, 8, 4);
@@ -205,9 +205,9 @@ void processInput(GLFWwindow *window){
         glfwSetWindowShouldClose(window, true);
     }
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS){
-        pause = true;
+        isPaused = true;
     } else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS){
-        pause = false;
+        isPaused = false;
     }
 }
 
