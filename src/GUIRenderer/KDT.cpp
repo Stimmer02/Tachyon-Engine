@@ -1,4 +1,6 @@
 #include "KDT.h"
+#include "Component.h"
+#include "KDTElement.h"
 KDT::KDT(){
     root = NULL;
 }
@@ -62,8 +64,55 @@ void KDT::buildRightSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRo
     buildRightSubTreeRec(elementsArray + mid + 1, subTreeRoot, elementsArraySize - mid - 1, !xOrY);
 }
 
-Component* KDT::find(const int &x, const int &y){
+Component* KDT::find(const float &x, const float &y){
+    return findRecX(x, y, root);
+}
 
+Component* KDT::findRecX(const float &x, const float &y, KDTElement* element){
+    if(element == NULL){
+        return NULL;
+    }
+    Component* helper = element->getValue();
+    if(helper->getX() <= x){
+        if(x <= helper->getX() + helper->getWidth()){
+            if(helper->getY() <= y && y <= helper->getY() + helper->getHeight()){
+                return helper;
+            }
+            else{
+                return findRecY(x, y, element->getRightSon());
+            }
+        }
+        else{
+            return findRecY(x, y, element->getRightSon());
+        }
+    }
+    else{
+        return findRecY(x, y, element->getLeftSon());
+    }
+}
+
+Component* KDT::findRecY(const float &x, const float &y, KDTElement* element){
+    if(element == NULL){
+        return NULL;
+    }
+
+    Component* helper = element->getValue();
+    if(helper->getY() <= y){
+        if(x <= helper->getY() + helper->getHeight()){
+            if(helper->getX() <= x && x <= helper->getX() + helper->getWidth()){
+                return helper;
+            }
+            else{
+                return findRecX(x, y, element->getRightSon());
+            }
+        }
+        else{
+            return findRecX(x, y, element->getRightSon());
+        }
+    }
+    else{
+        return findRecX(x, y, element->getLeftSon());
+    }
 }
 
 void KDT::clear(){
