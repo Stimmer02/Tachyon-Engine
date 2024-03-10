@@ -58,6 +58,8 @@ public:
 	float getY();
 
 	Color getColor();
+
+	bool operator ==(const Component &other);
 };
 
 #endif

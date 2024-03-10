@@ -48,5 +48,12 @@ Color Component::getColor(){
 	return color;
 }
 
+bool Component::operator ==(const Component &other){
+	if(x == other.x && y == other.y && width == other.width && height == other.height){
+		return true;
+	}
+	return false;
+}
+
 
 
