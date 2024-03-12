@@ -15,6 +15,7 @@ KDTElement::KDTElement(Component* value){
 }
 
 KDTElement::~KDTElement(){
+	//recursive delete nodes;
     value = NULL;
     if(leftSon != NULL){
         delete leftSon;
@@ -49,17 +50,21 @@ Component* KDTElement::getValue(){
 }
 
 bool KDTElement::comparatorXsmaller(KDTElement* &element, KDTElement* &other){
+	//compare 2 KDTElement and return true if first has smaller X coordinate
     return element->getValue()->getX() < other->getValue()->getX();
 }
 
 bool KDTElement::comparatorXsmallerOrEqueql(KDTElement* &element, KDTElement* &other){
+	//compare 2 KDTElement and return true if first hasn't bigger X coordinate
     return element->getValue()->getX() <= other->getValue()->getX();
 }
 
 bool KDTElement::comparatorYsmaller(KDTElement* &element, KDTElement* &other){
+	//compare 2 KDTElement and return true if first has smaller Y coordinate
     return element->getValue()->getX() < other->getValue()->getX();
 }
 
 bool KDTElement::comparatorYsmallerOrEqueql(KDTElement* &element, KDTElement* &other){
+	//compare 2 KDTElement and return true if first hasn't bigger Y coordinate
     return element->getValue()->getX() >= other->getValue()->getX();
 }
