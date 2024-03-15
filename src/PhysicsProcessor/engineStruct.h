@@ -32,18 +32,18 @@ struct engineStruct{
 
     struct field{
         std::string name;
-        cl_type type;
-        engineStruct* subStruct;
+        cl_type type = cl_invalid;
+        engineStruct* subStruct = nullptr;
         std::string subStructName;
-        uint arrSize;
-        uchar byteSize;
+        uint arrSize = 0;
+        uchar byteSize = 0;
     };
 
     std::string name;
     std::string rawCode;
-    uint byteSize;
-    ushort fieldCount;
-    field* fields;
+    uint byteSize = 0;
+    ushort fieldCount = 0;
+    field* fields = nullptr;
 };
 
 #endif
