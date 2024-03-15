@@ -4,8 +4,9 @@
 #include "MessageBus.h"
 #include "IClient.h"
 #include "IRunnable.h"
+#include "IShareable.h"
 
-class System : public IClient, public IRunnable{
+class System : public IClient, public IRunnable, public IShareable{
 private:
 
     bool isRunning;
@@ -19,6 +20,7 @@ protected:
     /// @brief This function is called on system startup and by default does nothing
     virtual void OnLoad();
 
+    /// @brief This abstract method is called every iteration of system loop and must be defined by specified system
     virtual void Execute() = 0;
 
     /// @brief This function is called on system shutdown and by default does nothing
