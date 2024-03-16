@@ -10,11 +10,8 @@ void Channel::BindClient(IClient * _client){
 }
 
 void Channel::EmplaceMessage(const Message & _message){
-    mutex.lock();
-
+    std::lock_guard<std::mutex> lock(mutex);
     this->messages.push(_message);
-
-    mutex.unlock();
 }
 
 void Channel::Send(){

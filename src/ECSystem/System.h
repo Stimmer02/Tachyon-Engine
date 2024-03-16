@@ -1,6 +1,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+// TODO : replace placeholders and Share method
+
 #include "MessageBus.h"
 #include "IClient.h"
 #include "IRunnable.h"
@@ -10,6 +12,12 @@ class System : public IClient, public IRunnable, public IShareable{
 private:
 
     bool isRunning;
+    std::mutex mutex;
+    std::queue<Message> messages;
+
+    /// @brief This method is called only if system receive any message
+    /// @param message 
+    void ReceiveMessage(const Message & _message);
 
 protected:
 
@@ -17,18 +25,27 @@ protected:
     // NameResolver * _1_placeholder;
     // ILogger * _2_placeholder;
 
-    /// @brief This function is called on system startup and by default does nothing
+    /// @brief This method is called on system startup and by default does nothing
     virtual void OnLoad();
 
     /// @brief This abstract method is called every iteration of system loop and must be defined by specified system
     virtual void Execute() = 0;
 
-    /// @brief This function is called on system shutdown and by default does nothing
+    /// @brief This method is called on system shutdown and by default does nothing
     virtual void OnUnload();
 
-    void SendMessage(const std::string & channel, IClient * receiver, const MessageType & type, void * data);
+    /// @brief This method is called when system have any pending messages stored in internal queue and by default does nothing
+    virtual void HandleMessage(const Message & message);
 
-    virtual void ReceiveMessage(const Message & message) = 0;
+    /// @brief This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system
+    virtual void Share() = 0;
+
+    /// @brief This method is used to send message to specified channel within message bus scope
+    /// @param channel name of channel
+    /// @param receiver pointer to receiver
+    /// @param type type of messsage
+    /// @param data pointer to data
+    void SendMessage(const std::string & channel, IClient * receiver, const MessageType & type, void * data);
 
 public:
 
