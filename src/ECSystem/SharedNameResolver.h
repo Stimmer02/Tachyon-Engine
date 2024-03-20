@@ -8,7 +8,7 @@ const int ALPHABET_SIZE = 26;
 
 struct Node {
     Node* next_char[ALPHABET_SIZE];
-    const int32_t size = 0;
+    const int32_t size_ = 0;
     const void * pointer;
 };
 
