@@ -82,12 +82,12 @@ void AttributeContainer<Component>::RemoveElement(const uint32_t & _id){
 }
 
 template<class Component>
-size_t AttributeContainer<Component>::GetSize() const{
+uint32_t AttributeContainer<Component>::GetSize() const{
     return size;
 }
 
 template<class Component>
-size_t AttributeContainer<Component>::GetCapacity() const{
+uint32_t AttributeContainer<Component>::GetCapacity() const{
     return capacity;
 }
 
@@ -104,7 +104,7 @@ void AttributeContainer<Component>::RemapAndResize(){
 template<class Component>
 AttributeContainer<Component>::~AttributeContainer(){
 
-    for(size_t i = 0; i < capacity; ++i){
+    for(uint32_t i = 0; i < capacity; ++i){
 
         if( components[i] )
             delete components[i];

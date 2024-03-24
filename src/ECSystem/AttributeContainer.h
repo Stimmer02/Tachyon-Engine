@@ -19,8 +19,8 @@ private:
 
     float remapThreshold;
 
-    size_t capacity;
-    size_t size;
+    uint32_t capacity;
+    uint32_t size;
 
     void RemapAndResize();
 
@@ -33,9 +33,9 @@ public:
 
     void RemoveElement(const uint32_t & _id);
 
-    size_t GetSize() const;
+    uint32_t GetSize() const;
 
-    size_t GetCapacity() const;
+    uint32_t GetCapacity() const;
 
     void SetRemapThresholdPercentage(const float & minElements);
 
