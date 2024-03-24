@@ -1,18 +1,19 @@
 #include "gtest/gtest.h"
 
 #include "AttributeContainer.h"
+#include "AttributeContainer.cpp"
 
-TEST(AttributeContainerTests, AddElementTest){
-
-    struct Position{
+struct Position{
         float x;
         float y;
     };
 
-    struct Transform{
-        Position position;
-        float rotation;
-    };
+struct Transform{
+    Position position;
+    float rotation;
+};
+
+TEST(AttributeContainerTests, AddElementTest){
 
     AttributeContainer<Transform> transforms;
 
@@ -23,16 +24,6 @@ TEST(AttributeContainerTests, AddElementTest){
 }
 
 TEST(AttributeContainerTests, RemoveElementTest){
-
-    struct Position{
-        float x;
-        float y;
-    };
-
-    struct Transform{
-        Position position;
-        float rotation;
-    };
 
     AttributeContainer<Transform> transforms;
 

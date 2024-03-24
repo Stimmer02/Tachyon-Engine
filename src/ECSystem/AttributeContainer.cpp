@@ -99,6 +99,29 @@ void AttributeContainer<Component>::SetRemapThresholdPercentage(const float & mi
 template<class Component>
 void AttributeContainer<Component>::RemapAndResize(){
 
+    std::map<uint32_t, uint32_t> newMapper;
+    Component ** newComponents = new Component*[ size ];
+    uint32_t newID = 0;
+
+    for (const auto& entry : mapper) {
+
+        uint32_t oldID = entry.first;
+        uint32_t componentID = entry.second;
+
+        newMapper[oldID] = newID;
+        newComponents[newID] = components[componentID];
+
+        newID++;
+    }
+
+    delete[] components;
+
+    this->components = newComponents;
+    this->mapper = newMapper;
+    this->currentID = newID;
+    this->freeIDs = std::priority_queue<uint32_t, std::vector<uint32_t>, std::greater<uint32_t>>();
+    this->capacity = ( size > 10 ? size : 10);
+
 }
 
 template<class Component>

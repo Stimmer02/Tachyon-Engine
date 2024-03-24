@@ -15,7 +15,6 @@ endif()
 
 set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(LIB_NAME ${PROJECT_NAME})
-set(LIB_NAME ${PROJECT_NAME})
 
 add_subdirectory(src)
 

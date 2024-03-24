@@ -2,6 +2,7 @@
 #define ATTRIBUTECONTAINER_H
 
 #include <stdint.h>
+#include <cstring>
 #include <queue>
 #include <map>
 
@@ -25,6 +26,7 @@ private:
     void RemapAndResize();
 
 public:
+
     AttributeContainer();
 
     Component * AddElement(const uint32_t & _id);
