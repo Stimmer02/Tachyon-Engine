@@ -77,7 +77,7 @@ public:
             memcpy(bigger, components, capacity * sizeof( Component * ));
 
             delete[] components;
-            
+
             capacity *= 2;
             components = bigger;
 
@@ -109,7 +109,7 @@ public:
 
         if( it == mapper.end() )
             return;
-            
+
 
         uint32_t componentID = it->second;
 
@@ -137,13 +137,16 @@ public:
 
     ~AttributeContainer(){
 
-        for(uint32_t i = 0; i < capacity; ++i){
+        if( !components )
+            return;
 
-            if( components[i] )
+        for(uint32_t i = 0; i < size; ++i){
+
+            if( components[i] != nullptr )
                 delete components[i];
 
         }
-                
+
         delete[] components;
 
     }
