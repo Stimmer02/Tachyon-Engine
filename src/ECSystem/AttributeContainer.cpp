@@ -51,7 +51,7 @@ Component * AttributeContainer<Component>::GetElement(const uint32_t & _id){
     auto it = mapper.find(_id);
 
     if( it == mapper.end())
-        return NULL;
+        return nullptr;
 
     uint32_t componentID = it->second;
 

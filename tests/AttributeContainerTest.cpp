@@ -18,7 +18,7 @@ TEST(AttributeContainerTests, AddElementTest){
 
     Transform * transform0 = transforms.AddElement(0);
 
-    ASSERT_NE(transform0, NULL);
+    ASSERT_NE(transform0, nullptr);
 
 }
 
@@ -38,12 +38,12 @@ TEST(AttributeContainerTests, RemoveElementTest){
 
     Transform * transform0 = transforms.AddElement(0);
 
-    ASSERT_NE(transform0, NULL);
+    ASSERT_NE(transform0, nullptr);
 
     transforms.RemoveElement(0);
 
     Transform * transform1 = transforms.GetElement(0);
 
-    ASSERT_EQ(transform1, NULL);
+    ASSERT_EQ(transform1, nullptr);
 
 }
