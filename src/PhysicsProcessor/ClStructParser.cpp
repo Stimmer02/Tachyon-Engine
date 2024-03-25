@@ -1,7 +1,7 @@
 #include "ClStructParser.h"
 #include "engineStruct.h"
 
-engineStruct* ClStructParser::processStruct(std::string structCode){
+engineStruct* ClStructParser::processStruct(std::string structCode, MacroManager& macroManager){
     std::vector<engineStruct::field> tempFields;
     engineStruct* structure = new engineStruct();
 
@@ -63,9 +63,12 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
 
 
             engineStruct::field field;
-            field.type = stringToClType(structCode.substr(wordStart, i - wordStart).c_str());
+            field.type = stringToClType(fieldType.c_str());
             if (field.type == engineStruct::cl_invalid){
-                std::fprintf(stderr, "ERR: ClStructParser::processStruct \"%s\" DOES NOT NAME ANY KNOWN TYPE\n", structCode.substr(wordStart, i - wordStart).c_str());
+                if (pointer){
+                    std::printf("pointer, %s\n", fieldType.c_str());
+                }
+                std::fprintf(stderr, "ERR: ClStructParser::processStruct \"%s\" DOES NOT NAME ANY KNOWN TYPE\n", fieldType);
                 delete structure;
                 return nullptr;
             } if (field.type == engineStruct::cl_struct){
@@ -100,14 +103,23 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
                     return nullptr;
                 }
             }
-            if (structCode[i] == ' '){
-                 i = structCode.find_first_not_of(' ', i);
+            bool valueSet = false;
+            if (structCode[i] == '='){
+                valueSet = true;
             }
-
+            long nameEnd = i;
             field.name = structCode.substr(wordStart, i - wordStart).c_str();
             if (field.name[field.name.length() - 1] == ' '){
                 field.name.erase(field.name.length() - 1);
             }
+
+            if (structCode[i] == ' '){
+                i = structCode.find_first_not_of(' ', i);
+            }
+            if (structCode[i] == '='){
+                valueSet = true;
+            }
+
             if (structCode[i] != ';'){
                 i = structCode.find_first_of(';', i);
             }
@@ -118,21 +130,33 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
                     wordStart = i;
                     i = structCode.find_first_of(' ', i);
                     std::string word = structCode.substr(wordStart, i - wordStart).c_str();
-                    if (word == "//ALLOCATE"){//TODO: TE-89
+                    if (word == "//ALLOCATE"){
                         i = structCode.find_first_not_of(' ', i);
                         wordStart = i;
-                        i = structCode.find_first_of(' ', i);
+                        while (structCode[i] != ' ' && structCode[i] != '\n'){
+                            i++;
+                            if (i == structCode.length()){
+                                //err
+                                delete structure;
+                                return nullptr;
+                            }
+                        }
                         word = structCode.substr(wordStart, i - wordStart).c_str();
-                        try {
-                            field.arrSize = std::stoi(word);
-                        } catch (const std::invalid_argument&){
-                            std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT PARSE \"%s\" AS INTEGER\n", word.c_str());
-                            delete structure;
-                            return nullptr;
-                        } catch (const std::out_of_range&){
-                            std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT PARSE \"%s\" AS INTEGER\n", word.c_str());
-                            delete structure;
-                            return nullptr;
+                        const float* macro = macroManager.getMacro(word);
+                        if (macro == nullptr){
+                            try {
+                                field.arrSize = std::stoi(word);
+                            } catch (const std::invalid_argument&){
+                                std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT PARSE \"%s\" AS INTEGER\n", word.c_str());
+                                delete structure;
+                                return nullptr;
+                            } catch (const std::out_of_range&){
+                                std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT PARSE \"%s\" AS INTEGER\n", word.c_str());
+                                delete structure;
+                                return nullptr;
+                            }
+                        } else {
+                            field.arrSize = *macro;
                         }
                     } else {
                         field.arrSize = 1;
@@ -140,11 +164,59 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
                 } else {
                     field.arrSize = 1;
                 }
-                i = structCode.find_first_of('\n', i);
             } else {
                 field.arrSize = 0;
-            }
 
+                if (structCode[i] == '/'){
+                    wordStart = i;
+                    i = structCode.find_first_of(' ', i);
+                    std::string word = structCode.substr(wordStart, i - wordStart).c_str();
+                    if (word == "//SET"){
+                        if (valueSet){
+                            std::printf("WARN: ClStructParser::processStruct VALUE ALREADY SET, IGNORING MACRO\n");
+                        } else {
+                            float valueTOSet;
+                            i = structCode.find_first_not_of(' ', i);
+                            wordStart = i;
+                            while (structCode[i] != ' ' && structCode[i] != '\n'){
+                                i++;
+                                if (i == structCode.length()){
+                                    //err
+                                    delete structure;
+                                    return nullptr;
+                                }
+                            }
+                            
+                            word = structCode.substr(wordStart, i - wordStart).c_str();
+                            const float* macro = macroManager.getMacro(word);
+                            if (macro == nullptr){
+                                try {
+                                    valueTOSet = std::stof(word);
+                                } catch (const std::invalid_argument&){
+                                    std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT PARSE \"%s\" AS FLOAT\n", word.c_str());
+                                    delete structure;
+                                    return nullptr;
+                                } catch (const std::out_of_range&){
+                                    std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT PARSE \"%s\" AS FLOAT\n", word.c_str());
+                                    delete structure;
+                                    return nullptr;
+                                }
+                            } else {
+                                valueTOSet = *macro;
+                            }
+                            std::string toInsert;
+                            if (field.type == engineStruct::cl_float || field.type == engineStruct::cl_double || field.type == engineStruct::cl_half){
+                                toInsert = " = " + std::to_string(valueTOSet);
+                            } else {
+                                toInsert = " = " + std::to_string(int(valueTOSet));
+                            }
+                            structCode.insert(nameEnd, toInsert);
+                            i += toInsert.length();
+                        }
+                    }
+                }
+            }
+            i = structCode.find_first_of('\n', i);
             field.subStruct = nullptr;
             tempFields.push_back(field);
         }
@@ -156,7 +228,7 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
         structure->fields[i] = tempFields.at(i);
     }
 
-
+    std::printf("STRUCT CODE:\n%s\n", structCode.c_str());
     return structure;
 }
 
@@ -188,7 +260,8 @@ engineStruct::cl_type ClStructParser::stringToClType(const char* word){
         {"size_t",         engineStruct::cl_size_t},
         {"void",           engineStruct::cl_void},
         {"struct",         engineStruct::cl_struct},
-        {"__struct",       engineStruct::cl_struct},
+        {"__struct",         engineStruct::cl_struct},
+        {"__struct__",       engineStruct::cl_struct},
     };
 
     try {
