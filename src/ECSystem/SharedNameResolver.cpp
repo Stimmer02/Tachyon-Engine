@@ -16,12 +16,12 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
                 break;
             }
 
+            path_destination_vestibule = path_destination;
+
             // Name does not exist.
             if ((*(path_destination)).next_char[((int) (_name[i] - 'a'))] == nullptr) {
                 // Not the last one.
                 if (i != _name.size() - 1) {
-                    path_destination_vestibule = path_destination;
-
                     // New empty Node.
                     Node newNode = { size_: 0, pointer: NULL };
                     for (int i = 0; i < ALPHABET_SIZE; ++i) {
@@ -34,8 +34,6 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
                 }
                 // The last one.
                 else {
-                    path_destination_vestibule = path_destination;
-
                     // New empty Node.
                     Node newNode = { size_: _size, pointer: _pointer };
                     for (int i = 0; i < ALPHABET_SIZE; ++i) {
@@ -48,7 +46,6 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
                 }
             }
             else {
-                path_destination_vestibule = path_destination;
                 path_destination = (*(path_destination)).next_char[((int) (_name[i] - 'a'))];
 
                 // This already exists.
