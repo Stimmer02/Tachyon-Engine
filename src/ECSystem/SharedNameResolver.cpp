@@ -18,14 +18,45 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
 
             // Name does not exist.
             if ((*(path_destination)).next_char[((int) (_name[i] - 'a'))] == nullptr) {
-                break;
+                // Not the last one.
+                if (i != _name.size() - 1) {
+                    path_destination_vestibule = path_destination;
+
+                    // New empty Node.
+                    Node newNode = { size_: 0, pointer: NULL };
+                    for (int i = 0; i < ALPHABET_SIZE; ++i) {
+                        newNode.next_char[i] = NULL;
+                    }
+                    Node* ptr = &newNode;
+
+                    path_destination = ptr;
+                    (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = path_destination;
+                }
+                // The last one.
+                else {
+                    path_destination_vestibule = path_destination;
+
+                    // New empty Node.
+                    Node newNode = { size_: _size, pointer: _pointer };
+                    for (int i = 0; i < ALPHABET_SIZE; ++i) {
+                        newNode.next_char[i] = NULL;
+                    }
+                    Node* ptr = &newNode;
+
+                    path_destination = ptr;
+                    (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = path_destination;
+                }
             }
+            else {
+                path_destination_vestibule = path_destination;
+                path_destination = (*(path_destination)).next_char[((int) (_name[i] - 'a'))];
 
-            path_destination_vestibule = path_destination;
-            path_destination = (*(path_destination)).next_char[((int) (_name[i] - 'a'))];
+                // This already exists.
+                if (i == _name.size() - 1) {
+                    break;
+                }
+            }
         }
-
-        // TODO.
     }
 }
 
