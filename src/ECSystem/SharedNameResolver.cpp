@@ -31,7 +31,6 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
 
 void * SharedNameResolver::Find(const std::string & _name, const int32_t & _elem_size, const int32_t & _element) {
     if (_name != "") {
-        Node* path_destination_vestibule = root;
         Node* path_destination = root;
         for (size_t i = 0; i < _name.size(); ++i) {
             // Invalid name.
@@ -44,15 +43,10 @@ void * SharedNameResolver::Find(const std::string & _name, const int32_t & _elem
                 return NULL;
             }
 
-            path_destination_vestibule = path_destination;
             path_destination = (*(path_destination)).next_char[((int) (_name[i] - 'a'))];
         }
 
-        if (_element == 0) {
-            return const_cast<void *>((*(path_destination)).pointer);
-        }
-
-        // TODO.
+        return const_cast<void *>((*(path_destination)).pointer + _element * _elem_size);
     }
 
     return NULL;
