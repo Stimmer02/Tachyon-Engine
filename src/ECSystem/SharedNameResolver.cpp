@@ -13,7 +13,7 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
         for (size_t i = 0; i < _name.size(); ++i) {
             // Invalid name.
             if (_name[i] < 'a' || _name[i] > 'z') {
-                break;
+                return;
             }
 
             path_destination_vestibule = path_destination;
@@ -50,7 +50,7 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
 
                 // This already exists.
                 if (i == _name.size() - 1) {
-                    break;
+                    return;
                 }
             }
         }
@@ -87,12 +87,12 @@ void SharedNameResolver::Resize(const std::string & _name, const int32_t & _size
         for (size_t i = 0; i < _name.size(); ++i) {
             // Invalid name.
             if (_name[i] < 'a' || _name[i] > 'z') {
-                break;
+                return;
             }
 
             // Name does not exist.
             if ((*(path_destination)).next_char[((int) (_name[i] - 'a'))] == nullptr) {
-                break;
+                return;
             }
 
             path_destination_vestibule = path_destination;
