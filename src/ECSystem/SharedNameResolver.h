@@ -2,9 +2,10 @@
 #define REDBLACKTREE_H
 
 #include <string.h>
+
 using namespace std;
 
-const int ALPHABET_SIZE = 26;
+#define ALPHABET_SIZE 26
 
 struct Node {
     Node* next_char[ALPHABET_SIZE];
