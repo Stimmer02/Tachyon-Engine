@@ -1,24 +1,24 @@
 #ifndef ENTITYMANAGER_H
 #define ENTITYMANAGER_H
 
-#include "IIterable.h"
+#include "EntityContainerIterator.h"
 
 #include <stdint.h>
 #include <unordered_set>
+#include <vector>
 #include <queue>
 
 using Entity = uint32_t;
 
-class EntityManager : public IIterable<Entity>{
+class EntityManager{
 private:
 
     static Entity currentEntity;
 
-    /* BinaryTree<Entity> or unordered_set _1_placeholder; */
-    std::unordered_set<Entity>::iterator currentElement;
+    // TODO : Consider using BinaryTree<Entity> or skip list for better complexity
 
-    std::unordered_set<Entity> entites;
-    std::priority_queue<Entity> freeIDs;
+    std::unordered_set<Entity> entities;
+    std::priority_queue< Entity, std::vector<int>, std::greater<Entity> > freeIDs; // there must be min heap
 
 public:
 
@@ -40,28 +40,24 @@ public:
 
         }
 
-        entites.insert(entity);
+        entities.insert(entity);
 
         return entity;
     }
 
     void Destroy(const Entity & _entity){
 
-        std::unordered_set<Entity>::iterator it = entites.find(_entity);
+        std::unordered_set<Entity>::iterator it = entities.find(_entity);
 
-        if( it == entites.end() )
+        if( it == entities.end() )
             return;
 
         freeIDs.push( _entity );
 
     }
 
-    bool HasMore() {
-        return currentElement != entites.end();
-    }
-
-    Entity Next() {
-        return *currentElement++;
+    EntityContainerIterator GetIterator(){
+        return EntityContainerIterator(&entities);
     }
 
 };
