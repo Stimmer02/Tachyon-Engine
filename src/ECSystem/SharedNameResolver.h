@@ -9,8 +9,8 @@ using namespace std;
 
 struct Node {
     Node* next_char[ALPHABET_SIZE];
-    const int32_t size_ = 0;
-    const void * pointer;
+    int32_t size_ = 0;
+    void * pointer;
 };
 
 class SharedNameResolver {
