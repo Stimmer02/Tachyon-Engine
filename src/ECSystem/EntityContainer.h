@@ -10,7 +10,7 @@
 
 using Entity = uint32_t;
 
-class EntityManager{
+class EntityContainer{
 private:
 
     static Entity currentEntity;
@@ -22,7 +22,7 @@ private:
 
 public:
 
-    EntityManager(){
+    EntityContainer(){
         currentEntity = 0;
     }
 

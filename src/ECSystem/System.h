@@ -16,13 +16,14 @@ private:
     std::mutex mutex;
     std::queue<Message> messages;
 
+    MessageBus * messageBus;
+
     /// @brief This method is called only if system receive any message
-    /// @param message 
+    /// @param message
     void ReceiveMessage(const Message & _message);
 
 protected:
 
-    MessageBus * messageBus;
     // NameResolver * _1_placeholder;
     // ILogger * _2_placeholder;
 
@@ -50,7 +51,7 @@ protected:
 
 public:
 
-    System(MessageBus * _messageBus);
+    System();
 
     /// @brief Executes system loop
     void Run();

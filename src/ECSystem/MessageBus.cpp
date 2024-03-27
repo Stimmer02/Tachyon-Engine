@@ -53,6 +53,10 @@ void MessageBus::Update(){
 
 }
 
+MessageBus& MessageBus::GetInstance(){
+    static MessageBus instance;
+    return instance;
+}
 
 MessageBus::~MessageBus(){
 

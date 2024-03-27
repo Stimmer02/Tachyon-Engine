@@ -2,28 +2,31 @@
 #define MICROKERNEL_H
 
 #include "System.h"
-#include "MessageBus.h"
+#include "EntityContainer.h"
+#include "EntityContainerIterator.h"
 
 #include <vector>
 
 class Microkernel {
 private:
 
-    MessageBus bus;
-    std::vector<System *> systems;
+    EntityContainer entityContainer;
+    std::vector< System * > systems;
 
 public:
-    Microkernel();
+
+    Microkernel(){
+
+    }
 
     void RegisterSystem(const System * _system){
         systems.emplace_back(_system);
     }
 
-    MessageBus & GetMessageBusHandle(){
-        return bus;
-    }
 
-    ~Microkernel();
+    ~Microkernel(){
+
+    }
 };
 
 #endif

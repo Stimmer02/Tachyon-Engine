@@ -13,8 +13,8 @@ void System::SendMessage(const std::string & channel, IClient * receiver, const 
 
 };
 
-System::System(MessageBus * _messageBus){
-    this->messageBus = _messageBus;
+System::System(){
+    this->messageBus = &MessageBus::GetInstance();
     this->isRunning = false;
 }
 
@@ -57,7 +57,7 @@ void System::Run(){
         }else{
             Execute();
         }
-        
+
     }
 
     OnUnload();
