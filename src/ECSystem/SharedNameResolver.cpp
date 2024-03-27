@@ -35,7 +35,7 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
                 // The last one.
                 else {
                     // New empty Node.
-                    Node newNode = { size_: _size, pointer: _pointer };
+                    Node newNode = { size_: _size, pointer: const_cast<void *>(_pointer) };
                     for (int i = 0; i < ALPHABET_SIZE; ++i) {
                         newNode.next_char[i] = NULL;
                     }
