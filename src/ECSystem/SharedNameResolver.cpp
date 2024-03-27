@@ -82,7 +82,6 @@ void * SharedNameResolver::Find(const std::string & _name, const int32_t & _elem
 
 void SharedNameResolver::Resize(const std::string & _name, const int32_t & _size) {
     if (_name != "") {
-        Node* path_destination_vestibule = root;
         Node* path_destination = root;
         for (size_t i = 0; i < _name.size(); ++i) {
             // Invalid name.
@@ -95,19 +94,12 @@ void SharedNameResolver::Resize(const std::string & _name, const int32_t & _size
                 return;
             }
 
-            path_destination_vestibule = path_destination;
+            // Traveling to the next letter.
             path_destination = (*(path_destination)).next_char[((int) (_name[i] - 'a'))];
         }
 
-        // New similar node with different size.
-        Node newNode = { size_: _size, pointer: (*(path_destination)).pointer };
-        Node* ptr = &newNode;
-        for (int i = 0; i < ALPHABET_SIZE; ++i) {
-            newNode.next_char[i] = (*(path_destination)).next_char[i];
-        }
-
-        // Setting new node in the main tree.
-        (*(path_destination_vestibule)).next_char[_name[_name.size() - 1] - 'a'] = ptr;
+        // Changing size..
+        (*path_destination).size_ = _size;
     }
 }
 
