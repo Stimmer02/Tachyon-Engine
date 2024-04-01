@@ -23,25 +23,27 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
                 // Not the last one.
                 if (i != _name.size() - 1) {
                     // New empty Node.
-                    Node newNode = { size_: 0, pointer: NULL };
+                    Node* newNode = new Node();
+                    (*(newNode)).size_ = 0;
+                    (*(newNode)).pointer = NULL;
                     for (int i = 0; i < ALPHABET_SIZE; ++i) {
-                        newNode.next_char[i] = NULL;
+                        (*(newNode)).next_char[i] = NULL;
                     }
-                    Node* ptr = &newNode;
 
-                    path_destination = ptr;
+                    path_destination = newNode;
                     (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = path_destination;
                 }
                 // The last one.
                 else {
                     // New empty Node.
-                    Node newNode = { size_: _size, pointer: const_cast<void *>(_pointer) };
+                    Node* newNode = new Node();
+                    (*(newNode)).size_ = _size;
+                    (*(newNode)).pointer = const_cast<void *>(_pointer);
                     for (int i = 0; i < ALPHABET_SIZE; ++i) {
-                        newNode.next_char[i] = NULL;
+                        (*(newNode)).next_char[i] = NULL;
                     }
-                    Node* ptr = &newNode;
 
-                    path_destination = ptr;
+                    path_destination = newNode;
                     (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = path_destination;
                 }
             }
