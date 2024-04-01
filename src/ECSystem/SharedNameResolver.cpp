@@ -74,7 +74,9 @@ void * SharedNameResolver::Find(const std::string & _name, const int32_t & _elem
             path_destination = (*(path_destination)).next_char[((int) (_name[i] - 'a'))];
         }
 
-        return const_cast<void *>((*(path_destination)).pointer + _element * _elem_size);
+        if (_element * _elem_size < (*(path_destination)).size_) {
+            return ((*(path_destination)).pointer);
+        }
     }
 
     return NULL;
