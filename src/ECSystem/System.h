@@ -8,11 +8,12 @@
 #include "IRunnable.h"
 #include "IShareable.h"
 
+#include <atomic>
 
 class System : public IClient, public IRunnable, public IShareable{
 private:
 
-    bool isRunning;
+    std::atomic<bool> isRunning;
     std::mutex mutex;
     std::queue<Message> messages;
 

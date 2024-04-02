@@ -9,7 +9,6 @@ UIManager::UIManager(const int &windowWidth, const int &windowHeight, const char
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
 
     glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
@@ -25,16 +24,27 @@ UIManager::UIManager(const int &windowWidth, const int &windowHeight, const char
     glfwMakeContextCurrent(window);
     glfwSwapInterval(enableVSync);
 
-	glLoadIdentity();
-    glOrtho(0, windowWidth, 0, windowHeight, -1.0f, 1.0f);
-    glViewport(0, 0, windowWidth, windowHeight);
-
-	if (glewInit() != GLEW_OK) {
+    glewExperimental = true;
+    if (glewInit() != GLEW_OK) {
         glfwDestroyWindow(window);
         glfwTerminate();
         fprintf(stderr, "Failed to initialize GLEW\n");
         return;
     }
+
+    const GLubyte * renderer = glGetString(GL_RENDERER);
+    const GLubyte * version = glGetString(GL_VERSION);
+
+    printf("Renderer: %s\n", renderer);
+    printf("OpenGL version supported %s\n", version);
+
+    glEnable(GL_DEPTH_TEST);
+
+	glLoadIdentity();
+    glOrtho(0, windowWidth, 0, windowHeight, -1.0f, 1.0f);
+    glViewport(0, 0, windowWidth, windowHeight);
+
+    this->inputHandlingService = nullptr;
 
 }
 
@@ -77,7 +87,7 @@ void UIManager::HandleEvents(){
 
 void UIManager::Update(){
 
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	HandleEvents();
 	Render();

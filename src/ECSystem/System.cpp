@@ -36,10 +36,16 @@ void System::HandleMessage(const Message & message){
 }
 
 void System::Stop(){
-    this->isRunning = false;
+    isRunning = false;
 }
 
 void System::Run(){
+
+#ifdef DEBUG
+
+    fprintf(stdout, "[DEBUG] Loading new system\n");
+
+#endif
 
     OnLoad();
 
@@ -59,6 +65,12 @@ void System::Run(){
         }
 
     }
+
+#ifdef DEBUG
+
+    fprintf(stdout, "[DEBUG] Disposing system\n");
+
+#endif
 
     OnUnload();
 

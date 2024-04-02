@@ -11,7 +11,7 @@ class Microkernel {
 private:
 
     EntityContainer entityContainer;
-    std::vector< System * > systems;
+    std::vector< std::pair<System * , bool> > systems;
 
 public:
 
@@ -20,11 +20,17 @@ public:
     }
 
     void RegisterSystem(const System * _system){
-        systems.emplace_back(_system);
+        systems.emplace_back( std::make_pair(_system, false) );
     }
 
-
     ~Microkernel(){
+
+        for(uint32_t i = 0; i < systems.size(); i++){
+
+            if( systems[i].second == true )
+                delete systems[i].first;
+
+        }
 
     }
 };

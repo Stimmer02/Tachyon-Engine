@@ -7,6 +7,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(TachyonEngine VERSION 1.1)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D DEBUG")
+
 if(WIN32)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lopengl32 -lglfw3 -lglew32 ")
