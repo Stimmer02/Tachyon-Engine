@@ -146,8 +146,8 @@ public:
 
     void SwapBuffers() const{
         assert(window && "Window does not exits");
-        glClear(bufferbits);
         glfwSwapBuffers(window);
+        glClear(bufferbits);
     }
 
     void DestroyWindow(){

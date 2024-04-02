@@ -2,12 +2,17 @@
 #define GRAPHICSYSTEM_H
 
 #include "System.h"
+#include <functional>
 #include "WindowContext.h"
+
+using RenderFunc = std::function<void()>;
 
 class GraphicSystem : public System{
 private:
 
     WindowContext context;
+
+    RenderFunc renderFunc;
 
     void OnLoad() override{
 
@@ -17,11 +22,13 @@ private:
 
     }
 
+
     void Execute() override{
 
-        if ( context.ShouldClose() ){
+        if( context.ShouldClose() )
             this->Stop();
-        }
+
+        renderFunc();
 
         context.PoolEvents();
         context.SwapBuffers();
@@ -29,9 +36,13 @@ private:
     }
 
 public:
-    GraphicSystem() : System(){
+
+    GraphicSystem(const RenderFunc & delegate) : System(){
+
         context.CreateWindow();
         context.SetVSync();
+        this->renderFunc = delegate;
+
     }
 
     void Share() override{
