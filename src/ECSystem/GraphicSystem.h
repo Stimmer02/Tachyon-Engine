@@ -10,8 +10,7 @@ private:
     WindowContext context;
 
     void OnLoad() override{
-        context.CreateWindow();
-        context.SetVSync();
+
     }
 
     void OnUnload() override{
@@ -31,7 +30,8 @@ private:
 
 public:
     GraphicSystem() : System(){
-
+        context.CreateWindow();
+        context.SetVSync();
     }
 
     void Share() override{
