@@ -22,7 +22,6 @@ private:
 
     }
 
-
     void Execute() override{
 
         if( context.ShouldClose() )

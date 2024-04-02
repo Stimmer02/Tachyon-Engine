@@ -2,6 +2,7 @@
 #include "GLShader.h"
 
 #include "Vertex.h"
+#include "Matrix.h"
 
 class Quad{
 private:
@@ -65,7 +66,7 @@ public:
 
 void Render();
 
-void Ortho(float matrix[16], const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far);
+void Ortho(Matrix & matrix, const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far);
 
 std::vector<Quad*> quads;
 
@@ -84,7 +85,7 @@ int main(){
     GLint modelLocation = mainShader.GetUniformLocation("model");
 
     // Fill model matrix
-    float model[16] = {};
+    Matrix model;
     Ortho(model, 0, 800, 0, 600, -1.0f, 1.0f);
 
     // Create objects
@@ -106,7 +107,7 @@ int main(){
     mainShader.Use();
 
     // Transfer model
-    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model);
+    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.data());
 
     graphic.Run();
 
@@ -118,7 +119,7 @@ int main(){
     return 0;
 }
 
-void Ortho(float matrix[16], const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far){
+void Ortho(Matrix & matrix, const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far){
 
     matrix[0] = 2.0f / (right - left);
     matrix[3] = - (right+left)/(right-left);

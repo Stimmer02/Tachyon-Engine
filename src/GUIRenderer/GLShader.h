@@ -6,11 +6,13 @@
 #include <string>
 #include <cassert>
 #include <list>
+#include <unordered_map>
 
 class GLShader{
 private:
 
     std::list<GLuint> shaders;
+    std::unordered_map<std::string, GLuint> uniforms;
 
     GLuint shaderProgram;
 
@@ -78,8 +80,25 @@ public:
         glUseProgram(0);
     }
 
-    GLuint GetUniformLocation(const std::string & variableName){
-        return glGetUniformLocation(shaderProgram, variableName.c_str());
+    GLuint GetUniformLocation(const std::string & uniformName){
+
+        std::unordered_map<std::string, GLuint>::iterator it = uniforms.find(uniformName);
+
+        GLuint location;
+
+        if( it == uniforms.end()){
+
+            location = glGetUniformLocation(shaderProgram, uniformName.c_str());
+            uniforms[uniformName] = location;
+
+        }else{
+
+            location = it->second;
+
+        }
+
+        return location;
+
     }
 
     ~GLShader(){
