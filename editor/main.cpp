@@ -107,7 +107,7 @@ int main(){
     mainShader.Use();
 
     // Transfer model
-    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.data());
+    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
 
     graphic.Run();
 

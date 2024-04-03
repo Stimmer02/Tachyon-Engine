@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include <cassert>
+#include <immintrin.h>
 
 class Matrix{
 
@@ -13,14 +14,14 @@ private:
 public:
 
     Matrix(){
-        loadIdentity();
+        LoadIdentity();
     }
 
     Matrix(const Matrix & otherMatrix){
         memcpy(matrix, otherMatrix.matrix, 16 * sizeof(float));
     }
 
-    void loadIdentity(){
+    void LoadIdentity(){
         memset(matrix, 0, 16 * sizeof(float));
         matrix[0] = 1.0f;
         matrix[5] = 1.0f;
@@ -28,17 +29,40 @@ public:
         matrix[15] = 1.0f;
     }
 
-    void zeros(){
+    void Zeros(){
         memset(matrix, 0, 16 * sizeof(float));
     }
 
-    Matrix transpose() const {
+    Matrix Transpose() const {
 
         Matrix result;
 
+        float * data = result.Data();
+
+    #ifdef __AVXINTRIN_H
+
+        __m128 row1 = _mm_loadu_ps(matrix);
+        __m128 row2 = _mm_loadu_ps(matrix + 4);
+        __m128 row3 = _mm_loadu_ps(matrix + 8);
+        __m128 row4 = _mm_loadu_ps(matrix + 12);
+
+        __m128 tmp1 = _mm_unpacklo_ps(row1, row2);
+        __m128 tmp2 = _mm_unpacklo_ps(row3, row4);
+        __m128 tmp3 = _mm_unpackhi_ps(row1, row2);
+        __m128 tmp4 = _mm_unpackhi_ps(row3, row4);
+
+        _mm_storeu_ps(data, _mm_movelh_ps(tmp1, tmp2));
+        _mm_storeu_ps(data+4, _mm_movehl_ps(tmp2, tmp1));
+        _mm_storeu_ps(data+8, _mm_movelh_ps(tmp3, tmp4));
+        _mm_storeu_ps(data+12, _mm_movehl_ps(tmp4, tmp3));
+
+    #else
+
         for (int i = 0; i < 4; ++i)
             for (int j = 0; j < 4; ++j)
-                result.matrix[i * 4 + j] = matrix[j * 4 + i];
+                data[i * 4 + j] = matrix[j * 4 + i];
+
+    #endif
 
         return result;
     }
@@ -48,10 +72,10 @@ public:
         return matrix[index];
     }
 
-    void luDecompositon(Matrix & L, Matrix & U){
+    void LUDecompositon(Matrix & L, Matrix & U){
 
-        L.zeros();
-        U.zeros();
+        L.Zeros();
+        U.Zeros();
 
         for (int i = 0; i < 4; ++i) {
 
@@ -79,7 +103,7 @@ public:
 
     }
 
-    float determinant() {
+    float Determinant() {
 
         float det1 = matrix[0] * matrix[5] - matrix[1] * matrix[4];
         float det2 = matrix[2] * matrix[7] - matrix[3] * matrix[6];
@@ -91,15 +115,15 @@ public:
         return det;
     }
 
-    Matrix inverse() {
+    Matrix Inverse() {
         Matrix result;
 
-        float det = determinant();
+        float det = Determinant();
 
         assert(det != 0.0f && "Zero determinant");
 
         Matrix L, U;
-        luDecompositon(L, U);
+        LUDecompositon(L, U);
 
         Matrix y;
 
@@ -162,7 +186,7 @@ public:
         return result;
     }
 
-    float * data(){
+    float * Data(){
         return matrix;
     }
 
