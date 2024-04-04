@@ -32,6 +32,7 @@ private:
         context.PoolEvents();
         context.SwapBuffers();
         context.CheckErrors();
+        context.SetVSync(false);
     }
 
 public:

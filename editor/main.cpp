@@ -1,10 +1,11 @@
 #include "GraphicSystem.h"
 #include "GLShader.h"
-
+#include "TransformStack.h"
 #include "Vertex.h"
-#include "Matrix.h"
 
-class Quad{
+#include <chrono>
+
+class Component{
 private:
 
     GLuint vao;
@@ -15,7 +16,7 @@ private:
 
 public:
 
-    Quad(float x, float y){
+    Component(float x, float y){
 
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
@@ -56,7 +57,7 @@ public:
 
     }
 
-    ~Quad(){
+    ~Component(){
         glDeleteBuffers(1, &ebo);
         glDeleteBuffers(1, &vbo);
         glDeleteVertexArrays(1, &vao);
@@ -66,11 +67,17 @@ public:
 
 void Render();
 
-void Ortho(Matrix & matrix, const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far);
+float xOff, yOff, zOff;
 
-std::vector<Quad*> quads;
+GLint modelLocation;
+std::vector<Component*> components;
 
 int main(){
+
+    // Initialize affine stack
+    TransformStack::Initialize();
+    TransformStack::Push();
+    TransformStack::Ortho(0, 800, 0, 600, -100.0f, 100.0f);
 
     // Create system
     GraphicSystem graphic(Render);
@@ -82,60 +89,71 @@ int main(){
     mainShader.Build();
 
     // Locate model in shader
-    GLint modelLocation = mainShader.GetUniformLocation("model");
-
-    // Fill model matrix
-    Matrix model;
-    Ortho(model, 0, 800, 0, 600, -1.0f, 1.0f);
+    modelLocation = mainShader.GetUniformLocation("model"); 
 
     // Create objects
 
     srand(time(NULL));
 
-    for (int i=0; i<100; i++){
+    for (int i=0; i<1000; i++){
 
-        float x = (( rand()/(float)RAND_MAX ) * 2.0f - 1.0f) * 100.0f + 400;
-        float y = (( rand()/(float)RAND_MAX ) * 2.0f - 1.0f) * 100.0f + 300;
+        float x = cos(( rand()/(float)RAND_MAX ) * 2.0f * 3.1415926535f) * 100.0f + 400;
+        float y = sin(( rand()/(float)RAND_MAX ) * 2.0f * 3.1415926535f) * 100.0f + 300;
 
-        Quad *q = new Quad(x, y);
+        Component *q = new Component(x, y);
 
-        quads.emplace_back(q);
+        components.emplace_back(q);
 
     }
 
     // Enable shader
     mainShader.Use();
 
-    // Transfer model
-    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
-
     graphic.Run();
 
     mainShader.Dispose();
 
-    for(Quad * quad : quads)
-        delete quad;
+    for(Component * Component : components)
+        delete Component;
 
     return 0;
 }
 
-void Ortho(Matrix & matrix, const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far){
-
-    matrix[0] = 2.0f / (right - left);
-    matrix[3] = - (right+left)/(right-left);
-    matrix[5] = 2.0f / (top - bottom);
-    matrix[7] = - (top+bottom)/(top-bottom);
-    matrix[10] = -2.0f /(far - near);
-    matrix[11] = - (far + near)/(far - near);
-    matrix[15] = 1.0f;
-
-}
 
 void Render(){
 
-    for(Quad * quad : quads){
-        quad->Draw();
+    static std::chrono::high_resolution_clock::time_point last;
+    static int frames;
+    static float accumulated;
+
+    std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
+    frames++;
+
+
+    float delta = std::chrono::duration_cast< std::chrono::duration<float> >(now - last).count();
+
+    if( delta >= 1.0f){
+        printf("FPS : %d\r", frames);
+        frames = 0;
+        last = now;
     }
 
+    TransformStack::Push();
+    TransformStack::Translate(400, 300, 0);
+    TransformStack::Rotate(xOff, xOff, yOff, 1.0f);
+    TransformStack::Translate(-400, -300, 0);
+    Matrix model = TransformStack::Top();
+    TransformStack::Pop();
+
+    // Transfer model
+    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
+
+    for(Component * component : components){
+        component->Draw();
+    }
+
+    xOff = cos(zOff);
+    yOff = sin(zOff);
+    zOff += 0.1f;
 }
 

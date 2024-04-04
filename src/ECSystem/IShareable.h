@@ -6,7 +6,8 @@
 
 class IShareable {
 public:
-    virtual void Share( /*const SharedNameResolver * resolver*/ ) = 0; 
+    /// @brief Method registers internal components into shared name resolver class
+    virtual void Share( /*const SharedNameResolver * resolver*/) = 0; 
 };
 
 #endif
