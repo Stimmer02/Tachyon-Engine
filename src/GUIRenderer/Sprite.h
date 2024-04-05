@@ -2,20 +2,18 @@
 #define SPRITE_H
 
 #include "Image.h"
+#include <stdio.h>
+#include <map>
 #include <cstring>
 
 #ifdef __APPLE__
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <OpenGL/gl3.h>
-#include <OpenGL/OpenGL.h>
 
 #elif _WIN32
 
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
 
 #else
 
@@ -24,6 +22,9 @@
 #include <GL/glx.h>
 
 #endif
+
+static GLuint pixelBuffer;
+static std::map<uint32_t, GLuint> almanach;
 
 class Sprite {
 
@@ -94,7 +95,6 @@ private:
     uint32_t height;
 
     GLuint textureID;
-    GLuint pixelBuffer;
 
     uint32_t checksum;
 

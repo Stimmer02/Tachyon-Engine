@@ -152,8 +152,10 @@ public:
 
         float * data = rotation.Data();
 
-        float c = cos(angle);
-        float s = sin(angle);
+        float deg2rad = angle * 3.1415926535f/180.0f;
+
+        float c = cos(deg2rad);
+        float s = sin(deg2rad);
 
         data[0] = xAxis * xAxis * (1 - c) + c;
         data[1] = xAxis * yAxis * (1 - c) - s * zAxis;

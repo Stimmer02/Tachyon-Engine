@@ -1,7 +1,6 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <stdint.h>
 #include "Color.h"
 
 struct Image {
@@ -11,6 +10,13 @@ struct Image {
     int32_t x_pixels_per_m;
     int32_t y_pixels_per_m;
     Color * pixels;
+
+    Image(){
+        width = 0;
+        height = 0;
+        pixels = nullptr;
+    }
+
 };
 
 

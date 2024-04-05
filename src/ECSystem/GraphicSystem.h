@@ -7,6 +7,14 @@
 
 using RenderFunc = std::function<void()>;
 
+namespace GraphicConfig{
+    const char * windowTitle = "Window";
+    int32_t windowWidth = 800;
+    int32_t windowHeight = 600;
+    bool vsync = true;
+    bool zbuffer = true;
+};
+
 class GraphicSystem : public System{
 private:
 
@@ -15,7 +23,7 @@ private:
     RenderFunc renderFunc;
 
     void OnLoad() override{
-
+        
     }
 
     void OnUnload() override{
@@ -32,15 +40,16 @@ private:
         context.PoolEvents();
         context.SwapBuffers();
         context.CheckErrors();
-        context.SetVSync(false);
     }
 
 public:
 
     GraphicSystem(const RenderFunc & delegate) : System(){
 
-        context.CreateWindow();
-        context.SetVSync();
+        context.CreateWindow(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
+        context.SetVSync( GraphicConfig::vsync );
+        context.SetZBuffer( GraphicConfig::zbuffer );
+
         this->renderFunc = delegate;
 
     }
