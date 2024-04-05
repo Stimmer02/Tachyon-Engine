@@ -1,26 +1,23 @@
 #ifndef GRAPHICSYSTEM_H
 #define GRAPHICSYSTEM_H
 
+#include "AttributeContainer.h"
+#include "TransformStack.h"
 #include "System.h"
-#include <functional>
+#include "Sprite.h"
 #include "WindowContext.h"
+#include "Settings.h"
+
+#include <functional>
 
 using RenderFunc = std::function<void()>;
-
-namespace GraphicConfig{
-    const char * windowTitle = "Window";
-    int32_t windowWidth = 800;
-    int32_t windowHeight = 600;
-    bool vsync = true;
-    bool zbuffer = true;
-};
 
 class GraphicSystem : public System{
 private:
 
-    WindowContext context;
+    WindowContext * context;
 
-    RenderFunc renderFunc;
+    AttributeContainer<Sprite> textures;
 
     void OnLoad() override{
         
@@ -30,27 +27,24 @@ private:
 
     }
 
-    void Execute() override{
+    void Execute(){
 
-        if( context.ShouldClose() )
-            this->Stop();
-
-        renderFunc();
-
-        context.PoolEvents();
-        context.SwapBuffers();
-        context.CheckErrors();
+        context->PoolEvents();
+        context->SwapBuffers();
+        context->CheckErrors();
     }
 
 public:
 
-    GraphicSystem(const RenderFunc & delegate) : System(){
+    GraphicSystem(WindowContext * context) : System(){
 
-        context.CreateWindow(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
-        context.SetVSync( GraphicConfig::vsync );
-        context.SetZBuffer( GraphicConfig::zbuffer );
+        this->context = context;
 
-        this->renderFunc = delegate;
+        context->CreateWindow(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
+        context->SetVSync( GraphicConfig::vsync );
+        context->SetZBuffer( GraphicConfig::zbuffer );
+
+        TransformStack::Initialize();
 
     }
 

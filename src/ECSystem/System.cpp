@@ -16,6 +16,13 @@ void System::SendMessage(const std::string & channel, IClient * receiver, const 
 System::System(){
     this->messageBus = &MessageBus::GetInstance();
     this->isRunning = false;
+
+#ifdef DEBUG
+
+    fprintf(stdout, "[DEBUG] Loading new system\n");
+
+#endif
+
 }
 
 void System::ReceiveMessage(const Message & _message){
@@ -41,17 +48,11 @@ void System::Stop(){
 
 void System::Run(){
 
-#ifdef DEBUG
+    // OnLoad();
 
-    fprintf(stdout, "[DEBUG] Loading new system\n");
+    // isRunning = true;
 
-#endif
-
-    OnLoad();
-
-    isRunning = true;
-
-    while( isRunning ){
+    // while( isRunning ){
 
         // Its written like that on purpose for cache coherence and minimalization of cache miss
 
@@ -64,14 +65,14 @@ void System::Run(){
             Execute();
         }
 
-    }
+    // }
 
-#ifdef DEBUG
+// #ifdef DEBUG
 
-    fprintf(stdout, "[DEBUG] Disposing system\n");
+//     fprintf(stdout, "[DEBUG] Disposing system\n");
 
-#endif
+// #endif
 
-    OnUnload();
+    // OnUnload();
 
 }

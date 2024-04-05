@@ -17,9 +17,11 @@ private:
 
     Sprite * sprite;
 
-    vertex vertices[4];
+    std::array<vertex, 4> vertices;
 
 public:
+
+    float xO, yO;
 
     Component(float x, float y){
 
@@ -39,7 +41,7 @@ public:
 
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(vertex), vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(vertex), vertices.data(), GL_STATIC_DRAW);
 
         GLuint indices[6] = {0, 1, 3, 1, 2, 3};
 
@@ -66,13 +68,9 @@ public:
         sprite->Load();
 
         glBindVertexArray(vao);
-        // glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-        // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        // glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
 
         sprite->UnLoad();
@@ -102,14 +100,17 @@ int main(){
     GraphicConfig::vsync = false;
     GraphicConfig::windowHeight = 1000;
     GraphicConfig::windowWidth = 1000;
+    GraphicConfig::windowTitle = "Translations";
 
-    // Initialize affine stack
-    TransformStack::Initialize();
-    TransformStack::Push();
-    TransformStack::Ortho(0, 1000, 0, 1000, -100.0f, 100.0f);
+    // Create context
+    WindowContext context;
 
     // Create system
-    GraphicSystem graphic(Render);
+    GraphicSystem graphic( &context );
+
+    // Initialize affine stack
+    TransformStack::Push();
+    TransformStack::Ortho(0, 1000, 0, 1000, -100.0f, 100.0f);
 
     // Create shader
     GLShader mainShader;
@@ -127,24 +128,35 @@ int main(){
     float x = 500;
     float y = 500;
 
-    for (int i = 0; i<100; i++){
+    // for (int i = 0; i<100; i++){
 
-        float angle = (rand()/(float)RAND_MAX)*2.0f * 3.1415926535f;
+    //     float angle = (rand()/(float)RAND_MAX)*2.0f * 3.1415926535f;
        
-        float radius = (rand()/(float)RAND_MAX)*50.0f + 10.0f;
+    //     float radius = (rand()/(float)RAND_MAX)*50.0f + 10.0f;
 
-        float nx = cos(angle) * radius + x;
-        float ny = sin(angle) * radius + y;
+    //     float nx = cos(angle) * radius + x;
+    //     float ny = sin(angle) * radius + y;
 
-        Component * q = new Component(nx, ny);
+    //     Component * q = new Component(nx, ny);
 
-        components.emplace_back(q);
-    }
+    //     components.emplace_back(q);
+    // }
     
     // Enable shader
     mainShader.Use();
 
-    graphic.Run();
+    TransformStack::Push();
+    TransformStack::Translate(500, 500, 0);
+    TransformStack::Scale(5, 5, 1);
+    TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
+
+    while( !context.ShouldClose() ){
+
+        graphic.Run();
+
+    }
+
+    TransformStack::Pop();
 
     mainShader.Dispose();
 
@@ -173,24 +185,32 @@ void Render(){
         last = now;
     }
 
-    TransformStack::Push();
-    TransformStack::Translate(500, 500, 0);
-    TransformStack::Scale(5, 5, 1);
-    TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
-    TransformStack::Rotate(xOff*10.0f, xOff, yOff, yOff);
-    TransformStack::Translate(-500, -500, 0);
-    Matrix model = TransformStack::Top();
-    TransformStack::Pop();
+    
+    for (int i = 0; i < components.size(); i++) {
+        Component* component = components[i];
 
-    // Transfer model
-    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
+        TransformStack::Push();
 
-    for(Component * component : components){
+        // Calculate individual rotation for each component
+        float componentXOff = component->xO;
+        float componentYOff = component->yO;
+        TransformStack::Rotate(componentXOff * 10.0f, componentXOff, componentYOff, 1.0f);
+
+        TransformStack::Translate(-500, -500, 0);
+
+        Matrix model = TransformStack::Top();
+        TransformStack::Pop();
+
+        // Transfer model
+        glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
+
+        component->yO = component->xO * 0.1f;
+        component->xO = zOff * (i + 1) / (float)components.size();
+
         component->Draw();
     }
 
-    xOff = cos(zOff);
-    yOff = sin(zOff);
+
     zOff += 0.1f;
 
 }
