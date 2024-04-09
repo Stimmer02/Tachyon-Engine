@@ -2,6 +2,7 @@
 #define EVENTREGISTER_H
 
 #include <fstream>
+#include <iostream>
 
 #include "ILog.h"
 
