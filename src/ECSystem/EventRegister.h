@@ -1,24 +1,26 @@
 #ifndef EVENTREGISTER_H
 #define EVENTREGISTER_H
 
-#include <fstream>
+#include <stdio.h>
 #include <iostream>
 #include <mutex>
 #include <queue>
 #include <ctime>
 #include <chrono>
 #include <cstdarg>
+#include <cstdio>
+#include <ctime>
 
 #include "ILog.h"
 #include "MessageType.h"
+#include "EventQueueElement.h"
 
 class EventRegister : public ILog{
 private:
-    std::priority_queue<std::pair<std::pair<std::time_t, MessageType>, std::string> > eventQueue;
+    std::priority_queue<EventQueueElement, std::vector<EventQueueElement>, std::greater<EventQueueElement> > eventQueue;
     std::mutex mut;
-    std::fstream logFile;
+    FILE* logFile;
 
-    bool queueElementsComperator(const std::pair<std::pair<std::time_t, MessageType>, std::string> &var1, const std::pair<std::pair<std::time_t, MessageType>, std::string>  &var2);
 public:
 
     EventRegister();
@@ -27,6 +29,8 @@ public:
     void Write(enum MessageType _type, const char * _format, ...) override;
 
     void Flush();
+
+    const char* MessageTypeToString(MessageType type);
 
 };
 
