@@ -16,9 +16,11 @@ EventRegister::~EventRegister(){
 }
 
 void EventRegister::Write(enum MessageType _type, const char * _format, ...){
+    std::unique_lock<std::mutex> loc(mut);
 
 }
 
 void EventRegister::Flush(){
+    std::unique_lock<std::mutex> loc(mut);
     flush(logFile);
 }

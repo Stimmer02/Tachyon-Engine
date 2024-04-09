@@ -3,11 +3,13 @@
 
 #include <fstream>
 #include <iostream>
+#include <mutex>
 
 #include "ILog.h"
 
 class EventRegister : public ILog{
 private:
+    std::mutex mut;
     std::fstream logFile;
 public:
 
