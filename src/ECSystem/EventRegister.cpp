@@ -16,8 +16,21 @@ EventRegister::~EventRegister(){
 }
 
 void EventRegister::Write(enum MessageType _type, const char * _format, ...){
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    char* helper = new char[4096]; //tyle powinno wystarczyć
+
+    va_list args;
+    va_start(args, _format);
+
+    sprintf(helper, _format, args);
+
+    va_end(args);
+
     std::unique_lock<std::mutex> loc(mut);
 
+    eventQueue.push({{currentTime, _type}, std::string(helper)});
+
+    delete [] helper;
 }
 
 void EventRegister::Flush(){
