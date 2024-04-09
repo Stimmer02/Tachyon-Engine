@@ -20,15 +20,14 @@ private:
     AttributeContainer<Sprite> textures;
 
     void OnLoad() override{
-        
+
     }
 
     void OnUnload() override{
 
     }
 
-    void Execute(){
-
+    void Execute() override{
         context->PoolEvents();
         context->SwapBuffers();
         context->CheckErrors();

@@ -1,4 +1,5 @@
 #include "GraphicSystem.h"
+#include "InteractionSystem.h"
 #include "GLShader.h"
 #include "TransformStack.h"
 #include "Vertex.h"
@@ -7,6 +8,7 @@
 #include "Sprite.h"
 
 #include <chrono>
+#include <array>
 
 class Component{
 private:
@@ -60,7 +62,7 @@ public:
         sprite = Sprite::Create(&image);
 
         delete[] image.pixels;
-        
+
     }
 
     void Draw() const{
@@ -88,16 +90,99 @@ public:
 
 };
 
+class Button {
+private:
+    GLuint vao;
+    GLuint vbo;
+    GLuint ebo;
+
+    Sprite * sprite;
+
+    std::array<vertex, 4> vertices;
+    std::function<void()> onClick;
+
+public:
+    Button(float x, float y, float width, float height){
+
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vbo);
+        glGenBuffers(1, &ebo);
+
+        vertices[0] = {-5 + x, -5 + y, 0.0f};
+        vertices[1] = { 5 + x, -5 + y, 0.0f};
+        vertices[2] = { 5 + x,  5 + y, 0.0f};
+        vertices[3] = {-5 + x,  5 + y, 0.0f};
+
+        vertices[0].uvs = { 0.0f, 0.0f};
+        vertices[1].uvs = { 1.0f, 0.0f};
+        vertices[2].uvs = { 1.0f, 1.0f};
+        vertices[3].uvs = { 0.0f, 1.0f};
+
+        glBindVertexArray(vao);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(vertex), vertices.data(), GL_STATIC_DRAW);
+
+        GLuint indices[6] = {0, 1, 3, 1, 2, 3};
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indices, GL_STATIC_DRAW);
+
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, pos));
+
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, uvs));
+
+        glBindVertexArray(0);
+
+        Image image = BitmapReader::ReadFile("resources/sprites/button.bmp");
+        sprite = Sprite::Create(&image);
+
+        delete[] image.pixels;
+    }
+
+    void Draw(){
+        sprite->Load();
+
+        glBindVertexArray(vao);
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        glBindVertexArray(0);
+
+        sprite->UnLoad();
+
+    }
+
+    bool IsMouseOver(float mouseX, float mouseY) const {
+        return (vertices[0].pos.x <= mouseX && mouseX <= vertices[1].pos.x) &&
+                (vertices[0].pos.y <= mouseY && mouseY <= vertices[2].pos.y);
+    }
+
+    void OnClick() const {
+        if (onClick)
+            onClick();
+    }
+
+    ~Button() {
+        delete sprite;
+
+        glDeleteBuffers(1, &ebo);
+        glDeleteBuffers(1, &vbo);
+        glDeleteVertexArrays(1, &vao);
+    }
+};
+
 void Render();
 
-float xOff, yOff, zOff;
 
 GLint modelLocation;
 std::vector<Component*> components;
 
 int main(){
 
-    GraphicConfig::vsync = false;
+    GraphicConfig::vsync = true;
+    GraphicConfig::zbuffer = true;
     GraphicConfig::windowHeight = 1000;
     GraphicConfig::windowWidth = 1000;
     GraphicConfig::windowTitle = "Translations";
@@ -107,6 +192,7 @@ int main(){
 
     // Create system
     GraphicSystem graphic( &context );
+    InteractionSystem interaction( &context );
 
     // Initialize affine stack
     TransformStack::Push();
@@ -119,44 +205,26 @@ int main(){
     mainShader.Build();
 
     // Locate model in shader
-    modelLocation = mainShader.GetUniformLocation("model"); 
+    modelLocation = mainShader.GetUniformLocation("model");
 
     // Create objects
-    srand(time(NULL));
 
+    Component * button = new Component(500, 500);
 
-    float x = 500;
-    float y = 500;
+    components.emplace_back(button);
 
-    // for (int i = 0; i<100; i++){
-
-    //     float angle = (rand()/(float)RAND_MAX)*2.0f * 3.1415926535f;
-       
-    //     float radius = (rand()/(float)RAND_MAX)*50.0f + 10.0f;
-
-    //     float nx = cos(angle) * radius + x;
-    //     float ny = sin(angle) * radius + y;
-
-    //     Component * q = new Component(nx, ny);
-
-    //     components.emplace_back(q);
-    // }
-    
     // Enable shader
     mainShader.Use();
 
-    TransformStack::Push();
-    TransformStack::Translate(500, 500, 0);
-    TransformStack::Scale(5, 5, 1);
-    TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
 
     while( !context.ShouldClose() ){
 
         graphic.Run();
+        interaction.Run();
+
+        Render();
 
     }
-
-    TransformStack::Pop();
 
     mainShader.Dispose();
 
@@ -176,42 +244,22 @@ void Render(){
     std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
     frames++;
 
-
     float delta = std::chrono::duration_cast< std::chrono::duration<float> >(now - last).count();
 
     if( delta >= 1.0f){
         printf("FPS : %d\r", frames);
+        fflush(stdout);
         frames = 0;
         last = now;
     }
 
-    
+    Matrix model = TransformStack::Top();
+    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
+
+
     for (int i = 0; i < components.size(); i++) {
-        Component* component = components[i];
-
-        TransformStack::Push();
-
-        // Calculate individual rotation for each component
-        float componentXOff = component->xO;
-        float componentYOff = component->yO;
-        TransformStack::Rotate(componentXOff * 10.0f, componentXOff, componentYOff, 1.0f);
-
-        TransformStack::Translate(-500, -500, 0);
-
-        Matrix model = TransformStack::Top();
-        TransformStack::Pop();
-
-        // Transfer model
-        glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
-
-        component->yO = component->xO * 0.1f;
-        component->xO = zOff * (i + 1) / (float)components.size();
-
+        Component * component = components[i];
         component->Draw();
     }
 
-
-    zOff += 0.1f;
-
 }
-

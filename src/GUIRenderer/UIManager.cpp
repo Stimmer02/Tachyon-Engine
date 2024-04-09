@@ -52,11 +52,6 @@ void UIManager::AssignEventHandlingService(IEventHandlingService * _eventHandlin
 	eventHandlingService = _eventHandling;
 }
 
-void UIManager::AssignInputHandlingService(IInputHandler * _inputHandler){
-	inputHandlingService = _inputHandler;
-	_inputHandler->BindWindow(window);
-}
-
 void UIManager::AddComponentToScene(Component * component){
 	scene.AddComponent(component);
 }

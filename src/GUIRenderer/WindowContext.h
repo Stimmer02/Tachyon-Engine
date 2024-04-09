@@ -93,7 +93,7 @@ public:
 
     void ShareContext(IShareableContext * client) const{
         assert(window && "Window does not exits");
-        client->ShareContext(window);
+        client->AcceptGLFWContext(window);
     }
 
     void BindMouseButtonCallback(GLFWmousebuttonfun callback) const{

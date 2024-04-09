@@ -50,8 +50,6 @@ public:
 
 	void AssignEventHandlingService(IEventHandlingService* _eventHandling);
 
-	void AssignInputHandlingService(IInputHandler* _inputHandler);
-
 	void AddComponentToScene(Component* component);
 
 	void Update();

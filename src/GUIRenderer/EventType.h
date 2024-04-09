@@ -1,13 +1,13 @@
 #ifndef EVENTTYPE_H
 #define EVENTTYPE_H
 
-enum EventType{
+enum EventType : char{
+    NONE,
     ONHOVER,
-    ONMOVE,
     ONCLICK,
-    ONSLIDE,
-    ONPRESS,
-    ONLOAD,
+    ONTRIGGER,
+    ONRELEASE,
+    ONMOVE,
     EVENTCOUNT
     //Etc...
 };

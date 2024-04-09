@@ -6,7 +6,7 @@
 class IShareableContext{
 public:
 
-    virtual void ShareContext( GLFWwindow * window ) = 0;
+    virtual void AcceptGLFWContext( GLFWwindow * window ) = 0;
 
 };
 
