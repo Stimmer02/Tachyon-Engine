@@ -47,8 +47,8 @@ void EventRegister::Flush(){
         eqe = eventQueue.top();
         eventQueue.pop();
         strftime(time, sizeof(time), "%d %b %Y %H:M:%S", localtime(&eqe.time));
-        fprintf(logFile, "%s, %s, %s", time, MessageTypeToString(eqe.type), eqe.data.c_str());
-
+        fprintf(logFile, "%s", "ABC");
+//         fprintf(logFile, "%s, %s, %s", time, MessageTypeToString(eqe.type), eqe.data.c_str());
     }
     fflush(logFile);
 }

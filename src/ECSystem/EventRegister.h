@@ -21,6 +21,7 @@ private:
     std::mutex mut;
     FILE* logFile;
 
+    const char* MessageTypeToString(MessageType type);
 public:
 
     EventRegister();
@@ -30,7 +31,6 @@ public:
 
     void Flush();
 
-    const char* MessageTypeToString(MessageType type);
 
 };
 
