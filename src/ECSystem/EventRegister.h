@@ -20,10 +20,9 @@ private:
     std::priority_queue<EventQueueElement, std::vector<EventQueueElement>, std::greater<EventQueueElement> > eventQueue;
     std::mutex mut;
     FILE* logFile;
-
-    const char* MessageTypeToString(MessageType type);
+    const char* types[TYPE_COUNT] = TYPE_STRINGS;
 public:
-
+    EventRegister(const char* filepath);
     EventRegister();
     ~EventRegister();
 
