@@ -1,7 +1,11 @@
 #include "ClStructParser.h"
-#include "engineStruct.h"
 
-engineStruct* ClStructParser::processStruct(std::string structCode, MacroManager& macroManager){
+ClStructParser::ClStructParser(MacroManager* macroManager, SizeCalculator* sizeCalculator){
+    this->macroManager = macroManager;
+    this->sizeCalculator = sizeCalculator;
+}
+
+engineStruct* ClStructParser::processStruct(std::string structCode){
     std::vector<engineStruct::field> tempFields;
     engineStruct* structure = new engineStruct();
 
@@ -142,7 +146,7 @@ engineStruct* ClStructParser::processStruct(std::string structCode, MacroManager
                             }
                         }
                         word = structCode.substr(wordStart, i - wordStart).c_str();
-                        const float* macro = macroManager.getMacro(word);
+                        const float* macro = macroManager->getMacro(word);
                         if (macro == nullptr){
                             try {
                                 field.arrSize = std::stoi(word);
@@ -188,7 +192,7 @@ engineStruct* ClStructParser::processStruct(std::string structCode, MacroManager
                             }
                             
                             word = structCode.substr(wordStart, i - wordStart).c_str();
-                            const float* macro = macroManager.getMacro(word);
+                            const float* macro = macroManager->getMacro(word);
                             if (macro == nullptr){
                                 try {
                                     valueTOSet = std::stof(word);
@@ -228,7 +232,13 @@ engineStruct* ClStructParser::processStruct(std::string structCode, MacroManager
         structure->fields[i] = tempFields.at(i);
     }
 
-    std::printf("STRUCT CODE:\n%s\n", structCode.c_str());
+    if (sizeCalculator->calculate(structure)){
+        std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT CALCULATE STRUCTURE SIZE\n");
+        delete structure;
+        return nullptr;
+    }
+
+    // std::printf("STRUCT CODE:\n%s\n", structCode.c_str());
     return structure;
 }
 

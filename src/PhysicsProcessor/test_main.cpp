@@ -11,22 +11,22 @@ int main(){
         fileContents += line + '\n';
     }
 
-    ClStructParser clParser;
-    SizeCalculator sCalc(8);
-
     MacroManager macroManager;
+    SizeCalculator sCalc(8);
+    ClStructParser clParser(&macroManager, &sCalc);
+
     if (macroManager.parseFile("/home/stimmer02/Documents/UMCS/SEMESTR_6/projetk_zespolowy/tachion-engine/config/macros.cfg")){
         std::fprintf(stderr, "Error has occured\n");
         return -1;
     }
 
-    engineStruct* structure = clParser.processStruct(fileContents, macroManager);
+    //Example ClStructParser usage
+    engineStruct* structure = clParser.processStruct(fileContents);
     if (structure == nullptr){
         std::fprintf(stderr, "Error has occured\n");
         return -1;
     }
 
-    sCalc.calculate(structure);
 
     std::printf("name: %s; size: %d; field count: %d\n", structure->name.c_str(), structure->byteSize, structure->fieldCount);
     for (uint i = 0; i < structure->fieldCount; i++){

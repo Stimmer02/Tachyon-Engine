@@ -3,6 +3,8 @@
 
 #include "engineStruct.h"
 #include "MacroManager.h"
+#include "engineStruct.h"
+#include "SizeCalculator.h"
 #include <vector>
 #include <map>
 #include <cstring>
@@ -12,10 +14,14 @@
 
 class ClStructParser{
 public:
-    engineStruct* processStruct(std::string structCode, MacroManager& macroManager);
+    ClStructParser(MacroManager* macroManager, SizeCalculator* sizeCalculator);
+    engineStruct* processStruct(std::string structCode);
 
 private:
     engineStruct::cl_type stringToClType(const char* word);
+
+    MacroManager* macroManager;
+    SizeCalculator* sizeCalculator;
 };
 
 
