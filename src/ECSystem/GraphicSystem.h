@@ -39,7 +39,7 @@ public:
 
         this->context = context;
 
-        context->CreateWindow(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
+        context->Open(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
         context->SetVSync( GraphicConfig::vsync );
         context->SetZBuffer( GraphicConfig::zbuffer );
 
@@ -52,7 +52,7 @@ public:
     }
 
     ~GraphicSystem(){
-
+        
     }
 };
 

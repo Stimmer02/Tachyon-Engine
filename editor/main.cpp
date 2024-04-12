@@ -175,8 +175,6 @@ public:
 
 void Render();
 
-MouseButtonMonitor * mouseMonitor;
-
 GLint modelLocation;
 std::vector<Component*> components;
 
@@ -194,10 +192,8 @@ int main(){
     // Create system
     GraphicSystem graphic( &context );
 
-    MouseButtonMonitor monitor;
-    KeyboardMonitor keyMonitor;
-
-    mouseMonitor = &monitor;
+    MouseButtonMonitor monitor( &context );
+    //KeyboardMonitor keyMonitor( &context );
 
     // Initialize affine stack
     TransformStack::Push();
@@ -220,8 +216,6 @@ int main(){
 
     // Enable shader
     mainShader.Use();
-
-    const char *estr[EventType::EVENT_COUNT] = EVENT_STRINGS;
 
     while( !context.ShouldClose() ){
 
@@ -256,20 +250,13 @@ void Render(){
         last = now;
     }
 
-    static float dx, dy, dz, angle;
-
-    EventInfo e = mouseMonitor->Query(GLFW_MOUSE_BUTTON_LEFT);
-
-    dx = sin(angle)  * delta ;
-    dy = cos(angle + delta) * delta;
-    dz = cos(angle) * delta;
-
-    angle += delta * 0.1f;
+    static float angle;
+    angle += 1.0f;
 
     TransformStack::Push();
     TransformStack::Translate(500.0f, 500.0f ,0.0f);
     TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
-    TransformStack::Rotate(angle, dx, dy, dz);
+    TransformStack::Rotate(angle, 0.0f, 0.0f, 1.0f);
     TransformStack::Scale(20.0f, 20.0f, 1.0f);
     TransformStack::Translate(-500.0f, -500.0f ,0.0f);
 

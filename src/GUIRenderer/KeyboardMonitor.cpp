@@ -1,8 +1,8 @@
 #include "KeyboardMonitor.h"
 
 
-KeyboardMonitor::KeyboardMonitor(){
-    this->window = glfwGetCurrentContext();
+KeyboardMonitor::KeyboardMonitor(WindowContext * context){
+    this->window = context;
     memset(lastKeyboardStates, GLFW_RELEASE, sizeof(char) * GLFW_MOUSE_BUTTON_LAST);
 }
 
@@ -15,7 +15,7 @@ EventInfo KeyboardMonitor::Query(int button){
     if( button >= GLFW_KEY_LAST)
         return info;
 
-    int currentState = glfwGetKey(window, button);
+    int currentState = window->GetKeyboardKey(button);
 
     // Check if the key is held
     bool isButtonHeld = (currentState == GLFW_PRESS) && (lastKeyboardStates[button] == GLFW_PRESS);
@@ -39,4 +39,8 @@ EventInfo KeyboardMonitor::Query(int button){
     lastKeyboardStates[button] = currentState;
 
     return info;
+}
+
+KeyboardMonitor::~KeyboardMonitor(){
+    
 }

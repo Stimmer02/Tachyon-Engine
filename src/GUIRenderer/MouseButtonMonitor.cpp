@@ -1,74 +1,25 @@
 #include "MouseButtonMonitor.h"
 
-MouseButtonMonitor::MouseButtonMonitor(){
-    this->window = glfwGetCurrentContext();
-    this->normal = nullptr;
-    this->active = nullptr;
-
+MouseButtonMonitor::MouseButtonMonitor(WindowContext * context){
+    this->window = context;
     memset(lastMouseStates, GLFW_RELEASE, sizeof(char) * GLFW_MOUSE_BUTTON_LAST);
-
-}
-
-void MouseButtonMonitor::SetNormalCursor(const unsigned char* pixels, const size_t & width, const size_t & height){
-
-    // Return if there is no pixels
-    if(!pixels)
-        return;
-
-    // Create temporary structure which holds image info
-    GLFWimage temporary;
-
-    temporary.width = width;
-    temporary.height = height;
-    temporary.pixels = (unsigned char*)pixels;
-
-    // Create new normal cursor;
-    normal = glfwCreateCursor(&temporary, 0, 0);
-
-    // Enable custom cursor within current window scope
-    if(window)
-        glfwSetCursor(window, normal);
-
-}
-
-void MouseButtonMonitor::SetActiveCursor(const unsigned char* pixels, const size_t & width, const size_t & height){
-
-    // Return if there is no pixels
-    if(!pixels)
-        return;
-
-    // Create temporary structure which holds image info
-    GLFWimage temporary;
-
-    temporary.width = width;
-    temporary.height = height;
-    temporary.pixels = (unsigned char*)pixels;
-
-    // Create new normal cursor;
-    active = glfwCreateCursor(&temporary, 0, 0);
 
 }
 
 MouseButtonMonitor::~MouseButtonMonitor(){
 
-    if(normal)
-        glfwDestroyCursor(normal);
-
-    if(active)
-        glfwDestroyCursor(active);
 
 }
 
 EventInfo MouseButtonMonitor::Query(int button){
 
-    assert(window != nullptr && "OpenGL context can't be null");
-
     EventInfo info = {};
 
     double mouseX, mouseY;
+    
     // Read current mouse position and window size
-    glfwGetCursorPos(window, &mouseX, &mouseY);
-    glfwGetWindowSize(window, &width, &height);
+    window->GetMousePos(mouseX, mouseY);
+    window->GetWindowSize(width, height);
 
     // Apply vertical correction
     mouseY = height-mouseY;
@@ -82,7 +33,7 @@ EventInfo MouseButtonMonitor::Query(int button){
     // Check if the mouse has moved
     bool positionChanged = (mouseX != lastXPosition || mouseY != lastYPosition);
 
-    int currentState = glfwGetMouseButton(window, button);
+    int currentState = window->GetMouseButton(button);
 
     // Check if the mouse button is triggered
     bool isButtonHeld = (currentState == GLFW_PRESS) && (lastMouseStates[button] == GLFW_PRESS);

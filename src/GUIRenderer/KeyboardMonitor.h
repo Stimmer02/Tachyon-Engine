@@ -2,6 +2,7 @@
 #define MOUSEBUTTONMONITOR_H
 
 #include "EventInfo.h"
+#include "WindowContext.h"
 #include <GLFW/glfw3.h>
 #include <cassert>
 
@@ -11,16 +12,17 @@ class KeyboardMonitor {
 
 private:
 
-    GLFWwindow * window;
+    WindowContext * window;
 
     char lastKeyboardStates[GLFW_KEY_LAST];
 
 public:
 
-    KeyboardMonitor();
-
+    KeyboardMonitor(WindowContext * window);
 
     EventInfo Query(int button);
+
+    ~KeyboardMonitor();
 
 };
 

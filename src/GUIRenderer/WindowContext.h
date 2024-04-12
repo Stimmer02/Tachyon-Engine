@@ -1,6 +1,8 @@
 #ifndef WINDOWCONTEXT_H
 #define WINDOWCONTEXT_H
 
+#pragma once
+
 #include <GL/glew.h>
 #include <string>
 #include <cassert>
@@ -55,7 +57,7 @@ public:
 
     }
 
-    void CreateWindow(const int & width = 800, const int & height = 600, const std::string & title = "Window"){
+    void Open(const int & width = 800, const int & height = 600, const std::string & title = "Window"){
         assert(width > 0 && height > 0 && "Invalid dimensions");
 
         window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
@@ -135,6 +137,11 @@ public:
         }
     }
 
+    void Close() const{
+        assert(window && "Window does not exits");
+        glfwSetWindowShouldClose(window, true);
+    }
+
     bool ShouldClose() const{
         assert(window && "Window does not exits");
         return glfwWindowShouldClose(window);
@@ -142,6 +149,26 @@ public:
 
     void PoolEvents() const{
         glfwPollEvents();
+    }
+
+    int GetMouseButton(const int & button) const{
+        if( button >= GLFW_MOUSE_BUTTON_LAST)
+            return 0;
+        return glfwGetMouseButton(window, button);
+    }
+
+    int GetKeyboardKey(const int & key) const{
+        if( key >= GLFW_KEY_LAST)
+            return 0;
+        return glfwGetKey(window, key);
+    }
+
+    void GetMousePos(double & x, double & y) const{
+        glfwGetCursorPos(window, &x, &y);
+    }
+
+    void GetWindowSize(int & width, int & height) const{
+        glfwGetWindowSize(window, &width, &height);
     }
 
     void SwapBuffers() const{
