@@ -2,8 +2,7 @@
 #define KEYBOARDMONITOR_H
 
 #include "EventInfo.h"
-#include "Input.h"
-
+#include <GLFW/glfw3.h>
 #include <cstring>
 #include <cassert>
 
