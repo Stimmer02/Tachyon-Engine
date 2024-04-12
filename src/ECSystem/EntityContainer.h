@@ -10,15 +10,15 @@
 
 using Entity = uint32_t;
 
+static Entity currentEntity;
+
 class EntityContainer{
 private:
-
-    static Entity currentEntity;
 
     // TODO : Consider using BinaryTree<Entity> or skip list for better complexity
 
     std::unordered_set<Entity> entities;
-    std::priority_queue< Entity, std::vector<int>, std::greater<Entity> > freeIDs; // there must be min heap
+    std::priority_queue< Entity, std::vector<Entity>, std::greater<Entity> > freeIDs;
 
 public:
 

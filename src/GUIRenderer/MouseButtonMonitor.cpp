@@ -1,20 +1,11 @@
 #include "MouseButtonMonitor.h"
 
 MouseButtonMonitor::MouseButtonMonitor(){
-    this->window = nullptr;
+    this->window = glfwGetCurrentContext();
     this->normal = nullptr;
     this->active = nullptr;
 
-    memset(lastStates, GLFW_RELEASE, sizeof(int) * GLFW_MOUSE_BUTTON_LAST);
-
-}
-
-void MouseButtonMonitor::AcceptGLFWContext(GLFWwindow * _window){
-    this->window = _window;
-
-    // Enable custom cursor within current window scope
-    if( normal != nullptr )
-        glfwSetCursor(window, normal);
+    memset(lastMouseStates, GLFW_RELEASE, sizeof(char) * GLFW_MOUSE_BUTTON_LAST);
 
 }
 
@@ -68,15 +59,10 @@ MouseButtonMonitor::~MouseButtonMonitor(){
 
 }
 
-void MouseButtonMonitor::Update(){
-
-    // Update all states
-    for(int i=0; i < GLFW_MOUSE_BUTTON_LAST; i++)
-        lastStates[i] = glfwGetMouseButton(window, i);
-
-}
-
 EventInfo MouseButtonMonitor::Query(int button){
+
+    assert(window != nullptr && "OpenGL context can't be null");
+
     EventInfo info = {};
 
     double mouseX, mouseY;
@@ -91,7 +77,7 @@ EventInfo MouseButtonMonitor::Query(int button){
         return info;
 
     // Check if mouse position is in window boundary
-    info.withinWindow = (mouseX > 0.0f && mouseX <= width && mouseY > 0.0f && mouseY <= height);
+    bool inWindow = (mouseX > 0.0f && mouseX <= width && mouseY > 0.0f && mouseY <= height);
 
     // Check if the mouse has moved
     bool positionChanged = (mouseX != lastXPosition || mouseY != lastYPosition);
@@ -99,10 +85,13 @@ EventInfo MouseButtonMonitor::Query(int button){
     int currentState = glfwGetMouseButton(window, button);
 
     // Check if the mouse button is triggered
-    bool isButtonTriggered = (currentState == GLFW_PRESS) && (lastStates[button] == GLFW_RELEASE);
+    bool isButtonHeld = (currentState == GLFW_PRESS) && (lastMouseStates[button] == GLFW_PRESS);
+
+    // Check if the mouse button is triggered
+    bool isButtonTriggered = (currentState == GLFW_PRESS) && (lastMouseStates[button] == GLFW_RELEASE);
 
     // Check if the mouse button is released
-    bool isButtonReleased = (currentState == GLFW_RELEASE) && (lastStates[button] == GLFW_PRESS);
+    bool isButtonReleased = (currentState == GLFW_RELEASE) && (lastMouseStates[button] == GLFW_PRESS);
 
     if(positionChanged){
         info.type = EventType::ONMOVE;
@@ -110,8 +99,12 @@ EventInfo MouseButtonMonitor::Query(int button){
         info.type = EventType::ONTRIGGER;
     }else if(isButtonReleased){
         info.type = EventType::ONRELEASE;
-    } else {
-        info.type = (info.withinWindow) ? EventType::ONHOVER : EventType::NONE;
+    } else if (isButtonHeld){
+        info.type = EventType::ONHOLD;
+    }else if(inWindow){
+        info.type = EventType::ONHOVER;
+    }else{
+        info.type = EventType::NONE;
     }
 
     info.x = mouseX;
@@ -120,6 +113,8 @@ EventInfo MouseButtonMonitor::Query(int button){
     // Remember last mouse position
     lastXPosition = info.x;
     lastYPosition = info.y;
+
+    lastMouseStates[button] = currentState;
 
     return info;
 }

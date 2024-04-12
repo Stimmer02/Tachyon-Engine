@@ -4,6 +4,7 @@
 #include "System.h"
 #include "WindowContext.h"
 #include "MouseButtonMonitor.h"
+#include "KeyboardMonitor.h"
 
 #include <functional>
 
@@ -11,7 +12,8 @@ class InteractionSystem : public System{
 private:
 
     WindowContext * context;
-    MouseButtonMonitor mouseMonitor;
+    MouseButtonMonitor * mouseMonitor;
+    KeyboardMonitor * keyboardMonitor;
 
     void OnLoad() override{
 
@@ -23,22 +25,14 @@ private:
 
     void Execute() override{
 
-        EventInfo info = mouseMonitor.Query(GLFW_MOUSE_BUTTON_LEFT);
-
-        if( info.type == EventType::ONTRIGGER)
-            fprintf(stdout, "Mouse pressed\n");
-
-
-        mouseMonitor.Update();
-
     }
 
 public:
 
-    InteractionSystem(WindowContext * context) : System(){
-
+    InteractionSystem(WindowContext * context, MouseButtonMonitor * mouseMonitor, KeyboardMonitor * keyboardMonitor) : System(){
         this->context = context;
-        context->ShareContext( &mouseMonitor );
+        this->mouseMonitor = mouseMonitor;
+        this->keyboardMonitor = keyboardMonitor;
     }
 
     void Share() override{

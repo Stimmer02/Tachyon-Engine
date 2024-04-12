@@ -1,12 +1,13 @@
-#ifndef MOUSEBUTTONMONITOR_H
-#define MOUSEBUTTONMONITOR_H
+#ifndef KEYBOARDMONITOR_H
+#define KEYBOARDMONITOR_H
 
-#include "IShareableContext.h"
 #include "EventInfo.h"
+#include "Input.h"
 
 #include <cstring>
+#include <cassert>
 
-class MouseButtonMonitor : public IShareableContext {
+class MouseButtonMonitor{
 
 private:
 
@@ -21,19 +22,15 @@ private:
     int width;
     int height;
 
-    int lastStates[GLFW_MOUSE_BUTTON_LAST];
+    char lastMouseStates[GLFW_MOUSE_BUTTON_LAST];
 
 public:
 
     MouseButtonMonitor();
 
-    void AcceptGLFWContext( GLFWwindow * window );
-
     void SetNormalCursor(const unsigned char* pixels, const size_t & width, const size_t & height);
 
     void SetActiveCursor(const unsigned char* pixels, const size_t & width, const size_t & height);
-
-    void Update();
 
     EventInfo Query(int button);
 

@@ -175,6 +175,7 @@ public:
 
 void Render();
 
+MouseButtonMonitor * mouseMonitor;
 
 GLint modelLocation;
 std::vector<Component*> components;
@@ -192,7 +193,11 @@ int main(){
 
     // Create system
     GraphicSystem graphic( &context );
-    InteractionSystem interaction( &context );
+
+    MouseButtonMonitor monitor;
+    KeyboardMonitor keyMonitor;
+
+    mouseMonitor = &monitor;
 
     // Initialize affine stack
     TransformStack::Push();
@@ -216,14 +221,13 @@ int main(){
     // Enable shader
     mainShader.Use();
 
+    const char *estr[EventType::EVENT_COUNT] = EVENT_STRINGS;
 
     while( !context.ShouldClose() ){
 
-        graphic.Run();
-        interaction.Run();
-
         Render();
 
+        graphic.Run();
     }
 
     mainShader.Dispose();
@@ -239,7 +243,6 @@ void Render(){
 
     static std::chrono::high_resolution_clock::time_point last;
     static int frames;
-    static float accumulated;
 
     std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
     frames++;
@@ -253,13 +256,30 @@ void Render(){
         last = now;
     }
 
+    static float dx, dy, dz, angle;
+
+    EventInfo e = mouseMonitor->Query(GLFW_MOUSE_BUTTON_LEFT);
+
+    dx = sin(angle)  * delta ;
+    dy = cos(angle + delta) * delta;
+    dz = cos(angle) * delta;
+
+    angle += delta * 0.1f;
+
+    TransformStack::Push();
+    TransformStack::Translate(500.0f, 500.0f ,0.0f);
+    TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
+    TransformStack::Rotate(angle, dx, dy, dz);
+    TransformStack::Scale(20.0f, 20.0f, 1.0f);
+    TransformStack::Translate(-500.0f, -500.0f ,0.0f);
+
     Matrix model = TransformStack::Top();
     glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
-
 
     for (int i = 0; i < components.size(); i++) {
         Component * component = components[i];
         component->Draw();
     }
 
+    TransformStack::Pop();
 }
