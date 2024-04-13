@@ -8,6 +8,10 @@
 #include <list>
 #include <unordered_map>
 
+class GLShader;
+
+static GLShader * currentShader;
+
 class GLShader{
 private:
 
@@ -73,6 +77,7 @@ public:
     }
 
     void Use(){
+        currentShader = this;
         glUseProgram(shaderProgram);
     }
 

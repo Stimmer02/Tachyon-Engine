@@ -41,7 +41,7 @@ public:
 
         float * data = result.Data();
 
-    #ifdef __SSE__
+    #ifdef VECTORIZED
 
         __m128 row1 = _mm_loadu_ps(matrix);
         __m128 row2 = _mm_loadu_ps(matrix + 4);
@@ -161,7 +161,7 @@ public:
         float * data = result.Data();
         float * src = othermatrix.Data();
 
-    #ifdef __SSE__
+    #ifdef VECTORIZED
 
         __m128 row1 = _mm_loadu_ps(src);
         __m128 row2 = _mm_loadu_ps(src + 4);
@@ -172,7 +172,7 @@ public:
         __m128 tmp2 = _mm_unpacklo_ps(row3, row4);
         __m128 tmp3 = _mm_unpackhi_ps(row1, row2);
         __m128 tmp4 = _mm_unpackhi_ps(row3, row4);
-        
+
         row1 = _mm_movelh_ps(tmp1, tmp2);
         row2 = _mm_movehl_ps(tmp2, tmp1);
         row3 = _mm_movelh_ps(tmp3, tmp4);
@@ -188,13 +188,13 @@ public:
 
             __m128 sum1 = _mm_hadd_ps(prod1, prod1);
             sum1 = _mm_hadd_ps(sum1, sum1);
-            
+
             __m128 sum2 = _mm_hadd_ps(prod2, prod2);
             sum2 = _mm_hadd_ps(sum2, sum2);
-            
+
             __m128 sum3 = _mm_hadd_ps(prod3, prod3);
             sum3 = _mm_hadd_ps(sum3, sum3);
-            
+
             __m128 sum4 = _mm_hadd_ps(prod4, prod4);
             sum4 = _mm_hadd_ps(sum4, sum4);
 
@@ -220,7 +220,7 @@ public:
 
         float * data = result.Data();
 
-    #ifdef __SSE__
+    #ifdef VECTORIZED
 
         __m128 number = _mm_set1_ps(scalar);
 
@@ -257,7 +257,7 @@ public:
         float * data = result.Data();
         float * src = othermatrix.Data();
 
-    #ifdef __SSE__
+    #ifdef VECTORIZED
 
         __m128 row1a = _mm_loadu_ps(matrix);
         __m128 row2a = _mm_loadu_ps(matrix + 4);
@@ -268,7 +268,7 @@ public:
         __m128 row2b = _mm_loadu_ps(src + 4);
         __m128 row3b = _mm_loadu_ps(src + 8);
         __m128 row4b = _mm_loadu_ps(src + 12);
-        
+
         _mm_storeu_ps(data, _mm_add_ps(row1a, row1b));
         _mm_storeu_ps(data+4, _mm_add_ps(row2a, row2b));
         _mm_storeu_ps(data+8, _mm_add_ps(row3a, row3b));
@@ -281,7 +281,7 @@ public:
                 result.matrix[i*4+j] = matrix[i*4+j] + othermatrix.matrix[i*4+j];
 
     #endif
-    
+
         return result;
     }
 
@@ -292,7 +292,7 @@ public:
         float * data = result.Data();
         float * src = othermatrix.Data();
 
-    #ifdef __SSE__
+    #ifdef VECTORIZED
 
         __m128 row1a = _mm_loadu_ps(matrix);
         __m128 row2a = _mm_loadu_ps(matrix + 4);
@@ -303,7 +303,7 @@ public:
         __m128 row2b = _mm_loadu_ps(src + 4);
         __m128 row3b = _mm_loadu_ps(src + 8);
         __m128 row4b = _mm_loadu_ps(src + 12);
-        
+
         _mm_storeu_ps(data, _mm_sub_ps(row1a, row1b));
         _mm_storeu_ps(data+4, _mm_sub_ps(row2a, row2b));
         _mm_storeu_ps(data+8, _mm_sub_ps(row3a, row3b));
