@@ -18,9 +18,11 @@ private:
 
 public:
 
+    KeyboardMonitor();
+
     KeyboardMonitor(WindowContext * window);
 
-    EventInfo Query(int button);
+    EventInfo GetButtonState(int button);
 
     ~KeyboardMonitor();
 

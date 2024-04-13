@@ -1,12 +1,15 @@
 #include "KeyboardMonitor.h"
 
+KeyboardMonitor::KeyboardMonitor(){
+
+}
 
 KeyboardMonitor::KeyboardMonitor(WindowContext * context){
     this->window = context;
     memset(lastKeyboardStates, GLFW_RELEASE, sizeof(char) * GLFW_MOUSE_BUTTON_LAST);
 }
 
-EventInfo KeyboardMonitor::Query(int button){
+EventInfo KeyboardMonitor::GetButtonState(int button){
 
     assert(window != nullptr && "OpenGL context can't be null");
 
@@ -42,5 +45,5 @@ EventInfo KeyboardMonitor::Query(int button){
 }
 
 KeyboardMonitor::~KeyboardMonitor(){
-    
+
 }

@@ -1,4 +1,3 @@
-#include "GraphicSystem.h"
 #include "InteractionSystem.h"
 #include "GLShader.h"
 #include "TransformStack.h"
@@ -7,7 +6,8 @@
 #include "BitmapReader.h"
 #include "Sprite.h"
 
-#include <chrono>
+#include "Application.h"
+
 #include <array>
 
 class Component{
@@ -102,26 +102,28 @@ public:
 
 };
 
-void Render();
+Component * component;
+KeyboardMonitor * ptr;
 
-std::vector<Component*> components;
+void Render();
 
 int main(){
 
-    GraphicConfig::vsync = false;
-    GraphicConfig::zbuffer = true;
+    srand( time(0) );
+
+    GraphicConfig::vsync = true;
+    GraphicConfig::zbuffer = false;
     GraphicConfig::windowHeight = 1000;
     GraphicConfig::windowWidth = 1000;
-    GraphicConfig::windowTitle = "Translations";
+    GraphicConfig::windowTitle = "Application";
 
-    // Create context
-    WindowContext context;
+    Application app;
+    app.SetRenderFunc(Render);
 
-    // Create system
-    GraphicSystem graphic( &context );
+    MouseButtonMonitor monitor = app.GetMouseInputMonitor();
+    KeyboardMonitor kmonitor = app.GerKeyboardInputMonitor();
 
-    MouseButtonMonitor monitor( &context );
-    //KeyboardMonitor keyMonitor( &context );
+    ptr = & kmonitor;
 
     // Initialize affine stack
     TransformStack::Push();
@@ -133,73 +135,74 @@ int main(){
     mainShader.LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
     mainShader.Build();
 
-
     // Create objects
-
-    Component * button = new Component(500, 500);
-
-    components.emplace_back(button);
+    component = new Component(500, 500);
 
     // Enable shader
     mainShader.Use();
 
-    bool isHolding = false;
+    // Execute main loop;
+    app.Loop();
 
-    while( !context.ShouldClose() ){
-
-        EventInfo info = monitor.Query(GLFW_MOUSE_BUTTON_LEFT);
-
-        if( info.type == ONTRIGGER)
-            isHolding = true;
-
-        if( isHolding && button->IsMouseOver(info.x, info.y)){
-            button->x = info.x;
-            button->y = info.y;
-        }
-
-        if( info.type == ONRELEASE)
-            isHolding = false;
-
-        Render();
-
-        graphic.Run();
-    }
-
+    // Disable shader
     mainShader.Dispose();
-
-    for(Component * Component : components)
-        delete Component;
 
     return 0;
 }
 
-
 void Render(){
 
-    static std::chrono::high_resolution_clock::time_point last;
-    static int frames;
+    static float angle;
+    static int mode;
 
-    std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
-    frames++;
+    const float speed = 100.0f;
 
-    float delta = std::chrono::duration_cast< std::chrono::duration<float> >(now - last).count();
+    Timer& timer = Timer::GetInstance();
 
-    if( delta >= 1.0f){
-        printf("FPS : %d\r", frames);
-        fflush(stdout);
-        frames = 0;
-        last = now;
+    TransformStack::Push();
+    TransformStack::Translate(component->x, component->y, 0.0f);
+    TransformStack::Scale(10.0f, 10.0f, 1.0f);
+
+    if(mode == 0){
+        TransformStack::Rotate(angle, 0.0f, 0.0f, 1.0f);
+        angle *= ( angle < 360.0f);
+        angle += 0.1f * timer.GetDeltaFrame() * speed;
+    }else{
+        TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
     }
 
-    static float angle;
-    angle += 1.0f;
+    TransformStack::Translate(-component->x, -component->y, 0.0f);
 
     Matrix model = TransformStack::Top();
     GLuint modelLocation = currentShader->GetUniformLocation("model");
     glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
+    TransformStack::Pop();
 
-    for (int i = 0; i < components.size(); i++) {
-        Component * component = components[i];
-        component->Draw();
+    component->Draw();
+
+    EventInfo info = ptr->GetButtonState(GLFW_KEY_R);
+
+    if( info.type == ONTRIGGER ){
+        mode ^= 1;
+        angle = 180.0f;
     }
+
+
+    if( timer.GetAccumulatedTime() >= 1.0f){
+        fprintf(stdout, "FPS : %d\r", timer.GetFrameCount());
+        fflush(stdout);
+    }
+
+    static bool flipX, flipY;
+
+    if( component->x <= 0.0f || component->x >= GraphicConfig::windowWidth)
+        flipX^=true;
+
+    if( component->y <= 0.0f || component->y >= GraphicConfig::windowHeight)
+        flipY^=true;
+
+
+    component->x += ( (2.0f * (flipX) - 1.0f) + (0.5f * rand()/(float)RAND_MAX - 0.25f) ) * timer.GetDeltaFrame() * speed;
+    component->y += ( (2.0f * (flipY) - 1.0f) + (0.5f * rand()/(float)RAND_MAX - 0.25f) ) * timer.GetDeltaFrame() * speed;
+
 }

@@ -19,6 +19,8 @@ private:
 
     AttributeContainer<Sprite> textures;
 
+    RenderFunc func;
+
     void OnLoad() override{
 
     }
@@ -31,6 +33,10 @@ private:
         context->PoolEvents();
         context->SwapBuffers();
         context->CheckErrors();
+
+        if( func )
+            func();
+
     }
 
 public:
@@ -47,12 +53,16 @@ public:
 
     }
 
+    void SetRenderFunc(RenderFunc func){
+        this->func = func;
+    }
+
     void Share() override{
 
     }
 
     ~GraphicSystem(){
-        
+
     }
 };
 

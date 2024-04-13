@@ -1,5 +1,9 @@
 #include "MouseButtonMonitor.h"
 
+MouseButtonMonitor::MouseButtonMonitor(){
+
+}
+
 MouseButtonMonitor::MouseButtonMonitor(WindowContext * context){
     this->window = context;
     memset(lastMouseStates, GLFW_RELEASE, sizeof(char) * GLFW_MOUSE_BUTTON_LAST);
@@ -11,12 +15,12 @@ MouseButtonMonitor::~MouseButtonMonitor(){
 
 }
 
-EventInfo MouseButtonMonitor::Query(int button){
+EventInfo MouseButtonMonitor::GeyKeyState(int button){
 
     EventInfo info = {};
 
     double mouseX, mouseY;
-    
+
     // Read current mouse position and window size
     window->GetMousePos(mouseX, mouseY);
     window->GetWindowSize(width, height);
