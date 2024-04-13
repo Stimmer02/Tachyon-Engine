@@ -29,7 +29,7 @@ char StructTree::build(ClStructParser* parser) {
 }
 
 std::string StructTree::getError() {
-    return this.error;
+    return this->error;
 }
 
 std::string StructTree::getStructures() {
