@@ -20,6 +20,6 @@ class StructTree{
         engineStruct* root; //Parsed root struct
         std::string structDirectory; //Root directory where the structs are stored
         std::string error; //Error message
-        char status; //Status of the tree building process:  < -1 not ready to be builded, -1 - ready to be builded, 0 - builded, < 0 - build error code
+        char status; //Status of the tree building process:  < -1 not ready to be builded, -1 - ready to be builded, 0 - builded, > 0 - build error code
 };
 #endif
