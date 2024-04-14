@@ -1,12 +1,11 @@
 #ifndef GRAPHICSYSTEM_H
 #define GRAPHICSYSTEM_H
 
-#include "AttributeContainer.h"
 #include "TransformStack.h"
 #include "System.h"
-#include "Sprite.h"
 #include "WindowContext.h"
 #include "Settings.h"
+// #include "Scene.h"
 
 #include <functional>
 
@@ -15,9 +14,8 @@ using RenderFunc = std::function<void()>;
 class GraphicSystem : public System{
 private:
 
+    //Scene * scene;
     WindowContext * context;
-
-    AttributeContainer<Sprite> textures;
 
     RenderFunc func;
 
@@ -34,7 +32,11 @@ private:
         context->SwapBuffers();
         context->CheckErrors();
 
-        if( func )
+        // if(scene)
+        //     scene->Render();
+
+        // TODO : remove
+        if(func)
             func();
 
     }
@@ -53,9 +55,13 @@ public:
 
     }
 
-    void SetRenderFunc(RenderFunc func){
+    void SetRenderFunc(RenderFunc & func){
         this->func = func;
     }
+
+    // void LoadScene(Scene * scene){
+    //     this->scene = scene;
+    // }
 
     void Share() override{
 

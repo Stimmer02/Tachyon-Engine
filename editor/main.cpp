@@ -1,4 +1,3 @@
-#include "InteractionSystem.h"
 #include "GLShader.h"
 #include "TransformStack.h"
 #include "Vertex.h"
@@ -10,7 +9,7 @@
 
 #include <array>
 
-class Component{
+class GLComponent{
 private:
 
     GLuint vao;
@@ -26,7 +25,7 @@ public:
 
     float x, y;
 
-    Component(float x, float y){
+    GLComponent(float x, float y){
 
         this->x = x;
         this->y = y;
@@ -91,7 +90,7 @@ public:
                 (vertices[0].pos.y + y <= mouseY && mouseY <= vertices[2].pos.y + y);
     }
 
-    ~Component(){
+    ~GLComponent(){
 
         delete sprite;
 
@@ -102,7 +101,7 @@ public:
 
 };
 
-Component * component;
+GLComponent * component;
 KeyboardMonitor * ptr;
 
 void Render();
@@ -136,7 +135,7 @@ int main(){
     mainShader.Build();
 
     // Create objects
-    component = new Component(500, 500);
+    component = new GLComponent(500, 500);
 
     // Enable shader
     mainShader.Use();
@@ -167,8 +166,14 @@ void Render(){
         TransformStack::Rotate(angle, 0.0f, 0.0f, 1.0f);
         angle *= ( angle < 360.0f);
         angle += 0.1f * timer.GetDeltaFrame() * speed;
-    }else{
+    }else if(mode == 1){
         TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
+    }else{
+        float t = glfwGetTime();
+        float x = cos(t);
+        float y = sin(t);
+
+        TransformStack::Scale(x, y, 1);
     }
 
     TransformStack::Translate(-component->x, -component->y, 0.0f);
@@ -180,13 +185,22 @@ void Render(){
 
     component->Draw();
 
-    EventInfo info = ptr->GetButtonState(GLFW_KEY_R);
+    EventInfo infoR = ptr->GetButtonState(GLFW_KEY_R);
+    EventInfo infoT = ptr->GetButtonState(GLFW_KEY_T);
+    EventInfo infoY = ptr->GetButtonState(GLFW_KEY_Y);
 
-    if( info.type == ONTRIGGER ){
-        mode ^= 1;
+    if( infoR.type == ONTRIGGER ){
+        mode = 0;
         angle = 180.0f;
     }
 
+    if( infoT.type == ONTRIGGER ){
+        mode = 1;
+    }
+
+    if( infoY.type == ONTRIGGER ){
+        mode = 2;
+    }
 
     if( timer.GetAccumulatedTime() >= 1.0f){
         fprintf(stdout, "FPS : %d\r", timer.GetFrameCount());

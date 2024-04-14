@@ -13,8 +13,12 @@ private:
 
     WindowContext context;
     GraphicSystem * graphics;
+
+    std::list<System *> systems;
+
     MouseButtonMonitor mouseMonitor;
     KeyboardMonitor keyboardMonitor;
+
     Timer * timer;
 
 public:
@@ -30,11 +34,30 @@ public:
         graphics->SetRenderFunc(func);
     }
 
-    MouseButtonMonitor& GetMouseInputMonitor(){
+    // void LoadScene(Scene & scene){
+    //     graphics->LoadScene( &scene );
+    // }
+
+    void RegisterSystem(System * system){
+        systems.emplace_back(system);
+    }
+
+    void RemoveSystem(System * system){
+
+        for( std::list<System*>::iterator it = systems.begin(); it != systems.end(); it++){
+            if( *it == system ){
+                systems.erase(it);
+                break;
+            }
+        }
+
+    }
+
+    MouseButtonMonitor& GetMouseInputMonitor() {
         return mouseMonitor;
     }
 
-    KeyboardMonitor& GerKeyboardInputMonitor(){
+    KeyboardMonitor& GerKeyboardInputMonitor() {
         return keyboardMonitor;
     }
 
@@ -42,8 +65,12 @@ public:
 
         while( !context.ShouldClose() ){
 
-            graphics->Run();
             timer->TicTac();
+            graphics->Run();
+
+            for(System * system : systems){
+                system->Run();
+            }
 
         }
 
