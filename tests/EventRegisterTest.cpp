@@ -8,7 +8,7 @@
 TEST(EventRegisterTest, SimpleTest){
     EventRegister *ER;
     ER = new EventRegister();
-    ER->Write(INFO, "abc%d", 5);
+    ER->Write(INFO, "abc%u", (unsigned int)5);
     ER->Flush();
     delete ER;
 }
