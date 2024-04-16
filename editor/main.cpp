@@ -9,7 +9,7 @@
 
 #include <array>
 
-#define SOURCES {"resources/sprites/heart.bmp", "resources/sprites/slime.bmp", "resources/sprites/test.bmp"}
+#define SOURCES {"resources/sprites/13.bmp", "resources/sprites/heart.bmp", "resources/sprites/slime.bmp", "resources/sprites/test.bmp"}
 #define UP {0.0f, 0.0f, 1.0f}
 
 position CrossProduct(const position & u, const position & v){
@@ -18,7 +18,7 @@ position CrossProduct(const position & u, const position & v){
 
     p.x = u.y*u.z - v.y*u.z;
     p.y = u.z*v.x - u.x*v.z;
-    p.z = u.x*v.y - u.y*v.x; 
+    p.z = u.x*v.y - u.y*v.x;
 
     return p;
 
@@ -47,9 +47,9 @@ public:
         this->x = x;
         this->y = y;
 
-        int idx = rand()%3;
+        int idx = rand()%4;
 
-        const char * resources[3] = SOURCES;
+        const char * resources[4] = SOURCES;
 
         Image image = BitmapReader::ReadFile(resources[idx]);
         sprite = Sprite::Create(&image);
@@ -79,7 +79,7 @@ public:
 
     }
 
-    ~GLComponent(){
+    virtual ~GLComponent(){
 
         glDeleteBuffers(1, &ebo);
         glDeleteBuffers(1, &vbo);
@@ -90,7 +90,7 @@ public:
 
 class Quad : public GLComponent{
 
-private: 
+private:
 
     std::array<vertex, 4> vertices;
 
@@ -98,6 +98,10 @@ public:
 
     Quad(float x, float y) : GLComponent(x, y){
         Fill();
+    }
+
+    ~Quad(){
+
     }
 
     void Fill() override{
@@ -143,12 +147,16 @@ private:
     std::vector<vertex> vertices;
 
 public:
-    Sphere(float x, float y, int sectors = 36, int stacks = 18) : GLComponent(x, y), sectors(sectors), stacks(stacks) {
+    Sphere(float x, float y, int sectors = 18, int stacks = 9) : GLComponent(x, y), sectors(sectors), stacks(stacks) {
         Fill();
     }
 
+    ~Sphere(){
+
+    }
+
     void Fill() override {
-        
+
         std::vector<GLuint> indices;
 
         const float pi = 3.1415926535f;
@@ -253,7 +261,7 @@ int main(){
     mainShader.Build();
 
     // Create objects
-    for(int i = 0; i < 200; i++){
+    for(int i = 0; i < 50; i++){
 
         float angle = (2.0f * rand()/(float)RAND_MAX - 1.0f) * 360.0f;
 
@@ -279,7 +287,7 @@ int main(){
     mainShader.Dispose();
 
     // Clear memory
-    for(int i = 0; i < 200; i++){
+    for(int i = 0; i < components.size(); i++){
         delete components[i];
     }
 
@@ -289,6 +297,7 @@ int main(){
 void Render(){
 
     static int mode = 0;
+    static bool isRunning = true;
     const float speed = 20.0f;
 
     Timer& timer = Timer::GetInstance();
@@ -303,7 +312,10 @@ void Render(){
         TransformStack::Push();
         TransformStack::Translate(component->x, component->y, 0.0f);
 
-        position dir = {component->vx, component->vy, 0.0f};
+        float deltaX = (2.0f * component->flipX - 1.0f) * component->vx;
+        float deltaY = (2.0f * component->flipY - 1.0f) * component->vy;
+
+        position dir = {deltaX, deltaY, 0.0f};
         position axis = CrossProduct(wu, dir);
 
         if (mode == 0) {
@@ -311,7 +323,7 @@ void Render(){
         } else if (mode == 1) {
             TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
         } else {
-            float t = glfwGetTime();
+            float t = glfwGetTime() * isRunning;
             float scaleX = cosf(t) * 2.0f + 2.0f;
             float scaleY = sinf(t) * 2.0f + 2.0f;
             TransformStack::Scale(scaleX, scaleY, 1.0f);
@@ -331,44 +343,62 @@ void Render(){
     EventInfo infoR = ptr->GetButtonState(GLFW_KEY_R);
     EventInfo infoT = ptr->GetButtonState(GLFW_KEY_T);
     EventInfo infoY = ptr->GetButtonState(GLFW_KEY_Y);
+    EventInfo infoS = ptr->GetButtonState(GLFW_KEY_SPACE);
+    EventInfo infoH = ptr->GetButtonState(GLFW_KEY_H);
 
     if (infoR.type == ONTRIGGER) {
         mode = 0;
-    }
-    if (infoT.type == ONTRIGGER) {
+    }else if (infoT.type == ONTRIGGER) {
         mode = 1;
-    }
-    if (infoY.type == ONTRIGGER) {
+    }else if (infoY.type == ONTRIGGER) {
         mode = 2;
+    }else if(infoH.type == ONTRIGGER){
+
+        static bool isMeshVisible = false;
+
+        if( isMeshVisible ){
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }else{
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+
+        isMeshVisible^=true;
+
+    }else if( infoS.type == ONTRIGGER){
+        isRunning ^= true;
     }
+
 
     if (timer.GetAccumulatedTime() >= 1.0f) {
         fprintf(stdout, "FPS : %d\r", timer.GetFrameCount());
         fflush(stdout);
     }
 
+    if( !isRunning )
+        return;
+
     for(GLComponent * component : components){
 
         float deltaX = (2.0f * component->flipX - 1.0f) * component->vx;
         float deltaY = (2.0f * component->flipY - 1.0f) * component->vy;
-        
+
         component->x += deltaX * timer.GetDeltaFrame() * speed;
         component->y += deltaY * timer.GetDeltaFrame() * speed;
 
         float len = sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        component->angle += len/20.0f * 0.1f;
+        component->angle += len/20.0f;
 
         if (component->x <= 20.0f || component->x >= (GraphicConfig::windowWidth - 20.0f) ){
             component->flipX ^= true;
             component->x = fmax( 20.0f, fmin(component->x, (GraphicConfig::windowWidth - 20.0f) ));
         }
-            
+
         if (component->y <= 20.0f || component->y >= (GraphicConfig::windowHeight - 20.0f) ){
             component->flipY ^= true;
             component->y = fmax( 20.0f, fmin(component->y, (GraphicConfig::windowHeight - 20.0f) ));
         }
-            
+
     }
-    
+
 }
