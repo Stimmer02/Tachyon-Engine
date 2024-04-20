@@ -28,14 +28,14 @@ public:
     }
 
     /// @brief Multiplies top matix with orthogonal projection matrix. Action occurs only if stack is initialized
-    /// @param left 
-    /// @param right 
-    /// @param bottom 
-    /// @param top 
+    /// @param left
+    /// @param right
+    /// @param bottom
+    /// @param top
     /// @param near
     /// @param far
     static void Ortho(const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far){
-        
+
         if( matrices.size() < 2 )
             return;
 
@@ -56,14 +56,14 @@ public:
     }
 
     /// @brief Multiplies top matix with frustum projection matrix. Action occurs only if stack is initialized
-    /// @param left 
-    /// @param right 
-    /// @param bottom 
-    /// @param top 
+    /// @param left
+    /// @param right
+    /// @param bottom
+    /// @param top
     /// @param near
     /// @param far
     static void Frustum(const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far){
-        
+
         if( matrices.size() < 2 )
             return;
 
@@ -84,11 +84,11 @@ public:
     }
 
     /// @brief Multiplies top matix with translation matrix. Action occurs only if stack is initialized
-    /// @param xOffset 
-    /// @param yOffset 
-    /// @param zOffset 
+    /// @param xOffset
+    /// @param yOffset
+    /// @param zOffset
     static void Translate(const float & xOffset, const float & yOffset, const float & zOffset){
-        
+
         if( matrices.size() < 2 )
             return;
 
@@ -105,11 +105,11 @@ public:
     }
 
     /// @brief Multiplies top matix with scaling matrix. Action occurs only if stack is initialized
-    /// @param xScale 
-    /// @param yScale 
-    /// @param zScale 
+    /// @param xScale
+    /// @param yScale
+    /// @param zScale
     static void Scale(const float & xScale, const float & yScale, const float & zScale){
-        
+
         if( matrices.size() < 2 )
             return;
 
@@ -219,7 +219,7 @@ public:
     }
 
     /// @brief Pops matrix at the top of the stack
-    static void Pop(){  
+    static void Pop(){
         if( matrices.size() > 1)
             matrices.pop();
     }

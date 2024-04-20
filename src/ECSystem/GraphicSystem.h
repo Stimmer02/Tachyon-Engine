@@ -33,6 +33,7 @@ private:
                 continue;
 
             object->Render();
+            object->Update();
 
         }
 

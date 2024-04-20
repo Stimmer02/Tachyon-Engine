@@ -5,11 +5,13 @@ layout(location = 0) in vec4 vert;
 
 // out vec2 uvs;
 
-uniform vec4 position;
-uniform mat4 model;
-// uniform vec4 offset;
+uniform mat4 u_model;
+uniform vec4 u_color;
+
+out vec4 o_color;
 
 void main(){
-    gl_Position = (vert + position) * model;
+    gl_Position = vert * u_model;
+    o_color = u_color;
     // uvs = uv;
 }

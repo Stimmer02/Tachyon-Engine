@@ -43,7 +43,10 @@ public:
 
     Vector3 Normalize(){
         float magnitude = this->Magnitude();
-        assert(magnitude!=0.0f && "Normalization require non zero length vector");
+
+        if( fabs(magnitude) < 1e-6f)
+            magnitude = 1.0f;
+
         return Vector3(x/magnitude, y/magnitude, z/magnitude);
     }
 

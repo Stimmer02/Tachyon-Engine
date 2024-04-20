@@ -1,7 +1,7 @@
 #ifndef SCENEOBJECT_H
 #define SCENEOBJECT_H
 
-#include "Matrix.h"
+#include "MatrixUtils.h"
 #include "Transform.h"
 #include "GLShader.h"
 #include "EntityContainer.h"
@@ -38,25 +38,25 @@ public:
         this->isActive = true;
         this->ID = ID;
 
+        const Vector3 verts[] = {
+            Vector3(-0.25, -0.25),
+            Vector3(0.25, -0.25),
+            Vector3(0.25, 0.25),
+            Vector3(-0.25, 0.25)
+            };
+
         glGenBuffers(1, &graphic.vbo);
         glGenVertexArrays(1, &graphic.vao);
 
         glBindVertexArray(graphic.vao);
+
         glBindBuffer(GL_ARRAY_BUFFER, graphic.vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
 
-        const Vector3 verts[] = {
-            Vector3(-10, -10),
-            Vector3(10, -10),
-            Vector3(10, 10),
-            Vector3(-10, 10)
-            };
-
-        glBufferData(GL_ARRAY_BUFFER, sizeof(verts) * sizeof(Vector3), verts, GL_STATIC_DRAW);
-
-        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0 );
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vector3), (void*)0);
         glEnableVertexAttribArray(0);
 
-        glBindVertexArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
 
@@ -73,11 +73,13 @@ public:
     }
 
     void AddChildren(SceneObject * children){
+        children->parent = this;
         childrens.push_back(children);
     }
 
     void RemoveChildren(SceneObject * children){
 
+        children->parent = nullptr;
         std::list<SceneObject*>::iterator it = childrens.begin();
 
         for(; it != childrens.end(); it++){
@@ -93,7 +95,7 @@ public:
 
     }
 
-    Matrix& GetModel(){
+    Matrix GetModel(){
 
         if( parent == nullptr)
             return model;
@@ -101,7 +103,7 @@ public:
 
         Matrix modelMatrix = parent->GetModel() * model;
 
-        return model;
+        return modelMatrix;
     }
 
     Transform& GetTransform(){
@@ -114,8 +116,19 @@ public:
 
     void Update(){
 
+        Matrix translation = MatrixUtils::Translate(transform.position.x, transform.position.y, transform.position.z);
+        Matrix scale = MatrixUtils::Scale(transform.scale.x, transform.scale.y, transform.scale.z);
 
+        model = scale * translation;
 
+        for(std::list<SceneObject*>::iterator it = childrens.begin(); it != childrens.end(); it++){
+            SceneObject * children = *it;
+
+            if(children == nullptr)
+                continue;
+
+            children->Update();
+        }
 
     }
 
@@ -125,10 +138,16 @@ public:
             return;
 
         GLShader * current = currentShader;
-        current->TransferToShader("position", transform.position);
+
+        Vector3 vec = transform.position.Normalize() * 0.5f + Vector3(0.5f, 0.5f, 0.5f);
+
+        Matrix localModel = GetModel();
+
+        current->TransferToShader("u_color", vec);
+        current->TransferToShader("u_model", localModel);
 
         glBindVertexArray(graphic.vao);
-        glDrawArrays(GL_LINES, 0, 4);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);
 
         for(std::list<SceneObject*>::iterator it = childrens.begin(); it != childrens.end(); it++){

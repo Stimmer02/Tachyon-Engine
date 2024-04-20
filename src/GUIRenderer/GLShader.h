@@ -2,6 +2,7 @@
 #define GLSHADER_H
 
 #include "Vector3.h"
+#include "Matrix.h"
 
 #include <GL/glew.h>
 #include <fstream>
@@ -21,6 +22,40 @@ private:
     std::unordered_map<std::string, GLuint> uniforms;
 
     GLuint shaderProgram;
+
+    bool CheckProgramStatus(){
+
+        GLint success;
+        glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+
+        if (!success) {
+
+            char infoLog[512];
+            glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
+            fprintf(stdout,"Shader linking error : %s", infoLog);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    bool CheckShaderStatus(GLuint shader){
+
+        GLint success;
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+
+        if (!success) {
+
+            char infoLog[512];
+            glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+            fprintf(stdout, "Shader compilation error : %s", infoLog);
+
+            return false;
+        }
+
+        return true;
+    }
 
 public:
 
@@ -56,13 +91,10 @@ public:
         glShaderSource(shader, 1, &rawBytesPtr, &numBytes);
         glCompileShader(shader);
 
-        GLenum error = glGetError();
-        assert(error == GL_NO_ERROR && "Error during shader compilation" );
+        if( CheckShaderStatus(shader) == false )
+            exit(1);
 
         glAttachShader(shaderProgram, shader);
-
-        error = glGetError();
-        assert(error == GL_NO_ERROR && "Error during shader attachment" );
 
         shaders.push_back(shader);
 
@@ -73,8 +105,8 @@ public:
         assert(shaderProgram != 0 && "Program does not exist" );
         glLinkProgram(shaderProgram);
 
-        GLenum error = glGetError();
-        assert(error == GL_NO_ERROR && "Error during program linking" );
+        if( CheckProgramStatus() == false )
+            exit(1);
 
     }
 
@@ -108,7 +140,7 @@ public:
 
     }
 
-    void TransferToShader(const std::string & uniformName, const Vector3 & vector){
+    void TransferToShader(const std::string & uniformName, Vector3 & vector){
 
         GLuint location = GetUniformLocation(uniformName);
 
@@ -116,6 +148,17 @@ public:
             return;
 
         glUniform4fv(location, 1, (GLfloat*)&vector);
+
+    }
+
+    void TransferToShader(const std::string & uniformName, Matrix & matrix){
+
+        GLuint location = GetUniformLocation(uniformName);
+
+        if( location == -1 )
+            return;
+
+        glUniformMatrix4fv(location, 1, GL_FALSE, matrix.Data());
 
     }
 

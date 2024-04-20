@@ -61,6 +61,7 @@ public:
 
         while( !context.ShouldClose() ){
 
+
             timer->TicTac();
             graphics->Run();
 

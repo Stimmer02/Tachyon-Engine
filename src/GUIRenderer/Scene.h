@@ -19,24 +19,27 @@ public:
 		Entity ID = entities.Create();
 
 		SceneObject * object = new SceneObject(ID);
-		objects.push_back(object);
 
 #ifdef DEBUG
 
-	fprintf(stdout, "New scene object %d created\n", ID);
+	fprintf(stdout, "[DEBUG] New scene object %d created\n", ID);
 
 #endif
 
 		return object;
 	}
 
-	void RemoveEntity(SceneObject * object){
+	void AddEntityToScene(SceneObject * object){
+		objects.push_back(object);
+	}
+
+	void RemoveEntityFromScene(SceneObject * object){
 		Entity ID = object->GetEntityID();
 		entities.Destroy( ID );
 
 #ifdef DEBUG
 
-	fprintf(stdout, "Removed scene object %d\n", ID);
+	fprintf(stdout, "[DEBUG] Removed scene object %d\n", ID);
 
 #endif
 
