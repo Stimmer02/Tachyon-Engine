@@ -1,18 +1,51 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "Component.h"
-#include <vector>
+#include "AttributeContainer.h"
+#include "SceneObject.h"
+#include "Sprite.h"
+#include <stdio.h>
+
+using IterationItem = std::list<SceneObject*>::iterator;
 
 class Scene{
 private:
-	std::vector <Component*> components;
+	EntityContainer entities;
+	std::list<SceneObject * > objects;
+
 public:
-	void RemoveComponents(Component* _object);
-	Component* GetComponent(const float &_x, const float &_y) const;
-	void AddComponent(Component* _object);
-	void Render() const;
-	~Scene();
+
+	SceneObject * CreateEntity(){
+		Entity ID = entities.Create();
+
+		SceneObject * object = new SceneObject(ID);
+		objects.push_back(object);
+
+#ifdef DEBUG
+
+	fprintf(stdout, "New scene object %d created\n", ID);
+
+#endif
+
+		return object;
+	}
+
+	void RemoveEntity(SceneObject * object){
+		Entity ID = object->GetEntityID();
+		entities.Destroy( ID );
+
+#ifdef DEBUG
+
+	fprintf(stdout, "Removed scene object %d\n", ID);
+
+#endif
+
+	}
+
+	std::pair<IterationItem, IterationItem> GetSceneObjectsIterator(){
+		return std::make_pair(objects.begin(), objects.end());
+	}
+
 };
 
 #endif

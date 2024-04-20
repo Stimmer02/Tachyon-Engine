@@ -9,6 +9,8 @@
 
 #include <array>
 
+#include "Attribute.h"
+
 class GLComponent{
 private:
 
@@ -101,14 +103,7 @@ public:
 
 };
 
-GLComponent * component;
-KeyboardMonitor * ptr;
-
-void Render();
-
 int main(){
-
-    srand( time(0) );
 
     GraphicConfig::vsync = true;
     GraphicConfig::zbuffer = false;
@@ -117,106 +112,29 @@ int main(){
     GraphicConfig::windowTitle = "Application";
 
     Application app;
-    app.SetRenderFunc(Render);
 
-    MouseButtonMonitor monitor = app.GetMouseInputMonitor();
-    KeyboardMonitor kmonitor = app.GerKeyboardInputMonitor();
-
-    ptr = & kmonitor;
-
-    // Initialize affine stack
-    TransformStack::Push();
-    TransformStack::Ortho(0, 1000, 0, 1000, -100.0f, 100.0f);
-
-    // Create shader
     GLShader mainShader;
     mainShader.LinkShader("./resources/shaders/vertexShader.vert", GL_VERTEX_SHADER);
     mainShader.LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
     mainShader.Build();
 
-    // Create objects
-    component = new GLComponent(500, 500);
+    Scene scene;
 
-    // Enable shader
+    SceneObject * object = scene.CreateEntity();
+    // object->GetTransform().position = {GraphicConfig::windowWidth/2, GraphicConfig::windowHeight/2, 0};
+
+    app.LoadScene(scene);
+
     mainShader.Use();
+
+    // Initialize affine stack
+    TransformStack::Push();
+    TransformStack::Ortho(0, 1000, 0, 1000, -100.0f, 100.0f);
 
     // Execute main loop;
     app.Loop();
 
-    // Disable shader
     mainShader.Dispose();
 
     return 0;
-}
-
-void Render(){
-
-    static float angle;
-    static int mode;
-
-    const float speed = 100.0f;
-
-    Timer& timer = Timer::GetInstance();
-
-    TransformStack::Push();
-    TransformStack::Translate(component->x, component->y, 0.0f);
-    TransformStack::Scale(10.0f, 10.0f, 1.0f);
-
-    if(mode == 0){
-        TransformStack::Rotate(angle, 0.0f, 0.0f, 1.0f);
-        angle *= ( angle < 360.0f);
-        angle += 0.1f * timer.GetDeltaFrame() * speed;
-    }else if(mode == 1){
-        TransformStack::Rotate(180.0f, 0.0f, 0.0f, 1.0f);
-    }else{
-        float t = glfwGetTime();
-        float x = cos(t);
-        float y = sin(t);
-
-        TransformStack::Scale(x, y, 1);
-    }
-
-    TransformStack::Translate(-component->x, -component->y, 0.0f);
-
-    Matrix model = TransformStack::Top();
-    GLuint modelLocation = currentShader->GetUniformLocation("model");
-    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.Data());
-    TransformStack::Pop();
-
-    component->Draw();
-
-    EventInfo infoR = ptr->GetButtonState(GLFW_KEY_R);
-    EventInfo infoT = ptr->GetButtonState(GLFW_KEY_T);
-    EventInfo infoY = ptr->GetButtonState(GLFW_KEY_Y);
-
-    if( infoR.type == ONTRIGGER ){
-        mode = 0;
-        angle = 180.0f;
-    }
-
-    if( infoT.type == ONTRIGGER ){
-        mode = 1;
-    }
-
-    if( infoY.type == ONTRIGGER ){
-        mode = 2;
-    }
-
-    if( timer.GetAccumulatedTime() >= 1.0f){
-        fprintf(stdout, "FPS : %d\r", timer.GetFrameCount());
-        fflush(stdout);
-    }
-
-    static bool flipX, flipY;
-
-    if( component->x <= 0.0f || component->x >= GraphicConfig::windowWidth)
-        flipX^=true;
-
-    if( component->y <= 0.0f || component->y >= GraphicConfig::windowHeight)
-        flipY^=true;
-
-
-    component->x += ( (2.0f * (flipX) - 1.0f) + (0.5f * rand()/(float)RAND_MAX - 0.25f) ) * timer.GetDeltaFrame() * speed;
-    component->y += ( (2.0f * (flipY) - 1.0f) + (0.5f * rand()/(float)RAND_MAX - 0.25f) ) * timer.GetDeltaFrame() * speed;
-
 }

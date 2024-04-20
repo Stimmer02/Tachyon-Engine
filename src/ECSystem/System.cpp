@@ -23,6 +23,20 @@ System::System(){
 
 #endif
 
+    OnLoad();
+
+}
+
+System::~System(){
+
+#ifdef DEBUG
+
+    fprintf(stdout, "[DEBUG] Disposing system\n");
+
+#endif
+
+    OnUnload();
+
 }
 
 void System::ReceiveMessage(const Message & _message){
@@ -48,8 +62,6 @@ void System::Stop(){
 
 void System::Run(){
 
-    // OnLoad();
-
     // isRunning = true;
 
     // while( isRunning ){
@@ -66,13 +78,5 @@ void System::Run(){
         }
 
     // }
-
-// #ifdef DEBUG
-
-//     fprintf(stdout, "[DEBUG] Disposing system\n");
-
-// #endif
-
-    // OnUnload();
 
 }

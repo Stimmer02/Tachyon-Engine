@@ -1,7 +1,6 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "Image.h"
 #include <stdio.h>
 #include <map>
 #include <cstring>
@@ -23,10 +22,13 @@
 
 #endif
 
+#include "Image.h"
+#include "Attribute.h"
+
 static GLuint pixelBuffer;
 static std::map<uint32_t, GLuint> almanach;
 
-class Sprite {
+class Sprite : public AttributeType<Sprite>{
 
 public:
 

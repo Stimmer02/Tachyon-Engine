@@ -1,6 +1,8 @@
 #ifndef GLSHADER_H
 #define GLSHADER_H
 
+#include "Vector3.h"
+
 #include <GL/glew.h>
 #include <fstream>
 #include <string>
@@ -89,7 +91,7 @@ public:
 
         std::unordered_map<std::string, GLuint>::iterator it = uniforms.find(uniformName);
 
-        GLuint location;
+        GLuint location = -1;
 
         if( it == uniforms.end()){
 
@@ -103,6 +105,17 @@ public:
         }
 
         return location;
+
+    }
+
+    void TransferToShader(const std::string & uniformName, const Vector3 & vector){
+
+        GLuint location = GetUniformLocation(uniformName);
+
+        if( location == -1 )
+            return;
+
+        glUniform4fv(location, 1, (GLfloat*)&vector);
 
     }
 

@@ -30,13 +30,9 @@ public:
         this->timer = &Timer::GetInstance();
     }
 
-    void SetRenderFunc(RenderFunc func){
-        graphics->SetRenderFunc(func);
+    void LoadScene(Scene & scene){
+        graphics->LoadScene( &scene );
     }
-
-    // void LoadScene(Scene & scene){
-    //     graphics->LoadScene( &scene );
-    // }
 
     void RegisterSystem(System * system){
         systems.emplace_back(system);

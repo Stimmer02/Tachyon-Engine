@@ -1,10 +1,10 @@
 #version 410
 
-layout(location = 0) in vec2 uvs;
+// layout(location = 0) in vec2 uvs;
 out vec4 frag_colour;
 
-uniform sampler2D tex;
+// uniform sampler2D tex;
 
 void main(){
-    frag_colour = texture(tex, uvs);
+    frag_colour = vec4(1.0, 1.0, 1.0, 1.0);//texture(tex, uvs);
 }

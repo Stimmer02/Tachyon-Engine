@@ -38,7 +38,7 @@ private:
 
 	GLFWwindow* window;
 
-	Scene scene;
+	// Scene scene;
 
 	EventType eventType;
 

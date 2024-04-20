@@ -60,6 +60,8 @@ public:
     /// @brief Sends stop signal to system thread
     void Stop();
 
+    virtual ~System();
+
 };
 
 

@@ -53,7 +53,7 @@ void UIManager::AssignEventHandlingService(IEventHandlingService * _eventHandlin
 }
 
 void UIManager::AddComponentToScene(Component * component){
-	scene.AddComponent(component);
+	// scene.AddComponent(component);
 }
 
 void UIManager::HandleEvents(){
@@ -66,13 +66,13 @@ void UIManager::HandleEvents(){
 	EventInfo info = inputHandlingService->Query();
 
 	if(info.type == EventType::ONCLICK && lastX!=info.x && lastY != info.y){
-        Component * component = scene.GetComponent(info.x, info.y);
+        // Component * component = scene.GetComponent(info.x, info.y);
 
-        if(component != nullptr){
-            InteractiveComponent * interactive = dynamic_cast<InteractiveComponent*>(component);
+        // if(component != nullptr){
+        //     InteractiveComponent * interactive = dynamic_cast<InteractiveComponent*>(component);
 
-            eventHandlingService->Publish( info.type, interactive );
-        }
+        //     eventHandlingService->Publish( info.type, interactive );
+        // }
 
         lastX = info.x;
         lastY = info.y;
@@ -98,7 +98,7 @@ void UIManager::Update(){
 }
 
 void UIManager::Render(){
-	scene.Render();
+	// scene.Render();
 }
 
 bool UIManager::ShouldClose(){
