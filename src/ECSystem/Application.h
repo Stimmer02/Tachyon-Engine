@@ -61,12 +61,16 @@ public:
 
         while( !context.ShouldClose() ){
 
-
             timer->TicTac();
             graphics->Run();
 
             for(System * system : systems){
                 system->Run();
+            }
+
+            if(timer->GetAccumulatedTime()>= 1.0f){
+                fprintf(stdout, "FPS : %05d\r", timer->GetFrameCount());
+                fflush(stdout);
             }
 
         }

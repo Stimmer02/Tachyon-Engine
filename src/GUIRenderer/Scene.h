@@ -2,6 +2,7 @@
 #define SCENE_H
 
 #include "AttributeContainer.h"
+#include "EntityContainer.h"
 #include "SceneObject.h"
 #include "Sprite.h"
 #include <stdio.h>

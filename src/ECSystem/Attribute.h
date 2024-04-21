@@ -6,6 +6,7 @@ using AttributeID = unsigned int;
 class Attribute{
 public:
     virtual ~Attribute() = default;
+    virtual void Update(){};
 };
 
 template<typename T>

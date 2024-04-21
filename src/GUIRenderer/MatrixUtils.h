@@ -5,6 +5,22 @@
 
 namespace MatrixUtils{
 
+    static Matrix Ortho(const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far){
+
+        Matrix ortho;
+
+        float * data = ortho.Data();
+
+        data[0] = 2.0f / (right - left);
+        data[3] = - (right+left)/(right-left);
+        data[5] = 2.0f / (top - bottom);
+        data[7] = - (top+bottom)/(top-bottom);
+        data[10] = -2.0f /(far - near);
+        data[11] = - (far + near)/(far - near);
+        data[15] = 1.0f;
+
+        return ortho;
+    }
 
     static Matrix Translate(const float & xOffset, const float & yOffset, const float & zOffset){
 

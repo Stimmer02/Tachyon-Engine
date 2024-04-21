@@ -1,17 +1,19 @@
 #ifndef SCENEOBJECT_H
 #define SCENEOBJECT_H
 
-#include "MatrixUtils.h"
 #include "Transform.h"
+#include "MatrixUtils.h"
 #include "GLShader.h"
-#include "EntityContainer.h"
-#include <list>
+#include "AttributeManager.h"
+#include "Sprite.h"
 
-#include <GL/glew.h>
+#include <vector>
 
-struct GraphicObject{
-    GLuint vao = 0;
-    GLuint vbo = 0;
+struct Quad{
+    GLuint vao;
+    GLuint vbo;
+    GLuint tbo;
+    GLuint cbo;
 };
 
 class SceneObject{
@@ -19,44 +21,87 @@ class SceneObject{
 private:
 
     Entity ID;
-
-    Transform transform;
     Matrix model;
 
     SceneObject * parent;
-    std::list<SceneObject*> childrens;
+    std::vector<SceneObject*> childrens;
+
+    AttributeManager * manager;
 
     bool isActive;
 
-    //Temporary
-    GraphicObject graphic;
+    Quad q;
 
 public:
+
+    Transform transform;
 
     SceneObject(const Entity & ID){
         this->parent = nullptr;
         this->isActive = true;
         this->ID = ID;
+        this->manager = &AttributeManager::GetInstance();
 
-        const Vector3 verts[] = {
-            Vector3(-0.25, -0.25),
-            Vector3(0.25, -0.25),
-            Vector3(0.25, 0.25),
-            Vector3(-0.25, 0.25)
-            };
+        const Vector3 vert[] = {
+            Vector3(-0.5f, -0.5f),
+            Vector3(0.5f, -0.5f),
+            Vector3(0.5f, 0.5f),
+            Vector3(-0.5f, 0.5f)
+        };
 
-        glGenBuffers(1, &graphic.vbo);
-        glGenVertexArrays(1, &graphic.vao);
+        const float uvs[] = {
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f,
+            0.0f, 0.0f
+        };
 
-        glBindVertexArray(graphic.vao);
+        const float col[] = {
+            1.0f, 0, 0, 1.0f,
+            0, 1.0f, 0, 1.0f,
+            0, 0, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f, 1.0f
+        };
 
-        glBindBuffer(GL_ARRAY_BUFFER, graphic.vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+        glGenVertexArrays(1, &q.vao);
+        glBindVertexArray(q.vao);
 
-        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vector3), (void*)0);
+// vertices
+
+        glGenBuffers(1, &q.vbo);
+
+        glBindBuffer(GL_ARRAY_BUFFER, q.vbo);
+        glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vector3), vert, GL_STATIC_DRAW);
+
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
         glEnableVertexAttribArray(0);
 
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ARRAY_BUFFER, q.vbo);
+
+// uvs
+
+        glGenBuffers(1, &q.tbo);
+
+        glBindBuffer(GL_ARRAY_BUFFER, q.tbo);
+        glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), uvs, GL_STATIC_DRAW);
+
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2*sizeof(float), 0);
+        glEnableVertexAttribArray(1);
+
+        glBindBuffer(GL_ARRAY_BUFFER, q.tbo);
+
+// color
+
+        glGenBuffers(1, &q.cbo);
+
+        glBindBuffer(GL_ARRAY_BUFFER, q.cbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(col), col, GL_STATIC_DRAW);
+
+        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4*sizeof(float), 0);
+        glEnableVertexAttribArray(2);
+
+        glBindBuffer(GL_ARRAY_BUFFER, q.cbo);
+
         glBindVertexArray(0);
     }
 
@@ -80,7 +125,7 @@ public:
     void RemoveChildren(SceneObject * children){
 
         children->parent = nullptr;
-        std::list<SceneObject*>::iterator it = childrens.begin();
+        std::vector<SceneObject*>::iterator it = childrens.begin();
 
         for(; it != childrens.end(); it++){
             if( *it == children)
@@ -96,18 +141,7 @@ public:
     }
 
     Matrix GetModel(){
-
-        if( parent == nullptr)
-            return model;
-
-
-        Matrix modelMatrix = parent->GetModel() * model;
-
-        return modelMatrix;
-    }
-
-    Transform& GetTransform(){
-        return transform;
+        return model;
     }
 
     Entity& GetEntityID(){
@@ -119,9 +153,13 @@ public:
         Matrix translation = MatrixUtils::Translate(transform.position.x, transform.position.y, transform.position.z);
         Matrix scale = MatrixUtils::Scale(transform.scale.x, transform.scale.y, transform.scale.z);
 
-        model = scale * translation;
+        if( parent == nullptr ){
+            model = scale * translation;
+        }else{
+            model = parent->model * scale * translation;
+        }
 
-        for(std::list<SceneObject*>::iterator it = childrens.begin(); it != childrens.end(); it++){
+        for(std::vector<SceneObject*>::iterator it = childrens.begin(); it != childrens.end(); it++){
             SceneObject * children = *it;
 
             if(children == nullptr)
@@ -137,20 +175,26 @@ public:
         if( isActive == false )
             return;
 
-        GLShader * current = currentShader;
-
-        Vector3 vec = transform.position.Normalize() * 0.5f + Vector3(0.5f, 0.5f, 0.5f);
-
         Matrix localModel = GetModel();
 
-        current->TransferToShader("u_color", vec);
+        GLShader * current = currentShader;
         current->TransferToShader("u_model", localModel);
 
-        glBindVertexArray(graphic.vao);
+        Sprite * sprite = manager->GetAttribute<Sprite>(ID);
+
+        if( sprite == nullptr )
+            return;
+
+        sprite->Load();
+
+        glBindVertexArray(q.vao);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);
 
-        for(std::list<SceneObject*>::iterator it = childrens.begin(); it != childrens.end(); it++){
+        sprite->UnLoad();
+
+
+        for(std::vector<SceneObject*>::iterator it = childrens.begin(); it != childrens.end(); it++){
             SceneObject * children = *it;
 
             if(children == nullptr)
@@ -161,9 +205,24 @@ public:
 
     }
 
+    template<typename T, typename... Args>
+    T * AddAttribute(Args&&... args) {
+        return manager->AddAttribute<T>(this->ID, std::forward<Args>(args)...);
+    }
+
+    template<typename T>
+    void RemoveAttribute() {
+        manager->RemoveAttribute<T>(this->ID);
+    }
+
+    template<typename T>
+    T * GetAttribute() {
+        return manager->GetAttribute<T>(this->ID);
+    }
+
     ~SceneObject(){
 
-
+        manager->DestroyEntity(this->ID);
 
     }
 

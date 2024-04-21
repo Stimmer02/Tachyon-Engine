@@ -14,6 +14,9 @@ private:
 
     Scene * scene;
     WindowContext * context;
+    GLShader * mainShader;
+
+    Matrix projectionMatrix;
 
     void Execute() override{
         context->PoolEvents();
@@ -22,6 +25,9 @@ private:
 
         if(!scene)
             return;
+
+        mainShader->Use();
+        mainShader->TransferToShader("u_projection", projectionMatrix);
 
         std::pair<IterationItem, IterationItem> iterator = scene->GetSceneObjectsIterator();
 
@@ -33,9 +39,11 @@ private:
                 continue;
 
             object->Render();
-            object->Update();
+            object->Update(); // It should be somewhere elese
 
         }
+
+        mainShader->Dispose();
 
     }
 
@@ -57,8 +65,12 @@ public:
         context->SetVSync( GraphicConfig::vsync );
         context->SetZBuffer( GraphicConfig::zbuffer );
 
+        this->projectionMatrix = MatrixUtils::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -10, 10);
 
-        TransformStack::Initialize();
+        this->mainShader = new GLShader();
+        this->mainShader->LinkShader("./resources/shaders/vertexShader.vert", GL_VERTEX_SHADER);
+        this->mainShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
+        this->mainShader->Build();
 
     }
 

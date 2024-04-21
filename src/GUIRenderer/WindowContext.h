@@ -37,8 +37,8 @@ private:
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
-        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        // glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+        // glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
     }
 
@@ -84,7 +84,7 @@ public:
 
         if( depthBuffer ){
             glEnable(GL_DEPTH_TEST);
-            glDepthFunc(GL_ALWAYS);
+            glDepthFunc(GL_LESS);
         }else{
             glDisable(GL_DEPTH_TEST);
         }
@@ -174,6 +174,7 @@ public:
     void SwapBuffers() const{
         assert(window && "Window does not exits");
         glfwSwapBuffers(window);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(bufferbits);
     }
 
