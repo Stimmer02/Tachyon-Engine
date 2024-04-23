@@ -26,7 +26,6 @@
 
 #endif
 
-static GLuint pixelBuffer;
 static std::map<std::string, GLuint> almanach;
 
 class Sprite : public AttributeType<Sprite>{
@@ -59,6 +58,9 @@ public:
     /// @param height
     void UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height);
 
+    /// @brief Method sets value correlated to texture attribute
+    void SetTextureAttrib(const GLenum & attrib, const GLint & value);
+
     /// @brief Method returns texture id of current sprite
     /// @return Sprite texture id
     GLuint GetTextureID();
@@ -71,6 +73,8 @@ public:
 
     /// @brief Method deletes texture from OpenGL graphic context.
     void Destroy();
+
+    AttributeID GetAttributeID() const override;
 
     ~Sprite();
 

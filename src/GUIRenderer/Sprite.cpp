@@ -86,6 +86,16 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
 
 }
 
+void Sprite::SetTextureAttrib(const GLenum & attrib, const GLint & value){
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glTexParameteri(GL_TEXTURE_2D, attrib, value);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+AttributeID Sprite::GetAttributeID() const{
+    return RenderingAttributes::SPRITE;
+}
+
 GLuint Sprite::GetTextureID(){
     return textureID;
 }

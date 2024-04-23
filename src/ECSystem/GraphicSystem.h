@@ -8,6 +8,13 @@
 #include "GLShader.h"
 #include "Scene.h"
 
+#include "Transform.h"
+#include "Sprite.h"
+#include "Mesh.h"
+
+#include <functional>
+
+using ArchetypeRenderFunc = std::function< void(Sprite *, Mesh *) >;
 
 class GraphicSystem : public System{
 private:
@@ -16,7 +23,35 @@ private:
     WindowContext * context;
     GLShader * mainShader;
 
+    Sprite * defaultTexture;
+    Mesh * defaultMesh;
+
     Matrix projectionMatrix;
+
+    ArchetypeRenderFunc archetypeFunc[RenderingAttributes::ATTRIB_MAX];
+
+    void RenderScene(SceneObject * object){
+
+        if(object == nullptr || object->isActive == false)
+            return;
+
+        Sprite * texture = object->GetAttribute<Sprite>();
+        Mesh * mesh = object->GetAttribute<Mesh>();
+
+        Matrix & model = object->GetModel();
+        currentShader->TransferToShader("u_model", model);
+
+        Archetype archetype = object->GetArchetype();
+        archetype &= RenderingAttributes::SPRITEANDMESH;
+
+        archetypeFunc[archetype](texture, mesh);
+
+        object->Update();
+
+        for( SceneObject * children : object->GetChildrens() )
+            RenderScene(children);
+
+    }
 
     void Execute() override{
         context->PoolEvents();
@@ -31,28 +66,87 @@ private:
 
         std::pair<IterationItem, IterationItem> iterator = scene->GetSceneObjectsIterator();
 
-        for(IterationItem it = iterator.first; it != iterator.second; it++){
-
-            SceneObject * object = *it;
-
-            if (object == nullptr || object->GetActivity() == false)
-                continue;
-
-            object->Render();
-            object->Update(); // It should be somewhere elese
-
-        }
+        for(IterationItem it = iterator.first; it != iterator.second; it++)
+            RenderScene(*it);
 
         mainShader->Dispose();
 
     }
 
-    void OnLoad() override{
+    void SetupUnhandledComponents() {
 
+        Color white[] = {255,255,255};
+        this->defaultTexture = new Sprite(white, 1, 1);
+
+        this->defaultMesh = new Mesh();
+
+        Vector3 verts[] = {
+            Vector3(-0.5f, 0.5f),
+            Vector3(-0.5f, -0.5f),
+            Vector3(0.5f, -0.5f),
+            Vector3(0.5f, 0.5f)
+        };
+
+        float texCoord[] = {
+            0.0f, 0.0f,
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f
+        };
+
+        this->defaultMesh->SetVertices(verts, 4);
+        this->defaultMesh->SetTexCoords(texCoord, 8);
 
     }
 
-    void OnUnload() override{
+    void UploadMainShader() {
+        this->mainShader = new GLShader();
+        this->mainShader->LinkShader("./resources/shaders/vertexShader.vert", GL_VERTEX_SHADER);
+        this->mainShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
+        this->mainShader->Build();
+    }
+
+    void SetupArchetypeFunc(){
+
+        archetypeFunc[RenderingAttributes::NONEATTRIB] =
+            [this](Sprite * sprite, Mesh * mesh){
+
+                sprite = this->GetDefaultTexture();
+                mesh = this->GetDefaultMesh();
+
+                sprite->Load();
+                mesh->Draw();
+                sprite->UnLoad();
+            };
+
+        archetypeFunc[RenderingAttributes::SPRITE] =
+            [this](Sprite * sprite, Mesh * mesh){
+
+                mesh = this->GetDefaultMesh();
+
+                sprite->Load();
+                mesh->Draw();
+                sprite->UnLoad();
+            };
+
+        archetypeFunc[RenderingAttributes::MESH] =
+            [this](Sprite * sprite, Mesh * mesh){
+
+                sprite = this->GetDefaultTexture();
+
+                sprite->Load();
+                mesh->Draw();
+                sprite->UnLoad();
+            };
+
+        archetypeFunc[RenderingAttributes::SPRITEANDMESH] =
+            [this](Sprite * sprite, Mesh * mesh){
+
+                sprite->Load();
+                mesh->Draw();
+                sprite->UnLoad();
+            };
+
     }
 
 public:
@@ -67,11 +161,9 @@ public:
 
         this->projectionMatrix = MatrixUtils::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -10, 10);
 
-        this->mainShader = new GLShader();
-        this->mainShader->LinkShader("./resources/shaders/vertexShader.vert", GL_VERTEX_SHADER);
-        this->mainShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
-        this->mainShader->Build();
-
+        SetupUnhandledComponents();
+        UploadMainShader();
+        SetupArchetypeFunc();
     }
 
     void LoadScene(Scene * scene){
@@ -82,8 +174,18 @@ public:
 
     }
 
-    ~GraphicSystem(){
+    Sprite * GetDefaultTexture(){
+        return defaultTexture;
+    }
 
+    Mesh * GetDefaultMesh(){
+        return defaultMesh;
+    }
+
+
+    ~GraphicSystem(){
+        delete defaultTexture;
+        delete defaultMesh;
     }
 };
 

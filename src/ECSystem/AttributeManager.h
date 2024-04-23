@@ -1,11 +1,13 @@
 #ifndef ATTRIBUTEMANAGER_H
 #define ATTRIBUTEMANAGER_H
 
-#include "EntityContainer.h"
+#include "SceneObject.h"
 #include "Attribute.h"
 
 #include <unordered_map>
 #include <typeindex>
+
+using Archetype = unsigned char;
 
 class AttributeManager {
 
@@ -29,6 +31,7 @@ public:
     template<typename T, typename... Args>
     T * AddAttribute(const Entity & ID, Args&&... args){
         Attribute * attrib = (Attribute *)new T(std::forward<Args>(args)...);
+        attrib->SetParent(ID);
 
         std::type_index index = typeid(T);
 
