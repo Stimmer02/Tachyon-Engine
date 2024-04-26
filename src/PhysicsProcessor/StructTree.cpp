@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 #include "StructTree.h"
 
 using namespace std;
@@ -25,7 +26,32 @@ void StructTree::setStructDirectory(std::string structDirectory) {
 }
 
 char StructTree::build(ClStructParser* parser) {
+    queue<engineStruct*> q;
+    q.push(root);
 
+    while (q.empty() == false) {
+        engineStruct* firstStruct = q.front();
+        q.pop();
+
+        for (int i = 0; i < firstStruct->fieldCount; ++i) {
+            if (firstStruct->fields[i].type == engineStruct::cl_struct) {
+                for (int j = 0; j < firstStruct->fieldCount; ++j) {
+                    if (firstStruct->fields[i].subStructName + ".cl" == firstStruct->fields[j].name || firstStruct->fields[i].subStructName + "clcpp" == firstStruct->fields[j].name) {
+                        std::string code = firstStruct->fields[j].subStruct->rawCode;
+                        firstStruct->fields[i].subStruct = parser->processStruct(code);
+                        if (firstStruct->fields[i].subStruct == nullptr) {
+                            status = 1;
+                            return status;
+                        }
+                        q.push(firstStruct->fields[i].subStruct);
+                    }
+                }
+            }
+        }
+    }
+
+    this->status = 0;
+    return status;
 }
 
 std::string StructTree::getError() {
@@ -34,4 +60,10 @@ std::string StructTree::getError() {
 
 std::string StructTree::getStructures() {
 
+}
+
+int main()
+{
+    cout << "Hello world!" << endl;
+    return 0;
 }
