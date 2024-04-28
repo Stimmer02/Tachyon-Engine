@@ -70,9 +70,3 @@ std::string StructTree::getStructuresHelper(engineStruct* node) {
 std::string StructTree::getStructures() {
     return getStructuresHelper(root);
 }
-
-int main()
-{
-    cout << "Hello world!" << endl;
-    return 0;
-}
