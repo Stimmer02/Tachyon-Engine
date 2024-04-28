@@ -19,6 +19,7 @@ StructTree::~StructTree() {
 
 char StructTree::setRootStruct(std::string rootStructName) {
     (*(this->root)).name = rootStructName;
+    return 0;
 }
 
 void StructTree::setStructDirectory(std::string structDirectory) {
