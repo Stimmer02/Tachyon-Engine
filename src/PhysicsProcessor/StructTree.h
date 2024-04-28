@@ -14,6 +14,7 @@ class StructTree{
         void setStructDirectory(std::string structDirectory); //Sets the root directory where the structs are stored (they could be stored recursively in subdirectories)
         char build(ClStructParser* parser); //Builds the tree of structures starting from the root
         std::string getError(); //Returns the error message
+        std::string getStructuresHelper(engineStruct* node);
         std::string getStructures(); //Returns structures code in a single string in the order from leaves to the root (format that is ready to be compiled)
 
     private:
