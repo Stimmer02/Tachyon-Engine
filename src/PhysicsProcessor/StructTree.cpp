@@ -58,8 +58,17 @@ std::string StructTree::getError() {
     return this->error;
 }
 
-std::string StructTree::getStructures() {
+std::string StructTree::getStructuresHelper(engineStruct* node) {
+    std::string result = "";
+    for (int i = 0; i < node->fieldCount; ++i) {
+        result += getStructuresHelper(node->fields[i].subStruct);
+    }
+    result += node->rawCode;
+    return result;
+}
 
+std::string StructTree::getStructures() {
+    return getStructuresHelper(root);
 }
 
 int main()
