@@ -12,6 +12,8 @@
 #include "Sprite.h"
 #include "Mesh.h"
 
+#include "TextElement.h"
+
 #include <functional>
 
 using ArchetypeRenderFunc = std::function< void(Sprite *, Mesh *) >;
@@ -21,7 +23,9 @@ private:
 
     Scene * scene;
     WindowContext * context;
+
     GLShader * mainShader;
+    GLShader * guiShader;
 
     Sprite * defaultTexture;
     Mesh * defaultMesh;
@@ -30,7 +34,7 @@ private:
 
     ArchetypeRenderFunc archetypeFunc[RenderingAttributes::ATTRIB_MAX];
 
-    void RenderScene(SceneObject * object){
+    void RenderSceneObjects(SceneObject * object){
 
         if(object == nullptr || object->isActive == false)
             return;
@@ -47,9 +51,18 @@ private:
         archetypeFunc[archetype](texture, mesh);
 
         for( SceneObject * children : object->GetChildrens() )
-            RenderScene(children);
+            RenderSceneObjects(children);
 
         object->Update();
+
+    }
+
+    void RenderGUI(GUIElement * guiElement){
+
+        if(guiElement == nullptr || guiElement->isActive == false)
+            return;
+
+        guiElement->Render();
 
     }
 
@@ -65,12 +78,20 @@ private:
         mainShader->TransferToShader("u_projection", projectionMatrix);
 
         std::list<SceneObject *>& objects = scene->GetSceneObjects();
+        std::list<GUIElement *>& guiElements = scene->GetGUIElements();
 
         for(SceneObject * object : objects)
-            RenderScene(object);
+            RenderSceneObjects(object);
 
         mainShader->Dispose();
 
+        guiShader->Use();
+        guiShader->TransferToShader("u_projection", projectionMatrix);
+
+        for(GUIElement * guiElement : guiElements)
+            RenderGUI(guiElement);
+
+        guiShader->Dispose();
     }
 
     void SetupUnhandledComponents() {
@@ -99,11 +120,16 @@ private:
 
     }
 
-    void UploadMainShader() {
+    void UploadMainShaders() {
         this->mainShader = new GLShader();
         this->mainShader->LinkShader("./resources/shaders/vertexShader.vert", GL_VERTEX_SHADER);
         this->mainShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
         this->mainShader->Build();
+
+        this->guiShader = new GLShader();
+        this->guiShader->LinkShader("./resources/shaders/textVertexShader.vert", GL_VERTEX_SHADER);
+        this->guiShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
+        this->guiShader->Build();
     }
 
     void SetupArchetypeFunc(){
@@ -162,7 +188,7 @@ public:
         this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -100, 100);
 
         SetupUnhandledComponents();
-        UploadMainShader();
+        UploadMainShaders();
         SetupArchetypeFunc();
     }
 

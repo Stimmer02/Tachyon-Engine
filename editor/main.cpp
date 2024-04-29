@@ -1,7 +1,5 @@
 #include "Application.h"
 
-MouseButtonMonitor * monitor;
-
 class SolarSystem : public System{
 
     Scene * scene;
@@ -24,7 +22,6 @@ class SolarSystem : public System{
 
         venusMoon->transform.position.x = 2.0f;
         venusMoon->transform.position.y = 0.0f;
-
 
         angle *= (angle < 360.0f);
         angle += 1.0f * deltaTime;
@@ -92,8 +89,6 @@ int main(){
     GraphicConfig::windowTitle = "Application";
 
     Application app;
-
-    monitor = &app.GetMouseInputMonitor();
 
     Scene scene;
     SolarSystem * solar = new SolarSystem(&scene);
