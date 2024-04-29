@@ -7,7 +7,6 @@
 #include "Sprite.h"
 #include <stdio.h>
 
-using IterationItem = std::list<SceneObject*>::iterator;
 
 class Scene{
 private:
@@ -46,8 +45,8 @@ public:
 
 	}
 
-	std::pair<IterationItem, IterationItem> GetSceneObjectsIterator(){
-		return std::make_pair(objects.begin(), objects.end());
+	std::list<SceneObject*>& GetSceneObjects(){
+		return objects;
 	}
 
 };

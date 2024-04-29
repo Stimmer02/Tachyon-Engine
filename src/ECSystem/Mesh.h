@@ -84,6 +84,77 @@ public:
 
     }
 
+    void GenCube(const float & width, const float & height, const float & depth){
+
+
+        const Vector3 vertices[] = {
+            { -width * 0.5f, -height * 0.5f, -depth * 0.5f },
+            { width * 0.5f, -height * 0.5f, -depth * 0.5f },
+            { width * 0.5f, height * 0.5f, -depth * 0.5f },
+            { -width * 0.5f, height * 0.5f, -depth * 0.5f },
+            { -width * 0.5f, height * 0.5f, depth * 0.5f },
+            { width * 0.5f, height * 0.5f, depth * 0.5f },
+            { width * 0.5f, -height * 0.5f, depth * 0.5f },
+            { -width * 0.5f, -height * 0.5f, depth * 0.5f }
+        };
+
+
+        const float uvs[] = {
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f,
+
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f,
+
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f,
+
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f,
+
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f,
+
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+            0.0f, 1.0f,
+
+        };
+
+
+        const unsigned int indices[] = {
+            0, 2, 1,
+            0, 3, 2,
+            2, 3, 4,
+            2, 4, 5,
+            1, 2, 5,
+            1, 5, 6,
+            0, 7, 4,
+            0, 4, 3,
+            5, 4, 7,
+            5, 7, 6,
+            0, 6, 7,
+            0, 1, 6
+        };
+
+
+        SetVertices(vertices, 8);
+        SetTexCoords(uvs, 48);
+        SetIndices(indices, 36);
+
+    }
+
     void SetVertices(const Vector3 * vertices, const unsigned int & numVertices){
         this->numVertices = numVertices;
 

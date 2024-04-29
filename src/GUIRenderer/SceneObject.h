@@ -2,7 +2,6 @@
 #define SCENEOBJECT_H
 
 #include "Transform.h"
-#include "MatrixUtils.h"
 #include "GLShader.h"
 #include "AttributeManager.h"
 #include "Sprite.h"
@@ -78,9 +77,9 @@ public:
 
     void Update(){
 
-        Matrix translation = MatrixUtils::Translate(transform.position.x, transform.position.y, transform.position.z);
-        Matrix rotation = MatrixUtils::Translate(0.0f, 0.0f, 0.0f);
-        Matrix scale = MatrixUtils::Scale(transform.scale.x, transform.scale.y, transform.scale.z);
+        Matrix translation = Matrix::Translate(transform.position.x, transform.position.y, transform.position.z);
+        Matrix rotation = Matrix::Rotate(transform.rotation);
+        Matrix scale = Matrix::Scale(transform.scale.x, transform.scale.y, transform.scale.z);
 
         if( parent == nullptr ){
             model = translation * rotation * scale;

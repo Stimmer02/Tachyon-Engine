@@ -46,10 +46,10 @@ private:
 
         archetypeFunc[archetype](texture, mesh);
 
-        object->Update();
-
         for( SceneObject * children : object->GetChildrens() )
             RenderScene(children);
+
+        object->Update();
 
     }
 
@@ -64,10 +64,10 @@ private:
         mainShader->Use();
         mainShader->TransferToShader("u_projection", projectionMatrix);
 
-        std::pair<IterationItem, IterationItem> iterator = scene->GetSceneObjectsIterator();
+        std::list<SceneObject *>& objects = scene->GetSceneObjects();
 
-        for(IterationItem it = iterator.first; it != iterator.second; it++)
-            RenderScene(*it);
+        for(SceneObject * object : objects)
+            RenderScene(object);
 
         mainShader->Dispose();
 
@@ -159,7 +159,7 @@ public:
         context->SetVSync( GraphicConfig::vsync );
         context->SetZBuffer( GraphicConfig::zbuffer );
 
-        this->projectionMatrix = MatrixUtils::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -10, 10);
+        this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -100, 100);
 
         SetupUnhandledComponents();
         UploadMainShader();
@@ -181,7 +181,6 @@ public:
     Mesh * GetDefaultMesh(){
         return defaultMesh;
     }
-
 
     ~GraphicSystem(){
         delete defaultTexture;

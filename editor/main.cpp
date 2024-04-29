@@ -1,5 +1,7 @@
 #include "Application.h"
 
+MouseButtonMonitor * monitor;
+
 class SolarSystem : public System{
 
     Scene * scene;
@@ -18,12 +20,14 @@ class SolarSystem : public System{
         venus->transform.position.x = 3.0f * cos(2.0f * angle );
         venus->transform.position.y = 3.0f * sin(2.0f * angle );
 
-        venusMoon->transform.position.x = 2.0f * cos( angle );
-        venusMoon->transform.position.y = 2.0f * sin( angle );
+        sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5, -angle, angle});
+
+        venusMoon->transform.position.x = 2.0f;
+        venusMoon->transform.position.y = 0.0f;
 
 
         angle *= (angle < 360.0f);
-        angle += 0.1f * deltaTime;
+        angle += 1.0f * deltaTime;
 
     }
 
@@ -50,17 +54,17 @@ public:
         venus->AddChildren(venusMoon);
 
         sun->transform.position = Vector3(400, 300);
-        sun->transform.scale = Vector3(50.0f, 50.0f);
-        mercury->transform.scale = Vector3(0.5f, 0.5f);
-        venus->transform.scale = Vector3(0.3f, 0.3f);
-        venusMoon->transform.scale = Vector3(0.3f, 0.3f);
+        sun->transform.scale = Vector3(50.0f, 50.0f, 50.0f);
+        mercury->transform.scale = Vector3(0.5f, 0.5f, 0.5f);
+        venus->transform.scale = Vector3(0.3f, 0.3f, 0.3f);
+        venusMoon->transform.scale = Vector3(0.3f, 0.3f, 0.3f);
 
         Mesh * sunMesh = sun->AddAttribute<Mesh>();
         Mesh * mercuryMesh = mercury->AddAttribute<Mesh>();
         Mesh * venusMesh = venus->AddAttribute<Mesh>();
         Mesh * venusMoonMesh = venusMoon->AddAttribute<Mesh>();
 
-        sunMesh->GenSphere(1.0f, 10, 10);
+        sunMesh->GenCube(1.0f, 1.0f, 1.0f);
         mercuryMesh->GenSphere(1.0f, 10, 10);
         venusMesh->GenSphere(1.0f, 10, 10);
         venusMoonMesh->GenSphere(1.0f, 10, 10);
@@ -88,6 +92,8 @@ int main(){
     GraphicConfig::windowTitle = "Application";
 
     Application app;
+
+    monitor = &app.GetMouseInputMonitor();
 
     Scene scene;
     SolarSystem * solar = new SolarSystem(&scene);
