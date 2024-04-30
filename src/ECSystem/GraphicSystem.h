@@ -1,10 +1,8 @@
 #ifndef GRAPHICSYSTEM_H
 #define GRAPHICSYSTEM_H
 
-#include "TransformStack.h"
 #include "System.h"
 #include "WindowContext.h"
-#include "Settings.h"
 #include "GLShader.h"
 #include "Scene.h"
 
@@ -13,6 +11,8 @@
 #include "Mesh.h"
 
 #include "TextElement.h"
+
+#include "Camera.h"
 
 #include <functional>
 
@@ -23,6 +23,8 @@ private:
 
     Scene * scene;
     WindowContext * context;
+
+    Camera mainCamera;
 
     GLShader * mainShader;
     GLShader * guiShader;
@@ -76,6 +78,7 @@ private:
 
         mainShader->Use();
         mainShader->TransferToShader("u_projection", projectionMatrix);
+        mainShader->TransferToShader("u_view", mainCamera.GetViewMatrix());
 
         std::list<SceneObject *>& objects = scene->GetSceneObjects();
         std::list<GUIElement *>& guiElements = scene->GetGUIElements();
@@ -92,6 +95,7 @@ private:
             RenderGUI(guiElement);
 
         guiShader->Dispose();
+
     }
 
     void SetupUnhandledComponents() {
@@ -198,6 +202,10 @@ public:
 
     void Share() override{
 
+    }
+
+    Camera& GetMainCamera(){
+        return mainCamera;
     }
 
     Sprite * GetDefaultTexture(){

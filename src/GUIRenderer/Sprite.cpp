@@ -13,7 +13,7 @@ Sprite::Sprite(const char * filepath){
     std::map<std::string, GLuint>::iterator it = almanach.find( std::string(filepath) );
 
     if( it != almanach.end() ){
-        this->textureID = it->second;
+        frames.push_back( it->second );
         return;
     }
 
@@ -23,7 +23,7 @@ Sprite::Sprite(const char * filepath){
         return;
 
     this->UpdateTexture(img.pixels, img.width, img.height);
-    almanach[ std::string(filepath) ] = textureID;
+    almanach[ std::string(filepath) ] = frames.back();
 
     delete[] img.pixels;
 
@@ -38,12 +38,18 @@ Sprite::Sprite(const Image * image){
 
 }
 
-void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height){
+void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height, const GLuint & frameID){
 
+    GLuint textureID = 0;
 
-    if( this->textureID == 0){
+    if( !frames.empty() && frames.size() > frameID)
+        textureID = frames[frameID];
+
+    if( textureID == 0){
 
         glGenTextures(1, &textureID);
+
+        frames.emplace_back(textureID);
 
 #ifdef DEBUG
 
@@ -86,8 +92,12 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
 
 }
 
-void Sprite::SetTextureAttrib(const GLenum & attrib, const GLint & value){
-    glBindTexture(GL_TEXTURE_2D, textureID);
+void Sprite::SetTextureAttrib(const GLenum & attrib, const GLint & value, const GLuint & frameID){
+
+    if( frames.empty() || frames.size() <= frameID)
+        return;
+
+    glBindTexture(GL_TEXTURE_2D, frames[frameID]);
     glTexParameteri(GL_TEXTURE_2D, attrib, value);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -96,12 +106,73 @@ AttributeID Sprite::GetAttributeID() const{
     return RenderingAttributes::SPRITE;
 }
 
-GLuint Sprite::GetTextureID(){
-    return textureID;
+void Sprite::Push(const Color * pixels, const uint32_t& width, const uint32_t& height){
+
+    if( pixels == nullptr )
+        return;
+
+    GLuint textureID =  frames.size();
+
+    this->UpdateTexture(pixels, width, height, textureID);
+
+}
+
+void Sprite::Push(const char * filepath){
+
+    std::map<std::string, GLuint>::iterator it = almanach.find( std::string(filepath) );
+
+    if( it != almanach.end() ){
+        frames.push_back( it->second );
+        return;
+    }
+
+    Image img = BitmapReader::ReadFile(filepath);
+
+    if( img.pixels == nullptr )
+        return;
+
+    GLuint textureID = frames.size();
+
+    this->UpdateTexture(img.pixels, img.width, img.height, textureID);
+    almanach[ std::string(filepath) ] = frames.back();
+
+    delete[] img.pixels;
+
+}
+
+void Sprite::Pop(){
+
+    if( frames.size()<2 )
+        return;
+
+    GLuint textureID = frames.back();
+    frames.pop_back();
+
+    glDeleteTextures(1, &textureID);
+
+}
+
+GLuint Sprite::GetTextureID(const GLuint & frameID){
+
+    if( frames.size() <= frameID )
+        return - 1;
+
+    return frames[frameID];
 }
 
 void Sprite::Load(){
-    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    if( frames.empty() )
+        return;
+
+    glBindTexture(GL_TEXTURE_2D, frames[currentFrame]);
+}
+
+void Sprite::NextFrame(){
+
+    currentFrame++;
+    currentFrame *= ( currentFrame < frames.size() );
+
 }
 
 void Sprite::UnLoad(){
@@ -109,8 +180,11 @@ void Sprite::UnLoad(){
 }
 
 void Sprite::Destroy(){
-    glDeleteTextures(1, &textureID);
-    textureID = 0;
+
+    this->currentFrame = 0;
+    for(GLuint frame : frames)
+        glDeleteTextures(1, &frame);
+
 }
 
 Sprite::~Sprite(){

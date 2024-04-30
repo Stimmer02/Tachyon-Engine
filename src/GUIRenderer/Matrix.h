@@ -357,6 +357,37 @@ public:
         return ortho;
     }
 
+    static Matrix LookAt(const Vector3 & position, const Vector3 & front, const Vector3 & up, const Vector3 & right){
+
+        Matrix look;
+
+        float * data = look.Data();
+
+        data[0] = right.x;
+        data[1] = right.y;
+        data[2] = right.z;
+        data[3] = -position.x;
+
+        data[4] = up.x;
+        data[5] = up.y;
+        data[6] = up.z;
+        data[7] = -position.y;
+
+        data[8] = front.x;
+        data[9] = front.y;
+        data[10] = front.z;
+        data[11] = -position.z;
+
+        data[12] = 0.0f;
+        data[13] = 0.0f;
+        data[14] = 0.0f;
+        data[14] = 1.0f;
+
+
+        return look;
+
+    }
+
     static Matrix Translate(const float & xOffset, const float & yOffset, const float & zOffset){
 
         Matrix translation;

@@ -26,13 +26,16 @@
 
 #endif
 
+#include <vector>
+
 static std::map<std::string, GLuint> almanach;
 
 class Sprite : public AttributeType<Sprite>{
 
 private:
 
-    GLuint textureID = 0;
+    std::vector<GLuint> frames;
+    int currentFrame = 0;
 
 public:
 
@@ -56,14 +59,30 @@ public:
     /// @param pixels
     /// @param width
     /// @param height
-    void UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height);
+    void UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height, const GLuint & frameID = 0);
 
     /// @brief Method sets value correlated to texture attribute
-    void SetTextureAttrib(const GLenum & attrib, const GLint & value);
+    void SetTextureAttrib(const GLenum & attrib, const GLint & value, const GLuint & frameID = 0);
 
     /// @brief Method returns texture id of current sprite
     /// @return Sprite texture id
-    GLuint GetTextureID();
+    GLuint GetTextureID(const GLuint & frameID = 0);
+
+    /// @brief Pushes a new frame to animation
+    /// @param pixels
+    /// @param width
+    /// @param height
+    void Push(const Color * pixels, const uint32_t& width, const uint32_t& height);
+
+    /// @brief Pushes a new frame to animation
+    /// @param filepath
+    void Push(const char * filepath);
+
+    /// @brief Switches pointer to the next frame
+    void NextFrame();
+
+    /// @brief Removes the last frame from animation
+    void Pop();
 
     /// @brief Method loads current sprite to texture buffer.
     void Load();

@@ -53,8 +53,12 @@ public:
         return mouseMonitor;
     }
 
-    KeyboardMonitor& GerKeyboardInputMonitor() {
+    KeyboardMonitor& GetKeyboardInputMonitor() {
         return keyboardMonitor;
+    }
+
+    Camera& GetMainCamera(){
+        return graphics->GetMainCamera();
     }
 
     void Loop(){

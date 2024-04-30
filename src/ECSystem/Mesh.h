@@ -81,6 +81,7 @@ public:
         SetVertices(vertices.data(), vertices.size());
         SetTexCoords(uvs.data(), uvs.size());
         SetIndices(indices.data(), indices.size());
+        renderMode = GL_TRIANGLES;
 
     }
 
@@ -92,10 +93,10 @@ public:
             { width * 0.5f, -height * 0.5f, -depth * 0.5f },
             { width * 0.5f, height * 0.5f, -depth * 0.5f },
             { -width * 0.5f, height * 0.5f, -depth * 0.5f },
-            { -width * 0.5f, height * 0.5f, depth * 0.5f },
-            { width * 0.5f, height * 0.5f, depth * 0.5f },
+            { -width * 0.5f, -height * 0.5f, depth * 0.5f },
             { width * 0.5f, -height * 0.5f, depth * 0.5f },
-            { -width * 0.5f, -height * 0.5f, depth * 0.5f }
+            { width * 0.5f, height * 0.5f, depth * 0.5f },
+            { -width * 0.5f, height * 0.5f, depth * 0.5f },
         };
 
 
@@ -134,24 +135,30 @@ public:
 
 
         const unsigned int indices[] = {
-            0, 2, 1,
-            0, 3, 2,
-            2, 3, 4,
-            2, 4, 5,
-            1, 2, 5,
+            0, 1, 2,
+            0, 2, 3,
+
             1, 5, 6,
-            0, 7, 4,
-            0, 4, 3,
+            1, 6, 2,
+
             5, 4, 7,
             5, 7, 6,
-            0, 6, 7,
-            0, 1, 6
+
+            4, 0, 3,
+            4, 3, 7,
+
+            3, 2, 6,
+            3, 6, 7,
+
+            4, 5, 1,
+            4, 1, 0
         };
 
 
         SetVertices(vertices, 8);
         SetTexCoords(uvs, 48);
         SetIndices(indices, 36);
+        renderMode = GL_TRIANGLES;
 
     }
 

@@ -1,9 +1,13 @@
 #include "Application.h"
 
+Camera * mainCamera;
+KeyboardMonitor * monitor;
+
 class SolarSystem : public System{
 
     Scene * scene;
     SceneObject * sun, * mercury, * venus, * venusMoon;
+    Sprite * sunSprite;
     Timer * timer;
 
     void Execute() override{
@@ -23,8 +27,42 @@ class SolarSystem : public System{
         venusMoon->transform.position.x = 2.0f;
         venusMoon->transform.position.y = 0.0f;
 
+        EventInfo info = monitor->GetButtonState(GLFW_KEY_W);
+
+        if( info.type == ONHOLD )
+            mainCamera->MoveBy(Vector3(0.0f, 0.0f, -1.0f), deltaTime);
+
+        info = monitor->GetButtonState(GLFW_KEY_S);
+
+        if( info.type == ONHOLD )
+            mainCamera->MoveBy(Vector3(0.0f, 0.0f, 1.0f), deltaTime);
+
+        info = monitor->GetButtonState(GLFW_KEY_A);
+
+        if( info.type == ONHOLD )
+            mainCamera->MoveBy(Vector3(-1.0f, 0.0f, 0.0f), deltaTime);
+
+        info = monitor->GetButtonState(GLFW_KEY_D);
+
+        if( info.type == ONHOLD )
+            mainCamera->MoveBy(Vector3(1.0f, 0.0f, 0.0f), deltaTime);
+
+        info = monitor->GetButtonState(GLFW_KEY_SPACE);
+
+        if( info.type == ONHOLD )
+            mainCamera->MoveBy(Vector3(0.0f, 1.0f, 0.0f), deltaTime);
+
+        info = monitor->GetButtonState(GLFW_KEY_LEFT_SHIFT);
+
+        if( info.type == ONHOLD )
+            mainCamera->MoveBy(Vector3(0.0f, -1.0f, 0.0f), deltaTime);
+
         angle *= (angle < 360.0f);
         angle += 1.0f * deltaTime;
+
+        if( timer->GetAccumulatedTime() >= 1.0f){
+            sunSprite->NextFrame();
+        }
 
     }
 
@@ -61,14 +99,16 @@ public:
         Mesh * venusMesh = venus->AddAttribute<Mesh>();
         Mesh * venusMoonMesh = venusMoon->AddAttribute<Mesh>();
 
-        sunMesh->GenCube(1.0f, 1.0f, 1.0f);
+        sunMesh->GenSphere(1.0f, 32, 32);
         mercuryMesh->GenSphere(1.0f, 10, 10);
         venusMesh->GenSphere(1.0f, 10, 10);
         venusMoonMesh->GenSphere(1.0f, 10, 10);
 
         Color colors[] = { {200, 128, 0}, {127, 127, 127}, {127, 0, 127}, {80, 80, 80} };
 
-        Sprite * sunSprite = sun->AddAttribute<Sprite>(colors, 1, 1);
+
+        sunSprite = sun->AddAttribute<Sprite>("resources/sprites/test.bmp");
+        sunSprite->Push("resources/sprites/slime.bmp");
         Sprite * mercurySprite = mercury->AddAttribute<Sprite>(colors + 1, 1, 1);
         Sprite * venusSprite = venus->AddAttribute<Sprite>(colors + 2, 1, 1);
         Sprite * venusMoonSprite = venusMoon->AddAttribute<Sprite>(colors + 3, 1, 1);
@@ -91,6 +131,10 @@ int main(){
     Application app;
 
     Scene scene;
+
+    mainCamera = &app.GetMainCamera();
+    monitor = &app.GetKeyboardInputMonitor();
+
     SolarSystem * solar = new SolarSystem(&scene);
 
     app.RegisterSystem(solar);
