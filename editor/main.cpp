@@ -122,7 +122,7 @@ int main(){
 
     srand(time(nullptr));
 
-    GraphicConfig::vsync = true;
+    GraphicConfig::vsync = false;
     GraphicConfig::zbuffer = true;
     GraphicConfig::windowHeight = 600;
     GraphicConfig::windowWidth = 800;

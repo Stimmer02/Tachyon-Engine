@@ -38,10 +38,8 @@ private:
         this->front.z = std::sin( yawInRad ) * cos( pitchInRad );
 
         this->front = front.Normalize();
-        this->right = Vector3::Cross(worldUp, front).Normalize();
-        this->up = Vector3::Cross(front, right).Normalize();
-
-        viewMatrix = Matrix::LookAt(position, front, up, right);
+        this->right = Vector3::Cross(front, worldUp).Normalize();
+        this->up = Vector3::Cross(right, front).Normalize();
     }
 
 public:
@@ -54,9 +52,14 @@ public:
         this->front = Vector3(0.0f, 0.0f, -1.0f);
         this->yaw = yaw;
         this->pitch = pitch;
+        UpdateVectors();
     }
 
     Matrix& GetViewMatrix(){
+
+        Matrix look = Matrix::LookAt(position, front, up, right);
+        viewMatrix = look;
+
         return viewMatrix;
     }
 
@@ -66,7 +69,7 @@ public:
         this->right = Vector3::Cross(worldUp, front);
         this->front = Vector3::Cross(worldUp, right);
 
-        viewMatrix = Matrix::LookAt(position, front, up, right);
+        UpdateVectors();
 
     }
 
@@ -80,7 +83,8 @@ public:
         this->right = newRight;
         this->front = direction;
 
-        viewMatrix = Matrix::LookAt(position, front, up, right);
+        UpdateVectors();
+
     }
 
     void RotateBy(const float & xOffset, const float & yOffset){

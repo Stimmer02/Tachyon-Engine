@@ -381,10 +381,32 @@ public:
         data[12] = 0.0f;
         data[13] = 0.0f;
         data[14] = 0.0f;
-        data[14] = 1.0f;
+        data[15] = 1.0f;
 
 
         return look;
+
+    }
+
+    static Matrix Perspective(const float & aspect, const float & fov, const float & near, const float & far){
+
+        Matrix perspective;
+
+        float * data = perspective.Data();
+
+        constexpr float deg2rad = M_PI/180.0f;
+
+        float f = std::tan(deg2rad * fov * 0.5f);
+
+        data[0] = f/aspect;
+        data[5] = f;
+        data[10] = (far + near)/(near-far);
+        data[11] = 2.0f * far * near / (near - far);
+        data[14] = -1.0f;
+        data[15] = 0.0f;
+
+
+        return perspective;
 
     }
 

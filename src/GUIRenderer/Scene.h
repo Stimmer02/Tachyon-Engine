@@ -39,20 +39,20 @@ public:
 		Entity ID = object->GetEntityID();
 		entities.Destroy( ID );
 
-
-		auto it = std::find(objects.begin(), objects.end(), object);
-
-		if (it == objects.end())
-			return;
-
-		objects.erase(it);
-			delete object;
+		for (auto it = objects.begin(); it != objects.end(); ++it) {
+			if (*it == object) {
+				objects.erase(it);
+				delete object;
 
 #ifdef DEBUG
 
 		fprintf(stdout, "[DEBUG] Removed scene object %d\n", ID);
 
 #endif
+
+				break;
+			}
+		}
 
 
 	}
@@ -63,19 +63,20 @@ public:
 
 	void RemoveGUIFromScene(GUIElement * object){
 
-		auto it = std::find(guiObjects.begin(), guiObjects.end(), object);
-
-		if(it == guiObjects.end())
-			return;
-
-		guiObjects.erase(it);
-		delete object;
+		for (auto it = guiObjects.begin(); it != guiObjects.end(); ++it) {
+			if (*it == object) {
+				guiObjects.erase(it);
+				delete object;
 
 #ifdef DEBUG
 
-	fprintf(stdout, "[DEBUG] Removed gui object from scene\n");
+		fprintf(stdout, "[DEBUG] Removed gui object\n");
 
 #endif
+
+				break;
+			}
+		}
 
 	}
 
