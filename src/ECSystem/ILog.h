@@ -5,7 +5,13 @@
 
 class ILog {
 public:
-  virtual void Write(enum MessageType _type, const char * _format, ...) = 0;
+
+  virtual void Write(enum LogMessageType _type, const char * _format, ...) = 0;
+
+  virtual void Flush() = 0;
+
+  virtual ~ILog(){}
+
 };
 
 #endif

@@ -8,7 +8,7 @@
 struct EventQueueElement{
 
     std::time_t time;
-    MessageType type;
+    LogMessageType type;
     std::string data;
 
     bool operator <(const EventQueueElement &other) const;

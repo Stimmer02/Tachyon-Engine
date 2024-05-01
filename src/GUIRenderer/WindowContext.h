@@ -9,6 +9,7 @@
 #include <unordered_map>
 
 #include "IShareableContext.h"
+#include "EventRegister.h"
 
 class WindowContext{
 
@@ -29,6 +30,8 @@ private:
     GLbitfield bufferbits;
     GLFWwindow * window;
 
+    ILog * windowLogger;
+
     void SetHints(){
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -43,11 +46,18 @@ private:
     }
 
 public:
+
     WindowContext(){
 
+        this->windowLogger = new EventRegister("context_log.txt");
+
+        windowLogger->Write(LogMessageType::M_INFO, "Initializing new context instance\n");
+
         if ( !glfwInit() ){
-            fprintf(stderr, "Failed to initialize GLFW!\n");
-            return;
+            windowLogger->Write(LogMessageType::M_DEBUG, "Failed to initialize GLFW!\n");
+            windowLogger->Flush();
+            delete windowLogger;
+            exit(-1);
         }
 
         SetHints();
@@ -60,24 +70,27 @@ public:
     void Open(const int & width = 800, const int & height = 600, const std::string & title = "Window"){
         assert(width > 0 && height > 0 && "Invalid dimensions");
 
+        windowLogger->Write(LogMessageType::M_INFO, "Opening new window instance with resolution %d x %d\n", width, height);
+
         window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
         glfwMakeContextCurrent(window);
 
         glewExperimental = true;
         glewInit();
 
-#ifdef DEBUG
-        const GLubyte * renderer = glGetString(GL_RENDERER);
+        const GLubyte * device = glGetString(GL_RENDERER);
         const GLubyte * version = glGetString(GL_VERSION);
 
-        printf("[DEBUG] Renderer: %s\n", renderer);
-        printf("[DEBUG] OpenGL version supported %s\n", version);
-#endif
+        windowLogger->Write(LogMessageType::M_INFO, "Discovered new device : %s\n", device);
+        windowLogger->Write(LogMessageType::M_INFO, "Supported OpenGL version : %s\n", version);
 
     }
 
     void SetVSync(const bool & vsync = true){
+
+        windowLogger->Write(LogMessageType::M_INFO, "Current V-Sync state : %s\n", vsync?"Enabled":"Disabled");
         glfwSwapInterval(vsync);
+
     }
 
     void SetZBuffer(const bool & depthBuffer = false){
@@ -89,6 +102,8 @@ public:
             glDisable(GL_DEPTH_TEST);
         }
 
+        windowLogger->Write(LogMessageType::M_INFO, "Current Z-Buffer state : %s\n", depthBuffer?"Enabled":"Disabled");
+
         bufferbits ^= GL_DEPTH_BUFFER_BIT;
 
     }
@@ -99,27 +114,47 @@ public:
     }
 
     void BindMouseButtonCallback(GLFWmousebuttonfun callback) const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
         glfwSetMouseButtonCallback(window, callback);
     }
 
     void BindKeyCallback(GLFWkeyfun callback) const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
         glfwSetKeyCallback(window, callback);
     }
 
     void BindScrollCallback(GLFWscrollfun callback) const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
         glfwSetScrollCallback(window, callback);
     }
 
     void SetInternalPointer(void * pointer) const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
         glfwSetWindowUserPointer(window, pointer);
     }
 
     void * GetInternalPointer() const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
         void * ptr = glfwGetWindowUserPointer(window);
         return ptr;
     }
@@ -133,17 +168,27 @@ public:
         std::unordered_map<GLenum, const char *>::const_iterator it = errorMap.find(error);
 
         if( it != errorMap.end() ){
-            printf("Error occured : %s\n", it->second);
+            windowLogger->Write(LogMessageType::M_ERROR, "OpenGL error : %s\n", it->second);
+            windowLogger->Flush();
+            exit(-1);
         }
     }
 
     void Close() const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
         glfwSetWindowShouldClose(window, true);
     }
 
     bool ShouldClose() const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
         return glfwWindowShouldClose(window);
     }
 
@@ -172,18 +217,36 @@ public:
     }
 
     void SwapBuffers() const{
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
+
         glfwSwapBuffers(window);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(bufferbits);
     }
 
     void DestroyWindow(){
-        assert(window && "Window does not exits");
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
+
         glfwDestroyWindow(window);
+        windowLogger->Write(LogMessageType::M_INFO, "Window instance destroyed succesfully\n");
+    }
+
+    ILog * GetContextLogger(){
+        return windowLogger;
     }
 
     ~WindowContext(){
+
+        windowLogger->Write(LogMessageType::M_INFO, "Context destroyed succesfully\n");
+        windowLogger->Flush();
 
         DestroyWindow();
         glfwTerminate();

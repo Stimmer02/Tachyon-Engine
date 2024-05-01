@@ -7,7 +7,7 @@
 
 TEST(EventRegisterTest, SimpleTest){
     EventRegister *ER;
-    ER = new EventRegister();
+    ER = new EventRegister("xlog.txt");
     ER->Write(M_INFO, "abc%u", (unsigned int)5);
     ER->Flush();
     delete ER;

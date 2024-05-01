@@ -32,6 +32,8 @@ private:
     Sprite * defaultTexture;
     Mesh * defaultMesh;
 
+    ILog * contextLogger;
+
     Matrix projectionMatrix;
 
     ArchetypeRenderFunc archetypeFunc[RenderingAttributes::ATTRIB_MAX];
@@ -100,6 +102,8 @@ private:
 
     void SetupUnhandledComponents() {
 
+        contextLogger->Write(LogMessageType::M_INFO, "Generating missing assets\n");
+
         Color white[] = {255,255,255};
         this->defaultTexture = new Sprite(white, 1, 1);
 
@@ -125,6 +129,9 @@ private:
     }
 
     void UploadMainShaders() {
+
+        contextLogger->Write(LogMessageType::M_INFO, "Compiling shaders\n");
+
         this->mainShader = new GLShader();
         this->mainShader->LinkShader("./resources/shaders/vertexShader.vert", GL_VERTEX_SHADER);
         this->mainShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
@@ -137,6 +144,8 @@ private:
     }
 
     void SetupArchetypeFunc(){
+
+        contextLogger->Write(LogMessageType::M_INFO, "Building rendering archetypes\n");
 
         archetypeFunc[RenderingAttributes::NONEATTRIB] =
             [this](Sprite * sprite, Mesh * mesh){
@@ -184,6 +193,7 @@ public:
     GraphicSystem(WindowContext * context) : System(){
 
         this->context = context;
+        this->contextLogger = context->GetContextLogger();
 
         context->Open(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
         context->SetVSync( GraphicConfig::vsync );

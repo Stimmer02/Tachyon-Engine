@@ -23,13 +23,9 @@ private:
 
 public:
 
-    MouseButtonMonitor();
-
     MouseButtonMonitor(WindowContext * context);
 
     EventInfo GeyKeyState(int button);
-
-    ~MouseButtonMonitor();
 
 };
 

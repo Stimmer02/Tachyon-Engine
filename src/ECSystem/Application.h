@@ -12,29 +12,41 @@ class Application{
 private:
 
     WindowContext context;
+    ILog * contextLogger;
+
     GraphicSystem * graphics;
+    MouseButtonMonitor * mouseMonitor;
+    KeyboardMonitor * keyboardMonitor;
 
     std::list<System *> systems;
-
-    MouseButtonMonitor mouseMonitor;
-    KeyboardMonitor keyboardMonitor;
 
     Timer * timer;
 
 public:
 
     Application(){
+
         this->graphics = new GraphicSystem(&context);
-        this->mouseMonitor = MouseButtonMonitor(&context);
-        this->keyboardMonitor = KeyboardMonitor(&context);
+        this->contextLogger = context.GetContextLogger();
+
+        contextLogger->Write(LogMessageType::M_INFO, "Creating new mouse handle\n");
+        this->mouseMonitor = new MouseButtonMonitor(&context);
+
+        contextLogger->Write(LogMessageType::M_INFO, "Creating new keyboard handle\n");
+        this->keyboardMonitor = new KeyboardMonitor(&context);
+
         this->timer = &Timer::GetInstance();
+        this->systems.push_back(graphics);
+
     }
 
     void LoadScene(Scene & scene){
+        contextLogger->Write(LogMessageType::M_INFO, "Loading new scene\n");
         graphics->LoadScene( &scene );
     }
 
     void RegisterSystem(System * system){
+        contextLogger->Write(LogMessageType::M_INFO, "New system registered\n");
         systems.emplace_back(system);
     }
 
@@ -42,6 +54,7 @@ public:
 
         for( std::list<System*>::iterator it = systems.begin(); it != systems.end(); it++){
             if( *it == system ){
+                contextLogger->Write(LogMessageType::M_INFO, "Erasing system data\n");
                 systems.erase(it);
                 break;
             }
@@ -50,11 +63,11 @@ public:
     }
 
     MouseButtonMonitor& GetMouseInputMonitor() {
-        return mouseMonitor;
+        return *mouseMonitor;
     }
 
     KeyboardMonitor& GetKeyboardInputMonitor() {
-        return keyboardMonitor;
+        return *keyboardMonitor;
     }
 
     Camera& GetMainCamera(){
@@ -66,7 +79,6 @@ public:
         while( !context.ShouldClose() ){
 
             timer->TicTac();
-            graphics->Run();
 
             for(System * system : systems){
                 system->Run();
@@ -82,9 +94,13 @@ public:
     }
 
     ~Application(){
-        delete graphics;
-    }
 
+        contextLogger->Write(LogMessageType::M_INFO, "Disposing resources\n");
+
+        delete graphics;
+        delete mouseMonitor;
+        delete keyboardMonitor;
+    }
 
 };
 

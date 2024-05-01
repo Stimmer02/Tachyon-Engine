@@ -12,23 +12,28 @@
 #include <ctime>
 
 #include "ILog.h"
-#include "MessageType.h"
 #include "EventQueueElement.h"
 
 class EventRegister : public ILog{
 private:
+
     std::priority_queue<EventQueueElement, std::vector<EventQueueElement>, std::greater<EventQueueElement> > eventQueue;
     std::mutex mut;
-    FILE* logFile;
+
+    FILE * logFile;
+    bool isSystemStream;
+
     const char* types[TYPE_COUNT] = TYPE_STRINGS;
 public:
     EventRegister(const char* filepath);
-    EventRegister();
+
+    EventRegister(FILE * file, bool isSystemStream = false);
+
     ~EventRegister();
 
-    void Write(enum MessageType _type, const char * _format, ...) override;
+    void Write(enum LogMessageType _type, const char * _format, ...) override;
 
-    void Flush();
+    void Flush() override;
 
 
 };

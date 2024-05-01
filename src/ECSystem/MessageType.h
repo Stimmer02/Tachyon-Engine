@@ -3,7 +3,7 @@
 
 #define TYPE_STRINGS { "INFO", "ERROR", "DEBUG"}
 
-enum MessageType{
+enum LogMessageType{
     M_INFO,
     M_ERROR,
     M_DEBUG,

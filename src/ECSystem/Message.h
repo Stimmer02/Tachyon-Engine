@@ -10,7 +10,6 @@ enum MessageType{
     DROP
 };
 
-
 struct Message {
     IClient * sender;
     IClient * receiver;

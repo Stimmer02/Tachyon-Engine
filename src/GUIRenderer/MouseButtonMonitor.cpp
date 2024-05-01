@@ -1,17 +1,9 @@
 #include "MouseButtonMonitor.h"
 
-MouseButtonMonitor::MouseButtonMonitor(){
-
-}
 
 MouseButtonMonitor::MouseButtonMonitor(WindowContext * context){
     this->window = context;
     memset(lastMouseStates, GLFW_RELEASE, sizeof(char) * GLFW_MOUSE_BUTTON_LAST);
-
-}
-
-MouseButtonMonitor::~MouseButtonMonitor(){
-
 
 }
 

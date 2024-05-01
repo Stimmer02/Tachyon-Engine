@@ -1,8 +1,9 @@
 #include "EventRegister.h"
 
-EventRegister::EventRegister(){
+EventRegister::EventRegister(FILE * file, bool isSystemStream){
 
-    logFile = fopen("xlog.txt", "w"); // open or create log.txt and clear it;
+    this->logFile = file;
+    this->isSystemStream = isSystemStream;
 
     if(logFile == NULL){
         std::cout << "mamy problem bo tego błędu nie da się wypisać do pliku z logami \n";
@@ -10,19 +11,20 @@ EventRegister::EventRegister(){
 }
 EventRegister::EventRegister(const char* filepath){
 
-    logFile = fopen(filepath, "w"); // open or create log.txt and clear it;
+    this->logFile = fopen(filepath, "w"); // open or create log.txt and clear it;
+    this->isSystemStream = false;
 
     if(logFile == NULL){
         std::cout << "mamy problem bo tego błędu nie da się wypisać do pliku z logami \n";
     }
 }
 EventRegister::~EventRegister(){
-    if(logFile != NULL){
+    if(logFile != NULL && !isSystemStream){
         fclose(logFile);
     }
 }
 
-void EventRegister::Write(enum MessageType _type, const char * _format, ...){
+void EventRegister::Write(enum LogMessageType _type, const char * _format, ...){
     std::time_t currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     char helper[4096] = {}; //tyle powinno wystarczyć
     EventQueueElement elementToAdd;
@@ -54,7 +56,7 @@ void EventRegister::Flush(){
         eventQueue.pop();
         strftime(time, sizeof(time), "%d %b %Y %H:%M:%S", localtime(&eqe.time));
         // fprintf(logFile, "%s", "ABC");
-        fprintf(logFile, "%s, %s, %s", time, types[eqe.type], eqe.data.c_str());
+        fprintf(logFile, "%s [%s] : %s", time, types[eqe.type], eqe.data.c_str());
     }
     fflush(logFile);
 }
