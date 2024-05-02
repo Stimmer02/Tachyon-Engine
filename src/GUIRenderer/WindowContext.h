@@ -40,8 +40,8 @@ private:
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
-        // glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
-        // glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
     }
 
@@ -49,7 +49,7 @@ public:
 
     WindowContext(){
 
-        this->windowLogger = new EventRegister("context_log.txt");
+        this->windowLogger = new EventRegister("runtime.log");
 
         windowLogger->Write(LogMessageType::M_INFO, "Initializing new context instance\n");
 

@@ -7,13 +7,14 @@
 #include "GUIElement.h"
 #include "Sprite.h"
 #include <stdio.h>
+#include <vector>
 
 
 class Scene{
 private:
 	EntityContainer entities;
-	std::list<SceneObject * > objects;
-	std::list<GUIElement * > guiObjects;
+	std::vector<SceneObject * > objects;
+	std::vector<GUIElement * > guiObjects;
 
 public:
 
@@ -80,11 +81,11 @@ public:
 
 	}
 
-	std::list<SceneObject*>& GetSceneObjects(){
+	std::vector<SceneObject*>& GetSceneObjects(){
 		return objects;
 	}
 
-	std::list<GUIElement*>& GetGUIElements(){
+	std::vector<GUIElement*>& GetGUIElements(){
 		return guiObjects;
 	}
 

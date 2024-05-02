@@ -82,8 +82,8 @@ private:
         mainShader->TransferToShader("u_projection", projectionMatrix);
         mainShader->TransferToShader("u_view", mainCamera.GetViewMatrix());
 
-        std::list<SceneObject *>& objects = scene->GetSceneObjects();
-        std::list<GUIElement *>& guiElements = scene->GetGUIElements();
+        std::vector<SceneObject *>& objects = scene->GetSceneObjects();
+        std::vector<GUIElement *>& guiElements = scene->GetGUIElements();
 
         for(SceneObject * object : objects)
             RenderSceneObjects(object);

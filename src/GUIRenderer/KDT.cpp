@@ -12,7 +12,7 @@ void KDT::buildTree(const std::vector<InteractiveElement*> &components){
 
     const int elementNum = components.size();
     int mid;
-    KDTElement* elements[components.size()];
+    KDTElement ** elements = new KDTElement*[components.size()];
 
 	//Creating all nodes before adding them to The KDTree
 	for(int i = 0; i < elementNum; ++i){
