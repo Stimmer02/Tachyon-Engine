@@ -35,6 +35,7 @@ private:
     ILog * contextLogger;
 
     Matrix projectionMatrix;
+    Matrix guiProjectionMatrix;
 
     ArchetypeRenderFunc archetypeFunc[RenderingAttributes::ATTRIB_MAX];
 
@@ -91,7 +92,7 @@ private:
         mainShader->Dispose();
 
         guiShader->Use();
-        guiShader->TransferToShader("u_projection", projectionMatrix);
+        guiShader->TransferToShader("u_projection", guiProjectionMatrix);
 
         for(GUIElement * guiElement : guiElements)
             RenderGUI(guiElement);
@@ -122,7 +123,7 @@ private:
         this->mainShader->Build();
 
         this->guiShader = new GLShader();
-        this->guiShader->LinkShader("./resources/shaders/textVertexShader.vert", GL_VERTEX_SHADER);
+        this->guiShader->LinkShader("./resources/shaders/guiVertexShader.vert", GL_VERTEX_SHADER);
         this->guiShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
         this->guiShader->Build();
     }
@@ -183,7 +184,13 @@ public:
         context->SetVSync( GraphicConfig::vsync );
         context->SetZBuffer( GraphicConfig::zbuffer );
 
-        this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -100, 100);
+        if(GraphicConfig::useOrthographicProjection){
+            this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -300, 300);
+        }else{
+            this->projectionMatrix = Matrix::Frustum(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -100, 100);
+        }
+
+        this->guiProjectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -1, 10);
 
         SetupUnhandledComponents();
         UploadMainShaders();

@@ -8,15 +8,17 @@
 class KDT{
 private:
     KDTElement* root;
+
+    InteractiveElement* findRecX(const float &x, const float &y, KDTElement* element);
+    InteractiveElement* findRecY(const float &x, const float &y, KDTElement* element);
+
+    void buildLeftSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoot, const int &elementsArraySize, const bool xOrY);
+    void buildRightSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoot, const int &elementsArraySize, const bool xOrY);
 public:
     KDT();
     ~KDT();
     void buildTree(const std::vector<InteractiveElement*> &components);
-    void buildLeftSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoot, const int &elementsArraySize, const bool xOrY);
-    void buildRightSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoot, const int &elementsArraySize, const bool xOrY);
     InteractiveElement* find(const float &x, const float &y);
-    InteractiveElement* findRecX(const float &x, const float &y, KDTElement* element);
-    InteractiveElement* findRecY(const float &x, const float &y, KDTElement* element);
     void clear();
     void rebuild(const std::vector<InteractiveElement*> &components);
 };

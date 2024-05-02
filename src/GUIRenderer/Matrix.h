@@ -340,7 +340,7 @@ public:
         printf("\n");
     }
 
-    static Matrix Ortho(const float & left, const float & right, const float &bottom, const float & top, const float & near, const float & far){
+    static Matrix Ortho(const float & left, const float & right, const float &bottom, const float & top, const float & nearVal, const float & farVal){
 
         Matrix ortho;
 
@@ -350,11 +350,30 @@ public:
         data[3] = - (right+left)/(right-left);
         data[5] = 2.0f / (top - bottom);
         data[7] = - (top+bottom)/(top-bottom);
-        data[10] = -2.0f /(far - near);
-        data[11] = - (far + near)/(far - near);
+        data[10] = -2.0f /(farVal - nearVal);
+        data[11] = - (farVal + nearVal)/(farVal - nearVal);
         data[15] = 1.0f;
 
         return ortho;
+    }
+
+    static Matrix Frustum(const float & left, const float & right, const float &bottom, const float & top, const float & nearVal, const float & farVal){
+
+        Matrix frustum;
+
+        float * data = frustum.Data();
+
+        data[0] = 2.0f * nearVal / (right - left);
+        data[2] = (right+left)/(right-left);
+        data[5] = 2.0f * nearVal / (top - bottom);
+        data[6] = (top+bottom)/(top-bottom);
+        data[10] = - (farVal + nearVal) /(farVal - nearVal);
+        data[11] = - 2.0f * farVal * nearVal/(farVal - nearVal);
+        data[14] = -1.0f;
+        data[15] = 0.0f;
+
+        return frustum;
+
     }
 
     static Matrix LookAt(const Vector3 & position, const Vector3 & front, const Vector3 & up, const Vector3 & right){
@@ -388,7 +407,7 @@ public:
 
     }
 
-    static Matrix Perspective(const float & aspect, const float & fov, const float & near, const float & far){
+    static Matrix Perspective(const float & aspect, const float & fov, const float & nearVal, const float & farVal){
 
         Matrix perspective;
 
@@ -396,12 +415,12 @@ public:
 
         constexpr float deg2rad = M_PI/180.0f;
 
-        float f = tan(deg2rad * fov * 0.5f);
+        float f = 1.0f / tan(deg2rad * fov * 0.5f);
 
         data[0] = f/aspect;
         data[5] = f;
-        data[10] = (far + near)/(near-far);
-        data[11] = 2.0f * far * near / (near - far);
+        data[10] = (farVal + nearVal)/(nearVal-farVal);
+        data[11] = -2.0f * farVal * nearVal / (farVal - nearVal);
         data[14] = -1.0f;
         data[15] = 0.0f;
 

@@ -59,12 +59,19 @@ class SolarSystem : public System{
         if( info.type == ONHOLD )
             mainCamera->MoveBy(Vector3(0.0f, -1.0f, 0.0f), deltaTime);
 
+        info = monitor->GetButtonState(GLFW_KEY_Q);
+
+        if( info.type == ONHOLD )
+            mainCamera->RotateBy(-1.0f, 0.0f);
+
+        info = monitor->GetButtonState(GLFW_KEY_E);
+
+        if( info.type == ONHOLD )
+            mainCamera->RotateBy(1.0f, 0.0f);
+
+
         angle *= (angle < 360.0f);
         angle += 1.0f * deltaTime;
-
-        if( timer->GetAccumulatedTime() >= 1.0f){
-            sunSprite->NextFrame();
-        }
 
     }
 
@@ -101,17 +108,10 @@ public:
         Mesh * venusMesh = venus->AddAttribute<Mesh>();
         Mesh * venusMoonMesh = venusMoon->AddAttribute<Mesh>();
 
-        sunMesh->GenSphere(1.0f, 32, 32);
+        sunMesh->GenSphere(1.0f, 10, 10);
         mercuryMesh->GenSphere(1.0f, 10, 10);
         venusMesh->GenSphere(1.0f, 10, 10);
         venusMoonMesh->GenSphere(1.0f, 10, 10);
-
-        auto callback = [](){
-            fprintf(stdout, "Hello world!\n");
-        };
-
-        button = new ButtonElement(400, 500, 200, 100, callback);
-        scene->AddGUIToScene(button);
 
         Color colors[] = { {200, 128, 0}, {127, 127, 127}, {127, 0, 127}, {80, 80, 80} };
 
@@ -121,6 +121,14 @@ public:
         Sprite * mercurySprite = mercury->AddAttribute<Sprite>(colors + 1, 1, 1);
         Sprite * venusSprite = venus->AddAttribute<Sprite>(colors + 2, 1, 1);
         Sprite * venusMoonSprite = venusMoon->AddAttribute<Sprite>(colors + 3, 1, 1);
+
+
+        auto callback = [&](){
+            sunSprite->NextFrame();
+        };
+
+        button = new ButtonElement(300, 450, 200, 100, callback);
+        scene->AddGUIToScene(button);
 
     }
 

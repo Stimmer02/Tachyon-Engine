@@ -9,6 +9,11 @@ namespace GraphicConfig{
     int32_t windowHeight = 600;
     bool vsync = true;
     bool zbuffer = true;
+    bool useOrthographicProjection = true;
 };
+
+namespace ApplicationConfig{
+    bool internalGUIInteraction = true;
+}
 
 #endif

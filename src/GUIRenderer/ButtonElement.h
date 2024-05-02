@@ -18,10 +18,10 @@ private:
     void AllocateBuffers(){
 
         const Vector3 vertices[] = {
-            { -width * 0.5f, -height * 0.5f, 0.0f },
-            { width * 0.5f, -height * 0.5f, 0.0f },
-            { width * 0.5f, height * 0.5f, 0.0f},
-            { -width * 0.5f, height * 0.5f, 0.0f }
+            { 0.0f, 0.0f, 0.0f },
+            { width, 0.0f, 0.0f },
+            { width, height, 0.0f},
+            { 0.0f, height, 0.0f }
         };
 
         const float uvs[] = {
@@ -62,6 +62,12 @@ public:
         this->transform.position.y = y;
         this->texture = defaultSprite;
 
+        Matrix translation = Matrix::Translate(transform.position.x, transform.position.y, transform.position.z);
+        Matrix rotation = Matrix::Rotate(transform.rotation);
+        Matrix scale = Matrix::Scale(transform.scale.x, transform.scale.y, transform.scale.z);
+
+        model = translation * rotation * scale;
+
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
         glGenBuffers(1, &tbo);
@@ -77,8 +83,7 @@ public:
 
         GLShader * shader = currentShader;
 
-        Vector3 position = this->transform.position;
-        shader->TransferToShader("u_translation", position);
+        shader->TransferToShader("u_model", model);
 
         texture->Load();
 

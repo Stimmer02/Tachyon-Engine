@@ -10,6 +10,6 @@ uniform mat4 u_view;
 uniform mat4 u_model;
 
 void main(){
-    gl_Position = vert  * u_model * u_projection * u_view;
+    gl_Position = vert * u_model * u_projection * u_view;
     uvs = uv;
 }

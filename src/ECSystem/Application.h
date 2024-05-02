@@ -3,6 +3,7 @@
 
 #include "WindowContext.h"
 #include "GraphicSystem.h"
+#include "InteractionManager.h"
 #include "MouseButtonMonitor.h"
 #include "KeyboardMonitor.h"
 #include "Timer.h"
@@ -18,6 +19,8 @@ private:
     MouseButtonMonitor * mouseMonitor;
     KeyboardMonitor * keyboardMonitor;
 
+    InteractionManager interactionManager;
+
     std::list<System *> systems;
 
     Timer * timer;
@@ -29,10 +32,10 @@ public:
         this->graphics = new GraphicSystem(&context);
         this->contextLogger = context.GetContextLogger();
 
-        contextLogger->Write(LogMessageType::M_INFO, "Creating new mouse handle\n");
+        contextLogger->Write(LogMessageType::M_INFO, "Creating new mouse state monitor\n");
         this->mouseMonitor = new MouseButtonMonitor(&context);
 
-        contextLogger->Write(LogMessageType::M_INFO, "Creating new keyboard handle\n");
+        contextLogger->Write(LogMessageType::M_INFO, "Creating new keyboard state monitor\n");
         this->keyboardMonitor = new KeyboardMonitor(&context);
 
         this->timer = &Timer::GetInstance();
@@ -42,6 +45,12 @@ public:
 
     void LoadScene(Scene & scene){
         contextLogger->Write(LogMessageType::M_INFO, "Loading new scene\n");
+
+        if( ApplicationConfig::internalGUIInteraction ){
+            contextLogger->Write(LogMessageType::M_INFO, "Enabling internal interaction handling\n");
+            interactionManager.LoadScene(scene);
+        }
+
         graphics->LoadScene( &scene );
     }
 
@@ -83,6 +92,11 @@ public:
             for(System * system : systems){
                 system->Run();
             }
+
+            EventInfo leftMouseButtonEvent = mouseMonitor->GeyKeyState(GLFW_MOUSE_BUTTON_LEFT);
+
+            if( leftMouseButtonEvent.type == ONTRIGGER  && ApplicationConfig::internalGUIInteraction)
+                interactionManager.Interact(leftMouseButtonEvent.x, leftMouseButtonEvent.y);
 
             if(timer->GetAccumulatedTime()>= 1.0f){
                 fprintf(stdout, "FPS : %05d\r", timer->GetFrameCount());
