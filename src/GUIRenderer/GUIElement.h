@@ -4,9 +4,6 @@
 #include "Transform.h"
 
 class GUIElement{
-
-private:
-    // placeholder _1
 public:
 
     bool isActive = true;

@@ -28,6 +28,7 @@
 
 #include <vector>
 
+
 static std::map<std::string, GLuint> almanach;
 
 class Sprite : public AttributeType<Sprite>{
@@ -99,5 +100,6 @@ public:
 
 };
 
+static Sprite * defaultSprite;
 
 #endif

@@ -10,6 +10,8 @@ class SolarSystem : public System{
     Sprite * sunSprite;
     Timer * timer;
 
+    ButtonElement * button;
+
     void Execute() override{
 
         static float angle;
@@ -103,6 +105,13 @@ public:
         mercuryMesh->GenSphere(1.0f, 10, 10);
         venusMesh->GenSphere(1.0f, 10, 10);
         venusMoonMesh->GenSphere(1.0f, 10, 10);
+
+        auto callback = [](){
+            fprintf(stdout, "Hello world!\n");
+        };
+
+        button = new ButtonElement(400, 500, 200, 100, callback);
+        scene->AddGUIToScene(button);
 
         Color colors[] = { {200, 128, 0}, {127, 127, 127}, {127, 0, 127}, {80, 80, 80} };
 

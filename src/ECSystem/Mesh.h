@@ -85,6 +85,27 @@ public:
 
     }
 
+    void GenQuad(const float & width, const float & height){
+
+        const Vector3 verts[] = {
+            {-width * 0.5f, height * 0.5f, 0.0f},
+            {-width * 0.5f, -height * 0.5f, 0.0f},
+            {width * 0.5f, -height * 0.5f, 0.0f},
+            {width * 0.5f, height * 0.5f, 0.0f}
+        };
+
+        const float texCoord[] = {
+            0.0f, 0.0f,
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f
+        };
+
+        SetVertices(verts, 4);
+        SetTexCoords(texCoord, 8);
+
+    }
+
     void GenCube(const float & width, const float & height, const float & depth){
 
 

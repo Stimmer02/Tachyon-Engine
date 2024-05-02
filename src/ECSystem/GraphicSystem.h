@@ -11,6 +11,7 @@
 #include "Mesh.h"
 
 #include "TextElement.h"
+#include "ButtonElement.h"
 
 #include "Camera.h"
 
@@ -29,7 +30,6 @@ private:
     GLShader * mainShader;
     GLShader * guiShader;
 
-    Sprite * defaultTexture;
     Mesh * defaultMesh;
 
     ILog * contextLogger;
@@ -105,26 +105,10 @@ private:
         contextLogger->Write(LogMessageType::M_INFO, "Generating missing assets\n");
 
         Color white[] = {255,255,255};
-        this->defaultTexture = new Sprite(white, 1, 1);
+        defaultSprite = new Sprite(white, 1, 1);
 
-        this->defaultMesh = new Mesh();
-
-        Vector3 verts[] = {
-            Vector3(-0.5f, 0.5f),
-            Vector3(-0.5f, -0.5f),
-            Vector3(0.5f, -0.5f),
-            Vector3(0.5f, 0.5f)
-        };
-
-        float texCoord[] = {
-            0.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            1.0f, 0.0f
-        };
-
-        this->defaultMesh->SetVertices(verts, 4);
-        this->defaultMesh->SetTexCoords(texCoord, 8);
+        defaultMesh = new Mesh();
+        defaultMesh->GenQuad(1.0f, 1.0f);
 
     }
 
@@ -219,7 +203,7 @@ public:
     }
 
     Sprite * GetDefaultTexture(){
-        return defaultTexture;
+        return defaultSprite;
     }
 
     Mesh * GetDefaultMesh(){
@@ -227,7 +211,7 @@ public:
     }
 
     ~GraphicSystem(){
-        delete defaultTexture;
+        delete defaultSprite;
         delete defaultMesh;
     }
 };
