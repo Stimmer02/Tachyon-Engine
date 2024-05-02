@@ -396,7 +396,7 @@ public:
 
         constexpr float deg2rad = M_PI/180.0f;
 
-        float f = std::tan(deg2rad * fov * 0.5f);
+        float f = tan(deg2rad * fov * 0.5f);
 
         data[0] = f/aspect;
         data[5] = f;

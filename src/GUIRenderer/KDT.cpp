@@ -1,6 +1,5 @@
 #include "KDT.h"
-#include "Component.h"
-#include "KDTElement.h"
+
 KDT::KDT(){
     root = NULL;
 }
@@ -9,17 +8,17 @@ KDT::~KDT(){
     delete root;
 }
 
-void KDT::buildTree(const std::vector<Component*> &components){
-	
+void KDT::buildTree(const std::vector<InteractiveElement*> &components){
+
     const int elementNum = components.size();
     int mid;
     KDTElement* elements[components.size()];
-    
+
 	//Creating all nodes before adding them to The KDTree
 	for(int i = 0; i < elementNum; ++i){
         elements[i] = new KDTElement(components[i]);
     }
-	
+
 	//sorting all nodes because it helps to chose the best root
     std::sort(elements, elements + elementNum, KDTElement::comparatorXsmaller);
 
@@ -79,23 +78,26 @@ void KDT::buildRightSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRo
     buildRightSubTreeRec(elementsArray + mid + 1, subTreeRoot, elementsArraySize - mid - 1, !xOrY);
 }
 
-Component* KDT::find(const float &x, const float &y){
+InteractiveElement* KDT::find(const float &x, const float &y){
 	//look for component where the x and y coordinates are located
     return findRecX(x, y, root);
 }
 
-Component* KDT::findRecX(const float &x, const float &y, KDTElement* element){
+InteractiveElement* KDT::findRecX(const float &x, const float &y, KDTElement* element){
 	//this function chose left or right subtree, basing on X coordinate
     //return NULL if there is no such component where the x and y coordinates are located
 	if(element == NULL){
         return NULL;
     }
-	
+
 	//compare component's coordinates with x and y value;
-    Component* helper = element->getValue();
-    if(helper->getX() <= x){
-        if(x <= helper->getX() + helper->getWidth()){
-            if(helper->getY() <= y && y <= helper->getY() + helper->getHeight()){
+    InteractiveElement* helper = element->getValue();
+    float & xH = helper->transform.position.x;
+    float & yH = helper->transform.position.y;
+
+    if(xH <= x){
+        if(x <= xH + helper->width){
+            if(yH <= y && y <= yH + helper->height){
 				//return component if the x and y coordinates are located inside them
                 return helper;
             }
@@ -115,7 +117,7 @@ Component* KDT::findRecX(const float &x, const float &y, KDTElement* element){
     }
 }
 
-Component* KDT::findRecY(const float &x, const float &y, KDTElement* element){
+InteractiveElement* KDT::findRecY(const float &x, const float &y, KDTElement* element){
 	//this function chose left or right subtree, basing on Y coordinate
     //return NULL if there is no such component where the x and y coordinates are located
     if(element == NULL){
@@ -123,10 +125,13 @@ Component* KDT::findRecY(const float &x, const float &y, KDTElement* element){
     }
 
 	//compare component's coordinates with x and y value;
-    Component* helper = element->getValue();
-    if(helper->getY() <= y){
-        if(x <= helper->getY() + helper->getHeight()){
-            if(helper->getX() <= x && x <= helper->getX() + helper->getWidth()){
+    InteractiveElement* helper = element->getValue();
+    float & xH = helper->transform.position.x;
+    float & yH = helper->transform.position.y;
+
+    if(yH <= y){
+        if(x <= yH + helper->height){
+            if(xH <= x && x <= xH + helper->width){
 				//return component if the x and y coordinates are located inside them
                 return helper;
             }
@@ -151,7 +156,7 @@ void KDT::clear(){
     delete root;
 }
 
-void KDT::rebuild(const std::vector<Component*> &components){
+void KDT::rebuild(const std::vector<InteractiveElement*> &components){
 	//delete all nodes of a tree and create the new one
     clear();
     buildTree(components);

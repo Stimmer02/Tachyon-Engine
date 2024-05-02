@@ -1,5 +1,4 @@
 #include "KDTElement.h"
-#include "Component.h"
 
 KDTElement::KDTElement(){
     value = NULL;
@@ -8,7 +7,7 @@ KDTElement::KDTElement(){
 }
 
 
-KDTElement::KDTElement(Component* value){
+KDTElement::KDTElement(InteractiveElement * value){
     this->value = value;
     this->leftSon = NULL;
     this->rightSon = NULL;
@@ -25,15 +24,15 @@ KDTElement::~KDTElement(){
     }
 }
 
-void KDTElement::setValue(Component* value){
+void KDTElement::setValue(InteractiveElement * value){
     this->value = value;
 }
 
-void KDTElement::setLeftSon(KDTElement* leftSon){
+void KDTElement::setLeftSon(KDTElement * leftSon){
     this->leftSon = leftSon;
 }
 
-void KDTElement::setRightSon(KDTElement* rightSon){
+void KDTElement::setRightSon(KDTElement * rightSon){
     this->rightSon = rightSon;
 }
 
@@ -45,26 +44,26 @@ KDTElement* KDTElement::getRightSon(){
     return rightSon;
 }
 
-Component* KDTElement::getValue(){
+InteractiveElement * KDTElement::getValue(){
     return value;
 }
 
 bool KDTElement::comparatorXsmaller(KDTElement* &element, KDTElement* &other){
 	//compare 2 KDTElement and return true if first has smaller X coordinate
-    return element->getValue()->getX() < other->getValue()->getX();
+    return element->getValue()->transform.position.x < other->getValue()->transform.position.x;
 }
 
 bool KDTElement::comparatorXsmallerOrEqueql(KDTElement* &element, KDTElement* &other){
 	//compare 2 KDTElement and return true if first hasn't bigger X coordinate
-    return element->getValue()->getX() <= other->getValue()->getX();
+    return element->getValue()->transform.position.x <= other->getValue()->transform.position.x;
 }
 
 bool KDTElement::comparatorYsmaller(KDTElement* &element, KDTElement* &other){
 	//compare 2 KDTElement and return true if first has smaller Y coordinate
-    return element->getValue()->getX() < other->getValue()->getX();
+    return element->getValue()->transform.position.y < other->getValue()->transform.position.y;
 }
 
 bool KDTElement::comparatorYsmallerOrEqueql(KDTElement* &element, KDTElement* &other){
 	//compare 2 KDTElement and return true if first hasn't bigger Y coordinate
-    return element->getValue()->getX() >= other->getValue()->getX();
+    return element->getValue()->transform.position.y >= other->getValue()->transform.position.y;
 }

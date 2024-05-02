@@ -3,8 +3,7 @@
 
 #include "Sprite.h"
 #include "InteractiveElement.h"
-
-#include <GL/glew.h>
+#include "GLShader.h"
 
 class ButtonElement : public InteractiveElement{
 

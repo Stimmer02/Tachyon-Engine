@@ -13,12 +13,10 @@ private:
 
     Callback callback;
 
-protected:
+public:
 
     int width;
     int height;
-
-public:
 
     InteractiveElement(const int & width, const int & height, const Callback & callbackFunc) : GUIElement(){
         this->callback = callbackFunc;
