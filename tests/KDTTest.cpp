@@ -13,10 +13,16 @@
 #include "IEventHandlingService.h"
 #include "EventManager.h"
 #include "ButtonElement.h"
+#include "WindowContext.h"
 #include "KDTElement.h"
 #include "KDT.h"
 
 TEST(KDTreeTests, treeTest1){
+
+    // It needs to be somewhere in this code to allow OpenGL operations in tests
+    WindowContext ctx(true);
+    ctx.Open();
+
     KDT* tree = new KDT();
 
     InteractiveElement** componentsArray;
@@ -31,7 +37,9 @@ TEST(KDTreeTests, treeTest1){
 
     componentsArray = new InteractiveElement*[compArrSize];
 
-    auto callback = [](){};
+    auto callback = [](){
+        printf("OK");
+    };
 
     for(int i = 0; i < compArrSize - 1; ++i){
         componentsArray[i] = new ButtonElement(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
@@ -54,6 +62,13 @@ TEST(KDTreeTests, treeTest1){
     ASSERT_EQ(cmp->transform.position.x, 50);
     ASSERT_TRUE(spr);
     delete tree;
+
+    for(int i = 0; i < compArrSize - 1; ++i){
+        delete componentsArray[i];
+    }
+    delete[] componentsArray;
+
+    ctx.Close();
 }
 
 

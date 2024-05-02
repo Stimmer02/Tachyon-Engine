@@ -47,7 +47,7 @@ private:
 
 public:
 
-    WindowContext(){
+    WindowContext(const bool & suppressVisibility = false){
 
         this->windowLogger = new EventRegister("runtime.log");
 
@@ -61,6 +61,9 @@ public:
         }
 
         SetHints();
+
+        if(suppressVisibility)
+            glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
         this->window = nullptr;
         this->bufferbits = GL_COLOR_BUFFER_BIT;
