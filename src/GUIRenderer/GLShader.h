@@ -14,6 +14,7 @@
 class GLShader;
 
 static GLShader * currentShader;
+static GLShader * previousShader;
 
 class GLShader{
 private:
@@ -111,12 +112,16 @@ public:
     }
 
     void Use(){
+        previousShader = currentShader;
         currentShader = this;
         glUseProgram(shaderProgram);
     }
 
     void Dispose(){
         glUseProgram(0);
+        currentShader = previousShader;
+        if( currentShader )
+            currentShader->Use();
     }
 
     GLuint GetUniformLocation(const std::string & uniformName){

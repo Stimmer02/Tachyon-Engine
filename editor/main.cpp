@@ -22,7 +22,7 @@ class SolarSystem : public System{
         venus->transform.position.x = 3.0f * cos(2.0f * angle );
         venus->transform.position.y = 3.0f * sin(2.0f * angle );
 
-        sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5, -angle, angle});
+        sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5f, -angle, angle});
 
         venusMoon->transform.position.x = 2.0f;
         venusMoon->transform.position.y = 0.0f;
