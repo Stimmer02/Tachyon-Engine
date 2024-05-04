@@ -3,11 +3,12 @@
 
 #include <iostream>
 #include <ctime>
+#include <chrono>
 #include "MessageType.h"
 
 struct EventQueueElement{
 
-    std::time_t time;
+    std::chrono::nanoseconds time;
     LogMessageType type;
     std::string data;
 

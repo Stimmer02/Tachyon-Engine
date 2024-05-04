@@ -25,7 +25,7 @@ EventRegister::~EventRegister(){
 }
 
 void EventRegister::Write(enum LogMessageType _type, const char * _format, ...){
-    std::time_t currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    std::chrono::nanoseconds currentTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch());
     char helper[4096] = {}; //tyle powinno wystarczyć
     EventQueueElement elementToAdd;
 
@@ -33,11 +33,17 @@ void EventRegister::Write(enum LogMessageType _type, const char * _format, ...){
     va_start(args, _format);
 
     vsnprintf(helper, sizeof(helper), _format, args);
-
+    
     va_end(args);
 
     elementToAdd.time = currentTime;
     elementToAdd.data = std::string(helper);
+    
+    if(elementToAdd.data.size() > 0){
+        if(elementToAdd.data[elementToAdd.data.size() - 1] != '\n'){    
+            elementToAdd.data += '\n';
+        }
+    }
     elementToAdd.type = _type;
 
 
@@ -49,12 +55,14 @@ void EventRegister::Write(enum LogMessageType _type, const char * _format, ...){
 
 void EventRegister::Flush(){
     EventQueueElement eqe;
+    std::time_t helper;
     char time[30];
     std::unique_lock<std::mutex> loc(mut);
     while(!eventQueue.empty()){
         eqe = eventQueue.top();
+        helper = std::chrono::system_clock::to_time_t(std::chrono::system_clock::time_point(std::chrono::duration_cast<std::chrono::system_clock::duration>(eqe.time)));
         eventQueue.pop();
-        strftime(time, sizeof(time), "%d %b %Y %H:%M:%S", localtime(&eqe.time));
+        strftime(time, sizeof(time), "%d %b %Y %H:%M:%S", localtime(&helper));
         // fprintf(logFile, "%s", "ABC");
         fprintf(logFile, "%s [%s] : %s", time, types[eqe.type], eqe.data.c_str());
     }
