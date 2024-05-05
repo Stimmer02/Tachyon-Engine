@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include "StructTree.h"
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -9,8 +10,8 @@ StructTree::StructTree() {
 }
 
 StructTree::StructTree(std::string structDirectory, std::string rootStructName) {
-    this->structDirectory = structDirectory;
-    (*(this->root)).name = rootStructName;
+    setStructDirectory(structDirectory);
+    setRootStruct(rootStructName);
 }
 
 StructTree::~StructTree() {
@@ -18,8 +19,17 @@ StructTree::~StructTree() {
 }
 
 char StructTree::setRootStruct(std::string rootStructName) {
+    string path = this->structDirectory + "/" + rootStructName;
+    const char* file = path.c_str();
+    struct stat sb;
+    if (stat(file, &sb) != 0 || (sb.st_mode & S_IFDIR)) {
+        this->status = -2;
+        this->error = "Root not found.";
+        return status;
+    }
     (*(this->root)).name = rootStructName;
-    return 0;
+    this->status = -1;
+    return status;
 }
 
 void StructTree::setStructDirectory(std::string structDirectory) {
