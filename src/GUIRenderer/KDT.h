@@ -1,6 +1,7 @@
 #ifndef KDT_H
 #define KDT_H
 
+#include <iostream>
 #include <vector>
 #include <algorithm>
 #include "KDTElement.h"
@@ -21,6 +22,10 @@ public:
     InteractiveElement* find(const float &x, const float &y);
     void clear();
     void rebuild(const std::vector<InteractiveElement*> &components);
+    void printTree(KDTElement* subRoot);
+    
+protected:
+    int binSearchMiddleKDTElement(KDTElement** elementsArray, const int &elementsArraySize, const bool &xOrY);
 };
 
 #endif

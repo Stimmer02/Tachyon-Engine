@@ -50,6 +50,9 @@ InteractiveElement * KDTElement::getValue(){
 
 bool KDTElement::comparatorXsmaller(KDTElement* &element, KDTElement* &other){
 	//compare 2 KDTElement and return true if first has smaller X coordinate
+    if(element->getValue()->transform.position.x == other->getValue()->transform.position.x){
+        element->getValue()->transform.position.y < other->getValue()->transform.position.y;
+    }
     return element->getValue()->transform.position.x < other->getValue()->transform.position.x;
 }
 
@@ -60,6 +63,9 @@ bool KDTElement::comparatorXsmallerOrEqueql(KDTElement* &element, KDTElement* &o
 
 bool KDTElement::comparatorYsmaller(KDTElement* &element, KDTElement* &other){
 	//compare 2 KDTElement and return true if first has smaller Y coordinate
+    if(element->getValue()->transform.position.y == other->getValue()->transform.position.y){
+        element->getValue()->transform.position.x < other->getValue()->transform.position.x;
+    }
     return element->getValue()->transform.position.y < other->getValue()->transform.position.y;
 }
 
