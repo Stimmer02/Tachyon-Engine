@@ -5,6 +5,7 @@
 #include<fstream>
 #include<sstream>
 #include "ClStructParser.h"
+#include <set>
 
 using namespace std;
 
@@ -125,6 +126,8 @@ std::string StructTree::getError() {
     return this->error;
 }
 
+set<string> used;
+
 std::string StructTree::getStructuresHelper(engineStruct* node) {
     std::string result = "";
     for (int i = 0; i < node->fieldCount; ++i) {
@@ -132,7 +135,11 @@ std::string StructTree::getStructuresHelper(engineStruct* node) {
             result += getStructuresHelper(node->fields[i].subStruct);
         }
     }
-    result += node->rawCode;
+
+    if (used.find(node->name) == used.end()) {
+        result += node->rawCode;
+        used.insert(node->name);
+    }
     return result;
 }
 
