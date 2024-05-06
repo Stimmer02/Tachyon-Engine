@@ -30,6 +30,8 @@ public:
     void Interact(const int & x, const int & y){
         InteractiveElement * element = interactiveElementContainer.find(x, y);
 
+        fprintf(stdout, "Element status : %s\n", element?"FOUND":"LOST");
+
         if(element == nullptr)
             return;
 

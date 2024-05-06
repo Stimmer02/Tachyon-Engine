@@ -1,7 +1,10 @@
 #include "Application.h"
 
+#include "CanvasElement.h"
+
 Camera * mainCamera;
 KeyboardMonitor * monitor;
+MouseButtonMonitor * mouseMonitor;
 
 class SolarSystem : public System{
 
@@ -11,67 +14,77 @@ class SolarSystem : public System{
     Timer * timer;
 
     ButtonElement * button;
+    CanvasElement * canvas, * canvasPrime;
 
     void Execute() override{
 
-        static float angle;
+        // static float angle;
 
-        float deltaTime = timer->GetDeltaFrame();
+        // float deltaTime = timer->GetDeltaFrame();
 
-        mercury->transform.position.x = 2.0f * cos( 0.5f * angle );
-        mercury->transform.position.y = 2.0f * sin( 0.5f * angle );
+        // mercury->transform.position.x = 2.0f * cos( 0.5f * angle );
+        // mercury->transform.position.y = 2.0f * sin( 0.5f * angle );
 
-        venus->transform.position.x = 3.0f * cos(2.0f * angle );
-        venus->transform.position.y = 3.0f * sin(2.0f * angle );
+        // venus->transform.position.x = 3.0f * cos(2.0f * angle );
+        // venus->transform.position.y = 3.0f * sin(2.0f * angle );
 
-        sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5f, -angle, angle});
+        // sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5f, -angle, angle});
 
-        venusMoon->transform.position.x = 2.0f;
-        venusMoon->transform.position.y = 0.0f;
+        // venusMoon->transform.position.x = 2.0f;
+        // venusMoon->transform.position.y = 0.0f;
 
-        EventInfo info = monitor->GetButtonState(GLFW_KEY_W);
+        // EventInfo info = monitor->GetButtonState(GLFW_KEY_W);
 
-        if( info.type == ONHOLD )
-            mainCamera->MoveBy(Vector3(0.0f, 0.0f, -1.0f), deltaTime);
+        // if( info.type == ONHOLD )
+        //     mainCamera->MoveBy(Vector3(0.0f, 0.0f, -1.0f), deltaTime);
 
-        info = monitor->GetButtonState(GLFW_KEY_S);
+        // info = monitor->GetButtonState(GLFW_KEY_S);
 
-        if( info.type == ONHOLD )
-            mainCamera->MoveBy(Vector3(0.0f, 0.0f, 1.0f), deltaTime);
+        // if( info.type == ONHOLD )
+        //     mainCamera->MoveBy(Vector3(0.0f, 0.0f, 1.0f), deltaTime);
 
-        info = monitor->GetButtonState(GLFW_KEY_A);
+        // info = monitor->GetButtonState(GLFW_KEY_A);
 
-        if( info.type == ONHOLD )
-            mainCamera->MoveBy(Vector3(-1.0f, 0.0f, 0.0f), deltaTime);
+        // if( info.type == ONHOLD )
+        //     mainCamera->MoveBy(Vector3(-1.0f, 0.0f, 0.0f), deltaTime);
 
-        info = monitor->GetButtonState(GLFW_KEY_D);
+        // info = monitor->GetButtonState(GLFW_KEY_D);
 
-        if( info.type == ONHOLD )
-            mainCamera->MoveBy(Vector3(1.0f, 0.0f, 0.0f), deltaTime);
+        // if( info.type == ONHOLD )
+        //     mainCamera->MoveBy(Vector3(1.0f, 0.0f, 0.0f), deltaTime);
 
-        info = monitor->GetButtonState(GLFW_KEY_SPACE);
+        // info = monitor->GetButtonState(GLFW_KEY_SPACE);
 
-        if( info.type == ONHOLD )
-            mainCamera->MoveBy(Vector3(0.0f, 1.0f, 0.0f), deltaTime);
+        // if( info.type == ONHOLD )
+        //     mainCamera->MoveBy(Vector3(0.0f, 1.0f, 0.0f), deltaTime);
 
-        info = monitor->GetButtonState(GLFW_KEY_LEFT_SHIFT);
+        // info = monitor->GetButtonState(GLFW_KEY_LEFT_SHIFT);
 
-        if( info.type == ONHOLD )
-            mainCamera->MoveBy(Vector3(0.0f, -1.0f, 0.0f), deltaTime);
+        // if( info.type == ONHOLD )
+        //     mainCamera->MoveBy(Vector3(0.0f, -1.0f, 0.0f), deltaTime);
 
-        info = monitor->GetButtonState(GLFW_KEY_Q);
+        // info = monitor->GetButtonState(GLFW_KEY_Q);
 
-        if( info.type == ONHOLD )
-            mainCamera->RotateBy(-1.0f, 0.0f);
+        // if( info.type == ONHOLD )
+        //     mainCamera->RotateBy(-1.0f, 0.0f);
 
-        info = monitor->GetButtonState(GLFW_KEY_E);
+        // info = monitor->GetButtonState(GLFW_KEY_E);
 
-        if( info.type == ONHOLD )
-            mainCamera->RotateBy(1.0f, 0.0f);
+        // if( info.type == ONHOLD )
+        //     mainCamera->RotateBy(1.0f, 0.0f);
 
 
-        angle *= (angle < 360.0f);
-        angle += 1.0f * deltaTime;
+        // angle *= (angle < 360.0f);
+        // angle += 1.0f * deltaTime;
+
+        // EventInfo info = mouseMonitor->GeyKeyState(GLFW_MOUSE_BUTTON_LEFT);
+
+        // if( info.type == ONTRIGGER ){
+
+        //     if( canvas->isInBound(info.x, info.y) ){
+        //         canvas->SetPixel(info.x, info.y, {0,0,0});
+        //     }
+        // }
 
     }
 
@@ -86,7 +99,7 @@ public:
         this->timer = &Timer::GetInstance();
 
         sun = scene->CreateEntity();
-        scene->AddEntityToScene(sun);
+        // scene->AddEntityToScene(sun);
 
         mercury = scene->CreateEntity();
         sun->AddChildren(mercury);
@@ -108,7 +121,7 @@ public:
         Mesh * venusMesh = venus->AddAttribute<Mesh>();
         Mesh * venusMoonMesh = venusMoon->AddAttribute<Mesh>();
 
-        sunMesh->GenSphere(1.0f, 10, 10);
+        sunMesh->GenSphere(1.0f, 8, 8);
         mercuryMesh->GenSphere(1.0f, 10, 10);
         venusMesh->GenSphere(1.0f, 10, 10);
         venusMoonMesh->GenSphere(1.0f, 10, 10);
@@ -122,13 +135,20 @@ public:
         Sprite * venusSprite = venus->AddAttribute<Sprite>(colors + 2, 1, 1);
         Sprite * venusMoonSprite = venusMoon->AddAttribute<Sprite>(colors + 3, 1, 1);
 
+        canvas = new CanvasElement(400, 300, 100, 100);
+        scene->AddGUIToScene(canvas);
+
+        canvasPrime = new CanvasElement(200, 150, 100, 100);
+        scene->AddGUIToScene(canvasPrime);
 
         auto callback = [&](){
-            sunSprite->NextFrame();
+            canvas->ClearCanvas({255,255,255});
         };
 
         button = new ButtonElement(300, 450, 200, 100, callback);
         scene->AddGUIToScene(button);
+
+
 
     }
 
@@ -145,16 +165,20 @@ int main(){
     GraphicConfig::windowWidth = 800;
     GraphicConfig::windowTitle = "Application";
 
+    // ApplicationConfig::internalGUIInteraction = false;
+
     Application app;
 
     Scene scene;
 
     mainCamera = &app.GetMainCamera();
     monitor = &app.GetKeyboardInputMonitor();
+    mouseMonitor = &app.GetMouseInputMonitor();
 
     SolarSystem * solar = new SolarSystem(&scene);
 
     app.RegisterSystem(solar);
+
     app.LoadScene(scene);
 
     app.Loop();

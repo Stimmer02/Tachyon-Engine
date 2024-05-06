@@ -37,6 +37,8 @@ private:
 
     std::vector<GLuint> frames;
     int currentFrame = 0;
+    uint32_t width;
+    uint32_t height;
 
 public:
 
@@ -85,6 +87,9 @@ public:
     /// @brief Removes the last frame from animation
     void Pop();
 
+    /// @brief Changes color of pixel at given coordinates
+    void SetPixel(const uint32_t & x, const uint32_t & y, const Color & color);
+
     /// @brief Method loads current sprite to texture buffer.
     void Load();
 
@@ -93,6 +98,9 @@ public:
 
     /// @brief Method deletes texture from OpenGL graphic context.
     void Destroy();
+
+    /// @brief Method fills texture with provided color
+    void ClearCanvas(const Color & clearColor);
 
     AttributeID GetAttributeID() const override;
 

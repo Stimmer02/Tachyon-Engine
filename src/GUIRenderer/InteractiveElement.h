@@ -2,7 +2,6 @@
 #define INTERACTIVEELEMENT_H
 
 #include "GUIElement.h"
-#include <cassert>
 #include <functional>
 
 using Callback = std::function<void()>;
@@ -27,18 +26,13 @@ public:
     virtual void Render() = 0;
 
     virtual bool isInBound(const int & x, const int & y){
-
-        float & xPos = transform.position.x;
-        float & yPos = transform.position.y;
-
-        return ( ((xPos - width*0.5f) < x) && ( x < (xPos + width * 0.5f)) ) &&
-         ( ((yPos - height*0.5f) < y) && ( y < (yPos + height * 0.5f)) );
-
+        return x >= transform.position.x && x <= transform.position.x + width &&
+               y >= transform.position.y && y <= transform.position.y + height;
     }
 
     void Interact(){
-        assert(callback && "Callback cannot be null");
-        callback();
+        if( callback )
+            callback();
     }
 };
 

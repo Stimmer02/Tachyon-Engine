@@ -8,6 +8,25 @@ KDT::~KDT(){
     delete root;
 }
 
+
+#ifdef DEBUG
+    // Only for debug purpose
+    void Traverse(KDTElement * element){
+
+        if( element == nullptr)
+            return;
+
+        Traverse(element->getLeftSon());
+
+        Transform & transform = element->getValue()->transform;
+
+        fprintf(stdout, "Element at position : %d %d\n", transform.position.x, transform.position.y);
+
+        Traverse(element->getRightSon());
+
+    }
+#endif
+
 void KDT::buildTree(const std::vector<InteractiveElement*> &components){
 
     const int elementNum = components.size();
@@ -29,6 +48,9 @@ void KDT::buildTree(const std::vector<InteractiveElement*> &components){
 	//Recursion bulding left and right subtrees
     buildLeftSubTreeRec(elements, root, mid, false);
     buildRightSubTreeRec(elements + mid + 1, root, elementNum - mid - 1, false);
+#ifdef DEBUG
+    Traverse(root);
+#endif
 }
 
 void KDT::buildLeftSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoot, const int &elementsArraySize, const bool xOrY){

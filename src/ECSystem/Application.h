@@ -95,7 +95,7 @@ public:
 
             EventInfo leftMouseButtonEvent = mouseMonitor->GeyKeyState(GLFW_MOUSE_BUTTON_LEFT);
 
-            if( leftMouseButtonEvent.type == ONTRIGGER  && ApplicationConfig::internalGUIInteraction)
+            if( ( leftMouseButtonEvent.type == ONTRIGGER )  && ApplicationConfig::internalGUIInteraction)
                 interactionManager.Interact(leftMouseButtonEvent.x, leftMouseButtonEvent.y);
 
             if(timer->GetAccumulatedTime()>= 1.0f){

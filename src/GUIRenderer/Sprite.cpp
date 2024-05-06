@@ -5,6 +5,8 @@ Sprite::Sprite(const Color * pixels, const uint32_t& width, const uint32_t& heig
     if( pixels == nullptr )
         return;
 
+    this->width = width;
+    this->height = height;
     this->UpdateTexture(pixels, width, height);
 }
 
@@ -22,6 +24,8 @@ Sprite::Sprite(const char * filepath){
     if( img.pixels == nullptr )
         return;
 
+    this->width = img.width;
+    this->height = img.height;
     this->UpdateTexture(img.pixels, img.width, img.height);
     almanach[ std::string(filepath) ] = frames.back();
 
@@ -34,6 +38,8 @@ Sprite::Sprite(const Image * image){
     if( image->pixels == nullptr )
         return;
 
+    this->width = image->width;
+    this->height = image->height;
     this->UpdateTexture(image->pixels, image->width, image->height);
 
 }
@@ -152,6 +158,18 @@ void Sprite::Pop(){
 
 }
 
+void Sprite::SetPixel(const uint32_t & x, const uint32_t & y, const Color & color){
+
+    if( x < 0 || x >= width || y < 0 || y >= height)
+        return;
+
+    glBindTexture(GL_TEXTURE_2D, frames[currentFrame]);
+
+    glTexSubImage2D(GL_TEXTURE_2D, 0, x, height - y - 1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, &color);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
 GLuint Sprite::GetTextureID(const GLuint & frameID){
 
     if( frames.size() <= frameID )
@@ -186,6 +204,19 @@ void Sprite::Destroy(){
         glDeleteTextures(1, &frame);
 
 }
+
+void Sprite::ClearCanvas(const Color & clearColor){
+
+    std::vector<Color> colors(width * height + width, clearColor);
+
+    glBindTexture(GL_TEXTURE_2D, frames[currentFrame]);
+
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0,0, width, height, GL_RGB, GL_UNSIGNED_BYTE, colors.data());
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+}
+
 
 Sprite::~Sprite(){
     this->Destroy();
