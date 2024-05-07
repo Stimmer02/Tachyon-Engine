@@ -230,7 +230,7 @@ int KDT::binSearchMiddleKDTElement(KDTElement **elementsArray, const int &elemen
     
     if(xOrY){
         x = elementsArray[mid]->getValue()->transform.position.x;
-        while(b + 1 != e){        
+        while(b + 1 != e && b != e){
             if(elementsArray[avg]->getValue()->transform.position.x == x){
                 e = avg;
             }
@@ -248,7 +248,7 @@ int KDT::binSearchMiddleKDTElement(KDTElement **elementsArray, const int &elemen
     }
     else{
         y = elementsArray[mid]->getValue()->transform.position.y;
-        while(b + 1 != e){        
+        while(b + 1 != e && b != e){
             if(elementsArray[avg]->getValue()->transform.position.y == y){
                 e = avg;
             }

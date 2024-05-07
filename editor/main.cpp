@@ -135,43 +135,45 @@ public:
         Sprite * venusSprite = venus->AddAttribute<Sprite>(colors + 2, 1, 1);
         Sprite * venusMoonSprite = venusMoon->AddAttribute<Sprite>(colors + 3, 1, 1);
 
-        canvas = new CanvasElement(400, 300, 100, 100);
-        scene->AddGUIToScene(canvas);
+        // canvas = new CanvasElement(400, 300, 100, 100);
+        // scene->AddGUIToScene(canvas);
         
         
         canvas1 = new CanvasElement(0, 0, 20, 20);
         scene->AddGUIToScene(canvas1);
-        canvas2 = new CanvasElement(0, 39, 20, 20);
-        scene->AddGUIToScene(canvas2);
-        canvas3 = new CanvasElement(0, 50, 20, 20);
-        scene->AddGUIToScene(canvas3);
-        canvas4 = new CanvasElement(0, 100, 20, 20);
-        scene->AddGUIToScene(canvas4);
-        canvas5 = new CanvasElement(10, 75, 20, 20);
-        scene->AddGUIToScene(canvas5);
-        canvas6 = new CanvasElement(30, 90, 20, 20);
-        scene->AddGUIToScene(canvas6);
-        canvas7 = new CanvasElement(50, 90, 20, 20);
-        scene->AddGUIToScene(canvas7);
-        canvas8 = new CanvasElement(400, 100, 20, 20);
-        scene->AddGUIToScene(canvas8);
-        canvas9 = new CanvasElement(450, 450, 20, 20);
-        scene->AddGUIToScene(canvas9);
-        canvas10 = new CanvasElement(450, 450, 20, 20);
-        scene->AddGUIToScene(canvas10);
+        // canvas2 = new CanvasElement(0, 39, 20, 20);
+        // scene->AddGUIToScene(canvas2);
+        // canvas3 = new CanvasElement(0, 50, 20, 20);
+        // scene->AddGUIToScene(canvas3);
+        // canvas4 = new CanvasElement(0, 100, 20, 20);
+        // scene->AddGUIToScene(canvas4);
+        // canvas5 = new CanvasElement(10, 75, 20, 20);
+        // scene->AddGUIToScene(canvas5);
+        // canvas6 = new CanvasElement(30, 90, 20, 20);
+        // scene->AddGUIToScene(canvas6);
+        // canvas7 = new CanvasElement(50, 90, 20, 20);
+        // scene->AddGUIToScene(canvas7);
+        // canvas8 = new CanvasElement(400, 100, 20, 20);
+        // scene->AddGUIToScene(canvas8);
+        // canvas9 = new CanvasElement(450, 450, 20, 20);
+        // scene->AddGUIToScene(canvas9);
+        // canvas10 = new CanvasElement(450, 450, 20, 20);
+        // scene->AddGUIToScene(canvas10);
 
 
-        canvasPrime = new CanvasElement(200, 150, 100, 100);
-        scene->AddGUIToScene(canvasPrime);
+        // canvasPrime = new CanvasElement(200, 150, 100, 100);
+        // scene->AddGUIToScene(canvasPrime);
         
 
-        auto callback = [&](){
-            canvas->ClearCanvas({255,255,255});
-        };
+        // auto callback = [&](){
+        //     canvas->ClearCanvas({255,255,255});
+        // };
 
-        button = new ButtonElement(300, 450, 200, 100, callback);
-        scene->AddGUIToScene(button);
+        // button = new ButtonElement(300, 450, 200, 100, callback);
+        // scene->AddGUIToScene(button);
 
+        TextElement * text = new TextElement("Hello world!");
+        scene->AddGUIToScene(text);
 
 
     }
@@ -195,6 +197,7 @@ int main(){
 
     Scene scene;
 
+
     mainCamera = &app.GetMainCamera();
     monitor = &app.GetKeyboardInputMonitor();
     mouseMonitor = &app.GetMouseInputMonitor();
@@ -203,6 +206,7 @@ int main(){
 
     app.RegisterSystem(solar);
 
+    
     app.LoadScene(scene);
 
     app.Loop();

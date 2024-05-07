@@ -180,10 +180,12 @@ GLuint Sprite::GetTextureID(const GLuint & frameID){
 
 void Sprite::Load(){
 
-    if( frames.empty() )
+    if( frames.empty() || currentFrame >= frames.size() ){
+        defaultSprite->Load();
         return;
+    }
 
-    glBindTexture(GL_TEXTURE_2D, frames[currentFrame]);
+    glBindTexture(GL_TEXTURE_2D, frames.front());
 }
 
 void Sprite::NextFrame(){

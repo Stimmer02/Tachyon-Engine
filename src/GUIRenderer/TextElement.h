@@ -4,6 +4,7 @@
 #include "Glyf.h"
 #include "GUIElement.h"
 #include "GLShader.h"
+#include "Converter.h"
 
 #include <list>
 
@@ -16,7 +17,7 @@ private:
 public:
 
     TextElement(const std::string & text){
-
+        glyfs = Converter::stringToGlyfList(text);
         // TODO
 
     }
