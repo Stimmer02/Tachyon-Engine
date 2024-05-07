@@ -10,82 +10,28 @@ class SolarSystem : public System{
 
     Scene * scene;
     SceneObject * sun, * mercury, * venus, * venusMoon;
-    Sprite * sunSprite;
     Timer * timer;
-
-    ButtonElement * button;
-    CanvasElement * canvas, * canvasPrime;
 
     void Execute() override{
 
-        // static float angle;
+        static float angle;
 
-        // float deltaTime = timer->GetDeltaFrame();
+        float deltaTime = timer->GetDeltaFrame();
 
-        // mercury->transform.position.x = 2.0f * cos( 0.5f * angle );
-        // mercury->transform.position.y = 2.0f * sin( 0.5f * angle );
+        mercury->transform.position.x = 2.0f * cos( 0.5f * angle );
+        mercury->transform.position.y = 2.0f * sin( 0.5f * angle );
 
-        // venus->transform.position.x = 3.0f * cos(2.0f * angle );
-        // venus->transform.position.y = 3.0f * sin(2.0f * angle );
+        venus->transform.position.x = 3.0f * cos(2.0f * angle );
+        venus->transform.position.y = 3.0f * sin(2.0f * angle );
 
-        // sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5f, -angle, angle});
+        sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5f, -angle, angle});
 
-        // venusMoon->transform.position.x = 2.0f;
-        // venusMoon->transform.position.y = 0.0f;
-
-        // EventInfo info = monitor->GetButtonState(GLFW_KEY_W);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->MoveBy(Vector3(0.0f, 0.0f, -1.0f), deltaTime);
-
-        // info = monitor->GetButtonState(GLFW_KEY_S);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->MoveBy(Vector3(0.0f, 0.0f, 1.0f), deltaTime);
-
-        // info = monitor->GetButtonState(GLFW_KEY_A);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->MoveBy(Vector3(-1.0f, 0.0f, 0.0f), deltaTime);
-
-        // info = monitor->GetButtonState(GLFW_KEY_D);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->MoveBy(Vector3(1.0f, 0.0f, 0.0f), deltaTime);
-
-        // info = monitor->GetButtonState(GLFW_KEY_SPACE);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->MoveBy(Vector3(0.0f, 1.0f, 0.0f), deltaTime);
-
-        // info = monitor->GetButtonState(GLFW_KEY_LEFT_SHIFT);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->MoveBy(Vector3(0.0f, -1.0f, 0.0f), deltaTime);
-
-        // info = monitor->GetButtonState(GLFW_KEY_Q);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->RotateBy(-1.0f, 0.0f);
-
-        // info = monitor->GetButtonState(GLFW_KEY_E);
-
-        // if( info.type == ONHOLD )
-        //     mainCamera->RotateBy(1.0f, 0.0f);
+        venusMoon->transform.position.x = 2.0f;
+        venusMoon->transform.position.y = 0.0f;
 
 
-        // angle *= (angle < 360.0f);
-        // angle += 1.0f * deltaTime;
-
-        // EventInfo info = mouseMonitor->GeyKeyState(GLFW_MOUSE_BUTTON_LEFT);
-
-        // if( info.type == ONTRIGGER ){
-
-        //     if( canvas->isInBound(info.x, info.y) ){
-        //         canvas->SetPixel(info.x, info.y, {0,0,0});
-        //     }
-        // }
-
+        angle *= (angle < 360.0f);
+        angle += 1.0f * deltaTime;
     }
 
     void Share() override{
@@ -99,7 +45,7 @@ public:
         this->timer = &Timer::GetInstance();
 
         sun = scene->CreateEntity();
-        // scene->AddEntityToScene(sun);
+        scene->AddEntityToScene(sun);
 
         mercury = scene->CreateEntity();
         sun->AddChildren(mercury);
@@ -121,33 +67,36 @@ public:
         Mesh * venusMesh = venus->AddAttribute<Mesh>();
         Mesh * venusMoonMesh = venusMoon->AddAttribute<Mesh>();
 
-        sunMesh->GenSphere(1.0f, 8, 8);
+        sunMesh->GenSphere(1.0f, 10, 10);
         mercuryMesh->GenSphere(1.0f, 10, 10);
         venusMesh->GenSphere(1.0f, 10, 10);
         venusMoonMesh->GenSphere(1.0f, 10, 10);
 
-        Color colors[] = { {200, 128, 0}, {127, 127, 127}, {127, 0, 127}, {80, 80, 80} };
+        Sprite * sunSprite = sun->AddAttribute<Sprite>("resources/sprites/test.bmp");
+        Sprite * mercurySprite = mercury->AddAttribute<Sprite>("resources/sprites/slime.bmp");
+        Sprite * venusSprite = venus->AddAttribute<Sprite>("resources/sprites/heart.bmp");
+        Sprite * venusMoonSprite = venusMoon->AddAttribute<Sprite>("resources/sprites/button.bmp");
+
+        // canvas = new CanvasElement(400, 300, 100, 100);
+        // scene->AddGUIToScene(canvas);
+
+        // canvasPrime = new CanvasElement(200, 150, 100, 100);
+        // scene->AddGUIToScene(canvasPrime);
+
+        // auto callback = [&](){
+        //     canvas->ClearCanvas({255,255,255});
+        // };
+
+        // button = new ButtonElement(300, 450, 200, 100, callback);
+        // scene->AddGUIToScene(button);
 
 
-        sunSprite = sun->AddAttribute<Sprite>("resources/sprites/test.bmp");
-        sunSprite->Push("resources/sprites/slime.bmp");
-        Sprite * mercurySprite = mercury->AddAttribute<Sprite>(colors + 1, 1, 1);
-        Sprite * venusSprite = venus->AddAttribute<Sprite>(colors + 2, 1, 1);
-        Sprite * venusMoonSprite = venusMoon->AddAttribute<Sprite>(colors + 3, 1, 1);
+        Glyf g = Glyf('a', 60, 80, sunSprite);
 
-        canvas = new CanvasElement(400, 300, 100, 100);
-        scene->AddGUIToScene(canvas);
+        TextElement * text = new TextElement("Hello");
+        text->Push(&g);
 
-        canvasPrime = new CanvasElement(200, 150, 100, 100);
-        scene->AddGUIToScene(canvasPrime);
-
-        auto callback = [&](){
-            canvas->ClearCanvas({255,255,255});
-        };
-
-        button = new ButtonElement(300, 450, 200, 100, callback);
-        scene->AddGUIToScene(button);
-
+        scene->AddGUIToScene(text);
 
 
     }
@@ -157,15 +106,13 @@ public:
 
 int main(){
 
-    srand(time(nullptr));
+    // GraphicConfig::vsync = false;
+    // GraphicConfig::zbuffer = true;
+    // GraphicConfig::windowHeight = 600;
+    // GraphicConfig::windowWidth = 800;
+    // GraphicConfig::windowTitle = "Application";
 
-    GraphicConfig::vsync = false;
-    GraphicConfig::zbuffer = true;
-    GraphicConfig::windowHeight = 600;
-    GraphicConfig::windowWidth = 800;
-    GraphicConfig::windowTitle = "Application";
-
-    // ApplicationConfig::internalGUIInteraction = false;
+    ApplicationConfig::internalGUIInteraction = false;
 
     Application app;
 

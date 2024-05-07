@@ -47,7 +47,7 @@ public:
 
 #ifdef DEBUG
 
-		fprintf(stdout, "[DEBUG] Removed scene object %d\n", ID);
+		fprintf(stdout, "[DEBUG] Removed entity %d\n", ID);
 
 #endif
 

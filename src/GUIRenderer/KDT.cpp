@@ -20,7 +20,7 @@ KDT::~KDT(){
 
         Transform & transform = element->getValue()->transform;
 
-        fprintf(stdout, "Element at position : %d %d\n", transform.position.x, transform.position.y);
+        fprintf(stdout, "Element at position : %f %f\n", transform.position.x, transform.position.y);
 
         Traverse(element->getRightSon());
 
