@@ -41,6 +41,7 @@ Sprite::Sprite(const Image * image){
     this->width = image->width;
     this->height = image->height;
     this->UpdateTexture(image->pixels, image->width, image->height);
+    
 
 }
 

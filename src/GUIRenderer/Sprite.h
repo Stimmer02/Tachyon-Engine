@@ -27,6 +27,7 @@
 #endif
 
 #include <vector>
+#include <iostream>
 
 
 static std::map<std::string, GLuint> almanach;

@@ -10,6 +10,6 @@ uniform mat4 u_model;
 uniform vec4 u_translation;
 
 void main(){
-    gl_Position = vert * u_model * u_projection ;
+    gl_Position = (vert + u_translation) * u_projection ;
     uvs = uv;
 }

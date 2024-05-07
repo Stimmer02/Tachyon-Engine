@@ -173,6 +173,8 @@ public:
         // scene->AddGUIToScene(button);
 
         TextElement * text = new TextElement("Hello world!");
+        text->transform.position.x = GraphicConfig::windowWidth/2.0;
+        text->transform.position.y = GraphicConfig::windowHeight/2.0f;
         scene->AddGUIToScene(text);
 
 

@@ -3,13 +3,15 @@
 
 #include <Glyf.h>
 #include <ImageEditor.h>
-#include <bits/stdc++.h>
+#include <map>
+#include <list>
 
 class Converter{
 private:
     static constexpr std::string_view possibleSymbols = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
     static std::map<char, Glyf*> letterGlyf;
     static Sprite** sprites;
+    static Glyf** glyfs;
     static Image* letters;
     static uint32_t lettersCount;
     static uint32_t width;
