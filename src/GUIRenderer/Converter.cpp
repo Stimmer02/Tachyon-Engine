@@ -15,10 +15,6 @@ std::list<Glyf *> Converter::stringToGlyfList(const std::string &str){
     std::list<Glyf*> result;
     
     
-    if(!letterGlyf.empty()){
-        std::cout << letterGlyf.size() << '\n';
-    }
-    
     for(int i = 0; i < str.size(); ++i){
         if(Converter::letterGlyf.count(str[i]) == 0){
             result.push_back(Converter::letterGlyf[' ']);
@@ -60,7 +56,6 @@ void Converter::makeGlyfArray(){
         Converter::sprites[i] = new Sprite(&(letters[i]));
         delete [] letters[i].pixels;
         Converter::glyfs[i] = new Glyf(Converter::possibleSymbols[i], 10 * Converter::width, 10 * Converter::height, Converter::sprites[i]);
-        std::cout << possibleSymbols[i] << '\n';
         Converter::letterGlyf[Converter::possibleSymbols[i]] = glyfs[i];
         
         if(i == possibleSymbols.size()){
