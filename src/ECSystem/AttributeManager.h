@@ -20,12 +20,18 @@ private:
 public:
 
     void DestroyEntity(const Entity & ID){
-        auto iterator = components.find(ID);
 
-        if (iterator == components.end())
-            return;
+        for (auto& componentPair : components) {
 
-        components.erase(ID);
+            std::unordered_map<Entity, Attribute*>& entityMap = componentPair.second;
+
+            auto it = entityMap.find(ID);
+            if (it != entityMap.end()) {
+                delete it->second;
+                entityMap.erase(it);
+            }
+        }
+
     }
 
     template<typename T, typename... Args>
@@ -35,11 +41,11 @@ public:
 
         std::type_index index = typeid(T);
 
-        components[ID][index] = attrib;
+        components[index][ID] = attrib;
 
 #ifdef DEBUG
 
-    fprintf(stdout, "[DEBUG] New component %s attached to entity %d\n", index.name(), ID);
+    fprintf(stdout, "[DEBUG] New attribute %s attached to entity %d\n", index.name(), ID);
 
 #endif
 
@@ -48,36 +54,49 @@ public:
 
     template<typename T>
     void RemoveAttribute(const Entity & ID){
-        auto iterator = components.find(ID);
+        std::type_index index = typeid(T);
+
+        auto iterator = components.find(index);
 
         if (iterator == components.end())
             return;
 
-        std::type_index index = typeid(T);
+        std::unordered_map<Entity, Attribute *>& entityMap = iterator->second;
 
- #ifdef DEBUG
+        auto componentIterator = entityMap.find(ID);
 
-    fprintf(stdout, "[DEBUG] Component %s removed from entity %d\n", index.name(), ID);
+        if (componentIterator == entityMap.end())
+            return;
+
+        delete componentIterator->second;
+
+#ifdef DEBUG
+
+    fprintf(stdout, "[DEBUG] Attribute %s erased from entity %d\n", index.name(), ID);
 
 #endif
 
-        iterator->second.erase( index );
+        entityMap.erase( componentIterator );
     }
 
     template<typename T>
     T * GetAttribute(const Entity & ID){
-        auto iterator = components.find(ID);
+        std::type_index index = typeid(T);
+
+        auto iterator = components.find(index);
 
         if (iterator == components.end())
             return nullptr;
 
-        auto attribIterator = iterator->second;
-        auto componentIterator = attribIterator.find( typeid(T) );
+        std::unordered_map<Entity, Attribute *>& entityMap = iterator->second;
 
-        if (componentIterator == attribIterator.end())
+        auto componentIterator = entityMap.find(ID);
+
+        if (componentIterator == entityMap.end())
             return nullptr;
 
-        return (T*)( componentIterator->second);
+        return (T*) componentIterator->second;
+
     }
 
     static AttributeManager& GetInstance(){
@@ -86,7 +105,7 @@ public:
     }
 
 private:
-    std::unordered_map< Entity, std::unordered_map< std::type_index, Attribute* > > components;
+    std::unordered_map< std::type_index, std::unordered_map< Entity, Attribute* > > components;
 };
 
 

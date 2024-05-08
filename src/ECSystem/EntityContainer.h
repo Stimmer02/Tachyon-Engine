@@ -1,8 +1,6 @@
 #ifndef ENTITYMANAGER_H
 #define ENTITYMANAGER_H
 
-#include "EntityContainerIterator.h"
-
 #include <stdint.h>
 #include <unordered_set>
 #include <vector>
@@ -56,8 +54,8 @@ public:
 
     }
 
-    EntityContainerIterator GetIterator(){
-        return EntityContainerIterator(&entities);
+    std::unordered_set<Entity> & GetEntities(){
+        return entities;
     }
 
 };

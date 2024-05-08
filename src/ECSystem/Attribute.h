@@ -6,11 +6,11 @@ using Archetype = unsigned char;
 using EntityID = unsigned int;
 
 enum RenderingAttributes : AttributeID{
-    NONEATTRIB = 0,
-    SPRITE = 1,
-    MESH = 2,
-    SPRITEANDMESH = 3,
-    ATTRIB_MAX = 4
+    NONEATTRIB = 0,         // 00000000
+    SPRITE = 1,             // 00000001
+    MESH = 2,               // 00000010
+    LINE = 4,               // 00000100
+    ATTRIB_MAX = 8          // 00001000
 };
 
 class Attribute{

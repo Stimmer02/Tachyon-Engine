@@ -17,7 +17,7 @@
 
 #include <functional>
 
-using ArchetypeRenderFunc = std::function< void(Sprite *, Mesh *) >;
+using ArchetypeRenderFunc = std::function< void(SceneObject *) >;
 
 class GraphicSystem : public System{
 private:
@@ -44,16 +44,12 @@ private:
         if(object == nullptr || object->isActive == false)
             return;
 
-        Sprite * texture = object->GetAttribute<Sprite>();
-        Mesh * mesh = object->GetAttribute<Mesh>();
-
         Matrix & model = object->GetModel();
         currentShader->TransferToShader("u_model", model);
 
-        Archetype archetype = object->GetArchetype();
-        archetype &= RenderingAttributes::SPRITEANDMESH;
+        Archetype archetype = object->GetArchetype() & (RenderingAttributes::ATTRIB_MAX - 1);
 
-        archetypeFunc[archetype](texture, mesh);
+        archetypeFunc[archetype](object);
 
         for( SceneObject * children : object->GetChildrens() )
             RenderSceneObjects(children);
@@ -133,42 +129,33 @@ private:
         contextLogger->Write(LogMessageType::M_INFO, "Building rendering archetypes\n");
 
         archetypeFunc[RenderingAttributes::NONEATTRIB] =
-            [this](Sprite * sprite, Mesh * mesh){
-
-                sprite = this->GetDefaultTexture();
-                mesh = this->GetDefaultMesh();
-
-                sprite->Load();
-                mesh->Draw();
-                sprite->UnLoad();
+            [this](SceneObject * object){
+                return ;
             };
 
         archetypeFunc[RenderingAttributes::SPRITE] =
-            [this](Sprite * sprite, Mesh * mesh){
+            [this](SceneObject * object){
 
-                mesh = this->GetDefaultMesh();
+                Sprite * sprite = object->GetAttribute<Sprite>();
+                Mesh * mesh = this->GetDefaultMesh();
 
                 sprite->Load();
                 mesh->Draw();
-                sprite->UnLoad();
             };
 
         archetypeFunc[RenderingAttributes::MESH] =
-            [this](Sprite * sprite, Mesh * mesh){
+            [this](SceneObject * object){
 
-                sprite = this->GetDefaultTexture();
+                Sprite * sprite = this->GetDefaultTexture();
+                Mesh * mesh = object->GetAttribute<Mesh>();
 
                 sprite->Load();
                 mesh->Draw();
-                sprite->UnLoad();
             };
 
-        archetypeFunc[RenderingAttributes::SPRITEANDMESH] =
-            [this](Sprite * sprite, Mesh * mesh){
+        archetypeFunc[RenderingAttributes::LINE] =
+            [](SceneObject * object){
 
-                sprite->Load();
-                mesh->Draw();
-                sprite->UnLoad();
             };
 
     }

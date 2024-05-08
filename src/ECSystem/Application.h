@@ -23,6 +23,8 @@ private:
 
     std::list<System *> systems;
 
+    Scene * scene;
+
     Timer * timer;
 
 public:
@@ -51,6 +53,7 @@ public:
             interactionManager.LoadScene(scene);
         }
 
+        this->scene = &scene;
         graphics->LoadScene( &scene );
     }
 
@@ -101,6 +104,7 @@ public:
             if(timer->GetAccumulatedTime()>= 1.0f){
                 fprintf(stdout, "FPS : %05d\r", timer->GetFrameCount());
                 fflush(stdout);
+                contextLogger->Flush();
             }
 
         }
@@ -110,10 +114,13 @@ public:
     ~Application(){
 
         contextLogger->Write(LogMessageType::M_INFO, "Disposing resources\n");
+        contextLogger->Write(LogMessageType::M_INFO, "Unmanaging context\n");
 
         delete graphics;
         delete mouseMonitor;
         delete keyboardMonitor;
+
+        contextLogger->Flush();
     }
 
 };

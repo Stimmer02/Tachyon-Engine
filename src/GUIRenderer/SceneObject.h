@@ -101,7 +101,11 @@ public:
     template<typename T, typename... Args>
     T * AddAttribute(Args&&... args) {
         Attribute * attrib = (Attribute*)manager->AddAttribute<T>(this->ID, std::forward<Args>(args)...);
-        this->archetype |= attrib->GetAttributeID();
+
+        Archetype attribID = attrib->GetAttributeID();
+
+        if( attribID > this->archetype && attribID < RenderingAttributes::ATTRIB_MAX)
+            this->archetype = attribID;
 
 #ifdef DEBUG
 
@@ -120,7 +124,7 @@ public:
             return;
 
         manager->RemoveAttribute<T>(this->ID);
-        this->archetype ^= attrib->GetAttributeID();
+        this->archetype ^= attrib->GetAttributeID(); // TODO rethink this part
 
 #ifdef DEBUG
 

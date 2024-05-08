@@ -7,6 +7,7 @@ Sprite::Sprite(const Color * pixels, const uint32_t& width, const uint32_t& heig
 
     this->width = width;
     this->height = height;
+    this->currentFrame = 0;
     this->UpdateTexture(pixels, width, height);
     
 }
@@ -27,6 +28,7 @@ Sprite::Sprite(const char * filepath){
 
     this->width = img.width;
     this->height = img.height;
+    this->currentFrame = 0;
     this->UpdateTexture(img.pixels, img.width, img.height);
     almanach[ std::string(filepath) ] = frames.back();
 
@@ -41,6 +43,7 @@ Sprite::Sprite(const Image * image){
 
     this->width = image->width;
     this->height = image->height;
+    this->currentFrame = 0;
     this->UpdateTexture(image->pixels, image->width, image->height);
     
     // for(int i = 0; i < width*height; ++i){
