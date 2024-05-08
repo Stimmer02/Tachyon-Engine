@@ -139,8 +139,8 @@ public:
         // scene->AddGUIToScene(canvas);
         
         
-        canvas1 = new CanvasElement(0, 0, 20, 20);
-        scene->AddGUIToScene(canvas1);
+        // canvas1 = new CanvasElement(0, 0, 20, 20);
+        // scene->AddGUIToScene(canvas1);
         // canvas2 = new CanvasElement(0, 39, 20, 20);
         // scene->AddGUIToScene(canvas2);
         // canvas3 = new CanvasElement(0, 50, 20, 20);
@@ -172,7 +172,7 @@ public:
         // button = new ButtonElement(300, 450, 200, 100, callback);
         // scene->AddGUIToScene(button);
 
-        TextElement * text = new TextElement("Hello world!");
+        TextElement * text = new TextElement("Hello\nWorld!");
         text->transform.position.x = GraphicConfig::windowWidth/2.0;
         text->transform.position.y = GraphicConfig::windowHeight/2.0f;
         scene->AddGUIToScene(text);

@@ -13,27 +13,28 @@ std::list<Glyf *> Converter::stringToGlyfList(const std::string &str){
         Converter::setDeatfulFont();
     }
     std::list<Glyf*> result;
-    for(int i = 0; i < str.size(); ++i){
-        result.push_back(Converter::letterGlyf[str[i]]);
+    
+    
+    if(!letterGlyf.empty()){
+        std::cout << letterGlyf.size() << '\n';
     }
     
-    // std::cout << result.size() << '\n';
-    // std::cout.flush();
-    // for(auto i : result){
-    //     if(i->sprite == NULL){
-    //         std::cout <<"ASD";
-    //         continue;
-    //     }
-    //     std::cout << i->sprite->GetTextureID() << ' ' << i->character << ' ' << i->height << ' ' << i->width << '\n';
-    //     std::cout.flush();
-    // }
-    // std::cout.flush();
+    for(int i = 0; i < str.size(); ++i){
+        if(Converter::letterGlyf.count(str[i]) == 0){
+            result.push_back(Converter::letterGlyf[' ']);
+        }
+        else{
+            result.push_back(Converter::letterGlyf[str[i]]);
+        }
+    }
+    
+
     
     return result;
 }
 
 void Converter::setDeatfulFont(){
-    setFontFromFile("resources/sprites/charmap-oldschool_white.bmp", (uint32_t)7, (uint32_t)9);
+    setFontFromFile("resources/sprites/abc.bmp", (uint32_t)7, (uint32_t)9);
 }
 
 void Converter::setFontFromFile(const std::string &path, const uint32_t &slice_width, const uint32_t &slice_height){
@@ -50,16 +51,22 @@ void Converter::makeGlyfArray(){
     if(sprites != NULL){
         delete [] sprites;
     }
+    if(glyfs != NULL){
+        delete [] glyfs;
+    }
     Converter::sprites = new Sprite*[lettersCount];
     Converter::glyfs = new Glyf*[lettersCount];
     for(int i = 0; i < lettersCount; ++i){
         Converter::sprites[i] = new Sprite(&(letters[i]));
-        Converter::glyfs[i] = new Glyf(Converter::possibleSymbols[i], Converter::width, Converter::height, Converter::sprites[i]);
+        delete [] letters[i].pixels;
+        Converter::glyfs[i] = new Glyf(Converter::possibleSymbols[i], 10 * Converter::width, 10 * Converter::height, Converter::sprites[i]);
         std::cout << possibleSymbols[i] << '\n';
         Converter::letterGlyf[Converter::possibleSymbols[i]] = glyfs[i];
-        if(possibleSymbols[i] == '~'){
+        
+        if(i == possibleSymbols.size()){
             lettersCount = i + 1;
             break;
         }
     }
+    
 }

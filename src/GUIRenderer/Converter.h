@@ -8,7 +8,7 @@
 
 class Converter{
 private:
-    static constexpr std::string_view possibleSymbols = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    static constexpr std::string_view possibleSymbols = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\n";
     static std::map<char, Glyf*> letterGlyf;
     static Sprite** sprites;
     static Glyf** glyfs;

@@ -8,6 +8,7 @@ Sprite::Sprite(const Color * pixels, const uint32_t& width, const uint32_t& heig
     this->width = width;
     this->height = height;
     this->UpdateTexture(pixels, width, height);
+    
 }
 
 Sprite::Sprite(const char * filepath){
@@ -42,6 +43,14 @@ Sprite::Sprite(const Image * image){
     this->height = image->height;
     this->UpdateTexture(image->pixels, image->width, image->height);
     
+    // for(int i = 0; i < width*height; ++i){
+    //     if(i % width == 0){
+    //         std::cout << '\n';
+    //     }
+    //     std::cout << (int)image->pixels[i].B / (int)255 << ' ';
+        
+    // }
+    
 
 }
 
@@ -68,6 +77,7 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
         glBindTexture(GL_TEXTURE_2D, textureID);
 
         // Allocate texture buffer for pixels
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
         // Set texture filtering mode
