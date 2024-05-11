@@ -1,6 +1,6 @@
 struct __attribute__ ((aligned)) substance{
 //     const char name;IMPOSIBLE
-    struct color* color;
+    struct color color;
     float mass;
     float jammingFactor;
     // psisicStateVariables TODO next iteration
