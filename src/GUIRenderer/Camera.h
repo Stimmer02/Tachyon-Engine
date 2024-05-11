@@ -24,7 +24,7 @@ public:
 
 private:
 
-    Matrix viewMatrix;
+    Matrix projection;
 
     void UpdateVectors(){
 
@@ -38,29 +38,31 @@ private:
         this->front.z = std::sin( yawInRad ) * cos( pitchInRad );
 
         this->front = front.Normalize();
-        this->right = Vector3::Cross(front, worldUp).Normalize();
-        this->up = Vector3::Cross(right, front).Normalize();
+        this->right = Vector3::Cross(worldUp, front).Normalize();
+        this->up = Vector3::Cross(front, right).Normalize();
     }
 
 public:
 
-    Camera(const Vector3& position = Vector3(0.0f,0.0f,0.0f), const Vector3 & worldUp = Vector3(0.0f, 1.0f, 0.0f), const float & yaw = -90.0f, const float & pitch = 0.00f ){
-        this->position = position;
-        this->worldUp = worldUp;
+
+    Camera(){
+        this->position = Vector3(0.0f, 0.0f, 0.0f);
+        this->worldUp = Vector3(0.0f, 1.0f, 0.0f);
+        this->front = Vector3(0.0f, 0.0f, -1.0f);
         this->up = worldUp;
         this->right = Vector3::Cross(worldUp, front).Normalize();
-        this->front = Vector3(0.0f, 0.0f, -1.0f);
-        this->yaw = yaw;
-        this->pitch = pitch;
+        this->yaw = -90.0f;
+        this->pitch = 0.0f;
         UpdateVectors();
     }
 
-    Matrix& GetViewMatrix(){
+    Matrix GetViewMatrix() const{
+
+        Vector3 right = Vector3::Cross(up, front).Normalize();
 
         Matrix look = Matrix::LookAt(position, front, up, right);
-        viewMatrix = look;
 
-        return viewMatrix;
+        return look;
     }
 
     void ResetView(){
@@ -77,11 +79,11 @@ public:
 
         Vector3 direction = (target - this->position).Normalize();
         Vector3 newRight = Vector3::Cross(worldUp, direction).Normalize();
-        Vector3 newFront = Vector3::Cross(direction, newRight).Normalize();
+        Vector3 newUp = Vector3::Cross(direction, newRight).Normalize();
 
-        this->front = newFront;
-        this->right = newRight;
         this->front = direction;
+        this->right = newRight;
+        this->up = newUp;
 
         UpdateVectors();
 

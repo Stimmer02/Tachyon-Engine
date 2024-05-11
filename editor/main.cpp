@@ -9,32 +9,28 @@ MouseButtonMonitor * mouseMonitor;
 class SolarSystem : public System{
 
     Scene * scene;
-    SceneObject * sun, * mercury, * venus, * venusMoon;
-    Timer * timer;
-
-    ButtonElement * button;
-    CanvasElement * canvas, * canvasPrime, * canvas1, * canvas2, * canvas3, * canvas4, * canvas5, * canvas6, * canvas7, * canvas8, * canvas9, * canvas10;
+    SceneObject * planet;
+    TextElement * text;
 
     void Execute() override{
 
-        static float angle;
+        static float angle, theta;
 
-        float deltaTime = timer->GetDeltaFrame();
+        Vector3& planetPosition = planet->transform.position;
 
-        mercury->transform.position.x = 2.0f * cos( 0.5f * angle );
-        mercury->transform.position.y = 2.0f * sin( 0.5f * angle );
+        planetPosition.x = 100.0f * cos(angle * 2.0f * M_PI) * cos(theta * 2.0f * M_PI) + GraphicConfig::windowWidth*0.5f;
+        planetPosition.y = 100.0f * sin(theta * 2.0f * M_PI) + GraphicConfig::windowHeight*0.5f;
+        planetPosition.z = 100.0f * cos(angle * 2.0f * M_PI) * cos(theta * 2.0f * M_PI);
 
-        venus->transform.position.x = 3.0f * cos(2.0f * angle );
-        venus->transform.position.y = 3.0f * sin(2.0f * angle );
+        float ry = theta;
+        float rz = 2.0f * angle;
 
-        sun->transform.rotation = Quaternion::ToQuaternion({angle * 0.5f, -angle, angle});
-
-        venusMoon->transform.position.x = 2.0f;
-        venusMoon->transform.position.y = 0.0f;
+        planet->transform.rotation = Quaternion::ToQuaternion(Vector3(angle,ry,rz));
 
 
-        angle *= (angle < 360.0f);
-        angle += 1.0f * deltaTime;
+        angle += 0.00001f;
+        theta += 0.0001f * angle;
+
     }
 
     void Share() override{
@@ -45,71 +41,42 @@ public:
 
     SolarSystem(Scene * scene){
         this->scene = scene;
-        this->timer = &Timer::GetInstance();
 
-        sun = scene->CreateEntity();
-        scene->AddEntityToScene(sun);
+        planet = scene->CreateEntity();
 
-        mercury = scene->CreateEntity();
-        sun->AddChildren(mercury);
-
-        venus = scene->CreateEntity();
-        sun->AddChildren(venus);
-
-        venusMoon = scene->CreateEntity();
-        venus->AddChildren(venusMoon);
-
-        sun->transform.position = Vector3(400, 300);
-        sun->transform.scale = Vector3(50.0f, 50.0f, 50.0f);
-        mercury->transform.scale = Vector3(0.5f, 0.5f, 0.5f);
-        venus->transform.scale = Vector3(0.3f, 0.3f, 0.3f);
-        venusMoon->transform.scale = Vector3(0.3f, 0.3f, 0.3f);
-
-        Mesh * sunMesh = sun->AddAttribute<Mesh>();
-        Mesh * mercuryMesh = mercury->AddAttribute<Mesh>();
-        Mesh * venusMesh = venus->AddAttribute<Mesh>();
-        Mesh * venusMoonMesh = venusMoon->AddAttribute<Mesh>();
-
-        sunMesh->GenSphere(1.0f, 10, 10);
-        mercuryMesh->GenSphere(1.0f, 10, 10);
-        venusMesh->GenSphere(1.0f, 10, 10);
-        venusMoonMesh->GenSphere(1.0f, 10, 10);
-
-        Color colors[] = { {200, 128, 0}, {127, 127, 127}, {127, 0, 127}, {80, 80, 80} };
+        scene->AddEntityToScene(planet);
 
 
-        sunSprite = sun->AddAttribute<Sprite>("resources/sprites/test.bmp");
-        sunSprite->Push("resources/sprites/slime.bmp");
-        Sprite * mercurySprite = mercury->AddAttribute<Sprite>(colors + 1, 1, 1);
-        Sprite * venusSprite = venus->AddAttribute<Sprite>(colors + 2, 1, 1);
-        Sprite * venusMoonSprite = venusMoon->AddAttribute<Sprite>(colors + 3, 1, 1);
-
-        // canvas = new CanvasElement(400, 300, 100, 100);
-        // scene->AddGUIToScene(canvas);
-
-        // canvasPrime = new CanvasElement(200, 150, 100, 100);
-        // scene->AddGUIToScene(canvasPrime);
+        Mesh * m = planet->AddAttribute<Mesh>();
+        planet->AddAttribute<Sprite>("resources/sprites/heart.bmp");
+        m->GenCube(100.0f, 100.0f, 100.0f);
 
 
-        TextElement * text = new TextElement("Hello\nWorld!");
-        text->transform.position.x = GraphicConfig::windowWidth/2.0;
-        text->transform.position.y = GraphicConfig::windowHeight/2.0f;
+        if( GraphicConfig::useOrthographicProjection )
+            text = new TextElement("Orthographic");
+        else
+            text = new TextElement("Perspective");
+
+        text->transform.position.x = 50.0f;
+        text->transform.position.y = 50.0f;
+
+        text->SetFontSize(12.0f);
+
         scene->AddGUIToScene(text);
 
-
     }
-
 
 };
 
 int main(){
 
-    // GraphicConfig::vsync = false;
-    // GraphicConfig::zbuffer = true;
-    // GraphicConfig::windowHeight = 600;
-    // GraphicConfig::windowWidth = 800;
-    // GraphicConfig::windowTitle = "Application";
+    GraphicConfig::vsync = false;
+    GraphicConfig::zbuffer = true;
+    GraphicConfig::windowHeight = 600;
+    GraphicConfig::windowWidth = 800;
+    GraphicConfig::windowTitle = "Application";
 
+    // GraphicConfig::useOrthographicProjection = false;
     ApplicationConfig::internalGUIInteraction = false;
 
     Application app;
@@ -124,8 +91,6 @@ int main(){
     SolarSystem * solar = new SolarSystem(&scene);
 
     app.RegisterSystem(solar);
-
-
     app.LoadScene(scene);
 
     app.Loop();

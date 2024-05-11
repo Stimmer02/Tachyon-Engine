@@ -63,6 +63,10 @@ private:
         if(guiElement == nullptr || guiElement->isActive == false)
             return;
 
+        Matrix model = guiElement->GetModel();
+
+        currentShader->TransferToShader("u_model", model);
+
         guiElement->Render();
 
     }
@@ -75,9 +79,11 @@ private:
         if(!scene)
             return;
 
+        Matrix viewMatrix = mainCamera.GetViewMatrix();
+
         mainShader->Use();
         mainShader->TransferToShader("u_projection", projectionMatrix);
-        mainShader->TransferToShader("u_view", mainCamera.GetViewMatrix());
+        mainShader->TransferToShader("u_view", viewMatrix);
 
         std::vector<SceneObject *>& objects = scene->GetSceneObjects();
         std::vector<GUIElement *>& guiElements = scene->GetGUIElements();
@@ -146,7 +152,7 @@ private:
         archetypeFunc[RenderingAttributes::MESH] =
             [this](SceneObject * object){
 
-                Sprite * sprite = this->GetDefaultTexture();
+                Sprite * sprite = object->GetAttribute<Sprite>();
                 Mesh * mesh = object->GetAttribute<Mesh>();
 
                 sprite->Load();
@@ -171,10 +177,12 @@ public:
         context->SetVSync( GraphicConfig::vsync );
         context->SetZBuffer( GraphicConfig::zbuffer );
 
+        float aspect = GraphicConfig::windowWidth/(float) GraphicConfig::windowHeight;
+
         if(GraphicConfig::useOrthographicProjection){
-            this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -300, 300);
+            this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -200.0f, 200.0f);
         }else{
-            this->projectionMatrix = Matrix::Frustum(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -100, 100);
+            this->projectionMatrix = Matrix::Perspective(60.0f, aspect, 0.1f, 100.0f);
         }
 
         this->guiProjectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -1, 10);

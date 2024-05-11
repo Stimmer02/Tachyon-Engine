@@ -2,7 +2,7 @@
 #define MESH_H
 
 #include "Attribute.h"
-#include "Vector3.h"
+#include "Material.h"
 #include <GL/glew.h>
 
 class Mesh : public AttributeType<Mesh>{
@@ -18,7 +18,24 @@ private:
     int numIndices = 0;
     int numVertices = 0;
 
+
+    void LoadFromFile(const std::string & filename){
+
+        // TODO
+
+    }
+
 public:
+
+    Material * material;
+
+    Mesh(const std::string & filename){
+        this->renderMode = GL_TRIANGLES;
+        glGenVertexArrays(1, &vao);
+
+        LoadFromFile(filename);
+
+    }
 
     Mesh(const GLenum & mode = GL_TRIANGLE_FAN){
         this->renderMode = mode;
