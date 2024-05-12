@@ -220,6 +220,10 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
+    void SetNormals(const Vector3 * normals, const unsigned int & numNormals){
+        // TODO
+    }
+
     void SetIndices(const unsigned int * indices, const unsigned int & numIndices){
         this->numIndices = numIndices;
 

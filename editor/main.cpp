@@ -3,18 +3,19 @@
 #include "CanvasElement.h"
 
 Camera * mainCamera;
-KeyboardMonitor * monitor;
-MouseButtonMonitor * mouseMonitor;
 
 class SolarSystem : public System{
 
     Scene * scene;
     SceneObject * planet;
     TextElement * text;
+    Input * instance;
 
     void Execute() override{
 
-        static float angle, theta;
+        static float angle, theta, lastX, lastY;
+        static float rx,ry,rz;
+
 
         Vector3& planetPosition = planet->transform.position;
 
@@ -22,10 +23,37 @@ class SolarSystem : public System{
         planetPosition.y = 100.0f * sin(theta * 2.0f * M_PI) + GraphicConfig::windowHeight*0.5f;
         planetPosition.z = 100.0f * cos(angle * 2.0f * M_PI) * cos(theta * 2.0f * M_PI);
 
-        float ry = theta;
-        float rz = 2.0f * angle;
 
-        planet->transform.rotation = Quaternion::ToQuaternion(Vector3(angle,ry,rz));
+        if ( instance->GetButtonState(GLFW_MOUSE_BUTTON_LEFT) == ONHOLD ){
+
+
+            Vector3 position = instance->GetMousePosition();
+            float dx = (position.x - lastX);
+            float dy = (lastY - position.y);
+            lastX = position.x ;
+            lastY = position.y ;
+
+            float magnitude = std::sqrt(dx*dx +dy*dy);
+
+            if( std::fabs(magnitude) < 1e-6f)
+                magnitude = 1.0f;
+
+            dx/=magnitude;
+            dy/=magnitude;
+
+            rx += dx * M_PI * 0.05f;
+            ry += dy * M_PI * 0.05f;
+
+            planet->transform.rotation = Quaternion::ToQuaternion(Vector3(ry,rx,rz));
+
+        }
+
+        if ( instance->GetKeyState(GLFW_KEY_R) == ONTRIGGER){
+            rx = 0.0f;
+            ry = 0.0f;
+            rz = 0.0f;
+        }
+
 
 
         angle += 0.00001f;
@@ -41,6 +69,7 @@ public:
 
     SolarSystem(Scene * scene){
         this->scene = scene;
+        this->instance = &Input::GetInstance();
 
         planet = scene->CreateEntity();
 
@@ -83,11 +112,7 @@ int main(){
 
     Scene scene;
 
-
     mainCamera = &app.GetMainCamera();
-    monitor = &app.GetKeyboardInputMonitor();
-    mouseMonitor = &app.GetMouseInputMonitor();
-
     SolarSystem * solar = new SolarSystem(&scene);
 
     app.RegisterSystem(solar);

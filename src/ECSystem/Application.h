@@ -4,8 +4,7 @@
 #include "WindowContext.h"
 #include "GraphicSystem.h"
 #include "InteractionManager.h"
-#include "MouseButtonMonitor.h"
-#include "KeyboardMonitor.h"
+#include "Input.h"
 #include "Timer.h"
 
 class Application{
@@ -14,10 +13,9 @@ private:
 
     WindowContext context;
     ILog * contextLogger;
+    Input * inputInstance;
 
     GraphicSystem * graphics;
-    MouseButtonMonitor * mouseMonitor;
-    KeyboardMonitor * keyboardMonitor;
 
     InteractionManager interactionManager;
 
@@ -34,13 +32,14 @@ public:
         this->graphics = new GraphicSystem(&context);
         this->contextLogger = context.GetContextLogger();
 
-        contextLogger->Write(LogMessageType::M_INFO, "Creating new mouse state monitor\n");
-        this->mouseMonitor = new MouseButtonMonitor(&context);
+        contextLogger->Write(M_INFO, "Initializing I/O handles");
+        this->inputInstance = &Input::GetInstance();
+        this->inputInstance->SetContext(&context);
 
-        contextLogger->Write(LogMessageType::M_INFO, "Creating new keyboard state monitor\n");
-        this->keyboardMonitor = new KeyboardMonitor(&context);
-
+        contextLogger->Write(M_INFO, "Instancing internal timer");
         this->timer = &Timer::GetInstance();
+
+        contextLogger->Write(M_INFO, "Pushing graphic system to systems pool");
         this->systems.push_back(graphics);
 
     }
@@ -74,14 +73,6 @@ public:
 
     }
 
-    MouseButtonMonitor& GetMouseInputMonitor() {
-        return *mouseMonitor;
-    }
-
-    KeyboardMonitor& GetKeyboardInputMonitor() {
-        return *keyboardMonitor;
-    }
-
     Camera& GetMainCamera(){
         return graphics->GetMainCamera();
     }
@@ -96,10 +87,12 @@ public:
                 system->Run();
             }
 
-            EventInfo leftMouseButtonEvent = mouseMonitor->GeyKeyState(GLFW_MOUSE_BUTTON_LEFT);
+            EventType leftMouseButtonEvent = inputInstance->GetKeyState(GLFW_MOUSE_BUTTON_LEFT);
 
-            if( ( leftMouseButtonEvent.type == ONTRIGGER )  && ApplicationConfig::internalGUIInteraction)
-                interactionManager.Interact(leftMouseButtonEvent.x, leftMouseButtonEvent.y);
+            if( ( leftMouseButtonEvent == ONTRIGGER )  && ApplicationConfig::internalGUIInteraction){
+                Vector3 mousePosition = inputInstance->GetMousePosition();
+                interactionManager.Interact(mousePosition.x, mousePosition.y);
+            }
 
             if(timer->GetAccumulatedTime()>= 1.0f){
                 fprintf(stdout, "FPS : %05d\r", timer->GetFrameCount());
@@ -117,8 +110,6 @@ public:
         contextLogger->Write(LogMessageType::M_INFO, "Unmanaging context\n");
 
         delete graphics;
-        delete mouseMonitor;
-        delete keyboardMonitor;
 
         contextLogger->Flush();
     }

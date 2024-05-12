@@ -4,11 +4,11 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <string>
 #include <cassert>
 #include <unordered_map>
 
-#include "IShareableContext.h"
 #include "EventRegister.h"
 
 class WindowContext{
@@ -109,11 +109,6 @@ public:
 
         bufferbits ^= GL_DEPTH_BUFFER_BIT;
 
-    }
-
-    void ShareContext(IShareableContext * client) const{
-        assert(window && "Window does not exits");
-        client->AcceptGLFWContext(window);
     }
 
     void BindMouseButtonCallback(GLFWmousebuttonfun callback) const{
