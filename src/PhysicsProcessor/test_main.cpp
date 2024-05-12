@@ -11,10 +11,12 @@ int main(){
         return -1;
     }
 
-    StructTree tree("/home/stimmer02/Documents/UMCS/SEMESTR_6/projetk_zespolowy/tachion-engine/engine_structs", "engineResources.clcpp");
+    StructTree tree("/home/stimmer02/Documents/UMCS/SEMESTR_6/projetk_zespolowy/tachion-engine/engine_structs", "engineResources.clcpp", &clParser);
     tree.build(&clParser);
     tree.calculateSizes(&sCalc);
     tree.printTree();
+
+    std::cout << '\n' << tree.getStructures() << std::endl;
   
     return 0;
 }

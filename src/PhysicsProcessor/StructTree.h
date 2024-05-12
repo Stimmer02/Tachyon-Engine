@@ -16,10 +16,10 @@
 class StructTree{
     public:
         StructTree();
-        StructTree(std::string structDirectory, std::string rootStructName);
+        StructTree(std::string structDirectory, std::string rootStructName, ClStructParser* parser);
         ~StructTree();
 
-        char setRootStruct(std::string rootStructName); //Parses and saves the root struct
+        char setRootStruct(std::string rootStructName, ClStructParser* parser); //Parses and saves the root struct
         void setStructDirectory(std::string structDirectory); //Sets the root directory where the structs are stored (they could be stored recursively in subdirectories)
         char build(ClStructParser* parser); //Builds the tree of structures starting from the root
         char calculateSizes(SizeCalculator* sCalc); //Calculates the sizes of the structures in the tree

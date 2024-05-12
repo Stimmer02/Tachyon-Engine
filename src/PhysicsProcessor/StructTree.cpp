@@ -7,24 +7,24 @@ StructTree::StructTree() {
     this->root = nullptr;
 }
 
-StructTree::StructTree(std::string structDirectory, std::string rootStructName) {
+StructTree::StructTree(std::string structDirectory, std::string rootStructName, ClStructParser* parser) {
     this->status = -1;
     setStructDirectory(structDirectory);
-    setRootStruct(rootStructName);
+    setRootStruct(rootStructName, parser);
 }
 
 StructTree::~StructTree() {
 
 }
 
-char StructTree::setRootStruct(std::string rootStructName) {
+char StructTree::setRootStruct(std::string rootStructName, ClStructParser* parser){
     // Checking if file exists.
-    string path = this->structDirectory + "/" + rootStructName;
+    string path = structDirectory + "/" + rootStructName;
     const char* file = path.c_str();
     struct stat sb;
     if (stat(file, &sb) != 0 || (sb.st_mode & S_IFDIR)) {
-        this->status = -2;
-        this->error = "Root not found.";
+        status = -2;
+        error = "Root not found.";
         return status;
     }
 
@@ -37,17 +37,9 @@ char StructTree::setRootStruct(std::string rootStructName) {
         code = s.str();
     }
 
-    MacroManager macroManager;
-    SizeCalculator sCalc(8);
-    ClStructParser clParser(&macroManager);
-
-    if (macroManager.parseFile("macro/macros.cfg")){
-        std::fprintf(stderr, "Error has occured\n");
-        return -1;
-    }
-
-    this->root = clParser.processStruct(code);
-    this->status = -1;
+    root = parser->processStruct(code);
+    parsedStructs[root->name].node = root;
+    status = -1;
     return status;
 }
 
@@ -92,23 +84,23 @@ char StructTree::build(ClStructParser* parser) {
                         s << f.rdbuf();
                         code = s.str();
                     } else {
-                        this->status = 1;
+                        status = 1;
                         return status;
                     }
                 }
 
                 currentStructure->fields[i].subStruct = parser->processStruct(code);
-                parsedStructs[currentStructure->fields[i].subStructName].node = currentStructure->fields[i].subStruct;
                 if (currentStructure->fields[i].subStruct == nullptr) {
                     status = 1;
                     return status;
                 }
+                parsedStructs[currentStructure->fields[i].subStructName].node = currentStructure->fields[i].subStruct;
                 q.push(currentStructure->fields[i].subStruct);
             }
         }
     }
 
-    this->status = 0;
+    status = 0;
     return status;
 }
 
@@ -131,12 +123,12 @@ char StructTree::calculateSizes(SizeCalculator* sCalc) {
         }
 
         if (sCalc->calculate(currentStructure) != 0) {
-            this->status = 2;
+            status = 2;
             return status;
         }
     }
 
-    this->status = 0;
+    status = 0;
     return status;
 }
 
@@ -169,7 +161,7 @@ void StructTree::printTreeRecursive(engineStruct* node) {
                 std::printf(" %d) var: %s; type: %d; size: %d\n", i, structure->fields[i].name.c_str(), structure->fields[i].type, structure->fields[i].byteSize);
             }
         }
-        parsed.visited = false;
+        parsed.visited = true;
     }
 }
 
