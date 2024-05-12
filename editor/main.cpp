@@ -14,44 +14,40 @@ class SolarSystem : public System{
     void Execute() override{
 
         static float angle, theta, lastX, lastY;
-        static float rx,ry,rz;
 
 
         Vector3& planetPosition = planet->transform.position;
+        Timer& timer = Timer::GetInstance();
 
         planetPosition.x = 100.0f * cos(angle * 2.0f * M_PI) * cos(theta * 2.0f * M_PI) + GraphicConfig::windowWidth*0.5f;
         planetPosition.y = 100.0f * sin(theta * 2.0f * M_PI) + GraphicConfig::windowHeight*0.5f;
         planetPosition.z = 100.0f * cos(angle * 2.0f * M_PI) * cos(theta * 2.0f * M_PI);
 
+        planet->transform.rotation = Quaternion::ToQuaternion(Vector3(angle, theta, 2.0f * angle));
 
-        if ( instance->GetButtonState(GLFW_MOUSE_BUTTON_LEFT) == ONHOLD ){
+        Vector3& position = mainCamera->position;
 
+        EventType wS = instance->GetKeyState(GLFW_KEY_W);
+        EventType sS = instance->GetKeyState(GLFW_KEY_S);
+        EventType aS = instance->GetKeyState(GLFW_KEY_A);
+        EventType dS = instance->GetKeyState(GLFW_KEY_D);
 
-            Vector3 position = instance->GetMousePosition();
-            float dx = (position.x - lastX);
-            float dy = (lastY - position.y);
-            lastX = position.x ;
-            lastY = position.y ;
+        printf("States : %d\t%d\t%d\t%d\n", wS, sS, aS, dS);
 
-            float magnitude = std::sqrt(dx*dx +dy*dy);
-
-            if( std::fabs(magnitude) < 1e-6f)
-                magnitude = 1.0f;
-
-            dx/=magnitude;
-            dy/=magnitude;
-
-            rx += dx * M_PI * 0.05f;
-            ry += dy * M_PI * 0.05f;
-
-            planet->transform.rotation = Quaternion::ToQuaternion(Vector3(ry,rx,rz));
-
+        if ( wS == ONHOLD){
+            position.y += timer.GetDeltaTime() ;
         }
 
-        if ( instance->GetKeyState(GLFW_KEY_R) == ONTRIGGER){
-            rx = 0.0f;
-            ry = 0.0f;
-            rz = 0.0f;
+        if ( sS == ONHOLD){
+            position.y -= timer.GetDeltaTime();
+        }
+
+        if ( aS == ONHOLD){
+            position.x -= timer.GetDeltaTime();
+        }
+
+        if ( dS == ONHOLD){
+            position.x += timer.GetDeltaTime();
         }
 
 

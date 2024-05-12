@@ -82,6 +82,7 @@ public:
         while( !context.ShouldClose() ){
 
             timer->TicTac();
+            inputInstance->Update();
 
             for(System * system : systems){
                 system->Run();

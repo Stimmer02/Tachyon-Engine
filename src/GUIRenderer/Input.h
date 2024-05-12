@@ -13,50 +13,38 @@ private:
 
     double lastXPosition, lastYPosition;
 
-    char lastMouseStates[GLFW_MOUSE_BUTTON_LAST + 1];
-    char lastKeyboardStates[GLFW_KEY_LAST];
+    EventType lastMouseStates[GLFW_MOUSE_BUTTON_LAST + 1];
+    EventType lastKeyboardStates[GLFW_KEY_LAST + 1];
 
-public:
-
-
-    EventType GetKeyState(const int & key){
+    void UpdateKey(const int & key){
 
         EventType type = EventType::NONE;
-
-        if( key >= GLFW_KEY_LAST)
-            return type;
 
         int currentState = context->GetKeyboardKey(key);
 
         // Check if the key is held
-        bool isButtonHeld = (currentState == GLFW_PRESS) && (lastKeyboardStates[key] == GLFW_PRESS);
+        bool isButtonHeld = (currentState == GLFW_PRESS);
 
         // Check if the key is triggered
-        bool isButtonTriggered = (currentState == GLFW_PRESS) && (lastKeyboardStates[key] == GLFW_RELEASE);
+        bool isButtonTriggered = (currentState == GLFW_PRESS) && (lastKeyboardStates[key] == EventType::ONRELEASE);
 
         // Check if the key is released
-        bool isButtonReleased = (currentState == GLFW_RELEASE) && (lastKeyboardStates[key] == GLFW_PRESS);
+        bool isButtonReleased = (currentState == GLFW_RELEASE) && (lastKeyboardStates[key] != EventType::NONE);
 
         if(isButtonTriggered){
             type = EventType::ONTRIGGER;
-        }else if(isButtonReleased){
+        } else if(isButtonReleased){
             type = EventType::ONRELEASE;
-        }else if (isButtonHeld){
+        } else if(isButtonHeld){
             type = EventType::ONHOLD;
-        }else{
+        } else {
             type = EventType::NONE;
         }
 
-        lastKeyboardStates[key] = currentState;
-
-        return type;
+        lastKeyboardStates[key] = type;
     }
 
-    Vector3 GetMousePosition(){
-        return Vector3(lastXPosition, lastYPosition);
-    }
-
-    EventType GetButtonState(const int & button){
+    void UpdateButton(const int & button){
 
         int width, height;
         double mouseX, mouseY;
@@ -69,9 +57,6 @@ public:
 
         // Apply vertical correction
         mouseY = height-mouseY;
-
-        if( button >= GLFW_MOUSE_BUTTON_LAST)
-            return NONE;
 
         // Check if mouse position is in window boundary
         bool inWindow = (mouseX > 0.0f && mouseX <= width && mouseY > 0.0f && mouseY <= height);
@@ -104,12 +89,44 @@ public:
             type = EventType::NONE;
         }
 
-        lastMouseStates[button] = currentState;
+        lastMouseStates[button] = type;
 
         lastXPosition = mouseX;
         lastYPosition = mouseY;
 
-        return type;
+    }
+
+
+public:
+
+    void Update(){
+
+        for(int key=0; key<=GLFW_KEY_LAST; key++)
+            UpdateKey(key);
+
+        for(int button=0; button<=GLFW_MOUSE_BUTTON_LAST; button++)
+            UpdateButton(button);
+
+    }
+
+    EventType GetKeyState(const int & key){
+
+        if( key >= GLFW_KEY_LAST)
+            return NONE;
+
+        return lastKeyboardStates[key];
+    }
+
+    Vector3 GetMousePosition(){
+        return Vector3(lastXPosition, lastYPosition);
+    }
+
+    EventType GetButtonState(const int & button){
+
+        if( button >= GLFW_MOUSE_BUTTON_LAST)
+            return NONE;
+
+        return lastMouseStates[button];
     }
 
     void SetContext( WindowContext * context ){
