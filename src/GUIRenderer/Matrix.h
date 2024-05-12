@@ -415,12 +415,12 @@ public:
 
         constexpr float deg2rad = M_PI/180.0f;
 
-        float f = 1.0f/tan(deg2rad * fov * 0.5f);
+        float e = 1.0f/tan(deg2rad * fov * 0.5f);
 
-        data[0] = f/aspect;
-        data[5] = f;
-        data[10] = (farVal + nearVal)/(nearVal-farVal);
-        data[11] = 2.0f * farVal * nearVal / (nearVal - farVal);
+        data[0] = e;
+        data[5] = e/aspect;
+        data[10] = -(farVal + nearVal)/(farVal - nearVal);
+        data[11] = - 2.0f * farVal * nearVal / (farVal - nearVal);
         data[14] = -1.0f;
         data[15] = 0.0f;
 

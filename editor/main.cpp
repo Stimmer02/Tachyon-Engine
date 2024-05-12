@@ -54,6 +54,24 @@ class SolarSystem : public System{
         }
 
 
+        if( instance->GetKeyState(GLFW_KEY_A) == ONHOLD ){
+            mainCamera->position.x -= timer.GetDeltaTime();
+        }
+
+        if( instance->GetKeyState(GLFW_KEY_D) == ONHOLD ){
+            mainCamera->position.x += timer.GetDeltaTime();
+        }
+
+        if( instance->GetKeyState(GLFW_KEY_W) == ONHOLD ){
+            mainCamera->position.z -= timer.GetDeltaTime();
+        }
+
+        if( instance->GetKeyState(GLFW_KEY_S) == ONHOLD ){
+            mainCamera->position.z += timer.GetDeltaTime();
+        }
+
+        printf("%f %f %f\n", mainCamera->position.x, mainCamera->position.y, mainCamera->position.z);
+
         angle += 0.00001f;
         theta += 0.0001f * angle;
 
@@ -73,6 +91,9 @@ public:
 
         scene->AddEntityToScene(planet);
 
+        mainCamera->position.x = GraphicConfig::windowWidth*0.5f;
+        mainCamera->position.y =  GraphicConfig::windowHeight*0.5f;
+        mainCamera->position.z =  GraphicConfig::windowHeight*0.5f;
 
         Mesh * m = planet->AddAttribute<Mesh>();
         planet->AddAttribute<Sprite>("resources/sprites/heart.bmp");
@@ -82,7 +103,7 @@ public:
         canvas->ClearCanvas({255,255,255});
         canvas->SetCellSize(5);
 
-        scene->AddGUIToScene(canvas);
+        // scene->AddGUIToScene(canvas);
 
         if( GraphicConfig::useOrthographicProjection )
             text = new TextElement("Orthographic");
@@ -108,7 +129,7 @@ int main(){
     GraphicConfig::windowWidth = 800;
     GraphicConfig::windowTitle = "Application";
 
-    // GraphicConfig::useOrthographicProjection = false;
+    GraphicConfig::useOrthographicProjection = false;
     // ApplicationConfig::internalGUIInteraction = false;
 
     Application app;
