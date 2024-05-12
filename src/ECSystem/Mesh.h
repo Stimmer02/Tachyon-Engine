@@ -46,6 +46,93 @@ public:
         this->renderMode = mode;
     }
 
+    void GenTorus(const float & majorRadius = 1.0f, const float & minorRadius = 0.3f, const unsigned int & numMajorSegments = 32, const unsigned int & numMinorSegments = 16) {
+
+        float phi, theta;
+        float phiIncrement = 2.0f * M_PI / numMajorSegments;
+        float thetaIncrement = 2.0f * M_PI / numMinorSegments;
+
+        std::vector<Vector3> vertices;
+        std::vector<float> uvs;
+        std::vector<unsigned int> indices;
+
+        for (int majorSegment = 0; majorSegment <= numMajorSegments; ++majorSegment) {
+            phi = majorSegment * phiIncrement;
+            float cosPhi = std::cos(phi);
+            float sinPhi = std::sin(phi);
+
+            for (int minorSegment = 0; minorSegment <= numMinorSegments; ++minorSegment) {
+                theta = minorSegment * thetaIncrement;
+                float cosTheta = std::cos(theta);
+                float sinTheta = std::sin(theta);
+
+                float x = (majorRadius + minorRadius * cosTheta) * cosPhi;
+                float y = (majorRadius + minorRadius * cosTheta) * sinPhi;
+                float z = minorRadius * sinTheta;
+
+                vertices.push_back(Vector3(x, y, z));
+
+                uvs.push_back(((float)minorSegment / numMinorSegments));
+                uvs.push_back(((float)majorSegment / numMajorSegments));
+            }
+        }
+
+        for (int majorSegment = 0; majorSegment < numMajorSegments; ++majorSegment) {
+            for (int minorSegment = 0; minorSegment < numMinorSegments; ++minorSegment) {
+                int first = (majorSegment * (numMinorSegments + 1)) + minorSegment;
+                int second = first + 1;
+                int third = second + (numMinorSegments + 1);
+                int fourth = first + (numMinorSegments + 1);
+
+                indices.push_back(first);
+                indices.push_back(second);
+                indices.push_back(third);
+
+                indices.push_back(first);
+                indices.push_back(third);
+                indices.push_back(fourth);
+            }
+        }
+
+        SetVertices(vertices.data(), vertices.size());
+        SetTexCoords(uvs.data(), uvs.size());
+        SetIndices(indices.data(), indices.size());
+        renderMode = GL_TRIANGLES;
+    }
+
+    void GenCone(const float & baseRadius = 1.0f, const float & height = 2.0f, const unsigned int & numSegments = 32) {
+
+        std::vector<Vector3> vertices;
+        std::vector<float> uvs;
+        std::vector<unsigned int> indices;
+
+        float angleIncrement = 2.0f * M_PI / numSegments;
+
+        vertices.push_back(Vector3(0.0f, 0.0f, height / 2.0f));
+        uvs.push_back(0.5f);  // UV at the tip
+
+        for (int i = 0; i < numSegments; ++i) {
+            float angle = i * angleIncrement;
+            float x = baseRadius * std::cos(angle);
+            float y = baseRadius * std::sin(angle);
+            vertices.push_back(Vector3(x, y, -height / 2.0f));
+            uvs.push_back((x + 1.0f) / 2.0f);
+            uvs.push_back((y + 1.0f) / 2.0f);
+        }
+
+        for (int i = 1; i <= numSegments; ++i) {
+            indices.push_back(0);
+            indices.push_back(i);
+            indices.push_back(i % numSegments + 1);
+        }
+
+        SetVertices(vertices.data(), vertices.size());
+        SetTexCoords(uvs.data(), uvs.size());
+        SetIndices(indices.data(), indices.size());
+        renderMode = GL_TRIANGLES;
+    }
+
+
     void GenSphere(const float & radius = 1.0f, const unsigned int & numSlices = 32, const unsigned int & numStacks = 10){
 
         float phi, theta;

@@ -70,7 +70,6 @@ class SolarSystem : public System{
             mainCamera->position.z += timer.GetDeltaTime();
         }
 
-        printf("%f %f %f\n", mainCamera->position.x, mainCamera->position.y, mainCamera->position.z);
 
         angle += 0.00001f;
         theta += 0.0001f * angle;
@@ -97,7 +96,7 @@ public:
 
         Mesh * m = planet->AddAttribute<Mesh>();
         planet->AddAttribute<Sprite>("resources/sprites/heart.bmp");
-        m->GenCube(100.0f, 100.0f, 100.0f);
+        m->GenTorus(100.0f, 40.0f);
 
         canvas = new CanvasElement(GraphicConfig::windowWidth*0.5f - 150, GraphicConfig::windowHeight*0.5f - 150, 300, 300);
         canvas->ClearCanvas({255,255,255});
