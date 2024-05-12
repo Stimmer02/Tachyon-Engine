@@ -1,8 +1,7 @@
 #include "ClStructParser.h"
 
-ClStructParser::ClStructParser(MacroManager* macroManager, SizeCalculator* sizeCalculator){
+ClStructParser::ClStructParser(MacroManager* macroManager){
     this->macroManager = macroManager;
-    this->sizeCalculator = sizeCalculator;
 }
 
 engineStruct* ClStructParser::processStruct(std::string structCode){
@@ -230,12 +229,6 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
     structure->fields = new engineStruct::field[tempFields.size()];
     for (uint i = 0; i < tempFields.size(); i++){
         structure->fields[i] = tempFields.at(i);
-    }
-
-    if (sizeCalculator->calculate(structure)){
-        std::fprintf(stderr, "ERR: ClStructParser::processStruct COULD NOT CALCULATE STRUCTURE SIZE\n");
-        delete structure;
-        return nullptr;
     }
 
     // std::printf("STRUCT CODE:\n%s\n", structCode.c_str());

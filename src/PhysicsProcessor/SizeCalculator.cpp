@@ -4,6 +4,7 @@ SizeCalculator::SizeCalculator(uint pointerSize): pointerSize(pointerSize){}
 
 
 char SizeCalculator::calculate(engineStruct* structure){
+    structure->byteSize = 0;
     for (uint i = 0; i < structure->fieldCount; i++){
         if (structure->fields[i].arrSize > 0){
             structure->fields[i].byteSize = pointerSize;
