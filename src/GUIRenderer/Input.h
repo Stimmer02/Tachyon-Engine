@@ -96,6 +96,15 @@ private:
 
     }
 
+    Input(){
+
+        for(int key=0; key<=GLFW_KEY_LAST; key++)
+            lastKeyboardStates[key] = ONRELEASE;
+
+        for(int button=0; button<=GLFW_MOUSE_BUTTON_LAST; button++)
+            lastMouseStates[button] = ONRELEASE;
+
+    }
 
 public:
 

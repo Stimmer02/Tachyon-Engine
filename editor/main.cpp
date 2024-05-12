@@ -10,11 +10,12 @@ class SolarSystem : public System{
     SceneObject * planet;
     TextElement * text;
     Input * instance;
+    CanvasElement * canvas;
 
     void Execute() override{
 
         static float angle, theta, lastX, lastY;
-
+        static Color color;
 
         Vector3& planetPosition = planet->transform.position;
         Timer& timer = Timer::GetInstance();
@@ -25,31 +26,32 @@ class SolarSystem : public System{
 
         planet->transform.rotation = Quaternion::ToQuaternion(Vector3(angle, theta, 2.0f * angle));
 
-        Vector3& position = mainCamera->position;
-
-        EventType wS = instance->GetKeyState(GLFW_KEY_W);
-        EventType sS = instance->GetKeyState(GLFW_KEY_S);
-        EventType aS = instance->GetKeyState(GLFW_KEY_A);
-        EventType dS = instance->GetKeyState(GLFW_KEY_D);
-
-        printf("States : %d\t%d\t%d\t%d\n", wS, sS, aS, dS);
-
-        if ( wS == ONHOLD){
-            position.y += timer.GetDeltaTime() ;
+        if( instance->GetKeyState(GLFW_KEY_0) == ONTRIGGER ){
+            color = {};
         }
 
-        if ( sS == ONHOLD){
-            position.y -= timer.GetDeltaTime();
+        if( instance->GetKeyState(GLFW_KEY_1) == ONTRIGGER ){
+            color = {255, 0, 0};
         }
 
-        if ( aS == ONHOLD){
-            position.x -= timer.GetDeltaTime();
+        if( instance->GetKeyState(GLFW_KEY_2) == ONTRIGGER ){
+            color = {0, 255, 0};
         }
 
-        if ( dS == ONHOLD){
-            position.x += timer.GetDeltaTime();
+        if( instance->GetKeyState(GLFW_KEY_3) == ONTRIGGER ){
+            color = {0, 0, 255};
         }
 
+        if( instance->GetKeyState(GLFW_KEY_4) == ONTRIGGER ){
+            color = {255, 255, 255};
+        }
+
+        if( instance->GetButtonState(GLFW_MOUSE_BUTTON_LEFT) == ONHOLD ){
+            Vector3 mousePos = instance->GetMousePosition();
+            if(canvas->isInBound(mousePos.x, mousePos.y))
+                canvas->SetPixel(mousePos.x, mousePos.y, color);
+
+        }
 
 
         angle += 0.00001f;
@@ -76,6 +78,11 @@ public:
         planet->AddAttribute<Sprite>("resources/sprites/heart.bmp");
         m->GenCube(100.0f, 100.0f, 100.0f);
 
+        canvas = new CanvasElement(GraphicConfig::windowWidth*0.5f - 150, GraphicConfig::windowHeight*0.5f - 150, 300, 300);
+        canvas->ClearCanvas({255,255,255});
+        canvas->SetCellSize(5);
+
+        scene->AddGUIToScene(canvas);
 
         if( GraphicConfig::useOrthographicProjection )
             text = new TextElement("Orthographic");
@@ -102,7 +109,7 @@ int main(){
     GraphicConfig::windowTitle = "Application";
 
     // GraphicConfig::useOrthographicProjection = false;
-    ApplicationConfig::internalGUIInteraction = false;
+    // ApplicationConfig::internalGUIInteraction = false;
 
     Application app;
 

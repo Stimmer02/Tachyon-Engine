@@ -61,12 +61,6 @@ public:
         this->transform.position.x = x;
         this->transform.position.y = y;
 
-        Matrix translation = Matrix::Translate(transform.position.x, transform.position.y, transform.position.z);
-        Matrix rotation = Matrix::Rotate(transform.rotation);
-        Matrix scale = Matrix::Scale(transform.scale.x, transform.scale.y, transform.scale.z);
-
-        model = translation * rotation * scale;
-
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
         glGenBuffers(1, &tbo);
@@ -74,6 +68,7 @@ public:
         AllocateBuffers();
 
         Realloc();
+
     }
 
     void SetCellSize(const int & cellSize){
