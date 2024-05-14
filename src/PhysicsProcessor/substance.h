@@ -5,8 +5,10 @@
 #include <vector>
 
 struct substance{
-    std::string  name;
     uint id;
+    std::string  name;
+    float R, G, B;
+    bool movable;
     std::vector<float> values;
 };
 

@@ -2,7 +2,7 @@
 
 int main(){
     SubstanceCollector substCollector;
-    if (substCollector.loadFromFile("substances.json")){
+    if (substCollector.parseConfig("./config/substances_to_load.cfg") == 0){
         std::printf("Substances loaded successfully\n");
     } else {
         std::printf("Failed to load substances\n");
