@@ -7,11 +7,13 @@
 #include "Scene.h"
 
 #include "Transform.h"
+#include "LineRenderer.h"
 #include "Sprite.h"
 #include "Mesh.h"
 
 #include "TextElement.h"
 #include "ButtonElement.h"
+#include "CanvasElement.h"
 
 #include "Camera.h"
 
@@ -161,6 +163,12 @@ private:
 
         archetypeFunc[RenderingAttributes::LINE] =
             [](SceneObject * object){
+
+                Sprite * sprite = object->GetAttribute<Sprite>();
+                LineRenderer * renderer = object->GetAttribute<LineRenderer>();
+
+                sprite->Load();
+                renderer->Draw();
 
             };
 
