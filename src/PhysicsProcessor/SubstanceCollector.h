@@ -14,7 +14,7 @@ public:
     SubstanceCollector();
 
     char parseConfig(std::string path);
-    char loadPhropertiesFromFile(std::string path);
+    char loadPropertiesFromFile(std::string path);
     char loadSubstancesFromFile(std::string path);
 
     std::string createSubstanceClStruct();

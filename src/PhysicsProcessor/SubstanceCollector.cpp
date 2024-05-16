@@ -13,15 +13,15 @@ char SubstanceCollector::parseConfig(std::string path){
     }
 
     std::string substancesFolder = "";
-    std::string phropertiesFolder = "";
+    std::string propertiesFolder = "";
 
     std::vector<std::string> substancesFilesNames;
-    std::vector<std::string> phropertiesFilesNames;
+    std::vector<std::string> propertiesFilesNames;
 
     std::string line;
 
     while(std::getline(file, line)){
-        if (line[0] == '#' || line[0] == ' '){
+        if (line.empty() || line[0] == '#' || line[0] == ' '){
             continue;
         }
 
@@ -31,8 +31,8 @@ char SubstanceCollector::parseConfig(std::string path){
             std::string value = line.substr(position + 1);
              if (key == "SUBSTANCES_FOLDER"){
                 substancesFolder = value;
-            } else if (key == "PHROPERTIES_FOLDER"){
-                phropertiesFolder = value;
+            } else if (key == "PROPERTIES_FOLDER"){
+                propertiesFolder = value;
             } else {
                 error += "ERR SubstanceCollector::parseConfig: Invalid key: " + key + "=\n";
                 return 1;
@@ -45,7 +45,7 @@ char SubstanceCollector::parseConfig(std::string path){
             std::string key = line.substr(0, position);
 
             while(std::getline(file, line)){
-                if (line[0] == '#' || line[0] == ' '){
+                if (line.empty() || line[0] == '#' || line[0] == ' '){
                     break;
                 }
                 size_t commaPosition = line.find(",");
@@ -56,10 +56,10 @@ char SubstanceCollector::parseConfig(std::string path){
                     value = line;
                 }
 
-                if (key == "SUBSTANCES_FILES"){
+                if (key == "SUBSTANCE_FILE_LIST"){
                     substancesFilesNames.push_back(value);
-                } else if (key == "PHROPERTIES_FILES"){
-                    phropertiesFilesNames.push_back(value);
+                } else if (key == "PROPERTY_FILE_LIST"){
+                    propertiesFilesNames.push_back(value);
                 } else {
                     error += "ERR SubstanceCollector::parseConfig: Invalid key: " + key + "\n";
                     return 1;
@@ -74,9 +74,17 @@ char SubstanceCollector::parseConfig(std::string path){
 
     file.close();
 
-    for (std::string fileName : phropertiesFilesNames){
-        if (loadPhropertiesFromFile(phropertiesFolder + fileName) != 0){
-            error += "ERR SubstanceCollector::parseConfig: Failed to load phroperties from file: " + phropertiesFolder + '/' + fileName + "\n";
+    if (substancesFolder[substancesFolder.size() - 1] != '/'){
+        substancesFolder += '/';
+    }
+
+    if (propertiesFolder[propertiesFolder.size() - 1] != '/'){
+        propertiesFolder += '/';
+    }
+
+    for (std::string fileName : propertiesFilesNames){
+        if (loadPropertiesFromFile(propertiesFolder + fileName) != 0){
+            error += "ERR SubstanceCollector::parseConfig: Failed to load phroperties from file: " + propertiesFolder + '/' + fileName + "\n";
             return 1;
         }
     }
@@ -91,10 +99,10 @@ char SubstanceCollector::parseConfig(std::string path){
     return 0;
 }
 
-char SubstanceCollector::loadPhropertiesFromFile(std::string path){
+char SubstanceCollector::loadPropertiesFromFile(std::string path){
     std::ifstream file(path);
     if (!file.is_open()){
-        error += "ERR SubstanceCollector::loadPhropertiesFromFile: Failed to open file: " + path + "\n";
+        error += "ERR SubstanceCollector::loadPropertiesFromFile: Failed to open file: " + path + "\n";
         return 1;
     }
 
@@ -106,7 +114,7 @@ char SubstanceCollector::loadPhropertiesFromFile(std::string path){
     bool foundDefaultValue = false;
 
     while (std::getline(file, line)){
-        if (line[0] == '#' || line[0] == ' '){
+        if (line.empty() || line[0] == '#' || line[0] == ' '){
             continue;
         }
 
@@ -120,7 +128,7 @@ char SubstanceCollector::loadPhropertiesFromFile(std::string path){
         if (key == "NAME"){
             std::string name = line.substr(position + 1);
             if (foundName){
-                error += "ERR SubstanceCollector::loadPhropertiesFromFile: Name already found (" + phroperty.name + " and " + name + ")\n";
+                error += "ERR SubstanceCollector::loadPropertiesFromFile: Name already found (" + phroperty.name + " and " + name + ")\n";
                 return 1;
             }
             phroperty.name = name;
@@ -128,26 +136,26 @@ char SubstanceCollector::loadPhropertiesFromFile(std::string path){
         } else if (key == "TYPE"){
             std::string type = line.substr(position + 1);
             if (foundType){
-                error += "ERR SubstanceCollector::loadPhropertiesFromFile: Type already found (" + type + ")\n";
+                error += "ERR SubstanceCollector::loadPropertiesFromFile: Type already found (" + type + ")\n";
                 return 1;
             }
             phroperty.type = stringToClType(type);
             if (phroperty.type == engineStruct::cl_type::cl_invalid){
-                error += "ERR SubstanceCollector::loadPhropertiesFromFile: Invalid type: " + type + "\n";
+                error += "ERR SubstanceCollector::loadPropertiesFromFile: Invalid type: " + type + "\n";
                 return 1;
             }
             foundType = true;
-        } else if (key == "DEFAULT_VALUE"){
+        } else if (key == "DEFAULT"){
             float defaultValue;
             try{
                 defaultValue = std::stof(line.substr(position + 1));
             } catch (std::invalid_argument){
-                error += "ERR SubstanceCollector::loadPhropertiesFromFile: Invalid default value: " + line.substr(position + 1) + "\n";
+                error += "ERR SubstanceCollector::loadPropertiesFromFile: Invalid default value: " + line.substr(position + 1) + "\n";
                 return 1;
             }
 
             if (foundDefaultValue){
-                error += "ERR SubstanceCollector::loadPhropertiesFromFile: Default value already found (" + std::to_string(phroperty.defaultValue) + " and " + std::to_string(defaultValue) + ")\n";
+                error += "ERR SubstanceCollector::loadPropertiesFromFile: Default value already found (" + std::to_string(phroperty.defaultValue) + " and " + std::to_string(defaultValue) + ")\n";
                 return 1;
             }
             phroperty.defaultValue = defaultValue;
@@ -187,7 +195,7 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
     substance substance;
 
     while (std::getline(file, line)){
-        if (line[0] == '#' || line[0] == ' '){
+        if (line.empty() || line[0] == '#' || line[0] == ' '){
             continue;
         }
 
@@ -195,8 +203,9 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
         if (position != std::string::npos){
             substance.name = line.substr(0, position);
             setDefaultPhroperties(substance);
+            std::string prevLine = line;
             while(std::getline(file, line)){
-                if (line[0] == '#' || line[0] == ' '){
+                if (line.empty() || line[0] == '#' || line[0] == ' '){
                     break;
                 }
 
@@ -206,27 +215,69 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
                     return 1;
                 }
 
-                std::string phropertyName = line.substr(0, position);
-                float value;
-                try{
-                    value = std::stof(line.substr(position + 1));
-                } catch (std::invalid_argument){
-                    error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid value: " + line.substr(position + 1) + "\n";
-                    return 1;
-                }
-
+                std::string propertyName = line.substr(0, position);
                 bool found = false;
-                for (uint i = 0; i < substancePhroperties.size(); i++){
-                    if (substancePhroperties[i].name == phropertyName){
-                        substance.values[i] = value;
-                        found = true;
+                
+                if (propertyName == "COLOR"){
+                    std::string values = line.substr(position + 1);
+                    position = values.find(",");
+                    if (position == std::string::npos){
+                        error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid color definition: " + line + "\n";
+                        return 1;
+                    }
+                    std::string rColor = values.substr(0, position);
+                    values = values.substr(position + 1);
+                    position = values.find(",");
+                    if (position == std::string::npos){
+                        error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid color definition: " + line + "\n";
+                        return 1;
+                    }
+                    std::string gColor = values.substr(0, position);
+                    std::string bColor = values.substr(position + 1);
+                    
+                    try{
+                        substance.R = std::stof(rColor);
+                        substance.G = std::stof(gColor);
+                        substance.B = std::stof(bColor);
+                    } catch (std::invalid_argument){
+                        error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid color definition: " + line + "\n";
+                        return 1;
+                    }
+
+                    found = true;
+                } else if (propertyName == "MOVABLE"){
+                    std::string value = line.substr(position + 1);
+                    if (value == "true" || value == "True" || value == "TRUE" || value == "1"){
+                        substance.movable = true;
+                    } else if (value == "false" || value == "False" || value == "FALSE" || value == "0"){
+                        substance.movable = false;
+                    } else {
+                        error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid value: " + value + "\n";
+                        return 1;
+                    }
+                    found = true;
+                } else {
+                    float value;
+                    try{
+                        value = std::stof(line.substr(position + 1));
+                    } catch (std::invalid_argument){
+                        error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid value: " + line.substr(position + 1) + "\n";
+                        return 1;
+                    }
+
+                    for (uint i = 0; i < substancePhroperties.size(); i++){
+                        if (substancePhroperties[i].name == propertyName){
+                            substance.values[i] = value;
+                            found = true;
+                        }
                     }
                 }
 
                 if (!found){
-                    error += "ERR SubstanceCollector::loadSubstancesFromFile: Phroperty not found: " + phropertyName + "\n";
+                    error += "ERR SubstanceCollector::loadSubstancesFromFile: Phroperty not found: " + propertyName + "\n";
                     return 1;
                 }
+                prevLine = line;
             }
 
             bool alreadyExists = false;
@@ -262,6 +313,10 @@ std::string SubstanceCollector::createSubstanceClStruct(){
     }
     structString += "};\n";
     return structString;
+}
+
+std::string SubstanceCollector::getError(){
+    return error;
 }
 
 engineStruct::cl_type SubstanceCollector::stringToClType(std::string type){
