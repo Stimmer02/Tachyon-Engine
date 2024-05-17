@@ -89,6 +89,8 @@ char SubstanceCollector::parseConfig(std::string path){
         }
     }
 
+    loadMandatorySubstances();
+
     for (std::string fileName : substancesFilesNames){
         if (loadSubstancesFromFile(substancesFolder + fileName) != 0){
             error += "ERR SubstanceCollector::parseConfig: Failed to load substances from file: " + substancesFolder + '/' + fileName + "\n";
@@ -192,7 +194,7 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
     }
 
     std::string line;
-    substance substance;
+    substance* substance;
 
     while (std::getline(file, line)){
         if (line.empty() || line[0] == '#' || line[0] == ' '){
@@ -201,15 +203,28 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
 
         size_t position = line.find(":");
         if (position != std::string::npos){
-            substance.name = line.substr(0, position);
-            setDefaultPhroperties(substance);
+            std::string substanceName = line.substr(0, position);
+            
+            bool alreadyExists = false;
+            for (uint i = 0; i < substanceTable.size(); i++){
+                if (substanceTable[i].name == substanceName){
+                    substance = &substanceTable[i];
+                    alreadyExists = true;
+                }
+            }
+            if (!alreadyExists){
+                substance = new struct substance;
+                substance->name = substanceName;
+                setDefaultPhroperties(*substance);
+            }
+            
             std::string prevLine = line;
             while(std::getline(file, line)){
                 if (line.empty() || line[0] == '#' || line[0] == ' '){
                     break;
                 }
 
-                size_t position = line.find("=");
+                position = line.find("=");
                 if (position == std::string::npos){
                     error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid line: " + line + "\n";
                     return 1;
@@ -236,9 +251,9 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
                     std::string bColor = values.substr(position + 1);
                     
                     try{
-                        substance.R = std::stof(rColor);
-                        substance.G = std::stof(gColor);
-                        substance.B = std::stof(bColor);
+                        substance->R = std::stof(rColor);
+                        substance->G = std::stof(gColor);
+                        substance->B = std::stof(bColor);
                     } catch (std::invalid_argument){
                         error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid color definition: " + line + "\n";
                         return 1;
@@ -248,9 +263,9 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
                 } else if (propertyName == "MOVABLE"){
                     std::string value = line.substr(position + 1);
                     if (value == "true" || value == "True" || value == "TRUE" || value == "1"){
-                        substance.movable = true;
+                        substance->movable = true;
                     } else if (value == "false" || value == "False" || value == "FALSE" || value == "0"){
-                        substance.movable = false;
+                        substance->movable = false;
                     } else {
                         error += "ERR SubstanceCollector::loadSubstancesFromFile: Invalid value: " + value + "\n";
                         return 1;
@@ -267,7 +282,7 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
 
                     for (uint i = 0; i < substancePhroperties.size(); i++){
                         if (substancePhroperties[i].name == propertyName){
-                            substance.values[i] = value;
+                            substance->values[i] = value;
                             found = true;
                         }
                     }
@@ -280,17 +295,11 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
                 prevLine = line;
             }
 
-            bool alreadyExists = false;
-            for (uint i = 0; i < substanceTable.size(); i++){
-                if (substanceTable[i].name == substance.name){
-                    substanceTable[i] = substance;
-                    alreadyExists = true;
-                }
-            }
 
             if (!alreadyExists){
-                giveIdToSubstances(substance);
-                substanceTable.push_back(substance);
+                giveIdToSubstances(*substance);
+                substanceTable.push_back(*substance);
+                delete substance;
             }
         }
     }
@@ -300,7 +309,7 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
 }
 
 std::string SubstanceCollector::createSubstanceClStruct(){
-    std::string structString = "struct substance ((allinged)){\n";
+    std::string structString = "struct __attribute__ ((packed)) substance {\n";
     structString += "    struct color color;\n";
     structString += "    bool movable;\n";
     for (substanceField phroperty : substancePhroperties){
@@ -313,6 +322,22 @@ std::string SubstanceCollector::createSubstanceClStruct(){
     }
     structString += "};\n";
     return structString;
+}
+
+std::vector<std::string> SubstanceCollector::getSubstanceNames(){
+    std::vector<std::string> names;
+    for (substance sub : substanceTable){
+        names.push_back(sub.name);
+    }
+    return names;
+}
+
+const std::vector<substance>& SubstanceCollector::getSubstances(){
+    return substanceTable;
+}
+
+const std::vector<substanceField>& SubstanceCollector::getSubstancePhroperties(){
+    return substancePhroperties;
 }
 
 std::string SubstanceCollector::getError(){
@@ -405,9 +430,26 @@ void SubstanceCollector::setDefaultPhroperties(substance& substance){
     substance.G = 0;
     substance.B = 1;
     substance.movable = true;
-    for (substanceField phroperty : substancePhroperties){
-        substance.values.push_back(phroperty.defaultValue);
+    for (uint i = 0; i < substancePhroperties.size(); i++){
+        substance.values[i] = substancePhroperties[i].defaultValue;
     }
+}
+
+void SubstanceCollector::loadMandatorySubstances(){
+    substance blank;
+    blank.name = "BLANK";
+    blank.values.resize(substancePhroperties.size());
+    blank.id = 0;
+    blank.R = 0;
+    blank.G = 0;
+    blank.B = 0;
+    blank.movable = false;
+
+    for (uint i = 0; i < substancePhroperties.size(); i++){
+        blank.values[i] = 0;
+    }
+
+    substanceTable.push_back(blank);
 }
 
 void SubstanceCollector::giveIdToSubstances(substance& substance){

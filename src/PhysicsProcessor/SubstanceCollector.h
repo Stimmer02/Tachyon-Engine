@@ -19,6 +19,8 @@ public:
 
     std::string createSubstanceClStruct();
     std::vector<std::string> getSubstanceNames();
+    const std::vector<substance>& getSubstances();
+    const std::vector<substanceField>& getSubstancePhroperties();
 
     std::string getError();
 
@@ -33,10 +35,10 @@ private:
 
     uint idCount;
 
-    void updateSubstances();
+    // void updateSubstances(); may turn useful if working with multiple files
     void setDefaultPhroperties(substance& substance);
     void loadMandatorySubstances();
-    void giveIdToSubstances(substance& substance); //mostly a placeholder for later implementation
+    void giveIdToSubstances(substance& substance); //mostly a placeholder for future implementation
 };
 
 #endif
