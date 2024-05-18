@@ -60,8 +60,29 @@ public:
         s->SetTextureAttrib(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         s->SetTextureAttrib(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+        std::vector<Vector3> vertices;
+
+        const int numVert = 30;
+        float radius = 30.0f;
+        float height = 0.0f;
+
+        for(int i = 0; i < numVert; i++){
+
+            const float angle = i * M_PI/180.0f;
+
+            Vector3 v = Vector3(radius * cos(angle),radius * sin(angle), height);
+
+            vertices.push_back(v);
+
+            radius += 0.1f;
+            height += 1.0f;
+
+        }
+
+
         renderer = planet->AddAttribute<Mesh>();
-        renderer->GenTorus(100.0f, 40.0f);
+        // renderer->SetVertices(vertices.data(), vertices.size());
+        renderer->GenTorus(100.0f, 50.0f);
         // canvas = new CanvasElement(GraphicConfig::windowWidth*0.5f - 150, GraphicConfig::windowHeight*0.5f - 150, 300, 300);
         // canvas->ClearCanvas({255,255,255});
         // canvas->SetCellSize(5);
@@ -97,6 +118,8 @@ int main(){
     Application app;
 
     Scene scene;
+
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     mainCamera = &app.GetMainCamera();
     SolarSystem * solar = new SolarSystem(&scene);

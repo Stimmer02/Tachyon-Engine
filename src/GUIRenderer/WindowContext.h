@@ -47,9 +47,9 @@ private:
 
 public:
 
-    WindowContext(const bool & suppressVisibility = false){
+    WindowContext(const bool & suppressVisibility = false, const std::string & file = "runtime.log"){
 
-        this->windowLogger = new EventRegister("runtime.log");
+        this->windowLogger = new EventRegister(file.c_str());
 
         windowLogger->Write(LogMessageType::M_INFO, "Initializing new context instance\n");
 

@@ -9,7 +9,7 @@ Sprite::Sprite(const Color * pixels, const uint32_t& width, const uint32_t& heig
     this->height = height;
     this->currentFrame = 0;
     this->UpdateTexture(pixels, width, height);
-    
+
 }
 
 Sprite::Sprite(const char * filepath){
@@ -45,15 +45,15 @@ Sprite::Sprite(const Image * image){
     this->height = image->height;
     this->currentFrame = 0;
     this->UpdateTexture(image->pixels, image->width, image->height);
-    
+
     // for(int i = 0; i < width*height; ++i){
     //     if(i % width == 0){
     //         std::cout << '\n';
     //     }
     //     std::cout << (int)image->pixels[i].B / (int)255 << ' ';
-        
+
     // }
-    
+
 
 }
 
@@ -69,12 +69,6 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
         glGenTextures(1, &textureID);
 
         frames.emplace_back(textureID);
-
-#ifdef DEBUG
-
-        printf("[DEBUG] Generating texture %d\n", textureID);
-
-#endif
 
         // Select current texture
         glBindTexture(GL_TEXTURE_2D, textureID);

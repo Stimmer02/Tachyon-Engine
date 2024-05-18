@@ -2,14 +2,15 @@
 #define SETTINGS_H
 
 #include <stdint.h>
+#include <string>
 
 namespace GraphicConfig{
-    const char * windowTitle = "Window";
-    int32_t windowWidth = 800;
-    int32_t windowHeight = 600;
-    bool vsync = true;
-    bool zbuffer = true;
-    bool useOrthographicProjection = true;
+    std::string windowTitle;
+    int32_t windowWidth;
+    int32_t windowHeight;
+    bool vsync;
+    bool zbuffer;
+    bool useOrthographicProjection;
 };
 
 namespace ApplicationConfig{

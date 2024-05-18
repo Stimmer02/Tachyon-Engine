@@ -4,6 +4,7 @@
 #include "WindowContext.h"
 #include "GraphicSystem.h"
 #include "InteractionManager.h"
+#include "Configurator.h"
 #include "Input.h"
 #include "Timer.h"
 
@@ -16,18 +17,37 @@ private:
     Input * inputInstance;
 
     GraphicSystem * graphics;
+    std::list<System *> systems;
 
     InteractionManager interactionManager;
 
-    std::list<System *> systems;
-
     Scene * scene;
-
     Timer * timer;
+
+    void LoadConfiguration(){
+
+        Configurator configurator("settings.conf");
+
+        // Graphic settings
+
+        configurator.ParseString("title", GraphicConfig::windowTitle, "Window");
+        configurator.ParseInt("width", GraphicConfig::windowWidth, 800);
+        configurator.ParseInt("height", GraphicConfig::windowHeight, 600);
+        configurator.ParseBoolean("vsync", GraphicConfig::vsync, true);
+        configurator.ParseBoolean("zbuffer", GraphicConfig::zbuffer, true);
+        configurator.ParseBoolean("ortho", GraphicConfig::useOrthographicProjection, true);
+
+        // Logic settings
+
+        configurator.ParseBoolean("internalinteraction", ApplicationConfig::internalGUIInteraction, true);
+
+    }
 
 public:
 
     Application(){
+
+        LoadConfiguration();
 
         this->graphics = new GraphicSystem(&context);
         this->contextLogger = context.GetContextLogger();
