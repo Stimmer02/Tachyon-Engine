@@ -93,7 +93,10 @@ void Configurator::ParseBoolean(const std::string & varName, bool & value, const
 
     if (it != configMap.end()) {
         std::string val = it->second;
-        std::transform(val.begin(), val.end(), val.begin(), ::tolower);
+
+        for (char & c : val)
+            if (c >= 'A' && c <= 'Z')
+                c += 'a' - 'A';
 
         if (val == "1" || val == "true") {
             value = true;

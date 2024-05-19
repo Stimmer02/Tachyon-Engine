@@ -1,6 +1,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#define GL_SILENCE_DEPRECATION
+
 #include "WindowContext.h"
 #include "GraphicSystem.h"
 #include "InteractionManager.h"

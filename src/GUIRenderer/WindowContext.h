@@ -1,7 +1,6 @@
 #ifndef WINDOWCONTEXT_H
 #define WINDOWCONTEXT_H
 
-#pragma once
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
