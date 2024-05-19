@@ -15,6 +15,8 @@ class Application{
 private:
 
     WindowContext context;
+    Timer timer;
+
     ILog * contextLogger;
     Input * inputInstance;
 
@@ -23,8 +25,6 @@ private:
 
     InteractionManager interactionManager;
     SharedNameResolver resourceManager;
-
-    Timer * timer;
 
     void LoadConfiguration(){
 
@@ -53,15 +53,17 @@ public:
 
         LoadConfiguration();
 
-        this->graphics = new GraphicSystem(&context);
+        this->graphics = new GraphicSystem();
         this->contextLogger = context.GetContextLogger();
+
+        this->resourceManager.Emplace("context", &context, sizeof(WindowContext));
 
         contextLogger->Write(M_INFO, "Initializing I/O handles");
         this->inputInstance = &Input::GetInstance();
         this->inputInstance->SetContext(&context);
 
         contextLogger->Write(M_INFO, "Instancing internal timer");
-        this->timer = &Timer::GetInstance();
+        resourceManager.Emplace("timer", &timer, sizeof(Timer));
 
         contextLogger->Write(M_INFO, "Pushing graphic system to systems pool");
         this->systems.push_back(graphics);
@@ -77,7 +79,6 @@ public:
         }
 
         resourceManager.Emplace("scene", &scene, sizeof(scene));
-        graphics->LoadScene( &scene );
     }
 
     void RegisterSystem(System * system){
@@ -100,10 +101,6 @@ public:
 
     }
 
-    Camera& GetMainCamera(){
-        return graphics->GetMainCamera();
-    }
-
     void Loop(){
 
         contextLogger->Write(M_INFO, "Sharing resources");
@@ -111,16 +108,16 @@ public:
         for(System * system : systems)
             system->Share(&resourceManager);
 
-        contextLogger->Write(M_INFO, "Preparing %d systems", systems.size());
+        contextLogger->Write(M_INFO, "Loading systems");
 
         for( System * system : systems)
-            system->OnUnload();
+            system->OnLoad();
 
         contextLogger->Write(M_INFO, "Executing main loop");
 
         while( !context.ShouldClose() ){
 
-            timer->TicTac();
+            timer.TicTac();
             inputInstance->Update();
 
             for( System * system : systems)
@@ -133,8 +130,8 @@ public:
                 interactionManager.Interact(mousePosition.x, mousePosition.y);
             }
 
-            if(timer->GetAccumulatedTime()>= 1.0f){
-                fprintf(stdout, "FPS : %05d\r", timer->GetFrameCount());
+            if(timer.GetAccumulatedTime()>= 1.0f){
+                fprintf(stdout, "FPS : %05d\r", timer.GetFrameCount());
                 fflush(stdout);
                 contextLogger->Flush();
             }
@@ -153,7 +150,6 @@ public:
         context.Close();
 
         contextLogger->Write(LogMessageType::M_INFO, "Disposing resources\n");
-        contextLogger->Write(LogMessageType::M_INFO, "Unmanaging context\n");
 
         delete graphics;
 

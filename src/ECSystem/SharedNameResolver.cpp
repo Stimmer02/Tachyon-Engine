@@ -23,26 +23,19 @@ void SharedNameResolver::Emplace(const std::string & _name, const void * _pointe
                 // Not the last one.
                 if (i != _name.size() - 1) {
                     // New empty Node.
-                    Node newNode = { size_: 0, pointer: NULL };
-                    for (int i = 0; i < ALPHABET_SIZE; ++i) {
-                        newNode.next_char[i] = NULL;
-                    }
-                    Node* ptr = &newNode;
-
-                    path_destination = ptr;
-                    (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = path_destination;
+                    Node * newNode = new Node();
+                    path_destination = newNode;
+                    (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = newNode;
                 }
                 // The last one.
                 else {
                     // New empty Node.
-                    Node newNode = { size_: _size, pointer: _pointer };
-                    for (int i = 0; i < ALPHABET_SIZE; ++i) {
-                        newNode.next_char[i] = NULL;
-                    }
-                    Node* ptr = &newNode;
+                    Node * newNode = new Node();
+                    newNode->size = _size;
+                    newNode->pointer = (void*)_pointer;
 
-                    path_destination = ptr;
-                    (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = path_destination;
+                    path_destination = newNode;
+                    (*(path_destination_vestibule)).next_char[((int) (_name[i] - 'a'))] = newNode;
                 }
             }
             else {
@@ -100,14 +93,28 @@ void SharedNameResolver::Resize(const std::string & _name, const int32_t & _size
         }
 
         // New similar node with different size.
-        Node newNode = { size_: _size, pointer: (*(path_destination)).pointer };
-        Node* ptr = &newNode;
-        for (int i = 0; i < ALPHABET_SIZE; ++i) {
-            newNode.next_char[i] = (*(path_destination)).next_char[i];
-        }
+        Node * newNode = new Node();
+        newNode->size = _size;
+        newNode->pointer = path_destination->pointer;
 
         // Setting new node in the main tree.
-        (*(path_destination_vestibule)).next_char[_name[_name.size() - 1] - 'a'] = ptr;
+        (*(path_destination_vestibule)).next_char[_name[_name.size() - 1] - 'a'] = newNode;
     }
 }
 
+void SharedNameResolver::DeleteNode(Node * node){
+
+    if( node == nullptr)
+        return;
+
+    for(int32_t idx = 0; idx < ALPHABET_SIZE; idx++)
+        DeleteNode(node->next_char[idx]);
+
+    delete node;
+}
+
+SharedNameResolver::~SharedNameResolver(){
+
+    DeleteNode(root);
+
+}

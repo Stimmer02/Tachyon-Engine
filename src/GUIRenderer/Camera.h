@@ -4,11 +4,12 @@
 #include "Settings.h"
 #include "Matrix.h"
 
+const Vector3 worldUp = Vector3(0.0f, 1.0f, 0.0f);
+
 class Camera{
 
 public:
     Vector3 position;
-    Vector3 worldUp;
 
     Vector3 right;
     Vector3 up;
@@ -25,6 +26,7 @@ public:
 private:
 
     Matrix projection;
+    Matrix view;
 
     void UpdateVectors(){
 
@@ -38,8 +40,8 @@ private:
         this->front.z = std::sin( yawInRad ) * cos( pitchInRad );
 
         this->front = front.Normalize();
-        this->right = Vector3::Cross(worldUp, front).Normalize();
-        this->up = Vector3::Cross(front, right).Normalize();
+        this->right = Vector3::Cross(front, worldUp).Normalize();
+        this->up = Vector3::Cross(right, front).Normalize();
     }
 
 public:
@@ -47,22 +49,19 @@ public:
 
     Camera(){
         this->position = Vector3(0.0f, 0.0f, 0.0f);
-        this->worldUp = Vector3(0.0f, 1.0f, 0.0f);
-        this->front = Vector3(0.0f, 0.0f, -1.0f);
+        this->front = Vector3(0.0f, 0.0f, 1.0f);
         this->up = worldUp;
-        this->right = Vector3::Cross(worldUp, front).Normalize();
+        this->right = Vector3::Cross(front, worldUp).Normalize();
         this->yaw = -90.0f;
         this->pitch = 0.0f;
-        UpdateVectors();
     }
 
     Matrix GetViewMatrix() const{
 
         Vector3 right = Vector3::Cross(up, front).Normalize();
 
-        Matrix look = Matrix::LookAt(position, front, up, right);
 
-        return look;
+        return Matrix::LookAt(position, front, up, right);
     }
 
     void ResetView(){
@@ -107,7 +106,6 @@ public:
 
         this->position =  position + direction * movementSpeed * deltaTime;
 
-        UpdateVectors();
     }
 
 };

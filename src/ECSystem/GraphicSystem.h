@@ -46,8 +46,13 @@ private:
         if(object == nullptr || object->isActive == false)
             return;
 
-        Matrix & model = object->GetModel();
-        currentShader->TransferToShader("u_model", model);
+        Matrix & modelMatrix = object->GetModel();
+        currentShader->TransferToShader("u_model", modelMatrix);
+
+        Matrix viewMatrix = mainCamera.GetViewMatrix();
+
+        Matrix mvpMatrix = modelMatrix * viewMatrix * projectionMatrix;
+        currentShader->TransferToShader("u_mvp", mvpMatrix);
 
         Archetype archetype = object->GetArchetype() & (RenderingAttributes::ATTRIB_MAX - 1);
 
@@ -177,14 +182,7 @@ private:
 
 public:
 
-    GraphicSystem(WindowContext * context) : System(){
-
-        this->context = context;
-        this->contextLogger = context->GetContextLogger();
-
-        context->Open(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
-        context->SetVSync( GraphicConfig::vsync );
-        context->SetZBuffer( GraphicConfig::zbuffer );
+    GraphicSystem() : System(){
 
         float aspect = GraphicConfig::windowWidth/(float) GraphicConfig::windowHeight;
 
@@ -196,26 +194,26 @@ public:
 
         this->guiProjectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -1, 10);
 
+    }
+
+    void OnLoad() override{
+
+        context->Open(GraphicConfig::windowWidth, GraphicConfig::windowHeight, GraphicConfig::windowTitle);
+        context->SetVSync( GraphicConfig::vsync );
+        context->SetZBuffer( GraphicConfig::zbuffer );
+
+        this->contextLogger = context->GetContextLogger();
+
         SetupUnhandledComponents();
         UploadMainShaders();
         SetupArchetypeFunc();
-    }
 
-    void LoadScene(Scene * scene){
-        this->scene = scene;
     }
 
     void Share(SharedNameResolver * resourceManager) override{
-        //TODO
-        //this->scene = (Scene*)resourceManager->Find("scene", sizeof(Scene), 0);
-    }
-
-    Camera& GetMainCamera(){
-        return mainCamera;
-    }
-
-    Sprite * GetDefaultTexture(){
-        return defaultSprite;
+        this->scene = (Scene*)resourceManager->Find("scene");
+        this->context = (WindowContext*)resourceManager->Find("context");
+        resourceManager->Emplace("camera", &mainCamera, sizeof(Camera));
     }
 
     Mesh * GetDefaultMesh(){

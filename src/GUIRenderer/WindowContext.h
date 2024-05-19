@@ -191,6 +191,9 @@ public:
             exit(-1);
         }
 
+        windowLogger->Write(LogMessageType::M_INFO, "Destroying window instance\n");
+        windowLogger->Flush();
+
         glfwSetWindowShouldClose(window, true);
     }
 
