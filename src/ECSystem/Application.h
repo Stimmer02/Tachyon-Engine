@@ -20,8 +20,8 @@ private:
     std::list<System *> systems;
 
     InteractionManager interactionManager;
+    SharedNameResolver resourceManager;
 
-    Scene * scene;
     Timer * timer;
 
     void LoadConfiguration(){
@@ -33,6 +33,8 @@ private:
         configurator.ParseString("title", GraphicConfig::windowTitle, "Window");
         configurator.ParseInt("width", GraphicConfig::windowWidth, 800);
         configurator.ParseInt("height", GraphicConfig::windowHeight, 600);
+        configurator.ParseBoolean("visible", GraphicConfig::visible, true);
+        configurator.ParseBoolean("resizable", GraphicConfig::resiazble, true);
         configurator.ParseBoolean("vsync", GraphicConfig::vsync, true);
         configurator.ParseBoolean("zbuffer", GraphicConfig::zbuffer, true);
         configurator.ParseBoolean("ortho", GraphicConfig::useOrthographicProjection, true);
@@ -72,12 +74,15 @@ public:
             interactionManager.LoadScene(scene);
         }
 
-        this->scene = &scene;
+        resourceManager.Emplace("scene", &scene, sizeof(scene));
         graphics->LoadScene( &scene );
     }
 
     void RegisterSystem(System * system){
         contextLogger->Write(LogMessageType::M_INFO, "New system registered\n");
+
+        system->Share(&resourceManager);
+
         systems.emplace_back(system);
     }
 
@@ -99,14 +104,25 @@ public:
 
     void Loop(){
 
+        contextLogger->Write(M_INFO, "Sharing resources");
+
+        for(System * system : systems)
+            system->Share(&resourceManager);
+
+        contextLogger->Write(M_INFO, "Preparing %d systems", systems.size());
+
+        for( System * system : systems)
+            system->OnUnload();
+
+        contextLogger->Write(M_INFO, "Executing main loop");
+
         while( !context.ShouldClose() ){
 
             timer->TicTac();
             inputInstance->Update();
 
-            for(System * system : systems){
+            for( System * system : systems)
                 system->Run();
-            }
 
             EventType leftMouseButtonEvent = inputInstance->GetKeyState(GLFW_MOUSE_BUTTON_LEFT);
 
@@ -123,9 +139,16 @@ public:
 
         }
 
+        contextLogger->Write(M_INFO, "Main loop aborted");
+
+        for( System * system : systems)
+            system->OnUnload();
+
     }
 
     ~Application(){
+
+        context.Close();
 
         contextLogger->Write(LogMessageType::M_INFO, "Disposing resources\n");
         contextLogger->Write(LogMessageType::M_INFO, "Unmanaging context\n");

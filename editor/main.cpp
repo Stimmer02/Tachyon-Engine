@@ -39,10 +39,6 @@ class SolarSystem : public System{
 
     }
 
-    void Share() override{
-
-    }
-
 public:
 
     SolarSystem(Scene * scene){

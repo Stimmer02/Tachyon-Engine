@@ -8,6 +8,8 @@ namespace GraphicConfig{
     std::string windowTitle;
     int32_t windowWidth;
     int32_t windowHeight;
+    bool visible;
+    bool resiazble;
     bool vsync;
     bool zbuffer;
     bool useOrthographicProjection;

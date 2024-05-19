@@ -32,7 +32,7 @@ private:
 
     ILog * windowLogger;
 
-    void SetHints(){
+    void SetHints(const bool & suppressVisibility, const bool & resizeable){
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -40,14 +40,19 @@ private:
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
-        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        if( suppressVisibility )
+            glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
+        if( !resizeable ){
+            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+            glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        }
 
     }
 
 public:
 
-    WindowContext(const bool & suppressVisibility = false, const std::string & file = "runtime.log"){
+    WindowContext(const bool & suppressVisibility = false, const bool & resizeable = false, const std::string & file = "runtime.log"){
 
         this->windowLogger = new EventRegister(file.c_str());
 
@@ -60,10 +65,7 @@ public:
             exit(-1);
         }
 
-        SetHints();
-
-        if(suppressVisibility)
-            glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        SetHints(suppressVisibility, resizeable);
 
         this->window = nullptr;
         this->bufferbits = GL_COLOR_BUFFER_BIT;
@@ -129,6 +131,15 @@ public:
         glfwSetKeyCallback(window, callback);
     }
 
+    void BindResizeCallback(GLFWwindowsizefun callback) const {
+        if( !window ){
+            windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
+            windowLogger->Flush();
+            exit(-1);
+        }
+        glfwSetWindowSizeCallback(window, callback);
+    }
+
     void BindScrollCallback(GLFWscrollfun callback) const{
         if( !window ){
             windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
@@ -170,23 +181,28 @@ public:
             windowLogger->Flush();
             exit(-1);
         }
+
     }
 
     void Close() const{
+
         if( !window ){
             windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
             windowLogger->Flush();
             exit(-1);
         }
+
         glfwSetWindowShouldClose(window, true);
     }
 
     bool ShouldClose() const{
+
         if( !window ){
             windowLogger->Write(LogMessageType::M_ERROR, "Window instance does not exist\n");
             windowLogger->Flush();
             exit(-1);
         }
+
         return glfwWindowShouldClose(window);
     }
 

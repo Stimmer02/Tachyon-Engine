@@ -74,12 +74,13 @@ private:
     }
 
     void Execute() override{
-        context->PoolEvents();
-        context->SwapBuffers();
-        context->CheckErrors();
 
         if(!scene)
             return;
+
+        context->PoolEvents();
+        context->SwapBuffers();
+        context->CheckErrors();
 
         Matrix viewMatrix = mainCamera.GetViewMatrix();
 
@@ -204,8 +205,9 @@ public:
         this->scene = scene;
     }
 
-    void Share() override{
-
+    void Share(SharedNameResolver * resourceManager) override{
+        //TODO
+        //this->scene = (Scene*)resourceManager->Find("scene", sizeof(Scene), 0);
     }
 
     Camera& GetMainCamera(){
