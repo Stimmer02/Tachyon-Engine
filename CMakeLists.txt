@@ -7,7 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(TachyonEngine VERSION 1.1)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D DEBUG -msse -glldb")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D DEBUG -msse")
 
 if(WIN32)
 
