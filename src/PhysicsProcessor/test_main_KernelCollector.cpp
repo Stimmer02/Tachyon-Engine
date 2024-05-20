@@ -1,22 +1,21 @@
-#include "StructTree.h"
+#include "KernelQueueBuilder.h"
 
 
 int main(){
-    MacroManager macroManager;
-    SizeCalculator sCalc(8);
-    ClStructParser clParser(&macroManager);
-
-    if (macroManager.parseFile("/home/stimmer02/Documents/UMCS/SEMESTR_6/projetk_zespolowy/tachion-engine/config/macros.cfg")){
-        std::fprintf(stderr, "Error has occured\n");
+    KernelQueueBuilder kqb;
+    system("pwd");
+    if (kqb.parseConfig("./config/kernel_sequence.cfg")){
+        std::printf("%s\n", kqb.getError().c_str());
         return -1;
     }
 
-    StructTree tree("/home/stimmer02/Documents/UMCS/SEMESTR_6/projetk_zespolowy/tachion-engine/engine_structs", "engineResources.clcpp", &clParser);
-    tree.build(&clParser);
-    tree.calculateSizes(&sCalc);
-    tree.printTree();
-
-    std::cout << '\n' << tree.getStructures() << std::endl;
+    std::vector<kernelExecutionUnit>& kernelQueue = kqb.getKernelQueue();
+    for (auto &keu : kernelQueue){
+        std::printf("name: %s\n", keu.name.c_str());
+        std::printf("path: %s\n", keu.path.c_str());
+        std::printf("executionCount: %d\n\n", keu.executionCount);
+    }
+        
   
     return 0;
 }

@@ -1,21 +1,22 @@
 #ifndef KERNELQUEUEBUILDER_H
 #define KERNELQUEUEBUILDER_H
 
-#include "kernelExecution.h"
-#include <string>
+#include "kernelExecutionUnit.h"
+
+#include <fstream>
+#include <vector>
 
 class KernelQueueBuilder{
     public:
         KernelQueueBuilder();
-        ~KernelQueueBuilder();
 
-        char parseConfig(std::string path); //parses config file with kernels
-
-        kernelExecution* getKernelQueue();
-
+        char parseConfig(std::string path);
+        std::vector<kernelExecutionUnit>& getKernelQueue();
+        std::string getError();
     private:
-        uint kernelCount;
-        kernelExecution* kernelQueue;
+        std::vector<kernelExecutionUnit> kernelQueue;
+
+        std::string error;
 };
 
 #endif
