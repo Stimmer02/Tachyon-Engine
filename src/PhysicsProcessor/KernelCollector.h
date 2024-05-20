@@ -4,18 +4,22 @@
 #include "kernelData.h"
 
 #include <vector>
+#include <string>
+#include <fstream>
 
 class KernelCollector{
 public:
     KernelCollector();
-    ~KernelCollector(); 
 
-    char addKernel(std::string path, uint priority);
+    char addKernel(std::string path, std::string& kernelName);
     std::string getKernels(); //returns kernels code in a single string
+    std::string getError();
 
 private:
     std::vector<kernelData> kernels;
 
-    char checkKernel(std::string* kernel); //checks if kernel has proper signature
+    std::string error;
+
+    char checkKernel(std::string* kernel, std::string& kernelName); //checks if kernel has proper signature and returns kernel name
 };
 #endif

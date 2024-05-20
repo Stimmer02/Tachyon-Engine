@@ -2,6 +2,7 @@
 #define KERNELQUEUEBUILDER_H
 
 #include "kernelExecutionUnit.h"
+#include "KernelCollector.h"
 
 #include <fstream>
 #include <vector>
@@ -11,7 +12,8 @@ class KernelQueueBuilder{
         KernelQueueBuilder();
 
         char parseConfig(std::string path);
-        std::vector<kernelExecutionUnit>& getKernelQueue();
+        char collectKernels(KernelCollector& kc);
+        const std::vector<kernelExecutionUnit>& getKernelQueue();
         std::string getError();
     private:
         std::vector<kernelExecutionUnit> kernelQueue;

@@ -4,7 +4,7 @@
 #include <string>
 
 struct kernelData{
-    kernelData(std::string kernel, uint priority, std::string name) : kernel(kernel), name(name){}
+    kernelData(std::string kernel, std::string name) : kernel(kernel), name(name){}
 
     std::string kernel;
     std::string name;

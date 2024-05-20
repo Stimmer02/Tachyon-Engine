@@ -50,14 +50,24 @@ char KernelQueueBuilder::parseConfig(std::string path){
 
         kernelPath = line.substr(position2+1);
 
-        kernelQueue.push_back(kernelExecutionUnit(kernelDirectory + name, kernelPath, kernelExecutionCount));
+        kernelQueue.push_back(kernelExecutionUnit(name, kernelDirectory + kernelPath, kernelExecutionCount));
     }
 
     file.close();
     return 0;
 }
 
-std::vector<kernelExecutionUnit>& KernelQueueBuilder::getKernelQueue(){
+char KernelQueueBuilder::collectKernels(KernelCollector& kc){
+    for (auto &keu : kernelQueue){
+        if (kc.addKernel(keu.path, keu.functionName)){
+            error += "ERR: KernelQueueBuilder::collectKernels could not continue due to following error - " + kc.getError() + "\n";
+            return -1;
+        }
+    }
+    return 0;
+}
+
+const std::vector<kernelExecutionUnit>& KernelQueueBuilder::getKernelQueue(){
     return kernelQueue;
 }
 
