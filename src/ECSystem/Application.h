@@ -3,6 +3,8 @@
 
 #define GL_SILENCE_DEPRECATION
 
+#pragma once
+
 #include "WindowContext.h"
 #include "GraphicSystem.h"
 #include "InteractionManager.h"
@@ -65,6 +67,8 @@ public:
         contextLogger->Write(M_INFO, "Instancing internal timer");
         resourceManager.Emplace("timer", &timer, sizeof(Timer));
 
+        resourceManager.Emplace("application", this, sizeof(Application));
+
         contextLogger->Write(M_INFO, "Pushing graphic system to systems pool");
         this->systems.push_back(graphics);
 
@@ -125,7 +129,7 @@ public:
 
             EventType leftMouseButtonEvent = inputInstance->GetKeyState(GLFW_MOUSE_BUTTON_LEFT);
 
-            if( ( leftMouseButtonEvent == ONTRIGGER )  && ApplicationConfig::internalGUIInteraction){
+            if( ( leftMouseButtonEvent == ONTRIGGER )  && ApplicationConfig::internalGUIInteraction ){
                 Vector3 mousePosition = inputInstance->GetMousePosition();
                 interactionManager.Interact(mousePosition.x, mousePosition.y);
             }

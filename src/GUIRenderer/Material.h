@@ -18,5 +18,7 @@ struct Material{
 
 };
 
+static Material * defaultMaterial;
+
 
 #endif

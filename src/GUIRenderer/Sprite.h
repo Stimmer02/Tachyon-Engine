@@ -59,6 +59,9 @@ public:
     /// @return Sprite object
     Sprite(const char * filepath);
 
+    /// @brief Method creates deep copy of given sprite
+    Sprite(const Sprite * sprite);
+
     /// @brief Method creates a new texture for current object.
     /// @param pixels
     /// @param width

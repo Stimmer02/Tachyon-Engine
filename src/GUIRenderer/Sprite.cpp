@@ -46,14 +46,18 @@ Sprite::Sprite(const Image * image){
     this->currentFrame = 0;
     this->UpdateTexture(image->pixels, image->width, image->height);
 
-    // for(int i = 0; i < width*height; ++i){
-    //     if(i % width == 0){
-    //         std::cout << '\n';
-    //     }
-    //     std::cout << (int)image->pixels[i].B / (int)255 << ' ';
+}
 
-    // }
+Sprite::Sprite(const Sprite * sprite){
 
+    this->width = sprite->width;
+    this->height = sprite->height;
+    this->currentFrame = 0;
+    this->parent = sprite->parent;
+
+    for( const GLuint & el : sprite->frames ){
+        this->frames.push_back(el);
+    }
 
 }
 

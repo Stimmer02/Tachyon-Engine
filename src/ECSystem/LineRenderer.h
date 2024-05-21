@@ -154,6 +154,20 @@ public:
         glGenVertexArrays(1, &vao);
     }
 
+    LineRenderer(LineRenderer * renderer){
+        this->renderMode = renderer->renderMode;
+        this->startWidth = renderer->startWidth;
+        this->endWidth = renderer->endWidth;
+
+        this->vao = renderer->vao;
+        this->vbo = renderer->vbo;
+        this->tbo = renderer->tbo;
+        this->ebo = renderer->ebo;
+
+        this->numIndices = renderer->numIndices;
+        this->numVertices = renderer->numVertices;
+    }
+
     void SetLineWidth(const float & startWidth, const float & endWidth) {
         this->startWidth = startWidth;
         this->endWidth = endWidth;

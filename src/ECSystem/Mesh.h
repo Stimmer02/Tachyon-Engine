@@ -12,6 +12,7 @@ private:
     GLuint vbo = 0;
     GLuint ebo = 0;
     GLuint tbo = 0;
+    GLuint nbo = 0;
 
     GLenum renderMode;
 
@@ -31,14 +32,29 @@ public:
 
     Mesh(const std::string & filename){
         this->renderMode = GL_TRIANGLES;
+        this->material = defaultMaterial;
         glGenVertexArrays(1, &vao);
 
         LoadFromFile(filename);
 
     }
 
+    Mesh(const Mesh * mesh){
+        this->renderMode = mesh->renderMode;
+        this->material = defaultMaterial;
+
+        this->vao = mesh->vao;
+        this->vbo = mesh->vbo;
+        this->ebo = mesh->ebo;
+        this->tbo = mesh->tbo;
+
+        this->numIndices = mesh->numIndices;
+        this->numVertices = mesh->numVertices;
+    }
+
     Mesh(const GLenum & mode = GL_TRIANGLE_FAN){
         this->renderMode = mode;
+        this->material = defaultMaterial;
         glGenVertexArrays(1, &vao);
     }
 
@@ -53,6 +69,7 @@ public:
         float thetaIncrement = 2.0f * M_PI / numMinorSegments;
 
         std::vector<Vector3> vertices;
+        std::vector<Vector3> normals;
         std::vector<float> uvs;
         std::vector<unsigned int> indices;
 
@@ -69,6 +86,12 @@ public:
                 float x = (majorRadius + minorRadius * cosTheta) * cosPhi;
                 float y = (majorRadius + minorRadius * cosTheta) * sinPhi;
                 float z = minorRadius * sinTheta;
+
+                float nx = cosTheta * cosPhi;
+                float ny = cosTheta * sinPhi;
+                float nz = sinTheta;
+
+                normals.push_back(Vector3(nx, ny, nz).Normalize());
 
                 vertices.push_back(Vector3(x, y, z));
 
@@ -95,6 +118,7 @@ public:
         }
 
         SetVertices(vertices.data(), vertices.size());
+        SetNormals(normals.data(), normals.size());
         SetTexCoords(uvs.data(), uvs.size());
         SetIndices(indices.data(), indices.size());
         renderMode = GL_TRIANGLES;
@@ -104,12 +128,15 @@ public:
 
         std::vector<Vector3> vertices;
         std::vector<float> uvs;
+        std::vector<Vector3> normals;
         std::vector<unsigned int> indices;
 
         float angleIncrement = 2.0f * M_PI / numSegments;
 
         vertices.push_back(Vector3(0.0f, 0.0f, height / 2.0f));
-        uvs.push_back(0.5f);  // UV at the tip
+        uvs.push_back(0.5f);
+        uvs.push_back(0.5f);
+        normals.push_back(Vector3(0.0f, 0.0f, 1.0f));
 
         for (int i = 0; i < numSegments; ++i) {
             float angle = i * angleIncrement;
@@ -118,6 +145,11 @@ public:
             vertices.push_back(Vector3(x, y, -height / 2.0f));
             uvs.push_back((x + 1.0f) / 2.0f);
             uvs.push_back((y + 1.0f) / 2.0f);
+
+            Vector3 sideVec(x, y, 0.0f);
+            Vector3 heightVec(0.0f, 0.0f, height);
+            Vector3 normal = Vector3::Cross(sideVec,heightVec).Normalize();
+            normals.push_back(normal);
         }
 
         for (int i = 1; i <= numSegments; ++i) {
@@ -126,8 +158,21 @@ public:
             indices.push_back(i % numSegments + 1);
         }
 
+        unsigned int baseCenterIndex = vertices.size();
+        vertices.push_back(Vector3(0.0f, 0.0f, -height / 2.0f));
+        uvs.push_back(0.5f);
+        uvs.push_back(0.5f);
+        normals.push_back(Vector3(0.0f, 0.0f, -1.0f));
+
+        for (unsigned int i = 1; i <= numSegments; ++i) {
+            indices.push_back(baseCenterIndex);
+            indices.push_back(i % numSegments + 1);
+            indices.push_back(i);
+        }
+
         SetVertices(vertices.data(), vertices.size());
         SetTexCoords(uvs.data(), uvs.size());
+        SetNormals(normals.data(), normals.size());
         SetIndices(indices.data(), indices.size());
         renderMode = GL_TRIANGLES;
     }
@@ -308,7 +353,22 @@ public:
     }
 
     void SetNormals(const Vector3 * normals, const unsigned int & numNormals){
-        // TODO
+
+        glBindVertexArray(vao);
+
+        if( nbo == 0 ){
+            glGenBuffers(1, &nbo);
+            glBindBuffer(GL_ARRAY_BUFFER, nbo);
+            glBufferData(GL_ARRAY_BUFFER, numNormals * sizeof(Vector3), normals, GL_STATIC_DRAW);
+        }else{
+            glBindBuffer(GL_ARRAY_BUFFER, nbo);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, numNormals * sizeof(Vector3), normals);
+        }
+
+        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(2);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
     void SetIndices(const unsigned int * indices, const unsigned int & numIndices){

@@ -58,9 +58,6 @@ private:
 
         archetypeFunc[archetype](object);
 
-        for( SceneObject * children : object->GetChildrens() )
-            RenderSceneObjects(children);
-
         object->Update();
 
     }
@@ -121,6 +118,8 @@ private:
         defaultMesh = new Mesh();
         defaultMesh->GenQuad(1.0f, 1.0f);
 
+        defaultMaterial = new Material(mainShader);
+        defaultMaterial->mainTexture = defaultSprite;
     }
 
     void UploadMainShaders() {

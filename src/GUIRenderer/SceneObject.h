@@ -27,6 +27,7 @@ public:
 
     SceneObject(const Entity & ID){
         this->parent = nullptr;
+        this->archetype = 0;
         this->isActive = true;
         this->ID = ID;
         this->manager = &AttributeManager::GetInstance();
