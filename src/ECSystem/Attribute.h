@@ -7,10 +7,9 @@ using EntityID = unsigned int;
 
 enum RenderingAttributes : AttributeID{
     NONEATTRIB = 0,         // 00000000
-    SPRITE = 1,             // 00000001
-    MESH = 2,               // 00000010
-    LINE = 4,               // 00000100
-    ATTRIB_MAX = 8          // 00001000
+    MESH = 1,               // 00000001
+    LINE = 2,               // 00000010
+    ATTRIB_MAX = 4          // 00000100
 };
 
 class Attribute{

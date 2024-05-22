@@ -90,6 +90,12 @@ public:
 
     }
 
+    void UploadImage(const Image & image){
+        if( image.width > this->width || image.height > this->height || image.pixels == nullptr)
+            return;
+        texture->UpdateTexture(image.pixels, image.width, image.height);
+    }
+
     void Realloc(){
         if( texture != nullptr )
             delete texture;

@@ -8,10 +8,9 @@ out vec4 color;
 
 uniform mat4 u_projection;
 uniform mat4 u_model;
-uniform vec4 u_color;
 
 void main(){
     gl_Position = vert * u_model * u_projection ;
     uvs = uv;
-    color = u_color;
+    color = vec4(1.0);
 }

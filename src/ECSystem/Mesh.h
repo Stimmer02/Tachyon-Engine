@@ -2,7 +2,6 @@
 #define MESH_H
 
 #include "Attribute.h"
-#include "Material.h"
 #include <GL/glew.h>
 
 class Mesh : public AttributeType<Mesh>{
@@ -28,11 +27,9 @@ private:
 
 public:
 
-    Material * material;
 
     Mesh(const std::string & filename){
         this->renderMode = GL_TRIANGLES;
-        this->material = defaultMaterial;
         glGenVertexArrays(1, &vao);
 
         LoadFromFile(filename);
@@ -41,7 +38,6 @@ public:
 
     Mesh(const Mesh * mesh){
         this->renderMode = mesh->renderMode;
-        this->material = defaultMaterial;
 
         this->vao = mesh->vao;
         this->vbo = mesh->vbo;
@@ -54,7 +50,6 @@ public:
 
     Mesh(const GLenum & mode = GL_TRIANGLE_FAN){
         this->renderMode = mode;
-        this->material = defaultMaterial;
         glGenVertexArrays(1, &vao);
     }
 
@@ -411,6 +406,7 @@ public:
     }
 
     void Draw(){
+
         glBindVertexArray(vao);
 
         if( numIndices != 0 ){
@@ -422,6 +418,7 @@ public:
         }
 
         glBindVertexArray(0);
+
     }
 
     ~Mesh(){

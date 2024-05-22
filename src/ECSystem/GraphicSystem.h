@@ -32,8 +32,6 @@ private:
     GLShader * mainShader;
     GLShader * guiShader;
 
-    Mesh * defaultMesh;
-
     ILog * contextLogger;
 
     Matrix projectionMatrix;
@@ -47,12 +45,14 @@ private:
             return;
 
         Matrix & modelMatrix = object->GetModel();
-        currentShader->TransferToShader("u_model", modelMatrix);
-
         Matrix viewMatrix = mainCamera.GetViewMatrix();
 
-        Matrix mvpMatrix = modelMatrix * viewMatrix * projectionMatrix;
-        currentShader->TransferToShader("u_mvp", mvpMatrix);
+        object->material->shader->Use();
+        object->material->mainTexture->Load();
+        object->material->shader->TransferToShader("u_projection", projectionMatrix);
+        object->material->shader->TransferToShader("u_view", viewMatrix);
+        object->material->shader->TransferToShader("u_model", modelMatrix);
+        object->material->shader->TransferToShader("u_color", object->material->color);
 
         Archetype archetype = object->GetArchetype() & (RenderingAttributes::ATTRIB_MAX - 1);
 
@@ -84,12 +84,6 @@ private:
         context->SwapBuffers();
         context->CheckErrors();
 
-        Matrix viewMatrix = mainCamera.GetViewMatrix();
-
-        mainShader->Use();
-        mainShader->TransferToShader("u_projection", projectionMatrix);
-        mainShader->TransferToShader("u_view", viewMatrix);
-
         std::vector<SceneObject *>& objects = scene->GetSceneObjects();
         std::vector<GUIElement *>& guiElements = scene->GetGUIElements();
 
@@ -115,9 +109,6 @@ private:
         Color white[] = {255,255,255};
         defaultSprite = new Sprite(white, 1, 1);
 
-        defaultMesh = new Mesh();
-        defaultMesh->GenQuad(1.0f, 1.0f);
-
         defaultMaterial = new Material(mainShader);
         defaultMaterial->mainTexture = defaultSprite;
     }
@@ -127,13 +118,13 @@ private:
         contextLogger->Write(LogMessageType::M_INFO, "Compiling shaders\n");
 
         this->mainShader = new GLShader();
-        this->mainShader->LinkShader("./resources/shaders/vertexShader.vert", GL_VERTEX_SHADER);
-        this->mainShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
+        this->mainShader->LinkShader("./resources/shaders/default.vert", GL_VERTEX_SHADER);
+        this->mainShader->LinkShader("./resources/shaders/default.frag", GL_FRAGMENT_SHADER);
         this->mainShader->Build();
 
         this->guiShader = new GLShader();
-        this->guiShader->LinkShader("./resources/shaders/guiVertexShader.vert", GL_VERTEX_SHADER);
-        this->guiShader->LinkShader("./resources/shaders/fragmentShader.frag", GL_FRAGMENT_SHADER);
+        this->guiShader->LinkShader("./resources/shaders/gui.vert", GL_VERTEX_SHADER);
+        this->guiShader->LinkShader("./resources/shaders/default.frag", GL_FRAGMENT_SHADER);
         this->guiShader->Build();
     }
 
@@ -146,35 +137,16 @@ private:
                 return ;
             };
 
-        archetypeFunc[RenderingAttributes::SPRITE] =
-            [this](SceneObject * object){
-
-                Sprite * sprite = object->GetAttribute<Sprite>();
-                Mesh * mesh = this->GetDefaultMesh();
-
-                sprite->Load();
-                mesh->Draw();
-            };
-
         archetypeFunc[RenderingAttributes::MESH] =
             [this](SceneObject * object){
-
-                Sprite * sprite = object->GetAttribute<Sprite>();
                 Mesh * mesh = object->GetAttribute<Mesh>();
-
-                sprite->Load();
                 mesh->Draw();
             };
 
         archetypeFunc[RenderingAttributes::LINE] =
             [](SceneObject * object){
-
-                Sprite * sprite = object->GetAttribute<Sprite>();
                 LineRenderer * renderer = object->GetAttribute<LineRenderer>();
-
-                sprite->Load();
                 renderer->Draw();
-
             };
 
     }
@@ -203,8 +175,8 @@ public:
 
         this->contextLogger = context->GetContextLogger();
 
-        SetupUnhandledComponents();
         UploadMainShaders();
+        SetupUnhandledComponents();
         SetupArchetypeFunc();
 
     }
@@ -215,13 +187,10 @@ public:
         resourceManager->Emplace("camera", &mainCamera, sizeof(Camera));
     }
 
-    Mesh * GetDefaultMesh(){
-        return defaultMesh;
-    }
-
     ~GraphicSystem(){
+        delete mainShader;
+        delete guiShader;
         delete defaultSprite;
-        delete defaultMesh;
     }
 };
 

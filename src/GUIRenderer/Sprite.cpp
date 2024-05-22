@@ -53,7 +53,6 @@ Sprite::Sprite(const Sprite * sprite){
     this->width = sprite->width;
     this->height = sprite->height;
     this->currentFrame = 0;
-    this->parent = sprite->parent;
 
     for( const GLuint & el : sprite->frames ){
         this->frames.push_back(el);
@@ -91,11 +90,6 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
         // Select current texture
         glBindTexture(GL_TEXTURE_2D, textureID);
 
-#ifdef DEBUG
-
-        printf("[DEBUG] Updating texture %d\n", textureID);
-
-#endif
         // Set texture filtering mode
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -118,10 +112,6 @@ void Sprite::SetTextureAttrib(const GLenum & attrib, const GLint & value, const 
     glBindTexture(GL_TEXTURE_2D, frames[frameID]);
     glTexParameteri(GL_TEXTURE_2D, attrib, value);
     glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-AttributeID Sprite::GetAttributeID() const{
-    return RenderingAttributes::SPRITE;
 }
 
 void Sprite::Push(const Color * pixels, const uint32_t& width, const uint32_t& height){

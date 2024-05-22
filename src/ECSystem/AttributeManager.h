@@ -28,6 +28,7 @@ public:
             auto it = entityMap.find(ID);
             if (it != entityMap.end()) {
                 delete it->second;
+                it->second = nullptr;
                 entityMap.erase(it);
             }
         }
