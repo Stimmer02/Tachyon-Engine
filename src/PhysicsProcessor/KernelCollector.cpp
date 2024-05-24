@@ -28,6 +28,11 @@ char KernelCollector::addKernel(std::string path, std::string& kernelName){
     return 0;
 }
 
+char KernelCollector::addKernelCode(const std::string& code, const std::string& kernelName){
+    kernels.push_back(kernelData(code, kernelName));
+    return 0;
+}
+
 std::string KernelCollector::getKernels(){
     std::string kernelsCode = "";
     for (auto &kernel : kernels){

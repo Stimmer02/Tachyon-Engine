@@ -1,6 +1,8 @@
 #include "PhysicsProcessorBuilder.h"
 
 PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
+    PhysicsProcessor* physicsProcessor = new PhysicsProcessor();
+
     structTree = new StructTree();
     sizeCalculator = new SizeCalculator(8);
     clParser = new ClStructParser(macroManager);
@@ -69,12 +71,16 @@ char PhysicsProcessorBuilder::setStructDirAndRootFile(std::string dir, std::stri
 }
 
 
-void PhysicsProcessorBuilder::setClPlatform(cl_platform_id platform){
+void PhysicsProcessorBuilder::setClPlatform(cl_uint platform){
     clPlatformID = platform;
 }
 
-void PhysicsProcessorBuilder::setClDevice(cl_device_id device){
+void PhysicsProcessorBuilder::setClDevice(cl_uint device){
     clDeviceID = device;
+}
+
+std::string PhysicsProcessorBuilder::getDeviceName(){
+    return clDeviceName;
 }
 
 
@@ -184,8 +190,41 @@ char PhysicsProcessorBuilder::build(){
         error += "ERR: PhysicsProcessorBuilder::build failed to parse config files\n";
         return 6;
     }
+
+    if (createClContext() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to create cl context\n";
+        return 7;
+    }
+
+    if (createSubstanceStructure() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to create substance structure\n";
+        return 8;
+    }
+
+    if (buildStructTree() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to build struct tree\n";
+        return 9;
+    }
     
-   
+    if (loadKernels() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to load kernels\n";
+        return 10;
+    }
+
+    if (compileCl() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to compile OpenCL program\n";
+        return 11;
+    }
+
+    if (setMandatoryKernels() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
+        return 12;
+    }
+
+    if (setKernelQueue() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
+        return 13;
+    }
 
     return 0;
 }
@@ -215,6 +254,266 @@ char PhysicsProcessorBuilder::parseConfigFiles(){
         error += "ERR: PhysicsProcessorBuilder::parseConfigFiles failed to parse substance config file\n";
         return 4;
     }
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::createClContext(){
+    std::vector<cl::Platform> allPlatforms;
+    cl::Platform::get(&allPlatforms);
+
+    if (allPlatforms.empty()){
+        error += "ERR: PhysicsProcessorBuilder::createClContext no platforms found\n";
+        return 1;
+    }
+
+    if (allPlatforms.size() <= clPlatformID){
+        error += "ERR: PhysicsProcessorBuilder::createClContext specified platform does not exist (platform 0 will be used)\n";
+        clPlatformID = 0;
+    }
+
+    cl::Platform defaultPlatform = allPlatforms[clPlatformID];
+
+    std::vector<cl::Device> allDevices;
+    defaultPlatform.getDevices(CL_DEVICE_TYPE_ALL, &allDevices);
+
+
+    if (allDevices.size() == 0){
+        error += "ERR: PhysicsProcessorBuilder::createClContext no devices found\n";
+        return 2;
+    }
+
+    if (allDevices.size() <= clDeviceID){
+        error += "ERR: PhysicsProcessorBuilder::createClContext specified device does not exist (device 0 will be used)\n";
+        clDeviceID = 0;
+    }
+
+    cl::Device defaultDevice = allDevices[clDeviceID];
+    clDeviceName = defaultDevice.getInfo<CL_DEVICE_NAME>();
+
+    cl_platform_id platform;
+    clGetPlatformIDs(1, &platform, NULL);
+
+
+#ifdef __APPLE__
+
+    CGLContextObj glContext = CGLGetCurrentContext();
+    CGLShareGroupObj shareGroup = CGLGetShareGroup(glContext);
+
+    cl_context_properties properties[] = {
+        CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE,
+        (cl_context_properties)shareGroup,
+        0
+    };
+
+#elif __WIN32__
+
+    cl_context_properties properties[] = {
+        CL_CONTEXT_PLATFORM, (cl_context_properties)platform,
+        CL_GL_CONTEXT_KHR, (cl_context_properties)wglGetCurrentContext(),
+        CL_WGL_HDC_KHR, (cl_context_properties)wglGetCurrentDC(),
+        0
+    };
+
+#else
+
+     cl_context_properties properties[] = {
+        CL_GL_CONTEXT_KHR, (cl_context_properties) glXGetCurrentContext(),
+        CL_GLX_DISPLAY_KHR, (cl_context_properties) glXGetCurrentDisplay(),
+        CL_CONTEXT_PLATFORM, (cl_context_properties) platform,
+        0
+    };
+
+#endif
+    cl::Context context(defaultDevice, properties);
+    if (context() == NULL) {
+        error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + "\n";
+        return 3;
+    }
+
+    physicsProcessor->context = context;
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::createSubstanceStructure(){
+    std::string subsStructCode = substanceCollector->createSubstanceClStruct();
+    std::string subsStructFilePath = structDir + "/substance.cl";
+    std::ofstream file(subsStructFilePath);
+    if (file.is_open()){
+        file << subsStructCode;
+        file.close();
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::createSubstanceStructure failed to write substance structure to file\n";
+        return 1;
+    }
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::buildStructTree(){
+    if (structTree->build(clParser) != 0){
+        error += structTree->getError();
+        error += "ERR: PhysicsProcessorBuilder::buildStructTree failed to build struct tree\n";
+        return 1;
+    }
+
+    if (structTree->calculateSizes(sizeCalculator) != 0){
+        error += structTree->getError();
+        error += "ERR: PhysicsProcessorBuilder::buildStructTree failed to calculate struct sizes\n";
+        return 2;
+    }
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::loadKernels(){
+    if (kernelQueueBuilder->collectKernels(*kernelCollector) != 0){
+        error += kernelQueueBuilder->getError();
+        error += "ERR: PhysicsProcessorBuilder::loadKernels failed to collect kernels\n";
+        return 1;
+    }
+
+    addMandatoryKernels();
+    return 0;
+}
+
+void PhysicsProcessorBuilder::addMandatoryKernels(){
+    const std::string spawnVoxelKernelName = "spawn_voxel";
+    const std::string spawnVoxelKernelCode = 
+        "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
+        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;"
+        "        resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
+        "    }";
+
+    const std::string spawnVoxelsInAreaKernelName = "spawn_voxels_in_area";
+    const std::string spawnVoxelsInAreaKernelCode = 
+        "   void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "       uint globalID, IDX, IDY;"
+        "       IDX = x + get_global_id(0);"
+        "       IDY = y + get_global_id(1);"
+        "       globalID = IDY * config->simulationWidth + IDX;"
+        ""
+        "        if (config->simulationWidth > IDX && config->simulationHeight > IDY){"
+        "           resources->worldMap->voxels[globalID].forceVector.x = 0;"
+        "           resources->worldMap->voxels[globalID].forceVector.y = 0;"
+        "           resources->worldMap->voxels[globalID].substanceID = substanceID;"
+        "        }"
+        "   }";
+
+    const std::string countVoxelsKernelName = "count_voxels";
+    const std::string countVoxelsKernelCode = 
+        "    void kernel count_voxels(global struct engineResources* resources, global uint* workArr, uint size, global uint* returnValue){"
+        "        private uint id = get_global_id(0);"
+        "        private uint dim = get_local_size(0);"
+        "        private char dividionRest = size & 0x1;"
+        "        private uint currentSize = size >> 1;"
+        "        private uint index;"
+        ""
+        "        for (private uint i = id; i < currentSize; i += dim){"
+        "           index = i << 1;"
+        "            workArr[i] = (resources->worldMap->voxels[index].substanceID > 0) + (resources->worldMap->voxels[index+1].substanceID > 0);"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        if (dividionRest){"
+        "            if (id == 0){"
+        "               workArr[currentSize] = (resources->worldMap->voxels[currentSize << 1].substanceID > 0);"
+        "           }"
+        "           currentSize++;"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        dividionRest = currentSize & 0x1;"
+        "        currentSize >>= 1;"
+        ""
+        "        while (currentSize > 1){"
+        "            for (private uint i = id; i < currentSize; i += dim){"
+        "               index = i << 1;"
+        "               workArr[i] = workArr[index] + workArr[index+1];"
+        "            }"
+        "            barrier(CLK_LOCAL_MEM_FENCE);"
+        "            if (dividionRest){"
+        "               if (id == 0){"
+        "                   workArr[currentSize] = workArr[currentSize << 1];"
+        "               }"
+        "               currentSize++;"
+        "           }"
+        "            barrier(CLK_LOCAL_MEM_FENCE);"
+        "            dividionRest = currentSize & 0x1;"
+        "            currentSize >>= 1;"
+        "        }"
+        "        barrier(CLK_LOCAL_MEM_FENCE);"
+        "        if (id == 0){"
+        "            *returnValue = workArr[0] + workArr[1];"
+        "            if (dividionRest == 1){"
+        "               *returnValue += workArr[2];"
+        "            }"
+        "       }"
+        "   }";
+
+    kernelCollector->addKernelCode(spawnVoxelKernelName, spawnVoxelKernelCode);
+    kernelCollector->addKernelCode(spawnVoxelsInAreaKernelName, spawnVoxelsInAreaKernelCode);
+    kernelCollector->addKernelCode(countVoxelsKernelName, countVoxelsKernelCode);
+}
+
+char PhysicsProcessorBuilder::compileCl(){
+    cl::Program::Sources sources;
+    std::string code = structTree->getStructures();
+    code += kernelCollector->getKernels();
+    sources.push_back({code.c_str(), code.length()});
+
+    program = cl::Program(physicsProcessor->context, sources);
+
+    cl_int buildCode = program.build();
+
+    if (buildCode != CL_SUCCESS) {
+        error += "ERR: PhysicsProcessorBuilder::compileCl failed to compile OpenCL program\n";
+        return 1;
+        // std::fprintf(stderr ,"Error building TACHYON_ENGINE code: %d\n", buildCode);
+        // std::fprintf(stderr ,"Trying fallback settings...\n");
+
+        // context = cl::Context(defaultDevice);
+        // program = cl::Program(context, sources);
+
+        // buildCode = program.build();
+        // if (buildCode != CL_SUCCESS) {
+        //     std::fprintf(stderr ,"Error building TACHYON_ENGINE %d: %s\n", buildCode, PhysicsProcessorBuilder::getErrorString(buildCode).c_str());
+        //     std::fprintf(stderr ,"Error building TACHYON_ENGINE content:\n%s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(defaultDevice).c_str());
+        //     std::fprintf(stderr ,"ERROR: not able to compile TACHYON_ENGINE kernel!\n");
+        //     return nullptr;
+        // }
+        // std::fprintf(stderr ,"WARNING: entering fallback mode\n");
+        // std::printf("Compillation TACHYON_ENGINE successful!\n");
+        // cl::Kernel TACHYON_ENGINE(program, "TACHYON_ENGINE");
+        // return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config, defaultDevice);
+    }
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::setMandatoryKernels(){
+    physicsProcessor->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+    if (physicsProcessor->spawn_voxelKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxel kernel\n";
+        return 1;
+    }
+
+    physicsProcessor->spawn_voxel_in_areaKernel = cl::Kernel(program, "spawn_voxels_in_area");
+    if (physicsProcessor->spawn_voxel_in_areaKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxels_in_area kernel\n";
+        return 2;
+    }
+
+    physicsProcessor->count_voxelKernel = cl::Kernel(program, "count_voxels");
+    if (physicsProcessor->count_voxelKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create count_voxels kernel\n";
+        return 3;
+    }
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::setKernelQueue(){
 
     return 0;
 }

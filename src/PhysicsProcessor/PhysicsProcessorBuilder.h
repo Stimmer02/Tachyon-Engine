@@ -1,10 +1,14 @@
-#ifndef _PHYSICSPROCSSORBUILDER_H
-#define _PHYSICSPROCSSORBUILDER_H
+#ifndef PHYSICSPROCSSORBUILDER_H
+#define PHYSICSPROCSSORBUILDER_H
 
 #include "SubstanceCollector.h"
 #include "StructTree.h"
 #include "KernelCollector.h"
 #include "KernelQueueBuilder.h"
+
+#include "PhysicsProcessor.h"
+
+// #include "../ Configurator.h"
 
 
 class PhysicsProcessorBuilder{
@@ -19,18 +23,21 @@ class PhysicsProcessorBuilder{
         char setSubstanceConfigFilePath(std::string path);
         char setStructDirAndRootFile(std::string dir, std::string rootFile);
 
-        void setClPlatform(cl_platform_id platform);
-        void setClDevice(cl_device_id device);
+        void setClPlatform(cl_uint platform);
+        void setClDevice(cl_uint device);
 
         // char setPBO(GLuit PBO);
+
+        std::string getDeviceName();
         std::string getError();
         std::string translateClBuildError(cl_int error);
 
         char build();
-
-        // PhysicsProcessor* build();
+        PhysicsProcessor* getPhysicsProcessor();
 
     private:
+        PhysicsProcessor* physicsProcessor;
+
         StructTree* structTree;
         SizeCalculator* sizeCalculator;
         MacroManager* macroManager;
@@ -46,20 +53,22 @@ class PhysicsProcessorBuilder{
         std::string structDir;
         std::string structRootFile;
 
-        cl_platform_id clPlatformID;
-        cl_device_id clDeviceID;
+        cl_uint clPlatformID;
+        cl_uint clDeviceID;
+        std::string clDeviceName;
+        cl::Program program;
 
         // GLuit PBO;
 
         char parseConfigFiles(); //reads location and priority of kernels, root location of structs, macros, location of substances directory
         char createClContext(); //creates cl context (platform / device) based on config file
+        char createSubstanceStructure(); //creates substance structure based on loaded substances
         char buildStructTree(); //builds struct tree and calculates its properties
+        char loadKernels(); //loads kernels from files
+        void addMandatoryKernels(); //adds kernels that are mandatory for PhysicsProcessor to work
         char compileCl(); //compiles all the kernels and structs
-        char addMandatoryKernels(); //adds kernels that are mandatory for PhysicsProcessor to work
-        char createSubstanceTable(); //creates substance table
-        char compileCl(); //compiles all the kernels and structs
-        char setKernelQueue(); //sets engine kernel queue based on their priority
         char setMandatoryKernels(); //sets previously defined kernels
+        char setKernelQueue(); //sets engine kernel queue based on their priority
         std::string createAllocationKernel(); //creates kernel that allocates memory for particullar structure
         char allocateGPUMemory(); //allocates memory for all structures based on structure tree
         char acquireGlObjectFromPBO(); //acquires gl object from PBO

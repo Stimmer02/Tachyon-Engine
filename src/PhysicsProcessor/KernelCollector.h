@@ -12,6 +12,7 @@ public:
     KernelCollector();
 
     char addKernel(std::string path, std::string& kernelName);
+    char addKernelCode(const std::string& code, const std::string& kernelName);
     std::string getKernels(); //returns kernels code in a single string
     std::string getError();
 

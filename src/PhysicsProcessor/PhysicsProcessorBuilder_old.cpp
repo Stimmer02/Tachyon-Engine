@@ -41,7 +41,7 @@ IPhysicsProcessor* PhysicsProcessorBuilder::build(KernelBuilder& kernelBuilder, 
     cl::Device defaultDevice = allDevices[deviceID];
     std::printf("Using device:\t%s\n", defaultDevice.getInfo<CL_DEVICE_NAME>().c_str());
 
-    cl_platform_id platform;
+    cl_uint platform;
     clGetPlatformIDs(1, &platform, NULL);
 
 
