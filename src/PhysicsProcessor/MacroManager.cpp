@@ -14,7 +14,7 @@ float* MacroManager::getMacro(std::string keyword){
 char MacroManager::parseFile(std::string filename){
     std::ifstream file(filename);
     if (!file.is_open()){
-        std::fprintf(stderr, "ERR: MacroManager::parseFile COULD NOT PARSE FILE %s\n", filename.c_str());
+        error += "ERR: MacroManager::parseFile could not parse file" + filename +"\n";
         return -1;
     }
 
@@ -33,11 +33,15 @@ char MacroManager::parseFile(std::string filename){
             addMacro(keyword, value);
         }
         catch (const std::invalid_argument&){
-            std::fprintf(stderr, "ERR: MacroManager::parseFile COULD NOT PARSE VALUE %s\n", line.c_str());
+            error += "ERR: MacroManager::parseFile could not parse value " + line + "\n";
             return -1;
         }
     }
 
     file.close();
     return 0;
+}
+
+std::string MacroManager::getError(){
+    return error;
 }

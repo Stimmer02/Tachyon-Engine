@@ -11,7 +11,11 @@ public:
     float* getMacro(std::string keyword);
     char parseFile(std::string filename);
 
+    std::string getError();
+
 private:
     std::map<std::string, float> macros;
+
+    std::string error;
 };
 #endif
