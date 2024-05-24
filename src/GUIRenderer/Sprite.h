@@ -1,21 +1,22 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "Image.h"
+#include "BitmapReader.h"
+#include "Attribute.h"
+
+#include <stdio.h>
+#include <map>
+#include <string>
 #include <cstring>
 
 #ifdef __APPLE__
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <OpenGL/gl3.h>
-#include <OpenGL/OpenGL.h>
 
 #elif _WIN32
 
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
 
 #else
 
@@ -25,7 +26,20 @@
 
 #endif
 
-class Sprite {
+#include <vector>
+#include <iostream>
+
+
+static std::map<std::string, GLuint> almanach;
+
+class Sprite : public AttributeType<Sprite>{
+
+private:
+
+    std::vector<GLuint> frames;
+    int currentFrame = 0;
+    uint32_t width;
+    uint32_t height;
 
 public:
 
@@ -33,39 +47,49 @@ public:
     /// @param pixels
     /// @param width
     /// @param height
-    /// @return Sprite object
-    static Sprite* Create(const Color * pixels, const uint32_t& width, const uint32_t& height);
+    Sprite(const Color * pixels, const uint32_t& width, const uint32_t& height);
 
     /// @brief Method creates a new Sprite within OpenGL graphic context.
     /// @param image
     /// @return Sprite object
-    static Sprite* Create(const Image * image);
+    Sprite(const Image * image);
+
+    /// @brief Method creates a new Sprite within OpenGL graphic context.
+    /// @param path
+    /// @return Sprite object
+    Sprite(const char * filepath);
 
     /// @brief Method creates a new texture for current object.
     /// @param pixels
     /// @param width
     /// @param height
-    void UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height);
+    void UpdateTexture(const Color * pixels, const uint32_t& width, const uint32_t& height, const GLuint & frameID = 0);
 
-    /// @brief Method returns width of sprite.
-    /// @return Sprite width
-    uint32_t GetWidth();
-
-    /// @brief Method returns height of sprite.
-    /// @return Sprite height
-    uint32_t GetHeight();
-
-    /// @brief Method returns pbo of current sprite
-    /// @return Sprite pbo
-    GLuint GetPixelBuffer();
+    /// @brief Method sets value correlated to texture attribute
+    void SetTextureAttrib(const GLenum & attrib, const GLint & value, const GLuint & frameID = 0);
 
     /// @brief Method returns texture id of current sprite
     /// @return Sprite texture id
-    GLuint GetTextureID();
+    GLuint GetTextureID(const GLuint & frameID = 0);
 
-    /// @brief Method returns sprite cheksum.
-    /// @return Sprite checksum
-    uint32_t GetChecksum();
+    /// @brief Pushes a new frame to animation
+    /// @param pixels
+    /// @param width
+    /// @param height
+    void Push(const Color * pixels, const uint32_t& width, const uint32_t& height);
+
+    /// @brief Pushes a new frame to animation
+    /// @param filepath
+    void Push(const char * filepath);
+
+    /// @brief Switches pointer to the next frame
+    void NextFrame();
+
+    /// @brief Removes the last frame from animation
+    void Pop();
+
+    /// @brief Changes color of pixel at given coordinates
+    void SetPixel(const uint32_t & x, const uint32_t & y, const Color & color);
 
     /// @brief Method loads current sprite to texture buffer.
     void Load();
@@ -76,29 +100,15 @@ public:
     /// @brief Method deletes texture from OpenGL graphic context.
     void Destroy();
 
-    bool operator==(const Sprite& sprite);
+    /// @brief Method fills texture with provided color
+    void ClearCanvas(const Color & clearColor);
+
+    AttributeID GetAttributeID() const override;
 
     ~Sprite();
 
-private:
-
-    Sprite();
-
-    /// @brief Method calculate image checksum within uint32_t range.
-    /// @param pixels
-    /// @param width
-    /// @param height
-    void CalculateChecksum(const Color * pixels, const uint32_t& width, const uint32_t& height);
-
-    uint32_t width;
-    uint32_t height;
-
-    GLuint textureID;
-    GLuint pixelBuffer;
-
-    uint32_t checksum;
-
 };
 
+static Sprite * defaultSprite;
 
 #endif

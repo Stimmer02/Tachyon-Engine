@@ -38,7 +38,7 @@ private:
 
 	GLFWwindow* window;
 
-	Scene scene;
+	// Scene scene;
 
 	EventType eventType;
 
@@ -49,8 +49,6 @@ public:
 	UIManager(const int &windowWidth, const int &windowHeight, const char* windowTitle, const bool & enableVSync);
 
 	void AssignEventHandlingService(IEventHandlingService* _eventHandling);
-
-	void AssignInputHandlingService(IInputHandler* _inputHandler);
 
 	void AddComponentToScene(Component* component);
 

@@ -5,8 +5,6 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <OpenGL/gl3.h>
-#include <OpenGL/OpenGL.h>
 
 #elif _WIN32
 
@@ -58,6 +56,8 @@ public:
 	float getY();
 
 	Color getColor();
+
+	bool operator ==(const Component &other);
 };
 
 #endif

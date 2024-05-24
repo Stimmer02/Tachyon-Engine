@@ -9,7 +9,6 @@ UIManager::UIManager(const int &windowWidth, const int &windowHeight, const char
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
 
     glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
@@ -25,16 +24,27 @@ UIManager::UIManager(const int &windowWidth, const int &windowHeight, const char
     glfwMakeContextCurrent(window);
     glfwSwapInterval(enableVSync);
 
-	glLoadIdentity();
-    glOrtho(0, windowWidth, 0, windowHeight, -1.0f, 1.0f);
-    glViewport(0, 0, windowWidth, windowHeight);
-
-	if (glewInit() != GLEW_OK) {
+    glewExperimental = true;
+    if (glewInit() != GLEW_OK) {
         glfwDestroyWindow(window);
         glfwTerminate();
         fprintf(stderr, "Failed to initialize GLEW\n");
         return;
     }
+
+    const GLubyte * renderer = glGetString(GL_RENDERER);
+    const GLubyte * version = glGetString(GL_VERSION);
+
+    printf("Renderer: %s\n", renderer);
+    printf("OpenGL version supported %s\n", version);
+
+    glEnable(GL_DEPTH_TEST);
+
+	glLoadIdentity();
+    glOrtho(0, windowWidth, 0, windowHeight, -1.0f, 1.0f);
+    glViewport(0, 0, windowWidth, windowHeight);
+
+    this->inputHandlingService = nullptr;
 
 }
 
@@ -42,13 +52,8 @@ void UIManager::AssignEventHandlingService(IEventHandlingService * _eventHandlin
 	eventHandlingService = _eventHandling;
 }
 
-void UIManager::AssignInputHandlingService(IInputHandler * _inputHandler){
-	inputHandlingService = _inputHandler;
-	_inputHandler->BindWindow(window);
-}
-
 void UIManager::AddComponentToScene(Component * component){
-	scene.AddComponent(component);
+	// scene.AddComponent(component);
 }
 
 void UIManager::HandleEvents(){
@@ -56,19 +61,18 @@ void UIManager::HandleEvents(){
     if( inputHandlingService == nullptr )
         return;
 
-
     static float lastX, lastY;
 
 	EventInfo info = inputHandlingService->Query();
 
 	if(info.type == EventType::ONCLICK && lastX!=info.x && lastY != info.y){
-        Component * component = scene.GetComponent(info.x, info.y);
+        // Component * component = scene.GetComponent(info.x, info.y);
 
-        if(component != nullptr){
-            InteractiveComponent * interactive = dynamic_cast<InteractiveComponent*>(component);
+        // if(component != nullptr){
+        //     InteractiveComponent * interactive = dynamic_cast<InteractiveComponent*>(component);
 
-            eventHandlingService->Publish( info.type, interactive );
-        }
+        //     eventHandlingService->Publish( info.type, interactive );
+        // }
 
         lastX = info.x;
         lastY = info.y;
@@ -78,7 +82,7 @@ void UIManager::HandleEvents(){
 
 void UIManager::Update(){
 
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	HandleEvents();
 	Render();
@@ -94,7 +98,7 @@ void UIManager::Update(){
 }
 
 void UIManager::Render(){
-	scene.Render();
+	// scene.Render();
 }
 
 bool UIManager::ShouldClose(){

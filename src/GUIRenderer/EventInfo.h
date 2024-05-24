@@ -4,11 +4,9 @@
 #include "EventType.h"
 
 struct EventInfo {
-   
     EventType type;
     double x;
     double y;
-
 };
 
 #endif
