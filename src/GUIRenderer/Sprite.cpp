@@ -9,7 +9,7 @@ Sprite::Sprite(const Color * pixels, const uint32_t& width, const uint32_t& heig
     this->height = height;
     this->currentFrame = 0;
     this->UpdateTexture(pixels, width, height);
-    
+
 }
 
 Sprite::Sprite(const char * filepath){
@@ -45,15 +45,18 @@ Sprite::Sprite(const Image * image){
     this->height = image->height;
     this->currentFrame = 0;
     this->UpdateTexture(image->pixels, image->width, image->height);
-    
-    // for(int i = 0; i < width*height; ++i){
-    //     if(i % width == 0){
-    //         std::cout << '\n';
-    //     }
-    //     std::cout << (int)image->pixels[i].B / (int)255 << ' ';
-        
-    // }
-    
+
+}
+
+Sprite::Sprite(const Sprite * sprite){
+
+    this->width = sprite->width;
+    this->height = sprite->height;
+    this->currentFrame = 0;
+
+    for( const GLuint & el : sprite->frames ){
+        this->frames.push_back(el);
+    }
 
 }
 
@@ -69,12 +72,6 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
         glGenTextures(1, &textureID);
 
         frames.emplace_back(textureID);
-
-#ifdef DEBUG
-
-        printf("[DEBUG] Generating texture %d\n", textureID);
-
-#endif
 
         // Select current texture
         glBindTexture(GL_TEXTURE_2D, textureID);
@@ -93,11 +90,6 @@ void Sprite::UpdateTexture(const Color * pixels, const uint32_t& width, const ui
         // Select current texture
         glBindTexture(GL_TEXTURE_2D, textureID);
 
-#ifdef DEBUG
-
-        printf("[DEBUG] Updating texture %d\n", textureID);
-
-#endif
         // Set texture filtering mode
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -120,10 +112,6 @@ void Sprite::SetTextureAttrib(const GLenum & attrib, const GLint & value, const 
     glBindTexture(GL_TEXTURE_2D, frames[frameID]);
     glTexParameteri(GL_TEXTURE_2D, attrib, value);
     glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-AttributeID Sprite::GetAttributeID() const{
-    return RenderingAttributes::SPRITE;
 }
 
 void Sprite::Push(const Color * pixels, const uint32_t& width, const uint32_t& height){

@@ -3,10 +3,12 @@
 
 #include "KDT.h"
 #include "Scene.h"
+#include <stdint.h>
 
 class InteractionManager {
 private:
     KDT interactiveElementContainer;
+    uint32_t numElements;
 public:
 
     void LoadScene(Scene & scene){
@@ -24,10 +26,19 @@ public:
 
         }
 
+        this->numElements = interactiveElements.size();
+
+        if(numElements == 0)
+            return;
+
         interactiveElementContainer.buildTree(interactiveElements);
     }
 
     void Interact(const int & x, const int & y){
+
+        if(numElements == 0)
+            return;
+
         InteractiveElement * element = interactiveElementContainer.find(x, y);
 
         fprintf(stdout, "Element status : %s\n", element?"FOUND":"LOST");

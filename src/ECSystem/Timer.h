@@ -18,13 +18,12 @@ private:
 
     uint32_t lastFrameCount;
 
+public:
+
     Timer(){
         this->lastTime = GetCurrentTime();
         this->deltaTime = 1.0f/60.0f;
     }
-
-
-public:
 
     void TicTac(){
         Timepoint currentTime = GetCurrentTime();
@@ -52,12 +51,6 @@ public:
 
     double & GetAccumulatedTime(){
         return accumulatedTime;
-    }
-
-    static Timer& GetInstance(){
-        static Timer instance;
-
-        return instance;
     }
 
     static Timepoint GetCurrentTime(){

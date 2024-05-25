@@ -34,7 +34,6 @@ typedef unsigned int uint;
 
 #endif
 
-#include "MouseButtonMonitor.h"
 
 #include <string>
 #include <vector>

@@ -25,23 +25,11 @@ private:
 
 protected:
 
-    // NameResolver * _1_placeholder;
-    // ILogger * _2_placeholder;
-
-    /// @brief This method is called on system startup and by default does nothing
-    virtual void OnLoad();
-
     /// @brief This abstract method is called every iteration of system loop and must be defined by specified system
     virtual void Execute() = 0;
 
-    /// @brief This method is called on system shutdown and by default does nothing
-    virtual void OnUnload();
-
     /// @brief This method is called when system have any pending messages stored in internal queue and by default does nothing
     virtual void HandleMessage(const Message & message);
-
-    /// @brief This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system
-    virtual void Share() = 0;
 
     /// @brief This method is used to send message to specified channel within message bus scope
     /// @param channel name of channel
@@ -54,11 +42,20 @@ public:
 
     System();
 
+    /// @brief This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system
+    virtual void Share(SharedNameResolver * resourceManager){};
+
+    /// @brief This method is called on system startup and by default does nothing
+    virtual void OnLoad();
+
     /// @brief Executes system loop
     void Run();
 
     /// @brief Sends stop signal to system thread
     void Stop();
+
+    /// @brief This method is called on system shutdown and by default does nothing
+    virtual void OnUnload();
 
     virtual ~System();
 

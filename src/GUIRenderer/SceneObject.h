@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "GLShader.h"
 #include "AttributeManager.h"
+#include "Material.h"
 #include "Sprite.h"
 
 #include <vector>
@@ -22,14 +23,18 @@ private:
     AttributeManager * manager;
 public:
 
+    Material * material;
+
     Transform transform;
     bool isActive;
 
     SceneObject(const Entity & ID){
         this->parent = nullptr;
+        this->archetype = 0;
         this->isActive = true;
         this->ID = ID;
         this->manager = &AttributeManager::GetInstance();
+        this->material = defaultMaterial;
     }
 
     void SetParent(SceneObject * parent){

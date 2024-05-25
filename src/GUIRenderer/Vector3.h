@@ -30,7 +30,7 @@ public:
         this->x = 0.0f;
         this->y = 0.0f;
         this->z = 0.0f;
-        this->w = 0.0f;
+        this->w = 1.0f;
     }
 
     float Magnitude() const{
@@ -128,6 +128,42 @@ public:
 
     bool operator!=(const Vector3 & v) const{
         return (x!=v.x || y!=v.y || z!=v.z || w != v.w);
+    }
+
+    Vector3& operator +=(const Vector3 & v) {
+        this->x += v.x;
+        this->y += v.y;
+        this->z += v.z;
+        return *this;
+    }
+
+    Vector3& operator -=(const Vector3 & v) {
+        this->x -= v.x;
+        this->y -= v.y;
+        this->z -= v.z;
+        return *this;
+    }
+
+    Vector3& operator *=(const Vector3 & v) {
+        this->x *= v.x;
+        this->y *= v.y;
+        this->z *= v.z;
+        return *this;
+    }
+
+    Vector3& operator /=(const Vector3 & v) {
+        this->x /= v.x;
+        this->y /= v.y;
+        this->z /= v.z;
+        return *this;
+    }
+
+    Vector3& operator /=(const float & scalar) {
+        assert(scalar != 0.0f && "Cannot divide by zero");
+        this->x /= scalar;
+        this->y /= scalar;
+        this->z /= scalar;
+        return *this;
     }
 
 };

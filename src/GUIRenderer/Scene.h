@@ -32,6 +32,11 @@ public:
 		return object;
 	}
 
+	void DestroyEntity(SceneObject * object){
+		Entity ID = object->GetEntityID();
+		entities.Destroy( ID );
+	}
+
 	void AddEntityToScene(SceneObject * object){
 		objects.push_back(object);
 	}

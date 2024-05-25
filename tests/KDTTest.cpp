@@ -386,3 +386,4 @@ TEST(KDTreeTests, treeTest10){
     ASSERT_TRUE(spr);
     delete tree;
 }
+

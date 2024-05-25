@@ -145,6 +145,17 @@ public:
 
     }
 
+    void TransferToShader(const std::string & uniformName, float & scalar){
+
+        GLuint location = GetUniformLocation(uniformName);
+
+        if( location == -1 )
+            return;
+
+        glUniform1fv(location, 1, (GLfloat*)&scalar);
+
+    }
+
     void TransferToShader(const std::string & uniformName, Vector3 & vector){
 
         GLuint location = GetUniformLocation(uniformName);

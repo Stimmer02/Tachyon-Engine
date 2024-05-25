@@ -4,11 +4,12 @@
 #include "Settings.h"
 #include "Matrix.h"
 
+const Vector3 worldUp = Vector3(0.0f, 1.0f, 0.0f);
+
 class Camera{
 
 public:
     Vector3 position;
-    Vector3 worldUp;
 
     Vector3 right;
     Vector3 up;
@@ -24,7 +25,8 @@ public:
 
 private:
 
-    Matrix viewMatrix;
+    Matrix projection;
+    Matrix view;
 
     void UpdateVectors(){
 
@@ -44,23 +46,22 @@ private:
 
 public:
 
-    Camera(const Vector3& position = Vector3(0.0f,0.0f,0.0f), const Vector3 & worldUp = Vector3(0.0f, 1.0f, 0.0f), const float & yaw = -90.0f, const float & pitch = 0.00f ){
-        this->position = position;
-        this->worldUp = worldUp;
+
+    Camera(){
+        this->position = Vector3(0.0f, 0.0f, 0.0f);
+        this->front = Vector3(0.0f, 0.0f, 1.0f);
         this->up = worldUp;
-        this->right = Vector3::Cross(worldUp, front).Normalize();
-        this->front = Vector3(0.0f, 0.0f, -1.0f);
-        this->yaw = yaw;
-        this->pitch = pitch;
-        UpdateVectors();
+        this->right = Vector3::Cross(front, worldUp).Normalize();
+        this->yaw = -90.0f;
+        this->pitch = 0.0f;
     }
 
-    Matrix& GetViewMatrix(){
+    Matrix GetViewMatrix() const{
 
-        Matrix look = Matrix::LookAt(position, front, up, right);
-        viewMatrix = look;
+        Vector3 right = Vector3::Cross(up, front).Normalize();
 
-        return viewMatrix;
+
+        return Matrix::LookAt(position, front, up, right);
     }
 
     void ResetView(){
@@ -77,11 +78,11 @@ public:
 
         Vector3 direction = (target - this->position).Normalize();
         Vector3 newRight = Vector3::Cross(worldUp, direction).Normalize();
-        Vector3 newFront = Vector3::Cross(direction, newRight).Normalize();
+        Vector3 newUp = Vector3::Cross(direction, newRight).Normalize();
 
-        this->front = newFront;
-        this->right = newRight;
         this->front = direction;
+        this->right = newRight;
+        this->up = newUp;
 
         UpdateVectors();
 
@@ -105,7 +106,6 @@ public:
 
         this->position =  position + direction * movementSpeed * deltaTime;
 
-        UpdateVectors();
     }
 
 };

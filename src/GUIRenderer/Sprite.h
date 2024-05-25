@@ -2,29 +2,14 @@
 #define SPRITE_H
 
 #include "BitmapReader.h"
-#include "Attribute.h"
 
 #include <stdio.h>
 #include <map>
 #include <string>
 #include <cstring>
 
-#ifdef __APPLE__
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-#elif _WIN32
-
-#include <GL/glew.h>
-
-#else
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/glx.h>
-
-#endif
 
 #include <vector>
 #include <iostream>
@@ -32,7 +17,7 @@
 
 static std::map<std::string, GLuint> almanach;
 
-class Sprite : public AttributeType<Sprite>{
+class Sprite{
 
 private:
 
@@ -58,6 +43,9 @@ public:
     /// @param path
     /// @return Sprite object
     Sprite(const char * filepath);
+
+    /// @brief Method creates deep copy of given sprite
+    Sprite(const Sprite * sprite);
 
     /// @brief Method creates a new texture for current object.
     /// @param pixels
@@ -102,8 +90,6 @@ public:
 
     /// @brief Method fills texture with provided color
     void ClearCanvas(const Color & clearColor);
-
-    AttributeID GetAttributeID() const override;
 
     ~Sprite();
 
