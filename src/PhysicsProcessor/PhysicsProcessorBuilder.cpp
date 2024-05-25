@@ -1,7 +1,7 @@
 #include "PhysicsProcessorBuilder.h"
 
 PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
-    PhysicsProcessor* physicsProcessor = new PhysicsProcessor();
+    physicsProcessor = nullptr;
 
     structTree = new StructTree();
     sizeCalculator = new SizeCalculator(8);
@@ -30,6 +30,12 @@ PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
     delete kernelQueueBuilder;
     delete substanceCollector;
 }
+
+
+char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
+
+}
+
 
 char PhysicsProcessorBuilder::setKernelConfigFilePath(std::string path){
     std::ifstream file(path);
@@ -190,24 +196,26 @@ char PhysicsProcessorBuilder::build(){
         error += "ERR: PhysicsProcessorBuilder::build failed to parse config files\n";
         return 6;
     }
+    
+    if (loadKernels() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to load kernels\n";
+        return 7;
+    }
+
+    physicsProcessor = new PhysicsProcessor(kernelQueueBuilder->getKernelQueueSize());
 
     if (createClContext() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create cl context\n";
-        return 7;
+        return 8;
     }
 
     if (createSubstanceStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create substance structure\n";
-        return 8;
+        return 9;
     }
 
     if (buildStructTree() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to build struct tree\n";
-        return 9;
-    }
-    
-    if (loadKernels() != 0){
-        error += "ERR: PhysicsProcessorBuilder::build failed to load kernels\n";
         return 10;
     }
 
@@ -514,6 +522,21 @@ char PhysicsProcessorBuilder::setMandatoryKernels(){
 }
 
 char PhysicsProcessorBuilder::setKernelQueue(){
+    const std::vector<kernelExecutionUnit>& kernelQueue = kernelQueueBuilder->getKernelQueue();
 
+    uint engineIterator = 0;
+    for (uint i = 0; i < kernelQueue.size(); i++){
+        const kernelExecutionUnit& keu = kernelQueue[i];
+        cl::Kernel kernel(program, keu.functionName.c_str());
+        if (kernel() == NULL){
+            error += "ERR: PhysicsProcessorBuilder::setKernelQueue failed to create engine kernel named: "  + keu.functionName + "\n";
+            return 1;
+        }
+        for (uint j = 0; j < keu.executionCount; j++){
+            physicsProcessor->engine[engineIterator] = kernel;
+            engineIterator++;
+        }
+    }
+    
     return 0;
 }

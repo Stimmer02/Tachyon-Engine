@@ -38,30 +38,25 @@ typedef unsigned int uint;
 class PhysicsProcessor{
     friend class PhysicsProcessorBuilder;
 public:
-    // ~PhysicsProcessor();
+    void spawnVoxel(int x, int y, int type);
+    void spawnVoxelsInArea(int x, int y, int width, int height, int type);
+    uint countVoxels();
 
+    void generateFrame();
 
 private:
-    PhysicsProcessor(){};
+    PhysicsProcessor(const uint& engineSize);
 
     cl::Context context;
-    cl::Kernel engine;
-    // engineConfig config;
     cl::Device device;
-
-    std::vector<cl::Buffer*> allocatedGPUMemory;
-
     cl::CommandQueue queue;
-    cl_mem pbo_mem;
-    cl::Buffer pbo_buff;
-    cl::Buffer engineResources;
-    cl::Buffer eConfig;
-    cl::Buffer sumReturnValue;
+
+    cl::Kernel* engine;
+    const uint engineSize; 
 
     cl::Kernel spawn_voxelKernel;
     cl::Kernel count_voxelKernel;
     cl::Kernel spawn_voxel_in_areaKernel;
-
 };
 
 #endif

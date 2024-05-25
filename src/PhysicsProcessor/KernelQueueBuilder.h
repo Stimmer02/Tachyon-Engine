@@ -14,6 +14,7 @@ class KernelQueueBuilder{
         char parseConfig(std::string path);
         char collectKernels(KernelCollector& kc);
         const std::vector<kernelExecutionUnit>& getKernelQueue();
+        uint getKernelQueueSize();
         std::string getError();
     private:
         std::vector<kernelExecutionUnit> kernelQueue;

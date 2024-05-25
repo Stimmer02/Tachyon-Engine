@@ -71,6 +71,15 @@ const std::vector<kernelExecutionUnit>& KernelQueueBuilder::getKernelQueue(){
     return kernelQueue;
 }
 
+uint KernelQueueBuilder::getKernelQueueSize(){
+    uint size;
+    for (auto &keu : kernelQueue){
+        size += keu.executionCount;
+    }
+
+    return size;
+}
+
 std::string KernelQueueBuilder::getError(){
     return error;
 }

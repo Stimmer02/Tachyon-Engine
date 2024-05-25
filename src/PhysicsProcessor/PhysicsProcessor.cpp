@@ -1,10 +1,8 @@
 #include "PhysicsProcessor.h"
-#include "IPhysicsProcessor.h"
-#ifdef __APPLE__
-#include "../OpenCL/include/CL/cl.hpp"
-#else
-#include <CL/opencl.hpp>
-#endif
+
+PhysicsProcessor::PhysicsProcessor(const uint& engineSize): engineSize(engineSize){
+    engine = new cl::Kernel[engineSize];
+};
 
 // Initializing GPU memory and allocating GPU.
 void PhysicsProcessor::allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, struct engineConfig config, cl::Device device){
