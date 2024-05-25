@@ -25,7 +25,6 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
 
     clDeviceName = "";
 
-    globalWorkSize = cl::NDRange(0);
     localWorkSize = cl::NDRange(0);
 }
 
@@ -290,39 +289,41 @@ char PhysicsProcessorBuilder::build(){
         return 7;
     }
 
-    if (physicsProcessor != nullptr){
-        delete physicsProcessor;
-    }
-    physicsProcessor = new PhysicsProcessor(kernelQueueBuilder->getKernelQueueSize());
+    createPhysicsProcessor();
 
     if (createClContext() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create cl context\n";
         return 8;
     }
 
+    if (checkLocalWorkSize() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed during local work size check\n";
+        return 9;
+    }
+
     if (createSubstanceStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create substance structure\n";
-        return 9;
+        return 10;
     }
 
     if (buildStructTree() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to build struct tree\n";
-        return 10;
+        return 11;
     }
 
     if (compileCl() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to compile OpenCL program\n";
-        return 11;
+        return 12;
     }
 
     if (setMandatoryKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
-        return 12;
+        return 13;
     }
 
     if (setKernelQueue() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
-        return 13;
+        return 14;
     }
 
     return 0;
@@ -459,6 +460,23 @@ char PhysicsProcessorBuilder::createClContext(){
     return 0;
 }
 
+char PhysicsProcessorBuilder::checkLocalWorkSize(){
+    if (localWorkSize[0] == 0 || localWorkSize[1] == 0){
+        error += "ERR: PhysicsProcessorBuilder::checkLocalWorkSize local work size was not set\n";
+        return 1;
+    }
+
+    size_t maxLocalWorkSize;
+    clGetDeviceInfo(physicsProcessor->device(), CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(size_t), &maxLocalWorkSize, NULL);
+
+    if (localWorkSize[0] * localWorkSize[1] > maxLocalWorkSize){
+        error += "ERR: PhysicsProcessorBuilder::checkLocalWorkSize local work size is too big (" + std::to_string(int(localWorkSize[0])) + " * " + std::to_string(int(localWorkSize[0])) + " > " + std::to_string(maxLocalWorkSize) + ") for device: " + clDeviceName + "\n";
+        return 2;
+    }
+
+    return 0;
+}
+
 char PhysicsProcessorBuilder::createSubstanceStructure(){
     std::string subsStructCode = substanceCollector->createSubstanceClStruct();
     std::string subsStructFilePath = structDir + "/substance.cl";
@@ -499,6 +517,16 @@ char PhysicsProcessorBuilder::loadKernels(){
 
     addMandatoryKernels();
     return 0;
+}
+
+void PhysicsProcessorBuilder::createPhysicsProcessor(){
+    if (physicsProcessor != nullptr){
+        delete physicsProcessor;
+    }
+    physicsProcessor = new PhysicsProcessor(kernelQueueBuilder->getKernelQueueSize());
+
+    physicsProcessor->globalWorkSize = cl::NDRange(simWidth, simHeight);
+    physicsProcessor->localWorkSize = localWorkSize;
 }
 
 void PhysicsProcessorBuilder::addMandatoryKernels(){
@@ -665,3 +693,4 @@ char PhysicsProcessorBuilder::setKernelQueue(){
     
     return 0;
 }
+

@@ -63,22 +63,23 @@ private:
     uint simWidth;
     uint simHeight;
 
-    cl::NDRange globalWorkSize;
     cl::NDRange localWorkSize;
 
     // GLuit PBO;
 
     char parseConfigFiles(); //reads location and priority of kernels, root location of structs, macros, location of substances directory
     char createClContext(); //creates cl context (platform / device) based on config file
+    char compileCl(); //compiles all the kernels and structs
     char createSubstanceStructure(); //creates substance structure based on loaded substances
     char buildStructTree(); //builds struct tree and calculates its properties
     char loadKernels(); //loads kernels from files
+    void createPhysicsProcessor(); //creates PhysicsProcessor object
     void addMandatoryKernels(); //adds kernels that are mandatory for PhysicsProcessor to work
-    char compileCl(); //compiles all the kernels and structs
+    char checkLocalWorkSize(); //checks if local work size is valid
     char setMandatoryKernels(); //sets previously defined kernels
     char setKernelQueue(); //sets engine kernel queue based on their priority
-    std::string createAllocationKernel(); //creates kernel that allocates memory for particullar structure
     char allocateGPUMemory(); //allocates memory for all structures based on structure tree
+    std::string createAllocationKernel(); //creates kernel that allocates memory for particullar structure
     char acquireGlObjectFromPBO(); //acquires gl object from PBO
     char createClQueue(); //creates cl queue
 };
