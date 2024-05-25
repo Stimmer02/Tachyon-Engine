@@ -9,6 +9,8 @@
 
 #include "PhysicsProcessor.h"
 
+#include <format>
+
 
 
 class PhysicsProcessorBuilder{
@@ -22,6 +24,7 @@ public:
     char setMacroConfigFilePath(std::string path);
     char setSubstanceConfigFilePath(std::string path);
     char setStructDirAndRootFile(std::string dir, std::string rootFile);
+    char setConfigStructFile(std::string path);
     void setClPlatformAndDevice(cl_uint platform, cl_uint device);
     void setLocalWorkSize(cl::NDRange localWorkSize);
 
@@ -54,6 +57,7 @@ private:
     std::string substanceConfigFilePath;
     std::string structDir;
     std::string structRootFile;
+    std::string configStructFile;
 
     cl_uint clPlatformID;
     cl_uint clDeviceID;
@@ -79,7 +83,8 @@ private:
     char setMandatoryKernels(); //sets previously defined kernels
     char setKernelQueue(); //sets engine kernel queue based on their priority
     char allocateGPUMemory(); //allocates memory for all structures based on structure tree
-    std::string createAllocationKernel(); //creates kernel that allocates memory for particullar structure
+    char allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer& buffer, uint count = 1); //allocates memory and sets structure hierarchy recursively
+    std::string createAllocationKernel(const engineStruct* structure); //creates kernel that allocates memory for particullar structure
     char acquireGlObjectFromPBO(); //acquires gl object from PBO
     char createClQueue(); //creates cl queue
 };

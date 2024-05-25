@@ -2,18 +2,18 @@
 
 using namespace std;
 
-StructTree::StructTree() {
+StructTree::StructTree(){
     this->status = -1;
     this->root = nullptr;
 }
 
-StructTree::StructTree(std::string structDirectory, std::string rootStructName, ClStructParser* parser) {
+StructTree::StructTree(std::string structDirectory, std::string rootStructName, ClStructParser* parser){
     this->status = -1;
     setStructDirectory(structDirectory);
     setRootStruct(rootStructName, parser);
 }
 
-StructTree::~StructTree() {
+StructTree::~StructTree(){
 
 }
 
@@ -22,7 +22,7 @@ char StructTree::setRootStruct(std::string rootStructName, ClStructParser* parse
     string path = structDirectory + "/" + rootStructName;
     const char* file = path.c_str();
     struct stat sb;
-    if (stat(file, &sb) != 0 || (sb.st_mode & S_IFDIR)) {
+    if (stat(file, &sb) != 0 || (sb.st_mode & S_IFDIR)){
         status = -2;
         error = "Root not found.";
         return status;
@@ -31,7 +31,7 @@ char StructTree::setRootStruct(std::string rootStructName, ClStructParser* parse
     // Setting root.
     ifstream f(path);
     string code;
-    if(f) {
+    if(f){
         ostringstream s;
         s << f.rdbuf();
         code = s.str();
@@ -43,22 +43,22 @@ char StructTree::setRootStruct(std::string rootStructName, ClStructParser* parse
     return status;
 }
 
-void StructTree::setStructDirectory(std::string structDirectory) {
+void StructTree::setStructDirectory(std::string structDirectory){
     this->structDirectory = structDirectory;
 }
 
-char StructTree::build(ClStructParser* parser) {
+char StructTree::build(ClStructParser* parser){
     queue<engineStruct*> q;
     q.push(root);
 
-    while (q.empty() == false) {
+    while (q.empty() == false){
         engineStruct* currentStructure = q.front();
         q.pop();
 
-        for (int i = 0; i < currentStructure->fieldCount; ++i) {
-            if (currentStructure->fields[i].type == engineStruct::cl_struct) {
+        for (int i = 0; i < currentStructure->fieldCount; ++i){
+            if (currentStructure->fields[i].type == engineStruct::cl_struct){
 
-                if (parsedStructs.find(currentStructure->fields[i].subStructName) != parsedStructs.end()) {
+                if (parsedStructs.find(currentStructure->fields[i].subStructName) != parsedStructs.end()){
                     currentStructure->fields[i].subStruct = parsedStructs[currentStructure->fields[i].subStructName].node;
                     // q.push(currentStructure->fields[i].subStruct); not sure if this is needed
                     continue;
@@ -72,14 +72,14 @@ char StructTree::build(ClStructParser* parser) {
 
                 ifstream f(path);
                 string code;
-                if(f) {
+                if(f){
                     ostringstream s;
                     s << f.rdbuf();
                     code = s.str();
                 } else {
                     f.close();
                     f.open(path2);
-                    if (f) {
+                    if (f){
                         ostringstream s;
                         s << f.rdbuf();
                         code = s.str();
@@ -90,7 +90,7 @@ char StructTree::build(ClStructParser* parser) {
                 }
 
                 currentStructure->fields[i].subStruct = parser->processStruct(code);
-                if (currentStructure->fields[i].subStruct == nullptr) {
+                if (currentStructure->fields[i].subStruct == nullptr){
                     status = 1;
                     return status;
                 }
@@ -104,25 +104,25 @@ char StructTree::build(ClStructParser* parser) {
     return status;
 }
 
-char StructTree::calculateSizes(SizeCalculator* sCalc) {
-    if (status != 0) {
+char StructTree::calculateSizes(SizeCalculator* sCalc){
+    if (status != 0){
         return status;
     }
 
     queue<engineStruct*> q;
     q.push(root);
 
-    while (q.empty() == false) {
+    while (q.empty() == false){
         engineStruct* currentStructure = q.front();
         q.pop();
 
-        for (int i = 0; i < currentStructure->fieldCount; ++i) {
-            if (currentStructure->fields[i].type == engineStruct::cl_struct) {
+        for (int i = 0; i < currentStructure->fieldCount; ++i){
+            if (currentStructure->fields[i].type == engineStruct::cl_struct){
                 q.push(currentStructure->fields[i].subStruct);
             }
         }
 
-        if (sCalc->calculate(currentStructure) != 0) {
+        if (sCalc->calculate(currentStructure) != 0){
             status = 2;
             return status;
         }
@@ -132,24 +132,24 @@ char StructTree::calculateSizes(SizeCalculator* sCalc) {
     return status;
 }
 
-void StructTree::printTree() {
-    if (status != 0) {
+void StructTree::printTree(){
+    if (status != 0){
         return;
     }
     setVisitedFalse();
     printTreeRecursive(root);
 }
 
-void StructTree::printTreeRecursive(engineStruct* node) {
-    for (int i = 0; i < node->fieldCount; ++i) {
-        if (node->fields[i].subStruct != nullptr) {
+void StructTree::printTreeRecursive(engineStruct* node){
+    for (int i = 0; i < node->fieldCount; ++i){
+        if (node->fields[i].subStruct != nullptr){
             printTreeRecursive(node->fields[i].subStruct);
         }
     }
 
     parsedStruct& parsed = parsedStructs[node->name];
 
-    if (parsed.visited == false) {
+    if (parsed.visited == false){
         engineStruct* structure = parsed.node;
         std::printf("name: %s; size: %d; field count: %d\n", structure->name.c_str(), structure->byteSize, structure->fieldCount);
         for (uint i = 0; i < structure->fieldCount; i++){
@@ -165,39 +165,58 @@ void StructTree::printTreeRecursive(engineStruct* node) {
     }
 }
 
-std::string StructTree::getStructuresRecursive(engineStruct* node) {
+std::string StructTree::getStructuresRecursive(engineStruct* node){
     std::string result = "";
-    for (int i = 0; i < node->fieldCount; ++i) {
-        if (node->fields[i].subStruct != nullptr) {
+    for (int i = 0; i < node->fieldCount; ++i){
+        if (node->fields[i].subStruct != nullptr){
             result += getStructuresRecursive(node->fields[i].subStruct);
         }
     }
 
     parsedStruct& parsed = parsedStructs[node->name];
 
-    if (parsed.visited == false) {
+    if (parsed.visited == false){
         result += node->rawCode;
         parsed.visited = false;
     }
     return result;
 }
 
-std::string StructTree::getError() {
+std::string StructTree::getError(){
     return this->error;
 }
 
-std::string StructTree::getStructures() {
-    if (status != 0) {
+std::string StructTree::getStructures(){
+    if (status != 0){
         return "";
     }
     setVisitedFalse();
     return getStructuresRecursive(root);
 }
 
-void StructTree::setVisitedFalse() {
-    for (auto& it : parsedStructs) {
+void StructTree::setVisitedFalse(){
+    for (auto& it : parsedStructs){
         it.second.visited = false;
     }
 }
 
+const std::vector<const engineStruct*> StructTree::unwindTree(){
+    if (status != 0){
+        return std::vector<const engineStruct*>();
+    }
+
+    setVisitedFalse();
+    vector<const engineStruct*> result;
+    unwindTreeRecursive(root, result);
+    return result;
+}
+
+void StructTree::unwindTreeRecursive(engineStruct* node, std::vector<const engineStruct*>& result){
+    result.push_back(node);
+    for (int i = 0; i < node->fieldCount; ++i){
+        if (node->fields[i].subStruct != nullptr){
+            unwindTreeRecursive(node->fields[i].subStruct, result);
+        }
+    }
+}
 

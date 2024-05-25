@@ -67,6 +67,8 @@ private:
     cl::Buffer engineConfig;//contains the configuration for the engine
     cl::Buffer countVoxelReturnValue;//used to return the count of voxels
     cl::Buffer countVoxelWorkMemory;//used during count_voxels kernel
+
+    std::vector<cl::Buffer*> allocatedGPUMemory;
 };
 
 #endif

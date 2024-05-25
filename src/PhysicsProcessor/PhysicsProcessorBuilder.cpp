@@ -154,6 +154,17 @@ char PhysicsProcessorBuilder::setStructDirAndRootFile(std::string dir, std::stri
     return 0;
 }
 
+char PhysicsProcessorBuilder::setConfigStructFile(std::string path){
+    std::ifstream file(path);
+    if (file.good() && file.is_open()) {
+        configStructFile = path;
+        return 0;
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::setConfigStructFile file '"+ path +"' not found\n";
+        return -1;
+    }
+}
+
 void PhysicsProcessorBuilder::setClPlatformAndDevice(cl_uint platform, cl_uint device){
     clPlatformID = platform;
     clDeviceID = device;
@@ -278,52 +289,61 @@ char PhysicsProcessorBuilder::build(){
         error += "ERR: PhysicsProcessorBuilder::build structRootFile not set\n";
         return 5;
     }
+    if (configStructFile == ""){
+        error += "ERR: PhysicsProcessorBuilder::build configStructFile not set\n";
+        return 6;
+    }
 
     if (parseConfigFiles() != 0){ 
         error += "ERR: PhysicsProcessorBuilder::build failed to parse config files\n";
-        return 6;
+        return 7;
     }
     
     if (loadKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to load kernels\n";
-        return 7;
+        return 8;
     }
 
     createPhysicsProcessor();
 
     if (createClContext() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create cl context\n";
-        return 8;
+        return 9;
     }
 
     if (checkLocalWorkSize() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed during local work size check\n";
-        return 9;
+        return 10;
     }
 
     if (createSubstanceStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create substance structure\n";
-        return 10;
+        return 11;
     }
 
     if (buildStructTree() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to build struct tree\n";
-        return 11;
+        return 12;
     }
 
     if (compileCl() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to compile OpenCL program\n";
-        return 12;
+        return 13;
     }
 
     if (setMandatoryKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
-        return 13;
+        return 14;
     }
 
     if (setKernelQueue() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
-        return 14;
+        return 15;
+    }
+
+    if (allocateGPUMemory() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
+        return 16;
     }
 
     return 0;
@@ -382,6 +402,16 @@ char PhysicsProcessorBuilder::parseConfigFiles(){
     return 0;
 }
 
+void PhysicsProcessorBuilder::createPhysicsProcessor(){
+    if (physicsProcessor != nullptr){
+        delete physicsProcessor;
+    }
+    physicsProcessor = new PhysicsProcessor(kernelQueueBuilder->getKernelQueueSize());
+
+    physicsProcessor->globalWorkSize = cl::NDRange(simWidth, simHeight);
+    physicsProcessor->localWorkSize = localWorkSize;
+}
+
 char PhysicsProcessorBuilder::createClContext(){
     std::vector<cl::Platform> allPlatforms;
     cl::Platform::get(&allPlatforms);
@@ -412,8 +442,8 @@ char PhysicsProcessorBuilder::createClContext(){
         clDeviceID = 0;
     }
 
-    cl::Device defaultDevice = allDevices[clDeviceID];
-    clDeviceName = defaultDevice.getInfo<CL_DEVICE_NAME>();
+    cl::Device device = allDevices[clDeviceID];
+    clDeviceName = device.getInfo<CL_DEVICE_NAME>();
 
     cl_platform_id platform;
     clGetPlatformIDs(1, &platform, NULL);
@@ -449,13 +479,15 @@ char PhysicsProcessorBuilder::createClContext(){
     };
 
 #endif
-    cl::Context context(defaultDevice, properties);
+    cl::Context context(device, properties);
     if (context() == NULL) {
         error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + "\n";
         return 3;
     }
 
     physicsProcessor->context = context;
+    physicsProcessor->device = device;
+    physicsProcessor->queue = cl::CommandQueue(context, device);
 
     return 0;
 }
@@ -517,16 +549,6 @@ char PhysicsProcessorBuilder::loadKernels(){
 
     addMandatoryKernels();
     return 0;
-}
-
-void PhysicsProcessorBuilder::createPhysicsProcessor(){
-    if (physicsProcessor != nullptr){
-        delete physicsProcessor;
-    }
-    physicsProcessor = new PhysicsProcessor(kernelQueueBuilder->getKernelQueueSize());
-
-    physicsProcessor->globalWorkSize = cl::NDRange(simWidth, simHeight);
-    physicsProcessor->localWorkSize = localWorkSize;
 }
 
 void PhysicsProcessorBuilder::addMandatoryKernels(){
@@ -623,20 +645,20 @@ char PhysicsProcessorBuilder::compileCl(){
         // std::fprintf(stderr ,"Error building TACHYON_ENGINE code: %d\n", buildCode);
         // std::fprintf(stderr ,"Trying fallback settings...\n");
 
-        // context = cl::Context(defaultDevice);
+        // context = cl::Context(device);
         // program = cl::Program(context, sources);
 
         // buildCode = program.build();
         // if (buildCode != CL_SUCCESS) {
         //     std::fprintf(stderr ,"Error building TACHYON_ENGINE %d: %s\n", buildCode, PhysicsProcessorBuilder::getErrorString(buildCode).c_str());
-        //     std::fprintf(stderr ,"Error building TACHYON_ENGINE content:\n%s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(defaultDevice).c_str());
+        //     std::fprintf(stderr ,"Error building TACHYON_ENGINE content:\n%s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device).c_str());
         //     std::fprintf(stderr ,"ERROR: not able to compile TACHYON_ENGINE kernel!\n");
         //     return nullptr;
         // }
         // std::fprintf(stderr ,"WARNING: entering fallback mode\n");
         // std::printf("Compillation TACHYON_ENGINE successful!\n");
         // cl::Kernel TACHYON_ENGINE(program, "TACHYON_ENGINE");
-        // return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config, defaultDevice);
+        // return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config, device);
     }
 
     return 0;
@@ -694,3 +716,115 @@ char PhysicsProcessorBuilder::setKernelQueue(){
     return 0;
 }
 
+char PhysicsProcessorBuilder::allocateGPUMemory(){
+    const std::vector<const engineStruct*> structs = structTree->unwindTree();
+    //1. creating allocation kernel for each structure that needs it
+    //2. compilating those kernels and saving them into a map
+    //3. invoking recursive allocation starting from the root
+    
+    std::map<std::string, cl::Kernel> allocationKernels;
+    std::string code = "";
+    cl::Program::Sources sources;
+
+    code = structTree->getStructures();
+    sources.push_back({code.c_str(), code.length()});
+
+    for (const engineStruct* structure : structs){
+        if (allocationKernels.find(structure->name) == allocationKernels.end()){
+            code = createAllocationKernel(structure);
+            sources.push_back({code.c_str(), code.length()});
+            
+            allocationKernels.insert({structure->name, cl::Kernel()});
+        }
+    }
+
+    cl::Program program = cl::Program(physicsProcessor->context, sources);
+    cl_int buildCode = program.build();
+    if (buildCode != CL_SUCCESS) {
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUMemory failed to compile allocation kernels\n";
+        return 1;
+    }
+
+    for (const engineStruct* structure : structs){
+        cl::Kernel kernel = cl::Kernel(program, ("set_" + structure->name).c_str());
+        if (kernel() == NULL){
+            error += "ERR: PhysicsProcessorBuilder::allocateGPUMemory failed to create allocation kernel for structure: " + structure->name + "\n";
+            return 2;
+        }
+        allocationKernels[structure->name] = kernel;
+    }
+
+    if (allocateStructure(structs[0], allocationKernels, physicsProcessor->engineResources) != 0){
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUMemory failed to build structure tree\n";
+        return 3;
+    }
+
+    // config struct allocation
+
+    physicsProcessor->engineConfig = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeof(engineConfig));
+
+
+    return 0;
+}
+
+std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* structure){
+    std::string kernelCode = "void kernel set_" + structure->name + "(global struct " + structure->name + "* structure, uint index";
+    for (uint i = 0; i < structure->fieldCount; i++){
+        const engineStruct::field& field = structure->fields[i];
+        if (field.arrSize > 0){
+            if (field.subStruct == nullptr){
+                kernelCode += ", global " + SubstanceCollector::clTypeToString(field.type) + "* " + field.name;
+            } else {
+                kernelCode += ", global struct " + field.subStruct->name + "* " + field.name;
+            }
+        }
+    }
+    kernelCode += "){\n";
+    for (uint i = 0; i < structure->fieldCount; i++){
+        const engineStruct::field& field = structure->fields[i];
+        if (field.arrSize > 0){
+            kernelCode += "    structure[index]." + field.name + " = " + field.name + ";\n";
+        }
+    }
+    kernelCode += "}\n";
+
+    return kernelCode;
+}
+
+char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer& buffer, uint count){
+    buffer = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, structure->byteSize*count);
+    if (buffer() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(structure->byteSize*count) + "B) for structure: " + structure->name + "\n";
+        return -1;
+    }
+
+    for (uint i = 0; i < count; i++){
+        cl::Kernel kernel = kernels.at(structure->name);
+        kernel.setArg(0, buffer);
+        kernel.setArg(1, i);
+
+        for (uint j = 0; j < structure->fieldCount; j++){
+            const engineStruct::field& field = structure->fields[j];
+            cl::Buffer* childBuffer;
+            if (field.arrSize > 0){
+                if (field.subStruct == nullptr){
+                    childBuffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeCalculator->clTypeSize(field.type) * field.arrSize);
+                    if ((*childBuffer)() == NULL){
+                        error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(sizeCalculator->clTypeSize(field.type) * field.arrSize) + "B) for field: " + field.name + "\n";
+                        return -1;
+                    }
+                } else {
+                    childBuffer = new cl::Buffer();
+                    if (allocateStructure(field.subStruct, kernels, *childBuffer, field.arrSize) != 0){
+                        return -1;
+                    }
+                }
+                physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
+            }
+            kernel.setArg(j+2, *childBuffer);
+        }
+        physicsProcessor->queue.enqueueNDRangeKernel(kernel, cl::NullRange, cl::NDRange(1), cl::NDRange(1));
+    }
+
+    return 0;
+}
