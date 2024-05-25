@@ -1,5 +1,4 @@
-#include "PhysicsProcessor.h"
-#include "IPhysicsProcessor.h"
+#include "PhysicsProcessor_old.h"
 #ifdef __APPLE__
 #include "../OpenCL/include/CL/cl.hpp"
 #else

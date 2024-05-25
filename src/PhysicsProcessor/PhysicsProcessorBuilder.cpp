@@ -19,6 +19,14 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
     structRootFile = "";
     clPlatformID = 0;
     clDeviceID = 0;
+
+    simWidth = 0;
+    simHeight = 0;
+
+    clDeviceName = "";
+
+    globalWorkSize = cl::NDRange(0);
+    localWorkSize = cl::NDRange(0);
 }
 
 PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
@@ -29,6 +37,10 @@ PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
     delete kernelCollector;
     delete kernelQueueBuilder;
     delete substanceCollector;
+
+    if (physicsProcessor != nullptr){
+        delete physicsProcessor;
+    }
 }
 
 
@@ -93,6 +105,13 @@ char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
     }
     setClPlatformAndDevice(platform, device);
 
+    int localWorkSizeX;
+    int localWorkSizeY;
+
+    config.ParseInt("LOCAL_WORK_SIZE_X", localWorkSizeX, 0);
+    config.ParseInt("LOCAL_WORK_SIZE_Y", localWorkSizeY, 0);
+    setLocalWorkSize(cl::NDRange(localWorkSizeX, localWorkSizeY));
+
     return 0;
 }
 
@@ -139,6 +158,10 @@ char PhysicsProcessorBuilder::setStructDirAndRootFile(std::string dir, std::stri
 void PhysicsProcessorBuilder::setClPlatformAndDevice(cl_uint platform, cl_uint device){
     clPlatformID = platform;
     clDeviceID = device;
+}
+
+void PhysicsProcessorBuilder::setLocalWorkSize(cl::NDRange localWorkSize){
+    this->localWorkSize = localWorkSize;
 }
 
 
@@ -322,16 +345,19 @@ char PhysicsProcessorBuilder::parseConfigFiles(){
         error += "ERR: PhysicsProcessorBuilder::parseConfigFiles failed to parse macros file\n";
         return 1;
     }
-
-    if (macroManager->getMacro("SIM_WIDTH") == nullptr){
+    float* simWidth = macroManager->getMacro("SIM_WIDTH");
+    if (simWidth == nullptr){
         error += "ERR: PhysicsProcessorBuilder::parseConfigFiles macro 'SIM_WIDTH' not found\n";
         return 1;
     }
+    this->simWidth = *simWidth;
 
-    if (macroManager->getMacro("SIM_HEIGHT") == nullptr){
+    float* simHeight = macroManager->getMacro("SIM_HEIGHT");
+    if (simHeight == nullptr){
         error += "ERR: PhysicsProcessorBuilder::parseConfigFiles macro 'SIM_HEIGHT' not found\n";
         return 1;
     }
+    this->simHeight = *simHeight;
 
     structTree->setStructDirectory(structDir);
     if (structTree->setRootStruct(structRootFile, clParser) != 0){
@@ -594,18 +620,26 @@ char PhysicsProcessorBuilder::setMandatoryKernels(){
         error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxel kernel\n";
         return 1;
     }
+    physicsProcessor->spawn_voxelKernel.setArg(3, physicsProcessor->engineResources);
+    physicsProcessor->spawn_voxelKernel.setArg(4, physicsProcessor->engineConfig);
 
     physicsProcessor->spawn_voxel_in_areaKernel = cl::Kernel(program, "spawn_voxels_in_area");
     if (physicsProcessor->spawn_voxel_in_areaKernel() == NULL){
         error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxels_in_area kernel\n";
         return 2;
     }
+    physicsProcessor->spawn_voxel_in_areaKernel.setArg(3, physicsProcessor->engineResources);
+    physicsProcessor->spawn_voxel_in_areaKernel.setArg(4, physicsProcessor->engineConfig);
 
     physicsProcessor->count_voxelKernel = cl::Kernel(program, "count_voxels");
     if (physicsProcessor->count_voxelKernel() == NULL){
         error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create count_voxels kernel\n";
         return 3;
     }
+    physicsProcessor->count_voxelKernel.setArg(0, physicsProcessor->engineResources);
+    physicsProcessor->count_voxelKernel.setArg(1, physicsProcessor->countVoxelWorkMemory);
+    physicsProcessor->count_voxelKernel.setArg(2, simHeight * simHeight);
+    physicsProcessor->count_voxelKernel.setArg(3, physicsProcessor->countVoxelReturnValue);
 
     return 0;
 }
@@ -621,6 +655,8 @@ char PhysicsProcessorBuilder::setKernelQueue(){
             error += "ERR: PhysicsProcessorBuilder::setKernelQueue failed to create engine kernel named: "  + keu.functionName + "\n";
             return 1;
         }
+        kernel.setArg(0, physicsProcessor->engineConfig);
+        kernel.setArg(1, physicsProcessor->engineResources);
         for (uint j = 0; j < keu.executionCount; j++){
             physicsProcessor->engine[engineIterator] = kernel;
             engineIterator++;
