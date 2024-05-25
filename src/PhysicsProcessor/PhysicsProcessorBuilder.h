@@ -22,6 +22,7 @@ class PhysicsProcessorBuilder{
         char setMacroConfigFilePath(std::string path);
         char setSubstanceConfigFilePath(std::string path);
         char setStructDirAndRootFile(std::string dir, std::string rootFile);
+        void setClPlatformAndDevice(cl_uint platform, cl_uint device);
 
         void setClPlatform(cl_uint platform);
         void setClDevice(cl_uint device);

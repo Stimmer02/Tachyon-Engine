@@ -35,55 +35,63 @@ PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
 char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
     Configurator config(path);
 
-    config.ParseString("KERNEL_CONFIG_PATH", kernelConfigFilePath, "");
-    config.ParseString("MACRO_CONFIG_PATH", macroConfigFilePath, "");
-    config.ParseString("SUBSTANCE_CONFIG_PATH", substanceConfigFilePath, "");
-    config.ParseString("STRUCT_DIR", structDir, "");
-    config.ParseString("STRUCT_ROOT_FILE", structRootFile, "");
+    std::string temp, rootStructureTemp;
+
+    config.ParseString("KERNEL_CONFIG_PATH", temp, "");
+    if (temp == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig KERNEL_CONFIG_PATH not found\n";
+        return 1;
+    }
+    if (setKernelConfigFilePath(temp) != 0){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig failed to set kernel config file path\n";
+        return 1;
+    }
+
+    config.ParseString("MACRO_CONFIG_PATH", temp, "");
+    if (temp == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig MACRO_CONFIG_PATH not found\n";
+        return 2;
+    }
+    if (setMacroConfigFilePath(temp) != 0){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig failed to set macro config file path\n";
+        return 2;
+    }
+
+    config.ParseString("SUBSTANCE_CONFIG_PATH", temp, "");
+    if (temp == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig SUBSTANCE_CONFIG_PATH not found\n";
+        return 3;
+    }
+    if (setSubstanceConfigFilePath(temp) != 0){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig failed to set substance config file path\n";
+        return 3;
+    }
+
+    config.ParseString("STRUCT_DIR", temp, "");
+    config.ParseString("STRUCT_ROOT_FILE", rootStructureTemp, "");
+    if (temp == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig STRUCT_DIR not found\n";
+        return 4;
+    }
+    if (temp == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig STRUCT_ROOT_FILE not found\n";
+        return 5;
+    }
+    if (setStructDirAndRootFile(temp, rootStructureTemp) != 0){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig failed to set struct dir and root file\n";
+        return 5;
+    }
 
     int platform;
     int device;
 
     config.ParseInt("CL_PLATFORM_ID", platform, -1);
     config.ParseInt("CL_DEVICE_ID", device, -1);
-
-    if (kernelConfigFilePath == ""){
-        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig KERNEL_CONFIG_PATH not found\n";
-        return 1;
-    }
-
-    if (macroConfigFilePath == ""){
-        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig MACRO_CONFIG_PATH not found\n";
-        return 2;
-    }
-
-    if (substanceConfigFilePath == ""){
-        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig SUBSTANCE_CONFIG_PATH not found\n";
-        return 3;
-    }
-
-    if (structDir == ""){
-        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig STRUCT_DIR not found\n";
-        return 4;
-    }
-
-    if (structRootFile == ""){
-        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig STRUCT_ROOT_FILE not found\n";
-        return 5;
-    }
-
-    if (platform == -1){
-        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CL_PLATFORM_ID not found\n";
+    if (platform == -1 || device == -1){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CL_PLATFORM_ID or CL_DEVICE_ID not found\n";
         return 6;
     }
-
-    if (device == -1){
-        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CL_DEVICE_ID not found\n";
-        return 7;
-    }
-
-    clPlatformID = platform;
-    clDeviceID = device;
+    setClPlatformAndDevice(platform, device);
 
     return 0;
 }
@@ -126,6 +134,11 @@ char PhysicsProcessorBuilder::setStructDirAndRootFile(std::string dir, std::stri
     structDir = dir;
     structRootFile = rootFile;
     return 0;
+}
+
+void PhysicsProcessorBuilder::setClPlatformAndDevice(cl_uint platform, cl_uint device){
+    clPlatformID = platform;
+    clDeviceID = device;
 }
 
 
