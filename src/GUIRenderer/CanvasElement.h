@@ -2,7 +2,7 @@
 #define CANVASELEMENT_H
 
 #include "InteractiveElement.h"
-#include "Sprite.h"
+#include "Sprite2D.h"
 #include "GLShader.h"
 
 class CanvasElement : public InteractiveElement{
@@ -13,7 +13,7 @@ private:
     GLuint vbo = 0;
     GLuint tbo = 0;
 
-    Sprite * texture = nullptr;
+    Sprite2D * texture = nullptr;
     int cellSize = 10;
 
     void AllocateBuffers(){
@@ -108,12 +108,12 @@ public:
         for(int i = 0; i < (texW * texH + width); i++)
             colors.push_back({255,255,255});
 
-        texture = new Sprite(colors.data(), texW, texH);
+        texture = new Sprite2D(colors.data(), texW, texH);
     }
 
     void ClearCanvas(const Color & clearColor) {
 
-        texture->ClearCanvas(clearColor);
+        texture->ClearColor(clearColor);
 
     }
 

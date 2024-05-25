@@ -1,5 +1,6 @@
 #include "Boids.h"
 #include "Fractal.h"
+#include "Lines.h"
 
 int main(){
 
@@ -8,10 +9,11 @@ int main(){
     Scene scene;
     app.LoadScene(scene);
 
-    BoidsSystem * fract = new BoidsSystem();
+    LinesSystem * fract = new LinesSystem();
     app.RegisterSystem(fract);
 
     app.Loop();
 
+    delete fract;
     return 0;
 }

@@ -21,8 +21,8 @@ UIBuilder* UIBuilder::AssignEvent(const EventType &_event, std::function<void()>
 	return this;
 }
 
-UIBuilder* UIBuilder::SetTexture(const Sprite * _sprite){
-	sprite = (Sprite *)_sprite;
+UIBuilder* UIBuilder::SetTexture(const Sprite2D * _sprite){
+	sprite = (Sprite2D *)_sprite;
 	return this;
 }
 

@@ -1,8 +1,6 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-// TODO : replace placeholders and Share method
-
 #include "MessageBus.h"
 #include "IClient.h"
 #include "IRunnable.h"

@@ -1,27 +1,11 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#ifdef __APPLE__
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-#elif _WIN32
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
-
-#else
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/glx.h>
-
-#endif
 
 #include "Color.h"
-#include "Sprite.h"
+#include "Sprite2D.h"
 
 class Component{
 protected:
@@ -32,7 +16,7 @@ protected:
 	float y;
 
 	Color color;
-	Sprite * sprite;
+	Sprite2D * sprite;
 
 public:
 	Component(const float &_x, const float &_y, const float &_width, const float &_height);
@@ -43,9 +27,9 @@ public:
 
 	virtual void Render() = 0;
 
-	void SetTexture( const Sprite * _sprite);
+	void SetTexture( const Sprite2D * _sprite);
 
-	Sprite GetTexture();
+	Sprite2D GetTexture();
 
 	float getWidth();
 

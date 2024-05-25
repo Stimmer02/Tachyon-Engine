@@ -20,11 +20,11 @@ void Component::SetColor(const Color &_color){
 	color = _color;
 }
 
-void Component::SetTexture( const Sprite * _sprite){
-	sprite = (Sprite*)_sprite;;
+void Component::SetTexture( const Sprite2D * _sprite){
+	sprite = (Sprite2D*)_sprite;;
 }
 
-Sprite Component::GetTexture(){
+Sprite2D Component::GetTexture(){
 	return *sprite;
 }
 

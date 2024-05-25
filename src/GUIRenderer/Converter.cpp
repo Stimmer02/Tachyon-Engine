@@ -13,8 +13,8 @@ std::list<Glyf *> Converter::stringToGlyfList(const std::string &str){
         Converter::setDeatfulFont();
     }
     std::list<Glyf*> result;
-    
-    
+
+
     for(int i = 0; i < str.size(); ++i){
         if(Converter::letterGlyf.count(str[i]) == 0){
             result.push_back(Converter::letterGlyf[' ']);
@@ -23,9 +23,9 @@ std::list<Glyf *> Converter::stringToGlyfList(const std::string &str){
             result.push_back(Converter::letterGlyf[str[i]]);
         }
     }
-    
 
-    
+
+
     return result;
 }
 
@@ -53,15 +53,15 @@ void Converter::makeGlyfArray(){
     Converter::sprites = new Sprite*[lettersCount];
     Converter::glyfs = new Glyf*[lettersCount];
     for(int i = 0; i < lettersCount; ++i){
-        Converter::sprites[i] = new Sprite(&(letters[i]));
+        Converter::sprites[i] = new Sprite2D(&(letters[i]));
         delete [] letters[i].pixels;
         Converter::glyfs[i] = new Glyf(Converter::possibleSymbols[i], 10 * Converter::width, 10 * Converter::height, Converter::sprites[i]);
         Converter::letterGlyf[Converter::possibleSymbols[i]] = glyfs[i];
-        
+
         if(i == possibleSymbols.size()){
             lettersCount = i + 1;
             break;
         }
     }
-    
+
 }

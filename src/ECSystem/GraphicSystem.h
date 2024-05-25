@@ -8,7 +8,7 @@
 
 #include "Transform.h"
 #include "LineRenderer.h"
-#include "Sprite.h"
+#include "Sprite2D.h"
 #include "Mesh.h"
 
 #include "TextElement.h"
@@ -36,6 +36,7 @@ private:
 
     Matrix projectionMatrix;
     Matrix guiProjectionMatrix;
+    Matrix viewProjectionMatrix;
 
     ArchetypeRenderFunc archetypeFunc[RenderingAttributes::ATTRIB_MAX];
 
@@ -47,15 +48,12 @@ private:
         Matrix & modelMatrix = object->GetModel();
         Matrix viewMatrix = mainCamera.GetViewMatrix();
 
-        object->material->shader->Use();
-        object->material->mainTexture->Load();
-        object->material->shader->TransferToShader("u_projection", projectionMatrix);
-        object->material->shader->TransferToShader("u_view", viewMatrix);
-        object->material->shader->TransferToShader("u_model", modelMatrix);
-        object->material->shader->TransferToShader("u_color", object->material->color);
+        Matrix mvp = viewProjectionMatrix * modelMatrix * viewMatrix;
+
+        object->material->Use();
+        currentShader->TransferToShader("u_mvp", mvp);
 
         Archetype archetype = object->GetArchetype() & (RenderingAttributes::ATTRIB_MAX - 1);
-
         archetypeFunc[archetype](object);
 
         object->Update();
@@ -87,6 +85,8 @@ private:
         std::vector<SceneObject *>& objects = scene->GetSceneObjects();
         std::vector<GUIElement *>& guiElements = scene->GetGUIElements();
 
+        viewProjectionMatrix = projectionMatrix ;
+
         for(SceneObject * object : objects)
             RenderSceneObjects(object);
 
@@ -107,7 +107,7 @@ private:
         contextLogger->Write(LogMessageType::M_INFO, "Generating missing assets\n");
 
         Color white[] = {255,255,255};
-        defaultSprite = new Sprite(white, 1, 1);
+        defaultSprite = new Sprite2D(white, 1, 1);
 
         defaultMaterial = new Material(mainShader);
         defaultMaterial->mainTexture = defaultSprite;

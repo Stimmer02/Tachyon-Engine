@@ -6,9 +6,10 @@
 #include <ctime>
 
 class BoidsSystem : public System {
-    Scene* scene;
-    Timer* timer;
-    Input* input;
+    Scene * scene;
+    Timer * timer;
+    Input * input;
+    Sprite2D * regularSprite;
 
     std::vector<SceneObject*> boids;
     std::vector<Vector3> velocities;
@@ -61,13 +62,14 @@ class BoidsSystem : public System {
     }
 
     void Execute() override {
+
         float deltaTime = timer->GetDeltaTime() * 0.01f;
 
         UpdateGrid();
         UpdateLeaderTargets();
 
         for (size_t i = 0; i < boids.size(); ++i) {
-            SceneObject* boid = boids[i];
+            SceneObject * boid = boids[i];
 
             Vector3 force;
             if (isLeader[i]) {
@@ -146,6 +148,7 @@ public:
     ~BoidsSystem() {
         for (SceneObject* boid : boids)
             scene->RemoveEntityFromScene(boid);
+        delete regularSprite;
     }
 
     void OnLoad() override {
@@ -154,7 +157,7 @@ public:
         Color regular = {255, 255, 255};
         Color leader = {255, 0, 0};
 
-        Sprite * regularSprite = new Sprite(&regular, 1, 1);
+        regularSprite = new Sprite2D(&regular, 1, 1);
 
         mesh = new Mesh();
         mesh->GenCone(10, 20);
@@ -164,15 +167,15 @@ public:
         shader->LinkShader("./resources/shaders/dither.frag", GL_FRAGMENT_SHADER);
         shader->Build();
 
-        Material * material = new Material(shader);
-        material->mainTexture = regularSprite;
-        material->color = defaultMaterial->color;
+        Material material(shader);
+        material.mainTexture = regularSprite;
+        material.color = defaultMaterial->color;
 
         for (int i = 0; i < numBoids; ++i) {
             SceneObject* boid = scene->CreateEntity();
             scene->AddEntityToScene(boid);
 
-            boid->material = new Material(material);
+            boid->material = new Material(&material);
             boid->transform.position = Vector3(rand() % GraphicConfig::windowWidth, rand() % GraphicConfig::windowHeight, 0.0f);
 
             float percent = rand() / (float)RAND_MAX;

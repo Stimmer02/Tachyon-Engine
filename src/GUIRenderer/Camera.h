@@ -59,9 +59,8 @@ public:
     Matrix GetViewMatrix() const{
 
         Vector3 right = Vector3::Cross(up, front).Normalize();
-
-
         return Matrix::LookAt(position, front, up, right);
+
     }
 
     void ResetView(){

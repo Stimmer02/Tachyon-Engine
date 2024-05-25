@@ -12,6 +12,7 @@
 #include "Text.h"
 #include "IEventHandlingService.h"
 #include "InteractiveComponent.h"
+#include "Sprite2D.h"
 //#include <TextAssembler.h> //TODO
 
 
@@ -25,7 +26,7 @@ private:
 	float x;
 	float y;
 	Color color;
-	Sprite * sprite;
+	Sprite2D * sprite;
 	std::map <EventType, std::function<void()> > events;
 	char* text;
 	int textLen;
@@ -37,7 +38,7 @@ public:
 	UIBuilder* SetDimensions(const float & _width, const float & _height);
 	UIBuilder* SetPosition(const float & _x, const float & _y);
 	UIBuilder* SetColor(const Color & _color);
-	UIBuilder* SetTexture(const Sprite * _sprite);
+	UIBuilder* SetTexture(const Sprite2D * _sprite);
 	UIBuilder* SetText(char * _text, const int & _textLen);
 	// UIBuilder* SetText(const std::string &_text); //TODO
 	Component* Build();

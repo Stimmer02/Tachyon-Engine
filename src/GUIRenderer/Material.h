@@ -44,6 +44,12 @@ public:
         this->checksum = material->checksum;
     }
 
+    virtual void Use(){
+        this->shader->Use();
+        this->mainTexture->Load();
+        this->shader->TransferToShader("u_color", color);
+    }
+
     bool operator==(const Material& other) const {
         return checksum == other.checksum;
     }
