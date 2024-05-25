@@ -33,7 +33,59 @@ PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
 
 
 char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
+    Configurator config(path);
 
+    config.ParseString("KERNEL_CONFIG_PATH", kernelConfigFilePath, "");
+    config.ParseString("MACRO_CONFIG_PATH", macroConfigFilePath, "");
+    config.ParseString("SUBSTANCE_CONFIG_PATH", substanceConfigFilePath, "");
+    config.ParseString("STRUCT_DIR", structDir, "");
+    config.ParseString("STRUCT_ROOT_FILE", structRootFile, "");
+
+    int platform;
+    int device;
+
+    config.ParseInt("CL_PLATFORM_ID", platform, -1);
+    config.ParseInt("CL_DEVICE_ID", device, -1);
+
+    if (kernelConfigFilePath == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig KERNEL_CONFIG_PATH not found\n";
+        return 1;
+    }
+
+    if (macroConfigFilePath == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig MACRO_CONFIG_PATH not found\n";
+        return 2;
+    }
+
+    if (substanceConfigFilePath == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig SUBSTANCE_CONFIG_PATH not found\n";
+        return 3;
+    }
+
+    if (structDir == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig STRUCT_DIR not found\n";
+        return 4;
+    }
+
+    if (structRootFile == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig STRUCT_ROOT_FILE not found\n";
+        return 5;
+    }
+
+    if (platform == -1){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CL_PLATFORM_ID not found\n";
+        return 6;
+    }
+
+    if (device == -1){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CL_DEVICE_ID not found\n";
+        return 7;
+    }
+
+    clPlatformID = platform;
+    clDeviceID = device;
+
+    return 0;
 }
 
 
@@ -202,6 +254,9 @@ char PhysicsProcessorBuilder::build(){
         return 7;
     }
 
+    if (physicsProcessor != nullptr){
+        delete physicsProcessor;
+    }
     physicsProcessor = new PhysicsProcessor(kernelQueueBuilder->getKernelQueueSize());
 
     if (createClContext() != 0){
@@ -237,10 +292,31 @@ char PhysicsProcessorBuilder::build(){
     return 0;
 }
 
+PhysicsProcessor* PhysicsProcessorBuilder::getPhysicsProcessor(){
+    if (physicsProcessor == nullptr){
+        error += "ERR: PhysicsProcessorBuilder::getPhysicsProcessor physicsProcessor not created\n";
+    }
+
+    PhysicsProcessor* out = physicsProcessor;
+    physicsProcessor = nullptr;
+
+    return out;
+}
+
 char PhysicsProcessorBuilder::parseConfigFiles(){
     if (macroManager->parseFile(macroConfigFilePath) != 0){
         error += macroManager->getError();
         error += "ERR: PhysicsProcessorBuilder::parseConfigFiles failed to parse macros file\n";
+        return 1;
+    }
+
+    if (macroManager->getMacro("SIM_WIDTH") == nullptr){
+        error += "ERR: PhysicsProcessorBuilder::parseConfigFiles macro 'SIM_WIDTH' not found\n";
+        return 1;
+    }
+
+    if (macroManager->getMacro("SIM_HEIGHT") == nullptr){
+        error += "ERR: PhysicsProcessorBuilder::parseConfigFiles macro 'SIM_HEIGHT' not found\n";
         return 1;
     }
 

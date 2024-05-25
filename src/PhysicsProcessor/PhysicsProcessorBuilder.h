@@ -5,10 +5,10 @@
 #include "StructTree.h"
 #include "KernelCollector.h"
 #include "KernelQueueBuilder.h"
+#include "../ECSystem/Configurator.h"
 
 #include "PhysicsProcessor.h"
 
-// #include "../ Configurator.h"
 
 
 class PhysicsProcessorBuilder{
