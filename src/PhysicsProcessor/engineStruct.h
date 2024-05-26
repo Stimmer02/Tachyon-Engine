@@ -37,6 +37,7 @@ struct engineStruct{
         std::string subStructName;
         uint arrSize = 0;
         uchar byteSize = 0;
+        float defaultValue = 0;
     };
 
     std::string name;

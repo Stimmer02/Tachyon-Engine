@@ -27,8 +27,12 @@ public:
     char calculate(engineStruct* structure);
     ushort clTypeSize(engineStruct::cl_type type);
 
+    std::string getError();
+
 private:
     const uint pointerSize;
+
+    std::string error;
 };
 
 #endif

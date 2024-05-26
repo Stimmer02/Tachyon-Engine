@@ -17,10 +17,14 @@ public:
     ClStructParser(MacroManager* macroManager);
     engineStruct* processStruct(std::string structCode);
 
+    std::string getError();
+
 private:
     engineStruct::cl_type stringToClType(const char* word);
 
     MacroManager* macroManager;
+
+    std::string error;
 };
 
 

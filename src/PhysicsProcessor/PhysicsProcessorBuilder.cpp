@@ -17,11 +17,15 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
     substanceConfigFilePath = "";
     structDir = "";
     structRootFile = "";
+    configStructFile = "";
+
     clPlatformID = 0;
     clDeviceID = 0;
 
     simWidth = 0;
     simHeight = 0;
+
+    configStructure = nullptr;
 
     clDeviceName = "";
 
@@ -39,6 +43,10 @@ PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
 
     if (physicsProcessor != nullptr){
         delete physicsProcessor;
+    }
+
+    if (configStructure != nullptr){
+        delete configStructure;
     }
 }
 
@@ -93,6 +101,16 @@ char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
         return 5;
     }
 
+    config.ParseString("CONFIG_STRUCT_FILE", temp, "");
+    if (temp == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CONFIG_STRUCT_FILE not found\n";
+        return 6;
+    }
+    if (setConfigStructFile(temp) != 0){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig failed to set config struct file\n";
+        return 6;
+    }
+
     int platform;
     int device;
 
@@ -100,7 +118,7 @@ char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
     config.ParseInt("CL_DEVICE_ID", device, -1);
     if (platform == -1 || device == -1){
         error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CL_PLATFORM_ID or CL_DEVICE_ID not found\n";
-        return 6;
+        return 7;
     }
     setClPlatformAndDevice(platform, device);
 
@@ -326,24 +344,34 @@ char PhysicsProcessorBuilder::build(){
         return 12;
     }
 
+    if (addConfigStructure() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to add config structure\n";
+        return 13;
+    }
+
     if (compileCl() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to compile OpenCL program\n";
-        return 13;
+        return 14;
     }
 
     if (setMandatoryKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
-        return 14;
+        return 15;
     }
 
     if (setKernelQueue() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
-        return 15;
+        return 16;
     }
 
-    if (allocateGPUMemory() != 0){
+    if (allocateGPUResourcesMemory() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
-        return 16;
+        return 17;
+    }
+
+    if (allocateGPUConfigStructure() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory for config structure\n";
+        return 18;
     }
 
     return 0;
@@ -540,6 +568,34 @@ char PhysicsProcessorBuilder::buildStructTree(){
     return 0;
 }
 
+char PhysicsProcessorBuilder::addConfigStructure(){
+    std::string configStructCode = "";
+    std::ifstream file(configStructFile);
+    if (file.is_open()){
+        std::string line;
+        while (std::getline(file, line)){
+            configStructCode += line + "\n";
+        }
+        file.close();
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::addConfigStructure failed to open config struct file\n";
+        return 1;
+    }
+
+    configStructure = clParser->processStruct(configStructCode);
+    if (configStructure == nullptr){
+        error += clParser->getError();
+        error += "ERR: PhysicsProcessorBuilder::addConfigStructure failed to process config struct\n";
+        return 2;
+    }
+
+    if (sizeCalculator->calculate(configStructure) != 0){
+        error += sizeCalculator->getError();
+        error += "ERR: PhysicsProcessorBuilder::addConfigStructure failed to calculate size of config struct\n";
+        return 3;
+    }
+}
+
 char PhysicsProcessorBuilder::loadKernels(){
     if (kernelQueueBuilder->collectKernels(*kernelCollector) != 0){
         error += kernelQueueBuilder->getError();
@@ -632,6 +688,7 @@ void PhysicsProcessorBuilder::addMandatoryKernels(){
 char PhysicsProcessorBuilder::compileCl(){
     cl::Program::Sources sources;
     std::string code = structTree->getStructures();
+    code += configStructure->rawCode;
     code += kernelCollector->getKernels();
     sources.push_back({code.c_str(), code.length()});
 
@@ -716,7 +773,7 @@ char PhysicsProcessorBuilder::setKernelQueue(){
     return 0;
 }
 
-char PhysicsProcessorBuilder::allocateGPUMemory(){
+char PhysicsProcessorBuilder::allocateGPUResourcesMemory(){
     const std::vector<const engineStruct*> structs = structTree->unwindTree();
     //1. creating allocation kernel for each structure that needs it
     //2. compilating those kernels and saving them into a map
@@ -741,28 +798,23 @@ char PhysicsProcessorBuilder::allocateGPUMemory(){
     cl::Program program = cl::Program(physicsProcessor->context, sources);
     cl_int buildCode = program.build();
     if (buildCode != CL_SUCCESS) {
-        error += "ERR: PhysicsProcessorBuilder::allocateGPUMemory failed to compile allocation kernels\n";
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUResourcesMemory failed to compile allocation kernels\n";
         return 1;
     }
 
     for (const engineStruct* structure : structs){
         cl::Kernel kernel = cl::Kernel(program, ("set_" + structure->name).c_str());
         if (kernel() == NULL){
-            error += "ERR: PhysicsProcessorBuilder::allocateGPUMemory failed to create allocation kernel for structure: " + structure->name + "\n";
+            error += "ERR: PhysicsProcessorBuilder::allocateGPUResourcesMemory failed to create allocation kernel for structure: " + structure->name + "\n";
             return 2;
         }
         allocationKernels[structure->name] = kernel;
     }
 
     if (allocateStructure(structs[0], allocationKernels, physicsProcessor->engineResources) != 0){
-        error += "ERR: PhysicsProcessorBuilder::allocateGPUMemory failed to build structure tree\n";
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUResourcesMemory failed to build structure tree\n";
         return 3;
     }
-
-    // config struct allocation
-
-    physicsProcessor->engineConfig = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeof(engineConfig));
-
 
     return 0;
 }
@@ -828,3 +880,48 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
 
     return 0;
 }
+
+char PhysicsProcessorBuilder::allocateGPUConfigStructure(){
+    physicsProcessor->engineConfig = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, configStructure->byteSize);
+
+    if (physicsProcessor->engineConfig() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUConfigStructure failed to allocate memory for config structure\n";
+        return 1;
+    }
+
+    std::string code = configStructure->rawCode;
+    code += createConfigStructureKernel();
+
+    cl::Program::Sources sources;
+    sources.push_back({code.c_str(), code.length()});
+
+    cl::Program program = cl::Program(physicsProcessor->context, sources);
+    cl_int buildCode = program.build();
+    if (buildCode != CL_SUCCESS) {
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUConfigStructure failed to compile config structure kernel\n";
+        return 2;
+    }
+
+    cl::Kernel kernel = cl::Kernel(program, "set_config_structure");
+    if (kernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUConfigStructure failed to create config structure kernel\n";
+        return 3;
+    }
+
+    kernel.setArg(0, physicsProcessor->engineConfig);
+
+    physicsProcessor->queue.enqueueNDRangeKernel(kernel, cl::NullRange, cl::NDRange(1), cl::NDRange(1));
+
+    return 0;
+}
+
+std::string PhysicsProcessorBuilder::createConfigStructureKernel(){
+    std::string kernelCode = "void kernel set_config_structure(global struct engineConfig* config){\n";
+    for (uint i = 0; i < configStructure->fieldCount; i++){
+        const engineStruct::field& field = configStructure->fields[i];
+        kernelCode += "    config->" + field.name + " = " + std::to_string(field.defaultValue) + ";\n";
+    }
+    kernelCode += "}\n";
+    return kernelCode;
+}
+

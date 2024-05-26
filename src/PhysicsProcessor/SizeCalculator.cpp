@@ -10,7 +10,7 @@ char SizeCalculator::calculate(engineStruct* structure){
             structure->fields[i].byteSize = pointerSize;
         } else if (structure->fields[i].type == engineStruct::cl_struct){
             if (structure->fields[i].subStruct == nullptr){
-                std::fprintf(stderr, "ERR: SizeCalculator::calculate SUBSTRUCTURE \"%s\" POINTER OF \"%s\" STRUCTURE POINTS TO nullptr\n", structure->fields[i].subStructName.c_str(), structure->name.c_str());
+                error = "ERR: SizeCalculator::calculate substructure \"" + structure->fields[i].subStructName + "\" pointer of\"" + structure->name + "\" structure, points to nullptr";
                 return -1;
             }
             if (calculate(structure->fields[i].subStruct)){
