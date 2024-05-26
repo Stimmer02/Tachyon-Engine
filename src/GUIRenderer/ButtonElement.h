@@ -56,10 +56,10 @@ private:
 
 public:
 
-    ButtonElement(const int & x, const int & y, const int width, const int height, const Callback callbackFunc) : InteractiveElement(width, height, callbackFunc) {
+    ButtonElement(const int width, const int height, const Callback callbackFunc) : InteractiveElement(width, height, callbackFunc) {
 
-        this->transform.position.x = x;
-        this->transform.position.y = y;
+        this->transform.position.x = 0;
+        this->transform.position.y = 0;
         this->texture = defaultSprite;
 
         Matrix translation = Matrix::Translate(transform.position.x, transform.position.y, transform.position.z);
@@ -85,7 +85,7 @@ public:
 
         shader->TransferToShader("u_model", model);
 
-        texture->Load();
+        texture->Load(shader);
 
         glBindVertexArray(vao);
 

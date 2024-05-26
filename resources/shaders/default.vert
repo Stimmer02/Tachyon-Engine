@@ -7,9 +7,7 @@ layout(location = 2) in vec4 normal;
 out vec2 uvs;
 out vec4 color;
 
-
 uniform mat4 u_mvp;
-
 uniform vec4 u_color;
 
 void main(){

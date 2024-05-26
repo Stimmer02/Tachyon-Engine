@@ -8,16 +8,55 @@ class LinesSystem : public System{
 private:
 
     Scene * scene;
+    SceneObject * object;
     Timer * timer;
-    LineRenderer * renderer;
+    Mesh * renderer;
+
+    GLShader * shader;
+    Material * mat;
+    MultiSprite * multiSprite;
 
     void Execute() override{
         static float time = 0.0f;
+        static float rx, ry, rz;
 
-        if(time >= 1.0f)
-            renderer->SetLineWidth(50.0f * cos(time) + 51.0f, 3);
+        object->transform.rotation = Quaternion::ToQuaternion(Vector3(rx, ry, rz));
+
+        rx += time * 1e-4f * cos(time);
+        ry += time * 1e-4f * sin(time);
+        rz += time * 1e-4f;
 
         time += timer->GetDeltaFrame();
+    }
+
+    void CreateShader(){
+
+        shader = new GLShader();
+        shader->LinkShader("resources/shaders/material.vert", GL_VERTEX_SHADER);
+        shader->LinkShader("resources/shaders/material.frag", GL_FRAGMENT_SHADER);
+        shader->Build();
+
+        Image img = BitmapReader::ReadFile("resources/materials/marble/albedo.bmp");
+        Image displ = BitmapReader::ReadFile("resources/materials/marble/displacement.bmp");
+        Image norm = BitmapReader::ReadFile("resources/materials/marble/normal.bmp");
+        Image ao = BitmapReader::ReadFile("resources/materials/marble/ao.bmp");
+        Image rough = BitmapReader::ReadFile("resources/materials/marble/roughness.bmp");
+
+        multiSprite = new MultiSprite();
+        multiSprite->SetTexture("albedo", img.pixels, img.width, img.height);
+        multiSprite->SetTexture("displacementMap", displ.pixels, displ.width, displ.height);
+        multiSprite->SetTexture("normalMap", norm.pixels, norm.width, norm.height);
+        multiSprite->SetTexture("aoMap", ao.pixels, ao.width, ao.height);
+        multiSprite->SetTexture("roughnessMap", rough.pixels, rough.width, rough.height);
+
+        multiSprite->SetTextureAttrib(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        multiSprite->SetTextureAttrib(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+        delete[] img.pixels;
+        delete[] norm.pixels;
+        delete[] displ.pixels;
+        delete[] ao.pixels;
+        delete[] rough.pixels;
     }
 
 public:
@@ -27,22 +66,20 @@ public:
     }
 
     void OnLoad() override{
-        SceneObject * object = scene->CreateEntity();
+
+        CreateShader();
+
+        mat = new Material(shader);
+        mat->mainTexture = multiSprite;
+
+        object = scene->CreateEntity();
         scene->AddEntityToScene(object);
-        renderer = object->AddAttribute<LineRenderer>();
+
+        object->material = mat;
+        renderer = object->AddAttribute<Mesh>();
+        renderer->GenTorus(128, 64, 128, 64);
 
         object->transform.position = Vector3(GraphicConfig::windowWidth, GraphicConfig::windowHeight) * 0.5f;
-
-        std::vector<Vector3> vertices;
-        const int numVertices = 32;
-        for ( int i =0; i <= numVertices; i++){
-            float angle = (i/(float)numVertices) * 2.0f * M_PI;
-            float x = 100.0f * cos(angle);
-            float y = 100.0f * sin(angle);
-            vertices.push_back( Vector3(x, y, 0.0f) );
-        }
-
-        renderer->SetVertices(vertices.data(), vertices.size());
     }
 
     void Share(SharedNameResolver * resourceManager) override{

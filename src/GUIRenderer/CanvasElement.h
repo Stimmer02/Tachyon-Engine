@@ -56,10 +56,10 @@ private:
 
 public:
 
-    CanvasElement(const int & x, const int & y, const int & width, const int & height) : InteractiveElement(width, height, nullptr){
+    CanvasElement(const int & width, const int & height) : InteractiveElement(width, height, nullptr){
 
-        this->transform.position.x = x;
-        this->transform.position.y = y;
+        this->transform.position.x = 0;
+        this->transform.position.y = 0;
 
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
@@ -123,7 +123,7 @@ public:
 
         shader->TransferToShader("u_model", model);
 
-        texture->Load();
+        texture->Load(shader);
 
         glBindVertexArray(vao);
 

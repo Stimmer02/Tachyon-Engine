@@ -79,7 +79,7 @@ public:
 
     void Render(){
 
-        sprite->Load();
+        sprite->Load(currentShader);
 
         glBindVertexArray(vao);
 
