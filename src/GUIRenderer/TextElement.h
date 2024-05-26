@@ -18,8 +18,6 @@ public:
 
     TextElement(const std::string & text){
         glyfs = Converter::stringToGlyfList(text);
-        // TODO
-
     }
 
     void Pop(){
@@ -40,13 +38,13 @@ public:
         Vector3 position = this->transform.position;
 
         for(Glyf * glyf : glyfs){
-            
+
             if(glyf->character == '\n'){
                 position.x = this->transform.position.x;
                 position.y -= glyf->height;
                 continue;
             }
-            
+
             shader->TransferToShader("u_translation", position);
 
             glyf->Render();

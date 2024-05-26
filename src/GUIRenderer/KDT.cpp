@@ -8,25 +8,6 @@ KDT::~KDT(){
     delete root;
 }
 
-
-#ifdef DEBUG
-    // Only for debug purpose
-    void Traverse(KDTElement * element){
-
-        if( element == nullptr)
-            return;
-
-        Traverse(element->getLeftSon());
-
-        Transform & transform = element->getValue()->transform;
-
-        fprintf(stdout, "Element at position : %f %f\n", transform.position.x, transform.position.y);
-
-        Traverse(element->getRightSon());
-
-    }
-#endif
-
 void KDT::buildTree(const std::vector<InteractiveElement*> &components){
     const int elementNum = components.size();
     int mid, b, e, avg;
@@ -39,22 +20,19 @@ void KDT::buildTree(const std::vector<InteractiveElement*> &components){
 
 	//sorting all nodes because it helps to chose the best root
     std::sort(elements, elements + elementNum, KDTElement::comparatorXsmaller);
-    
+
 	//chosing the best root
     mid = binSearchMiddleKDTElement(elements, elementNum, true);
-      
-   
+
+
     root = elements[mid];
 
 	//Recursion bulding left and right subtrees
     buildLeftSubTreeRec(elements, root, mid, false);
     buildRightSubTreeRec(elements + mid + 1, root, elementNum - mid - 1, false);
-    
+
     printTree(root);
-    
-#ifdef DEBUG
-    Traverse(root);
-#endif
+
 }
 
 void KDT::buildLeftSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoot, const int &elementsArraySize, const bool xOrY){
@@ -67,10 +45,10 @@ void KDT::buildLeftSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoo
         subTreeRoot->setLeftSon(elementsArray[0]);
         return;
     }
-    
+
     int b, e, avg;
     int mid;
-    
+
 	//chose X or Y axis for comparing Nodes
     if(xOrY){
         std::sort(elementsArray, elementsArray + elementsArraySize, KDTElement::comparatorXsmaller);
@@ -78,11 +56,11 @@ void KDT::buildLeftSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRoo
     else{
         std::sort(elementsArray, elementsArray + elementsArraySize, KDTElement::comparatorYsmaller);
     }
-    
-    mid = binSearchMiddleKDTElement(elementsArray, elementsArraySize, xOrY);
-    
 
-    
+    mid = binSearchMiddleKDTElement(elementsArray, elementsArraySize, xOrY);
+
+
+
 	//set root of left subtree
     subTreeRoot->setLeftSon(elementsArray[mid]);
 
@@ -112,9 +90,9 @@ void KDT::buildRightSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRo
     else{
         std::sort(elementsArray, elementsArray + elementsArraySize, KDTElement::comparatorYsmaller);
     }
-    
+
     mid = binSearchMiddleKDTElement(elementsArray, elementsArraySize, xOrY);
-    
+
 	//set root of right subtree
     subTreeRoot->setRightSon(elementsArray[mid]);
 
@@ -134,7 +112,7 @@ InteractiveElement* KDT::findRecX(const float &x, const float &y, KDTElement* el
 	if(element == NULL){
         return NULL;
     }
-    
+
 	//compare component's coordinates with x and y value;
     InteractiveElement* helper = element->getValue();
     float & xH = helper->transform.position.x;
@@ -163,7 +141,7 @@ InteractiveElement* KDT::findRecX(const float &x, const float &y, KDTElement* el
 }
 
 InteractiveElement* KDT::findRecY(const float &x, const float &y, KDTElement* element){
-    
+
 	//this function chose left or right subtree, basing on Y coordinate
     //return NULL if there is no such component where the x and y coordinates are located
     if(element == NULL){
@@ -223,11 +201,11 @@ void KDT::printTree(KDTElement *subRoot){
 int KDT::binSearchMiddleKDTElement(KDTElement **elementsArray, const int &elementsArraySize, const bool &xOrY){
     int mid, b, e, avg, x, y;
     mid = elementsArraySize / 2;
-    
+
     b = 0;
     e = mid;
     avg = (b + e) / 2;
-    
+
     if(xOrY){
         x = elementsArray[mid]->getValue()->transform.position.x;
         while(b + 1 != e && b != e){
