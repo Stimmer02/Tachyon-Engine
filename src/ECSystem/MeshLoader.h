@@ -11,21 +11,21 @@
 
 class MeshLoader{
 private:
-    Vector3* vertices;
-    unsigned int numVertices;
-    std::vector<Vector3> verticesVector;
-    
-    Vector3* normals; 
-    unsigned int numNormals;
-    std::vector<Vector3> normalsVector;
-    
-    unsigned int* indices; 
-    unsigned int numIndices;
-    std::vector<unsigned int> indicesVector;
-    
-    float* texCoords;
-    unsigned int numTexCoords;
-    std::vector<float> texCoordsVector;
+    static Vector3* vertices;
+    static unsigned int numVertices;
+    static std::vector<Vector3> verticesVector;
+
+    static Vector3* normals; 
+    static unsigned int numNormals;
+    static std::vector<Vector3> normalsVector;
+
+    static unsigned int* indices; 
+    static unsigned int numIndices;
+    static std::vector<unsigned int> indicesVector;
+
+    static float* texCoords;
+    static unsigned int numTexCoords;
+    static std::vector<float> texCoordsVector;
     
     static const int functionsArraySize = 256 * 256;
     static const int charSize = 256;
@@ -41,7 +41,7 @@ private:
     static void initFunctionsArray();
     
 public:
-    static void ParseMesh(const std::string &pathToFile, Mesh* mesh);
+    static void parseMesh(const std::string &pathToFile, Mesh* mesh);
 };
 
 #endif
