@@ -4,5 +4,5 @@ void kernel update_canvas(global struct engineConfig* config, global struct engi
 
     global_ID = get_global_id(0) + get_global_id(1) * config->simulationWidth;
     tempID = resources->worldMap->voxels[global_ID].substanceID;
-    resources->PBO[global_ID] = resources->substanceTable->substances[tempID].color;
+    resources->PBO[global_ID] = resources->substanceTable->SUBSTANCES[tempID].color;
 }

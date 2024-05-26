@@ -7,6 +7,14 @@ PhysicsProcessor::PhysicsProcessor(const uint& engineSize): engineSize(engineSiz
 
 PhysicsProcessor::~PhysicsProcessor(){
     delete[] engine;
+
+    // if (fallback){
+    //     delete[] hostFallbackBuffer;
+    // }
+
+    for (cl::Buffer* buffer: allocatedGPUMemory){
+        delete buffer;
+    }
 }
 
 void PhysicsProcessor::spawnVoxel(uint x, uint y, uint substanceID){
@@ -27,7 +35,7 @@ void PhysicsProcessor::spawnVoxelsInArea(uint x, uint y, uint width, uint height
 
 uint PhysicsProcessor::countVoxels(){
     cl_uint returnValue;
-    queue.enqueueNDRangeKernel(count_voxelKernel, cl::NullRange, globalWorkSize, localWorkSize);
+    // queue.enqueueNDRangeKernel(count_voxelKernel, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
     queue.enqueueReadBuffer(countVoxelReturnValue, CL_TRUE, 0, sizeof(cl_uint), &returnValue);
     queue.finish();
 

@@ -51,7 +51,7 @@ private:
     bool fallback;
     unsigned char* hostFallbackBuffer;
 
-    cl::NDRange globalWorkSize; //TODO: rethink this
+    cl::NDRange globalWorkSize;
     cl::NDRange localWorkSize;
 
     cl::Context context;

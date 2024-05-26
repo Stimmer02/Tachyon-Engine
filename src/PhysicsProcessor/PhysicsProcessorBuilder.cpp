@@ -113,6 +113,16 @@ char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
         return 6;
     }
 
+    config.ParseString("MANDATORY_KERNELS_DIR", temp, "");
+    if (temp == ""){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig MANDATORY_KERNELS_FILE not found\n";
+        return 7;
+    }
+    if (setMandatoryKernelsDir(temp) != 0){
+        error += "ERR: PhysicsProcessorBuilder::parseSystemConfig failed to set mandatory kernels file\n";
+        return 7;
+    }
+
     int platform;
     int device;
 
@@ -120,7 +130,7 @@ char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
     config.ParseInt("CL_DEVICE_ID", device, -1);
     if (platform == -1 || device == -1){
         error += "ERR: PhysicsProcessorBuilder::parseSystemConfig CL_PLATFORM_ID or CL_DEVICE_ID not found\n";
-        return 7;
+        return 8;
     }
     setClPlatformAndDevice(platform, device);
 
@@ -181,6 +191,17 @@ char PhysicsProcessorBuilder::setConfigStructFile(std::string path){
         return 0;
     } else {
         error += "ERR: PhysicsProcessorBuilder::setConfigStructFile file '"+ path +"' not found\n";
+        return -1;
+    }
+}
+
+char PhysicsProcessorBuilder::setMandatoryKernelsDir(std::string path){
+    std::ifstream file(path);
+    if (file.good() && file.is_open()) {
+        mandatoryKernelsDir = path;
+        return 0;
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernelsDir file '"+ path +"' not found\n";
         return -1;
     }
 }
@@ -385,21 +406,25 @@ char PhysicsProcessorBuilder::build(bool verbose){
         error += "ERR: PhysicsProcessorBuilder::build configStructFile not set\n";
         return 6;
     }
+    if (mandatoryKernelsDir == ""){
+        error += "ERR: PhysicsProcessorBuilder::build mandatoryKernelsDir not set\n";
+        return 7;
+    }
     if (PBO == 0){
         error += "ERR: PhysicsProcessorBuilder::build PBO not set\n";
-        return 7;
+        return 8;
     }
 
     if (verbose)std::printf("Parsing config files\n");
     if (parseConfigFiles() != 0){ 
         error += "ERR: PhysicsProcessorBuilder::build failed to parse config files\n";
-        return 8;
+        return 9;
     }
     
     if (verbose)std::printf("Loading kernels\n");
     if (loadKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to load kernels\n";
-        return 9;
+        return 10;
     }
 
     if (verbose)std::printf("Creating physics processor\n");
@@ -408,67 +433,73 @@ char PhysicsProcessorBuilder::build(bool verbose){
     if (verbose)std::printf("Creating OpenCL context\n");
     if (createClContext() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create cl context\n";
-        return 10;
+        return 11;
     }
 
     if (verbose)std::printf("Checking local work size\n");
     if (checkLocalWorkSize() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed during local work size check\n";
-        return 11;
+        return 12;
     }
 
     if (verbose)std::printf("Creating substance structure\n");
     if (createSubstanceStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create substance structure\n";
-        return 12;
+        return 13;
     }
 
     if (verbose)std::printf("Building struct tree\n");
     if (buildStructTree() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to build struct tree\n";
-        return 13;
+        return 14;
     }
 
     if (verbose)std::printf("Adding config structure\n");
     if (addConfigStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to add config structure\n";
-        return 14;
+        return 15;
     }
 
     if (verbose)std::printf("Compiling OpenCL program\n");
     if (compileCl() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to compile OpenCL program\n";
-        return 15;
+        return 16;
     }
 
     if (verbose)std::printf("Setting mandatory kernels\n");
     if (setMandatoryKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
-        return 16;
+        return 17;
     }
 
     if (verbose)std::printf("Setting kernel queue (engine)\n");
     if (setKernelQueue() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
-        return 17;
+        return 18;
     }
 
     // if (verbose)std::printf("Acquiring GL object from PBO\n"
     // if (acquireGlObjectFromPBO() != 0){
     //     error += "ERR: PhysicsProcessorBuilder::build failed to acquire GL object from PBO\n";
-    //     return 18;
+    //     return 19;
     // }
 
     if (verbose)std::printf("Allocating GPU resources memory\n");
     if (allocateGPUResourcesMemory() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
-        return 19;
+        return 20;
     }
 
     if (verbose)std::printf("Allocating GPU config structure\n");
     if (allocateGPUConfigStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory for config structure\n";
-        return 20;
+        return 21;
+    }
+
+    if (verbose)std::printf("Allocating rest of GPU buffers\n");
+    if (allocateRestGPUBuffers() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to allocate rest of GPU buffers\n";
+        return 22;
     }
 
     if (verbose)std::printf("Done\n");
@@ -538,13 +569,9 @@ void PhysicsProcessorBuilder::createPhysicsProcessor(){
     physicsProcessor->localWorkSize = localWorkSize;
 }
 
-void PhysicsProcessorBuilder::appendError(const std::string& err) {
-    error += err;
-}
 
-static void CL_CALLBACK contextCallback(const char *errInfo, const void *private_info, size_t cb, void *user_data) {
-    PhysicsProcessorBuilder* self = static_cast<PhysicsProcessorBuilder*>(user_data);
-    self->appendError("ERR: PhysicsProcessorBuilder: OpenCL error message: " + std::string(errInfo));
+static void CL_CALLBACK clCallback(const char *errInfo, const void *private_info, size_t cb, void *user_data) {
+    std::fprintf(stderr ,"RUNTIME ERROR: OpenCL error message: %s\n",errInfo);
 }
 
 char PhysicsProcessorBuilder::createClContext(){
@@ -615,12 +642,12 @@ char PhysicsProcessorBuilder::createClContext(){
 
 #endif
     cl_int err;
-    cl::Context context(device, properties, contextCallback, this, &err);
+    cl::Context context(device, properties, clCallback, nullptr, &err);
     if (err != CL_SUCCESS) {
         error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (" + std::to_string(err) + ")\n";
         error += "WARNING: PhysicsProcessorBuilder::createClContext trying fallback mode\n";
         physicsProcessor->fallback = true;
-        context = cl::Context(device, NULL, contextCallback, this, &err);
+        context = cl::Context(device, NULL, clCallback, nullptr, &err);
     }
     
     if (context() == NULL) {
@@ -647,6 +674,11 @@ char PhysicsProcessorBuilder::checkLocalWorkSize(){
     if (localWorkSize[0] * localWorkSize[1] > maxLocalWorkSize){
         error += "ERR: PhysicsProcessorBuilder::checkLocalWorkSize local work size is too big (" + std::to_string(int(localWorkSize[0])) + " * " + std::to_string(int(localWorkSize[0])) + " > " + std::to_string(maxLocalWorkSize) + ") for device: " + clDeviceName + "\n";
         return 2;
+    }
+
+    if (simWidth % localWorkSize[0] != 0 || simHeight % localWorkSize[1] != 0){
+        error += "ERR: PhysicsProcessorBuilder::checkLocalWorkSize local work size does not divide simulation size: " + std::to_string(simWidth) + "x" + std::to_string(simHeight) + "\n";
+        return 3;
     }
 
     return 0;
@@ -720,86 +752,62 @@ char PhysicsProcessorBuilder::loadKernels(){
         return 1;
     }
 
-    addMandatoryKernels();
+    if (addMandatoryKernels() != 0){
+        error += "ERR: PhysicsProcessorBuilder::loadKernels failed to add mandatory kernels\n";
+        return 2;
+    }
     return 0;
 }
 
-void PhysicsProcessorBuilder::addMandatoryKernels(){
+char PhysicsProcessorBuilder::addMandatoryKernels(){
     const std::string spawnVoxelKernelName = "spawn_voxel";
-    const std::string spawnVoxelKernelCode = 
-        "    void kernel spawn_voxel(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
-        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.x = 0;"
-        "        resources->worldMap->voxels[y * config->simulationWidth + x].forceVector.y = 0;"
-        "        resources->worldMap->voxels[y * config->simulationWidth + x].substanceID = substanceID;"
-        "    }";
+    std::string spawnVoxelKernelCode = "";
+    std::ifstream file(mandatoryKernelsDir + spawnVoxelKernelName + ".cl");
+    if (file.is_open()){
+        std::string line;
+        while (std::getline(file, line)){
+            spawnVoxelKernelCode += line + "\n";
+        }
+        file.close();
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::addMandatoryKernels failed to open file: " + mandatoryKernelsDir + spawnVoxelKernelName + ".cl\n";
+        return 1;
+    }
+
 
     const std::string spawnVoxelsInAreaKernelName = "spawn_voxels_in_area";
-    const std::string spawnVoxelsInAreaKernelCode = 
-        "   void kernel spawn_voxels_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
-        "       uint globalID, IDX, IDY;"
-        "       IDX = x + get_global_id(0);"
-        "       IDY = y + get_global_id(1);"
-        "       globalID = IDY * config->simulationWidth + IDX;"
-        ""
-        "        if (config->simulationWidth > IDX && config->simulationHeight > IDY){"
-        "           resources->worldMap->voxels[globalID].forceVector.x = 0;"
-        "           resources->worldMap->voxels[globalID].forceVector.y = 0;"
-        "           resources->worldMap->voxels[globalID].substanceID = substanceID;"
-        "        }"
-        "   }";
+    std::string spawnVoxelsInAreaKernelCode;
+    std::ifstream file2(mandatoryKernelsDir + spawnVoxelsInAreaKernelName + ".cl");
+    if (file2.is_open()){
+        std::string line;
+        while (std::getline(file2, line)){
+            spawnVoxelsInAreaKernelCode += line + "\n";
+        }
+        file2.close();
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::addMandatoryKernels failed to open file: " + mandatoryKernelsDir + spawnVoxelsInAreaKernelName + ".cl\n";
+        return 2;
+    }
 
     const std::string countVoxelsKernelName = "count_voxels";
-    const std::string countVoxelsKernelCode = 
-        "    void kernel count_voxels(global struct engineResources* resources, global uint* workArr, uint size, global uint* returnValue){"
-        "        private uint id = get_global_id(0);"
-        "        private uint dim = get_local_size(0);"
-        "        private char dividionRest = size & 0x1;"
-        "        private uint currentSize = size >> 1;"
-        "        private uint index;"
-        ""
-        "        for (private uint i = id; i < currentSize; i += dim){"
-        "           index = i << 1;"
-        "            workArr[i] = (resources->worldMap->voxels[index].substanceID > 0) + (resources->worldMap->voxels[index+1].substanceID > 0);"
-        "        }"
-        "        barrier(CLK_LOCAL_MEM_FENCE);"
-        "        if (dividionRest){"
-        "            if (id == 0){"
-        "               workArr[currentSize] = (resources->worldMap->voxels[currentSize << 1].substanceID > 0);"
-        "           }"
-        "           currentSize++;"
-        "        }"
-        "        barrier(CLK_LOCAL_MEM_FENCE);"
-        "        dividionRest = currentSize & 0x1;"
-        "        currentSize >>= 1;"
-        ""
-        "        while (currentSize > 1){"
-        "            for (private uint i = id; i < currentSize; i += dim){"
-        "               index = i << 1;"
-        "               workArr[i] = workArr[index] + workArr[index+1];"
-        "            }"
-        "            barrier(CLK_LOCAL_MEM_FENCE);"
-        "            if (dividionRest){"
-        "               if (id == 0){"
-        "                   workArr[currentSize] = workArr[currentSize << 1];"
-        "               }"
-        "               currentSize++;"
-        "           }"
-        "            barrier(CLK_LOCAL_MEM_FENCE);"
-        "            dividionRest = currentSize & 0x1;"
-        "            currentSize >>= 1;"
-        "        }"
-        "        barrier(CLK_LOCAL_MEM_FENCE);"
-        "        if (id == 0){"
-        "            *returnValue = workArr[0] + workArr[1];"
-        "            if (dividionRest == 1){"
-        "               *returnValue += workArr[2];"
-        "            }"
-        "       }"
-        "   }";
+    std::string countVoxelsKernelCode;
+    std::ifstream file3(mandatoryKernelsDir + countVoxelsKernelName + ".cl");
+    if (file3.is_open()){
+        std::string line;
+        while (std::getline(file3, line)){
+            countVoxelsKernelCode += line + "\n";
+        }
+        file3.close();
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::addMandatoryKernels failed to open file: " + mandatoryKernelsDir + countVoxelsKernelName + ".cl\n";
+        return 3;
+    }
 
     kernelCollector->addKernelCode(spawnVoxelKernelCode, spawnVoxelKernelName);
     kernelCollector->addKernelCode(spawnVoxelsInAreaKernelCode, spawnVoxelsInAreaKernelName);
     kernelCollector->addKernelCode(countVoxelsKernelCode, countVoxelsKernelName);
+
+    return 0;
 }
 
 char PhysicsProcessorBuilder::compileCl(){
@@ -874,6 +882,30 @@ char PhysicsProcessorBuilder::setKernelQueue(){
     return 0;
 }
 
+char PhysicsProcessorBuilder::acquireGlObjectFromPBO(){
+    if (physicsProcessor->fallback == false){
+        cl_int error;
+        physicsProcessor->pboMemory = clCreateFromGLBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, PBO, &error);
+
+        if (error != CL_SUCCESS){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromPBO failed to create OpenCL memory object from PBO\n";
+            return 1;
+        }
+
+        physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
+        clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->pboMemory, 0, NULL, NULL);
+
+        physicsProcessor->hostFallbackBuffer = nullptr;
+    } else {
+        physicsProcessor->hostFallbackBuffer = new unsigned char[4 * simWidth * simHeight];//!!!!!!! 4 is hardcoded
+        physicsProcessor->pboMemory = clCreateBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, 4 * simWidth * simHeight, NULL, NULL);//!!!!!!! 4 is hardcoded
+        physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
+
+        glBindBuffer(GL_ARRAY_BUFFER, PBO);
+    }
+    return 0;
+}
+
 char PhysicsProcessorBuilder::allocateGPUResourcesMemory(){
     const std::vector<const engineStruct*> structs = structTree->unwindTree();
     //1. creating allocation kernel for each structure that needs it
@@ -944,6 +976,7 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
     return kernelCode;
 }
 
+
 char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer& buffer, uint count){
     buffer = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, structure->byteSize*count);
     if (buffer() == NULL){
@@ -960,8 +993,14 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
             const engineStruct::field& field = structure->fields[j];
             cl::Buffer* childBuffer;
             if (field.arrSize > 0){
-                if (field.name == "PBO" || field.name == "pbo"){
+                if (field.name == "PBO"){
                     childBuffer = &physicsProcessor->pboBuffer;
+                } else if (field.name == "SUBSTANCES"){
+                    if (setSubstancesProperties(childBuffer) != 0){
+                        error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
+                        return -1;
+                    }
+                    physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
                 } else if (field.subStruct == nullptr){
                     childBuffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeCalculator->clTypeSize(field.type) * field.arrSize);
                     if ((*childBuffer)() == NULL){
@@ -979,8 +1018,102 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
             }
             kernel.setArg(j+2, *childBuffer);
         }
-        physicsProcessor->queue.enqueueNDRangeKernel(kernel, cl::NullRange, cl::NDRange(1), cl::NDRange(1));
+        cl_int err;
+        err = physicsProcessor->queue.enqueueNDRangeKernel(kernel, cl::NullRange, cl::NDRange(1), cl::NDRange(1));
+        if (err != CL_SUCCESS){
+            error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to enqueue kernel for structure: " + structure->name + " " + translateClError(err) + "(" + std::to_string(err) + ")\n";
+            return -1;
+        }
+        err = physicsProcessor->queue.finish();
+        if (err != CL_SUCCESS){
+            error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to finish queue for structure: " + structure->name + " " + translateClError(err) + "(" + std::to_string(err) + ")\n";
+            return -1;
+        }
     }
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer* buffer){
+    const std::vector<substance>& substances = substanceCollector->getSubstances();
+    const std::vector<substanceField>& properties = substanceCollector->getSubstancePhroperties();
+
+    const engineStruct* subsStruct;
+    for (const engineStruct* structure : structTree->unwindTree()){
+        if (structure->name == "substance"){
+            subsStruct = structure;
+            break;
+        }
+    }
+
+    buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, subsStruct->byteSize * substances.size());
+
+    if ((*buffer)() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to allocate memory for substances\n";
+        return 1;
+    }
+    std::string code = structTree->getStructures();
+    code += "void kernel set_substances(global struct substance* substances, uint index";
+    code += ", uint movable, float R, float G, float B";
+    for (uint i = 0; i < properties.size(); i++){
+        code += ", float " + properties[i].name;
+    }
+    code += "){\n";
+    code += "    substances[index].movable = movable;\n";
+    code += "    substances[index].color.R = R;\n";
+    code += "    substances[index].color.G = G;\n";
+    code += "    substances[index].color.B = B;\n";
+    for (uint i = 0; i < properties.size(); i++){
+        code += "    substances[index]." + properties[i].name + " = " + properties[i].name + ";\n";
+    }
+    code += "}\n";
+
+    cl::Program::Sources sources;
+    sources.push_back({code.c_str(), code.length()});
+
+    cl::Program program = cl::Program(physicsProcessor->context, sources);
+
+    cl_int buildCode = program.build();
+    if (buildCode != CL_SUCCESS) {
+        error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to compile set_substances kernel: " + translateClBuildError(buildCode) + "(" + std::to_string(buildCode) +")\n";
+        error += "BUILD LOG:\n" + program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(physicsProcessor->device);
+        error += "SOURCE CODE:\n" + code;
+        return 2;
+    }
+
+    cl::Kernel kernel = cl::Kernel(program, "set_substances");
+
+    if (kernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to create set_substances kernel\n";
+        return 3;
+    }
+    
+    // cl_uint maxParameterSize = physicsProcessor->device.getInfo<CL_DEVICE_MAX_PARAMETER_SIZE>();
+    // std::printf("Max parameter size: %u\n", maxParameterSize);
+
+    kernel.setArg(0, *buffer);
+    for (uint i = 0; i < substances.size(); i++){
+        kernel.setArg(1, i);
+        kernel.setArg(2, uint(substances[i].movable));
+        kernel.setArg(3, substances[i].R);
+        kernel.setArg(4, substances[i].G);
+        kernel.setArg(5, substances[i].B);
+        for (uint j = 0; j < properties.size(); j++){
+            kernel.setArg(j+6, substances[i].values[j]);
+        }
+        cl_int err;
+        err = physicsProcessor->queue.enqueueNDRangeKernel(kernel, cl::NullRange, cl::NDRange(1), cl::NDRange(1));
+        if (err != CL_SUCCESS){
+            error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to enqueue kernel for substance: " + substances[i].name + " " + translateClError(err) + "(" + std::to_string(err) + ")\n";
+            return 3;
+        }
+        err = physicsProcessor->queue.finish();
+        if (err != CL_SUCCESS){
+            error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to finish queue for substance: " + substances[i].name + " " + translateClError(err) + "(" + std::to_string(err) + ")\n";
+            return 4;
+        }
+    }
+
 
     return 0;
 }
@@ -1029,26 +1162,8 @@ std::string PhysicsProcessorBuilder::createConfigStructureKernel(){
     return kernelCode;
 }
 
-char PhysicsProcessorBuilder::acquireGlObjectFromPBO(){
-    if (physicsProcessor->fallback == false){
-        cl_int error;
-        physicsProcessor->pboMemory = clCreateFromGLBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, PBO, &error);
-
-        if (error != CL_SUCCESS){
-            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromPBO failed to create OpenCL memory object from PBO\n";
-            return 1;
-        }
-
-        physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
-        clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->pboMemory, 0, NULL, NULL);
-
-        physicsProcessor->hostFallbackBuffer = nullptr;
-    } else {
-        physicsProcessor->hostFallbackBuffer = new unsigned char[4 * simWidth * simHeight];//!!!!!!! 4 is hardcoded
-        physicsProcessor->pboMemory = clCreateBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, 4 * simWidth * simHeight, NULL, NULL);
-        physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
-
-        glBindBuffer(GL_ARRAY_BUFFER, PBO);
-    }
+char PhysicsProcessorBuilder::allocateRestGPUBuffers(){
+    physicsProcessor->countVoxelReturnValue = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeof(uint));
+    physicsProcessor->countVoxelWorkMemory = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeof(cl_uint) * simHeight * simWidth / 2 + ((simHeight * simWidth) & 0x1));
     return 0;
 }
