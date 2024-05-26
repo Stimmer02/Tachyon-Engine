@@ -28,7 +28,7 @@ typedef unsigned int uint;
 
 #include <CL/opencl.hpp>
 #include <GL/glew.h>
-// #include <GLFW/glfw3.h>
+#include <GLFW/glfw3.h>
 #include <CL/cl_gl.h>
 #include <GL/glx.h>
 

@@ -238,7 +238,9 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
     return structure;
 }
 
-
+std::string ClStructParser::getError(){
+    return error;
+}
 
 engineStruct::cl_type ClStructParser::stringToClType(const char* word){
      struct cmp_str{

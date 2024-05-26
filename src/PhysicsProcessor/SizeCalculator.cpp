@@ -25,6 +25,10 @@ char SizeCalculator::calculate(engineStruct* structure){
     return 0;
 }
 
+std::string SizeCalculator::getError(){
+    return error;
+}
+
 ushort SizeCalculator::clTypeSize(engineStruct::cl_type type){
     switch (type){
         case engineStruct::cl_bool:
