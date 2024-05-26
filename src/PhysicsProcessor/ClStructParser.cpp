@@ -27,6 +27,10 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
         }
     }
 
+    // if (structCode[wordEnd-1] == ' '){
+    //     wordEnd--;
+    // }
+
     long wordStart = wordEnd;
     for (; structCode[wordStart] != ' '; wordStart--){
         if (wordStart == 0){

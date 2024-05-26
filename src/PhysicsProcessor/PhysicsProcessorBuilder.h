@@ -36,10 +36,12 @@ public:
     std::string getDeviceName();
     std::string getError();
     std::string translateClBuildError(cl_int error);
+    std::string translateClError(cl_int error);
 
-    char build();
+    char build(bool verbose = false); //builds entire system, returns 0 if successful, otherwise error code
     PhysicsProcessor* getPhysicsProcessor();
 
+    void appendError(const std::string& err); //appends error message
 private:
     PhysicsProcessor* physicsProcessor;
 

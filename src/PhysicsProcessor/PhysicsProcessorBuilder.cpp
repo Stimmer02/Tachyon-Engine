@@ -5,8 +5,8 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
 
     structTree = new StructTree();
     sizeCalculator = new SizeCalculator(8);
-    clParser = new ClStructParser(macroManager);
     macroManager = new MacroManager();
+    clParser = new ClStructParser(macroManager);
     kernelCollector = new KernelCollector();
     kernelQueueBuilder = new KernelQueueBuilder();
     substanceCollector = new SubstanceCollector();
@@ -292,7 +292,75 @@ std::string PhysicsProcessorBuilder::translateClBuildError(cl_int error){
     }
 }
 
-char PhysicsProcessorBuilder::build(){
+std::string PhysicsProcessorBuilder::translateClError(cl_int error){
+    switch(error){
+        case CL_SUCCESS: return "CL_SUCCESS";
+        case CL_DEVICE_NOT_FOUND: return "CL_DEVICE_NOT_FOUND";
+        case CL_DEVICE_NOT_AVAILABLE: return "CL_DEVICE_NOT_AVAILABLE";
+        case CL_COMPILER_NOT_AVAILABLE: return "CL_COMPILER_NOT_AVAILABLE";
+        case CL_MEM_OBJECT_ALLOCATION_FAILURE: return "CL_MEM_OBJECT_ALLOCATION_FAILURE";
+        case CL_OUT_OF_RESOURCES: return "CL_OUT_OF_RESOURCES";
+        case CL_OUT_OF_HOST_MEMORY: return "CL_OUT_OF_HOST_MEMORY";
+        case CL_PROFILING_INFO_NOT_AVAILABLE: return "CL_PROFILING_INFO_NOT_AVAILABLE";
+        case CL_MEM_COPY_OVERLAP: return "CL_MEM_COPY_OVERLAP";
+        case CL_IMAGE_FORMAT_MISMATCH: return "CL_IMAGE_FORMAT_MISMATCH";
+        case CL_IMAGE_FORMAT_NOT_SUPPORTED: return "CL_IMAGE_FORMAT_NOT_SUPPORTED";
+        case CL_BUILD_PROGRAM_FAILURE: return "CL_BUILD_PROGRAM_FAILURE";
+        case CL_MAP_FAILURE: return "CL_MAP_FAILURE";
+        case CL_MISALIGNED_SUB_BUFFER_OFFSET: return "CL_MISALIGNED_SUB_BUFFER_OFFSET";
+        case CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST: return "CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST";
+        case CL_COMPILE_PROGRAM_FAILURE: return "CL_COMPILE_PROGRAM_FAILURE";
+        case CL_LINKER_NOT_AVAILABLE: return "CL_LINKER_NOT_AVAILABLE";
+        case CL_LINK_PROGRAM_FAILURE: return "CL_LINK_PROGRAM_FAILURE";
+        case CL_DEVICE_PARTITION_FAILED: return "CL_DEVICE_PARTITION_FAILED";
+        case CL_KERNEL_ARG_INFO_NOT_AVAILABLE: return "CL_KERNEL_ARG_INFO_NOT_AVAILABLE";
+        case CL_INVALID_VALUE: return "CL_INVALID_VALUE";
+        case CL_INVALID_DEVICE_TYPE: return "CL_INVALID_DEVICE_TYPE";
+        case CL_INVALID_PLATFORM: return "CL_INVALID_PLATFORM";
+        case CL_INVALID_DEVICE: return "CL_INVALID_DEVICE";
+        case CL_INVALID_CONTEXT: return "CL_INVALID_CONTEXT";
+        case CL_INVALID_QUEUE_PROPERTIES: return "CL_INVALID_QUEUE_PROPERTIES";
+        case CL_INVALID_COMMAND_QUEUE: return "CL_INVALID_COMMAND_QUEUE";
+        case CL_INVALID_HOST_PTR: return "CL_INVALID_HOST_PTR";
+        case CL_INVALID_MEM_OBJECT: return "CL_INVALID_MEM_OBJECT";
+        case CL_INVALID_IMAGE_FORMAT_DESCRIPTOR: return "CL_INVALID_IMAGE_FORMAT_DESCRIPTOR";
+        case CL_INVALID_IMAGE_SIZE: return "CL_INVALID_IMAGE_SIZE";
+        case CL_INVALID_SAMPLER: return "CL_INVALID_SAMPLER";
+        case CL_INVALID_BINARY: return "CL_INVALID_BINARY";
+        case CL_INVALID_PROGRAM: return "CL_INVALID_PROGRAM";
+        case CL_INVALID_PROGRAM_EXECUTABLE: return "CL_INVALID_PROGRAM_EXECUTABLE";
+        case CL_INVALID_KERNEL_NAME: return "CL_INVALID_KERNEL_NAME";
+        case CL_INVALID_KERNEL_DEFINITION: return "CL_INVALID_KERNEL_DEFINITION";
+        case CL_INVALID_KERNEL: return "CL_INVALID_KERNEL";
+        case CL_INVALID_ARG_INDEX: return "CL_INVALID_ARG_INDEX";
+        case CL_INVALID_ARG_VALUE: return "CL_INVALID_ARG_VALUE";
+        case CL_INVALID_ARG_SIZE: return "CL_INVALID_ARG_SIZE";
+        case CL_INVALID_KERNEL_ARGS: return "CL_INVALID_KERNEL_ARGS";
+        case CL_INVALID_WORK_DIMENSION: return "CL_INVALID_WORK_DIMENSION";
+        case CL_INVALID_WORK_GROUP_SIZE: return "CL_INVALID_WORK_GROUP_SIZE";
+        case CL_INVALID_WORK_ITEM_SIZE: return "CL_INVALID_WORK_ITEM_SIZE";
+        case CL_INVALID_GLOBAL_OFFSET: return "CL_INVALID_GLOBAL_OFFSET";
+        case CL_INVALID_EVENT_WAIT_LIST: return "CL_INVALID_EVENT_WAIT_LIST";
+        case CL_INVALID_EVENT: return "CL_INVALID_EVENT";
+        case CL_INVALID_OPERATION: return "CL_INVALID_OPERATION";
+        case CL_INVALID_GL_OBJECT: return "CL_INVALID_GL_OBJECT";
+        case CL_INVALID_BUFFER_SIZE: return "CL_INVALID_BUFFER_SIZE";
+        case CL_INVALID_MIP_LEVEL: return "CL_INVALID_MIP_LEVEL";
+        case CL_INVALID_GLOBAL_WORK_SIZE: return "CL_INVALID_GLOBAL_WORK_SIZE";
+        case CL_INVALID_PROPERTY: return "CL_INVALID_PROPERTY";
+        case CL_INVALID_IMAGE_DESCRIPTOR: return "CL_INVALID_IMAGE_DESCRIPTOR";
+        case CL_INVALID_COMPILER_OPTIONS: return "CL_INVALID_COMPILER_OPTIONS";
+        case CL_INVALID_LINKER_OPTIONS: return "CL_INVALID_LINKER_OPTIONS";
+        case CL_INVALID_DEVICE_PARTITION_COUNT: return "CL_INVALID_DEVICE_PARTITION_COUNT";
+        case CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR: return "CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR";
+        case CL_PLATFORM_NOT_FOUND_KHR: return "CL_PLATFORM_NOT_FOUND_KHR";
+        default: return "Unknown OpenCL error";
+
+    }
+}
+
+char PhysicsProcessorBuilder::build(bool verbose){
+    if (verbose)std::printf("Checking if all necessary variables are set\n");
     if (kernelConfigFilePath == ""){
         error += "ERR: PhysicsProcessorBuilder::build kernelConfigFilePath not set\n";
         return 1;
@@ -322,74 +390,88 @@ char PhysicsProcessorBuilder::build(){
         return 7;
     }
 
+    if (verbose)std::printf("Parsing config files\n");
     if (parseConfigFiles() != 0){ 
         error += "ERR: PhysicsProcessorBuilder::build failed to parse config files\n";
         return 8;
     }
     
+    if (verbose)std::printf("Loading kernels\n");
     if (loadKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to load kernels\n";
         return 9;
     }
 
+    if (verbose)std::printf("Creating physics processor\n");
     createPhysicsProcessor();
 
+    if (verbose)std::printf("Creating OpenCL context\n");
     if (createClContext() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create cl context\n";
         return 10;
     }
 
+    if (verbose)std::printf("Checking local work size\n");
     if (checkLocalWorkSize() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed during local work size check\n";
         return 11;
     }
 
+    if (verbose)std::printf("Creating substance structure\n");
     if (createSubstanceStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create substance structure\n";
         return 12;
     }
 
+    if (verbose)std::printf("Building struct tree\n");
     if (buildStructTree() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to build struct tree\n";
         return 13;
     }
 
+    if (verbose)std::printf("Adding config structure\n");
     if (addConfigStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to add config structure\n";
         return 14;
     }
 
+    if (verbose)std::printf("Compiling OpenCL program\n");
     if (compileCl() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to compile OpenCL program\n";
         return 15;
     }
 
+    if (verbose)std::printf("Setting mandatory kernels\n");
     if (setMandatoryKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
         return 16;
     }
 
+    if (verbose)std::printf("Setting kernel queue (engine)\n");
     if (setKernelQueue() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
         return 17;
     }
 
+    // if (verbose)std::printf("Acquiring GL object from PBO\n"
     // if (acquireGlObjectFromPBO() != 0){
     //     error += "ERR: PhysicsProcessorBuilder::build failed to acquire GL object from PBO\n";
     //     return 18;
     // }
 
+    if (verbose)std::printf("Allocating GPU resources memory\n");
     if (allocateGPUResourcesMemory() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
         return 19;
     }
 
+    if (verbose)std::printf("Allocating GPU config structure\n");
     if (allocateGPUConfigStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory for config structure\n";
         return 20;
     }
 
-
+    if (verbose)std::printf("Done\n");
     return 0;
 }
 
@@ -454,6 +536,15 @@ void PhysicsProcessorBuilder::createPhysicsProcessor(){
 
     physicsProcessor->globalWorkSize = cl::NDRange(simWidth, simHeight);
     physicsProcessor->localWorkSize = localWorkSize;
+}
+
+void PhysicsProcessorBuilder::appendError(const std::string& err) {
+    error += err;
+}
+
+static void CL_CALLBACK contextCallback(const char *errInfo, const void *private_info, size_t cb, void *user_data) {
+    PhysicsProcessorBuilder* self = static_cast<PhysicsProcessorBuilder*>(user_data);
+    self->appendError("ERR: PhysicsProcessorBuilder: OpenCL error message: " + std::string(errInfo));
 }
 
 char PhysicsProcessorBuilder::createClContext(){
@@ -523,9 +614,17 @@ char PhysicsProcessorBuilder::createClContext(){
     };
 
 #endif
-    cl::Context context(device, properties);
+    cl_int err;
+    cl::Context context(device, properties, contextCallback, this, &err);
+    if (err != CL_SUCCESS) {
+        error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (" + std::to_string(err) + ")\n";
+        error += "WARNING: PhysicsProcessorBuilder::createClContext trying fallback mode\n";
+        physicsProcessor->fallback = true;
+        context = cl::Context(device, NULL, contextCallback, this, &err);
+    }
+    
     if (context() == NULL) {
-        error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + "\n";
+        error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (NO ERROR SPECIFIED)\n";
         return 3;
     }
 
@@ -610,6 +709,8 @@ char PhysicsProcessorBuilder::addConfigStructure(){
         error += "ERR: PhysicsProcessorBuilder::addConfigStructure failed to calculate size of config struct\n";
         return 3;
     }
+
+    return 0;
 }
 
 char PhysicsProcessorBuilder::loadKernels(){
@@ -634,7 +735,7 @@ void PhysicsProcessorBuilder::addMandatoryKernels(){
 
     const std::string spawnVoxelsInAreaKernelName = "spawn_voxels_in_area";
     const std::string spawnVoxelsInAreaKernelCode = 
-        "   void kernel spawn_voxel_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
+        "   void kernel spawn_voxels_in_area(uint x, uint y, uint substanceID, global struct engineResources* resources, global struct engineConfig* config){"
         "       uint globalID, IDX, IDY;"
         "       IDX = x + get_global_id(0);"
         "       IDY = y + get_global_id(1);"
@@ -696,9 +797,9 @@ void PhysicsProcessorBuilder::addMandatoryKernels(){
         "       }"
         "   }";
 
-    kernelCollector->addKernelCode(spawnVoxelKernelName, spawnVoxelKernelCode);
-    kernelCollector->addKernelCode(spawnVoxelsInAreaKernelName, spawnVoxelsInAreaKernelCode);
-    kernelCollector->addKernelCode(countVoxelsKernelName, countVoxelsKernelCode);
+    kernelCollector->addKernelCode(spawnVoxelKernelCode, spawnVoxelKernelName);
+    kernelCollector->addKernelCode(spawnVoxelsInAreaKernelCode, spawnVoxelsInAreaKernelName);
+    kernelCollector->addKernelCode(countVoxelsKernelCode, countVoxelsKernelName);
 }
 
 char PhysicsProcessorBuilder::compileCl(){
@@ -713,30 +814,11 @@ char PhysicsProcessorBuilder::compileCl(){
     cl_int buildCode = program.build();
 
     if (buildCode != CL_SUCCESS) {
-        error += "ERR: PhysicsProcessorBuilder::compileCl failed to compile OpenCL program\n";
+        error += "ERR: PhysicsProcessorBuilder::compileCl failed to compile OpenCL program: " + translateClBuildError(buildCode) + "(" + std::to_string(buildCode) +")\n";
+        error += "BUILD LOG:\n" + program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(physicsProcessor->device);
+        error += "SOURCE CODE:\n" + code;
         return 1;
-        //physicsProcessor->fallback = true;
-        // std::fprintf(stderr ,"Error building TACHYON_ENGINE code: %d\n", buildCode);
-        // std::fprintf(stderr ,"Trying fallback settings...\n");
-
-        // context = cl::Context(device);
-        // program = cl::Program(context, sources);
-
-        // buildCode = program.build();
-        // if (buildCode != CL_SUCCESS) {
-        //     std::fprintf(stderr ,"Error building TACHYON_ENGINE %d: %s\n", buildCode, PhysicsProcessorBuilder::getErrorString(buildCode).c_str());
-        //     std::fprintf(stderr ,"Error building TACHYON_ENGINE content:\n%s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device).c_str());
-        //     std::fprintf(stderr ,"ERROR: not able to compile TACHYON_ENGINE kernel!\n");
-        //     return nullptr;
-        // }
-        // std::fprintf(stderr ,"WARNING: entering fallback mode\n");
-        // std::printf("Compillation TACHYON_ENGINE successful!\n");
-        // cl::Kernel TACHYON_ENGINE(program, "TACHYON_ENGINE");
-        // return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config, device);
     }
-
-    physicsProcessor->fallback = false;
-
     return 0;
 }
 
@@ -803,21 +885,21 @@ char PhysicsProcessorBuilder::allocateGPUResourcesMemory(){
     cl::Program::Sources sources;
 
     code = structTree->getStructures();
-    sources.push_back({code.c_str(), code.length()});
 
     for (const engineStruct* structure : structs){
         if (allocationKernels.find(structure->name) == allocationKernels.end()){
-            code = createAllocationKernel(structure);
-            sources.push_back({code.c_str(), code.length()});
-            
+            code += createAllocationKernel(structure);
             allocationKernels.insert({structure->name, cl::Kernel()});
         }
     }
+    sources.push_back({code.c_str(), code.length()});
 
     cl::Program program = cl::Program(physicsProcessor->context, sources);
     cl_int buildCode = program.build();
     if (buildCode != CL_SUCCESS) {
-        error += "ERR: PhysicsProcessorBuilder::allocateGPUResourcesMemory failed to compile allocation kernels\n";
+        error += "ERR: PhysicsProcessorBuilder::allocateGPUResourcesMemory failed to compile allocation kernels: " + translateClBuildError(buildCode) + "(" + std::to_string(buildCode) +")\n";
+        error += "BUILD LOG:\n" + program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(physicsProcessor->device);
+        error += "SOURCE CODE:\n" + code;
         return 1;
     }
 

@@ -1,5 +1,0 @@
-struct __attribute__ ((aligned)) substance{
-    struct color color;
-    float mass;
-    float jammingFactor;
-};

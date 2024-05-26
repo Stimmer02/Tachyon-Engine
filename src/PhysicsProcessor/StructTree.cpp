@@ -40,7 +40,7 @@ char StructTree::setRootStruct(std::string rootStructName, ClStructParser* parse
     root = parser->processStruct(code);
     parsedStructs[root->name].node = root;
     status = -1;
-    return status;
+    return 0;
 }
 
 void StructTree::setStructDirectory(std::string structDirectory){
@@ -57,7 +57,6 @@ char StructTree::build(ClStructParser* parser){
 
         for (int i = 0; i < currentStructure->fieldCount; ++i){
             if (currentStructure->fields[i].type == engineStruct::cl_struct){
-
                 if (parsedStructs.find(currentStructure->fields[i].subStructName) != parsedStructs.end()){
                     currentStructure->fields[i].subStruct = parsedStructs[currentStructure->fields[i].subStructName].node;
                     // q.push(currentStructure->fields[i].subStruct); not sure if this is needed
@@ -66,9 +65,6 @@ char StructTree::build(ClStructParser* parser){
 
                 string path = this->structDirectory + "/" + currentStructure->fields[i].subStructName + ".cl";
                 string path2 = this->structDirectory + "/" + currentStructure->fields[i].subStructName + ".clcpp";
-
-                const char* file = path.c_str();
-                const char* file2 = path2.c_str();
 
                 ifstream f(path);
                 string code;
@@ -165,23 +161,6 @@ void StructTree::printTreeRecursive(engineStruct* node){
     }
 }
 
-std::string StructTree::getStructuresRecursive(engineStruct* node){
-    std::string result = "";
-    for (int i = 0; i < node->fieldCount; ++i){
-        if (node->fields[i].subStruct != nullptr){
-            result += getStructuresRecursive(node->fields[i].subStruct);
-        }
-    }
-
-    parsedStruct& parsed = parsedStructs[node->name];
-
-    if (parsed.visited == false){
-        result += node->rawCode;
-        parsed.visited = false;
-    }
-    return result;
-}
-
 std::string StructTree::getError(){
     return this->error;
 }
@@ -192,6 +171,28 @@ std::string StructTree::getStructures(){
     }
     setVisitedFalse();
     return getStructuresRecursive(root);
+}
+
+std::string StructTree::getStructuresRecursive(engineStruct* node){
+    std::string result = "";
+    
+    for (int i = 0; i < node->fieldCount; ++i){
+        if (node->fields[i].subStruct != nullptr){
+            result += getStructuresRecursive(node->fields[i].subStruct);
+        }
+    }
+
+    parsedStruct& parsed = parsedStructs[node->name];
+
+    if (node->name == ""){
+        std::printf("NO NAME CODE: %s\n", node->rawCode.c_str());
+    }
+
+    if (parsed.visited == false){
+        result += node->rawCode;
+        parsed.visited = true;
+    }
+    return result;
 }
 
 void StructTree::setVisitedFalse(){

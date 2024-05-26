@@ -1,6 +1,7 @@
 #include "PhysicsProcessor.h"
 
 PhysicsProcessor::PhysicsProcessor(const uint& engineSize): engineSize(engineSize){
+    fallback = false;
     engine = new cl::Kernel[engineSize];
 }
 
