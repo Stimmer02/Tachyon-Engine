@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 #include "Mesh.h"
 #include "Vector3.h"
@@ -26,14 +27,21 @@ private:
     unsigned int numTexCoords;
     std::vector<float> texCoordsVector;
     
+    static const int functionsArraySize = 256 * 256;
+    static const int charSize = 256;
     
-    void addSingleVertex(const std::string &vertexLine);
-    void addSingleNormal(const std::string &normal);
-    void addSingleIndex(const std::string &indexLine);
-    void addSingleTexCoord(const std::string &texCoordLine);
+    static void (*functionsArr[functionsArraySize])(const std::string&);
+    
+    static void addSingleVertex(const std::string &vertexLine);
+    static void addSingleNormal(const std::string &normal);
+    static void addSingleIndex(const std::string &indexLine);
+    static void addSingleTexCoord(const std::string &texCoordLine);
+    static void doNothing(const std::string &comment);
+    
+    static void initFunctionsArray();
+    
 public:
     static void ParseMesh(const std::string &pathToFile, Mesh* mesh);
-    
 };
 
 #endif
