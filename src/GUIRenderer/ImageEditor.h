@@ -3,7 +3,7 @@
 
 #include "Component.h"
 #include "Image.h"
-#include <iostream>
+#include "Color.h"
 
 class ImageEditor{
 private:

@@ -172,7 +172,7 @@ public:
         // button = new ButtonElement(300, 450, 200, 100, callback);
         // scene->AddGUIToScene(button);
 
-        TextElement * text = new TextElement("Hello\nWorld!");
+        TextElement * text = new TextElement("Pingwin");
         text->transform.position.x = GraphicConfig::windowWidth/2.0;
         text->transform.position.y = GraphicConfig::windowHeight/2.0f;
         scene->AddGUIToScene(text);
