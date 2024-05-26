@@ -1,5 +1,23 @@
 #include "MeshLoader.h"
 
+Vector3* MeshLoader::vertices;
+unsigned int MeshLoader::numVertices;
+std::vector<Vector3> MeshLoader::verticesVector;
+
+Vector3* MeshLoader::normals; 
+unsigned int MeshLoader::numNormals;
+std::vector<Vector3> MeshLoader::normalsVector;
+
+unsigned int* MeshLoader::indices; 
+unsigned int MeshLoader::numIndices;
+std::vector<unsigned int> MeshLoader::indicesVector;
+
+float* MeshLoader::texCoords;
+unsigned int MeshLoader::numTexCoords;
+std::vector<float> MeshLoader::texCoordsVector;
+
+void (*MeshLoader::functionsArr[functionsArraySize])(const std::string&);
+
 void MeshLoader::addSingleVertex(const std::string &vertexLine){
     const int startId = 3;
     std::string singleCoord;
@@ -15,9 +33,9 @@ void MeshLoader::addSingleVertex(const std::string &vertexLine){
         }
     }
     
-    verticesVector.push_back({coords[0], coords[1], coords[2]});
+    MeshLoader::verticesVector.push_back({coords[0], coords[1], coords[2]});
     if(coords.size() == 4){
-        verticesVector[verticesVector.size() - 1].w = coords[3];
+        MeshLoader::verticesVector[MeshLoader::verticesVector.size() - 1].w = coords[3];
     }
     
 }
