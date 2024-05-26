@@ -4,6 +4,8 @@
 #include "Attribute.h"
 #include <GL/glew.h>
 
+#include "Vector3.h"
+
 class Mesh : public AttributeType<Mesh>{
 private:
 
