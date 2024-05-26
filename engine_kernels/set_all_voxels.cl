@@ -2,5 +2,5 @@ void kernel set_all_voxels(global struct engineConfig* config, global struct eng
     private int global_ID;
 
     global_ID = get_global_id(0) + get_global_id(1) * config->simulationWidth;
-    resources->worldMap->voxels[global_ID].substanceID = 1;
+    resources->voxels[global_ID].substanceID = 1;
 }

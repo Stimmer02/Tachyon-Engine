@@ -5,8 +5,8 @@ void kernel spawn_voxels_in_area(uint x, uint y, uint substanceID, global struct
     globalID = IDY * config->simulationWidth + IDX;
         
     if (config->simulationWidth > IDX && config->simulationHeight > IDY){
-        resources->worldMap->voxels[globalID].forceVector.x = 0;
-        resources->worldMap->voxels[globalID].forceVector.y = 0;
-        resources->worldMap->voxels[globalID].substanceID = substanceID;
+        resources->voxels[globalID].forceVector.x = 0;
+        resources->voxels[globalID].forceVector.y = 0;
+        resources->voxels[globalID].substanceID = substanceID;
     }
 }

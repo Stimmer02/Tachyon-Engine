@@ -35,8 +35,8 @@ void PhysicsProcessor::spawnVoxelsInArea(uint x, uint y, uint width, uint height
 
 uint PhysicsProcessor::countVoxels(){
     cl_uint returnValue;
-    // queue.enqueueNDRangeKernel(count_voxelKernel, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
-    queue.enqueueReadBuffer(countVoxelReturnValue, CL_TRUE, 0, sizeof(cl_uint), &returnValue);
+    queue.enqueueNDRangeKernel(count_voxelKernel, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
+    queue.enqueueReadBuffer(countVoxelReturnValue, CL_FALSE, 0, sizeof(cl_uint), &returnValue);
     queue.finish();
 
     return returnValue;

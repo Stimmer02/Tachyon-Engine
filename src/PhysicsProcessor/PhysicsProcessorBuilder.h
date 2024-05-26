@@ -88,18 +88,20 @@ private:
     void createPhysicsProcessor(); //creates PhysicsProcessor object
     char addMandatoryKernels(); //adds kernels that are mandatory for PhysicsProcessor to work
     char checkLocalWorkSize(); //checks if local work size is valid
-    char setMandatoryKernels(); //sets previously defined kernels
-    char setKernelQueue(); //sets engine kernel queue based on their priority
     char acquireGlObjectFromPBO(); //acquires gl object from PBO
 
     char allocateGPUResourcesMemory(); //allocates memory for all structures based on structure tree
     std::string createAllocationKernel(const engineStruct* structure); //creates kernel that allocates memory for particullar structure
     char allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer& buffer, uint count = 1); //allocates memory and sets structure hierarchy recursively
+    bool hasPointers(const engineStruct* structure); //checks if structure has pointers recursively
     char setSubstancesProperties(cl::Buffer* buffer); //sets substances properties based on loaded substances
 
     char allocateGPUConfigStructure(); //allocates and initializes memory for config structure
     std::string createConfigStructureKernel(); //creates config structure based on config file
-    char allocateRestGPUBuffers(); //allocates memory for all other purposes
+
+    char allocateGPUWorkBuffers(); //allocates memory for all work buffers
+    char setMandatoryKernels(); //sets previously defined kernels
+    char setKernelQueue(); //sets engine kernel queue based on their priority
 };
 
 #endif

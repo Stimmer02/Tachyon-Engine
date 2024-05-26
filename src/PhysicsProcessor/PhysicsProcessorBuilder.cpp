@@ -466,18 +466,6 @@ char PhysicsProcessorBuilder::build(bool verbose){
         return 16;
     }
 
-    if (verbose)std::printf("Setting mandatory kernels\n");
-    if (setMandatoryKernels() != 0){
-        error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
-        return 17;
-    }
-
-    if (verbose)std::printf("Setting kernel queue (engine)\n");
-    if (setKernelQueue() != 0){
-        error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
-        return 18;
-    }
-
     // if (verbose)std::printf("Acquiring GL object from PBO\n"
     // if (acquireGlObjectFromPBO() != 0){
     //     error += "ERR: PhysicsProcessorBuilder::build failed to acquire GL object from PBO\n";
@@ -497,9 +485,21 @@ char PhysicsProcessorBuilder::build(bool verbose){
     }
 
     if (verbose)std::printf("Allocating rest of GPU buffers\n");
-    if (allocateRestGPUBuffers() != 0){
+    if (allocateGPUWorkBuffers() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate rest of GPU buffers\n";
         return 22;
+    }
+
+    if (verbose)std::printf("Setting mandatory kernels\n");
+    if (setMandatoryKernels() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
+        return 17;
+    }
+
+    if (verbose)std::printf("Setting kernel queue (engine)\n");
+    if (setKernelQueue() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
+        return 18;
     }
 
     if (verbose)std::printf("Done\n");
@@ -830,58 +830,6 @@ char PhysicsProcessorBuilder::compileCl(){
     return 0;
 }
 
-char PhysicsProcessorBuilder::setMandatoryKernels(){
-    physicsProcessor->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
-    if (physicsProcessor->spawn_voxelKernel() == NULL){
-        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxel kernel\n";
-        return 1;
-    }
-    physicsProcessor->spawn_voxelKernel.setArg(3, physicsProcessor->engineResources);
-    physicsProcessor->spawn_voxelKernel.setArg(4, physicsProcessor->engineConfig);
-
-    physicsProcessor->spawn_voxel_in_areaKernel = cl::Kernel(program, "spawn_voxels_in_area");
-    if (physicsProcessor->spawn_voxel_in_areaKernel() == NULL){
-        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxels_in_area kernel\n";
-        return 2;
-    }
-    physicsProcessor->spawn_voxel_in_areaKernel.setArg(3, physicsProcessor->engineResources);
-    physicsProcessor->spawn_voxel_in_areaKernel.setArg(4, physicsProcessor->engineConfig);
-
-    physicsProcessor->count_voxelKernel = cl::Kernel(program, "count_voxels");
-    if (physicsProcessor->count_voxelKernel() == NULL){
-        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create count_voxels kernel\n";
-        return 3;
-    }
-    physicsProcessor->count_voxelKernel.setArg(0, physicsProcessor->engineResources);
-    physicsProcessor->count_voxelKernel.setArg(1, physicsProcessor->countVoxelWorkMemory);
-    physicsProcessor->count_voxelKernel.setArg(2, simHeight * simHeight);
-    physicsProcessor->count_voxelKernel.setArg(3, physicsProcessor->countVoxelReturnValue);
-
-    return 0;
-}
-
-char PhysicsProcessorBuilder::setKernelQueue(){
-    const std::vector<kernelExecutionUnit>& kernelQueue = kernelQueueBuilder->getKernelQueue();
-
-    uint engineIterator = 0;
-    for (uint i = 0; i < kernelQueue.size(); i++){
-        const kernelExecutionUnit& keu = kernelQueue[i];
-        cl::Kernel kernel(program, keu.functionName.c_str());
-        if (kernel() == NULL){
-            error += "ERR: PhysicsProcessorBuilder::setKernelQueue failed to create engine kernel named: "  + keu.functionName + "\n";
-            return 1;
-        }
-        kernel.setArg(0, physicsProcessor->engineConfig);
-        kernel.setArg(1, physicsProcessor->engineResources);
-        for (uint j = 0; j < keu.executionCount; j++){
-            physicsProcessor->engine[engineIterator] = kernel;
-            engineIterator++;
-        }
-    }
-    
-    return 0;
-}
-
 char PhysicsProcessorBuilder::acquireGlObjectFromPBO(){
     if (physicsProcessor->fallback == false){
         cl_int error;
@@ -978,10 +926,18 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
 
 
 char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer& buffer, uint count){
+    std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count, structure->byteSize*count);
     buffer = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, structure->byteSize*count);
     if (buffer() == NULL){
         error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(structure->byteSize*count) + "B) for structure: " + structure->name + "\n";
         return -1;
+    }
+    cl_int size;
+    buffer.getInfo(CL_MEM_SIZE, &size);
+    std::printf("Allocated %s (%dB)\n", structure->name.c_str(), size);
+
+    if (hasPointers(structure) == false){
+        return 0;
     }
 
     for (uint i = 0; i < count; i++){
@@ -1013,6 +969,9 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
                     if (allocateStructure(field.subStruct, kernels, *childBuffer, field.arrSize) != 0){
                         return -1;
                     }
+                    cl_int size;
+                    childBuffer->getInfo(CL_MEM_SIZE, &size);
+                    std::printf("Allocated substructure %s (%dB)\n", field.subStruct->name.c_str(), size);
                     physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
                 }
             }
@@ -1032,6 +991,20 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
     }
 
     return 0;
+}
+
+bool PhysicsProcessorBuilder::hasPointers(const engineStruct* structure){
+    for (uint i = 0; i < structure->fieldCount; i++){
+        if (structure->fields[i].arrSize > 0){
+            return true;
+        }
+        if (structure->fields[i].subStruct != nullptr){
+            if (hasPointers(structure->fields[i].subStruct)){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer* buffer){
@@ -1162,8 +1135,61 @@ std::string PhysicsProcessorBuilder::createConfigStructureKernel(){
     return kernelCode;
 }
 
-char PhysicsProcessorBuilder::allocateRestGPUBuffers(){
+
+char PhysicsProcessorBuilder::allocateGPUWorkBuffers(){
     physicsProcessor->countVoxelReturnValue = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeof(uint));
     physicsProcessor->countVoxelWorkMemory = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeof(cl_uint) * simHeight * simWidth / 2 + ((simHeight * simWidth) & 0x1));
+    return 0;
+}
+
+char PhysicsProcessorBuilder::setMandatoryKernels(){
+    physicsProcessor->spawn_voxelKernel = cl::Kernel(program, "spawn_voxel");
+    if (physicsProcessor->spawn_voxelKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxel kernel\n";
+        return 1;
+    }
+    physicsProcessor->spawn_voxelKernel.setArg(3, physicsProcessor->engineResources);
+    physicsProcessor->spawn_voxelKernel.setArg(4, physicsProcessor->engineConfig);
+
+    physicsProcessor->spawn_voxel_in_areaKernel = cl::Kernel(program, "spawn_voxels_in_area");
+    if (physicsProcessor->spawn_voxel_in_areaKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxels_in_area kernel\n";
+        return 2;
+    }
+    physicsProcessor->spawn_voxel_in_areaKernel.setArg(3, physicsProcessor->engineResources);
+    physicsProcessor->spawn_voxel_in_areaKernel.setArg(4, physicsProcessor->engineConfig);
+
+    physicsProcessor->count_voxelKernel = cl::Kernel(program, "count_voxels");
+    if (physicsProcessor->count_voxelKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create count_voxels kernel\n";
+        return 3;
+    }
+    physicsProcessor->count_voxelKernel.setArg(0, physicsProcessor->engineResources);
+    physicsProcessor->count_voxelKernel.setArg(1, physicsProcessor->countVoxelWorkMemory);
+    physicsProcessor->count_voxelKernel.setArg(2, simHeight * simHeight);
+    physicsProcessor->count_voxelKernel.setArg(3, physicsProcessor->countVoxelReturnValue);
+
+    return 0;
+}
+
+char PhysicsProcessorBuilder::setKernelQueue(){
+    const std::vector<kernelExecutionUnit>& kernelQueue = kernelQueueBuilder->getKernelQueue();
+
+    uint engineIterator = 0;
+    for (uint i = 0; i < kernelQueue.size(); i++){
+        const kernelExecutionUnit& keu = kernelQueue[i];
+        cl::Kernel kernel(program, keu.functionName.c_str());
+        if (kernel() == NULL){
+            error += "ERR: PhysicsProcessorBuilder::setKernelQueue failed to create engine kernel named: "  + keu.functionName + "\n";
+            return 1;
+        }
+        kernel.setArg(0, physicsProcessor->engineConfig);
+        kernel.setArg(1, physicsProcessor->engineResources);
+        for (uint j = 0; j < keu.executionCount; j++){
+            physicsProcessor->engine[engineIterator] = kernel;
+            engineIterator++;
+        }
+    }
+    
     return 0;
 }
