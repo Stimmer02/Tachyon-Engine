@@ -30,6 +30,8 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
     clDeviceName = "";
 
     localWorkSize = cl::NDRange(0);
+
+    PBO = 0;
 }
 
 PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
@@ -201,6 +203,10 @@ void PhysicsProcessorBuilder::setClDevice(cl_uint device){
     clDeviceID = device;
 }
 
+void PhysicsProcessorBuilder::setPBO(GLuint PBO){
+    this->PBO = PBO;
+}
+
 std::string PhysicsProcessorBuilder::getDeviceName(){
     return clDeviceName;
 }
@@ -311,68 +317,78 @@ char PhysicsProcessorBuilder::build(){
         error += "ERR: PhysicsProcessorBuilder::build configStructFile not set\n";
         return 6;
     }
+    if (PBO == 0){
+        error += "ERR: PhysicsProcessorBuilder::build PBO not set\n";
+        return 7;
+    }
 
     if (parseConfigFiles() != 0){ 
         error += "ERR: PhysicsProcessorBuilder::build failed to parse config files\n";
-        return 7;
+        return 8;
     }
     
     if (loadKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to load kernels\n";
-        return 8;
+        return 9;
     }
 
     createPhysicsProcessor();
 
     if (createClContext() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create cl context\n";
-        return 9;
+        return 10;
     }
 
     if (checkLocalWorkSize() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed during local work size check\n";
-        return 10;
+        return 11;
     }
 
     if (createSubstanceStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to create substance structure\n";
-        return 11;
+        return 12;
     }
 
     if (buildStructTree() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to build struct tree\n";
-        return 12;
+        return 13;
     }
 
     if (addConfigStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to add config structure\n";
-        return 13;
+        return 14;
     }
 
     if (compileCl() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to compile OpenCL program\n";
-        return 14;
+        return 15;
     }
 
     if (setMandatoryKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
-        return 15;
+        return 16;
     }
 
     if (setKernelQueue() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
-        return 16;
+        return 17;
     }
+
+    // if (acquireGlObjectFromPBO() != 0){
+    //     error += "ERR: PhysicsProcessorBuilder::build failed to acquire GL object from PBO\n";
+    //     return 18;
+    // }
 
     if (allocateGPUResourcesMemory() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
-        return 17;
+        return 19;
     }
 
     if (allocateGPUConfigStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory for config structure\n";
-        return 18;
+        return 20;
     }
+
 
     return 0;
 }
@@ -699,6 +715,7 @@ char PhysicsProcessorBuilder::compileCl(){
     if (buildCode != CL_SUCCESS) {
         error += "ERR: PhysicsProcessorBuilder::compileCl failed to compile OpenCL program\n";
         return 1;
+        //physicsProcessor->fallback = true;
         // std::fprintf(stderr ,"Error building TACHYON_ENGINE code: %d\n", buildCode);
         // std::fprintf(stderr ,"Trying fallback settings...\n");
 
@@ -717,6 +734,8 @@ char PhysicsProcessorBuilder::compileCl(){
         // cl::Kernel TACHYON_ENGINE(program, "TACHYON_ENGINE");
         // return PhysicsProcesor = new PhysicsProcessor_Fallback(context, TACHYON_ENGINE, PBO, config, device);
     }
+
+    physicsProcessor->fallback = false;
 
     return 0;
 }
@@ -859,19 +878,22 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
             const engineStruct::field& field = structure->fields[j];
             cl::Buffer* childBuffer;
             if (field.arrSize > 0){
-                if (field.subStruct == nullptr){
+                if (field.name == "PBO" || field.name == "pbo"){
+                    childBuffer = &physicsProcessor->pboBuffer;
+                } else if (field.subStruct == nullptr){
                     childBuffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeCalculator->clTypeSize(field.type) * field.arrSize);
                     if ((*childBuffer)() == NULL){
                         error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(sizeCalculator->clTypeSize(field.type) * field.arrSize) + "B) for field: " + field.name + "\n";
                         return -1;
                     }
+                    physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
                 } else {
                     childBuffer = new cl::Buffer();
                     if (allocateStructure(field.subStruct, kernels, *childBuffer, field.arrSize) != 0){
                         return -1;
                     }
+                    physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
                 }
-                physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
             }
             kernel.setArg(j+2, *childBuffer);
         }
@@ -925,3 +947,26 @@ std::string PhysicsProcessorBuilder::createConfigStructureKernel(){
     return kernelCode;
 }
 
+char PhysicsProcessorBuilder::acquireGlObjectFromPBO(){
+    if (physicsProcessor->fallback == false){
+        cl_int error;
+        physicsProcessor->pboMemory = clCreateFromGLBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, PBO, &error);
+
+        if (error != CL_SUCCESS){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromPBO failed to create OpenCL memory object from PBO\n";
+            return 1;
+        }
+
+        physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
+        clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->pboMemory, 0, NULL, NULL);
+
+        physicsProcessor->hostFallbackBuffer = nullptr;
+    } else {
+        physicsProcessor->hostFallbackBuffer = new unsigned char[4 * simWidth * simHeight];//!!!!!!! 4 is hardcoded
+        physicsProcessor->pboMemory = clCreateBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, 4 * simWidth * simHeight, NULL, NULL);
+        physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
+
+        glBindBuffer(GL_ARRAY_BUFFER, PBO);
+    }
+    return 0;
+}

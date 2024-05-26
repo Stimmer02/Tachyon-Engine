@@ -31,7 +31,7 @@ public:
     void setClPlatform(cl_uint platform);
     void setClDevice(cl_uint device);
 
-    // char setPBO(GLuit PBO);
+    void setPBO(GLuint PBO);
 
     std::string getDeviceName();
     std::string getError();
@@ -71,7 +71,7 @@ private:
 
     cl::NDRange localWorkSize;
 
-    // GLuit PBO;
+    GLuint PBO;
 
     char parseConfigFiles(); //reads location and priority of kernels, root location of structs, macros, location of substances directory
     char createClContext(); //creates cl context (platform / device) based on config file

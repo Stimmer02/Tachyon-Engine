@@ -48,6 +48,8 @@ public:
 
 private:
     PhysicsProcessor(const uint& engineSize);
+    bool fallback;
+    unsigned char* hostFallbackBuffer;
 
     cl::NDRange globalWorkSize; //TODO: rethink this
     cl::NDRange localWorkSize;
@@ -67,6 +69,10 @@ private:
     cl::Buffer engineConfig;//contains the configuration for the engine
     cl::Buffer countVoxelReturnValue;//used to return the count of voxels
     cl::Buffer countVoxelWorkMemory;//used during count_voxels kernel
+
+    cl_mem pboMemory;//contains allocated memory for the PBO
+
+    cl::Buffer pboBuffer;//contains the PBO buffer
 
     std::vector<cl::Buffer*> allocatedGPUMemory;
 };
