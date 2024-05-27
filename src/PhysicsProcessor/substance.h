@@ -3,9 +3,10 @@
 
 #include <string>
 #include <vector>
+#include <stdint.h>
 
 struct substance{
-    uint id;
+    uint32_t id;
     std::string  name;
     float R, G, B;
     bool movable;

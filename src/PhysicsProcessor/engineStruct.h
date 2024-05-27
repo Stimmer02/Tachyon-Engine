@@ -2,6 +2,7 @@
 #define ENGINE_STRUCT_H
 
 #include <string>
+#include <stdint.h>
 
 typedef unsigned char uchar;
 
@@ -35,15 +36,15 @@ struct engineStruct{
         cl_type type = cl_invalid;
         engineStruct* subStruct = nullptr;
         std::string subStructName;
-        uint arrSize = 0;
-        uchar byteSize = 0;
+        uint32_t arrSize = 0;
+        uint8_t byteSize = 0;
         float defaultValue = 0;
     };
 
     std::string name;
     std::string rawCode;
-    uint byteSize = 0;
-    ushort fieldCount = 0;
+    uint32_t byteSize = 0;
+    uint16_t fieldCount = 0;
     field* fields = nullptr;
 };
 

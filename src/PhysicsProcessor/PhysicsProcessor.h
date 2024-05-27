@@ -5,49 +5,45 @@
 
 #ifdef __APPLE__
 
-#include <GL/glew.h>
+// #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <OpenGL/gl3.h>
-#include <OpenGL/OpenGL.h>
 #include <OpenCL/opencl.h>
 #include <OpenCL/cl_gl.h>
 #include "../OpenCL/include/CL/cl.hpp"
 
 #elif __WIN32__
 
-typedef unsigned int uint;
+typedef unsigned int uint32_t;
 
 #include <windows.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <GL/gl.h>
+// #include <GL/glew.h>
 #include <CL/opencl.hpp>
 #include <CL/cl_gl.h>
 
 #else
 
 #include <CL/opencl.hpp>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+// #include <GL/glew.h>
 #include <CL/cl_gl.h>
 #include <GL/glx.h>
 
 #endif
 
+#include <stdint.h>
 
 class PhysicsProcessor{
     friend class PhysicsProcessorBuilder;
 public:
     ~PhysicsProcessor();
 
-    void spawnVoxel(uint x, uint y, uint substanceID);
-    void spawnVoxelsInArea(uint x, uint y, uint width, uint height, uint substanceID);
-    uint countVoxels();
+    void spawnVoxel(uint32_t x, uint32_t y, uint32_t substanceID);
+    void spawnVoxelsInArea(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t substanceID);
+    uint32_t countVoxels();
 
     void generateFrame();
 
 private:
-    PhysicsProcessor(const uint& engineSize);
+    PhysicsProcessor(const uint32_t& engineSize);
     bool fallback;
     unsigned char* hostFallbackBuffer;
 
@@ -59,7 +55,7 @@ private:
     cl::CommandQueue queue;
 
     cl::Kernel* engine;
-    const uint engineSize; 
+    const uint32_t engineSize;
 
     cl::Kernel spawn_voxelKernel;
     cl::Kernel spawn_voxel_in_areaKernel;

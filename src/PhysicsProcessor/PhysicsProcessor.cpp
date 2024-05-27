@@ -1,6 +1,6 @@
 #include "PhysicsProcessor.h"
 
-PhysicsProcessor::PhysicsProcessor(const uint& engineSize): engineSize(engineSize){
+PhysicsProcessor::PhysicsProcessor(const uint32_t& engineSize): engineSize(engineSize){
     fallback = false;
     engine = new cl::Kernel[engineSize];
     engineResources = nullptr;
@@ -22,7 +22,7 @@ PhysicsProcessor::~PhysicsProcessor(){
     }
 }
 
-void PhysicsProcessor::spawnVoxel(uint x, uint y, uint substanceID){
+void PhysicsProcessor::spawnVoxel(uint32_t x, uint32_t y, uint32_t substanceID){
     spawn_voxelKernel.setArg(0, x);
     spawn_voxelKernel.setArg(1, y);
     spawn_voxelKernel.setArg(2, substanceID);
@@ -30,7 +30,7 @@ void PhysicsProcessor::spawnVoxel(uint x, uint y, uint substanceID){
     queue.finish();
 }
 
-void PhysicsProcessor::spawnVoxelsInArea(uint x, uint y, uint width, uint height, uint substanceID){
+void PhysicsProcessor::spawnVoxelsInArea(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t substanceID){
     spawn_voxel_in_areaKernel.setArg(0, x);
     spawn_voxel_in_areaKernel.setArg(1, y);
     spawn_voxel_in_areaKernel.setArg(2, substanceID);
@@ -38,7 +38,7 @@ void PhysicsProcessor::spawnVoxelsInArea(uint x, uint y, uint width, uint height
     queue.finish();
 }
 
-uint PhysicsProcessor::countVoxels(){
+uint32_t PhysicsProcessor::countVoxels(){
     cl_uint returnValue;
     queue.enqueueNDRangeKernel(count_voxelKernel, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
     queue.enqueueReadBuffer(countVoxelReturnValue, CL_FALSE, 0, sizeof(cl_uint), &returnValue);
@@ -48,7 +48,7 @@ uint PhysicsProcessor::countVoxels(){
 }
 
 void PhysicsProcessor::generateFrame(){
-    for (uint i = 0; i < engineSize; i++){
+    for (uint32_t i = 0; i < engineSize; i++){
         queue.enqueueNDRangeKernel(engine[i], cl::NullRange, globalWorkSize, localWorkSize);
     }
     queue.finish();
