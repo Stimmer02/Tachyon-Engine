@@ -70,6 +70,12 @@ void PhysicsProcessorSystem::OnLoad(){
     log->Flush();
 
     physicsProcessor = builder.getPhysicsProcessor();
+
+    uint voxelCount = physicsProcessor->countVoxels();
+    std::printf("Voxel count: %d\n", voxelCount);
+    physicsProcessor->generateFrame();
+    voxelCount = physicsProcessor->countVoxels();
+    std::printf("Voxel count: %d\n", voxelCount);
 }
 
 void PhysicsProcessorSystem::OnUnload(){

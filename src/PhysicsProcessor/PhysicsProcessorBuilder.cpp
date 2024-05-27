@@ -876,15 +876,21 @@ char PhysicsProcessorBuilder::compileCl(){
 
 char PhysicsProcessorBuilder::acquireGlObjectFromTBO(){
     if (physicsProcessor->fallback == false){
-        cl_int error;
-        physicsProcessor->TBOMemory = clCreateFromGLTexture2D(physicsProcessor->context(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, TBO, &error);
+        cl_int error = CL_SUCCESS;
+        physicsProcessor->TBOMemory = clCreateFromGLTexture(physicsProcessor->context(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, TBO, &error);
+        // cl::ImageFormat format;
+        // format.image_channel_order = CL_RGBA;
+        // format.image_channel_data_type = CL_FLOAT;  
+        // physicsProcessor->TBOBuffer = cl::Image2D(physicsProcessor->context, CL_MEM_WRITE_ONLY, format, simWidth, simHeight, 0, NULL, &error);
+        // physicsProcessor->TBOBuffer = cl::ImageGL(physicsProcessor->context, CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, TBO, &error);
+
         if (error != CL_SUCCESS){
             this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to create OpenCL memory object from TBO\n";
             return 1;
         }
-        physicsProcessor->TBOBuffer = cl::Image2D(physicsProcessor->TBOMemory);
 
-
+        // physicsProcessor->TBOMemory = clCreateImage2D(physicsProcessor->context(), CL_MEM_WRITE_ONLY, &format, simWidth, simHeight, 0, NULL, NULL);
+        physicsProcessor->TBOBuffer = cl::Image2D(physicsProcessor->TBOMemory); 
         clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->TBOMemory, 0, NULL, NULL);
         physicsProcessor->hostFallbackBuffer = nullptr;
 
@@ -1085,6 +1091,7 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
     code += "    substances[index].color.R = R;\n";
     code += "    substances[index].color.G = G;\n";
     code += "    substances[index].color.B = B;\n";
+    code += "    substances[index].color.A = 1.0f;\n";
     for (uint i = 0; i < properties.size(); i++){
         code += "    substances[index]." + properties[i].name + " = " + properties[i].name + ";\n";
     }
@@ -1226,7 +1233,6 @@ char PhysicsProcessorBuilder::setKernelQueue(){
 
     uint engineIterator = 0;
 
-    
 
     for (uint i = 0; i < kernelQueue.size(); i++){
         const kernelExecutionUnit& keu = kernelQueue[i];
@@ -1237,8 +1243,8 @@ char PhysicsProcessorBuilder::setKernelQueue(){
         }
         kernel.setArg(0, physicsProcessor->engineConfig);
         kernel.setArg(1, *physicsProcessor->engineResources);
-
         kernel.setArg(2, physicsProcessor->TBOBuffer);
+        
         for (uint j = 0; j < keu.executionCount; j++){
             physicsProcessor->engine[engineIterator] = kernel;
             engineIterator++;

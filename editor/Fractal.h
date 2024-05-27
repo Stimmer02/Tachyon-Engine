@@ -76,7 +76,7 @@ public:
 
     FractalSystem(){
         this->input = &Input::GetInstance();
-        this->cellSize = 3;
+        this->cellSize = 1;
         PopulateColorLookup();
 
         img.pixels = new Color[GraphicConfig::windowWidth * GraphicConfig::windowHeight/(cellSize*cellSize)];

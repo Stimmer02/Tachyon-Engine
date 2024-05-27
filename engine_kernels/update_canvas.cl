@@ -5,6 +5,6 @@ void kernel update_canvas(global struct engineConfig* config, global struct engi
 
     global_ID = get_global_id(0) + get_global_id(1) * config->simulationWidth;
     tempID = resources->voxels[global_ID].substanceID;
-    // write_imagei(TBO, coord, (int4)(-1, -1, -1 ,-1));
     write_imagef(TBO, coord, *((float4*)(&resources->SUBSTANCES[tempID].color)));
+
 }
