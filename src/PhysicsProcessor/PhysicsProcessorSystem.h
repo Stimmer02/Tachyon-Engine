@@ -4,6 +4,7 @@
 #include "PhysicsProcessorBuilder.h"
 #include "../ECSystem/System.h"
 #include "../GUIRenderer/WindowContext.h"
+#include "../GUIRenderer/Sprite2D.h"
 
 class PhysicsProcessorSystem : public System{
 public:
@@ -21,7 +22,7 @@ private:
 
     PhysicsProcessor* physicsProcessor;
 
-    GLuint* TBO;
+    GLuint TBO;
     std::string* PPConfigPath;
     std::function<void(std::string)>* errorFunction;
     ILog* log;

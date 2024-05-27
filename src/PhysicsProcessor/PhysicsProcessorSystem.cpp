@@ -3,6 +3,8 @@
 PhysicsProcessorSystem::PhysicsProcessorSystem(){
     physicsProcessor = nullptr;
     errorFunction = nullptr;
+    PPConfigPath = nullptr;
+    TBO = 0;
 }
 
 PhysicsProcessorSystem::~PhysicsProcessorSystem(){
@@ -13,7 +15,7 @@ PhysicsProcessorSystem::~PhysicsProcessorSystem(){
 }
 
 void PhysicsProcessorSystem::Share(SharedNameResolver* snr){
-    TBO = (GLuint*)(snr->Find("TBO"));
+    TBO = ((Sprite2D*)(snr->Find("Sprite2D")))->GetTextureID();
     PPConfigPath = (std::string*)(snr->Find("PPConfigPath"));
     WindowContext* windowContext = (WindowContext*)(snr->Find("context"));
     if (windowContext != nullptr){
@@ -25,7 +27,7 @@ void PhysicsProcessorSystem::Share(SharedNameResolver* snr){
 }
 
 void PhysicsProcessorSystem::OnLoad(){
-    if (TBO == nullptr){
+    if (TBO == 0){
         std::fprintf(stderr, "PhysicsProcessorSystem failed to find TBO\n");
         exit(-1);
     }
@@ -40,7 +42,7 @@ void PhysicsProcessorSystem::OnLoad(){
         return;
     }
 
-    builder.setTBO(*TBO);
+    builder.setTBO(TBO);
 
     if (errorFunction != nullptr){
         builder.setClErrorFunction(errorFunction);
