@@ -1,8 +1,7 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "Headers.h"
 
 #include "Color.h"
 #include "Sprite2D.h"

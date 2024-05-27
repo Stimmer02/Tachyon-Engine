@@ -1,14 +1,16 @@
 #ifndef UIMANAGER_H
 #define UIMANAGER_H
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <stdio.h>
+
 
 #include "IEventHandlingService.h"
 #include "IInputHandler.h"
 #include "InteractiveComponent.h"
 #include "Scene.h"
+#include "Headers.h"
+
+#include <stdio.h>
+
 
 class UIManager{
 private:

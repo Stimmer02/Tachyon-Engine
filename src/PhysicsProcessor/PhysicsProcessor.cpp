@@ -20,7 +20,9 @@ PhysicsProcessor::~PhysicsProcessor(){
     if (engineResources != nullptr){
         delete engineResources;
     }
-    clEnqueueReleaseGLObjects(queue(), 1, &TBOMemory, 0, NULL, NULL);
+
+    if( TBOBuffer() != 0)
+        clEnqueueReleaseGLObjects(queue(), 1, &TBOMemory, 0, NULL, NULL);
 }
 
 void PhysicsProcessor::spawnVoxel(uint32_t x, uint32_t y, uint32_t substanceID){

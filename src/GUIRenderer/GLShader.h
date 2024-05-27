@@ -5,8 +5,8 @@
 
 #include "Vector3.h"
 #include "Matrix.h"
+#include "Headers.h"
 
-#include <GL/glew.h>
 #include <fstream>
 #include <string>
 #include <cassert>

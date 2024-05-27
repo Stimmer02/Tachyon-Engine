@@ -1,15 +1,14 @@
 #ifndef WINDOWCONTEXT_H
 #define WINDOWCONTEXT_H
 
-#pragma once
+#include "Headers.h"
+#include "EventRegister.h"
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+
 #include <string>
 #include <cassert>
 #include <unordered_map>
 
-#include "EventRegister.h"
 
 class WindowContext{
 

@@ -2,7 +2,7 @@
 #define MESH_H
 
 #include "Attribute.h"
-#include <GL/glew.h>
+#include "Headers.h"
 
 class Mesh : public AttributeType<Mesh>{
 private:

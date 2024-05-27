@@ -32,7 +32,7 @@ void PhysicsProcessorSystem::OnLoad(){
     if (PPConfigPath == nullptr){
         std::fprintf(stderr, "PhysicsProcessorSystem failed to find PPConfigPath\n");
         exit(-1);
-    }    
+    }
 
     PhysicsProcessorBuilder builder;
     if (builder.parseSystemConfig(*PPConfigPath) != 0){
@@ -49,7 +49,7 @@ void PhysicsProcessorSystem::OnLoad(){
     log->Write(LogMessageType::M_INFO, "Building PhysicsProcessor with config: %s", PPConfigPath->c_str());
     char errorCode = builder.build(true);
     if (errorCode != 0){
-        log->Write(LogMessageType::M_ERROR, "PhysicsProcessor failed to build with error code: %d\n ERROR LOG:\n%s", errorCode, builder.getError().c_str()); 
+        log->Write(LogMessageType::M_ERROR, "PhysicsProcessor failed to build with error code: %d\n ERROR LOG:\n%s", errorCode, builder.getError().c_str());
         exit(errorCode);
     }
     log->Write(LogMessageType::M_INFO, "PhysicsProcessor built successfully");
@@ -58,7 +58,7 @@ void PhysicsProcessorSystem::OnLoad(){
 }
 
 void PhysicsProcessorSystem::OnUnload(){
-    
+
 }
 
 void PhysicsProcessorSystem::Execute(){

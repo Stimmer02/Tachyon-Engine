@@ -5,22 +5,7 @@
 
 #include "engineStruct.h"
 
-#ifdef __APPLE__
-
-#include <OpenCL/opencl.h>
-#include "../OpenCL/include/CL/cl.hpp"
-
-#elif __WIN32__
-
-typedef unsigned int uint;
-
-#include <CL/opencl.hpp>
-
-#else
-
-#include <CL/opencl.hpp>
-
-#endif
+#include "Headers.h"
 
 class SizeCalculator{
 public:

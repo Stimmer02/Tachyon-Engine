@@ -5,7 +5,7 @@
 #include "Vector3.h"
 
 #include <cassert>
-#include <GL/glew.h>
+#include "Headers.h"
 
 /// @brief This class represents single character
 struct Glyf{

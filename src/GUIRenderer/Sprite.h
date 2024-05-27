@@ -3,8 +3,7 @@
 
 #include "BitmapReader.h"
 #include "GLShader.h"
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "Headers.h"
 
 #include <map>
 #include <string>
