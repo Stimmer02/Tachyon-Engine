@@ -62,6 +62,12 @@ engineStruct* ClStructParser::processStruct(std::string structCode){
                 i = structCode.find_first_of(' ', i);
 
                 fieldType += ' ' + structCode.substr(wordStart, i - wordStart);
+            } else if (fieldType == "global"){
+                i = structCode.find_first_not_of(' ', i);
+                wordStart = i;
+                i = structCode.find_first_of(' ', i);
+
+                fieldType = structCode.substr(wordStart, i - wordStart);
             }
             bool pointer = false;
             if (fieldType[fieldType.length() - 1] == '*'){
