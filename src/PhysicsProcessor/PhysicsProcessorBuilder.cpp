@@ -26,6 +26,7 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
     simHeight = 0;
 
     configStructure = nullptr;
+    clErrorFunction = nullptr;
 
     clDeviceName = "";
 
@@ -50,6 +51,10 @@ PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
     if (configStructure != nullptr){
         delete configStructure;
     }
+
+    // if (clErrorFunction != nullptr){ probably handeled higher
+    //     delete clErrorFunction;
+    // }
 }
 
 
@@ -222,6 +227,10 @@ void PhysicsProcessorBuilder::setClPlatform(cl_uint platform){
 
 void PhysicsProcessorBuilder::setClDevice(cl_uint device){
     clDeviceID = device;
+}
+
+void PhysicsProcessorBuilder::setClErrorFunction(std::function<void(std::string)>* errorFunction){
+    clErrorFunction = errorFunction;
 }
 
 void PhysicsProcessorBuilder::setTBO(GLuint TBO){
@@ -582,6 +591,11 @@ static void CL_CALLBACK clCallback(const char *errInfo, const void *private_info
     std::fprintf(stderr ,"RUNTIME ERROR: OpenCL error message: %s\n",errInfo);
 }
 
+static void CL_CALLBACK clCustomCallback(const char *errInfo, const void *private_info, size_t cb, void *user_data){
+    std::function<void(std::string)>* func = (std::function<void(std::string)>*)user_data;
+    (*func)(errInfo);
+}
+
 char PhysicsProcessorBuilder::createClContext(){
     std::vector<cl::Platform> allPlatforms;
     cl::Platform::get(&allPlatforms);
@@ -650,12 +664,22 @@ char PhysicsProcessorBuilder::createClContext(){
 
 #endif
     cl_int err;
-    cl::Context context(device, properties, clCallback, nullptr, &err);
+    cl::Context context;
+    physicsProcessor->fallback = false;
+    if (clErrorFunction != nullptr){
+        context = cl::Context(device, properties, clCustomCallback, clErrorFunction, &err);
+    } else {
+        context = cl::Context(device, properties, clCallback, nullptr, &err);
+    }
     if (err != CL_SUCCESS) {
         error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (" + std::to_string(err) + ")\n";
         error += "WARNING: PhysicsProcessorBuilder::createClContext trying fallback mode\n";
         physicsProcessor->fallback = true;
-        context = cl::Context(device, NULL, clCallback, nullptr, &err);
+        if (clErrorFunction != nullptr){
+            context = cl::Context(device, NULL, clCustomCallback, clErrorFunction, &err);
+        } else {
+            context = cl::Context(device, NULL, clCallback, nullptr, &err);
+        }
     }
 
     if (context() == NULL) {
