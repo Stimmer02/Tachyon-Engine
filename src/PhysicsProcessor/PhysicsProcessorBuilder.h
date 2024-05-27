@@ -32,7 +32,7 @@ public:
     void setClPlatform(cl_uint platform);
     void setClDevice(cl_uint device);
 
-    void setPBO(GLuint PBO);
+    void setTBO(GLuint TBO);
 
     std::string getDeviceName();
     std::string getError();
@@ -74,7 +74,7 @@ private:
 
     cl::NDRange localWorkSize;
 
-    GLuint PBO; //realy important to include this in structure tree
+    GLuint TBO; //realy important to include this in structure tree
 
     // cl::Buffer** substanceTable; //realy important to include SUBSTANCES in structure tree
 
@@ -88,7 +88,7 @@ private:
     void createPhysicsProcessor(); //creates PhysicsProcessor object
     char addMandatoryKernels(); //adds kernels that are mandatory for PhysicsProcessor to work
     char checkLocalWorkSize(); //checks if local work size is valid
-    char acquireGlObjectFromPBO(); //acquires gl object from PBO
+    char acquireGlObjectFromTBO(); //acquires gl object from TBO
 
     char allocateGPUResourcesMemory(uint& allocatedMemory, const bool& verbose = false); //allocates memory for all structures based on structure tree
     std::string createAllocationKernel(const engineStruct* structure); //creates kernel that allocates memory for particullar structure

@@ -31,7 +31,7 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
 
     localWorkSize = cl::NDRange(0);
 
-    PBO = 0;
+    TBO = 0;
 }
 
 PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
@@ -224,8 +224,8 @@ void PhysicsProcessorBuilder::setClDevice(cl_uint device){
     clDeviceID = device;
 }
 
-void PhysicsProcessorBuilder::setPBO(GLuint PBO){
-    this->PBO = PBO;
+void PhysicsProcessorBuilder::setTBO(GLuint TBO){
+    this->TBO = TBO;
 }
 
 std::string PhysicsProcessorBuilder::getDeviceName(){
@@ -415,8 +415,8 @@ char PhysicsProcessorBuilder::build(bool verbose){
         error += "ERR: PhysicsProcessorBuilder::build mandatoryKernelsDir not set\n";
         return 7;
     }
-    if (PBO == 0){
-        error += "ERR: PhysicsProcessorBuilder::build PBO not set\n";
+    if (TBO == 0){
+        error += "ERR: PhysicsProcessorBuilder::build TBO not set\n";
         return 8;
     }
 
@@ -471,11 +471,11 @@ char PhysicsProcessorBuilder::build(bool verbose){
         return 16;
     }
 
-    // if (verbose)std::printf("Acquiring GL object from PBO\n"
-    // if (acquireGlObjectFromPBO() != 0){
-    //     error += "ERR: PhysicsProcessorBuilder::build failed to acquire GL object from PBO\n";
-    //     return 19;
-    // }
+    if (verbose)std::printf("Acquiring GL object from TBO\n");
+    if (acquireGlObjectFromTBO() != 0){
+        error += "ERR: PhysicsProcessorBuilder::build failed to acquire GL object from TBO\n";
+        return 19;
+    }
 
     if (verbose)std::printf("Allocating GPU resources memory\n");
     uint allocatedMemory = 0;
@@ -573,6 +573,7 @@ void PhysicsProcessorBuilder::createPhysicsProcessor(){
     physicsProcessor = new PhysicsProcessor(kernelQueueBuilder->getKernelQueueSize());
 
     physicsProcessor->globalWorkSize = cl::NDRange(simWidth, simHeight);
+    physicsProcessor->countVoxelsSize = cl::NDRange(256);
     physicsProcessor->localWorkSize = localWorkSize;
 }
 
@@ -686,6 +687,18 @@ char PhysicsProcessorBuilder::checkLocalWorkSize(){
     if (simWidth % localWorkSize[0] != 0 || simHeight % localWorkSize[1] != 0){
         error += "ERR: PhysicsProcessorBuilder::checkLocalWorkSize local work size does not divide simulation size: " + std::to_string(simWidth) + "x" + std::to_string(simHeight) + "\n";
         return 3;
+    }
+
+    size_t maxWorkItemSizes[3];
+    clGetDeviceInfo(physicsProcessor->device(), CL_DEVICE_MAX_WORK_ITEM_SIZES, sizeof(maxWorkItemSizes), &maxWorkItemSizes, NULL);
+
+    if (localWorkSize[0] > maxWorkItemSizes[0] || localWorkSize[1] > maxWorkItemSizes[1]){
+        error += "ERR: PhysicsProcessorBuilder::checkLocalWorkSize local work size is too big (" + std::to_string(int(localWorkSize[0])) + " > " + std::to_string(maxWorkItemSizes[0]) + " or " + std::to_string(int(localWorkSize[1])) + " > " + std::to_string(maxWorkItemSizes[1]) + ") for device: " + clDeviceName + "\n";
+        return 4;
+    }
+
+    if (physicsProcessor->countVoxelsSize[0] > localWorkSize[0] * localWorkSize[1]){
+        physicsProcessor->countVoxelsSize = cl::NDRange(localWorkSize[0] * localWorkSize[1]);
     }
 
     return 0;
@@ -837,27 +850,28 @@ char PhysicsProcessorBuilder::compileCl(){
     return 0;
 }
 
-char PhysicsProcessorBuilder::acquireGlObjectFromPBO(){
-    // if (physicsProcessor->fallback == false){
-    //     cl_int error;
-    //     physicsProcessor->pboMemory = clCreateFromGLBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, PBO, &error);
+char PhysicsProcessorBuilder::acquireGlObjectFromTBO(){
+    if (physicsProcessor->fallback == false){
+        cl_int error;
+        physicsProcessor->TBOMemory = clCreateFromGLTexture2D(physicsProcessor->context(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, TBO, &error);
+        if (error != CL_SUCCESS){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to create OpenCL memory object from TBO\n";
+            return 1;
+        }
+        physicsProcessor->TBOBuffer = cl::Buffer(physicsProcessor->TBOMemory);
 
-    //     if (error != CL_SUCCESS){
-    //         this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromPBO failed to create OpenCL memory object from PBO\n";
-    //         return 1;
-    //     }
 
-    //     physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
-    //     clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->pboMemory, 0, NULL, NULL);
+        clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->TBOMemory, 0, NULL, NULL);
+        physicsProcessor->hostFallbackBuffer = nullptr;
 
-    //     physicsProcessor->hostFallbackBuffer = nullptr;
-    // } else {
-    //     physicsProcessor->hostFallbackBuffer = new unsigned char[4 * simWidth * simHeight];//!!!!!!! 4 is hardcoded
-    //     physicsProcessor->pboMemory = clCreateBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, 4 * simWidth * simHeight, NULL, NULL);//!!!!!!! 4 is hardcoded
-    //     physicsProcessor->pboBuffer = cl::Buffer(physicsProcessor->pboMemory);
-
-    //     glBindBuffer(GL_ARRAY_BUFFER, PBO);
-    // }
+    } else {
+        // physicsProcessor->hostFallbackBuffer = new unsigned char[4 * simWidth * simHeight];//!!!!!!! 4 is hardcoded
+        // physicsProcessor->TBOMemory = clCreateBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, 4 * simWidth * simHeight, NULL, NULL);//!!!!!!! 4 is hardcoded
+        // physicsProcessor->TBOBuffer = cl::Buffer(physicsProcessor->TBOMemory);
+        //TODO: THIS IS A TEMPORARY SOLUTION
+        error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO fallback mode not implemented\n";
+        return 2;
+    }
     return 0;
 }
 
@@ -960,18 +974,15 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
             const engineStruct::field& field = structure->fields[j];
             cl::Buffer* childBuffer = nullptr;
             if (field.arrSize > 0){
-                if (field.name == "PBO"){
-                    childBuffer = &physicsProcessor->pboBuffer;
-                }
-                //TODO: uncomment this when PBO is implemented
-                // else if (field.name == "SUBSTANCES"){
-                //     if (setSubstancesProperties(childBuffer, allocatedMemory) != 0){
-                //         error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
-                //         return -1;
-                //     }
-                //     physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
-                // }
-                else if (field.subStruct == nullptr){
+                if (field.name == "TBO"){
+                    childBuffer = &physicsProcessor->TBOBuffer;
+                } else if (field.name == "SUBSTANCES"){
+                    if (setSubstancesProperties(childBuffer, allocatedMemory) != 0){
+                        error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
+                        return -1;
+                    }
+                    physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
+                } else if (field.subStruct == nullptr){
                     uint toAllocate = sizeCalculator->clTypeSize(field.type) * field.arrSize;
                     childBuffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
                     if ((*childBuffer)() == NULL){
