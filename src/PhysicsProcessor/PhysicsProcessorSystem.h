@@ -4,6 +4,7 @@
 #include "PhysicsProcessorBuilder.h"
 #include "../ECSystem/System.h"
 #include "../GUIRenderer/WindowContext.h"
+#include "../ECSystem/SharedNameResolver.h"
 #include "../GUIRenderer/Sprite2D.h"
 
 class PhysicsProcessorSystem : public System{
@@ -21,9 +22,9 @@ private:
     void Execute() override;
 
     PhysicsProcessor* physicsProcessor;
-
+    SharedNameResolver* resourceManager;
     GLuint TBO;
-    std::string* PPConfigPath;
+    const char* PPConfigPath;
     std::function<void(std::string)>* errorFunction;
     ILog* log;
 };

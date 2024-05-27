@@ -17,6 +17,7 @@ class FractalSystem : public System {
 
     Sprite2D * sprite;
     CanvasElement * canvas;
+    SharedNameResolver* resourceManager;
     Input * input;
 
     static constexpr int maxIteration = 16;
@@ -94,12 +95,13 @@ public:
         canvas = new CanvasElement(GraphicConfig::windowWidth, GraphicConfig::windowHeight);
         canvas->SetSprite(sprite);
         scene->AddGUIToScene(canvas);
+        resourceManager->Emplace("tbo", sprite, sizeof(Sprite2D));
     }
 
     void Share(SharedNameResolver* resourceManager) override {
         this->scene = (Scene*)resourceManager->Find("scene");
         this->timer = (Timer*)resourceManager->Find("timer");
-        resourceManager->Emplace("TBO", sprite, sizeof(Sprite2D));
+        this->resourceManager = resourceManager;
     }
 };
 

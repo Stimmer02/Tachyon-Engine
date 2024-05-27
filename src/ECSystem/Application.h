@@ -59,7 +59,7 @@ public:
         this->contextLogger = context.GetContextLogger();
 
         this->resourceManager.Emplace("context", &context, sizeof(WindowContext));
-        this->resourceManager.Emplace("PPConfigPath", &ApplicationConfig::physicProcessorConfig, sizeof(char) * ApplicationConfig::physicProcessorConfig.size());
+        this->resourceManager.Emplace("ppconfigpath", ApplicationConfig::physicProcessorConfig.c_str(), sizeof(char) * ApplicationConfig::physicProcessorConfig.size());
 
         contextLogger->Write(M_INFO, "Initializing I/O handles");
         this->inputInstance = &Input::GetInstance();
