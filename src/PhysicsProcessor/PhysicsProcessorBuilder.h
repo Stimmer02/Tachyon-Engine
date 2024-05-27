@@ -9,7 +9,7 @@
 
 #include "PhysicsProcessor.h"
 
-#include <format>
+#include <functional>
 
 
 
@@ -31,6 +31,8 @@ public:
 
     void setClPlatform(cl_uint platform);
     void setClDevice(cl_uint device);
+
+    void setClErrorFunction(std::function<void(std::string)>* errorFunction);
 
     void setTBO(GLuint TBO);
 
@@ -75,8 +77,9 @@ private:
     cl::NDRange localWorkSize;
 
     GLuint TBO; //realy important to include this in structure tree
-
     // cl::Buffer** substanceTable; //realy important to include SUBSTANCES in structure tree
+
+    std::function<void(std::string)>* clErrorFunction;
 
     char parseConfigFiles(); //reads location and priority of kernels, root location of structs, macros, location of substances directory
     char createClContext(); //creates cl context (platform / device) based on config file

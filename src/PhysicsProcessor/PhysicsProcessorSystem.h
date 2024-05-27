@@ -23,7 +23,8 @@ private:
 
     GLuint* TBO;
     std::string* PPConfigPath;
-    WindowContext* windowContext;
+    std::function<void(std::string)>* errorFunction;
+    ILog* log;
 };
 
 #endif
