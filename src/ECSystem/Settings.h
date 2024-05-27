@@ -16,7 +16,8 @@ namespace GraphicConfig{
 };
 
 namespace ApplicationConfig{
-    bool internalGUIInteraction = true;
+    bool internalGUIInteraction;
+    std::string physicProcessorConfig;
 }
 
 #endif

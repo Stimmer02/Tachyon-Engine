@@ -30,7 +30,7 @@ private:
 
     void LoadConfiguration(){
 
-        Configurator configurator("settings.conf");
+        Configurator configurator("settings.cfg");
 
         // Graphic settings
 
@@ -46,7 +46,7 @@ private:
         // Logic settings
 
         configurator.ParseBoolean("internalinteraction", ApplicationConfig::internalGUIInteraction, true);
-
+        configurator.ParseString("physicProcessorConfigPath", ApplicationConfig::physicProcessorConfig, "./config/system.cfg");
     }
 
 public:
@@ -59,6 +59,7 @@ public:
         this->contextLogger = context.GetContextLogger();
 
         this->resourceManager.Emplace("context", &context, sizeof(WindowContext));
+        this->resourceManager.Emplace("PPConfigPath", &ApplicationConfig::physicProcessorConfig, sizeof(char) * ApplicationConfig::physicProcessorConfig.size());
 
         contextLogger->Write(M_INFO, "Initializing I/O handles");
         this->inputInstance = &Input::GetInstance();

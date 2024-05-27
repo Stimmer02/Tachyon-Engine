@@ -111,10 +111,21 @@ public:
         texture = new Sprite2D(colors.data(), texW, texH);
     }
 
+    void SetSprite(Sprite2D * sprite){
+        if(texture)
+            delete texture;
+
+        this->texture = sprite;
+    }
+
     void ClearCanvas(const Color & clearColor) {
 
         texture->ClearColor(clearColor);
 
+    }
+
+    GLuint GetTextureID(){
+        return texture->GetTextureID();
     }
 
     void Render() override{

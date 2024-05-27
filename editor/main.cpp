@@ -9,7 +9,7 @@ int main(){
     Scene scene;
     app.LoadScene(scene);
 
-    LinesSystem * fract = new LinesSystem();
+    FractalSystem * fract = new FractalSystem();
     app.RegisterSystem(fract);
 
     app.Loop();

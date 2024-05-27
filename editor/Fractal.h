@@ -15,6 +15,8 @@ class FractalSystem : public System {
     Image img;
     int cellSize;
 
+    Sprite2D * sprite;
+    Sprite2D ** spritePtr;
     CanvasElement * canvas;
     Input * input;
 
@@ -77,6 +79,10 @@ public:
         this->input = &Input::GetInstance();
         this->cellSize = 3;
         PopulateColorLookup();
+
+        img.pixels = new Color[GraphicConfig::windowWidth * GraphicConfig::windowHeight/(cellSize*cellSize)];
+        img.width = GraphicConfig::windowWidth/cellSize;
+        img.height = GraphicConfig::windowHeight/cellSize;
     }
 
     ~FractalSystem() {
@@ -85,17 +91,17 @@ public:
     }
 
     void OnLoad() override {
+        this->sprite = new Sprite2D(&img);
         canvas = new CanvasElement(GraphicConfig::windowWidth, GraphicConfig::windowHeight);
-        canvas->SetCellSize(cellSize);
-        img.pixels = new Color[GraphicConfig::windowWidth * GraphicConfig::windowHeight/(cellSize*cellSize)];
-        img.width = GraphicConfig::windowWidth/cellSize;
-        img.height = GraphicConfig::windowHeight/cellSize;
+        canvas->SetSprite(sprite);
         scene->AddGUIToScene(canvas);
     }
 
     void Share(SharedNameResolver* resourceManager) override {
+        spritePtr = &sprite;
         this->scene = (Scene*)resourceManager->Find("scene");
         this->timer = (Timer*)resourceManager->Find("timer");
+        resourceManager->Emplace("TBO", spritePtr, sizeof(Sprite2D*));
     }
 };
 
