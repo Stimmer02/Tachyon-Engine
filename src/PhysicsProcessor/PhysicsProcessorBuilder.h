@@ -90,11 +90,11 @@ private:
     char checkLocalWorkSize(); //checks if local work size is valid
     char acquireGlObjectFromPBO(); //acquires gl object from PBO
 
-    char allocateGPUResourcesMemory(); //allocates memory for all structures based on structure tree
+    char allocateGPUResourcesMemory(uint& allocatedMemory, const bool& verbose = false); //allocates memory for all structures based on structure tree
     std::string createAllocationKernel(const engineStruct* structure); //creates kernel that allocates memory for particullar structure
-    char allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer& buffer, uint count = 1); //allocates memory and sets structure hierarchy recursively
+    char allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer*& buffer, uint& allocatedMemory, uint count = 1, const bool& verbose = false); //allocates memory and sets structure hierarchy recursively
     bool hasPointers(const engineStruct* structure); //checks if structure has pointers recursively
-    char setSubstancesProperties(cl::Buffer* buffer); //sets substances properties based on loaded substances
+    char setSubstancesProperties(cl::Buffer*& buffer, uint& allocatedMemory); //sets substances properties based on loaded substances
 
     char allocateGPUConfigStructure(); //allocates and initializes memory for config structure
     std::string createConfigStructureKernel(); //creates config structure based on config file

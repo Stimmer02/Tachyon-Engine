@@ -309,7 +309,7 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
 }
 
 std::string SubstanceCollector::createSubstanceClStruct(){
-    std::string structString = "struct __attribute__ ((aligned)) substance{\n";
+    std::string structString = "struct __attribute__ ((packed)) substance{\n";
     structString += "    struct color color;\n";
     structString += "    bool movable;\n";
     for (substanceField phroperty : substancePhroperties){

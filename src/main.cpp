@@ -24,7 +24,7 @@ int main(){
 
     uint count = physicsProcessor->countVoxels();
     std::cout << "pre-run count: " << count << std::endl;
-    // physicsProcessor->generateFrame();
+    physicsProcessor->generateFrame();
     count = physicsProcessor->countVoxels();
     std::cout << "post-run count: " << count << std::endl;
 

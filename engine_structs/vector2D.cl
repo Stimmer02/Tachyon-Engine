@@ -1,4 +1,4 @@
-struct __attribute__ ((aligned)) vector2D{
+struct __attribute__ ((packed)) vector2D{
     int x;
     int y;
 };

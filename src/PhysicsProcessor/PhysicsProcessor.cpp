@@ -3,6 +3,7 @@
 PhysicsProcessor::PhysicsProcessor(const uint& engineSize): engineSize(engineSize){
     fallback = false;
     engine = new cl::Kernel[engineSize];
+    engineResources = nullptr;
 }
 
 PhysicsProcessor::~PhysicsProcessor(){
@@ -14,6 +15,10 @@ PhysicsProcessor::~PhysicsProcessor(){
 
     for (cl::Buffer* buffer: allocatedGPUMemory){
         delete buffer;
+    }
+
+    if (engineResources != nullptr){
+        delete engineResources;
     }
 }
 

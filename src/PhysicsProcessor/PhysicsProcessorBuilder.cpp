@@ -473,10 +473,12 @@ char PhysicsProcessorBuilder::build(bool verbose){
     // }
 
     if (verbose)std::printf("Allocating GPU resources memory\n");
-    if (allocateGPUResourcesMemory() != 0){
+    uint allocatedMemory = 0;
+    if (allocateGPUResourcesMemory(allocatedMemory) != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
         return 20;
     }
+    if (verbose)std::printf("    Allocated overall %uMB\n", allocatedMemory/(1024*1024));
 
     if (verbose)std::printf("Allocating GPU config structure\n");
     if (allocateGPUConfigStructure() != 0){
@@ -854,7 +856,7 @@ char PhysicsProcessorBuilder::acquireGlObjectFromPBO(){
     return 0;
 }
 
-char PhysicsProcessorBuilder::allocateGPUResourcesMemory(){
+char PhysicsProcessorBuilder::allocateGPUResourcesMemory(uint& allocatedMemory, const bool& verbose){
     const std::vector<const engineStruct*> structs = structTree->unwindTree();
     //1. creating allocation kernel for each structure that needs it
     //2. compilating those kernels and saving them into a map
@@ -892,7 +894,7 @@ char PhysicsProcessorBuilder::allocateGPUResourcesMemory(){
         allocationKernels[structure->name] = kernel;
     }
 
-    if (allocateStructure(structs[0], allocationKernels, physicsProcessor->engineResources) != 0){
+    if (allocateStructure(structs[0], allocationKernels, physicsProcessor->engineResources, allocatedMemory, 1, verbose) != 0){
         error += "ERR: PhysicsProcessorBuilder::allocateGPUResourcesMemory failed to build structure tree\n";
         return 3;
     }
@@ -925,16 +927,20 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
 }
 
 
-char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer& buffer, uint count){
-    std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count, structure->byteSize*count);
-    buffer = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, structure->byteSize*count);
-    if (buffer() == NULL){
-        error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(structure->byteSize*count) + "B) for structure: " + structure->name + "\n";
-        return -1;
+char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer*& buffer, uint& allocatedMemory, uint count, const bool& verbose){
+    uint toAllocate = structure->byteSize*count;
+    if (buffer == nullptr){
+        // if (verbose) std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count, structure->byteSize*count);
+        buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
+        if ((*buffer)() == NULL){
+            error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(toAllocate) + "B) for structure: " + structure->name + "\n";
+            return -1;
+        }
     }
-    cl_int size;
-    buffer.getInfo(CL_MEM_SIZE, &size);
-    std::printf("Allocated %s (%dB)\n", structure->name.c_str(), size);
+    size_t size;
+    buffer->getInfo(CL_MEM_SIZE, &size);
+    if (verbose)std::printf("Allocated %s (%dB out of %dB)\n", structure->name.c_str(), size, toAllocate);
+    allocatedMemory += size;
 
     if (hasPointers(structure) == false){
         return 0;
@@ -942,36 +948,40 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
 
     for (uint i = 0; i < count; i++){
         cl::Kernel kernel = kernels.at(structure->name);
-        kernel.setArg(0, buffer);
+        kernel.setArg(0, *buffer);
         kernel.setArg(1, i);
 
         for (uint j = 0; j < structure->fieldCount; j++){
             const engineStruct::field& field = structure->fields[j];
-            cl::Buffer* childBuffer;
+            cl::Buffer* childBuffer = nullptr;
             if (field.arrSize > 0){
                 if (field.name == "PBO"){
                     childBuffer = &physicsProcessor->pboBuffer;
-                } else if (field.name == "SUBSTANCES"){
-                    if (setSubstancesProperties(childBuffer) != 0){
-                        error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
-                        return -1;
-                    }
-                    physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
-                } else if (field.subStruct == nullptr){
-                    childBuffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeCalculator->clTypeSize(field.type) * field.arrSize);
+                } 
+                //TODO: uncomment this when PBO is implemented
+                // else if (field.name == "SUBSTANCES"){ 
+                //     if (setSubstancesProperties(childBuffer, allocatedMemory) != 0){
+                //         error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
+                //         return -1;
+                //     }
+                //     physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
+                // } 
+                else if (field.subStruct == nullptr){
+                    uint toAllocate = sizeCalculator->clTypeSize(field.type) * field.arrSize;
+                    childBuffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
                     if ((*childBuffer)() == NULL){
+                        size_t size;
+                        childBuffer->getInfo(CL_MEM_SIZE, &size);
                         error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(sizeCalculator->clTypeSize(field.type) * field.arrSize) + "B) for field: " + field.name + "\n";
                         return -1;
                     }
+                    if (verbose)std::printf("Allocated field %s (%dB out of %dB)\n", field.name.c_str(), size, toAllocate);
+                    allocatedMemory += toAllocate;
                     physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
                 } else {
-                    childBuffer = new cl::Buffer();
-                    if (allocateStructure(field.subStruct, kernels, *childBuffer, field.arrSize) != 0){
+                    if (allocateStructure(field.subStruct, kernels, childBuffer, allocatedMemory, field.arrSize, verbose) != 0){
                         return -1;
                     }
-                    cl_int size;
-                    childBuffer->getInfo(CL_MEM_SIZE, &size);
-                    std::printf("Allocated substructure %s (%dB)\n", field.subStruct->name.c_str(), size);
                     physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
                 }
             }
@@ -1007,7 +1017,7 @@ bool PhysicsProcessorBuilder::hasPointers(const engineStruct* structure){
     return false;
 }
 
-char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer* buffer){
+char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint& allocatedMemory){
     const std::vector<substance>& substances = substanceCollector->getSubstances();
     const std::vector<substanceField>& properties = substanceCollector->getSubstancePhroperties();
 
@@ -1018,13 +1028,14 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer* buffer){
             break;
         }
     }
-
-    buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, subsStruct->byteSize * substances.size());
-
+    uint toAllocate = subsStruct->byteSize * substances.size();
+    buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
     if ((*buffer)() == NULL){
         error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to allocate memory for substances\n";
         return 1;
     }
+    allocatedMemory += toAllocate;
+
     std::string code = structTree->getStructures();
     code += "void kernel set_substances(global struct substance* substances, uint index";
     code += ", uint movable, float R, float G, float B";
@@ -1148,7 +1159,7 @@ char PhysicsProcessorBuilder::setMandatoryKernels(){
         error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxel kernel\n";
         return 1;
     }
-    physicsProcessor->spawn_voxelKernel.setArg(3, physicsProcessor->engineResources);
+    physicsProcessor->spawn_voxelKernel.setArg(3, *physicsProcessor->engineResources);
     physicsProcessor->spawn_voxelKernel.setArg(4, physicsProcessor->engineConfig);
 
     physicsProcessor->spawn_voxel_in_areaKernel = cl::Kernel(program, "spawn_voxels_in_area");
@@ -1156,7 +1167,7 @@ char PhysicsProcessorBuilder::setMandatoryKernels(){
         error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create spawn_voxels_in_area kernel\n";
         return 2;
     }
-    physicsProcessor->spawn_voxel_in_areaKernel.setArg(3, physicsProcessor->engineResources);
+    physicsProcessor->spawn_voxel_in_areaKernel.setArg(3, *physicsProcessor->engineResources);
     physicsProcessor->spawn_voxel_in_areaKernel.setArg(4, physicsProcessor->engineConfig);
 
     physicsProcessor->count_voxelKernel = cl::Kernel(program, "count_voxels");
@@ -1164,7 +1175,7 @@ char PhysicsProcessorBuilder::setMandatoryKernels(){
         error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create count_voxels kernel\n";
         return 3;
     }
-    physicsProcessor->count_voxelKernel.setArg(0, physicsProcessor->engineResources);
+    physicsProcessor->count_voxelKernel.setArg(0, *physicsProcessor->engineResources);
     physicsProcessor->count_voxelKernel.setArg(1, physicsProcessor->countVoxelWorkMemory);
     physicsProcessor->count_voxelKernel.setArg(2, simHeight * simHeight);
     physicsProcessor->count_voxelKernel.setArg(3, physicsProcessor->countVoxelReturnValue);
@@ -1184,7 +1195,7 @@ char PhysicsProcessorBuilder::setKernelQueue(){
             return 1;
         }
         kernel.setArg(0, physicsProcessor->engineConfig);
-        kernel.setArg(1, physicsProcessor->engineResources);
+        kernel.setArg(1, *physicsProcessor->engineResources);
         for (uint j = 0; j < keu.executionCount; j++){
             physicsProcessor->engine[engineIterator] = kernel;
             engineIterator++;

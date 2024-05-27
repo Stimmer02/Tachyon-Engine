@@ -65,7 +65,7 @@ private:
     cl::Kernel spawn_voxel_in_areaKernel;
     cl::Kernel count_voxelKernel;
 
-    cl::Buffer engineResources;//contains all the resources for the engine
+    cl::Buffer* engineResources;//contains all the resources for the engine
     cl::Buffer engineConfig;//contains the configuration for the engine
     cl::Buffer countVoxelReturnValue;//used to return the count of voxels
     cl::Buffer countVoxelWorkMemory;//used during count_voxels kernel
