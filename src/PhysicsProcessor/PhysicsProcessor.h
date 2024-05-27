@@ -44,7 +44,7 @@ private:
     cl::Buffer countVoxelWorkMemory;//used during count_voxels kernel
 
     cl_mem TBOMemory;//contains allocated memory for the TBO
-    cl::Buffer TBOBuffer;//contains the TBO buffer
+    cl::Image2D  TBOBuffer;//contains the TBO buffer
 
     std::vector<cl::Buffer*> allocatedGPUMemory;
 };

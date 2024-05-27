@@ -48,7 +48,8 @@ void PhysicsProcessorSystem::OnLoad(){
     PhysicsProcessorBuilder builder;
     if (builder.parseSystemConfig(PPConfigPath) != 0){
         log->Write(LogMessageType::M_INFO, "Building PhysicsProcessor error: %s", builder.getError().c_str());
-        return;
+        log->Flush();
+        exit(-1);
     }
 
     builder.setTBO(TBO);
@@ -61,6 +62,7 @@ void PhysicsProcessorSystem::OnLoad(){
     char errorCode = builder.build(true);
     if (errorCode != 0){
         log->Write(LogMessageType::M_ERROR, "PhysicsProcessor failed to build with error code: %d\n ERROR LOG:\n%s", errorCode, builder.getError().c_str());
+        log->Flush();
         exit(errorCode);
     }
     log->Write(LogMessageType::M_INFO, "PhysicsProcessor built successfully");

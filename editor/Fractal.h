@@ -41,36 +41,35 @@ class FractalSystem : public System {
     }
 
     void Execute() override {
-        static int currentY = 0;
+        // static int currentY = 0;
 
-        Vector3 pos = input->GetMousePosition();
-        float cx = ((pos.x - GraphicConfig::windowWidth * 0.5f) / GraphicConfig::windowWidth) + 0.5f;
-        float cy = ((pos.y - GraphicConfig::windowHeight * 0.5f) / GraphicConfig::windowHeight) + 0.5f;
+        // Vector3 pos = input->GetMousePosition();
+        // float cx = ((pos.x - GraphicConfig::windowWidth * 0.5f) / GraphicConfig::windowWidth) + 0.5f;
+        // float cy = ((pos.y - GraphicConfig::windowHeight * 0.5f) / GraphicConfig::windowHeight) + 0.5f;
 
-        for (int currentX = 0; currentX < img.width; currentX++) {
+        // for (int currentX = 0; currentX < img.width; currentX++) {
 
-            float x = (float)currentX / img.width * 3.5f - 2.0f;
-            float y = (float)currentY / img.height * 2.0f - 1.0f;
-            int iteration = 0;
+        //     float x = (float)currentX / img.width * 3.5f - 2.0f;
+        //     float y = (float)currentY / img.height * 2.0f - 1.0f;
+        //     int iteration = 0;
 
-            while (x*x + y*y <= 4 && iteration < maxIteration) {
-                float xtemp = x*x - y*y + cx;
-                y = 2*x*y + cy;
-                x = xtemp;
-                iteration++;
-            }
+        //     while (x*x + y*y <= 4 && iteration < maxIteration) {
+        //         float xtemp = x*x - y*y + cx;
+        //         y = 2*x*y + cy;
+        //         x = xtemp;
+        //         iteration++;
+        //     }
 
-            img.pixels[currentY * img.width + currentX] = colorLookup[iteration];
-        }
+        //     img.pixels[currentY * img.width + currentX] = colorLookup[iteration];
+        // }
 
-        canvas->UploadImage(img);
+        // canvas->UploadImage(img);
 
-        currentY++;
+        // currentY++;
 
-        if( currentY >= img.height ){
-            currentY = 0;
-        }
-
+        // if( currentY >= img.height ){
+        //     currentY = 0;
+        // }
     }
 
 public:

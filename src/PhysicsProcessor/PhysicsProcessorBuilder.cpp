@@ -882,7 +882,7 @@ char PhysicsProcessorBuilder::acquireGlObjectFromTBO(){
             this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to create OpenCL memory object from TBO\n";
             return 1;
         }
-        physicsProcessor->TBOBuffer = cl::Buffer(physicsProcessor->TBOMemory);
+        physicsProcessor->TBOBuffer = cl::Image2D(physicsProcessor->TBOMemory);
 
 
         clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->TBOMemory, 0, NULL, NULL);
@@ -1225,6 +1225,9 @@ char PhysicsProcessorBuilder::setKernelQueue(){
     const std::vector<kernelExecutionUnit>& kernelQueue = kernelQueueBuilder->getKernelQueue();
 
     uint engineIterator = 0;
+
+    
+
     for (uint i = 0; i < kernelQueue.size(); i++){
         const kernelExecutionUnit& keu = kernelQueue[i];
         cl::Kernel kernel(program, keu.functionName.c_str());
@@ -1234,7 +1237,8 @@ char PhysicsProcessorBuilder::setKernelQueue(){
         }
         kernel.setArg(0, physicsProcessor->engineConfig);
         kernel.setArg(1, *physicsProcessor->engineResources);
-        kernel.setArg(2, sizeof(cl_mem), &physicsProcessor->TBOMemory);
+
+        kernel.setArg(2, physicsProcessor->TBOBuffer);
         for (uint j = 0; j < keu.executionCount; j++){
             physicsProcessor->engine[engineIterator] = kernel;
             engineIterator++;
