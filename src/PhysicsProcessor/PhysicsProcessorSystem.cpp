@@ -12,14 +12,22 @@ void PhysicsProcessorSystem::Share(SharedNameResolver* snr){
     TBO = (GLuint*)(snr->Find("TBO"));
     PPConfigPath = (std::string*)(snr->Find("PPConfigPath"));
     windowContext = (WindowContext*)(snr->Find("context"));
-
-    if (TBO == nullptr || PPConfigPath == nullptr || windowContext == nullptr){
-        std::fprintf(stderr, "PhysicsProcessorSystem failed to find TBO, PPConfigPath, or context\n");
-        exit(-1);
-    }
 }
 
 void PhysicsProcessorSystem::OnLoad(){
+    if (TBO == nullptr){
+        std::fprintf(stderr, "PhysicsProcessorSystem failed to find TBO\n");
+        exit(-1);
+    }
+    if (PPConfigPath == nullptr){
+        std::fprintf(stderr, "PhysicsProcessorSystem failed to find PPConfigPath\n");
+        exit(-1);
+    }
+    if (windowContext == nullptr){
+        std::fprintf(stderr, "PhysicsProcessorSystem failed to find context\n");
+        exit(-1);
+    }
+
     PhysicsProcessorBuilder builder;
     if (builder.parseSystemConfig(*PPConfigPath) != 0){
         std::cout << builder.getError() << std::endl;
