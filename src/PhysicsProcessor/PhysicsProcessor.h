@@ -1,46 +1,80 @@
-#ifndef _PHYSICSPROCESSOR_H
-#define _PHYSICSPROCESSOR_H
+#ifndef PHYSICSPROCESSOR_H
+#define PHYSICSPROCESSOR_H
 
-#include "IPhysicsProcessor.h"
+#define CL_HPP_TARGET_OPENCL_VERSION 200
+
 #ifdef __APPLE__
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <OpenGL/gl3.h>
+#include <OpenGL/OpenGL.h>
+#include <OpenCL/opencl.h>
+#include <OpenCL/cl_gl.h>
 #include "../OpenCL/include/CL/cl.hpp"
-#else
+
+#elif __WIN32__
+
+typedef unsigned int uint;
+
+#include <windows.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <GL/gl.h>
 #include <CL/opencl.hpp>
+#include <CL/cl_gl.h>
+
+#else
+
+#include <CL/opencl.hpp>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <CL/cl_gl.h>
+#include <GL/glx.h>
+
 #endif
 
-class PhysicsProcessor : public IPhysicsProcessor{
-public:
-    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
-    std::string structuresAsString();
-    std::string kernelCodeAsString();
-    void constructorMain(cl::Context openCLContext, engineConfig config, cl::Device device);
-    void configureMainKernel();
-    PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
-    ~PhysicsProcessor();
-    void generateFrame() override;
-    void spawnVoxel(uint x, uint y, uint substanceID) override;
-    uint countVoxels() override;
-    void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) override;
 
+class PhysicsProcessor{
+    friend class PhysicsProcessorBuilder;
+public:
+    ~PhysicsProcessor();
+
+    void spawnVoxel(uint x, uint y, uint substanceID);
+    void spawnVoxelsInArea(uint x, uint y, uint width, uint height, uint substanceID);
+    uint countVoxels();
+
+    void generateFrame();
 
 private:
+    PhysicsProcessor(const uint& engineSize);
+    bool fallback;
+    unsigned char* hostFallbackBuffer;
+
+    cl::NDRange globalWorkSize;
+    cl::NDRange localWorkSize;
+
     cl::Context context;
-    cl::Kernel engine;
-    engineConfig config;
     cl::Device device;
+    cl::CommandQueue queue;
+
+    cl::Kernel* engine;
+    const uint engineSize; 
+
+    cl::Kernel spawn_voxelKernel;
+    cl::Kernel spawn_voxel_in_areaKernel;
+    cl::Kernel count_voxelKernel;
+
+    cl::Buffer* engineResources;//contains all the resources for the engine
+    cl::Buffer engineConfig;//contains the configuration for the engine
+    cl::Buffer countVoxelReturnValue;//used to return the count of voxels
+    cl::Buffer countVoxelWorkMemory;//used during count_voxels kernel
+
+    cl_mem pboMemory;//contains allocated memory for the PBO
+
+    cl::Buffer pboBuffer;//contains the PBO buffer
 
     std::vector<cl::Buffer*> allocatedGPUMemory;
-
-    cl::CommandQueue queue;
-    cl_mem pbo_mem;
-    cl::Buffer pbo_buff;
-    cl::Buffer engineResources;
-    cl::Buffer eConfig;
-    cl::Buffer sumReturnValue;
-    cl::Kernel spawn_voxelKernel;
-    cl::Kernel sum_voxelKernel;
-    cl::Kernel spawn_voxel_in_areaKernel;
-
 };
 
 #endif
