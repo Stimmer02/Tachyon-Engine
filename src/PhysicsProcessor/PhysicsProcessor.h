@@ -50,6 +50,7 @@ private:
 
     cl::NDRange globalWorkSize;
     cl::NDRange localWorkSize;
+    cl::NDRange countVoxelsSize;
 
     cl::Context context;
     cl::Device device;
@@ -67,9 +68,8 @@ private:
     cl::Buffer countVoxelReturnValue;//used to return the count of voxels
     cl::Buffer countVoxelWorkMemory;//used during count_voxels kernel
 
-    cl_mem pboMemory;//contains allocated memory for the PBO
-
-    cl::Buffer pboBuffer;//contains the PBO buffer
+    cl_mem TBOMemory;//contains allocated memory for the TBO
+    cl::Buffer TBOBuffer;//contains the TBO buffer
 
     std::vector<cl::Buffer*> allocatedGPUMemory;
 };

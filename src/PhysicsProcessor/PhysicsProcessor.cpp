@@ -20,6 +20,7 @@ PhysicsProcessor::~PhysicsProcessor(){
     if (engineResources != nullptr){
         delete engineResources;
     }
+    clEnqueueReleaseGLObjects(queue(), 1, &TBOMemory, 0, NULL, NULL);
 }
 
 void PhysicsProcessor::spawnVoxel(uint32_t x, uint32_t y, uint32_t substanceID){
@@ -40,7 +41,7 @@ void PhysicsProcessor::spawnVoxelsInArea(uint32_t x, uint32_t y, uint32_t width,
 
 uint32_t PhysicsProcessor::countVoxels(){
     cl_uint returnValue;
-    queue.enqueueNDRangeKernel(count_voxelKernel, cl::NullRange, cl::NDRange(256), cl::NDRange(256));
+    queue.enqueueNDRangeKernel(count_voxelKernel, cl::NullRange, countVoxelsSize, countVoxelsSize);
     queue.enqueueReadBuffer(countVoxelReturnValue, CL_FALSE, 0, sizeof(cl_uint), &returnValue);
     queue.finish();
 
