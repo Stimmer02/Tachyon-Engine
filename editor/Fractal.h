@@ -16,7 +16,6 @@ class FractalSystem : public System {
     int cellSize;
 
     Sprite2D * sprite;
-    Sprite2D ** spritePtr;
     CanvasElement * canvas;
     Input * input;
 
@@ -98,10 +97,9 @@ public:
     }
 
     void Share(SharedNameResolver* resourceManager) override {
-        spritePtr = &sprite;
         this->scene = (Scene*)resourceManager->Find("scene");
         this->timer = (Timer*)resourceManager->Find("timer");
-        resourceManager->Emplace("TBO", spritePtr, sizeof(Sprite2D*));
+        resourceManager->Emplace("TBO", sprite, sizeof(Sprite2D));
     }
 };
 

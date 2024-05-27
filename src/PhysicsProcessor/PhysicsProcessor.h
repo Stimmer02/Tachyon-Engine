@@ -3,14 +3,14 @@
 
 #define CL_HPP_TARGET_OPENCL_VERSION 200
 
+
 #ifdef __APPLE__
 
-// #include <GL/glew.h>
-#include <OpenGL/OpenGL.h>
-#include <GLFW/glfw3.h>
-#include <OpenCL/opencl.h>
-#include <OpenCL/cl_gl.h>
+//TODO
+
+#include <GL/glew.h>
 #include "../OpenCL/include/CL/cl.hpp"
+#include <OpenCL/cl_gl.h>
 
 #elif __WIN32__
 
