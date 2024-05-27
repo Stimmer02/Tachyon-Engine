@@ -48,7 +48,7 @@ std::string KernelCollector::getError(){
 
 char KernelCollector::checkKernel(std::string* kernel, std::string& kernelName){
     std::string signature1 = "void kernel ";
-    std::string signature2 = "(global struct engineConfig* config, global struct engineResources* resources)";
+    std::string signature2 = "(global struct engineConfig* config, global struct engineResources* resources, write_only image2d_t TBO)";
     size_t pos = kernel->find(signature1);
     if (pos == std::string::npos){
         error += "ERR: KernelCollector:checkKernel signature not found: " + signature1 + "\n";

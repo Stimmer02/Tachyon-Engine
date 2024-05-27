@@ -622,7 +622,7 @@ char PhysicsProcessorBuilder::createClContext(){
     }
 
     if (allDevices.size() <= clDeviceID){
-        error += "ERR: PhysicsProcessorBuilder::createClContext specified device does not exist (device 0 will be used)\n";
+        error += "WARNING: PhysicsProcessorBuilder::createClContext specified device does not exist (device 0 will be used)\n";
         clDeviceID = 0;
     }
 
@@ -672,7 +672,7 @@ char PhysicsProcessorBuilder::createClContext(){
         context = cl::Context(device, properties, clCallback, nullptr, &err);
     }
     if (err != CL_SUCCESS) {
-        error += "ERR: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (" + std::to_string(err) + ")\n";
+        error += "WARNING: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (" + std::to_string(err) + ")\n";
         error += "WARNING: PhysicsProcessorBuilder::createClContext trying fallback mode\n";
         physicsProcessor->fallback = true;
         if (clErrorFunction != nullptr){
@@ -998,9 +998,7 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
             const engineStruct::field& field = structure->fields[j];
             cl::Buffer* childBuffer = nullptr;
             if (field.arrSize > 0){
-                if (field.name == "TBO"){
-                    childBuffer = &physicsProcessor->TBOBuffer;
-                } else if (field.name == "SUBSTANCES"){
+                if (field.name == "SUBSTANCES"){
                     if (setSubstancesProperties(childBuffer, allocatedMemory) != 0){
                         error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
                         return -1;
@@ -1236,6 +1234,7 @@ char PhysicsProcessorBuilder::setKernelQueue(){
         }
         kernel.setArg(0, physicsProcessor->engineConfig);
         kernel.setArg(1, *physicsProcessor->engineResources);
+        kernel.setArg(2, sizeof(cl_mem), &physicsProcessor->TBOMemory);
         for (uint j = 0; j < keu.executionCount; j++){
             physicsProcessor->engine[engineIterator] = kernel;
             engineIterator++;

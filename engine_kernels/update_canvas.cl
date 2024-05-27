@@ -1,4 +1,4 @@
-void kernel update_canvas(global struct engineConfig* config, global struct engineResources* resources){
+void kernel update_canvas(global struct engineConfig* config, global struct engineResources* resources, write_only image2d_t TBO){
     private int global_ID;
     private uchar tempID;
 

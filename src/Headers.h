@@ -17,6 +17,7 @@ typedef unsigned int uint32_t;
 
 #include <windows.h>
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <CL/opencl.hpp>
 #include <CL/cl_gl.h>
 
@@ -24,6 +25,7 @@ typedef unsigned int uint32_t;
 
 #include <CL/opencl.hpp>
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <CL/cl_gl.h>
 #include <GL/glx.h>
 
