@@ -72,7 +72,7 @@ const std::vector<kernelExecutionUnit>& KernelQueueBuilder::getKernelQueue(){
 }
 
 uint KernelQueueBuilder::getKernelQueueSize(){
-    uint size;
+    uint size = 0;
     for (auto &keu : kernelQueue){
         size += keu.executionCount;
     }
