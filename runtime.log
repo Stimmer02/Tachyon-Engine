@@ -1,0 +1,21 @@
+28 May 2024 19:38:08 [INFO] : Initializing new context instance
+28 May 2024 19:38:08 [INFO] : Initializing I/O handles
+28 May 2024 19:38:08 [INFO] : Instancing internal timer
+28 May 2024 19:38:08 [INFO] : Pushing graphic system to systems pool
+28 May 2024 19:38:08 [INFO] : Loading new scene
+28 May 2024 19:38:08 [INFO] : New system registered
+28 May 2024 19:38:08 [INFO] : Sharing resources
+28 May 2024 19:38:08 [INFO] : Loading systems
+28 May 2024 19:38:08 [INFO] : Opening new window instance with resolution 800 x 600
+28 May 2024 19:38:08 [INFO] : Discovered new device : RENOIR (renoir, LLVM 15.0.7, DRM 3.54, 6.5.0-35-generic)
+28 May 2024 19:38:08 [INFO] : Supported OpenGL version : 4.6 (Core Profile) Mesa 23.2.1-1ubuntu3.1~22.04.2
+28 May 2024 19:38:08 [INFO] : Current V-Sync state : Disabled
+28 May 2024 19:38:08 [INFO] : Current Z-Buffer state : Enabled
+28 May 2024 19:38:08 [INFO] : Compiling shaders
+28 May 2024 19:38:08 [INFO] : Generating missing assets
+28 May 2024 19:38:08 [INFO] : Building rendering archetypes
+28 May 2024 19:38:08 [INFO] : Executing main loop
+28 May 2024 19:38:25 [INFO] : Main loop aborted
+28 May 2024 19:38:25 [INFO] : Destroying window instance
+28 May 2024 19:38:25 [INFO] : Disposing resources
+28 May 2024 19:38:25 [INFO] : Context destroyed succesfully
