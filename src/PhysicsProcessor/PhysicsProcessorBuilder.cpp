@@ -1152,7 +1152,6 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
         }
     }
     uint toAllocate = alignedStructSize(subsStruct->byteSize) * substances.size();
-    std::printf("Struct size: %u, count: %u, total: %u\n", subsStruct->byteSize, substances.size(), toAllocate);
     buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
     if ((*buffer)() == NULL){
         error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to allocate memory for substances\n";
