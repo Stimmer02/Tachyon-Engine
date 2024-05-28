@@ -545,10 +545,6 @@ PhysicsProcessor* PhysicsProcessorBuilder::getPhysicsProcessor(){
     return out;
 }
 
-std::string PhysicsProcessorBuilder::getClDeviceName(){
-    return clDeviceName;
-}
-
 char PhysicsProcessorBuilder::parseConfigFiles(){
     if (macroManager->parseFile(macroConfigFilePath) != 0){
         error += macroManager->getError();

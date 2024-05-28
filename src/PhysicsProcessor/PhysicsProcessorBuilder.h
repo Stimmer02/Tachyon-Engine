@@ -44,7 +44,6 @@ public:
 
     char build(bool verbose = false); //builds entire system, returns 0 if successful, otherwise error code
     PhysicsProcessor* getPhysicsProcessor();
-    std::string getClDeviceName();
 
 private:
     PhysicsProcessor* physicsProcessor;
