@@ -19,7 +19,7 @@ private:
         static float rx, ry, rz;
 
         object->transform.rotation = Quaternion::ToQuaternion(Vector3(rx, ry, rz));
-
+        object->transform.scale = Vector3(1000, 1000, 1000);
         rx += time * 1e-4f * cos(time);
         ry += time * 1e-4f * sin(time);
         rz += time * 1e-4f;

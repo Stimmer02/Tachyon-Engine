@@ -15,7 +15,6 @@ class Mesh;
 
 class MeshLoader{
 public:
-    static Vector3* vertices;
     static unsigned int numVertices;
     static std::vector<Vector3> verticesVector;
 
@@ -23,13 +22,10 @@ public:
     static unsigned int numNormals;
     static std::vector<Vector3> normalsVector;
 
-    static unsigned int* indices;
     static int caseId;
     static unsigned int numIndices;
     static std::vector<unsigned int> indicesVector;
 
-
-    static float* texCoords;
     static unsigned int numTexCoords;
     static std::vector<float> texCoordsVector;
 
