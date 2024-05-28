@@ -10,6 +10,7 @@ std::vector<Vector3> MeshLoader::normalsVector;
 
 unsigned int* MeshLoader::indices; 
 unsigned int MeshLoader::numIndices;
+int MeshLoader::caseId = 0;
 std::vector<unsigned int> MeshLoader::indicesVector;
 
 float* MeshLoader::texCoords;
@@ -19,7 +20,7 @@ std::vector<float> MeshLoader::texCoordsVector;
 void (*MeshLoader::functionsArr[functionsArraySize])(const std::string&);
 
 void MeshLoader::addSingleVertex(const std::string &vertexLine){
-    const int startId = 3;
+    const int startId = 2;
     std::string singleCoord;
     std::vector <float> coords;
     
@@ -38,6 +39,11 @@ void MeshLoader::addSingleVertex(const std::string &vertexLine){
         MeshLoader::verticesVector[MeshLoader::verticesVector.size() - 1].w = coords[3];
     }
     
+    numVertices = verticesVector.size();
+    vertices = new Vector3[numVertices];
+    for(int i = 0; i < numVertices; ++i){
+        vertices[i] = verticesVector[i];
+    }
 }
 void MeshLoader::addSingleNormal(const std::string &normalLine){
     const int startId = 3;
@@ -76,10 +82,38 @@ void MeshLoader::addSingleTexCoord(const std::string &texCoordLine){
     texCoordsVector.push_back(coords[0]);
     texCoordsVector.push_back(coords[1]);
     //pomijam 3 współrzędną jeśli owa istnieje bo tak można zrobić a jest prościej 
+    
+    
 }
 
 void MeshLoader::addSingleIndex(const std::string &indexLine){
+    int caseId = 0;
+    const int startId = 2;
+    std::string singleCoord;
     
+    
+    for(int i = 2; indexLine[i] != ' ' && indexLine[i] != '\0' && indexLine[i] != '\n'; ++i){
+        if(indexLine[i] == ' ' || indexLine[i] == '\n' || indexLine[i] == '\0' || indexLine[i] == '/'){
+            indicesVector.push_back(std::atof(singleCoord.c_str()));
+            singleCoord.clear();
+        }
+        else{
+            singleCoord+=indexLine[i];
+        }
+    }
+    
+    for(int i = 2; indexLine[i] != ' ' && indexLine[i] != '\0' && indexLine[i] != '\n'; ++i){
+        if(indexLine[i] == '/'){
+            if(indexLine[i + 1] == '/'){
+                caseId = 1;
+            }
+            else{
+                caseId = 2;
+            }
+            break;
+        }
+
+    }
 }
 
 
@@ -93,6 +127,80 @@ void MeshLoader::initFunctionsArray(){
     functionsArr['v' * charSize + 'n'] = addSingleNormal;
     functionsArr['v' * charSize + 't'] = addSingleTexCoord;
     functionsArr['f' * charSize + ' '] = addSingleIndex;
+}
+
+void MeshLoader::finalizeParsing(){
+    if(caseId == 0){
+        computeTriangulation();
+    }
+    else if(caseId == 1){
+        
+    }
+    else{
+        
+    }
+}
+
+void MeshLoader::computeTriangulation(){
+    
+    std::vector<Tetrahedron> tetrahedrons;
+    std::map< std::pair< std::pair<int, int>, int >, int > trianglesCount;
+    
+    float helper = 0.0f;
+    
+    for(int i = 0; i < numVertices; ++i){
+        helper = std::max(helper, fabs(verticesVector[i].x));
+        helper = std::max(helper, fabs(verticesVector[i].y));
+        helper = std::max(helper, fabs(verticesVector[i].z));
+    }
+    
+    
+    
+    verticesVector.push_back({-helper, -helper, -helper});
+    verticesVector.push_back({helper, -helper, -helper});
+    verticesVector.push_back({0, helper, -helper});
+    verticesVector.push_back({0, 0, helper});
+    
+    tetrahedrons.push_back({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
+    
+    
+    for(int i = 0; i < numVertices; ++i){
+        for(int j = 0; j < tetrahedrons.size(); ++j){
+            if(tetrahedrons[j].isPointInsideTetrahedron(i)){
+                
+                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[1], tetrahedrons[j].points[2], i});
+                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[1], tetrahedrons[j].points[3], i});
+                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[2], tetrahedrons[j].points[3], i});
+                tetrahedrons.push_back({tetrahedrons[j].points[1], tetrahedrons[j].points[2], tetrahedrons[j].points[3], i});
+                
+                std::swap(tetrahedrons[j], tetrahedrons[tetrahedrons.size() - 1]);
+                
+                tetrahedrons.pop_back();
+                
+                break;
+            }
+        }
+    }
+    
+    for(Tetrahedron &t: tetrahedrons){
+        
+        std::sort(t.points, t.points + 4);
+        
+        trianglesCount[{{t.points[0], t.points[1]}, t.points[2]}]++;
+        trianglesCount[{{t.points[0], t.points[1]}, t.points[3]}]++;
+        trianglesCount[{{t.points[0], t.points[2]}, t.points[3]}]++;
+        trianglesCount[{{t.points[1], t.points[2]}, t.points[3]}]++;
+    }
+    
+    indicesVector.clear();
+    for(auto i = trianglesCount.begin(); i != trianglesCount.end(); ++i){
+        if(i->second == 1 && i->first.first.first <= numVertices && i->first.first.second <= numVertices && i->first.second <= numVertices){
+            indicesVector.push_back(i->first.first.first);
+            indicesVector.push_back(i->first.first.second);
+            indicesVector.push_back(i->first.second);
+        }
+    }
+    
 }
 
 void MeshLoader::parseMesh(const std::string &pathToFile, Mesh* mesh){

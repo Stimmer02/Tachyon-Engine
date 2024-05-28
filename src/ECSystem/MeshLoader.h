@@ -5,12 +5,15 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
+#include <map>
 
 #include "Mesh.h"
+#include "Tetrahedron.h"
 #include "Vector3.h"
 
 class MeshLoader{
-private:
+public:
     static Vector3* vertices;
     static unsigned int numVertices;
     static std::vector<Vector3> verticesVector;
@@ -20,8 +23,10 @@ private:
     static std::vector<Vector3> normalsVector;
 
     static unsigned int* indices; 
+    static int caseId;
     static unsigned int numIndices;
     static std::vector<unsigned int> indicesVector;
+
 
     static float* texCoords;
     static unsigned int numTexCoords;
@@ -38,9 +43,10 @@ private:
     static void addSingleTexCoord(const std::string &texCoordLine);
     static void doNothing(const std::string &comment);
     
+    static void computeTriangulation();
     static void initFunctionsArray();
+    static void finalizeParsing();  
     
-public:
     static void parseMesh(const std::string &pathToFile, Mesh* mesh);
 };
 
