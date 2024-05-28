@@ -311,7 +311,7 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
 std::string SubstanceCollector::createSubstanceClStruct(){
     std::string structString = "struct __attribute__ ((packed)) substance{\n";
     structString += "    struct color color;\n";
-    structString += "    bool movable;\n";
+    structString += "    int movable;\n";
     for (substanceField phroperty : substancePhroperties){
         std::string type = clTypeToString(phroperty.type);
         if (type == "invalid"){

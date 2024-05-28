@@ -5,7 +5,7 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
     defaultToFallback = false;
 
     structTree = new StructTree();
-    sizeCalculator = new SizeCalculator(8);
+    sizeCalculator = nullptr;
     macroManager = new MacroManager();
     clParser = new ClStructParser(macroManager);
     kernelCollector = new KernelCollector();
@@ -38,12 +38,15 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
 
 PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
     delete structTree;
-    delete sizeCalculator;
     delete clParser;
     delete macroManager;
     delete kernelCollector;
     delete kernelQueueBuilder;
     delete substanceCollector;
+
+    if (sizeCalculator != nullptr){
+        delete sizeCalculator;
+    }
 
     if (physicsProcessor != nullptr){
         delete physicsProcessor;
@@ -501,7 +504,7 @@ char PhysicsProcessorBuilder::build(bool verbose){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
         return 20;
     }
-    if (verbose)std::printf("    Allocated overall %uMB\n", allocatedMemory/(1024*1024));
+    if (verbose)std::printf("    Allocated overall %.2fMB\n", float(allocatedMemory)/float(1024.0*1024.0));
 
     if (verbose)std::printf("Allocating GPU config structure\n");
     if (allocateGPUConfigStructure() != 0){
@@ -709,6 +712,10 @@ char PhysicsProcessorBuilder::createClContext(){
     physicsProcessor->context = context;
     physicsProcessor->device = device;
     physicsProcessor->queue = cl::CommandQueue(context, device);
+
+    cl_uint addressBits;
+    device.getInfo(CL_DEVICE_ADDRESS_BITS, &addressBits);
+    sizeCalculator = new SizeCalculator(addressBits/8);
 
     return 0;
 }
