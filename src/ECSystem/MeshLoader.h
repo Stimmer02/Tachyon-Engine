@@ -34,6 +34,7 @@ public:
     
     
     static std::vector<std::vector<Vector3> > normalsList;
+    static std::vector<int> texturesIdx;
     
     static const int functionsArraySize = 256 * 256;
     static const int charSize = 256;
@@ -46,7 +47,7 @@ public:
     static void addSingleTexCoord(const std::string &texCoordLine);
     static void doNothing(const std::string &comment);
     
-    static std::vector<int> computeTriangulation();
+    static std::vector<int> computeTriangulation(const std::vector<int> &inputPoints);
     static void initFunctionsArray();
     static void finalizeParsing();  
     
