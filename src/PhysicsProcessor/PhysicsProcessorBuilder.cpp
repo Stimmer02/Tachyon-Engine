@@ -1039,9 +1039,6 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
             kernelCode += "    structure[index]." + field.name + " = " + field.name + ";\n";
         }
     }
-    if (structure->name == "substance"){
-        kernelCode += "   printf(\"%f, %f, %f \\n\", structure[index].color.R, structure[index].color.G, structure[index].color.B);";
-    }
 
     kernelCode += "}\n";
 
@@ -1081,14 +1078,6 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
                     if (setSubstancesProperties(childBuffer, allocatedMemory) != 0){
                         error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
                         return -1;
-                    }
-                    cl::Kernel kernel2 = kernels.at("substance");
-                    kernel2.setArg(0, *childBuffer);
-
-                    for (uint k = 0; k < substanceCollector->getSubstances().size(); k++){
-                        kernel2.setArg(1, k);
-                        physicsProcessor->queue.enqueueNDRangeKernel(kernel2, cl::NullRange, cl::NDRange(1), cl::NDRange(1));
-                        physicsProcessor->queue.finish();
                     }
 
                     physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
@@ -1155,7 +1144,6 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
         }
     }
     uint toAllocate = subsStruct->byteSize * substances.size();
-    std::printf("Struct size: %u, count: %u, total: %u\n", subsStruct->byteSize, substances.size(), toAllocate);
     buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
     if ((*buffer)() == NULL){
         error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to allocate memory for substances\n";
