@@ -28,10 +28,13 @@ void MeshLoader::addSingleVertex(const std::string &vertexLine){
     std::string singleCoord;
     std::vector <float> coords;
 
-    for(int i = startId; vertexLine[i] != '\n'; ++i){
+    for(int i = startId;; ++i){
         if(vertexLine[i] == ' ' || vertexLine[i] == '\n' || vertexLine[i] == '\0'){
             coords.push_back(std::atof(singleCoord.c_str()));
             singleCoord.clear();
+            if(vertexLine[i] == '\n' || vertexLine[i] == '\0'){
+                break;
+            }
         }
         else{
            singleCoord+=vertexLine[i];
@@ -64,10 +67,13 @@ void MeshLoader::addSingleNormal(const std::string &normalLine){
     std::string singleCoord;
     std::vector <float> coords;
 
-    for(int i = startId; normalLine[i] != '\n'; ++i){
+    for(int i = startId;; ++i){
         if(normalLine[i] == ' ' || normalLine[i] == '\n' || normalLine[i] == '\0'){
             coords.push_back(std::atof(singleCoord.c_str()));
             singleCoord.clear();
+            if(normalLine[i] == '\n' || normalLine[i] == '\0'){
+                break;
+            }
         }
         else{
             singleCoord+=normalLine[i];
@@ -83,10 +89,13 @@ void MeshLoader::addSingleTexCoord(const std::string &texCoordLine){
     std::string singleCoord;
     std::vector <float> coords;
 
-    for(int i = startId; texCoordLine[i] != '\n'; ++i){
+    for(int i = startId;; ++i){
         if(texCoordLine[i] == ' ' || texCoordLine[i] == '\n' || texCoordLine[i] == '\0'){
             coords.push_back(std::atof(singleCoord.c_str()));
             singleCoord.clear();
+            if(texCoordLine[i] == '\n' || texCoordLine[i] == '\0'){
+                break;
+            }
         }
         else{
             singleCoord+=texCoordLine[i];
@@ -108,15 +117,19 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
     std::vector<int> triangulationInput;
     Vector3 helperNormal, edge1, edge2;
 
-
-    for(int i = 2; indexLine[i] != ' ' && indexLine[i] != '\0' && indexLine[i] != '\n'; ++i){
+    // std::cout << indexLine << '\n';
+    for(int i = 2;; ++i){
         if(indexLine[i] == ' ' || indexLine[i] == '\n' || indexLine[i] == '\0' || indexLine[i] == '/'){
             helperIdxArray.push_back(std::atoi(singleCoord.c_str()));
             singleCoord.clear();
+            if(indexLine[i] == '\n' || indexLine[i] == '\0'){
+                break;
+            }
         }
         else{
             singleCoord+=indexLine[i];
         }
+        // std::cout << singleCoord << '\n';
     }
 
     for(int i = 2; indexLine[i] != ' ' && indexLine[i] != '\0' && indexLine[i] != '\n'; ++i){
@@ -133,6 +146,7 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
 
     if(caseId == 0){
         triangulationInput = helperIdxArray;
+        
     }
     else if(caseId == 1){
         for(int i = 0 ; i < helperIdxArray.size(); i+=2){
@@ -148,6 +162,8 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             triangulationInput.push_back(helperIdxArray[i]);
         }
     }
+    // std::cout << triangulationInput.size() << '\n';
+    // std::cout.flush();
     triangulationResult = computeTriangulation(triangulationInput);
 
     if(caseId == 0){
@@ -263,8 +279,10 @@ std::vector<int> MeshLoader::computeTriangulation(const std::vector<int> &inputP
     std::vector<int> result;
 
     float helper = 0.0f;
-
-    for(int i = 0; i < numVertices; ++i){
+    
+    for(int i = 0; i < inputPoints.size(); ++i){
+        // std::cout << i << '\n';
+        // std::cout.flush();
         helper = std::max(helper, fabs(verticesVector[inputPoints[i]].x));
         helper = std::max(helper, fabs(verticesVector[inputPoints[i]].y));
         helper = std::max(helper, fabs(verticesVector[inputPoints[i]].z));
