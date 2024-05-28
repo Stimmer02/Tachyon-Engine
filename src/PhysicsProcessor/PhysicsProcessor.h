@@ -21,7 +21,10 @@ public:
 private:
     PhysicsProcessor(const uint32_t& engineSize);
     bool fallback;
-    unsigned char* hostFallbackBuffer;
+    float* hostFallbackBuffer;
+    void* openGLFallbackBuffer;
+    std::array<size_t, 3> fallbackOrigin;
+    std::array<size_t, 3> fallbackRegion;
 
     cl::NDRange globalWorkSize;
     cl::NDRange localWorkSize;

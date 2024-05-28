@@ -53,9 +53,9 @@ void Sprite2D::UpdateTexture(const Color * pixels, const uint32_t& width, const 
 
         // Allocate texture buffer for pixels
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
         this->width = width;
-        this->height = height;
+        this->height = height;        
     }else{
 
         // Select current texture
@@ -64,7 +64,7 @@ void Sprite2D::UpdateTexture(const Color * pixels, const uint32_t& width, const 
         if( this->width == width && this->height == height){
             glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
         }else{
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
             this->width = width;
             this->height = height;
         }

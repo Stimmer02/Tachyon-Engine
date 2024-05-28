@@ -4,14 +4,16 @@ PhysicsProcessor::PhysicsProcessor(const uint32_t& engineSize): engineSize(engin
     fallback = false;
     engine = new cl::Kernel[engineSize];
     engineResources = nullptr;
+    hostFallbackBuffer = nullptr;
+    openGLFallbackBuffer = nullptr;
 }
 
 PhysicsProcessor::~PhysicsProcessor(){
     delete[] engine;
 
-    // if (fallback){
-    //     delete[] hostFallbackBuffer;
-    // }
+    if (fallback){
+        delete[] hostFallbackBuffer;
+    }
 
     for (cl::Buffer* buffer: allocatedGPUMemory){
         delete buffer;

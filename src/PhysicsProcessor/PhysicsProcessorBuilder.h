@@ -28,6 +28,7 @@ public:
     char setMandatoryKernelsDir(std::string path);
     void setClPlatformAndDevice(cl_uint platform, cl_uint device);
     void setLocalWorkSize(cl::NDRange localWorkSize);
+    void setDefaultToFallback(bool fallback);
 
     void setClPlatform(cl_uint platform);
     void setClDevice(cl_uint device);
@@ -46,6 +47,7 @@ public:
 
 private:
     PhysicsProcessor* physicsProcessor;
+    bool defaultToFallback;
 
     StructTree* structTree;
     SizeCalculator* sizeCalculator;

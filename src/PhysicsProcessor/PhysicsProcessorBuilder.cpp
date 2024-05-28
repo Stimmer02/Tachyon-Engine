@@ -2,6 +2,7 @@
 
 PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
     physicsProcessor = nullptr;
+    defaultToFallback = false;
 
     structTree = new StructTree();
     sizeCalculator = new SizeCalculator(8);
@@ -127,6 +128,10 @@ char PhysicsProcessorBuilder::parseSystemConfig(std::string path){
         error += "ERR: PhysicsProcessorBuilder::parseSystemConfig failed to set mandatory kernels file\n";
         return 7;
     }
+    
+    bool fallback;
+    config.ParseBoolean("DEFAULT_TO_FALLBACK", fallback, false);
+    setDefaultToFallback(fallback);
 
     int platform;
     int device;
@@ -218,6 +223,10 @@ void PhysicsProcessorBuilder::setClPlatformAndDevice(cl_uint platform, cl_uint d
 
 void PhysicsProcessorBuilder::setLocalWorkSize(cl::NDRange localWorkSize){
     this->localWorkSize = localWorkSize;
+}
+
+void PhysicsProcessorBuilder::setDefaultToFallback(bool fallback){
+    defaultToFallback = fallback;
 }
 
 
@@ -629,52 +638,61 @@ char PhysicsProcessorBuilder::createClContext(){
     cl::Device device = allDevices[clDeviceID];
     clDeviceName = device.getInfo<CL_DEVICE_NAME>();
 
-    cl_platform_id platform;
-    clGetPlatformIDs(1, &platform, NULL);
+    cl_int err;
+    cl::Context context;
 
+    if (defaultToFallback){
+        physicsProcessor->fallback = true;
+        error += "WARNING: PhysicsProcessorBuilder::createClContext set to fallback mode\n";
+    } else {
+        cl_platform_id platform;
+        clGetPlatformIDs(1, &platform, NULL);
 
 #ifdef __APPLE__
 
-    CGLContextObj glContext = CGLGetCurrentContext();
-    CGLShareGroupObj shareGroup = CGLGetShareGroup(glContext);
+        CGLContextObj glContext = CGLGetCurrentContext();
+        CGLShareGroupObj shareGroup = CGLGetShareGroup(glContext);
 
-    cl_context_properties properties[] = {
-        CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE,
-        (cl_context_properties)shareGroup,
-        0
-    };
+        cl_context_properties properties[] = {
+            CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE,
+            (cl_context_properties)shareGroup,
+            0
+        };
 
 #elif __WIN32__
 
-    cl_context_properties properties[] = {
-        CL_CONTEXT_PLATFORM, (cl_context_properties)platform,
-        CL_GL_CONTEXT_KHR, (cl_context_properties)wglGetCurrentContext(),
-        CL_WGL_HDC_KHR, (cl_context_properties)wglGetCurrentDC(),
-        0
-    };
+        cl_context_properties properties[] = {
+            CL_CONTEXT_PLATFORM, (cl_context_properties)platform,
+            CL_GL_CONTEXT_KHR, (cl_context_properties)wglGetCurrentContext(),
+            CL_WGL_HDC_KHR, (cl_context_properties)wglGetCurrentDC(),
+            0
+        };
 
 #else
 
-     cl_context_properties properties[] = {
-        CL_GL_CONTEXT_KHR, (cl_context_properties) glXGetCurrentContext(),
-        CL_GLX_DISPLAY_KHR, (cl_context_properties) glXGetCurrentDisplay(),
-        CL_CONTEXT_PLATFORM, (cl_context_properties) platform,
-        0
-    };
+        cl_context_properties properties[] = {
+            CL_GL_CONTEXT_KHR, (cl_context_properties) glXGetCurrentContext(),
+            CL_GLX_DISPLAY_KHR, (cl_context_properties) glXGetCurrentDisplay(),
+            CL_CONTEXT_PLATFORM, (cl_context_properties) platform,
+            0
+        };
 
 #endif
-    cl_int err;
-    cl::Context context;
-    physicsProcessor->fallback = false;
-    if (clErrorFunction != nullptr){
-        context = cl::Context(device, properties, clCustomCallback, clErrorFunction, &err);
-    } else {
-        context = cl::Context(device, properties, clCallback, nullptr, &err);
+
+        physicsProcessor->fallback = false;
+        if (clErrorFunction != nullptr){
+            context = cl::Context(device, properties, clCustomCallback, clErrorFunction, &err);
+        } else {
+            context = cl::Context(device, properties, clCallback, nullptr, &err);
+        }
+        if (err != CL_SUCCESS){
+            error += "WARNING: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (" + std::to_string(err) + ")\n";
+            error += "WARNING: PhysicsProcessorBuilder::createClContext trying fallback mode\n";
+            physicsProcessor->fallback = true;
+        }
     }
-    if (err != CL_SUCCESS) {
-        error += "WARNING: PhysicsProcessorBuilder::createClContext failed to create OpenCL context for device: " + clDeviceName + " (" + std::to_string(err) + ")\n";
-        error += "WARNING: PhysicsProcessorBuilder::createClContext trying fallback mode\n";
-        physicsProcessor->fallback = true;
+
+    if (physicsProcessor->fallback){
         if (clErrorFunction != nullptr){
             context = cl::Context(device, NULL, clCustomCallback, clErrorFunction, &err);
         } else {
@@ -876,31 +894,74 @@ char PhysicsProcessorBuilder::compileCl(){
 
 char PhysicsProcessorBuilder::acquireGlObjectFromTBO(){
     if (physicsProcessor->fallback == false){
-        cl_int error = CL_SUCCESS;
+        cl_int error;
+
+        GLint texWidth, texHeight;
+        glBindTexture(GL_TEXTURE_2D, TBO);
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &texWidth);
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &texHeight);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        if (texWidth != simWidth || texHeight != simHeight){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO TBO size does not match simulation size (" + std::to_string(texWidth) + "x" + std::to_string(texHeight) + " != " + std::to_string(simWidth) + "x" + std::to_string(simHeight) + ")\n";
+            return 1;
+        }
+
         physicsProcessor->TBOMemory = clCreateFromGLTexture(physicsProcessor->context(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, TBO, &error);
-        // cl::ImageFormat format;
-        // format.image_channel_order = CL_RGBA;
-        // format.image_channel_data_type = CL_FLOAT;  
-        // physicsProcessor->TBOBuffer = cl::Image2D(physicsProcessor->context, CL_MEM_WRITE_ONLY, format, simWidth, simHeight, 0, NULL, &error);
-        // physicsProcessor->TBOBuffer = cl::ImageGL(physicsProcessor->context, CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, TBO, &error);
 
         if (error != CL_SUCCESS){
             this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to create OpenCL memory object from TBO\n";
             return 1;
         }
 
-        // physicsProcessor->TBOMemory = clCreateImage2D(physicsProcessor->context(), CL_MEM_WRITE_ONLY, &format, simWidth, simHeight, 0, NULL, NULL);
         physicsProcessor->TBOBuffer = cl::Image2D(physicsProcessor->TBOMemory); 
         clEnqueueAcquireGLObjects(physicsProcessor->queue(), 1, &physicsProcessor->TBOMemory, 0, NULL, NULL);
         physicsProcessor->hostFallbackBuffer = nullptr;
 
     } else {
-        // physicsProcessor->hostFallbackBuffer = new unsigned char[4 * simWidth * simHeight];//!!!!!!! 4 is hardcoded
-        // physicsProcessor->TBOMemory = clCreateBuffer(physicsProcessor->context(), CL_MEM_WRITE_ONLY, 4 * simWidth * simHeight, NULL, NULL);//!!!!!!! 4 is hardcoded
-        // physicsProcessor->TBOBuffer = cl::Buffer(physicsProcessor->TBOMemory);
-        //TODO: THIS IS A TEMPORARY SOLUTION
-        error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO fallback mode not implemented\n";
-        return 2;
+        cl_int error;
+
+        GLint texWidth, texHeight;
+        glBindTexture(GL_TEXTURE_2D, TBO);
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &texWidth);
+        glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &texHeight);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        if (texWidth != simWidth || texHeight != simHeight){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO TBO size does not match simulation size (" + std::to_string(texWidth) + "x" + std::to_string(texHeight) + " != " + std::to_string(simWidth) + "x" + std::to_string(simHeight) + ")\n";
+            return 1;
+        }
+
+        cl::ImageFormat format(CL_RGBA, CL_FLOAT);
+        physicsProcessor->TBOBuffer = cl::Image2D(physicsProcessor->context, CL_MEM_READ_WRITE, format, texWidth, texHeight, 0, nullptr, &error);
+        if (error != CL_SUCCESS){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to create OpenCL buffer\n";
+            return 1;
+        }
+
+        glBindBuffer(GL_TEXTURE_BUFFER, TBO);
+        physicsProcessor->openGLFallbackBuffer = glMapBuffer(GL_TEXTURE_BUFFER, GL_WRITE_ONLY);
+        if (physicsProcessor->openGLFallbackBuffer == nullptr){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to map TBO to host memory\n";
+            return 1;
+        }
+        // glUnmapBuffer(GL_TEXTURE_BUFFER);
+        // glBindBuffer(GL_TEXTURE_BUFFER, 0);
+
+        // physicsProcessor->hostFallbackBuffer = new float[texWidth*texHeight*4];
+
+        physicsProcessor->fallbackOrigin = {0, 0, 0};
+        physicsProcessor->fallbackRegion = {static_cast<size_t>(texWidth), static_cast<size_t>(texHeight), 1};
+
+        error = physicsProcessor->queue.enqueueReadImage(physicsProcessor->TBOBuffer, CL_TRUE, physicsProcessor->fallbackOrigin, physicsProcessor->fallbackRegion, 0, 0, physicsProcessor->openGLFallbackBuffer);
+        
+        if (error != CL_SUCCESS){
+            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to test copy TBO data to OpenCL buffer with error: " + translateClError(error) + "(" +std::to_string(error) + ")\n";
+            return 1;
+        }
+
+        // size_t bufferSize = texWidth*texHeight*4*sizeof(float);
+        // memcpy(physicsProcessor->openGLFallbackBuffer, physicsProcessor->hostFallbackBuffer, bufferSize);
+
+        // this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO fallback mode not implemented\n";
     }
     return 0;
 }
