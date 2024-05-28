@@ -1,4 +1,4 @@
-struct __attribute__ ((packed)) substance{
+struct __attribute__ ((aligned(16))) substance{
     struct color color;
     int movable;
     float MASS;

@@ -295,7 +295,6 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
                 prevLine = line;
             }
 
-
             if (!alreadyExists){
                 giveIdToSubstances(*substance);
                 substanceTable.push_back(*substance);
@@ -309,7 +308,7 @@ char SubstanceCollector::loadSubstancesFromFile(std::string path){
 }
 
 std::string SubstanceCollector::createSubstanceClStruct(){
-    std::string structString = "struct __attribute__ ((packed)) substance{\n";
+    std::string structString = "struct __attribute__ ((aligned(16))) substance{\n";
     structString += "    struct color color;\n";
     structString += "    int movable;\n";
     for (substanceField phroperty : substancePhroperties){

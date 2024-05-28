@@ -44,6 +44,7 @@ public:
 
     char build(bool verbose = false); //builds entire system, returns 0 if successful, otherwise error code
     PhysicsProcessor* getPhysicsProcessor();
+    std::string getClDeviceName();
 
 private:
     PhysicsProcessor* physicsProcessor;
@@ -82,6 +83,9 @@ private:
     // cl::Buffer** substanceTable; //realy important to include SUBSTANCES in structure tree
 
     std::function<void(std::string)>* clErrorFunction;
+
+    uint alignment;
+    uint alignedStructSize(uint size);
 
     char parseConfigFiles(); //reads location and priority of kernels, root location of structs, macros, location of substances directory
     char createClContext(); //creates cl context (platform / device) based on config file
