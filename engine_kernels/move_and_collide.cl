@@ -19,7 +19,7 @@ void kernel move_and_collide(global struct engineConfig* config, global struct e
     private short normalVectorX, normalVectorY;
     private int absVectorX, absVectorY, loopLength;
     private bool tempLogic;
-    struct voxel* currentVoxel;
+    global struct voxel* currentVoxel;
 
 
     normalVectorX = (thisVoxel.forceVector.x > 0) ? 1 : -1;
@@ -43,9 +43,9 @@ void kernel move_and_collide(global struct engineConfig* config, global struct e
         error += absVectorX * tempLogic;
         cursorY += normalVectorY * tempLogic;
 
-        if (cursorX >= config->simulationWidth || cursorY >= config->simulationHeight || cursorX <= 0 || cursorY <= 0){
+        if (cursorX >= (int)config->simulationWidth || cursorY >= (int)config->simulationHeight || cursorX <= 0 || cursorY <= 0){
             // getting out of bounds
-            // resources->voxels[global_ID].substanceID = 0; 
+            // resources->voxels[global_ID].substanceID = 0;
             return;
         }
 
@@ -79,6 +79,6 @@ void kernel move_and_collide(global struct engineConfig* config, global struct e
                 // TODO: check other voxel's force vector
             }
             resources->hashMap[cursorX + cursorY * config->simulationWidth] = global_ID;
-        }   
+        }
     }
 }

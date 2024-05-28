@@ -38,7 +38,7 @@ void PhysicsProcessor::spawnVoxelsInArea(uint32_t x, uint32_t y, uint32_t width,
     spawn_voxel_in_areaKernel.setArg(0, x);
     spawn_voxel_in_areaKernel.setArg(1, y);
     spawn_voxel_in_areaKernel.setArg(2, substanceID);
-    queue.enqueueNDRangeKernel(spawn_voxel_in_areaKernel, cl::NullRange, cl::NDRange(width, height, 1), cl::NDRange(8, 8));
+    queue.enqueueNDRangeKernel(spawn_voxel_in_areaKernel, cl::NullRange, cl::NDRange(width, height));
     queue.finish();
 }
 
@@ -58,7 +58,7 @@ void PhysicsProcessor::generateFrame(){
     queue.finish();
     if (fallback){
         queue.enqueueReadImage(TBOBuffer, CL_TRUE, fallbackOrigin, fallbackRegion, 0, 0, hostFallbackBuffer);
-    
+
         glBindTexture(GL_TEXTURE_2D, TBO);
         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, fallbackRegion[0] , fallbackRegion[1], GL_RGBA, GL_FLOAT, hostFallbackBuffer);
         glBindTexture(GL_TEXTURE_2D, 0);
