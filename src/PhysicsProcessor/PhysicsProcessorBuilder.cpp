@@ -35,7 +35,7 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
 
     TBO = 0;
 
-    alignment = 16;
+    alignment = 32;
 }
 
 PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
@@ -1058,7 +1058,7 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
 
 char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer*& buffer, uint& allocatedMemory, uint count, const bool& verbose){
     
-    uint toAllocate = alignedStructSize(structure->byteSize*count);
+    uint toAllocate = alignedStructSize(structure->byteSize) * count;
     if (buffer == nullptr){
         // if (verbose) std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count, structure->byteSize*count);
         buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
@@ -1162,7 +1162,7 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
             break;
         }
     }
-    uint toAllocate = alignedStructSize(subsStruct->byteSize * substances.size());
+    uint toAllocate = alignedStructSize(subsStruct->byteSize) * substances.size();
     std::printf("Struct size: %u, count: %u, total: %u\n", subsStruct->byteSize, substances.size(), toAllocate);
     buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
     if ((*buffer)() == NULL){
@@ -1233,7 +1233,6 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
             return 4;
         }
     }
-
 
     return 0;
 }
