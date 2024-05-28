@@ -189,7 +189,14 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             normalsList[triangulationResult[i]].push_back(helperNormal);
         }
     }
-    std::sort(triangulationResult.begin(), triangulationResult.end());
+    
+    for(int i = 0; i < triangulationResult.size(); ++i){
+        for(int j = i; j >= 1; --j){
+            if(triangulationResult[j] < triangulationResult[j - 1]){
+                std::swap(triangulationResult[i], triangulationResult[i - 1]);
+            }
+        }
+    }
     
     for(int i = 0; i < triangulationResult.size(); ++i){
         std::cout << triangulationResult[i] << '\n';
@@ -246,7 +253,9 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
         helperNormal = helperNormal.Normalize();
         normals[i] = helperNormal;
     }
-
+    
+    
+    
     // std::cout << indicesVector.size() << '\n';
     // std::cout.flush();
     // for(int i = 0; i < indicesVector.size(); ++i){
