@@ -5,6 +5,7 @@
 #include <GL/glew.h>
 
 #include "Vector3.h"
+#include "MeshLoader.h"
 
 class Mesh : public AttributeType<Mesh>{
 private:
@@ -20,21 +21,13 @@ private:
     int numIndices = 0;
     int numVertices = 0;
 
-
-    void LoadFromFile(const std::string & filename){
-
-        // TODO
-
-    }
-
 public:
-
 
     Mesh(const std::string & filename){
         this->renderMode = GL_TRIANGLES;
         glGenVertexArrays(1, &vao);
 
-        LoadFromFile(filename);
+        MeshLoader::parseMesh(filename, this);
 
     }
 
@@ -72,13 +65,13 @@ public:
 
         for (int majorSegment = 0; majorSegment <= numMajorSegments; ++majorSegment) {
             phi = majorSegment * phiIncrement;
-            float cosPhi = std::cos(phi);
-            float sinPhi = std::sin(phi);
+            float cosPhi = cos(phi);
+            float sinPhi = sin(phi);
 
             for (int minorSegment = 0; minorSegment <= numMinorSegments; ++minorSegment) {
                 theta = minorSegment * thetaIncrement;
-                float cosTheta = std::cos(theta);
-                float sinTheta = std::sin(theta);
+                float cosTheta = cos(theta);
+                float sinTheta = sin(theta);
 
                 float x = (majorRadius + minorRadius * cosTheta) * cosPhi;
                 float y = (majorRadius + minorRadius * cosTheta) * sinPhi;
@@ -137,8 +130,8 @@ public:
 
         for (int i = 0; i < numSegments; ++i) {
             float angle = i * angleIncrement;
-            float x = baseRadius * std::cos(angle);
-            float y = baseRadius * std::sin(angle);
+            float x = baseRadius * cos(angle);
+            float y = baseRadius * sin(angle);
             vertices.push_back(Vector3(x, y, -height / 2.0f));
             uvs.push_back((x + 1.0f) / 2.0f);
             uvs.push_back((y + 1.0f) / 2.0f);
@@ -187,13 +180,13 @@ public:
 
         for (int stack = 0; stack <= numStacks; ++stack) {
             theta = stack * thetaIncrement;
-            float sinTheta = std::sin(theta);
-            float cosTheta = std::cos(theta);
+            float sinTheta = sin(theta);
+            float cosTheta = cos(theta);
 
             for (int slice = 0; slice <= numSlices; ++slice) {
                 phi = slice * phiIncrement;
-                float sinPhi = std::sin(phi);
-                float cosPhi = std::cos(phi);
+                float sinPhi = sin(phi);
+                float cosPhi = cos(phi);
 
                 float x = radius * cosPhi * sinTheta;
                 float y = radius * cosTheta;
