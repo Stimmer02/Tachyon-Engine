@@ -32,6 +32,9 @@ public:
     static unsigned int numTexCoords;
     static std::vector<float> texCoordsVector;
     
+    
+    static std::vector<std::vector<Vector3> > normalsList;
+    
     static const int functionsArraySize = 256 * 256;
     static const int charSize = 256;
     
@@ -43,7 +46,7 @@ public:
     static void addSingleTexCoord(const std::string &texCoordLine);
     static void doNothing(const std::string &comment);
     
-    static void computeTriangulation();
+    static std::vector<int> computeTriangulation();
     static void initFunctionsArray();
     static void finalizeParsing();  
     
