@@ -48,8 +48,8 @@ public:
     static void doNothing(const std::string &comment);
     
     static std::vector<int> computeTriangulation(const std::vector<int> &inputPoints);
-    static void initFunctionsArray();
-    static void finalizeParsing();  
+    static void init();
+    static void finalizeParsing(Mesh* mesh);  
     
     static void parseMesh(const std::string &pathToFile, Mesh* mesh);
 };
