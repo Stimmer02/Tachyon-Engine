@@ -940,8 +940,14 @@ char PhysicsProcessorBuilder::acquireGlObjectFromTBO(){
 
         physicsProcessor->hostFallbackBuffer = new float[texWidth*texHeight*4];
 
+#ifdef __APPLE__
+        physicsProcessor->fallbackRegion[0] = static_cast<size_t>(texWidth);
+        physicsProcessor->fallbackRegion[1] = static_cast<size_t>(texHeight);
+        physicsProcessor->fallbackRegion[2] = 1;
+#else
         physicsProcessor->fallbackOrigin = {0, 0, 0};
         physicsProcessor->fallbackRegion = {static_cast<size_t>(texWidth), static_cast<size_t>(texHeight), 1};
+#endif
 
         error = physicsProcessor->queue.enqueueReadImage(physicsProcessor->TBOBuffer, CL_TRUE, physicsProcessor->fallbackOrigin, physicsProcessor->fallbackRegion, 0, 0, physicsProcessor->hostFallbackBuffer);
         
@@ -1022,6 +1028,10 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
             kernelCode += "    structure[index]." + field.name + " = " + field.name + ";\n";
         }
     }
+    if (structure->name == "substance"){
+        kernelCode += "   printf(\"%f, %f, %f \\n\", structure[index].color.R, structure[index].color.G, structure[index].color.B);";
+    }
+
     kernelCode += "}\n";
 
     return kernelCode;
@@ -1061,6 +1071,15 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
                         error  += "ERR: PhysicsProcessorBuilder::allocateStructure failed to set substances properties\n";
                         return -1;
                     }
+                    cl::Kernel kernel2 = kernels.at("substance");
+                    kernel2.setArg(0, *childBuffer);
+
+                    for (uint k = 0; k < substanceCollector->getSubstances().size(); k++){
+                        kernel2.setArg(1, k);
+                        physicsProcessor->queue.enqueueNDRangeKernel(kernel2, cl::NullRange, cl::NDRange(1), cl::NDRange(1));
+                        physicsProcessor->queue.finish();
+                    }
+
                     physicsProcessor->allocatedGPUMemory.push_back(childBuffer);
                 } else if (field.subStruct == nullptr){
                     uint toAllocate = sizeCalculator->clTypeSize(field.type) * field.arrSize;
@@ -1125,6 +1144,7 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
         }
     }
     uint toAllocate = subsStruct->byteSize * substances.size();
+    std::printf("Struct size: %u, count: %u, total: %u\n", subsStruct->byteSize, substances.size(), toAllocate);
     buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
     if ((*buffer)() == NULL){
         error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to allocate memory for substances\n";
