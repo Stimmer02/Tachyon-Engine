@@ -84,6 +84,9 @@ private:
 
     std::function<void(std::string)>* clErrorFunction;
 
+    uint alignment;
+    uint alignedStructSize(uint size);
+
     char parseConfigFiles(); //reads location and priority of kernels, root location of structs, macros, location of substances directory
     char createClContext(); //creates cl context (platform / device) based on config file
     char compileCl(); //compiles all the kernels and structs

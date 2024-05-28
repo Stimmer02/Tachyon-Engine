@@ -34,6 +34,8 @@ PhysicsProcessorBuilder::PhysicsProcessorBuilder(){
     localWorkSize = cl::NDRange(0);
 
     TBO = 0;
+
+    alignment = 16;
 }
 
 PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
@@ -549,6 +551,11 @@ std::string PhysicsProcessorBuilder::getClDeviceName(){
     return clDeviceName;
 }
 
+
+uint PhysicsProcessorBuilder::alignedStructSize(uint size){
+    return size + (alignment - size % alignment) % alignment;
+}
+
 char PhysicsProcessorBuilder::parseConfigFiles(){
     if (macroManager->parseFile(macroConfigFilePath) != 0){
         error += macroManager->getError();
@@ -1050,7 +1057,8 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
 
 
 char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer*& buffer, uint& allocatedMemory, uint count, const bool& verbose){
-    uint toAllocate = structure->byteSize*count;
+    
+    uint toAllocate = alignedStructSize(structure->byteSize*count);
     if (buffer == nullptr){
         // if (verbose) std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count, structure->byteSize*count);
         buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
@@ -1154,7 +1162,7 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
             break;
         }
     }
-    uint toAllocate = subsStruct->byteSize * substances.size();
+    uint toAllocate = alignedStructSize(subsStruct->byteSize * substances.size());
     std::printf("Struct size: %u, count: %u, total: %u\n", subsStruct->byteSize, substances.size(), toAllocate);
     buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
     if ((*buffer)() == NULL){
@@ -1231,7 +1239,8 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
 }
 
 char PhysicsProcessorBuilder::allocateGPUConfigStructure(){
-    physicsProcessor->engineConfig = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, configStructure->byteSize);
+    uint toAllocate = alignedStructSize(configStructure->byteSize);
+    physicsProcessor->engineConfig = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
 
     if (physicsProcessor->engineConfig() == NULL){
         error += "ERR: PhysicsProcessorBuilder::allocateGPUConfigStructure failed to allocate memory for config structure\n";
@@ -1273,7 +1282,6 @@ std::string PhysicsProcessorBuilder::createConfigStructureKernel(){
     kernelCode += "}\n";
     return kernelCode;
 }
-
 
 char PhysicsProcessorBuilder::allocateGPUWorkBuffers(){
     physicsProcessor->countVoxelReturnValue = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, sizeof(uint));
