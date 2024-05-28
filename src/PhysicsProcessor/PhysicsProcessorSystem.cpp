@@ -68,11 +68,12 @@ void PhysicsProcessorSystem::OnLoad(){
     std::string error = builder.getError();
     if (error.length() > 0){
         log->Write(LogMessageType::M_ERROR, "PhysicsProcessor built with errors:\n%s", error.c_str());
-        log->Flush();
     } else {
         log->Write(LogMessageType::M_INFO, "PhysicsProcessor built successfully");
-        log->Flush();
     }
+
+    log->Write(LogMessageType::M_INFO, "PhysicsProcessor using device: %s", builder.getClDeviceName().c_str());
+    log->Flush();
 
     physicsProcessor = builder.getPhysicsProcessor();
 
