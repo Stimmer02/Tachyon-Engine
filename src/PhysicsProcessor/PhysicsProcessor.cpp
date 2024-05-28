@@ -5,7 +5,6 @@ PhysicsProcessor::PhysicsProcessor(const uint32_t& engineSize): engineSize(engin
     engine = new cl::Kernel[engineSize];
     engineResources = nullptr;
     hostFallbackBuffer = nullptr;
-    openGLFallbackBuffer = nullptr;
 }
 
 PhysicsProcessor::~PhysicsProcessor(){
@@ -57,4 +56,11 @@ void PhysicsProcessor::generateFrame(){
         queue.enqueueNDRangeKernel(engine[i], cl::NullRange, globalWorkSize, localWorkSize);
     }
     queue.finish();
+    if (fallback){
+        queue.enqueueReadImage(TBOBuffer, CL_TRUE, fallbackOrigin, fallbackRegion, 0, 0, hostFallbackBuffer);
+    
+        glBindTexture(GL_TEXTURE_2D, TBO);
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, fallbackRegion[0] , fallbackRegion[1], GL_RGBA, GL_FLOAT, hostFallbackBuffer);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
 }

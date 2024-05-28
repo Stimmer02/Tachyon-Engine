@@ -593,6 +593,7 @@ void PhysicsProcessorBuilder::createPhysicsProcessor(){
     physicsProcessor->globalWorkSize = cl::NDRange(simWidth, simHeight);
     physicsProcessor->countVoxelsSize = cl::NDRange(256);
     physicsProcessor->localWorkSize = localWorkSize;
+    physicsProcessor->TBO = TBO;
 }
 
 
@@ -937,31 +938,21 @@ char PhysicsProcessorBuilder::acquireGlObjectFromTBO(){
             return 1;
         }
 
-        glBindBuffer(GL_TEXTURE_BUFFER, TBO);
-        physicsProcessor->openGLFallbackBuffer = glMapBuffer(GL_TEXTURE_BUFFER, GL_WRITE_ONLY);
-        if (physicsProcessor->openGLFallbackBuffer == nullptr){
-            this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to map TBO to host memory\n";
-            return 1;
-        }
-        // glUnmapBuffer(GL_TEXTURE_BUFFER);
-        // glBindBuffer(GL_TEXTURE_BUFFER, 0);
-
-        // physicsProcessor->hostFallbackBuffer = new float[texWidth*texHeight*4];
+        physicsProcessor->hostFallbackBuffer = new float[texWidth*texHeight*4];
 
         physicsProcessor->fallbackOrigin = {0, 0, 0};
         physicsProcessor->fallbackRegion = {static_cast<size_t>(texWidth), static_cast<size_t>(texHeight), 1};
 
-        error = physicsProcessor->queue.enqueueReadImage(physicsProcessor->TBOBuffer, CL_TRUE, physicsProcessor->fallbackOrigin, physicsProcessor->fallbackRegion, 0, 0, physicsProcessor->openGLFallbackBuffer);
+        error = physicsProcessor->queue.enqueueReadImage(physicsProcessor->TBOBuffer, CL_TRUE, physicsProcessor->fallbackOrigin, physicsProcessor->fallbackRegion, 0, 0, physicsProcessor->hostFallbackBuffer);
         
         if (error != CL_SUCCESS){
             this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO failed to test copy TBO data to OpenCL buffer with error: " + translateClError(error) + "(" +std::to_string(error) + ")\n";
             return 1;
         }
 
-        // size_t bufferSize = texWidth*texHeight*4*sizeof(float);
-        // memcpy(physicsProcessor->openGLFallbackBuffer, physicsProcessor->hostFallbackBuffer, bufferSize);
-
-        // this->error += "ERR: PhysicsProcessorBuilder::acquireGlObjectFromTBO fallback mode not implemented\n";
+        glBindTexture(GL_TEXTURE_2D, TBO);
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, texWidth, texHeight, GL_RGBA, GL_FLOAT, physicsProcessor->hostFallbackBuffer);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
     return 0;
 }

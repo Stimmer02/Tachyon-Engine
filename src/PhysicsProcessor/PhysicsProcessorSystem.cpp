@@ -65,9 +65,14 @@ void PhysicsProcessorSystem::OnLoad(){
         log->Flush();
         exit(errorCode);
     }
-    log->Write(LogMessageType::M_INFO, "PhysicsProcessor built successfully");
-
-    log->Flush();
+    std::string error = builder.getError();
+    if (error.length() > 0){
+        log->Write(LogMessageType::M_ERROR, "PhysicsProcessor built with errors:\n%s", error.c_str());
+        log->Flush();
+    } else {
+        log->Write(LogMessageType::M_INFO, "PhysicsProcessor built successfully");
+        log->Flush();
+    }
 
     physicsProcessor = builder.getPhysicsProcessor();
 

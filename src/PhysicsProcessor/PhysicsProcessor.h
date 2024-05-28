@@ -22,9 +22,15 @@ private:
     PhysicsProcessor(const uint32_t& engineSize);
     bool fallback;
     float* hostFallbackBuffer;
-    void* openGLFallbackBuffer;
+#ifdef __APPLE__
+    cl::size_t<3> fallbackOrigin;
+    cl::size_t<3> fallbackRegion;
+#else
     std::array<size_t, 3> fallbackOrigin;
     std::array<size_t, 3> fallbackRegion;
+#endif
+    
+    GLuint TBO;
 
     cl::NDRange globalWorkSize;
     cl::NDRange localWorkSize;
