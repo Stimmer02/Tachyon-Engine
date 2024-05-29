@@ -44,11 +44,12 @@ void kernel populate_collision(global struct engineConfig* config, global struct
         error += absVectorX * tempLogic;
         cursorY += normalVectorY * tempLogic;
 
-        if (cursorX >= (int)config->simulationWidth || cursorY >= (int)config->simulationHeight || cursorX < 0 || cursorY < 0){
-            // getting out of bounds
-            // resources->voxels[global_ID].substanceID = 0;
-            return;
-        }
+        // I SHOULD NOT HAVE TO DO THIS BECAUSE THOSE VALUES SHOULD BE HANDLED BY PREVIOUS KERNEL
+        // if (cursorX >= (int)config->simulationWidth || cursorY >= (int)config->simulationHeight || cursorX < 0 || cursorY < 0){
+        //     // getting out of bounds
+        //     // resources->voxels[global_ID].substanceID = 0;
+        //     return;
+        // }
 
         if (resources->hashMap[cursorX + cursorY * config->simulationWidth] != global_ID){
             resources->collisionMap[cursorX + cursorY * config->simulationWidth] = global_ID;
@@ -66,14 +67,17 @@ void kernel populate_collision(global struct engineConfig* config, global struct
             error += absVectorX * tempLogic;
             cursorY += normalVectorY * tempLogic;
 
-            if (cursorX >= config->simulationWidth || cursorY >= config->simulationHeight || cursorX < 0 || cursorY < 0){
-                // getting out of bounds
-                break;
-            }
+            // I SHOULD NOT HAVE TO DO THIS BECAUSE THOSE VALUES SHOULD BE HANDLED BY PREVIOUS KERNEL
+            // if (cursorX >= config->simulationWidth || cursorY >= config->simulationHeight || cursorX < 0 || cursorY < 0){
+            //     // getting out of bounds
+            //     break;
+            // }
 
             if (resources->hashMap[cursorX + cursorY * config->simulationWidth] != global_ID){
                 resources->collisionMap[cursorX + cursorY * config->simulationWidth] = global_ID;
             }
         }
+    } else {
+        resources->endpointMap[global_ID] = global_ID;
     }
 }

@@ -17,7 +17,7 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
 
     private int error, doubleError;
     private short normalVectorX, normalVectorY;
-    private int absVectorX, absVectorY, loopLength;
+    private int absVectorX, absVectorY, loopLength, currentCursor, previousCursor;
     private bool tempLogic;
     global struct voxel* currentVoxel; // voxel under cursor
 
@@ -43,22 +43,27 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
         error += absVectorX * tempLogic;
         cursorY += normalVectorY * tempLogic;
 
+        currentCursor = cursorX + cursorY * config->simulationWidth;
+
+
         if (cursorX >= (int)config->simulationWidth || cursorY >= (int)config->simulationHeight || cursorX < 0 || cursorY < 0){
             // getting out of bounds
             // resources->voxels[global_ID].substanceID = 0;
             return;
         }
-
-        currentVoxel = &resources->voxels[cursorX + cursorY * config->simulationWidth];
+        currentVoxel = &resources->voxels[currentCursor];
         if (currentVoxel->substanceID > 0){
             // cursor hits other voxel's starting position
             if (resources->SUBSTANCES[currentVoxel->substanceID].movable == 0){
+                resources->voxels[global_ID].forceVector.x = 0;
+                resources->voxels[global_ID].forceVector.y = 0;
+                resources->endpointMap[global_ID] = global_ID;
                 return;
             }
             // TODO: check other voxel's force vector
         }
 
-        resources->hashMap[cursorX + cursorY * config->simulationWidth] = global_ID;
+        resources->hashMap[currentCursor] = global_ID;
 
         for (uint i = 1; i < loopLength; i++){
             doubleError = error*2;
@@ -70,21 +75,30 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
             tempLogic = doubleError < absVectorX;
             error += absVectorX * tempLogic;
             cursorY += normalVectorY * tempLogic;
+            
+            previousCursor = currentCursor;
+            currentCursor = cursorX + cursorY * config->simulationWidth;
+
 
             if (cursorX >= config->simulationWidth || cursorY >= config->simulationHeight || cursorX < 0 || cursorY < 0){
                 // getting out of bounds
-                break;
-            }
-
-            currentVoxel = &resources->voxels[cursorX + cursorY * config->simulationWidth];
-            if (currentVoxel->substanceID > 0){
-            // cursor hits other voxel's starting position
-            if (resources->SUBSTANCES[currentVoxel->substanceID].movable == 0){
+                // resources->voxels[global_ID].substanceID = 0;
                 return;
             }
-            // TODO: check other voxel's force vector
+
+            currentVoxel = &resources->voxels[currentCursor];
+            if (currentVoxel->substanceID > 0){
+                // cursor hits other voxel's starting position
+                if (resources->SUBSTANCES[currentVoxel->substanceID].movable == 0){
+                    resources->voxels[global_ID].forceVector.x = 0;
+                    resources->voxels[global_ID].forceVector.y = 0;
+                    resources->endpointMap[previousCursor] = global_ID;
+                    return;
+                }
+                // TODO: check other voxel's force vector
+            }
+            resources->hashMap[currentCursor] = global_ID;
         }
-            resources->hashMap[cursorX + cursorY * config->simulationWidth] = global_ID;
-        }
+        resources->endpointMap[currentCursor] = global_ID;
     }
 }
