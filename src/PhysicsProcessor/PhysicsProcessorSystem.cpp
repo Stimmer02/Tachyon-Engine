@@ -78,7 +78,8 @@ void PhysicsProcessorSystem::OnLoad(){
 
     uint voxelCount = physicsProcessor->countVoxels();
     std::printf("Voxel count: %d\n", voxelCount);
-    physicsProcessor->spawnVoxel(512, 512, 2);
+    // physicsProcessor->spawnVoxel(512, 512, 2);
+    physicsProcessor->spawnVoxelsInArea(0, 0, 1024, 2, 2);
     voxelCount = physicsProcessor->countVoxels();
     std::printf("Voxel count: %d\n", voxelCount);
 }

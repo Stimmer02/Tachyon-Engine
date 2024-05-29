@@ -1057,7 +1057,7 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
 
     uint toAllocate = alignedStructSize(structure->byteSize, count);
     if (buffer == nullptr){
-        std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count+4, toAllocate);
+        // std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count+4, toAllocate);
         buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
         if ((*buffer)() == NULL){
             error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(toAllocate) + "B) for structure: " + structure->name + "\n";

@@ -1,4 +1,4 @@
-void kernel populate_hash(global struct engineConfig* config, global struct engineResources* resources, write_only image2d_t TBO){
+void kernel populate_collision(global struct engineConfig* config, global struct engineResources* resources, write_only image2d_t TBO){
     private int global_ID = get_global_id(0) + get_global_id(1) * get_global_size(0);
     private struct voxel thisVoxel = resources->voxels[global_ID];
 
@@ -19,7 +19,6 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
     private short normalVectorX, normalVectorY;
     private int absVectorX, absVectorY, loopLength;
     private bool tempLogic;
-    global struct voxel* currentVoxel; // voxel under cursor
 
 
     normalVectorX = (thisVoxel.forceVector.x > 0) ? 1 : -1;
@@ -29,7 +28,9 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
     loopLength = (absVectorX > absVectorY) ? absVectorX : absVectorY;
     error = absVectorX - absVectorY;
 
-    resources->hashMap[global_ID] = global_ID;
+    if (resources->hashMap[global_ID] != global_ID){
+        resources->collisionMap[global_ID] = global_ID;
+    }
 
     if (loopLength > 0){
         doubleError = error*2;
@@ -49,16 +50,10 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
             return;
         }
 
-        currentVoxel = &resources->voxels[cursorX + cursorY * config->simulationWidth];
-        if (currentVoxel->substanceID > 0){
-            // cursor hits other voxel's starting position
-            if (resources->SUBSTANCES[currentVoxel->substanceID].movable == 0){
-                return;
-            }
-            // TODO: check other voxel's force vector
+        if (resources->hashMap[cursorX + cursorY * config->simulationWidth] != global_ID){
+            resources->collisionMap[cursorX + cursorY * config->simulationWidth] = global_ID;
         }
-
-        resources->hashMap[cursorX + cursorY * config->simulationWidth] = global_ID;
+        
 
         for (uint i = 1; i < loopLength; i++){
             doubleError = error*2;
@@ -76,15 +71,9 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
                 break;
             }
 
-            currentVoxel = &resources->voxels[cursorX + cursorY * config->simulationWidth];
-            if (currentVoxel->substanceID > 0){
-            // cursor hits other voxel's starting position
-            if (resources->SUBSTANCES[currentVoxel->substanceID].movable == 0){
-                return;
+            if (resources->hashMap[cursorX + cursorY * config->simulationWidth] != global_ID){
+                resources->collisionMap[cursorX + cursorY * config->simulationWidth] = global_ID;
             }
-            // TODO: check other voxel's force vector
-        }
-            resources->hashMap[cursorX + cursorY * config->simulationWidth] = global_ID;
         }
     }
 }
