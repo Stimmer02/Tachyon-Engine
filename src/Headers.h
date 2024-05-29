@@ -2,6 +2,8 @@
 #define HEADERS_H
 
 #pragma once
+#define CL_HPP_TARGET_OPENCL_VERSION 200
+
 
 #ifdef __APPLE__
 

@@ -19,7 +19,7 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
     private short normalVectorX, normalVectorY;
     private int absVectorX, absVectorY, loopLength;
     private bool tempLogic;
-    global struct voxel* currentVoxel;
+    global struct voxel* currentVoxel; // voxel under cursor
 
 
     normalVectorX = (thisVoxel.forceVector.x > 0) ? 1 : -1;
@@ -43,9 +43,10 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
         error += absVectorX * tempLogic;
         cursorY += normalVectorY * tempLogic;
 
-        if (cursorX >= (int)config->simulationWidth || cursorY >= (int)config->simulationHeight || cursorX <= 0 || cursorY <= 0){
+        if (cursorX >= (int)config->simulationWidth || cursorY >= (int)config->simulationHeight || cursorX < 0 || cursorY < 0){
             // getting out of bounds
             // resources->voxels[global_ID].substanceID = 0;
+            resources->voxels[global_ID].substanceID = 0;
             return;
         }
 
@@ -68,8 +69,9 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
             error += absVectorX * tempLogic;
             cursorY += normalVectorY * tempLogic;
 
-            if (cursorX >= config->simulationWidth || cursorY >= config->simulationHeight || cursorX <= 0 || cursorY <= 0){
+            if (cursorX >= config->simulationWidth || cursorY >= config->simulationHeight || cursorX < 0 || cursorY < 0){
                 // getting out of bounds
+                resources->voxels[global_ID].substanceID = 0;
                 break;
             }
 

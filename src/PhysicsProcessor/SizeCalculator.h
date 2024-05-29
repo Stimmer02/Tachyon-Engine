@@ -1,8 +1,6 @@
 #ifndef SIZE_CALCULATOR_H
 #define SIZE_CALCULATOR_H
 
-#define CL_HPP_TARGET_OPENCL_VERSION 200
-
 #include "engineStruct.h"
 
 #include "../Headers.h"

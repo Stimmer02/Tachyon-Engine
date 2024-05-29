@@ -506,7 +506,7 @@ char PhysicsProcessorBuilder::build(bool verbose){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
         return 20;
     }
-    if (verbose)std::printf("    Allocated overall %.2fMB\n", float(allocatedMemory)/float(1024.0*1024.0));
+    if (verbose)std::printf("    Allocated overall %.0fMB\n", float(allocatedMemory)/(1024*1024));
 
     if (verbose)std::printf("Allocating GPU config structure\n");
     if (allocateGPUConfigStructure() != 0){
@@ -1057,7 +1057,7 @@ char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, c
 
     uint toAllocate = alignedStructSize(structure->byteSize, count);
     if (buffer == nullptr){
-        // if (verbose) std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count, structure->byteSize*count);
+        std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count+4, toAllocate);
         buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
         if ((*buffer)() == NULL){
             error += "ERR: PhysicsProcessorBuilder::allocateStructure failed to allocate memory (" + std::to_string(toAllocate) + "B) for structure: " + structure->name + "\n";
