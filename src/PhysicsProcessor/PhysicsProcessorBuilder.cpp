@@ -552,8 +552,8 @@ std::string PhysicsProcessorBuilder::getClDeviceName(){
 }
 
 
-uint PhysicsProcessorBuilder::alignedStructSize(uint size){
-    return size + (alignment - size % alignment) % alignment;
+uint PhysicsProcessorBuilder::alignedStructSize(uint size, uint count){
+    return (size + (alignment - size % alignment) % alignment) * (count + 1);
 }
 
 char PhysicsProcessorBuilder::parseConfigFiles(){
@@ -1054,8 +1054,8 @@ std::string PhysicsProcessorBuilder::createAllocationKernel(const engineStruct* 
 
 
 char PhysicsProcessorBuilder::allocateStructure(const engineStruct* structure, const std::map<std::string, cl::Kernel>& kernels, cl::Buffer*& buffer, uint& allocatedMemory, uint count, const bool& verbose){
-    
-    uint toAllocate = alignedStructSize(structure->byteSize) * count;
+
+    uint toAllocate = alignedStructSize(structure->byteSize, count);
     if (buffer == nullptr){
         // if (verbose) std::printf("Allocating %s x %u (%dB)\n", structure->name.c_str(), count, structure->byteSize*count);
         buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
@@ -1151,7 +1151,7 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
             break;
         }
     }
-    uint toAllocate = alignedStructSize(subsStruct->byteSize) * substances.size();
+    uint toAllocate = alignedStructSize(subsStruct->byteSize, substances.size());
     buffer = new cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
     if ((*buffer)() == NULL){
         error += "ERR: PhysicsProcessorBuilder::setSubstancesProperties failed to allocate memory for substances\n";
@@ -1226,7 +1226,7 @@ char PhysicsProcessorBuilder::setSubstancesProperties(cl::Buffer*& buffer, uint&
 }
 
 char PhysicsProcessorBuilder::allocateGPUConfigStructure(){
-    uint toAllocate = alignedStructSize(configStructure->byteSize);
+    uint toAllocate = alignedStructSize(configStructure->byteSize, 1);
     physicsProcessor->engineConfig = cl::Buffer(physicsProcessor->context, CL_MEM_READ_WRITE, toAllocate);
 
     if (physicsProcessor->engineConfig() == NULL){
