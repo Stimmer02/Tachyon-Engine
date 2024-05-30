@@ -2,6 +2,7 @@
 #include "Fractal.h"
 #include "Lines.h"
 #include "../PhysicsProcessor/PhysicsProcessorSystem.h"
+#include "../PhysicsProcessor/FpsLimiter.h"
 
 int main(){
 
@@ -16,9 +17,15 @@ int main(){
     PhysicsProcessorSystem * physic = new PhysicsProcessorSystem();
     app.RegisterSystem(physic);
 
+    FpsLimiter * fps = new FpsLimiter();
+    app.RegisterSystem(fps);
+
+
     app.Loop();
 
-    // delete physic;
+
+    delete fps;
+    delete physic;
     delete fract;
     return 0;
 }
