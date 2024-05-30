@@ -5,9 +5,7 @@ FpsLimiter::FpsLimiter() : fps(10){
 }
 
 FpsLimiter::~FpsLimiter(){
-    if (timer != nullptr){
-        delete timer;
-    }
+
 }
 
 void FpsLimiter::Share(SharedNameResolver* snr){
