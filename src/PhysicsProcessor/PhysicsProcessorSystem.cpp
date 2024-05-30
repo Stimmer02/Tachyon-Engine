@@ -59,7 +59,7 @@ void PhysicsProcessorSystem::OnLoad(){
     }
 
     log->Write(LogMessageType::M_INFO, "Building PhysicsProcessor with config: %s", PPConfigPath);
-    char errorCode = builder.build(true);
+    char errorCode = builder.build(false);
     if (errorCode != 0){
         log->Write(LogMessageType::M_ERROR, "PhysicsProcessor failed to build with error code: %d\n ERROR LOG:\n%s", errorCode, builder.getError().c_str());
         log->Flush();
@@ -78,9 +78,10 @@ void PhysicsProcessorSystem::OnLoad(){
 
     uint voxelCount = physicsProcessor->countVoxels();
     std::printf("Voxel count: %d\n", voxelCount);
-    // physicsProcessor->spawnVoxel(512, 512, 2);
+    // physicsProcessor->spawnVoxel(512, 1000, 2);
+    physicsProcessor->spawnVoxelsInArea(512-4/2, 1000, 4, 4, 2);
+    // physicsProcessor->spawnVoxelsInArea(512-128/2, 0, 128, 128, 2);
     physicsProcessor->spawnVoxelsInArea(0, 1023-8, 1024, 8, 1);
-    physicsProcessor->spawnVoxelsInArea(512-128/2, 0, 128, 128, 2);
     voxelCount = physicsProcessor->countVoxels();
     std::printf("Voxel count: %d\n", voxelCount);
 }
@@ -91,4 +92,6 @@ void PhysicsProcessorSystem::OnUnload(){
 
 void PhysicsProcessorSystem::Execute(){
     physicsProcessor->generateFrame();
+    uint voxelCount = physicsProcessor->countVoxels();
+    std::printf("Voxel count: %d\n", voxelCount);
 }

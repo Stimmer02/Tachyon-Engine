@@ -48,19 +48,19 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
 
         if (cursorX >= (int)config->simulationWidth || cursorY >= (int)config->simulationHeight || cursorX < 0 || cursorY < 0){
             // getting out of bounds
-            // resources->voxels[global_ID].substanceID = 0;
+            resources->voxels[global_ID].substanceID = 0;
             return;
         }
         currentVoxel = &resources->voxels[currentCursor];
         if (currentVoxel->substanceID > 0){
             // cursor hits other voxel's starting position
             if (resources->SUBSTANCES[currentVoxel->substanceID].movable == 0){
+                // voxel is not movable
                 resources->voxels[global_ID].forceVector.x = 0;
                 resources->voxels[global_ID].forceVector.y = 0;
                 resources->endpointMap[global_ID] = global_ID;
                 return;
             }
-            // TODO: check other voxel's force vector
         }
 
         resources->hashMap[currentCursor] = global_ID;
@@ -82,7 +82,7 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
 
             if (cursorX >= config->simulationWidth || cursorY >= config->simulationHeight || cursorX < 0 || cursorY < 0){
                 // getting out of bounds
-                // resources->voxels[global_ID].substanceID = 0;
+                resources->voxels[global_ID].substanceID = 0;
                 return;
             }
 
@@ -90,15 +90,17 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
             if (currentVoxel->substanceID > 0){
                 // cursor hits other voxel's starting position
                 if (resources->SUBSTANCES[currentVoxel->substanceID].movable == 0){
+                    // voxel is not movable
                     resources->voxels[global_ID].forceVector.x = 0;
                     resources->voxels[global_ID].forceVector.y = 0;
                     resources->endpointMap[previousCursor] = global_ID;
                     return;
                 }
-                // TODO: check other voxel's force vector
             }
             resources->hashMap[currentCursor] = global_ID;
         }
         resources->endpointMap[currentCursor] = global_ID;
     }
 }
+
+

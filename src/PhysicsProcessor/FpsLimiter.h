@@ -3,6 +3,8 @@
 
 #include "../ECSystem/System.h"
 #include "../ECSystem/Timer.h"
+#include "../ECSystem/Configurator.h"
+
 
 #include <thread>
 
@@ -21,10 +23,10 @@ private:
     void Execute() override;
 
     SharedNameResolver* resourceManager;
-
     Timepoint lastTimepoint;
+    const char* PPConfigPath;
 
-    const unsigned int fps;
+    float fps;
     Timer* timer;
 };
 

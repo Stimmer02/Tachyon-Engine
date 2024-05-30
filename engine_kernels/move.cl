@@ -3,7 +3,9 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
     private struct voxel thisVoxel = resources->voxels[global_ID];
 
     if (resources->SUBSTANCES[thisVoxel.substanceID].movable == 0){
-        resources->voxelsCopy[global_ID] = thisVoxel;
+        if (thisVoxel.substanceID > 0){
+            resources->voxelsCopy[global_ID] = thisVoxel;
+        }
         return;
     }
     
@@ -16,39 +18,40 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
 
     if (resources->endpointMap[targetCell] == global_ID){
         resources->voxelsCopy[targetCell] = thisVoxel;
-    } else {
-
-        private int error, doubleError;
-        private short normalVectorX, normalVectorY;
-        private int absVectorX, absVectorY, loopLength;
-        private bool tempLogic;
-
-        normalVectorX = (thisVoxel.forceVector.x > 0) ? -1 : 1; // reversed
-        normalVectorY = (thisVoxel.forceVector.y > 0) ? -1 : 1;
-        absVectorX = abs(thisVoxel.forceVector.x);
-        absVectorY = abs(thisVoxel.forceVector.y);
-        loopLength = (absVectorX > absVectorY) ? absVectorX : absVectorY;
-        error = absVectorX - absVectorY;
-
-
-        for (uint i = 0; i < loopLength; i++){
-            doubleError = error*2;
-
-            tempLogic = doubleError > -absVectorY;
-            error -= absVectorY * tempLogic;
-            cursorX += normalVectorX * tempLogic;
-
-            tempLogic = doubleError < absVectorX;
-            error += absVectorX * tempLogic;
-            cursorY += normalVectorY * tempLogic;
-
-            if (resources->collisionMap[cursorX + cursorY * config->simulationWidth] == 0){
-                thisVoxel.forceVector.x = 0;
-                thisVoxel.forceVector.y = 0;
-                resources->voxelsCopy[cursorX + cursorY * config->simulationWidth] = thisVoxel;
-                return;
-            }
-        }
-        // at this point voxel has no place to go :(
+        return;
     }
+
+    private int error, doubleError;
+    private short normalVectorX, normalVectorY;
+    private int absVectorX, absVectorY, loopLength;
+    private bool tempLogic;
+
+    normalVectorX = (thisVoxel.forceVector.x > 0) ? -1 : 1; // reversed
+    normalVectorY = (thisVoxel.forceVector.y > 0) ? -1 : 1;
+    absVectorX = abs(thisVoxel.forceVector.x);
+    absVectorY = abs(thisVoxel.forceVector.y);
+    loopLength = (absVectorX > absVectorY) ? absVectorX : absVectorY;
+    error = absVectorX - absVectorY;
+
+
+    for (uint i = 0; i < loopLength; i++){
+        doubleError = error*2;
+
+        tempLogic = doubleError > -absVectorY;
+        error -= absVectorY * tempLogic;
+        cursorX += normalVectorX * tempLogic;
+
+        tempLogic = doubleError < absVectorX;
+        error += absVectorX * tempLogic;
+        cursorY += normalVectorY * tempLogic;
+
+        if (resources->collisionMap[cursorX + cursorY * config->simulationWidth] == 0){
+            thisVoxel.forceVector.x = 0;
+            thisVoxel.forceVector.y = 0;
+            resources->voxelsCopy[cursorX + cursorY * config->simulationWidth] = thisVoxel;
+            return;
+        }
+    }
+    // at this point voxel has no place to go :(
+    printf("Voxel %d has no place to go\n", global_ID);
 } 

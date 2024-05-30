@@ -1,6 +1,7 @@
 #include "FpsLimiter.h"
 
-FpsLimiter::FpsLimiter() : fps(10){
+FpsLimiter::FpsLimiter(){
+    fps = 60.0f;
     timer = nullptr;
 }
 
@@ -12,6 +13,7 @@ void FpsLimiter::Share(SharedNameResolver* snr){
     resourceManager = snr;
 
     timer = (Timer*)(snr->Find("timer"));
+    PPConfigPath = (const char*)(snr->Find("ppconfigpath"));
 }
 
 void FpsLimiter::OnLoad(){
@@ -19,6 +21,9 @@ void FpsLimiter::OnLoad(){
         std::fprintf(stderr, "FpsLimiter failed to find Timer\n");
         exit(-1);
     }
+
+    Configurator config(PPConfigPath);
+    config.ParseFloat("FPS", fps, 60.0f);
 
     lastTimepoint = Timer::GetCurrentTime();
 }
