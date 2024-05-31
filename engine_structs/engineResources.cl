@@ -6,4 +6,5 @@ struct __attribute__ ((aligned(16))) engineResources{
     global uint* hashMap; //ALLOCATE SIM_SIZE
     global uint* collisionMap; //ALLOCATE SIM_SIZE
     global uint* endpointMap; //ALLOCATE SIM_SIZE
+    global uint* missingVoxels; //ALLOCATE SIM_SIZE
 };

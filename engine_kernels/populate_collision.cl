@@ -32,10 +32,30 @@ void kernel populate_collision(global struct engineConfig* config, global struct
         resources->collisionMap[global_ID] = global_ID;
     }
 
-    if (loopLength > 0){
+    if (loopLength == 0){
+        resources->endpointMap[global_ID] = global_ID;
+        return;
+    }
+    
+    doubleError = error*2;
+
+    //updating cursor position
+    tempLogic = doubleError > -absVectorY;
+    error -= absVectorY * tempLogic;
+    cursorX += normalVectorX * tempLogic;
+
+    tempLogic = doubleError < absVectorX;
+    error += absVectorX * tempLogic;
+    cursorY += normalVectorY * tempLogic;
+
+    if (resources->hashMap[cursorX + cursorY * config->simulationWidth] != global_ID){
+        resources->collisionMap[cursorX + cursorY * config->simulationWidth] = global_ID;
+    }
+    
+
+    for (uint i = 1; i < loopLength; i++){
         doubleError = error*2;
 
-        //updating cursor position
         tempLogic = doubleError > -absVectorY;
         error -= absVectorY * tempLogic;
         cursorX += normalVectorX * tempLogic;
@@ -44,28 +64,10 @@ void kernel populate_collision(global struct engineConfig* config, global struct
         error += absVectorX * tempLogic;
         cursorY += normalVectorY * tempLogic;
 
+
         if (resources->hashMap[cursorX + cursorY * config->simulationWidth] != global_ID){
             resources->collisionMap[cursorX + cursorY * config->simulationWidth] = global_ID;
         }
-        
-
-        for (uint i = 1; i < loopLength; i++){
-            doubleError = error*2;
-
-            tempLogic = doubleError > -absVectorY;
-            error -= absVectorY * tempLogic;
-            cursorX += normalVectorX * tempLogic;
-
-            tempLogic = doubleError < absVectorX;
-            error += absVectorX * tempLogic;
-            cursorY += normalVectorY * tempLogic;
-
-
-            if (resources->hashMap[cursorX + cursorY * config->simulationWidth] != global_ID){
-                resources->collisionMap[cursorX + cursorY * config->simulationWidth] = global_ID;
-            }
-        }
-    } else {
-        resources->endpointMap[global_ID] = global_ID;
     }
+ 
 }

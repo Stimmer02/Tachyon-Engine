@@ -4,7 +4,7 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
 
     if (resources->SUBSTANCES[thisVoxel.substanceID].movable == 0){
         if (thisVoxel.substanceID > 0){
-            resources->voxelsCopy[global_ID] = thisVoxel;
+            resources->endpointMap[global_ID] = global_ID;
         }
         return;
     }
@@ -17,7 +17,7 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
     private int targetCell = cursorX + cursorY * config->simulationWidth;
 
     if (resources->endpointMap[targetCell] == global_ID){
-        resources->voxelsCopy[targetCell] = thisVoxel;
+        resources->endpointMap[targetCell] = global_ID;
         return;
     }
 
@@ -46,12 +46,15 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
         cursorY += normalVectorY * tempLogic;
 
         if (resources->collisionMap[cursorX + cursorY * config->simulationWidth] == 0){
+
+            // TODO: calculate side force based on the jamming factor
             thisVoxel.forceVector.x = 0;
             thisVoxel.forceVector.y = 0;
-            resources->voxelsCopy[cursorX + cursorY * config->simulationWidth] = thisVoxel;
+            resources->voxels[cursorX + cursorY * config->simulationWidth] = thisVoxel;
+            resources->endpointMap[cursorX + cursorY * config->simulationWidth] = global_ID;
             return;
         }
     }
-    // at this point voxel has no place to go :(
-    printf("Voxel %d has no place to go\n", global_ID);
+    // printf("Voxel %d has no place to go\n", global_ID);
+    resources->missingVoxels[global_ID] = global_ID;
 } 
