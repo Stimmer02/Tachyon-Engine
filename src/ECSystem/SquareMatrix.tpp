@@ -1,5 +1,6 @@
 #include "SquareMatrix.h"
 
+//podkreśla błąd ale kod się kompiluje
 template<typename T>
 void SquareMatrix<T>::setArr(T** values,const unsigned int &newSize){
     if(arr != nullptr){
@@ -21,7 +22,7 @@ void SquareMatrix<T>::setArr(T** values,const unsigned int &newSize){
 }
 
 template<typename T>
-void SquareMatrix<T>::fastSet(const SquareMatrix<T> &sm,const unsigned int &newSize, const unsigned int &rowId){
+void SquareMatrix<T>::fastSetArrR(const SquareMatrix<T> &sm,const unsigned int &newSize, const unsigned int &rowId){
     if(arr != nullptr){
         for(int i = 0; i < size; ++i){
             delete [] arr[i];
@@ -45,6 +46,33 @@ void SquareMatrix<T>::fastSet(const SquareMatrix<T> &sm,const unsigned int &newS
     }
 }
 
+
+template<typename T>
+void SquareMatrix<T>::fastSetArrC(const SquareMatrix<T> &sm,const unsigned int &newSize, const unsigned int &colId){
+    if(arr != nullptr){
+        for(int i = 0; i < size; ++i){
+            delete [] arr[i];
+        }
+        delete [] arr;
+    }
+    
+    size = newSize;
+    
+    arr = new T*[size];
+    for(int i = 1; i < size; ++i){
+        arr[i] = new T[size];
+        
+        for(int j = 0, q = 0; j < size; ++j){
+            if(q == colId){
+                continue;
+            }
+            arr[i - 1][q] = sm.arr[i][j];
+            ++q;
+        }
+    }
+}
+
+
 template<typename T>
 T SquareMatrix<T>::getDeterminant(){
     if(size == 1){
@@ -57,10 +85,20 @@ T SquareMatrix<T>::getDeterminant(){
     T result = (T)0;
     SquareMatrix<T> helper;
     for(int i = 0; i < size; ++i){
-        helper.fastSet(*this, size - 1, i);
+        helper.fastSetArrR(*this, size - 1, i);
         result += arr[i][0] * helper.getDeterminant() * (1 - 2 * (i % 2));
     }
     
     return result;
     
+}
+
+template<typename T>
+T SquareMatrix<T>::getSubDeterminant(const int &uselessCol){
+    SquareMatrix<T> helperMatrix;
+    
+    helperMatrix.fastSetArrR(*this, size - 1, uselessCol);
+    
+    return helperMatrix.getDeterminant();
+
 }
