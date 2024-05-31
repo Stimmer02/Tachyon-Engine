@@ -109,7 +109,7 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
     std::vector<int> triangulationInput;
     Vector3 helperNormal, edge1, edge2;
 
-    // std::cout << indexLine << '\n';
+    std::cout << indexLine << '\n';
     for(int i = 2;; ++i){
         if(indexLine[i] == ' ' || indexLine[i] == '\n' || indexLine[i] == '\0' || indexLine[i] == '/'){
             helperIdxArray.push_back(std::atoi(singleCoord.c_str()));
@@ -190,18 +190,17 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
         }
     }
     
-    for(int i = 0; i < triangulationResult.size(); ++i){
-        for(int j = i; j >= 1; --j){
-            if(triangulationResult[j] < triangulationResult[j - 1]){
-                std::swap(triangulationResult[i], triangulationResult[i - 1]);
-            }
-        }
-    }
+    std::cout << triangulationResult.size() << '\n';
+    
     
     for(int i = 0; i < triangulationResult.size(); ++i){
         std::cout << triangulationResult[i] << '\n';
     }
+    std::cout << '\n';
+    std::cout << '\n';
     std::cout.flush();
+    
+    
     
     for(int i: triangulationResult){
         indicesVector.push_back(i);
@@ -286,10 +285,12 @@ std::vector<int> MeshLoader::computeTriangulation(const std::vector<int> &inputP
     }
     // Something there is segmentation fault
 
-    std::vector<Tetrahedron> tetrahedrons;
+    std::set<Tetrahedron> tetrahedrons;
     std::map< std::pair< std::pair<int, int>, int >, int > trianglesCount;
     std::vector<int> result;
-
+    std::vector<Tetrahedron> helperVec;
+    std::map<std::pair<std::pair<int, int>, int >, std::set<Tetrahedron> > triangleToTetrahedrons; 
+    
     float helper = 0.0f;
     
     for(int i = 0; i < inputPoints.size(); ++i){
@@ -300,53 +301,57 @@ std::vector<int> MeshLoader::computeTriangulation(const std::vector<int> &inputP
         helper = std::max(helper, fabs(verticesVector[inputPoints[i]].z));
     }
     
-    helper *= 100.0f;
+    helper *= 1000.0f;
     
     verticesVector.push_back({-helper, -helper, -helper});
     verticesVector.push_back({helper, -helper, -helper});
     verticesVector.push_back({0, helper, -helper});
     verticesVector.push_back({0, 0, helper});
-
-    tetrahedrons.push_back({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
-
+    
+    tetrahedrons.insert({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
+    std::sort(tetrahedrons.begin()->points, tetrahedrons.begin()->points + 4); 
+    
+    triangleToTetrahedrons[{{numVertices, numVertices + 1}, numVertices + 2}].insert(*tetrahedrons.begin());
+    triangleToTetrahedrons[{{numVertices, numVertices + 1}, numVertices + 3}].insert(*tetrahedrons.begin());
+    triangleToTetrahedrons[{{numVertices, numVertices + 2}, numVertices + 3}].insert(*tetrahedrons.begin());
+    triangleToTetrahedrons[{{numVertices +, numVertices + 2}, numVertices + 3}].insert(*tetrahedrons.begin());
 
     for(int i = 0; i < inputPoints.size(); ++i){
-        for(int j = 0; j < tetrahedrons.size(); ++j){
-            if(tetrahedrons[j].isPointInsideTetrahedron(inputPoints[i])){
+        for(auto j = tetrahedrons.begin(); j != tetrahedrons.end(); ++j){
+            if(j->isPointInsideTetrahedron(inputPoints[i])){
+                // std::cout << "ASD";
+                helperVec.push_back({j->points[0], j->points[1], j->points[3], inputPoints[i]});
+                helperVec.push_back({j->points[0], j->points[1], j->points[2], inputPoints[i]});
+                helperVec.push_back({j->points[0], j->points[2], j->points[3], inputPoints[i]});
+                helperVec.push_back({j->points[1], j->points[2], j->points[3], inputPoints[i]});
 
-                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[1], tetrahedrons[j].points[2], inputPoints[i]});
-                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[1], tetrahedrons[j].points[3], inputPoints[i]});
-                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[2], tetrahedrons[j].points[3], inputPoints[i]});
-                tetrahedrons.push_back({tetrahedrons[j].points[1], tetrahedrons[j].points[2], tetrahedrons[j].points[3], inputPoints[i]});
+                tetrahedrons.erase(j);
 
-                std::swap(tetrahedrons[j], tetrahedrons[tetrahedrons.size() - 1]);
-
-                tetrahedrons.pop_back();
-
-                break;
             }
         }
     }
-
+    
+    
     for(Tetrahedron &t: tetrahedrons){
 
         std::sort(t.points, t.points + 4);
-
+        std::cout << t.points[0] << ' ' << t.points[1] << ' ' << t.points[2] << ' ' << t.points[3] << '\n';
         trianglesCount[{{t.points[0], t.points[1]}, t.points[2]}]++;
         trianglesCount[{{t.points[0], t.points[1]}, t.points[3]}]++;
         trianglesCount[{{t.points[0], t.points[2]}, t.points[3]}]++;
         trianglesCount[{{t.points[1], t.points[2]}, t.points[3]}]++;
     }
 
-
+    // std::cout << "SIZE: " << trianglesCount.size() << '\n' << numVertices << '\n';
     for(auto i = trianglesCount.begin(); i != trianglesCount.end(); ++i){
-        if(i->second == 1 && i->first.first.first <= numVertices && i->first.first.second <= numVertices && i->first.second <= numVertices){
+        std::cout << i->second << ' ' << i->first.first.first << ' ' << i->first.first.second << ' ' << i->first.second << '\n';
+        if(i->first.first.first < numVertices && i->first.first.second < numVertices && i->first.second < numVertices){
             result.push_back(i->first.first.first);
             result.push_back(i->first.first.second);
             result.push_back(i->first.second);
         }
     }
-
+    
     verticesVector.pop_back();
     verticesVector.pop_back();
     verticesVector.pop_back();

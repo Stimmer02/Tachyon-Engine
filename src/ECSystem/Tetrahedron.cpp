@@ -8,34 +8,47 @@ Tetrahedron::Tetrahedron(const int &p1, const int &p2, const int &p3, const int 
     
 }
 
-float Tetrahedron::helperFun(const int &p1, const int &p2, const int &p3, const int &p4){
-    Vector3 helperAD, helperBD, helperCD, helperCrossProduct;
+bool Tetrahedron::helperFun(const int &p1, const int &p2, const int &p3, const int &p4, const int & p5) const{
+    //kod tej funkcji jest z https://stackoverflow.com/questions/25179693/how-to-check-whether-the-point-is-in-the-tetrahedron-or-not
+    Vector3 helperNormal;
+    float helperDot, helperDot2;
     
-    float helperValue;
+    helperNormal = Vector3::Cross(MeshLoader::verticesVector[p2] - MeshLoader::verticesVector[p1], MeshLoader::verticesVector[p3] - MeshLoader::verticesVector[p1]);
     
-    helperAD = MeshLoader::verticesVector[p1] - MeshLoader::verticesVector[p4];
-    helperBD = MeshLoader::verticesVector[p2] - MeshLoader::verticesVector[p4];
-    helperCD = MeshLoader::verticesVector[p3] - MeshLoader::verticesVector[p4];
+    helperDot = Vector3::Dot(helperNormal, MeshLoader::verticesVector[p4] - MeshLoader::verticesVector[p1]);
     
-    helperCrossProduct = Vector3::Cross(helperBD, helperCD);
+    helperDot2 = Vector3::Dot(helperNormal,MeshLoader::verticesVector[p5] - MeshLoader::verticesVector[p1]);
     
-    helperValue = fabs(Vector3::Dot(helperAD, helperCrossProduct) / 6.0f);
+    return helperDot * helperDot2 >= 0;
+}
+
+bool Tetrahedron::isPointInsideTetrahedron(const int &point) const{
+    //kod tej funkcji jest z https://stackoverflow.com/questions/25179693/how-to-check-whether-the-point-is-in-the-tetrahedron-or-not
+    // std::cout << MeshLoader::verticesVector[points[0]].x << ' ' << MeshLoader::verticesVector[points[0]].y  <<  ' ' << MeshLoader::verticesVector[points[0]].z << '\n';
+    // std::cout << MeshLoader::verticesVector[points[1]].x << ' ' << MeshLoader::verticesVector[points[1]].y  <<  ' ' << MeshLoader::verticesVector[points[1]].z << '\n';
+    // std::cout << MeshLoader::verticesVector[points[2]].x << ' ' << MeshLoader::verticesVector[points[2]].y  <<  ' ' << MeshLoader::verticesVector[points[2]].z << '\n';
+    // std::cout << MeshLoader::verticesVector[points[3]].x << ' ' << MeshLoader::verticesVector[points[3]].y  <<  ' ' << MeshLoader::verticesVector[points[3]].z << '\n';
+    // std::cout << MeshLoader::verticesVector[point].x << ' ' << MeshLoader::verticesVector[point].y  <<  ' ' << MeshLoader::verticesVector[point].z << '\n' << '\n';
     
-    return helperValue;
+    return helperFun(points[0], points[1], points[2], points[3], point) && helperFun(points[1], points[2], points[3], points[0], point) && helperFun(points[2], points[3], points[0], points[1], point) && helperFun(points[3], points[0], points[1], points[2], point);
     
 }
 
-bool Tetrahedron::isPointInsideTetrahedron(const int &point){
-    float v1, v2, v3, v4, v5;
-    v1 = helperFun(points[0], points[1], points[2], points[3]);
-    v2 = helperFun(point, points[1], points[2], points[3]);
-    v3 = helperFun(points[0], point, points[2], points[3]);
-    v4 = helperFun(points[0], points[1], point, points[3]);
-    v5 = helperFun(points[0], points[1], points[2], point);
-    if(v2 > 0 && v3 > 0 && v4 > 0 && v5 > 0 && (v2 + v3 + v4 + v5 == v1)){
-        return true;
+bool Tetrahedron::operator<(const Tetrahedron& other)const {
+    for(int i = 0; i < 4; ++i){
+        if(points[i] < other.points[i]){
+            return true;
+        }
+        else if(points[i] > other.points[i]){
+            return false;
+        }
     }
-    else{
-        return false;
-    }
+    return false;
+}
+
+bool Tetrahedron::operator=(const Tetrahedron &other){
+    points[0] = other.points[0];
+    points[1] = other.points[1];
+    points[2] = other.points[2];
+    points[3] = other.points[3];
 }
