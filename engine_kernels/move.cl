@@ -22,16 +22,15 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
     }
 
     private int error, doubleError;
-    private short normalVectorX, normalVectorY;
-    private int absVectorX, absVectorY, loopLength;
     private bool tempLogic;
 
-    normalVectorX = (thisVoxel.forceVector.x > 0) ? -1 : 1; // reversed
-    normalVectorY = (thisVoxel.forceVector.y > 0) ? -1 : 1;
-    absVectorX = abs(thisVoxel.forceVector.x);
-    absVectorY = abs(thisVoxel.forceVector.y);
-    loopLength = (absVectorX > absVectorY) ? absVectorX : absVectorY;
+    private short normalVectorX = (thisVoxel.forceVector.x > 0) ? -1 : 1; // reversed
+    private short normalVectorY = (thisVoxel.forceVector.y > 0) ? -1 : 1; // reversed
+    private int absVectorX = abs(thisVoxel.forceVector.x);
+    private int absVectorY = abs(thisVoxel.forceVector.y);
+    private int loopLength = (absVectorX > absVectorY) ? absVectorX : absVectorY;
     error = absVectorX - absVectorY;
+
 
 
     for (uint i = 0; i < loopLength; i++){
