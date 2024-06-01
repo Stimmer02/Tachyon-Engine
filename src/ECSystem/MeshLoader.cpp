@@ -283,7 +283,36 @@ std::vector<int> MeshLoader::computeTriangulation(const std::vector<int> &inputP
     if(inputPoints.size() == 3){
         return inputPoints;
     }
-  
+    
+    std::vector<int> result;
+    std::set<Tetrahedron> tetrahedrons;
+    std::queue<Triangle> triangleQueue;
+    
+    float helper = 0.0f;
+    
+    for(int i = 0; i < inputPoints.size(); ++i){
+        helper = std::max(helper, fabs(verticesVector[inputPoints[i]].z));
+    }
+    
+    helper *= 100.0f;
+    helper *= 1000.0f;
+    
+    verticesVector.push_back({-helper, -helper, -helper});
+    verticesVector.push_back({helper, -helper, -helper});
+    verticesVector.push_back({0, helper, -helper});
+    verticesVector.push_back({0, 0, helper});
+    
+    tetrahedrons.insert({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
+    
+    for(int i = 0; i < inputPoints.size(); ++i){
+        
+    }
+    
+    
+    verticesVector.pop_back();
+    verticesVector.pop_back();
+    verticesVector.pop_back();
+    verticesVector.pop_back();
 }
 
 void MeshLoader::parseMesh(const std::string &pathToFile, Mesh* mesh){

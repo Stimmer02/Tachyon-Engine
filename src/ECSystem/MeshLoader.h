@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include <map>
+#include <queue>
 
 class Mesh;
 

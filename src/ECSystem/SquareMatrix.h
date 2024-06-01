@@ -3,7 +3,7 @@
 
 
 template <typename T>
-struct SquareMatrix
+struct SquareMatrix 
 {
     unsigned int size;
     T** arr;
