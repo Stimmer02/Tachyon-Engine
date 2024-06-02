@@ -59,8 +59,7 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
                 // voxel is not movable
                 thisVoxel.loopLength = i;
                 thisVoxel.targetCell = completlyUselessVariableThatTriesToResolveUterlyStupidCompilerError;
-                thisVoxel.forceVector.x = 0.0f;
-                thisVoxel.forceVector.y = 0.0f;
+                thisVoxel.state = 1;
                 resources->voxels[global_ID] = thisVoxel;
                 resources->endpointMap[previousCursor] = global_ID;
                 return;
@@ -71,7 +70,7 @@ void kernel populate_hash(global struct engineConfig* config, global struct engi
     }
     resources->endpointMap[currentCursor] = global_ID;
     thisVoxel.loopLength = loopLength;
-    thisVoxel.targetCell = completlyUselessVariableThatTriesToResolveUterlyStupidCompilerError;
+    thisVoxel.targetCell = currentCursor;
     resources->voxels[global_ID] = thisVoxel;
 }
 

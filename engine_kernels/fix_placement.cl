@@ -9,18 +9,19 @@ void kernel fix_placement(global struct engineConfig* config, global struct engi
     private int cursor = global_ID;
     private int swap;
     global struct voxel* currentVoxel;
+    private float reduceEnergy = 2;
 
     while (resources->endpointMap[cursor] != 0){
         swap = resources->endpointMap[cursor];
         resources->endpointMap[cursor] = cursor;
         currentVoxel = &resources->voxels[cursor];
-        currentVoxel->forceVector.x /= 2;
-        currentVoxel->forceVector.y /= 2;
+        currentVoxel->forceVector.x /= reduceEnergy;
+        currentVoxel->forceVector.y /= reduceEnergy;
         cursor = swap;
     }
 
     resources->endpointMap[cursor] = cursor;
     currentVoxel = &resources->voxels[cursor];
-    currentVoxel->forceVector.x /= 2;
-    currentVoxel->forceVector.y /= 2;
+    currentVoxel->forceVector.x /= reduceEnergy;
+    currentVoxel->forceVector.y /= reduceEnergy;
 }

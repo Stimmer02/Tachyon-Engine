@@ -3,5 +3,4 @@ struct __attribute__ ((aligned(16))) substance{
     int movable;
     float MASS;
     float JAMMING_FACTOR;
-    int NEW_PHROPERTY;
 };

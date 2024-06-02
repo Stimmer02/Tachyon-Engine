@@ -43,15 +43,12 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
         cursorY += normalVectorY * tempLogic;
 
         if (resources->collisionMap[cursorX + cursorY * config->simulationWidth] == 0){
-
-            // TODO: calculate side force based on the jamming factor
-            thisVoxel.forceVector.x = 0.0f;
-            thisVoxel.forceVector.y = 0.0f;
-            resources->voxels[cursorX + cursorY * config->simulationWidth] = thisVoxel;
+            resources->voxels[global_ID].state = 2;
             resources->endpointMap[cursorX + cursorY * config->simulationWidth] = global_ID;
             return;
         }
     }
-    // printf("Voxel %d has no place to go\n", global_ID);
+
+    // at this point, voxel cannot return to its target cell
     resources->missingVoxels[global_ID] = global_ID;
 } 
