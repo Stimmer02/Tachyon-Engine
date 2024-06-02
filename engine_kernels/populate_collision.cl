@@ -12,11 +12,14 @@ void kernel populate_collision(global struct engineConfig* config, global struct
     private int error, doubleError;
     private bool tempLogic;
 
-    private short normalVectorX = (thisVoxel.forceVector.x > 0) ? 1 : -1;
-    private short normalVectorY = (thisVoxel.forceVector.y > 0) ? 1 : -1;
-    private int absVectorX = abs(thisVoxel.forceVector.x);
-    private int absVectorY = abs(thisVoxel.forceVector.y);
-    private int loopLength = (absVectorX > absVectorY) ? absVectorX : absVectorY;
+    int newVectorX = (thisVoxel.targetCell % get_global_size(0)) - cursorX;
+    int newVectorY = (thisVoxel.targetCell / get_global_size(0)) - cursorY;
+
+    private short normalVectorX = (newVectorX > 0.0f) ? 1 : -1;
+    private short normalVectorY = (newVectorY > 0.0f) ? 1 : -1;
+    private int absVectorX = abs(newVectorX);
+    private int absVectorY = abs(newVectorY);
+    private int loopLength = thisVoxel.loopLength;
     error = absVectorX - absVectorY;
 
     if (resources->hashMap[global_ID] != global_ID){

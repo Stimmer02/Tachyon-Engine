@@ -7,30 +7,28 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
             resources->endpointMap[global_ID] = global_ID;
         }
         return;
-    }
-    
-    private int cursorX, cursorY;
+    }   
 
-    cursorX = thisVoxel.forceVector.x + get_global_id(0);
-    cursorY = thisVoxel.forceVector.y +  get_global_id(1);
+    private int cursorX = thisVoxel.targetCell % get_global_size(0);
+    private int cursorY = thisVoxel.targetCell / get_global_size(0);
 
-    private int targetCell = cursorX + cursorY * config->simulationWidth;
 
-    if (resources->endpointMap[targetCell] == global_ID){
-        resources->endpointMap[targetCell] = global_ID;
+    if (resources->endpointMap[thisVoxel.targetCell] == global_ID){
         return;
     }
 
     private int error, doubleError;
     private bool tempLogic;
 
-    private short normalVectorX = (thisVoxel.forceVector.x > 0) ? -1 : 1; // reversed
-    private short normalVectorY = (thisVoxel.forceVector.y > 0) ? -1 : 1; // reversed
-    private int absVectorX = abs(thisVoxel.forceVector.x);
-    private int absVectorY = abs(thisVoxel.forceVector.y);
-    private int loopLength = (absVectorX > absVectorY) ? absVectorX : absVectorY;
-    error = absVectorX - absVectorY;
+    int newVectorX = cursorX - get_global_id(0);
+    int newVectorY = cursorY - get_global_id(1);
 
+    private short normalVectorX = (newVectorX > 0.0f) ? -1 : 1; //reversed
+    private short normalVectorY = (newVectorY > 0.0f) ? -1 : 1; //reversed
+    private int absVectorX = abs(newVectorX);
+    private int absVectorY = abs(newVectorY);
+    private int loopLength = thisVoxel.loopLength;
+    error = absVectorX - absVectorY;
 
 
     for (uint i = 0; i < loopLength; i++){
@@ -47,8 +45,8 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
         if (resources->collisionMap[cursorX + cursorY * config->simulationWidth] == 0){
 
             // TODO: calculate side force based on the jamming factor
-            thisVoxel.forceVector.x = 0;
-            thisVoxel.forceVector.y = 0;
+            thisVoxel.forceVector.x = 0.0f;
+            thisVoxel.forceVector.y = 0.0f;
             resources->voxels[cursorX + cursorY * config->simulationWidth] = thisVoxel;
             resources->endpointMap[cursorX + cursorY * config->simulationWidth] = global_ID;
             return;
