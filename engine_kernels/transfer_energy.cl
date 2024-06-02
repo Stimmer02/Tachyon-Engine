@@ -7,7 +7,7 @@ void kernel transfer_energy(global struct engineConfig* config, global struct en
     }
 
     private float energyTransfer = 1.0f - resources->SUBSTANCES[thisVoxel.substanceID].JAMMING_FACTOR;
-    private char direction = 1 - 2*(global_ID % 2);
+    private char direction = 1 - 2 * ((get_global_id(0) & 1)^(get_global_id(1) & 1));
 
     thisVoxel.forceVector.x *= energyTransfer/2;
     thisVoxel.forceVector.x += thisVoxel.forceVector.y * energyTransfer * direction;
