@@ -51,4 +51,5 @@ void kernel move(global struct engineConfig* config, global struct engineResourc
 
     // at this point, voxel cannot return to its target cell
     resources->missingVoxels[global_ID] = global_ID;
+    resources->voxels[global_ID].state = 3;
 } 
