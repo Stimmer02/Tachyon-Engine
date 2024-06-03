@@ -9,7 +9,7 @@ void kernel apply_flowability(global struct engineConfig* config, global struct 
     if (thisVoxel.state == 0){
         return;
     }
-    thisVoxel.state = 0;
+    resources->voxelsCopy[global_ID].state = 0;
 
     private float jammingFactor = resources->SUBSTANCES[thisVoxel.substanceID].JAMMING_FACTOR;
 
@@ -18,24 +18,24 @@ void kernel apply_flowability(global struct engineConfig* config, global struct 
     }
 
     if (jammingFactor == 0){
-        jammingFactor = -2;
+        jammingFactor = -4;
     }
 
     private bool leftBorder = get_global_id(0) == 0;
     private bool rightBorder = get_global_id(0) == get_global_size(0) - 1;
     private bool bottomBorder = get_global_id(1) == 0;
 
-    private bool moveRight = rightBorder || resources->voxelsCopy[global_ID + 1].substanceID != 0;
-    private bool moveLeft = leftBorder || resources->voxelsCopy[global_ID - 1].substanceID != 0;
+    private bool moveRight = rightBorder || resources->voxelsCopy[global_ID + 1].substanceID == 0;
+    private bool moveLeft = leftBorder || resources->voxelsCopy[global_ID - 1].substanceID == 0;
     
-    if (jammingFactor > 0.25f){
-        // calculating if there is voxel below and to the left/right
-        moveRight = moveRight && (bottomBorder || resources->voxelsCopy[global_ID + 1 + get_global_size(0)].substanceID != 0);
-        moveLeft = moveLeft && (bottomBorder || resources->voxelsCopy[global_ID - 1 + get_global_size(0)].substanceID != 0);
-    }
+    // if (jammingFactor > 0.25f){
+    //     // calculating if there is voxel below and to the left/right
+    //     moveRight = moveRight && (bottomBorder || resources->voxelsCopy[global_ID + 1 + get_global_size(0)].substanceID == 0);
+    //     moveLeft = moveLeft && (bottomBorder || resources->voxelsCopy[global_ID - 1 + get_global_size(0)].substanceID == 0);
+    // }
 
 
-    if (moveRight && moveLeft){
+    if (!(moveRight ^ moveLeft)){
         moveLeft = ((get_global_id(0) & 1)^(get_global_id(1) & 1));
         moveRight = !moveLeft;
     }
