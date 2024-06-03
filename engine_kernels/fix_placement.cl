@@ -9,7 +9,7 @@ void kernel fix_placement(global struct engineConfig* config, global struct engi
     private int cursor = global_ID;
     private int swap;
     global struct voxel* currentVoxel;
-    private float reduceEnergy = 1.8;
+    private float reduceEnergy = 1;
 
     while (resources->endpointMap[cursor] != 0){
         swap = resources->endpointMap[cursor];

@@ -10,11 +10,13 @@ void kernel transfer_energy(global struct engineConfig* config, global struct en
     private char direction = 1 - 2 * ((get_global_id(0) & 1)^(get_global_id(1) & 1));
 
     thisVoxel.forceVector.x *= energyTransfer/2;
-    thisVoxel.forceVector.x += thisVoxel.forceVector.y * energyTransfer * direction;
+    thisVoxel.forceVector.x += thisVoxel.forceVector.y * energyTransfer*energyTransfer * direction;
 
-    thisVoxel.forceVector.y *= -0.14f;
+    thisVoxel.forceVector.y *= 0.14f;
     // thisVoxel.forceVector.y = 0;
-    thisVoxel.state = 0;
+
+    // thisVoxel.forceVector.x = (int)(thisVoxel.forceVector.x);
+    // thisVoxel.forceVector.y = (int)(thisVoxel.forceVector.y);
 
     resources->voxelsCopy[global_ID] = thisVoxel;
 }
