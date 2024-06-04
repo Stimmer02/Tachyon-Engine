@@ -1,6 +1,0 @@
-relocation_variables
-3
-
-        private int tempX, tempY;
-        tempX = IDX;
-        tempY = IDY;

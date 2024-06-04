@@ -1,4 +1,0 @@
-draw_moved_pixels
-9
-
-        resources->PBO[tempX + tempY * localConfig.simulationWidth] = resources->substanceTable->substances[thisVoxelCopy.substanceID].color;

@@ -1,3 +1,0 @@
-if_not_bottom_row_start
-5
-        if (tempY > 0 && resources->worldMap->voxels[tempX + (tempY - 1) * localConfig.simulationWidth].substanceID > 0){

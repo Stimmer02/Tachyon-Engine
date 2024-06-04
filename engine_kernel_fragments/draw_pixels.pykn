@@ -1,6 +1,0 @@
-draw_pixels
--2
-    private uchar tempID;
-    tempID = resources->worldMap->voxels[global_ID].substanceID;
-    resources->PBO[global_ID] = resources->substanceTable->substances[tempID].color;
-
