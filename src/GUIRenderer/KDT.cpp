@@ -103,6 +103,9 @@ void KDT::buildRightSubTreeRec(KDTElement** elementsArray, KDTElement* subTreeRo
 
 InteractiveElement* KDT::find(const float &x, const float &y){
 	//look for component where the x and y coordinates are located
+    if(root == NULL){
+        return NULL;
+    }
     return findRecX(x, y, root);
 }
 

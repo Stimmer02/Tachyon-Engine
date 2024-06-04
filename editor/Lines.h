@@ -23,7 +23,7 @@ private:
 
         object->transform.rotation = Quaternion::ToQuaternion(Vector3(0.0f, ry, 0.0f));
         object->transform.position.y = GraphicConfig::windowHeight/3;
-        object->transform.scale = Vector3(1000, 1000, 1000);
+        object->transform.scale = Vector3(10, 10, 10);
 
         rx += time * 1e-4f * cos(time);
         ry += time * 1e-4f * sin(time);
