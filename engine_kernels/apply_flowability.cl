@@ -16,6 +16,10 @@ void kernel apply_flowability(global struct engineConfig* config, global struct 
         return;
     }
 
+    if (jammingFactor == 0){
+        jammingFactor = -24;
+    }
+
     private bool leftBorder = get_global_id(0) == 0;
     private bool rightBorder = get_global_id(0) == get_global_size(0) - 1;
     private bool bottomBorder = get_global_id(1) == 0;
