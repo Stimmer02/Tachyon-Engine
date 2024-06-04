@@ -39,5 +39,9 @@ void kernel apply_flowability(global struct engineConfig* config, global struct 
         moveRight = !moveLeft;
     }
 
-    resources->voxelsCopy[global_ID].forceVector.x = thisVoxel.forceVector.x + (2-jammingFactor)*(moveRight - moveLeft);
+    if (thisVoxel.state != 3){
+        thisVoxel.forceVector.x /= 2;
+    }
+
+    resources->voxelsCopy[global_ID].forceVector.x = thisVoxel.forceVector.x + 2*(1-jammingFactor)*(moveRight - moveLeft);
 }
