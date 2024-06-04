@@ -147,7 +147,7 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             helperIdxArray[i]--;
         }
         triangulationInput = helperIdxArray;
-
+        
     }
     else if(caseId == 1){
         for(int i = 0 ; i < helperIdxArray.size(); i+=2){
@@ -166,17 +166,18 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             triangulationInput.push_back(helperIdxArray[i]);
         }
     }
-    //std::cout << triangulationInput.size() << '\n';
+    // std::cout << triangulationInput.size() << '\n';
     // std::cout.flush();
     triangulationResult = computeTriangulation(triangulationInput);
 
     if(caseId == 0){
         for(int i = 0; i < triangulationResult.size(); i += 3){
+            
             edge1 = (verticesVector[triangulationResult[i + 2]] - verticesVector[triangulationResult[i]]).Normalize();
             edge2 = (verticesVector[triangulationResult[i + 1]] - verticesVector[triangulationResult[i]]).Normalize();
 
             helperNormal = Vector3::Cross(edge1, edge2).Normalize();
-
+             
             normalsList[triangulationResult[i]].push_back(helperNormal);
 
 
@@ -196,19 +197,19 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             normalsList[triangulationResult[i + 2]].push_back(helperNormal);
         }
     }
-
+    
     // std::cout << triangulationResult.size() << '\n';
-
-
+    
+    
     // for(int i = 0; i < triangulationResult.size(); ++i){
     //     std::cout << triangulationResult[i] << '\n';
     // }
     // std::cout << '\n';
     // std::cout << '\n';
     // std::cout.flush();
-
-
-
+    
+    
+    
     for(int i: triangulationResult){
         indicesVector.push_back(i);
     }
@@ -259,9 +260,9 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
         helperNormal = helperNormal.Normalize();
         normals[i] = helperNormal;
     }
-
-
-
+    
+    
+    
     // std::cout << normalsList.size() << '\n';
     // std::cout.flush();
     // for(int i = 0; i < normalsList.size(); ++i){
@@ -284,10 +285,28 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
     // for(int i = 0; i < numNormals; ++i){
     //     std::cout << normals[i].x << ' ' << normals[i].y << ' ' << normals[i].z << '\n';
     // }
-
+    numTexCoords = 2 * numVertices;
+    float* textCoordsArr = new float[numTexCoords];
+    if(caseId == 0 || caseId == 1){
+        for(int i = 0; i < numVertices; ++i){
+            textCoordsArr[i] = 0.0f;
+            textCoordsArr[i + 1] = 0.0f;
+        }
+    }
+    else{
+        for(int i = 0; i < numVertices; ++i){
+            // std::cout << texCoordsVector[texturesIdx[i]] << ' ' << texCoordsVector[texturesIdx[i] + 1] << '\n';
+            textCoordsArr[2 * i] = texCoordsVector[texturesIdx[i]];
+            textCoordsArr[2 * i + 1] = texCoordsVector[texturesIdx[i] + 1];
+        }
+    }
+    
+    // for(int i = 0; i < numTexCoords; ++i){
+    //     std::cout << textCoordsArr[i] << ' ';
+    // }
     mesh->SetVertices(verticesVector.data(), numVertices);
     mesh->SetNormals(normals, numNormals);
-    mesh->SetTexCoords(texCoordsVector.data(), numTexCoords);
+    mesh->SetTexCoords(textCoordsArr, numTexCoords);
     mesh->SetIndices(indicesVector.data(), numIndices);
 
     delete [] normals;
@@ -302,11 +321,11 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
 }
 
 std::vector<int> MeshLoader::computeTriangulation(const std::vector<int> &inputPoints){
-
+    
     if(inputPoints.size() == 3){
         return inputPoints;
     }
-
+    
     //Tutaj jest miejsce na ewentualny rozwój projektu.
     std::vector<int> empty;
     return empty;

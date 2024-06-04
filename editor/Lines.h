@@ -23,7 +23,7 @@ private:
 
         object->transform.rotation = Quaternion::ToQuaternion(Vector3(0.0f, ry, 0.0f));
         object->transform.position.y = GraphicConfig::windowHeight/3;
-        object->transform.scale = Vector3(1000, 1000, 1000);
+        object->transform.scale = Vector3(30, 30, 30);
 
         rx += time * 1e-4f * cos(time);
         ry += time * 1e-4f * sin(time);
@@ -67,24 +67,23 @@ private:
 public:
 
     LinesSystem(){
-
     }
 
     void OnLoad() override{
-
         CreateShader();
+        // mat->shader = shader;
 
         object = scene->CreateEntity();
         scene->AddEntityToScene(object);
 
         mat = new Material(defaultMaterial);
         mat->color = Vector3(1.0f, 1.0f, 1.0f);
-        mat->mainTexture = sprite;
+        mat->mainTexture = multiSprite;
         // mat->shader = shader;
 
         object->material = mat;
 
-        renderer = object->AddAttribute<Mesh>("./resources/meshes/skull.obj");
+        renderer = object->AddAttribute<Mesh>("./resources/meshes/dragon.obj");
 
         object->transform.position = Vector3(GraphicConfig::windowWidth, GraphicConfig::windowHeight) * 0.5f;
     }
