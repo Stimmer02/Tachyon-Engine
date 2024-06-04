@@ -15,13 +15,15 @@ private:
     GLShader * shader;
     Material * mat;
     MultiSprite * multiSprite;
+    Sprite2D * sprite;
 
     void Execute() override{
         static float time = 0.0f;
         static float rx, ry, rz;
 
-        object->transform.rotation = Quaternion::ToQuaternion(Vector3(rx, ry, rz));
-        object->transform.scale = Vector3(10, 10, 10);
+        object->transform.rotation = Quaternion::ToQuaternion(Vector3(0.0f, ry, 0.0f));
+        object->transform.position.y = GraphicConfig::windowHeight/3;
+        object->transform.scale = Vector3(1000, 1000, 1000);
 
         rx += time * 1e-4f * cos(time);
         ry += time * 1e-4f * sin(time);
@@ -42,6 +44,8 @@ private:
         Image norm = BitmapReader::ReadFile("resources/materials/marble/normal.bmp");
         Image ao = BitmapReader::ReadFile("resources/materials/marble/ao.bmp");
         Image rough = BitmapReader::ReadFile("resources/materials/marble/roughness.bmp");
+
+        sprite = new Sprite2D("resources/sprites/heart.bmp");
 
         multiSprite = new MultiSprite();
         multiSprite->SetTexture("albedo", img.pixels, img.width, img.height);
@@ -68,17 +72,19 @@ public:
 
     void OnLoad() override{
 
+        CreateShader();
+
         object = scene->CreateEntity();
         scene->AddEntityToScene(object);
 
-        // mat = new Material(defaultMaterial);
-        // mat->color = Vector3(1.0f, 1.0f, 1.0f);
-        // mat->mainTexture = multiSprite;
+        mat = new Material(defaultMaterial);
+        mat->color = Vector3(1.0f, 1.0f, 1.0f);
+        mat->mainTexture = sprite;
         // mat->shader = shader;
 
-        // object->material = mat;
+        object->material = mat;
 
-        renderer = object->AddAttribute<Mesh>("./resources/meshes/bunny.obj");
+        renderer = object->AddAttribute<Mesh>("./resources/meshes/skull.obj");
 
         object->transform.position = Vector3(GraphicConfig::windowWidth, GraphicConfig::windowHeight) * 0.5f;
     }
