@@ -67,17 +67,10 @@ public:
 
     void OnLoad() override{
 
-        CreateShader();
-
-        mat = new Material(shader);
-        mat->mainTexture = multiSprite;
-
         object = scene->CreateEntity();
         scene->AddEntityToScene(object);
 
-        object->material = mat;
-        renderer = object->AddAttribute<Mesh>();
-        renderer->GenTorus(128, 64, 128, 64);
+        renderer = object->AddAttribute<Mesh>("./resources/meshes/bunny.obj");
 
         object->transform.position = Vector3(GraphicConfig::windowWidth, GraphicConfig::windowHeight) * 0.5f;
     }
