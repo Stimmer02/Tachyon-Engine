@@ -1,18 +1,15 @@
 var searchData=
 [
-  ['lerp_1565',['Lerp',['../class_vector3.html#a04e6c6dfbb54d76c48e6b14f0f2e5b5f',1,'Vector3']]],
-  ['linerenderer_1566',['LineRenderer',['../class_line_renderer.html#a1c0f5dc2464f6e7cab48d093957857eb',1,'LineRenderer::LineRenderer()'],['../class_line_renderer.html#a71254d7e71255b704d095a29c25344ea',1,'LineRenderer::LineRenderer(LineRenderer *renderer)']]],
-  ['linessystem_1567',['LinesSystem',['../class_lines_system.html#a777b7d18f00e77c1fe6887947b2007cf',1,'LinesSystem']]],
-  ['linkshader_1568',['LinkShader',['../class_g_l_shader.html#a521024d058db5ce31d3bcc0a4a5f3f1e',1,'GLShader']]],
-  ['load_1569',['Load',['../class_cube_sprite.html#aa6436eaa6d9ab24966a843c1ef3a7a96',1,'CubeSprite::Load()'],['../class_multi_sprite.html#ab83bb19eeced6bdc32503e103825aa26',1,'MultiSprite::Load()'],['../class_sprite.html#a7157f052d53e9db60d4d66d3637e172f',1,'Sprite::Load()'],['../class_sprite2_d.html#a47305cfab61267f4bf7cd51ab7fb4733',1,'Sprite2D::Load()']]],
-  ['loadconfiguration_1570',['LoadConfiguration',['../class_application.html#a36a28e120d8781fb512b776ef98da6c6',1,'Application']]],
-  ['loadidentity_1571',['LoadIdentity',['../class_matrix.html#ad1c2f3688b51b531b6927f29a660b01e',1,'Matrix']]],
-  ['loadkernels_1572',['loadKernels',['../class_physics_processor_builder.html#a9c4960784edd937b0373df059947bc8b',1,'PhysicsProcessorBuilder']]],
-  ['loadmandatorysubstances_1573',['loadMandatorySubstances',['../class_substance_collector.html#a1eaabda0412c68d1da971d76f1337cbd',1,'SubstanceCollector']]],
-  ['loadpropertiesfromfile_1574',['loadPropertiesFromFile',['../class_substance_collector.html#acf706afb0a65cd8818e7e4951f2a787e',1,'SubstanceCollector']]],
-  ['loadscene_1575',['LoadScene',['../class_application.html#a22c1d856df9837ee6633f6c8cc354642',1,'Application::LoadScene()'],['../class_interaction_manager.html#ae43837e65bbe6ac5ffb2d7b24b87ef73',1,'InteractionManager::LoadScene()']]],
-  ['loadsubstancesfromfile_1576',['loadSubstancesFromFile',['../class_substance_collector.html#a2f69dc3bb55305b181dd35089c852174',1,'SubstanceCollector']]],
-  ['lookat_1577',['LookAt',['../class_camera.html#af91e2c84d5b3fd716d1059181bf31436',1,'Camera::LookAt()'],['../class_matrix.html#aea09d6e52a209619c603c9327d2c60fd',1,'Matrix::LookAt()']]],
-  ['loop_1578',['Loop',['../class_application.html#a436e18cbb7572a635661f222d66296ce',1,'Application']]],
-  ['ludecompositon_1579',['LUDecompositon',['../class_matrix.html#a851b1609bb3ebe21def76af3809e77f0',1,'Matrix']]]
+  ['magnitude_1539',['Magnitude',['../class_vector3.html#a94c30ca7427965f94ae1af09a9c67179',1,'Vector3::Magnitude()'],['../class_quaternion.html#a65314bc9b0696fe84ac7e94508a726cd',1,'Quaternion::Magnitude()']]],
+  ['magnitudesqr_1540',['MagnitudeSqr',['../class_vector3.html#af89f4e09c6006e4171cbdfe1499a4689',1,'Vector3']]],
+  ['main_1541',['main',['../_open_c_l-_open_g_l_01__test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;OpenCL-OpenGL _test.cpp'],['../unit__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;unit_test.cpp'],['../src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp'],['../editor_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp']]],
+  ['makeglyfarray_1542',['makeGlyfArray',['../class_converter.html#a8637e964d0e11e3becf7c05cc166025d',1,'Converter']]],
+  ['material_1543',['Material',['../class_material.html#a409561467835a522dc5328ae708b78af',1,'Material::Material(const Material *material)'],['../class_material.html#ae2aec70c9c59cad6369d83ccffbe778d',1,'Material::Material(const GLShader *shader)']]],
+  ['matrix_1544',['Matrix',['../class_matrix.html#a190366bd80dea2a573c415a19946698c',1,'Matrix::Matrix(const Matrix &amp;otherMatrix)'],['../class_matrix.html#a2dba13c45127354c9f75ef576f49269b',1,'Matrix::Matrix()']]],
+  ['max_1545',['Max',['../class_vector3.html#ac0f31fd1cfdabc24d45dc4d6c3bc0df1',1,'Vector3']]],
+  ['mesh_1546',['Mesh',['../class_mesh.html#a0e70398077181af5e83226a45bc69b0c',1,'Mesh::Mesh(const std::string &amp;filename)'],['../class_mesh.html#ac0204336e4e36f9ab76404b7bbbc7643',1,'Mesh::Mesh(const Mesh *mesh)'],['../class_mesh.html#a3b1b33a48ad9715ab333b6a38688c63a',1,'Mesh::Mesh(const GLenum &amp;mode=GL_TRIANGLE_FAN)']]],
+  ['min_1547',['Min',['../class_vector3.html#ad8fd66aa4dc64f76170057da267ee695',1,'Vector3']]],
+  ['moveby_1548',['MoveBy',['../class_camera.html#ab4291cc1ef851a0b20f20569cba9142d',1,'Camera']]],
+  ['mulmatrix_1549',['MulMatrix',['../class_transform_stack.html#a5fdb6887a0d43796d6c79899439a1bbf',1,'TransformStack']]],
+  ['multisprite_1550',['MultiSprite',['../class_multi_sprite.html#a9f60e045a17164e3ad7f82ef5f15614c',1,'MultiSprite::MultiSprite()'],['../class_multi_sprite.html#a2b434dd4a62dfc0b7ea9150f96bf355e',1,'MultiSprite::MultiSprite(const MultiSprite *sprite)']]]
 ];

@@ -97,7 +97,7 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_event_register.html#a1f630ff4b7e893e27442791791c5e06b">   27</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_event_register.html#a1f630ff4b7e893e27442791791c5e06b">EventRegister::Write</a>(<span class="keyword">enum</span> <a class="code" href="_message_type_8h.html#aa6bd480865d0aa966a942958dcf7290c">LogMessageType</a> _type, <span class="keyword">const</span> <span class="keywordtype">char</span> * _format, ...){</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::chrono::nanoseconds currentTime = std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(std::chrono::system_clock::now().time_since_epoch());</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">char</span> helper[4096] = {}; <span class="comment">//tyle powinno wystarczyć</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">char</span> helper[4096*10] = {}; <span class="comment">//tyle powinno wystarczyć</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="struct_event_queue_element.html">EventQueueElement</a> elementToAdd;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    va_list args;</div>

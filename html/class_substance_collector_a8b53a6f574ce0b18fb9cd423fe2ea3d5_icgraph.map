@@ -1,7 +1,9 @@
 <map id="SubstanceCollector::stringToClType" name="SubstanceCollector::stringToClType">
-<area shape="rect" id="node1" title=" " alt="" coords="656,27,803,69"/>
-<area shape="rect" id="node2" href="$class_substance_collector.html#acf706afb0a65cd8818e7e4951f2a787e" title=" " alt="" coords="428,27,608,69"/>
-<area shape="rect" id="node3" href="$class_substance_collector.html#a0dc8f9898055c775e1505073306330e9" title=" " alt="" coords="233,27,380,69"/>
-<area shape="rect" id="node4" href="$test__main___substance_collector_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="68,5,123,32"/>
-<area shape="rect" id="node5" href="$class_physics_processor_builder.html#a87cddc17d2bf4013a5efa609a885e237" title=" " alt="" coords="5,57,185,98"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1115,27,1261,69"/>
+<area shape="rect" id="node2" href="$class_substance_collector.html#acf706afb0a65cd8818e7e4951f2a787e" title=" " alt="" coords="887,27,1067,69"/>
+<area shape="rect" id="node3" href="$class_substance_collector.html#a0dc8f9898055c775e1505073306330e9" title=" " alt="" coords="692,27,839,69"/>
+<area shape="rect" id="node4" href="$class_physics_processor_builder.html#a87cddc17d2bf4013a5efa609a885e237" title=" " alt="" coords="464,27,644,69"/>
+<area shape="rect" id="node5" href="$class_physics_processor_builder.html#afa9dab260b2977f5eabe843ffd5e53fa" title=" " alt="" coords="236,27,416,69"/>
+<area shape="rect" id="node6" href="$src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="69,5,124,32"/>
+<area shape="rect" id="node7" href="$class_physics_processor_system.html#a97a20d1bc5573cd0d264ee5d87d7095a" title="This method is called on system startup and by default does nothing." alt="" coords="5,57,188,98"/>
 </map>

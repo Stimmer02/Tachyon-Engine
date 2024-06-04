@@ -2,18 +2,8 @@
 \label{class_physics_processor}\index{PhysicsProcessor@{PhysicsProcessor}}
 
 
-{\ttfamily \#include $<$.\+Physics\+Processor\+\_\+old.\+h$>$}
+{\ttfamily \#include $<$Physics\+Processor.\+h$>$}
 
-
-
-Inheritance diagram for Physics\+Processor\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=217pt]{class_physics_processor__inherit__graph}
-\end{center}
-\end{figure}
 
 
 Collaboration diagram for Physics\+Processor\+:
@@ -21,33 +11,11 @@ Collaboration diagram for Physics\+Processor\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=217pt]{class_physics_processor__coll__graph}
+\includegraphics[width=210pt]{class_physics_processor__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
-\item 
-void \mbox{\hyperlink{class_physics_processor_a9f700dd1f884ebe7006f7ab60b4e87aa}{allocate\+Host\+Memory}} (cl\+::\+Context open\+CLContext, cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_a30452a61c562c7683502ba9f9664761c}{engine}}, GLuint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a8dcd4760dbb89b843e5259a7b290938d}{PBO}}, \mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}} \mbox{\hyperlink{class_physics_processor_abdc3991354098480e73d24c621015a33}{config}}, cl\+::\+Device \mbox{\hyperlink{class_physics_processor_a09151a9bde05a727f6bea2e28b768788}{device}})
-\item 
-std\+::string \mbox{\hyperlink{class_physics_processor_a029508ba8e94a74ef6f9b6aa94916a9b}{structures\+As\+String}} ()
-\item 
-std\+::string \mbox{\hyperlink{class_physics_processor_af61970e7e2867f0a8bae2df503261fc1}{kernel\+Code\+As\+String}} ()
-\item 
-void \mbox{\hyperlink{class_physics_processor_a4434b4f4948e58e0b934dca513a7ebbd}{constructor\+Main}} (cl\+::\+Context open\+CLContext, \mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}} \mbox{\hyperlink{class_physics_processor_abdc3991354098480e73d24c621015a33}{config}}, cl\+::\+Device \mbox{\hyperlink{class_physics_processor_a09151a9bde05a727f6bea2e28b768788}{device}})
-\item 
-void \mbox{\hyperlink{class_physics_processor_a11a9e663457eeb49a5b5f646b38078c4}{configure\+Main\+Kernel}} ()
-\item 
-\mbox{\hyperlink{class_physics_processor_ac8f7436caf26779dbcc717f4301a5389}{Physics\+Processor}} (cl\+::\+Context open\+CLContext, cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_a30452a61c562c7683502ba9f9664761c}{engine}}, GLuint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a8dcd4760dbb89b843e5259a7b290938d}{PBO}}, \mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}} \mbox{\hyperlink{class_physics_processor_abdc3991354098480e73d24c621015a33}{config}}, cl\+::\+Device \mbox{\hyperlink{class_physics_processor_a09151a9bde05a727f6bea2e28b768788}{device}})
-\item 
-\mbox{\hyperlink{class_physics_processor_a1acba3a4b4985b87f08fe112a5111a08}{$\sim$\+Physics\+Processor}} ()
-\item 
-void \mbox{\hyperlink{class_physics_processor_ac72146bd09d5043ce63e1339d4935568}{generate\+Frame}} () override
-\item 
-void \mbox{\hyperlink{class_physics_processor_ad4afd6fe5426bfa23a7ff2230cd15af1}{spawn\+Voxel}} (uint x, uint y, uint substance\+ID) override
-\item 
-uint \mbox{\hyperlink{class_physics_processor_a9f9b8cfd16ed9619ca48a4f3f22efea8}{count\+Voxels}} () override
-\item 
-void \mbox{\hyperlink{class_physics_processor_ad9d4b35d136ec023d69f723a15c86d58}{spawn\+Voxel\+In\+Area}} (uint x, uint y, uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}, uint substance\+ID) override
 \item 
 \mbox{\hyperlink{class_physics_processor_a1acba3a4b4985b87f08fe112a5111a08}{$\sim$\+Physics\+Processor}} ()
 \item 
@@ -56,6 +24,8 @@ void \mbox{\hyperlink{class_physics_processor_a470bddab34ed7202f9f9fa60d5a0b2c6}
 void \mbox{\hyperlink{class_physics_processor_a1b388bb7ee2f8a0cabaf7877a1ce02b5}{spawn\+Voxels\+In\+Area}} (uint32\+\_\+t x, uint32\+\_\+t y, uint32\+\_\+t \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, uint32\+\_\+t \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}, uint32\+\_\+t substance\+ID)
 \item 
 uint32\+\_\+t \mbox{\hyperlink{class_physics_processor_a377014e3396efe200e541147cfc0fa15}{count\+Voxels}} ()
+\item 
+char \mbox{\hyperlink{class_physics_processor_acb0327f2682d5ad66b92e54998f0ac54}{load\+Simulation}} (const std\+::string \&path)
 \item 
 void \mbox{\hyperlink{class_physics_processor_a8de6f4ce22cf33f6fe48a8d2bd4abc6c}{generate\+Frame}} ()
 \end{DoxyCompactItemize}
@@ -66,34 +36,6 @@ void \mbox{\hyperlink{class_physics_processor_a8de6f4ce22cf33f6fe48a8d2bd4abc6c}
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
-\item 
-cl\+::\+Context \mbox{\hyperlink{class_physics_processor_a6b6cc5abbd1b0a9971598207569feec8}{context}}
-\item 
-cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_a30452a61c562c7683502ba9f9664761c}{engine}}
-\item 
-\mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}} \mbox{\hyperlink{class_physics_processor_abdc3991354098480e73d24c621015a33}{config}}
-\item 
-cl\+::\+Device \mbox{\hyperlink{class_physics_processor_a09151a9bde05a727f6bea2e28b768788}{device}}
-\item 
-std\+::vector$<$ cl\+::\+Buffer $\ast$ $>$ \mbox{\hyperlink{class_physics_processor_a1f72c4dc81dd38ba1cfcf76d99a56994}{allocated\+GPUMemory}}
-\item 
-cl\+::\+Command\+Queue \mbox{\hyperlink{class_physics_processor_a7278fa5f65dfa40a54d5960c417325ef}{queue}}
-\item 
-cl\+\_\+mem \mbox{\hyperlink{class_physics_processor_adea72a7b964c4b75962f0edeb271bbc6}{pbo\+\_\+mem}}
-\item 
-cl\+::\+Buffer \mbox{\hyperlink{class_physics_processor_a168ce1aebb4c0e79a24df40c6763f1d8}{pbo\+\_\+buff}}
-\item 
-cl\+::\+Buffer \mbox{\hyperlink{class_physics_processor_ac988355e0ddfa27a4afb186b2fc26d8d}{engine\+Resources}}
-\item 
-cl\+::\+Buffer \mbox{\hyperlink{class_physics_processor_a98fc77ed29f8664abbc73268e4a2355e}{e\+Config}}
-\item 
-cl\+::\+Buffer \mbox{\hyperlink{class_physics_processor_acc595c0b110c46f5ef576fbff627367e}{sum\+Return\+Value}}
-\item 
-cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_adcf501eb4307d8824ddd4406653fcd15}{spawn\+\_\+voxel\+Kernel}}
-\item 
-cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_a09355677da7ec26512193ef9d40cf9fa}{sum\+\_\+voxel\+Kernel}}
-\item 
-cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_a3b65ccf092cca5a6917a72a455628250}{spawn\+\_\+voxel\+\_\+in\+\_\+area\+Kernel}}
 \item 
 bool \mbox{\hyperlink{class_physics_processor_ad9545b661be4656dfb4a37e9d2d927be}{fallback}}
 \item 
@@ -111,11 +53,23 @@ cl\+::\+NDRange \mbox{\hyperlink{class_physics_processor_a870478df67b0f955fe3a71
 \item 
 cl\+::\+NDRange \mbox{\hyperlink{class_physics_processor_a1c59b42c75cc3820ac4991f6f35fc826}{count\+Voxels\+Size}}
 \item 
+cl\+::\+Context \mbox{\hyperlink{class_physics_processor_a6b6cc5abbd1b0a9971598207569feec8}{context}}
+\item 
+cl\+::\+Device \mbox{\hyperlink{class_physics_processor_a09151a9bde05a727f6bea2e28b768788}{device}}
+\item 
+cl\+::\+Command\+Queue \mbox{\hyperlink{class_physics_processor_a7278fa5f65dfa40a54d5960c417325ef}{queue}}
+\item 
 cl\+::\+Kernel $\ast$ \mbox{\hyperlink{class_physics_processor_a5d7ec20151344d8f8181f85ef764b8ed}{engine}}
 \item 
 const uint32\+\_\+t \mbox{\hyperlink{class_physics_processor_a1924ab300239ed57f02f1094560b0428}{engine\+Size}}
 \item 
+cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_adcf501eb4307d8824ddd4406653fcd15}{spawn\+\_\+voxel\+Kernel}}
+\item 
+cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_a3b65ccf092cca5a6917a72a455628250}{spawn\+\_\+voxel\+\_\+in\+\_\+area\+Kernel}}
+\item 
 cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_abd85ec73e8d52b2fbef95c67bca2558c}{count\+\_\+voxel\+Kernel}}
+\item 
+cl\+::\+Kernel \mbox{\hyperlink{class_physics_processor_a462413881de8f29e51c02815e6ff60dc}{load\+\_\+simulation\+Kernel}}
 \item 
 cl\+::\+Buffer $\ast$ \mbox{\hyperlink{class_physics_processor_a6655112bf736991c794a5768f0ac0bdf}{engine\+Resources}}
 \item 
@@ -128,6 +82,8 @@ cl\+::\+Buffer \mbox{\hyperlink{class_physics_processor_abbf7fceb99261458ac15240
 cl\+\_\+mem \mbox{\hyperlink{class_physics_processor_aa0c7e4f0c2150c1e4b1a9973f0b71f5a}{TBOMemory}}
 \item 
 cl\+::\+Image2D \mbox{\hyperlink{class_physics_processor_abfe930d07b74ddcdb6a836e7364a3a9f}{TBOBuffer}}
+\item 
+std\+::vector$<$ cl\+::\+Buffer $\ast$ $>$ \mbox{\hyperlink{class_physics_processor_ade7d46595642687daa57393be4b21af7}{allocated\+GPUMemory}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -139,49 +95,25 @@ class \mbox{\hyperlink{class_physics_processor_a7e11037edc7618218a3fde3a16cca7f8
 \doxysubsection{Detailed Description}
 
 
-Definition at line 11 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 9 of file Physics\+Processor.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_physics_processor_ac8f7436caf26779dbcc717f4301a5389}\label{class_physics_processor_ac8f7436caf26779dbcc717f4301a5389}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!PhysicsProcessor@{PhysicsProcessor}}
-\index{PhysicsProcessor@{PhysicsProcessor}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{PhysicsProcessor()}{PhysicsProcessor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Physics\+Processor\+::\+Physics\+Processor (\begin{DoxyParamCaption}\item[{cl\+::\+Context}]{open\+CLContext,  }\item[{cl\+::\+Kernel}]{engine,  }\item[{GLuint}]{PBO,  }\item[{\mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}}}]{config,  }\item[{cl\+::\+Device}]{device }\end{DoxyParamCaption})}
-
-
-
-Definition at line 278 of file .\+Physics\+Processor\+\_\+old.\+cpp.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_physics_processor_ac8f7436caf26779dbcc717f4301a5389_cgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_physics_processor_a1acba3a4b4985b87f08fe112a5111a08}\label{class_physics_processor_a1acba3a4b4985b87f08fe112a5111a08}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!````~PhysicsProcessor@{$\sim$PhysicsProcessor}}
 \index{````~PhysicsProcessor@{$\sim$PhysicsProcessor}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{$\sim$PhysicsProcessor()}{~PhysicsProcessor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{$\sim$PhysicsProcessor()}{~PhysicsProcessor()}}
 {\footnotesize\ttfamily Physics\+Processor\+::$\sim$\+Physics\+Processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Definition at line 289 of file .\+Physics\+Processor\+\_\+old.\+cpp.
-
-\mbox{\Hypertarget{class_physics_processor_a1acba3a4b4985b87f08fe112a5111a08}\label{class_physics_processor_a1acba3a4b4985b87f08fe112a5111a08}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!````~PhysicsProcessor@{$\sim$PhysicsProcessor}}
-\index{````~PhysicsProcessor@{$\sim$PhysicsProcessor}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{$\sim$PhysicsProcessor()}{~PhysicsProcessor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Physics\+Processor\+::$\sim$\+Physics\+Processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+Definition at line 10 of file Physics\+Processor.\+cpp.
 
 \mbox{\Hypertarget{class_physics_processor_aa73de2ff37f54b2cb25d2c9491e39a14}\label{class_physics_processor_aa73de2ff37f54b2cb25d2c9491e39a14}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!PhysicsProcessor@{PhysicsProcessor}}
 \index{PhysicsProcessor@{PhysicsProcessor}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{PhysicsProcessor()}{PhysicsProcessor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{PhysicsProcessor()}{PhysicsProcessor()}}
 {\footnotesize\ttfamily Physics\+Processor\+::\+Physics\+Processor (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t \&}]{engine\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
@@ -191,187 +123,61 @@ Definition at line 3 of file Physics\+Processor.\+cpp.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_physics_processor_a9f700dd1f884ebe7006f7ab60b4e87aa}\label{class_physics_processor_a9f700dd1f884ebe7006f7ab60b4e87aa}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!allocateHostMemory@{allocateHostMemory}}
-\index{allocateHostMemory@{allocateHostMemory}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{allocateHostMemory()}{allocateHostMemory()}}
-{\footnotesize\ttfamily void Physics\+Processor\+::allocate\+Host\+Memory (\begin{DoxyParamCaption}\item[{cl\+::\+Context}]{open\+CLContext,  }\item[{cl\+::\+Kernel}]{engine,  }\item[{GLuint}]{PBO,  }\item[{\mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}}}]{config,  }\item[{cl\+::\+Device}]{device }\end{DoxyParamCaption})}
-
-
-
-Definition at line 9 of file .\+Physics\+Processor\+\_\+old.\+cpp.
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_physics_processor_a9f700dd1f884ebe7006f7ab60b4e87aa_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_physics_processor_a11a9e663457eeb49a5b5f646b38078c4}\label{class_physics_processor_a11a9e663457eeb49a5b5f646b38078c4}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!configureMainKernel@{configureMainKernel}}
-\index{configureMainKernel@{configureMainKernel}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{configureMainKernel()}{configureMainKernel()}}
-{\footnotesize\ttfamily void Physics\+Processor\+::configure\+Main\+Kernel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 273 of file .\+Physics\+Processor\+\_\+old.\+cpp.
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_physics_processor_a11a9e663457eeb49a5b5f646b38078c4_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_physics_processor_a4434b4f4948e58e0b934dca513a7ebbd}\label{class_physics_processor_a4434b4f4948e58e0b934dca513a7ebbd}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!constructorMain@{constructorMain}}
-\index{constructorMain@{constructorMain}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{constructorMain()}{constructorMain()}}
-{\footnotesize\ttfamily void Physics\+Processor\+::constructor\+Main (\begin{DoxyParamCaption}\item[{cl\+::\+Context}]{open\+CLContext,  }\item[{\mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}}}]{config,  }\item[{cl\+::\+Device}]{device }\end{DoxyParamCaption})}
-
-
-
-Definition at line 155 of file .\+Physics\+Processor\+\_\+old.\+cpp.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_physics_processor_a4434b4f4948e58e0b934dca513a7ebbd_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_physics_processor_a4434b4f4948e58e0b934dca513a7ebbd_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_physics_processor_a377014e3396efe200e541147cfc0fa15}\label{class_physics_processor_a377014e3396efe200e541147cfc0fa15}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!countVoxels@{countVoxels}}
 \index{countVoxels@{countVoxels}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{countVoxels()}{countVoxels()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily uint32\+\_\+t Physics\+Processor\+::count\+Voxels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\doxysubsubsection{\texorpdfstring{countVoxels()}{countVoxels()}}
+{\footnotesize\ttfamily uint32\+\_\+t Physics\+Processor\+::count\+Voxels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Implements \mbox{\hyperlink{class_i_physics_processor_a515d6d2ab130af45dabba09defdc5957}{IPhysics\+Processor}}.
-
-\mbox{\Hypertarget{class_physics_processor_a9f9b8cfd16ed9619ca48a4f3f22efea8}\label{class_physics_processor_a9f9b8cfd16ed9619ca48a4f3f22efea8}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!countVoxels@{countVoxels}}
-\index{countVoxels@{countVoxels}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{countVoxels()}{countVoxels()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily uint32\+\_\+t Physics\+Processor\+::count\+Voxels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Implements \mbox{\hyperlink{class_i_physics_processor_a515d6d2ab130af45dabba09defdc5957}{IPhysics\+Processor}}.
-
-
-
-Definition at line 311 of file .\+Physics\+Processor\+\_\+old.\+cpp.
+Definition at line 46 of file Physics\+Processor.\+cpp.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_physics_processor_a9f9b8cfd16ed9619ca48a4f3f22efea8_icgraph}
+\includegraphics[width=350pt]{class_physics_processor_a377014e3396efe200e541147cfc0fa15_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{class_physics_processor_a8de6f4ce22cf33f6fe48a8d2bd4abc6c}\label{class_physics_processor_a8de6f4ce22cf33f6fe48a8d2bd4abc6c}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!generateFrame@{generateFrame}}
 \index{generateFrame@{generateFrame}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{generateFrame()}{generateFrame()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Physics\+Processor\+::generate\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\doxysubsubsection{\texorpdfstring{generateFrame()}{generateFrame()}}
+{\footnotesize\ttfamily void Physics\+Processor\+::generate\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Implements \mbox{\hyperlink{class_i_physics_processor_ad16ea81412141168a11d88d917200b1f}{IPhysics\+Processor}}.
-
-\mbox{\Hypertarget{class_physics_processor_ac72146bd09d5043ce63e1339d4935568}\label{class_physics_processor_ac72146bd09d5043ce63e1339d4935568}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!generateFrame@{generateFrame}}
-\index{generateFrame@{generateFrame}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{generateFrame()}{generateFrame()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void Physics\+Processor\+::generate\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Implements \mbox{\hyperlink{class_i_physics_processor_ad16ea81412141168a11d88d917200b1f}{IPhysics\+Processor}}.
-
-
-
-Definition at line 296 of file .\+Physics\+Processor\+\_\+old.\+cpp.
+Definition at line 82 of file Physics\+Processor.\+cpp.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_physics_processor_ac72146bd09d5043ce63e1339d4935568_icgraph}
+\includegraphics[width=350pt]{class_physics_processor_a8de6f4ce22cf33f6fe48a8d2bd4abc6c_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{class_physics_processor_af61970e7e2867f0a8bae2df503261fc1}\label{class_physics_processor_af61970e7e2867f0a8bae2df503261fc1}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!kernelCodeAsString@{kernelCodeAsString}}
-\index{kernelCodeAsString@{kernelCodeAsString}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{kernelCodeAsString()}{kernelCodeAsString()}}
-{\footnotesize\ttfamily std\+::string Physics\+Processor\+::kernel\+Code\+As\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_physics_processor_acb0327f2682d5ad66b92e54998f0ac54}\label{class_physics_processor_acb0327f2682d5ad66b92e54998f0ac54}} 
+\index{PhysicsProcessor@{PhysicsProcessor}!loadSimulation@{loadSimulation}}
+\index{loadSimulation@{loadSimulation}!PhysicsProcessor@{PhysicsProcessor}}
+\doxysubsubsection{\texorpdfstring{loadSimulation()}{loadSimulation()}}
+{\footnotesize\ttfamily char Physics\+Processor\+::load\+Simulation (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
 
 
 
-Definition at line 73 of file .\+Physics\+Processor\+\_\+old.\+cpp.
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_physics_processor_af61970e7e2867f0a8bae2df503261fc1_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_physics_processor_ad4afd6fe5426bfa23a7ff2230cd15af1}\label{class_physics_processor_ad4afd6fe5426bfa23a7ff2230cd15af1}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!spawnVoxel@{spawnVoxel}}
-\index{spawnVoxel@{spawnVoxel}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{spawnVoxel()}{spawnVoxel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Physics\+Processor\+::spawn\+Voxel (\begin{DoxyParamCaption}\item[{uint}]{x,  }\item[{uint}]{y,  }\item[{uint}]{substance\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Implements \mbox{\hyperlink{class_i_physics_processor_ae94f0ebf1124c76e0d4a936a60622adb}{IPhysics\+Processor}}.
-
-
-
-Definition at line 301 of file .\+Physics\+Processor\+\_\+old.\+cpp.
+Definition at line 55 of file Physics\+Processor.\+cpp.
 
 \mbox{\Hypertarget{class_physics_processor_a470bddab34ed7202f9f9fa60d5a0b2c6}\label{class_physics_processor_a470bddab34ed7202f9f9fa60d5a0b2c6}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!spawnVoxel@{spawnVoxel}}
 \index{spawnVoxel@{spawnVoxel}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{spawnVoxel()}{spawnVoxel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{spawnVoxel()}{spawnVoxel()}}
 {\footnotesize\ttfamily void Physics\+Processor\+::spawn\+Voxel (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{x,  }\item[{uint32\+\_\+t}]{y,  }\item[{uint32\+\_\+t}]{substance\+ID }\end{DoxyParamCaption})}
 
 
 
 Definition at line 30 of file Physics\+Processor.\+cpp.
-
-\mbox{\Hypertarget{class_physics_processor_ad9d4b35d136ec023d69f723a15c86d58}\label{class_physics_processor_ad9d4b35d136ec023d69f723a15c86d58}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!spawnVoxelInArea@{spawnVoxelInArea}}
-\index{spawnVoxelInArea@{spawnVoxelInArea}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{spawnVoxelInArea()}{spawnVoxelInArea()}}
-{\footnotesize\ttfamily void Physics\+Processor\+::spawn\+Voxel\+In\+Area (\begin{DoxyParamCaption}\item[{uint}]{x,  }\item[{uint}]{y,  }\item[{uint}]{width,  }\item[{uint}]{height,  }\item[{uint}]{substance\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Implements \mbox{\hyperlink{class_i_physics_processor_a443995f85cc3c72bde41a00345a7b4a4}{IPhysics\+Processor}}.
-
-
-
-Definition at line 320 of file .\+Physics\+Processor\+\_\+old.\+cpp.
 
 \mbox{\Hypertarget{class_physics_processor_a1b388bb7ee2f8a0cabaf7877a1ce02b5}\label{class_physics_processor_a1b388bb7ee2f8a0cabaf7877a1ce02b5}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!spawnVoxelsInArea@{spawnVoxelsInArea}}
@@ -391,24 +197,6 @@ Here is the caller graph for this function\+:
 \includegraphics[width=350pt]{class_physics_processor_a1b388bb7ee2f8a0cabaf7877a1ce02b5_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{class_physics_processor_a029508ba8e94a74ef6f9b6aa94916a9b}\label{class_physics_processor_a029508ba8e94a74ef6f9b6aa94916a9b}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!structuresAsString@{structuresAsString}}
-\index{structuresAsString@{structuresAsString}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{structuresAsString()}{structuresAsString()}}
-{\footnotesize\ttfamily std\+::string Physics\+Processor\+::structures\+As\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 29 of file .\+Physics\+Processor\+\_\+old.\+cpp.
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_physics_processor_a029508ba8e94a74ef6f9b6aa94916a9b_icgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Friends And Related Function Documentation}
@@ -420,30 +208,20 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 9 of file Physics\+Processor.\+h.
+Definition at line 10 of file Physics\+Processor.\+h.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_physics_processor_a1f72c4dc81dd38ba1cfcf76d99a56994}\label{class_physics_processor_a1f72c4dc81dd38ba1cfcf76d99a56994}} 
+\mbox{\Hypertarget{class_physics_processor_ade7d46595642687daa57393be4b21af7}\label{class_physics_processor_ade7d46595642687daa57393be4b21af7}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!allocatedGPUMemory@{allocatedGPUMemory}}
 \index{allocatedGPUMemory@{allocatedGPUMemory}!PhysicsProcessor@{PhysicsProcessor}}
 \doxysubsubsection{\texorpdfstring{allocatedGPUMemory}{allocatedGPUMemory}}
-{\footnotesize\ttfamily std\+::vector$<$ cl\+::\+Buffer $\ast$ $>$ Physics\+Processor\+::allocated\+GPUMemory\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::vector$<$cl\+::\+Buffer$\ast$$>$ Physics\+Processor\+::allocated\+GPUMemory\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 32 of file .\+Physics\+Processor\+\_\+old.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_abdc3991354098480e73d24c621015a33}\label{class_physics_processor_abdc3991354098480e73d24c621015a33}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!config@{config}}
-\index{config@{config}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{config}{config}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}{engine\+Config}} Physics\+Processor\+::config\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 29 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 60 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a6b6cc5abbd1b0a9971598207569feec8}\label{class_physics_processor_a6b6cc5abbd1b0a9971598207569feec8}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!context@{context}}
@@ -453,7 +231,7 @@ Definition at line 29 of file .\+Physics\+Processor\+\_\+old.\+h.
 
 
 
-Definition at line 27 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 40 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_abd85ec73e8d52b2fbef95c67bca2558c}\label{class_physics_processor_abd85ec73e8d52b2fbef95c67bca2558c}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!count\_voxelKernel@{count\_voxelKernel}}
@@ -463,7 +241,7 @@ Definition at line 27 of file .\+Physics\+Processor\+\_\+old.\+h.
 
 
 
-Definition at line 46 of file Physics\+Processor.\+h.
+Definition at line 49 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_afc551284d7d7c4c056bf5fff8fd1a41f}\label{class_physics_processor_afc551284d7d7c4c056bf5fff8fd1a41f}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!countVoxelReturnValue@{countVoxelReturnValue}}
@@ -473,7 +251,7 @@ Definition at line 46 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 50 of file Physics\+Processor.\+h.
+Definition at line 54 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a1c59b42c75cc3820ac4991f6f35fc826}\label{class_physics_processor_a1c59b42c75cc3820ac4991f6f35fc826}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!countVoxelsSize@{countVoxelsSize}}
@@ -483,7 +261,7 @@ Definition at line 50 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 35 of file Physics\+Processor.\+h.
+Definition at line 38 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_abbf7fceb99261458ac15240f4dd82a92}\label{class_physics_processor_abbf7fceb99261458ac15240f4dd82a92}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!countVoxelWorkMemory@{countVoxelWorkMemory}}
@@ -493,7 +271,7 @@ Definition at line 35 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 51 of file Physics\+Processor.\+h.
+Definition at line 55 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a09151a9bde05a727f6bea2e28b768788}\label{class_physics_processor_a09151a9bde05a727f6bea2e28b768788}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!device@{device}}
@@ -503,37 +281,17 @@ Definition at line 51 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 30 of file .\+Physics\+Processor\+\_\+old.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_a98fc77ed29f8664abbc73268e4a2355e}\label{class_physics_processor_a98fc77ed29f8664abbc73268e4a2355e}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!eConfig@{eConfig}}
-\index{eConfig@{eConfig}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{eConfig}{eConfig}}
-{\footnotesize\ttfamily cl\+::\+Buffer Physics\+Processor\+::e\+Config\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 38 of file .\+Physics\+Processor\+\_\+old.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_a30452a61c562c7683502ba9f9664761c}\label{class_physics_processor_a30452a61c562c7683502ba9f9664761c}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!engine@{engine}}
-\index{engine@{engine}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{engine}{engine}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily cl\+::\+Kernel Physics\+Processor\+::engine\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 28 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 41 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a5d7ec20151344d8f8181f85ef764b8ed}\label{class_physics_processor_a5d7ec20151344d8f8181f85ef764b8ed}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!engine@{engine}}
 \index{engine@{engine}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{engine}{engine}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{engine}{engine}}
 {\footnotesize\ttfamily cl\+::\+Kernel$\ast$ Physics\+Processor\+::engine\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 41 of file Physics\+Processor.\+h.
+Definition at line 44 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}\label{class_physics_processor_aa11be99fd6aa4bb5bbeb77a97b54d215}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!engineConfig@{engineConfig}}
@@ -543,27 +301,17 @@ Definition at line 41 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 49 of file Physics\+Processor.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_ac988355e0ddfa27a4afb186b2fc26d8d}\label{class_physics_processor_ac988355e0ddfa27a4afb186b2fc26d8d}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!engineResources@{engineResources}}
-\index{engineResources@{engineResources}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{engineResources}{engineResources}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily cl\+::\+Buffer Physics\+Processor\+::engine\+Resources\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 37 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 53 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a6655112bf736991c794a5768f0ac0bdf}\label{class_physics_processor_a6655112bf736991c794a5768f0ac0bdf}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!engineResources@{engineResources}}
 \index{engineResources@{engineResources}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{engineResources}{engineResources}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{engineResources}{engineResources}}
 {\footnotesize\ttfamily cl\+::\+Buffer$\ast$ Physics\+Processor\+::engine\+Resources\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 48 of file Physics\+Processor.\+h.
+Definition at line 52 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a1924ab300239ed57f02f1094560b0428}\label{class_physics_processor_a1924ab300239ed57f02f1094560b0428}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!engineSize@{engineSize}}
@@ -573,7 +321,7 @@ Definition at line 48 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 42 of file Physics\+Processor.\+h.
+Definition at line 45 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_ad9545b661be4656dfb4a37e9d2d927be}\label{class_physics_processor_ad9545b661be4656dfb4a37e9d2d927be}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!fallback@{fallback}}
@@ -583,7 +331,7 @@ Definition at line 42 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 21 of file Physics\+Processor.\+h.
+Definition at line 24 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a937565ccb9ca349a6aef2d7c7ff7581d}\label{class_physics_processor_a937565ccb9ca349a6aef2d7c7ff7581d}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!fallbackOrigin@{fallbackOrigin}}
@@ -593,7 +341,7 @@ Definition at line 21 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 27 of file Physics\+Processor.\+h.
+Definition at line 30 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_ad98253825259a631e494b4ca65396b75}\label{class_physics_processor_ad98253825259a631e494b4ca65396b75}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!fallbackRegion@{fallbackRegion}}
@@ -603,7 +351,7 @@ Definition at line 27 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 28 of file Physics\+Processor.\+h.
+Definition at line 31 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a3de2510a18134e813ff4fbc8195d7af7}\label{class_physics_processor_a3de2510a18134e813ff4fbc8195d7af7}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!globalWorkSize@{globalWorkSize}}
@@ -613,7 +361,7 @@ Definition at line 28 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 33 of file Physics\+Processor.\+h.
+Definition at line 36 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a8b5bf0a2af2f724a72c12c6ae2d2f7c4}\label{class_physics_processor_a8b5bf0a2af2f724a72c12c6ae2d2f7c4}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!hostFallbackBuffer@{hostFallbackBuffer}}
@@ -623,7 +371,17 @@ Definition at line 33 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 22 of file Physics\+Processor.\+h.
+Definition at line 25 of file Physics\+Processor.\+h.
+
+\mbox{\Hypertarget{class_physics_processor_a462413881de8f29e51c02815e6ff60dc}\label{class_physics_processor_a462413881de8f29e51c02815e6ff60dc}} 
+\index{PhysicsProcessor@{PhysicsProcessor}!load\_simulationKernel@{load\_simulationKernel}}
+\index{load\_simulationKernel@{load\_simulationKernel}!PhysicsProcessor@{PhysicsProcessor}}
+\doxysubsubsection{\texorpdfstring{load\_simulationKernel}{load\_simulationKernel}}
+{\footnotesize\ttfamily cl\+::\+Kernel Physics\+Processor\+::load\+\_\+simulation\+Kernel\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 50 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a870478df67b0f955fe3a71bdebc9493f}\label{class_physics_processor_a870478df67b0f955fe3a71bdebc9493f}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!localWorkSize@{localWorkSize}}
@@ -633,27 +391,7 @@ Definition at line 22 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 34 of file Physics\+Processor.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_a168ce1aebb4c0e79a24df40c6763f1d8}\label{class_physics_processor_a168ce1aebb4c0e79a24df40c6763f1d8}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!pbo\_buff@{pbo\_buff}}
-\index{pbo\_buff@{pbo\_buff}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{pbo\_buff}{pbo\_buff}}
-{\footnotesize\ttfamily cl\+::\+Buffer Physics\+Processor\+::pbo\+\_\+buff\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 36 of file .\+Physics\+Processor\+\_\+old.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_adea72a7b964c4b75962f0edeb271bbc6}\label{class_physics_processor_adea72a7b964c4b75962f0edeb271bbc6}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!pbo\_mem@{pbo\_mem}}
-\index{pbo\_mem@{pbo\_mem}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{pbo\_mem}{pbo\_mem}}
-{\footnotesize\ttfamily cl\+\_\+mem Physics\+Processor\+::pbo\+\_\+mem\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 35 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 37 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a7278fa5f65dfa40a54d5960c417325ef}\label{class_physics_processor_a7278fa5f65dfa40a54d5960c417325ef}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!queue@{queue}}
@@ -663,7 +401,7 @@ Definition at line 35 of file .\+Physics\+Processor\+\_\+old.\+h.
 
 
 
-Definition at line 34 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 42 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a3b65ccf092cca5a6917a72a455628250}\label{class_physics_processor_a3b65ccf092cca5a6917a72a455628250}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!spawn\_voxel\_in\_areaKernel@{spawn\_voxel\_in\_areaKernel}}
@@ -673,7 +411,7 @@ Definition at line 34 of file .\+Physics\+Processor\+\_\+old.\+h.
 
 
 
-Definition at line 42 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 48 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_adcf501eb4307d8824ddd4406653fcd15}\label{class_physics_processor_adcf501eb4307d8824ddd4406653fcd15}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!spawn\_voxelKernel@{spawn\_voxelKernel}}
@@ -683,27 +421,7 @@ Definition at line 42 of file .\+Physics\+Processor\+\_\+old.\+h.
 
 
 
-Definition at line 40 of file .\+Physics\+Processor\+\_\+old.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_a09355677da7ec26512193ef9d40cf9fa}\label{class_physics_processor_a09355677da7ec26512193ef9d40cf9fa}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!sum\_voxelKernel@{sum\_voxelKernel}}
-\index{sum\_voxelKernel@{sum\_voxelKernel}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{sum\_voxelKernel}{sum\_voxelKernel}}
-{\footnotesize\ttfamily cl\+::\+Kernel Physics\+Processor\+::sum\+\_\+voxel\+Kernel\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 41 of file .\+Physics\+Processor\+\_\+old.\+h.
-
-\mbox{\Hypertarget{class_physics_processor_acc595c0b110c46f5ef576fbff627367e}\label{class_physics_processor_acc595c0b110c46f5ef576fbff627367e}} 
-\index{PhysicsProcessor@{PhysicsProcessor}!sumReturnValue@{sumReturnValue}}
-\index{sumReturnValue@{sumReturnValue}!PhysicsProcessor@{PhysicsProcessor}}
-\doxysubsubsection{\texorpdfstring{sumReturnValue}{sumReturnValue}}
-{\footnotesize\ttfamily cl\+::\+Buffer Physics\+Processor\+::sum\+Return\+Value\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 39 of file .\+Physics\+Processor\+\_\+old.\+h.
+Definition at line 47 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_a65a0de07ef7772c04dd86f98c26bb78a}\label{class_physics_processor_a65a0de07ef7772c04dd86f98c26bb78a}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!TBO@{TBO}}
@@ -713,7 +431,7 @@ Definition at line 39 of file .\+Physics\+Processor\+\_\+old.\+h.
 
 
 
-Definition at line 31 of file Physics\+Processor.\+h.
+Definition at line 34 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_abfe930d07b74ddcdb6a836e7364a3a9f}\label{class_physics_processor_abfe930d07b74ddcdb6a836e7364a3a9f}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!TBOBuffer@{TBOBuffer}}
@@ -723,7 +441,7 @@ Definition at line 31 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 54 of file Physics\+Processor.\+h.
+Definition at line 58 of file Physics\+Processor.\+h.
 
 \mbox{\Hypertarget{class_physics_processor_aa0c7e4f0c2150c1e4b1a9973f0b71f5a}\label{class_physics_processor_aa0c7e4f0c2150c1e4b1a9973f0b71f5a}} 
 \index{PhysicsProcessor@{PhysicsProcessor}!TBOMemory@{TBOMemory}}
@@ -733,13 +451,11 @@ Definition at line 54 of file Physics\+Processor.\+h.
 
 
 
-Definition at line 53 of file Physics\+Processor.\+h.
+Definition at line 57 of file Physics\+Processor.\+h.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-old\+\_\+system/\mbox{\hyperlink{_8_physics_processor__old_8h}{.\+Physics\+Processor\+\_\+old.\+h}}\item 
 src/\+Physics\+Processor/\mbox{\hyperlink{_physics_processor_8h}{Physics\+Processor.\+h}}\item 
-old\+\_\+system/\mbox{\hyperlink{_8_physics_processor__old_8cpp}{.\+Physics\+Processor\+\_\+old.\+cpp}}\item 
 src/\+Physics\+Processor/\mbox{\hyperlink{_physics_processor_8cpp}{Physics\+Processor.\+cpp}}\end{DoxyCompactItemize}

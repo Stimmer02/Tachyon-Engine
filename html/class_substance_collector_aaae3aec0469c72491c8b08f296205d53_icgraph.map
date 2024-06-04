@@ -1,8 +1,10 @@
 <map id="SubstanceCollector::clTypeToString" name="SubstanceCollector::clTypeToString">
-<area shape="rect" id="node1" title=" " alt="" coords="521,71,668,112"/>
-<area shape="rect" id="node2" href="$class_physics_processor_builder.html#abaf0714963e193d88667343ddc9bbf16" title=" " alt="" coords="289,5,469,47"/>
-<area shape="rect" id="node4" href="$class_substance_collector.html#ab66d011d6f11515f62e066e51d3df171" title=" " alt="" coords="284,71,473,112"/>
-<area shape="rect" id="node6" href="$test__main___substance_collector_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="93,137,148,163"/>
-<area shape="rect" id="node3" href="$class_physics_processor_builder.html#a5ab5a23cb807f37699cae51d4e82bfc3" title=" " alt="" coords="5,5,236,47"/>
-<area shape="rect" id="node5" href="$class_physics_processor_builder.html#a12b4678e2b5532f453e80721413c79de" title=" " alt="" coords="22,71,219,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="980,39,1127,80"/>
+<area shape="rect" id="node2" href="$class_physics_processor_builder.html#abaf0714963e193d88667343ddc9bbf16" title=" " alt="" coords="747,5,927,47"/>
+<area shape="rect" id="node7" href="$class_substance_collector.html#ab66d011d6f11515f62e066e51d3df171" title=" " alt="" coords="743,71,932,112"/>
+<area shape="rect" id="node3" href="$class_physics_processor_builder.html#a5ab5a23cb807f37699cae51d4e82bfc3" title=" " alt="" coords="464,5,695,47"/>
+<area shape="rect" id="node4" href="$class_physics_processor_builder.html#afa9dab260b2977f5eabe843ffd5e53fa" title=" " alt="" coords="236,39,416,80"/>
+<area shape="rect" id="node5" href="$src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="69,17,124,43"/>
+<area shape="rect" id="node6" href="$class_physics_processor_system.html#a97a20d1bc5573cd0d264ee5d87d7095a" title="This method is called on system startup and by default does nothing." alt="" coords="5,68,188,109"/>
+<area shape="rect" id="node8" href="$class_physics_processor_builder.html#a12b4678e2b5532f453e80721413c79de" title=" " alt="" coords="481,71,678,112"/>
 </map>
