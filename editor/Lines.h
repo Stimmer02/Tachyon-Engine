@@ -21,6 +21,7 @@ private:
         static float rx, ry, rz;
 
         object->transform.rotation = Quaternion::ToQuaternion(Vector3(rx, ry, rz));
+        object->transform.scale = Vector3(10, 10, 10);
 
         rx += time * 1e-4f * cos(time);
         ry += time * 1e-4f * sin(time);
@@ -69,6 +70,13 @@ public:
 
         object = scene->CreateEntity();
         scene->AddEntityToScene(object);
+
+        // mat = new Material(defaultMaterial);
+        // mat->color = Vector3(1.0f, 1.0f, 1.0f);
+        // mat->mainTexture = multiSprite;
+        // mat->shader = shader;
+
+        // object->material = mat;
 
         renderer = object->AddAttribute<Mesh>("./resources/meshes/bunny.obj");
 
