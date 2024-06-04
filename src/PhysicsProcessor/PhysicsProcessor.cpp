@@ -58,26 +58,60 @@ char PhysicsProcessor::loadSimulation(const std::string& path){
         return 1;
     }
     int width, height;
-    file >> width >> height;
+    file.read((char*)&width, sizeof(int));
+    file.read((char*)&height, sizeof(int));
 
     if (width != globalWorkSize[0] || height != globalWorkSize[1]){
         return 2;
     }
 
     int* arr = new int[width * height];
-    cl::Buffer buffer(context, CL_MEM_READ_ONLY, sizeof(int) * width * height);
+    cl::Buffer buffer(context, CL_MEM_READ_WRITE, sizeof(int) * width * height);
 
     file.read((char*)arr, sizeof(int) * width * height);
     file.close();
 
-    queue.enqueueWriteBuffer(buffer, CL_TRUE, 0, sizeof(int) * width * height, arr);
-
+    queue.enqueueWriteBuffer(buffer, CL_FALSE, 0, sizeof(int) * width * height, arr);
     load_simulationKernel.setArg(2, buffer);
     queue.enqueueNDRangeKernel(load_simulationKernel, cl::NullRange, globalWorkSize);
+    queue.finish();
+
 
     delete[] arr;
     return 0;
 }
+
+char PhysicsProcessor::saveSimulation(const std::string& path){
+    std::ofstream file(path, std::ios::binary | std::ios::trunc);
+    if (!file.is_open()){
+        return 1;
+    }
+
+    int width = globalWorkSize[0];
+    int height = globalWorkSize[1];
+
+    file.write((char*)&width, sizeof(int));
+    file.write((char*)&height, sizeof(int));
+
+    int* arr = new int[width * height];
+    cl::Buffer buffer(context, CL_MEM_READ_WRITE, sizeof(int) * width * height);
+
+    save_simulationKernel.setArg(2, buffer);
+    queue.enqueueNDRangeKernel(save_simulationKernel, cl::NullRange, globalWorkSize);
+    queue.enqueueReadBuffer(buffer, CL_FALSE, 0, sizeof(int) * width * height, arr);
+    cl_int clError = queue.finish();
+
+    if (clError != CL_SUCCESS){
+        return 2;
+    }
+
+    file.write((char*)arr, sizeof(int) * width * height);
+    file.close();
+
+    delete[] arr;
+    return 0;
+}
+
 
 void PhysicsProcessor::generateFrame(){
     for (uint32_t i = 0; i < engineSize; i++){

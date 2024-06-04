@@ -894,10 +894,25 @@ char PhysicsProcessorBuilder::addMandatoryKernels(){
         return 4;
     }
 
+    const std::string saveSimulationKernelName = "save_simulation";
+    std::string saveSimulationKernelCode;
+    std::ifstream file5(mandatoryKernelsDir + saveSimulationKernelName + ".cl");
+    if (file5.is_open()){
+        std::string line;
+        while (std::getline(file5, line)){
+            saveSimulationKernelCode += line + "\n";
+        }
+        file5.close();
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::addMandatoryKernels failed to open file: " + mandatoryKernelsDir + saveSimulationKernelName + ".cl\n";
+        return 5;
+    }
+
     kernelCollector->addKernelCode(spawnVoxelKernelCode, spawnVoxelKernelName);
     kernelCollector->addKernelCode(spawnVoxelsInAreaKernelCode, spawnVoxelsInAreaKernelName);
     kernelCollector->addKernelCode(countVoxelsKernelCode, countVoxelsKernelName);
     kernelCollector->addKernelCode(loadSimulationKernelCode, loadSimulationKernelName);
+    kernelCollector->addKernelCode(saveSimulationKernelCode, saveSimulationKernelName);
 
     return 0;
 }
@@ -1321,6 +1336,14 @@ char PhysicsProcessorBuilder::setMandatoryKernels(){
     }
     physicsProcessor->load_simulationKernel.setArg(0, *physicsProcessor->engineResources);
     physicsProcessor->load_simulationKernel.setArg(1, physicsProcessor->engineConfig);
+
+    physicsProcessor->save_simulationKernel = cl::Kernel(program, "save_simulation");
+    if (physicsProcessor->save_simulationKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create save_simulation kernel\n";
+        return 5;
+    }
+    physicsProcessor->save_simulationKernel.setArg(0, *physicsProcessor->engineResources);
+    physicsProcessor->save_simulationKernel.setArg(1, physicsProcessor->engineConfig);
 
     return 0;
 }
