@@ -54,7 +54,7 @@ bool Tetrahedron::operator=(const Tetrahedron &other){
     points[3] = other.points[3];
 }
 
-void Tetrahedron::getCircumscribedSphere(Vector3 &centre, float &radius){
+void Tetrahedron::getCircumscribedSphere(Vector3 &centre, float &radius) const{
     float alfa, gamma, dx, dy, dz, alfa2;
     const int size = 5;
     SquareMatrix<float> helperMatrix;

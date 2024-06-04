@@ -46,10 +46,10 @@ void MeshLoader::addSingleVertex(const std::string &vertexLine){
     numVertices = verticesVector.size();
 
     std::vector<Vector3> emptyVec;
-    while(normalsList.size() < verticesVector.size()){
+    while(normalsList.size() <= verticesVector.size()){
         normalsList.push_back(emptyVec);
     }
-    while(texturesIdx.size() < verticesVector.size()){
+    while(texturesIdx.size() <= verticesVector.size()){
         texturesIdx.push_back(0);
     }
 
@@ -109,7 +109,7 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
     std::vector<int> triangulationInput;
     Vector3 helperNormal, edge1, edge2;
 
-    std::cout << indexLine << '\n';
+    // std::cout << indexLine << '\n';
     for(int i = 2;; ++i){
         if(indexLine[i] == ' ' || indexLine[i] == '\n' || indexLine[i] == '\0' || indexLine[i] == '/'){
             helperIdxArray.push_back(std::atoi(singleCoord.c_str()));
@@ -159,8 +159,13 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             triangulationInput.push_back(helperIdxArray[i]);
         }
     }
-    // std::cout << triangulationInput.size() << '\n';
+    std::cout << triangulationInput.size() << '\n';
     // std::cout.flush();
+    for(int i = 0; i < triangulationInput.size(); ++i){
+        std::cout << triangulationInput[i] << ' ';
+    }
+    std::cout << '\n';
+    std::cout.flush();
     triangulationResult = computeTriangulation(triangulationInput);
 
     if(caseId == 0){
@@ -185,8 +190,16 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             edge2 = (verticesVector[triangulationResult[i]] - verticesVector[triangulationResult[i + 2]]).Normalize();
 
             helperNormal = Vector3::Cross(edge1, edge2).Normalize();
-
-            normalsList[triangulationResult[i]].push_back(helperNormal);
+            
+    
+            std::cout << "\n\nASDADS\n";
+            std::cout << normalsList.size() << '\n';
+            for(int i = 0; i < triangulationResult.size(); ++i){
+                std::cout << triangulationResult[i] << ' ';
+            }
+            std::cout <<"ASD: " <<  normalsList[triangulationResult[i + 2]].size() << '\n';
+            std::cout.flush();
+            normalsList[triangulationResult[i + 2]].push_back(helperNormal);
         }
     }
     
@@ -194,18 +207,20 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
     
     
     for(int i = 0; i < triangulationResult.size(); ++i){
-        std::cout << triangulationResult[i] << '\n';
+        std::cout << triangulationResult[i] << ' ';
     }
     std::cout << '\n';
-    std::cout << '\n';
+    std::cout << '\n';  
     std::cout.flush();
     
     
     
     for(int i: triangulationResult){
+        std::cout << indicesVector.size() << '\n';
+        
         indicesVector.push_back(i);
     }
-
+    std::cout << "HES\n";
 
 }
 
@@ -236,11 +251,15 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
     numVertices = verticesVector.size();
     numNormals = numVertices;
     numTexCoords = numVertices;
-
+    
+    
+    
     normals = new Vector3[numNormals];
 
     Vector3 helperNormal;
 
+
+    
     for(int i = 0; i < numVertices; ++i){
         helperNormal = {0.0f, 0.0f, 0.0f};
         for(int j = 0; j < normalsList[i].size(); ++i){
@@ -262,19 +281,25 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
     // }
     // std::cout.flush();
 
-    mesh->SetVertices(verticesVector.data(), numVertices);
-    mesh->SetNormals(normals, numNormals);
-    mesh->SetTexCoords(texCoordsVector.data(), numTexCoords);
-    mesh->SetIndices(indicesVector.data(), numIndices);
+    std::cout << numVertices << ' ' << verticesVector.size() << '\n';
+    for(int i = 0; i < numVertices; ++i){
+        std::cout << verticesVector[i].x << ' '  << verticesVector[i].y << ' '  << verticesVector[i].z << ' '  << verticesVector[i].w << '\n';
+    }
+    
+    // mesh->SetVertices(verticesVector.data(), numVertices);
+    
+    // mesh->SetNormals(normals, numNormals);
+    // mesh->SetTexCoords(texCoordsVector.data(), numTexCoords);
+    // mesh->SetIndices(indicesVector.data(), numIndices);
+    
+    // delete [] normals;
 
-    delete [] normals;
-
-    verticesVector.clear();
-    normalsVector.clear();
-    indicesVector.clear();
-    texCoordsVector.clear();
-    normalsList.clear();
-    texturesIdx.clear();
+    // verticesVector.clear();
+    // normalsVector.clear();
+    // indicesVector.clear();
+    // texCoordsVector.clear();
+    // normalsList.clear();
+    // texturesIdx.clear();
 
 }
 
@@ -284,35 +309,85 @@ std::vector<int> MeshLoader::computeTriangulation(const std::vector<int> &inputP
         return inputPoints;
     }
     
-    std::vector<int> result;
-    std::set<Tetrahedron> tetrahedrons;
-    std::queue<Triangle> triangleQueue;
+    // std::vector<int> result;
+    // std::set<Tetrahedron> tetrahedrons;
+    // std::vector<Tetrahedron> tetraToDelete;
+    // std::queue<Triangle> triangleQueue;
+    // std::map<Triangle, std::set<Tetrahedron> > trianglesTetrahedrons;
     
-    float helper = 0.0f;
+    // float helper = 0.0f;
     
-    for(int i = 0; i < inputPoints.size(); ++i){
-        helper = std::max(helper, fabs(verticesVector[inputPoints[i]].z));
-    }
+    // for(int i = 0; i < inputPoints.size(); ++i){
+    //     helper = std::max(helper, fabs(verticesVector[inputPoints[i]].z));
+    // }
     
-    helper *= 100.0f;
-    helper *= 1000.0f;
+    // helper *= 100.0f;
+    // helper *= 1000.0f;
     
-    verticesVector.push_back({-helper, -helper, -helper});
-    verticesVector.push_back({helper, -helper, -helper});
-    verticesVector.push_back({0, helper, -helper});
-    verticesVector.push_back({0, 0, helper});
+    // verticesVector.push_back({-helper, -helper, -helper});
+    // verticesVector.push_back({helper, -helper, -helper});
+    // verticesVector.push_back({0, helper, -helper});
+    // verticesVector.push_back({0, 0, helper});
     
-    tetrahedrons.insert({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
+    // tetrahedrons.insert({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
     
-    for(int i = 0; i < inputPoints.size(); ++i){
-        
-    }
+    // trianglesTetrahedrons[{numVertices, numVertices + 1, numVertices + 2}].insert({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
+    
+    // for(int i = 0; i < inputPoints.size(); ++i){
+    //     for(auto j = tetrahedrons.begin(); j != tetrahedrons.end(); ++j){
+    //         if(j->isPointInsideTetrahedron(inputPoints[i])){
+    //             tetraToDelete.push_back(*j);
+    //             tetrahedrons.insert({j->points[0], j->points[1], j->points[2], inputPoints[i]});
+    //             tetrahedrons.insert({j->points[0], j->points[1], j->points[3], inputPoints[i]});
+    //             tetrahedrons.insert({j->points[0], j->points[2], j->points[3], inputPoints[i]});
+    //             tetrahedrons.insert({j->points[1], j->points[2], j->points[3], inputPoints[i]});
+                
+    //             triangleQueue.push({j->points[0], j->points[1], inputPoints[i]});
+    //             triangleQueue.push({j->points[0], j->points[2], inputPoints[i]});
+    //             triangleQueue.push({j->points[0], j->points[3], inputPoints[i]});
+    //             triangleQueue.push({j->points[1], j->points[2], inputPoints[i]});
+    //             triangleQueue.push({j->points[1], j->points[3], inputPoints[i]});
+    //             triangleQueue.push({j->points[2], j->points[3], inputPoints[i]});
+                
+    //             trianglesTetrahedrons[{j->points[0], j->points[1], inputPoints[i]}].insert({{j->points[0], j->points[1], j->points[2], inputPoints[i]}});
+    //             trianglesTetrahedrons[{j->points[0], j->points[1], inputPoints[i]}].insert({{j->points[0], j->points[1], j->points[3], inputPoints[i]}});
+                
+    //             trianglesTetrahedrons[{j->points[0], j->points[2], inputPoints[i]}].insert({{j->points[0], j->points[2], j->points[1], inputPoints[i]}});
+    //             trianglesTetrahedrons[{j->points[0], j->points[2], inputPoints[i]}].insert({{j->points[0], j->points[2], j->points[3], inputPoints[i]}});
+                
+    //             trianglesTetrahedrons[{j->points[0], j->points[3], inputPoints[i]}].insert({{j->points[0], j->points[3], j->points[1], inputPoints[i]}});
+    //             trianglesTetrahedrons[{j->points[0], j->points[3], inputPoints[i]}].insert({{j->points[0], j->points[3], j->points[2], inputPoints[i]}});
+                
+    //             trianglesTetrahedrons[{j->points[1], j->points[2], inputPoints[i]}].insert({{j->points[1], j->points[2], j->points[0], inputPoints[i]}});
+    //             trianglesTetrahedrons[{j->points[1], j->points[2], inputPoints[i]}].insert({{j->points[1], j->points[2], j->points[3], inputPoints[i]}});
+                
+    //             trianglesTetrahedrons[{j->points[1], j->points[3], inputPoints[i]}].insert({{j->points[1], j->points[3], j->points[0], inputPoints[i]}});
+    //             trianglesTetrahedrons[{j->points[1], j->points[3], inputPoints[i]}].insert({{j->points[1], j->points[3], j->points[2], inputPoints[i]}});
+                
+    //             trianglesTetrahedrons[{j->points[2], j->points[3], inputPoints[i]}].insert({{j->points[2], j->points[3], j->points[0], inputPoints[i]}});
+    //             trianglesTetrahedrons[{j->points[2], j->points[3], inputPoints[i]}].insert({{j->points[2], j->points[3], j->points[1], inputPoints[i]}});
+                
+                
+    //             trianglesTetrahedrons[{j->points[0], j->points[1], j->points[2]}].erase({*j});
+    //             trianglesTetrahedrons[{j->points[0], j->points[1], j->points[3]}].erase({*j});
+    //             trianglesTetrahedrons[{j->points[0], j->points[2], j->points[3]}].erase({*j});
+    //             trianglesTetrahedrons[{j->points[1], j->points[2], j->points[3]}].erase({*j});
+                
+    //             while (/* condition */)
+    //             {
+    //                 /* code */
+    //             }
+                
+                
+    //         }
+    //     }
+    // }
     
     
-    verticesVector.pop_back();
-    verticesVector.pop_back();
-    verticesVector.pop_back();
-    verticesVector.pop_back();
+    // verticesVector.pop_back();
+    // verticesVector.pop_back();
+    // verticesVector.pop_back();
+    // verticesVector.pop_back();
 }
 
 void MeshLoader::parseMesh(const std::string &pathToFile, Mesh* mesh){
@@ -327,8 +402,9 @@ void MeshLoader::parseMesh(const std::string &pathToFile, Mesh* mesh){
     }
 
     while(std::getline(file, helper)){
+        std::cout << "in\n";
         functionsArr[helper[0] * charSize + helper[1]](helper);
+        std::cout << "out\n";
     }
-
     finalizeParsing(mesh);
 }

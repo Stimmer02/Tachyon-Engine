@@ -14,6 +14,7 @@ class Mesh;
 
 #include "Tetrahedron.h"
 #include "Vector3.h"
+#include "Triangle.cpp"
 
 class MeshLoader{
 public:
