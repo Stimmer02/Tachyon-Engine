@@ -19,7 +19,7 @@ private:
         static float rx, ry, rz;
 
         object->transform.rotation = Quaternion::ToQuaternion(Vector3(rx, ry, rz));
-        object->transform.scale = Vector3(1000, 1000, 1000);
+        object->transform.scale = Vector3(10, 10, 10);
         rx += time * 1e-4f * cos(time);
         ry += time * 1e-4f * sin(time);
         rz += time * 1e-4f;
@@ -38,7 +38,7 @@ public:
         object = scene->CreateEntity();
         scene->AddEntityToScene(object);
 
-        renderer = object->AddAttribute<Mesh>("./resources/meshes/bunny.obj");
+        renderer = object->AddAttribute<Mesh>("./resources/meshes/dragon.obj");
 
         object->transform.position = Vector3(GraphicConfig::windowWidth, GraphicConfig::windowHeight) * 0.5f;
     }

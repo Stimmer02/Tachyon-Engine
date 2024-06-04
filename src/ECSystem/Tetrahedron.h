@@ -21,7 +21,7 @@ struct Tetrahedron{
     void getCircumscribedSphere(Vector3 &centre, float &radius) const;
 
     bool operator<(const Tetrahedron &other) const;
-    bool operator=(const Tetrahedron &other);
+    void operator=(const Tetrahedron &other);
 };
 
 
