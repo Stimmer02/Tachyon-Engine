@@ -1,46 +1,59 @@
-#ifndef _PHYSICSPROCESSOR_H
-#define _PHYSICSPROCESSOR_H
+#ifndef PHYSICSPROCESSOR_H
+#define PHYSICSPROCESSOR_H
 
-#include "IPhysicsProcessor.h"
-#ifdef __APPLE__
-#include "../OpenCL/include/CL/cl.hpp"
-#else
-#include <CL/opencl.hpp>
-#endif
+#include "../Headers.h"
 
-class PhysicsProcessor : public IPhysicsProcessor{
+#include <stdint.h>
+
+class PhysicsProcessor{
+    friend class PhysicsProcessorBuilder;
 public:
-    void allocateHostMemory(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
-    std::string structuresAsString();
-    std::string kernelCodeAsString();
-    void constructorMain(cl::Context openCLContext, engineConfig config, cl::Device device);
-    void configureMainKernel();
-    PhysicsProcessor(cl::Context openCLContext, cl::Kernel engine, GLuint PBO, engineConfig config, cl::Device device);
     ~PhysicsProcessor();
-    void generateFrame() override;
-    void spawnVoxel(uint x, uint y, uint substanceID) override;
-    uint countVoxels() override;
-    void spawnVoxelInArea(uint x, uint y, uint width, uint height, uint substanceID) override;
 
+    void spawnVoxel(uint32_t x, uint32_t y, uint32_t substanceID);
+    void spawnVoxelsInArea(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t substanceID);
+    uint32_t countVoxels();
+
+    void generateFrame();
 
 private:
+    PhysicsProcessor(const uint32_t& engineSize);
+    bool fallback;
+    float* hostFallbackBuffer;
+#ifdef __APPLE__
+    cl::size_t<3> fallbackOrigin;
+    cl::size_t<3> fallbackRegion;
+#else
+    std::array<size_t, 3> fallbackOrigin;
+    std::array<size_t, 3> fallbackRegion;
+#endif
+    
+    GLuint TBO;
+
+    cl::NDRange globalWorkSize;
+    cl::NDRange localWorkSize;
+    cl::NDRange countVoxelsSize;
+
     cl::Context context;
-    cl::Kernel engine;
-    engineConfig config;
     cl::Device device;
+    cl::CommandQueue queue;
+
+    cl::Kernel* engine;
+    const uint32_t engineSize;
+
+    cl::Kernel spawn_voxelKernel;
+    cl::Kernel spawn_voxel_in_areaKernel;
+    cl::Kernel count_voxelKernel;
+
+    cl::Buffer* engineResources;//contains all the resources for the engine
+    cl::Buffer engineConfig;//contains the configuration for the engine
+    cl::Buffer countVoxelReturnValue;//used to return the count of voxels
+    cl::Buffer countVoxelWorkMemory;//used during count_voxels kernel
+
+    cl_mem TBOMemory;//contains allocated memory for the TBO
+    cl::Image2D  TBOBuffer;//contains the TBO buffer
 
     std::vector<cl::Buffer*> allocatedGPUMemory;
-
-    cl::CommandQueue queue;
-    cl_mem pbo_mem;
-    cl::Buffer pbo_buff;
-    cl::Buffer engineResources;
-    cl::Buffer eConfig;
-    cl::Buffer sumReturnValue;
-    cl::Kernel spawn_voxelKernel;
-    cl::Kernel sum_voxelKernel;
-    cl::Kernel spawn_voxel_in_areaKernel;
-
 };
 
 #endif

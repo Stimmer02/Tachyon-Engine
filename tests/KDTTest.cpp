@@ -42,10 +42,12 @@ TEST(KDTreeTests, treeTest1){
     };
 
     for(int i = 0; i < compArrSize - 1; ++i){
-        componentsArray[i] = new ButtonElement(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i] = new ButtonElement(rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i]->transform.position = Vector3(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, 0);
         componentsVector.push_back(componentsArray[i]);
     }
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
     // auto time2 = std::chrono::high_resolution_clock::now();
 
@@ -87,7 +89,8 @@ TEST(KDTreeTests, treeTest2){
 
     auto callback = [](){};
 
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
 
 
@@ -120,7 +123,8 @@ TEST(KDTreeTests, treeTest3){
 
     auto callback = [](){};
 
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
 
 
@@ -153,7 +157,8 @@ TEST(KDTreeTests, treeTest4){
 
     auto callback = [](){};
 
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
 
 
@@ -185,7 +190,8 @@ TEST(KDTreeTests, treeTest5){
     componentsArray = new InteractiveElement*[compArrSize];
 
 
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
 
 
@@ -218,7 +224,8 @@ TEST(KDTreeTests, treeTest6){
 
     auto callback = [](){};
 
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
 
 
@@ -251,7 +258,8 @@ TEST(KDTreeTests, treeTest7){
     auto callback = [](){};
 
 
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
 
 
@@ -282,7 +290,8 @@ TEST(KDTreeTests, treeTest8){
 
     auto callback = [](){};
 
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
 
 
@@ -318,14 +327,17 @@ TEST(KDTreeTests, treeTest9){
     auto callback = [](){};
 
     for(int i = 0; i < compArrSize/2; ++i){
-        componentsArray[i] = new ButtonElement(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i] = new ButtonElement(rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i]->transform.position = Vector3(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, 0);
         componentsVector.push_back(componentsArray[i]);
     }
     for(int i = compArrSize/2; i < compArrSize - 1; ++i){
-        componentsArray[i] = new ButtonElement(rand() % XUpperBound + XLowerBoun + 100, rand() % YUpperBound + YLowerBound + 100, rand() % widthUpperBound + widthLowerBound + 100, rand() % heightUpperBound + heightLowerBOund + 100, callback);
+        componentsArray[i] = new ButtonElement(rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i]->transform.position = Vector3(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, 0);
         componentsVector.push_back(componentsArray[i]);
     }
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
     // auto time2 = std::chrono::high_resolution_clock::now();
 
@@ -362,14 +374,17 @@ TEST(KDTreeTests, treeTest10){
     auto callback = [](){};
 
     for(int i = 0; i < compArrSize/2; ++i){
-        componentsArray[i] = new ButtonElement(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i] = new ButtonElement(rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i]->transform.position = Vector3(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, 0);
         componentsVector.push_back(componentsArray[i]);
     }
     for(int i = compArrSize/2; i < compArrSize - 1; ++i){
-        componentsArray[i] = new ButtonElement(rand() % XUpperBound + XLowerBoun + 100, rand() % YUpperBound + YLowerBound + 100, rand() % widthUpperBound + widthLowerBound + 100, rand() % heightUpperBound + heightLowerBOund + 100, callback);
+        componentsArray[i] = new ButtonElement(rand() % widthUpperBound + widthLowerBound, rand() % heightUpperBound + heightLowerBOund, callback);
+        componentsArray[i]->transform.position = Vector3(rand() % XUpperBound + XLowerBoun, rand() % YUpperBound + YLowerBound, 0);
         componentsVector.push_back(componentsArray[i]);
     }
-    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, 50, 50, callback);
+    componentsArray[compArrSize - 1] = new ButtonElement(50, 50, callback);
+    componentsArray[compArrSize - 1]->transform.position = Vector3(50, 50, 0);
     componentsVector.push_back(componentsArray[compArrSize - 1]);
     // auto time2 = std::chrono::high_resolution_clock::now();
 

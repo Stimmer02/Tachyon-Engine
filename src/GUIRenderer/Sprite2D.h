@@ -29,7 +29,7 @@ public:
 
     void SetPixel(const uint32_t & x, const uint32_t & y, const Color & color);
 
-    void Load() override;
+    void Load(GLShader * shader) override;
 
     void UnLoad() override;
 

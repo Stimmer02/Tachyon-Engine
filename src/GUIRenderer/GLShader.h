@@ -1,26 +1,27 @@
 #ifndef GLSHADER_H
 #define GLSHADER_H
 
+#pragma once
+
 #include "Vector3.h"
 #include "Matrix.h"
+#include "Headers.h"
 
-#include <GL/glew.h>
 #include <fstream>
 #include <string>
 #include <cassert>
 #include <list>
-#include <unordered_map>
+#include <map>
 
 class GLShader;
 
 static GLShader * currentShader;
-static GLShader * previousShader;
 
 class GLShader{
 private:
 
     std::list<GLuint> shaders;
-    std::unordered_map<std::string, GLuint> uniforms;
+    std::map<std::string, GLint> uniforms;
 
     GLuint shaderProgram;
 
@@ -33,7 +34,7 @@ private:
 
             char infoLog[512];
             glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
-            fprintf(stdout,"Shader linking error : %s", infoLog);
+            fprintf(stderr,"Shader linking error : %s", infoLog);
 
             return false;
         }
@@ -50,7 +51,7 @@ private:
 
             char infoLog[512];
             glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-            fprintf(stdout, "Shader compilation error : %s", infoLog);
+            fprintf(stderr, "Shader compilation error : %s", infoLog);
 
             return false;
         }
@@ -75,13 +76,9 @@ public:
     void LinkShader(const std::string & shaderPath, const GLenum type){
 
         std::ifstream input(shaderPath);
-
         assert(input && "File %s can't be loaded or does not exist");
 
-        std::string rawCode;
-
-        std::getline(input, rawCode, '\0');
-
+        std::string rawCode((std::istreambuf_iterator<char>(input)), std::istreambuf_iterator<char>());
         input.close();
 
         const char * rawBytesPtr = rawCode.c_str();
@@ -103,7 +100,7 @@ public:
 
     void Build(){
 
-        assert(shaderProgram != 0 && "Program does not exist" );
+        assert( shaderProgram != 0 && "Program does not exist" );
         glLinkProgram(shaderProgram);
 
         if( CheckProgramStatus() == false )
@@ -112,53 +109,56 @@ public:
     }
 
     void Use(){
-        previousShader = currentShader;
         currentShader = this;
         glUseProgram(shaderProgram);
     }
 
     void Dispose(){
         glUseProgram(0);
-        currentShader = previousShader;
-        if( currentShader )
-            currentShader->Use();
     }
 
-    GLuint GetUniformLocation(const std::string & uniformName){
+    GLint GetUniformLocation(const std::string & uniformName){
 
-        std::unordered_map<std::string, GLuint>::iterator it = uniforms.find(uniformName);
+        auto it = uniforms.find(uniformName);
 
-        GLuint location = -1;
+        GLint location = -1;
 
         if( it == uniforms.end()){
-
             location = glGetUniformLocation(shaderProgram, uniformName.c_str());
             uniforms[uniformName] = location;
-
         }else{
-
             location = it->second;
-
         }
 
         return location;
 
     }
 
-    void TransferToShader(const std::string & uniformName, float & scalar){
+    void TransferToShader(const std::string & uniformName, const float & value){
 
-        GLuint location = GetUniformLocation(uniformName);
+        GLint location = GetUniformLocation(uniformName);
 
         if( location == -1 )
             return;
 
-        glUniform1fv(location, 1, (GLfloat*)&scalar);
+        glUniform1fv(location, 1, (GLfloat*)&value);
 
     }
 
-    void TransferToShader(const std::string & uniformName, Vector3 & vector){
+    void TransferToShader(const std::string & uniformName, const int & value){
 
-        GLuint location = GetUniformLocation(uniformName);
+        GLint location = GetUniformLocation(uniformName);
+
+        if( location == -1 )
+            return;
+
+        glUniform1i(location, value);
+
+    }
+
+    void TransferToShader(const std::string & uniformName, const Vector3 & vector){
+
+        GLint location = GetUniformLocation(uniformName);
 
         if( location == -1 )
             return;
@@ -167,14 +167,14 @@ public:
 
     }
 
-    void TransferToShader(const std::string & uniformName, Matrix & matrix){
+    void TransferToShader(const std::string & uniformName, const Matrix & matrix){
 
-        GLuint location = GetUniformLocation(uniformName);
+        GLint location = GetUniformLocation(uniformName);
 
         if( location == -1 )
             return;
 
-        glUniformMatrix4fv(location, 1, GL_FALSE, matrix.Data());
+        glUniformMatrix4fv(location, 1, GL_FALSE, ((Matrix)matrix).Data());
 
     }
 
@@ -198,7 +198,5 @@ public:
     }
 
 };
-
-
 
 #endif

@@ -2,7 +2,7 @@
 #define MESH_H
 
 #include "Attribute.h"
-#include <GL/glew.h>
+#include "Headers.h"
 
 #include "Vector3.h"
 #include "MeshLoader.h"
@@ -175,6 +175,7 @@ public:
         float thetaIncrement = M_PI / numStacks;
 
         std::vector<Vector3> vertices;
+        std::vector<Vector3> normals;
         std::vector<float> uvs;
         std::vector<unsigned int> indices;
 
@@ -192,7 +193,11 @@ public:
                 float y = radius * cosTheta;
                 float z = radius * sinPhi * sinTheta;
 
-                vertices.push_back( Vector3(x, y, z) );
+                Vector3 vertex(x, y, z);
+                Vector3 normal = vertex.Normalize();
+
+                vertices.push_back(vertex);
+                normals.push_back(normal);
 
                 uvs.push_back( ((float)slice / numSlices) );
                 uvs.push_back( ((float)stack / numStacks) );
@@ -219,6 +224,7 @@ public:
 
         SetVertices(vertices.data(), vertices.size());
         SetTexCoords(uvs.data(), uvs.size());
+        SetNormals(normals.data(), normals.size());
         SetIndices(indices.data(), indices.size());
         renderMode = GL_TRIANGLES;
 
@@ -240,9 +246,17 @@ public:
             1.0f, 0.0f
         };
 
+        const Vector3 normals[] = {
+            {0.0f, 0.0f, 1.0f},
+            {0.0f, 0.0f, 1.0f},
+            {0.0f, 0.0f, 1.0f},
+            {0.0f, 0.0f, 1.0f}
+        };
+
         SetVertices(verts, 4);
         SetTexCoords(texCoord, 8);
-
+        SetNormals(normals, 4);
+        renderMode = GL_TRIANGLE_FAN;
     }
 
     void GenCube(const float & width, const float & height, const float & depth){
@@ -261,62 +275,36 @@ public:
 
 
         const float uvs[] = {
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f,
-            0.0f, 1.0f,
-
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f,
-            0.0f, 1.0f,
-
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f,
-            0.0f, 1.0f,
-
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f,
-            0.0f, 1.0f,
-
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f,
-            0.0f, 1.0f,
-
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f,
-            0.0f, 1.0f,
-
+            0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,
+            0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,
+            0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,
+            0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,
+            0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,
+            0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 1.0f,  0.0f, 1.0f,
         };
 
+        const Vector3 normals[] = {
+            { 0.0f,  0.0f, -1.0f }, { 0.0f,  0.0f, -1.0f }, { 0.0f,  0.0f, -1.0f }, { 0.0f,  0.0f, -1.0f },
+            { 0.0f,  0.0f,  1.0f }, { 0.0f,  0.0f,  1.0f }, { 0.0f,  0.0f,  1.0f }, { 0.0f,  0.0f,  1.0f },
+            { -1.0f,  0.0f,  0.0f }, { -1.0f,  0.0f,  0.0f }, { -1.0f,  0.0f,  0.0f }, { -1.0f,  0.0f,  0.0f },
+            { 1.0f,  0.0f,  0.0f }, { 1.0f,  0.0f,  0.0f }, { 1.0f,  0.0f,  0.0f }, { 1.0f,  0.0f,  0.0f },
+            { 0.0f,  1.0f,  0.0f }, { 0.0f,  1.0f,  0.0f }, { 0.0f,  1.0f,  0.0f }, { 0.0f,  1.0f,  0.0f },
+            { 0.0f, -1.0f,  0.0f }, { 0.0f, -1.0f,  0.0f }, { 0.0f, -1.0f,  0.0f }, { 0.0f, -1.0f,  0.0f },
+        };
 
         const unsigned int indices[] = {
-            0, 1, 2,
-            0, 2, 3,
-
-            1, 5, 6,
-            1, 6, 2,
-
-            5, 4, 7,
-            5, 7, 6,
-
-            4, 0, 3,
-            4, 3, 7,
-
-            3, 2, 6,
-            3, 6, 7,
-
-            4, 5, 1,
-            4, 1, 0
+            0, 1, 2,  0, 2, 3,
+            5, 4, 7,  5, 7, 6,
+            4, 0, 3,  4, 3, 7,
+            1, 5, 6,  1, 6, 2,
+            3, 2, 6,  3, 6, 7,
+            4, 5, 1,  4, 1, 0,
         };
 
 
         SetVertices(vertices, 8);
-        SetTexCoords(uvs, 48);
+        SetTexCoords(uvs, 24);
+        SetNormals(normals, 24);
         SetIndices(indices, 36);
         renderMode = GL_TRIANGLES;
 

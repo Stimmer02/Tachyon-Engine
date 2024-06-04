@@ -2,14 +2,12 @@
 #define SPRITE_H
 
 #include "BitmapReader.h"
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "GLShader.h"
+#include "Headers.h"
 
 #include <map>
 #include <string>
 #include <vector>
-
-static std::map<std::string, GLuint> almanach;
 
 class Sprite{
 
@@ -23,7 +21,7 @@ public:
     virtual GLuint GetTextureID() = 0;
 
     /// @brief Method loads current sprite to texture buffer.
-    virtual void Load() = 0;
+    virtual void Load(GLShader * shader) = 0;
 
     /// @brief Method unloads current sprite from texture buffer.
     virtual void UnLoad() = 0;
@@ -35,6 +33,7 @@ public:
 
 };
 
+static std::map<std::string, Sprite *> almanach;
 static Sprite * defaultSprite;
 
 #endif

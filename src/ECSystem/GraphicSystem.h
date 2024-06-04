@@ -9,6 +9,7 @@
 #include "Transform.h"
 #include "LineRenderer.h"
 #include "Sprite2D.h"
+#include "MultiSprite.h"
 #include "Mesh.h"
 
 #include "TextElement.h"

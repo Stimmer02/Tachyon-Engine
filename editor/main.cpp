@@ -1,6 +1,8 @@
 #include "Boids.h"
 #include "Fractal.h"
 #include "Lines.h"
+#include "../PhysicsProcessor/PhysicsProcessorSystem.h"
+#include "../PhysicsProcessor/FpsLimiter.h"
 
 int main(){
 
@@ -9,11 +11,21 @@ int main(){
     Scene scene;
     app.LoadScene(scene);
 
-    LinesSystem * fract = new LinesSystem();
+    FractalSystem * fract = new FractalSystem();
     app.RegisterSystem(fract);
+
+    PhysicsProcessorSystem * physic = new PhysicsProcessorSystem();
+    app.RegisterSystem(physic);
+
+    FpsLimiter * fps = new FpsLimiter();
+    app.RegisterSystem(fps);
+
 
     app.Loop();
 
+
+    delete fps;
+    delete physic;
     delete fract;
     return 0;
 }

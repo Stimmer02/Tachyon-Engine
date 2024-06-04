@@ -8,7 +8,7 @@ Button::Button(const int& x, const int& y, const int& width, const int& height) 
 void Button::Render(){
 
 	if(sprite != nullptr)
-		sprite->Load();
+		sprite->Load(currentShader);
 
 	float w_2 = width/2.0f;
 	float h_2 = height/2.0f;

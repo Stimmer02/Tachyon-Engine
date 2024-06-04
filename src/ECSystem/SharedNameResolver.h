@@ -28,13 +28,15 @@ protected:
 
     void DeleteNode(Node * node);
 
+    void Traverse(Node* node, std::string current_name);
+
 public:
     SharedNameResolver();
 
     void Emplace(const std::string & _name, const void * _pointer, const int32_t & _size = 1);
     void * Find(const std::string & _name, const int32_t & _elem_size = 0, const int32_t & _element = 0);
     void Resize(const std::string & _name, const int32_t & _size);
-
+    void Traverse();
     ~SharedNameResolver();
 };
 

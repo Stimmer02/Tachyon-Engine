@@ -32,15 +32,16 @@ target_include_directories(${LIB_NAME}_lib PUBLIC
     ${OPENGL_INCLUDE_DIRS}
     ${glfw3_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS}
-    ${CMAKE_CURRENT_SOURCE_DIR}/GUIRenderer  
-    ${CMAKE_CURRENT_SOURCE_DIR}/PhysicsProcessor 
     ${CMAKE_CURRENT_SOURCE_DIR}/ECSystem
+    ${CMAKE_CURRENT_SOURCE_DIR}/GUIRenderer
+    ${CMAKE_CURRENT_SOURCE_DIR}/PhysicsProcessor
+    ${CMAKE_CURRENT_SOURCE_DIR}/
 )
 
-target_link_libraries(${LIB_NAME}_lib 
+target_link_libraries(${LIB_NAME}_lib
     ${OpenCL_LIBRARIES}
-    OpenGL::GL 
-    glfw 
+    OpenGL::GL
+    glfw
     GLEW::GLEW
 )
 

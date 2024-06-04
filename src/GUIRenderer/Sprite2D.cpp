@@ -5,8 +5,6 @@ Sprite2D::Sprite2D(const Color * pixels, const uint32_t& width, const uint32_t& 
     if( pixels == nullptr )
         return;
 
-    this->width = width;
-    this->height = height;
     this->UpdateTexture(pixels, width, height);
 }
 
@@ -17,10 +15,8 @@ Sprite2D::Sprite2D(const char * filepath) : Sprite(){
     if( img.pixels == nullptr )
         return;
 
-    this->width = img.width;
-    this->height = img.height;
     this->UpdateTexture(img.pixels, img.width, img.height);
-    almanach[ std::string(filepath) ] = texture;
+    almanach[ std::string(filepath) ] = this;
 
     delete[] img.pixels;
 
@@ -31,13 +27,15 @@ Sprite2D::Sprite2D(const Image * image) : Sprite(){
     if( image->pixels == nullptr )
         return;
 
-    this->width = image->width;
-    this->height = image->height;
     this->UpdateTexture(image->pixels, image->width, image->height);
 
 }
 
 Sprite2D::Sprite2D(const Sprite2D * sprite) : Sprite(){
+
+    if( sprite == nullptr)
+        return;
+
     this->width = sprite->width;
     this->height = sprite->height;
     this->texture = sprite->texture;
@@ -55,13 +53,21 @@ void Sprite2D::UpdateTexture(const Color * pixels, const uint32_t& width, const 
 
         // Allocate texture buffer for pixels
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+        this->width = width;
+        this->height = height;        
     }else{
 
         // Select current texture
         glBindTexture(GL_TEXTURE_2D, texture);
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+        if( this->width == width && this->height == height){
+            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+        }else{
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+            this->width = width;
+            this->height = height;
+        }
 
     }
 
@@ -90,9 +96,7 @@ void Sprite2D::SetPixel(const uint32_t & x, const uint32_t & y, const Color & co
         return;
 
     glBindTexture(GL_TEXTURE_2D, texture);
-
     glTexSubImage2D(GL_TEXTURE_2D, 0, x, height - y - 1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, &color);
-
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -100,7 +104,8 @@ GLuint Sprite2D::GetTextureID(){
     return texture;
 }
 
-void Sprite2D::Load(){
+void Sprite2D::Load(GLShader * shader){
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
 }
 

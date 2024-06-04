@@ -5,7 +5,7 @@
 #include "Vector3.h"
 
 #include <cassert>
-#include <GL/glew.h>
+#include "Headers.h"
 
 /// @brief This class represents single character
 struct Glyf{
@@ -79,7 +79,7 @@ public:
 
     void Render(){
 
-        sprite->Load();
+        sprite->Load(currentShader);
 
         glBindVertexArray(vao);
 

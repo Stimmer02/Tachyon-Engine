@@ -56,10 +56,10 @@ private:
 
 public:
 
-    CanvasElement(const int & x, const int & y, const int & width, const int & height) : InteractiveElement(width, height, nullptr){
+    CanvasElement(const int & width, const int & height) : InteractiveElement(width, height, nullptr){
 
-        this->transform.position.x = x;
-        this->transform.position.y = y;
+        this->transform.position.x = 0;
+        this->transform.position.y = 0;
 
         glGenVertexArrays(1, &vao);
         glGenBuffers(1, &vbo);
@@ -111,10 +111,21 @@ public:
         texture = new Sprite2D(colors.data(), texW, texH);
     }
 
+    void SetSprite(Sprite2D * sprite){
+        if(texture)
+            delete texture;
+
+        this->texture = sprite;
+    }
+
     void ClearCanvas(const Color & clearColor) {
 
         texture->ClearColor(clearColor);
 
+    }
+
+    GLuint GetTextureID(){
+        return texture->GetTextureID();
     }
 
     void Render() override{
@@ -123,7 +134,7 @@ public:
 
         shader->TransferToShader("u_model", model);
 
-        texture->Load();
+        texture->Load(shader);
 
         glBindVertexArray(vao);
 

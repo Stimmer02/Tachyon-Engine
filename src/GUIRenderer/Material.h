@@ -46,7 +46,7 @@ public:
 
     virtual void Use(){
         this->shader->Use();
-        this->mainTexture->Load();
+        this->mainTexture->Load(shader);
         this->shader->TransferToShader("u_color", color);
     }
 

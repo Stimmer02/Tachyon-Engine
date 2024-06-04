@@ -1,7 +1,7 @@
 #ifndef IINPUTHANDLER_H
 #define IINPUTHANDLER_H
 
-#include <GLFW/glfw3.h>
+#include "Headers.h"
 
 #include "EventInfo.h"
 

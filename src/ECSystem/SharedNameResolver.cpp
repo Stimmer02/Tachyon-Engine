@@ -102,6 +102,22 @@ void SharedNameResolver::Resize(const std::string & _name, const int32_t & _size
     }
 }
 
+void SharedNameResolver::Traverse() {
+    Traverse(root, "");
+}
+
+void SharedNameResolver::Traverse(Node* node, std::string current_name){
+    if (node == nullptr) {
+        return;
+    }
+
+    cout << "Name: " << current_name << ", Size: " << node->size << ", Pointer: " << node->pointer << endl;
+
+    for (int i = 0; i < ALPHABET_SIZE; ++i) {
+        Traverse(node->next_char[i], current_name + static_cast<char>('a' + i));
+    }
+}
+
 void SharedNameResolver::DeleteNode(Node * node){
 
     if( node == nullptr)
