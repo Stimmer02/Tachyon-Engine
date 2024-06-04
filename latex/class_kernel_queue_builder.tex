@@ -1,0 +1,188 @@
+\hypertarget{class_kernel_queue_builder}{}\doxysection{Kernel\+Queue\+Builder Class Reference}
+\label{class_kernel_queue_builder}\index{KernelQueueBuilder@{KernelQueueBuilder}}
+
+
+{\ttfamily \#include $<$Kernel\+Queue\+Builder.\+h$>$}
+
+
+
+Collaboration diagram for Kernel\+Queue\+Builder\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{class_kernel_queue_builder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_kernel_queue_builder_a7d2e357235de99bfff67af4f69d9b486}{Kernel\+Queue\+Builder}} ()
+\item 
+char \mbox{\hyperlink{class_kernel_queue_builder_af8c1c20df86d5788ab23a90aed13e9ff}{parse\+Config}} (std\+::string path)
+\item 
+char \mbox{\hyperlink{class_kernel_queue_builder_a0de34144ebf10064d7490b7231d4ec4b}{collect\+Kernels}} (\mbox{\hyperlink{class_kernel_collector}{Kernel\+Collector}} \&kc)
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{structkernel_execution_unit}{kernel\+Execution\+Unit}} $>$ \& \mbox{\hyperlink{class_kernel_queue_builder_added82bf14be2089d34b8e514331dc61}{get\+Kernel\+Queue}} ()
+\item 
+uint \mbox{\hyperlink{class_kernel_queue_builder_a3ec201016db220ea65aec9d3a2b5e354}{get\+Kernel\+Queue\+Size}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_kernel_queue_builder_a25237793421fa5d08056761701bf6eaa}{get\+Error}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structkernel_execution_unit}{kernel\+Execution\+Unit}} $>$ \mbox{\hyperlink{class_kernel_queue_builder_a1006a631ef9d191eacc821fa87133f8a}{kernel\+Queue}}
+\item 
+std\+::string \mbox{\hyperlink{class_kernel_queue_builder_a6e26e74d929be9fcb1d8a6b0901178bb}{error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file Kernel\+Queue\+Builder.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_kernel_queue_builder_a7d2e357235de99bfff67af4f69d9b486}\label{class_kernel_queue_builder_a7d2e357235de99bfff67af4f69d9b486}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!KernelQueueBuilder@{KernelQueueBuilder}}
+\index{KernelQueueBuilder@{KernelQueueBuilder}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{KernelQueueBuilder()}{KernelQueueBuilder()}}
+{\footnotesize\ttfamily Kernel\+Queue\+Builder\+::\+Kernel\+Queue\+Builder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Kernel\+Queue\+Builder.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_kernel_queue_builder_a0de34144ebf10064d7490b7231d4ec4b}\label{class_kernel_queue_builder_a0de34144ebf10064d7490b7231d4ec4b}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!collectKernels@{collectKernels}}
+\index{collectKernels@{collectKernels}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{collectKernels()}{collectKernels()}}
+{\footnotesize\ttfamily char Kernel\+Queue\+Builder\+::collect\+Kernels (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_kernel_collector}{Kernel\+Collector}} \&}]{kc }\end{DoxyParamCaption})}
+
+
+
+Definition at line 60 of file Kernel\+Queue\+Builder.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_queue_builder_a0de34144ebf10064d7490b7231d4ec4b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_queue_builder_a0de34144ebf10064d7490b7231d4ec4b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_queue_builder_a25237793421fa5d08056761701bf6eaa}\label{class_kernel_queue_builder_a25237793421fa5d08056761701bf6eaa}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!getError@{getError}}
+\index{getError@{getError}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily std\+::string Kernel\+Queue\+Builder\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 83 of file Kernel\+Queue\+Builder.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_queue_builder_a25237793421fa5d08056761701bf6eaa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_queue_builder_added82bf14be2089d34b8e514331dc61}\label{class_kernel_queue_builder_added82bf14be2089d34b8e514331dc61}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!getKernelQueue@{getKernelQueue}}
+\index{getKernelQueue@{getKernelQueue}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{getKernelQueue()}{getKernelQueue()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{structkernel_execution_unit}{kernel\+Execution\+Unit}} $>$ \& Kernel\+Queue\+Builder\+::get\+Kernel\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 70 of file Kernel\+Queue\+Builder.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_queue_builder_added82bf14be2089d34b8e514331dc61_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_queue_builder_a3ec201016db220ea65aec9d3a2b5e354}\label{class_kernel_queue_builder_a3ec201016db220ea65aec9d3a2b5e354}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!getKernelQueueSize@{getKernelQueueSize}}
+\index{getKernelQueueSize@{getKernelQueueSize}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{getKernelQueueSize()}{getKernelQueueSize()}}
+{\footnotesize\ttfamily uint Kernel\+Queue\+Builder\+::get\+Kernel\+Queue\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 74 of file Kernel\+Queue\+Builder.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_queue_builder_a3ec201016db220ea65aec9d3a2b5e354_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_queue_builder_af8c1c20df86d5788ab23a90aed13e9ff}\label{class_kernel_queue_builder_af8c1c20df86d5788ab23a90aed13e9ff}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!parseConfig@{parseConfig}}
+\index{parseConfig@{parseConfig}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{parseConfig()}{parseConfig()}}
+{\footnotesize\ttfamily char Kernel\+Queue\+Builder\+::parse\+Config (\begin{DoxyParamCaption}\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file Kernel\+Queue\+Builder.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_queue_builder_af8c1c20df86d5788ab23a90aed13e9ff_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_kernel_queue_builder_a6e26e74d929be9fcb1d8a6b0901178bb}\label{class_kernel_queue_builder_a6e26e74d929be9fcb1d8a6b0901178bb}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!error@{error}}
+\index{error@{error}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily std\+::string Kernel\+Queue\+Builder\+::error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 22 of file Kernel\+Queue\+Builder.\+h.
+
+\mbox{\Hypertarget{class_kernel_queue_builder_a1006a631ef9d191eacc821fa87133f8a}\label{class_kernel_queue_builder_a1006a631ef9d191eacc821fa87133f8a}} 
+\index{KernelQueueBuilder@{KernelQueueBuilder}!kernelQueue@{kernelQueue}}
+\index{kernelQueue@{kernelQueue}!KernelQueueBuilder@{KernelQueueBuilder}}
+\doxysubsubsection{\texorpdfstring{kernelQueue}{kernelQueue}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structkernel_execution_unit}{kernel\+Execution\+Unit}}$>$ Kernel\+Queue\+Builder\+::kernel\+Queue\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file Kernel\+Queue\+Builder.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_kernel_queue_builder_8h}{Kernel\+Queue\+Builder.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_kernel_queue_builder_8cpp}{Kernel\+Queue\+Builder.\+cpp}}\end{DoxyCompactItemize}

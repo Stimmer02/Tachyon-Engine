@@ -1,0 +1,329 @@
+\hypertarget{class_canvas_element}{}\doxysection{Canvas\+Element Class Reference}
+\label{class_canvas_element}\index{CanvasElement@{CanvasElement}}
+
+
+{\ttfamily \#include $<$Canvas\+Element.\+h$>$}
+
+
+
+Inheritance diagram for Canvas\+Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_canvas_element__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Canvas\+Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_canvas_element__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_canvas_element_a0aa6b9e5beb8eb0ea4fed934e16196d6}{Canvas\+Element}} (const int \&\mbox{\hyperlink{class_interactive_element_a9177e65ce43991cebfe3897d13b507eb}{width}}, const int \&\mbox{\hyperlink{class_interactive_element_a0c97fd2a517e80d091e6f9e23c26b078}{height}})
+\item 
+void \mbox{\hyperlink{class_canvas_element_a90ce8e1a4d614b96a50e19783c7051b6}{Set\+Cell\+Size}} (const int \&\mbox{\hyperlink{class_canvas_element_a0c529a9ccd3ecc973190b2a2fc2e75fb}{cell\+Size}})
+\item 
+bool \mbox{\hyperlink{class_canvas_element_a5cc59f8a92ea4eacd05976510c1d5478}{is\+In\+Bound}} (const float \&x, const float \&y) const
+\item 
+void \mbox{\hyperlink{class_canvas_element_ae0bb3af050387aa9a5d2e3b8192510a6}{Set\+Pixel}} (const float \&x, const float \&y, const \mbox{\hyperlink{struct_color}{Color}} \&\mbox{\hyperlink{structcolor}{color}})
+\item 
+void \mbox{\hyperlink{class_canvas_element_adcbf606118ff4a62c5a1252f8cd3db11}{Upload\+Image}} (const \mbox{\hyperlink{struct_image}{Image}} \&image)
+\item 
+void \mbox{\hyperlink{class_canvas_element_a318b72f81e27e1cbdec57d7ca71f7826}{Realloc}} ()
+\item 
+void \mbox{\hyperlink{class_canvas_element_a9ece35a68dc9318180609efa628576e1}{Set\+Sprite}} (\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$sprite)
+\item 
+void \mbox{\hyperlink{class_canvas_element_afeca7d430e4ba9bd669bb86b260e555d}{Clear\+Canvas}} (const \mbox{\hyperlink{struct_color}{Color}} \&clear\+Color)
+\item 
+GLuint \mbox{\hyperlink{class_canvas_element_a41239a50a7dd319af1916f7a8ff92e12}{Get\+Texture\+ID}} ()
+\item 
+void \mbox{\hyperlink{class_canvas_element_a3b7a492ec72fcd2ec90469768fd8f869}{Render}} () override
+\item 
+\mbox{\hyperlink{class_canvas_element_aef2026530d1a41e56dce597220388611}{$\sim$\+Canvas\+Element}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_canvas_element_aef4d77bb0dbcb76357c2c15ec5b96933}{Allocate\+Buffers}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+GLuint \mbox{\hyperlink{class_canvas_element_a1f644a01e371f43a10d264198f5398c7}{vao}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_canvas_element_a1ec3891d272e8a9c85e1b300d7ebd9ac}{vbo}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_canvas_element_a84513aa1f4bff9a55d42100a7d48a9b5}{tbo}} = 0
+\item 
+\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$ \mbox{\hyperlink{class_canvas_element_a0c77c9e6b2381ad33da6bf1a5ce1a7e2}{texture}} = nullptr
+\item 
+int \mbox{\hyperlink{class_canvas_element_a0c529a9ccd3ecc973190b2a2fc2e75fb}{cell\+Size}} = 10
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file Canvas\+Element.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_canvas_element_a0aa6b9e5beb8eb0ea4fed934e16196d6}\label{class_canvas_element_a0aa6b9e5beb8eb0ea4fed934e16196d6}} 
+\index{CanvasElement@{CanvasElement}!CanvasElement@{CanvasElement}}
+\index{CanvasElement@{CanvasElement}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{CanvasElement()}{CanvasElement()}}
+{\footnotesize\ttfamily Canvas\+Element\+::\+Canvas\+Element (\begin{DoxyParamCaption}\item[{const int \&}]{width,  }\item[{const int \&}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 59 of file Canvas\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_a0aa6b9e5beb8eb0ea4fed934e16196d6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_canvas_element_aef2026530d1a41e56dce597220388611}\label{class_canvas_element_aef2026530d1a41e56dce597220388611}} 
+\index{CanvasElement@{CanvasElement}!````~CanvasElement@{$\sim$CanvasElement}}
+\index{````~CanvasElement@{$\sim$CanvasElement}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{$\sim$CanvasElement()}{~CanvasElement()}}
+{\footnotesize\ttfamily Canvas\+Element\+::$\sim$\+Canvas\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 149 of file Canvas\+Element.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_canvas_element_aef4d77bb0dbcb76357c2c15ec5b96933}\label{class_canvas_element_aef4d77bb0dbcb76357c2c15ec5b96933}} 
+\index{CanvasElement@{CanvasElement}!AllocateBuffers@{AllocateBuffers}}
+\index{AllocateBuffers@{AllocateBuffers}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{AllocateBuffers()}{AllocateBuffers()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Allocate\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Canvas\+Element.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_aef4d77bb0dbcb76357c2c15ec5b96933_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_canvas_element_afeca7d430e4ba9bd669bb86b260e555d}\label{class_canvas_element_afeca7d430e4ba9bd669bb86b260e555d}} 
+\index{CanvasElement@{CanvasElement}!ClearCanvas@{ClearCanvas}}
+\index{ClearCanvas@{ClearCanvas}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{ClearCanvas()}{ClearCanvas()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Clear\+Canvas (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{clear\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 121 of file Canvas\+Element.\+h.
+
+\mbox{\Hypertarget{class_canvas_element_a41239a50a7dd319af1916f7a8ff92e12}\label{class_canvas_element_a41239a50a7dd319af1916f7a8ff92e12}} 
+\index{CanvasElement@{CanvasElement}!GetTextureID@{GetTextureID}}
+\index{GetTextureID@{GetTextureID}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{GetTextureID()}{GetTextureID()}}
+{\footnotesize\ttfamily GLuint Canvas\+Element\+::\+Get\+Texture\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 127 of file Canvas\+Element.\+h.
+
+\mbox{\Hypertarget{class_canvas_element_a5cc59f8a92ea4eacd05976510c1d5478}\label{class_canvas_element_a5cc59f8a92ea4eacd05976510c1d5478}} 
+\index{CanvasElement@{CanvasElement}!isInBound@{isInBound}}
+\index{isInBound@{isInBound}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{isInBound()}{isInBound()}}
+{\footnotesize\ttfamily bool Canvas\+Element\+::is\+In\+Bound (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 79 of file Canvas\+Element.\+h.
+
+\mbox{\Hypertarget{class_canvas_element_a318b72f81e27e1cbdec57d7ca71f7826}\label{class_canvas_element_a318b72f81e27e1cbdec57d7ca71f7826}} 
+\index{CanvasElement@{CanvasElement}!Realloc@{Realloc}}
+\index{Realloc@{Realloc}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{Realloc()}{Realloc()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Realloc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 99 of file Canvas\+Element.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_a318b72f81e27e1cbdec57d7ca71f7826_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_canvas_element_a3b7a492ec72fcd2ec90469768fd8f869}\label{class_canvas_element_a3b7a492ec72fcd2ec90469768fd8f869}} 
+\index{CanvasElement@{CanvasElement}!Render@{Render}}
+\index{Render@{Render}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_interactive_element_a16ffa8257383947d247e1ea16d679469}{Interactive\+Element}}.
+
+
+
+Definition at line 131 of file Canvas\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_a3b7a492ec72fcd2ec90469768fd8f869_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_canvas_element_a90ce8e1a4d614b96a50e19783c7051b6}\label{class_canvas_element_a90ce8e1a4d614b96a50e19783c7051b6}} 
+\index{CanvasElement@{CanvasElement}!SetCellSize@{SetCellSize}}
+\index{SetCellSize@{SetCellSize}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{SetCellSize()}{SetCellSize()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Set\+Cell\+Size (\begin{DoxyParamCaption}\item[{const int \&}]{cell\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 74 of file Canvas\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_a90ce8e1a4d614b96a50e19783c7051b6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_canvas_element_ae0bb3af050387aa9a5d2e3b8192510a6}\label{class_canvas_element_ae0bb3af050387aa9a5d2e3b8192510a6}} 
+\index{CanvasElement@{CanvasElement}!SetPixel@{SetPixel}}
+\index{SetPixel@{SetPixel}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{SetPixel()}{SetPixel()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Set\+Pixel (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y,  }\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 84 of file Canvas\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_ae0bb3af050387aa9a5d2e3b8192510a6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_canvas_element_a9ece35a68dc9318180609efa628576e1}\label{class_canvas_element_a9ece35a68dc9318180609efa628576e1}} 
+\index{CanvasElement@{CanvasElement}!SetSprite@{SetSprite}}
+\index{SetSprite@{SetSprite}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{SetSprite()}{SetSprite()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Set\+Sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$}]{sprite }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 114 of file Canvas\+Element.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_a9ece35a68dc9318180609efa628576e1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_canvas_element_adcbf606118ff4a62c5a1252f8cd3db11}\label{class_canvas_element_adcbf606118ff4a62c5a1252f8cd3db11}} 
+\index{CanvasElement@{CanvasElement}!UploadImage@{UploadImage}}
+\index{UploadImage@{UploadImage}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{UploadImage()}{UploadImage()}}
+{\footnotesize\ttfamily void Canvas\+Element\+::\+Upload\+Image (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_image}{Image}} \&}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 93 of file Canvas\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_canvas_element_adcbf606118ff4a62c5a1252f8cd3db11_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_canvas_element_a0c529a9ccd3ecc973190b2a2fc2e75fb}\label{class_canvas_element_a0c529a9ccd3ecc973190b2a2fc2e75fb}} 
+\index{CanvasElement@{CanvasElement}!cellSize@{cellSize}}
+\index{cellSize@{cellSize}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{cellSize}{cellSize}}
+{\footnotesize\ttfamily int Canvas\+Element\+::cell\+Size = 10\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Canvas\+Element.\+h.
+
+\mbox{\Hypertarget{class_canvas_element_a84513aa1f4bff9a55d42100a7d48a9b5}\label{class_canvas_element_a84513aa1f4bff9a55d42100a7d48a9b5}} 
+\index{CanvasElement@{CanvasElement}!tbo@{tbo}}
+\index{tbo@{tbo}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{tbo}{tbo}}
+{\footnotesize\ttfamily GLuint Canvas\+Element\+::tbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Canvas\+Element.\+h.
+
+\mbox{\Hypertarget{class_canvas_element_a0c77c9e6b2381ad33da6bf1a5ce1a7e2}\label{class_canvas_element_a0c77c9e6b2381ad33da6bf1a5ce1a7e2}} 
+\index{CanvasElement@{CanvasElement}!texture@{texture}}
+\index{texture@{texture}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite2_d}{Sprite2D}}$\ast$ Canvas\+Element\+::texture = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Canvas\+Element.\+h.
+
+\mbox{\Hypertarget{class_canvas_element_a1f644a01e371f43a10d264198f5398c7}\label{class_canvas_element_a1f644a01e371f43a10d264198f5398c7}} 
+\index{CanvasElement@{CanvasElement}!vao@{vao}}
+\index{vao@{vao}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{vao}{vao}}
+{\footnotesize\ttfamily GLuint Canvas\+Element\+::vao = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Canvas\+Element.\+h.
+
+\mbox{\Hypertarget{class_canvas_element_a1ec3891d272e8a9c85e1b300d7ebd9ac}\label{class_canvas_element_a1ec3891d272e8a9c85e1b300d7ebd9ac}} 
+\index{CanvasElement@{CanvasElement}!vbo@{vbo}}
+\index{vbo@{vbo}!CanvasElement@{CanvasElement}}
+\doxysubsubsection{\texorpdfstring{vbo}{vbo}}
+{\footnotesize\ttfamily GLuint Canvas\+Element\+::vbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Canvas\+Element.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_canvas_element_8h}{Canvas\+Element.\+h}}\end{DoxyCompactItemize}

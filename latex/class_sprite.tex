@@ -1,0 +1,158 @@
+\hypertarget{class_sprite}{}\doxysection{Sprite Class Reference}
+\label{class_sprite}\index{Sprite@{Sprite}}
+
+
+{\ttfamily \#include $<$Sprite.\+h$>$}
+
+
+
+Inheritance diagram for Sprite\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sprite__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Sprite\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_sprite__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_sprite_af0935e92c9fae5d97bfadffd5b5dc1e9}{Set\+Texture\+Attrib}} (const GLenum \&attrib, const GLint \&value)=0
+\begin{DoxyCompactList}\small\item\em Method sets value correlated to texture attribute. \end{DoxyCompactList}\item 
+virtual GLuint \mbox{\hyperlink{class_sprite_a037b294644e9666941cf6d4b914504a1}{Get\+Texture\+ID}} ()=0
+\begin{DoxyCompactList}\small\item\em Method returns texture id of current sprite. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_sprite_a7157f052d53e9db60d4d66d3637e172f}{Load}} (\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$shader)=0
+\begin{DoxyCompactList}\small\item\em Method loads current sprite to texture buffer. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_sprite_ade7895e85f3dc02a8c6334e5647b42dc}{Un\+Load}} ()=0
+\begin{DoxyCompactList}\small\item\em Method unloads current sprite from texture buffer. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_sprite_a34404a9e5f31096d75d9a8f22a1d97cc}{Clear\+Color}} (const \mbox{\hyperlink{struct_color}{Color}} \&clear\+Color)=0
+\begin{DoxyCompactList}\small\item\em Method fills texture with provided color. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_sprite_aff0448963fc0515aad87ac0cce6f8bc2}{$\sim$\+Sprite}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 12 of file Sprite.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sprite_aff0448963fc0515aad87ac0cce6f8bc2}\label{class_sprite_aff0448963fc0515aad87ac0cce6f8bc2}} 
+\index{Sprite@{Sprite}!````~Sprite@{$\sim$Sprite}}
+\index{````~Sprite@{$\sim$Sprite}!Sprite@{Sprite}}
+\doxysubsubsection{\texorpdfstring{$\sim$Sprite()}{~Sprite()}}
+{\footnotesize\ttfamily virtual Sprite\+::$\sim$\+Sprite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 32 of file Sprite.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sprite_a34404a9e5f31096d75d9a8f22a1d97cc}\label{class_sprite_a34404a9e5f31096d75d9a8f22a1d97cc}} 
+\index{Sprite@{Sprite}!ClearColor@{ClearColor}}
+\index{ClearColor@{ClearColor}!Sprite@{Sprite}}
+\doxysubsubsection{\texorpdfstring{ClearColor()}{ClearColor()}}
+{\footnotesize\ttfamily virtual void Sprite\+::\+Clear\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{clear\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Method fills texture with provided color. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sprite2_d_a768ed05cabc21118bdd6a0fbeb56a49f}{Sprite2D}}, \mbox{\hyperlink{class_multi_sprite_a2c636b5c4337ff7a86e7ddad9dcba581}{Multi\+Sprite}}, and \mbox{\hyperlink{class_cube_sprite_a9d9a68f632bce9fe950aed346cf4dad5}{Cube\+Sprite}}.
+
+\mbox{\Hypertarget{class_sprite_a037b294644e9666941cf6d4b914504a1}\label{class_sprite_a037b294644e9666941cf6d4b914504a1}} 
+\index{Sprite@{Sprite}!GetTextureID@{GetTextureID}}
+\index{GetTextureID@{GetTextureID}!Sprite@{Sprite}}
+\doxysubsubsection{\texorpdfstring{GetTextureID()}{GetTextureID()}}
+{\footnotesize\ttfamily virtual GLuint Sprite\+::\+Get\+Texture\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Method returns texture id of current sprite. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_sprite}{Sprite}} texture id 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_sprite2_d_a117eece3ea8479ccaef68e9d56e79e08}{Sprite2D}}, \mbox{\hyperlink{class_multi_sprite_a27f95e0683bcd60532ca81cd45a0baca}{Multi\+Sprite}}, and \mbox{\hyperlink{class_cube_sprite_a9f721008c561fc916a91cb15daff6100}{Cube\+Sprite}}.
+
+\mbox{\Hypertarget{class_sprite_a7157f052d53e9db60d4d66d3637e172f}\label{class_sprite_a7157f052d53e9db60d4d66d3637e172f}} 
+\index{Sprite@{Sprite}!Load@{Load}}
+\index{Load@{Load}!Sprite@{Sprite}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily virtual void Sprite\+::\+Load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Method loads current sprite to texture buffer. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sprite2_d_a47305cfab61267f4bf7cd51ab7fb4733}{Sprite2D}}, \mbox{\hyperlink{class_multi_sprite_ab83bb19eeced6bdc32503e103825aa26}{Multi\+Sprite}}, and \mbox{\hyperlink{class_cube_sprite_aa6436eaa6d9ab24966a843c1ef3a7a96}{Cube\+Sprite}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{class_sprite_a7157f052d53e9db60d4d66d3637e172f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite_af0935e92c9fae5d97bfadffd5b5dc1e9}\label{class_sprite_af0935e92c9fae5d97bfadffd5b5dc1e9}} 
+\index{Sprite@{Sprite}!SetTextureAttrib@{SetTextureAttrib}}
+\index{SetTextureAttrib@{SetTextureAttrib}!Sprite@{Sprite}}
+\doxysubsubsection{\texorpdfstring{SetTextureAttrib()}{SetTextureAttrib()}}
+{\footnotesize\ttfamily virtual void Sprite\+::\+Set\+Texture\+Attrib (\begin{DoxyParamCaption}\item[{const GLenum \&}]{attrib,  }\item[{const GLint \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Method sets value correlated to texture attribute. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sprite2_d_a488f08e97cc96a85d17120bcbba306d6}{Sprite2D}}, \mbox{\hyperlink{class_multi_sprite_aff59be13f2259024085ae0e6c9dabb6d}{Multi\+Sprite}}, and \mbox{\hyperlink{class_cube_sprite_ab9374bc080aea5f23b587991998a5459}{Cube\+Sprite}}.
+
+\mbox{\Hypertarget{class_sprite_ade7895e85f3dc02a8c6334e5647b42dc}\label{class_sprite_ade7895e85f3dc02a8c6334e5647b42dc}} 
+\index{Sprite@{Sprite}!UnLoad@{UnLoad}}
+\index{UnLoad@{UnLoad}!Sprite@{Sprite}}
+\doxysubsubsection{\texorpdfstring{UnLoad()}{UnLoad()}}
+{\footnotesize\ttfamily virtual void Sprite\+::\+Un\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Method unloads current sprite from texture buffer. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sprite2_d_a0f0a5201f4aa2d626c65883c71f40bc4}{Sprite2D}}, \mbox{\hyperlink{class_multi_sprite_a4893fd6443bb47f7f37a9fdbde59e3f1}{Multi\+Sprite}}, and \mbox{\hyperlink{class_cube_sprite_a1c1fcbe420e33f722cefdd491cffdaa7}{Cube\+Sprite}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{class_sprite_ade7895e85f3dc02a8c6334e5647b42dc_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_sprite_8h}{Sprite.\+h}}\end{DoxyCompactItemize}

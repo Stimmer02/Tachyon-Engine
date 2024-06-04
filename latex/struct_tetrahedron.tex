@@ -1,0 +1,160 @@
+\hypertarget{struct_tetrahedron}{}\doxysection{Tetrahedron Struct Reference}
+\label{struct_tetrahedron}\index{Tetrahedron@{Tetrahedron}}
+
+
+{\ttfamily \#include $<$Tetrahedron.\+h$>$}
+
+
+
+Collaboration diagram for Tetrahedron\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{struct_tetrahedron__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_tetrahedron_a010d9f3a7af07cba4c9438cbd5545d25}{Tetrahedron}} (const int \&p1, const int \&p2, const int \&p3, const int \&p4)
+\item 
+bool \mbox{\hyperlink{struct_tetrahedron_a5a68468ad79520df14d9c4d1ae067f01}{helper\+Fun}} (const int \&p1, const int \&p2, const int \&p3, const int \&p4, const int \&p5) const
+\item 
+bool \mbox{\hyperlink{struct_tetrahedron_a2a6be1e2e1f8434b67b463dc625e1754}{is\+Point\+Inside\+Tetrahedron}} (const int \&point) const
+\item 
+void \mbox{\hyperlink{struct_tetrahedron_ac6bb704ea45106610a46a2ffff7c1fc5}{get\+Circumscribed\+Sphere}} (\mbox{\hyperlink{class_vector3}{Vector3}} \&centre, float \&radius) const
+\item 
+bool \mbox{\hyperlink{struct_tetrahedron_aba129bef8d2f288acc21dc3e1b3ce223}{operator$<$}} (const \mbox{\hyperlink{struct_tetrahedron}{Tetrahedron}} \&other) const
+\item 
+void \mbox{\hyperlink{struct_tetrahedron_a790ed1c815c6413b3daa6bda8d42871c}{operator=}} (const \mbox{\hyperlink{struct_tetrahedron}{Tetrahedron}} \&other)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{struct_tetrahedron_a3e7c2747cb8778dac944b6aa71f82ebd}{points}} \mbox{[}4\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 13 of file Tetrahedron.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_tetrahedron_a010d9f3a7af07cba4c9438cbd5545d25}\label{struct_tetrahedron_a010d9f3a7af07cba4c9438cbd5545d25}} 
+\index{Tetrahedron@{Tetrahedron}!Tetrahedron@{Tetrahedron}}
+\index{Tetrahedron@{Tetrahedron}!Tetrahedron@{Tetrahedron}}
+\doxysubsubsection{\texorpdfstring{Tetrahedron()}{Tetrahedron()}}
+{\footnotesize\ttfamily Tetrahedron\+::\+Tetrahedron (\begin{DoxyParamCaption}\item[{const int \&}]{p1,  }\item[{const int \&}]{p2,  }\item[{const int \&}]{p3,  }\item[{const int \&}]{p4 }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Tetrahedron.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_tetrahedron_ac6bb704ea45106610a46a2ffff7c1fc5}\label{struct_tetrahedron_ac6bb704ea45106610a46a2ffff7c1fc5}} 
+\index{Tetrahedron@{Tetrahedron}!getCircumscribedSphere@{getCircumscribedSphere}}
+\index{getCircumscribedSphere@{getCircumscribedSphere}!Tetrahedron@{Tetrahedron}}
+\doxysubsubsection{\texorpdfstring{getCircumscribedSphere()}{getCircumscribedSphere()}}
+{\footnotesize\ttfamily void Tetrahedron\+::get\+Circumscribed\+Sphere (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector3}{Vector3}} \&}]{centre,  }\item[{float \&}]{radius }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 52 of file Tetrahedron.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_tetrahedron_ac6bb704ea45106610a46a2ffff7c1fc5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{struct_tetrahedron_a5a68468ad79520df14d9c4d1ae067f01}\label{struct_tetrahedron_a5a68468ad79520df14d9c4d1ae067f01}} 
+\index{Tetrahedron@{Tetrahedron}!helperFun@{helperFun}}
+\index{helperFun@{helperFun}!Tetrahedron@{Tetrahedron}}
+\doxysubsubsection{\texorpdfstring{helperFun()}{helperFun()}}
+{\footnotesize\ttfamily bool Tetrahedron\+::helper\+Fun (\begin{DoxyParamCaption}\item[{const int \&}]{p1,  }\item[{const int \&}]{p2,  }\item[{const int \&}]{p3,  }\item[{const int \&}]{p4,  }\item[{const int \&}]{p5 }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 12 of file Tetrahedron.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_tetrahedron_a5a68468ad79520df14d9c4d1ae067f01_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_tetrahedron_a5a68468ad79520df14d9c4d1ae067f01_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{struct_tetrahedron_a2a6be1e2e1f8434b67b463dc625e1754}\label{struct_tetrahedron_a2a6be1e2e1f8434b67b463dc625e1754}} 
+\index{Tetrahedron@{Tetrahedron}!isPointInsideTetrahedron@{isPointInsideTetrahedron}}
+\index{isPointInsideTetrahedron@{isPointInsideTetrahedron}!Tetrahedron@{Tetrahedron}}
+\doxysubsubsection{\texorpdfstring{isPointInsideTetrahedron()}{isPointInsideTetrahedron()}}
+{\footnotesize\ttfamily bool Tetrahedron\+::is\+Point\+Inside\+Tetrahedron (\begin{DoxyParamCaption}\item[{const int \&}]{point }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 26 of file Tetrahedron.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_tetrahedron_a2a6be1e2e1f8434b67b463dc625e1754_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{struct_tetrahedron_aba129bef8d2f288acc21dc3e1b3ce223}\label{struct_tetrahedron_aba129bef8d2f288acc21dc3e1b3ce223}} 
+\index{Tetrahedron@{Tetrahedron}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Tetrahedron@{Tetrahedron}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Tetrahedron\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_tetrahedron}{Tetrahedron}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 33 of file Tetrahedron.\+cpp.
+
+\mbox{\Hypertarget{struct_tetrahedron_a790ed1c815c6413b3daa6bda8d42871c}\label{struct_tetrahedron_a790ed1c815c6413b3daa6bda8d42871c}} 
+\index{Tetrahedron@{Tetrahedron}!operator=@{operator=}}
+\index{operator=@{operator=}!Tetrahedron@{Tetrahedron}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void Tetrahedron\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_tetrahedron}{Tetrahedron}} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file Tetrahedron.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_tetrahedron_a3e7c2747cb8778dac944b6aa71f82ebd}\label{struct_tetrahedron_a3e7c2747cb8778dac944b6aa71f82ebd}} 
+\index{Tetrahedron@{Tetrahedron}!points@{points}}
+\index{points@{points}!Tetrahedron@{Tetrahedron}}
+\doxysubsubsection{\texorpdfstring{points}{points}}
+{\footnotesize\ttfamily int Tetrahedron\+::points\mbox{[}4\mbox{]}}
+
+
+
+Definition at line 14 of file Tetrahedron.\+h.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_tetrahedron_8h}{Tetrahedron.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_tetrahedron_8cpp}{Tetrahedron.\+cpp}}\end{DoxyCompactItemize}

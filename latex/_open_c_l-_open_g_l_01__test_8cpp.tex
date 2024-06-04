@@ -1,0 +1,296 @@
+\hypertarget{_open_c_l-_open_g_l_01__test_8cpp}{}\doxysection{useful\+\_\+tools/\+Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp File Reference}
+\label{_open_c_l-_open_g_l_01__test_8cpp}\index{useful\_tools/OpenCL-\/OpenGL \_test.cpp@{useful\_tools/OpenCL-\/OpenGL \_test.cpp}}
+{\ttfamily \#include $<$CL/opencl.\+hpp$>$}\newline
+{\ttfamily \#include $<$GL/glew.\+h$>$}\newline
+{\ttfamily \#include $<$GLFW/glfw3.\+h$>$}\newline
+{\ttfamily \#include $<$CL/cl\+\_\+gl.\+h$>$}\newline
+{\ttfamily \#include $<$GL/glx.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+Include dependency graph for Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_open_c_l-_open_g_l_01__test_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcolor}{color}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a37ea07405ca286c1570612b42d43b345}{CL\+\_\+\+HPP\+\_\+\+TARGET\+\_\+\+OPENCL\+\_\+\+VERSION}}~200
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2d03c6f2666863543429a06ef642fe6a}{process\+Input}} (GLFWwindow $\ast$window)
+\item 
+GLFWwindow $\ast$ \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_af57c0cf94e3fb70fc5a93d57e9fc5e2b}{initialize\+GLFW}} (uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}, uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}})
+\item 
+cl\+::\+Device \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ab2119ec4795ddf5fc1623287f78d03d6}{get\+Default\+Cl\+Device}} ()
+\item 
+cl\+::\+Program \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a708f610f4ec78537f4da966770d9b57b}{compile\+Copy\+Kernel}} (cl\+::\+Context context, cl\+::\+Device default\+\_\+device)
+\item 
+void \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638}{glfw\+Error\+Callback}} (int error, const char $\ast$description)
+\item 
+void \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a5180f7bf2b71421af837035824a8c8ac}{framebuffer\+\_\+size\+\_\+callback}} (GLFWwindow $\ast$window, int \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, int \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}})
+\item 
+int \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ac9b8e938285a9b837c60f501e59c0540}{local\+Xsize}} = 16
+\item 
+uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_acb0a5199dcd35d969378873976619027}{local\+Ysize}} = 16
+\item 
+int \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}} = 1024
+\item 
+int \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}} = 1024
+\item 
+GLuint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a8dcd4760dbb89b843e5259a7b290938d}{PBO}}
+\item 
+GLuint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}{texture}}
+\item 
+GLuint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a3b742dda5bdb4e360f14bfbe00340439}{fbo\+Id}}
+\item 
+bool \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_afd9cc194bc58f807c63dc9ad6ed7bec1}{FALLBACK}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a37ea07405ca286c1570612b42d43b345}\label{_open_c_l-_open_g_l_01__test_8cpp_a37ea07405ca286c1570612b42d43b345}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!CL\_HPP\_TARGET\_OPENCL\_VERSION@{CL\_HPP\_TARGET\_OPENCL\_VERSION}}
+\index{CL\_HPP\_TARGET\_OPENCL\_VERSION@{CL\_HPP\_TARGET\_OPENCL\_VERSION}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{CL\_HPP\_TARGET\_OPENCL\_VERSION}{CL\_HPP\_TARGET\_OPENCL\_VERSION}}
+{\footnotesize\ttfamily \#define CL\+\_\+\+HPP\+\_\+\+TARGET\+\_\+\+OPENCL\+\_\+\+VERSION~200}
+
+
+
+Definition at line 1 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a708f610f4ec78537f4da966770d9b57b}\label{_open_c_l-_open_g_l_01__test_8cpp_a708f610f4ec78537f4da966770d9b57b}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!compileCopyKernel@{compileCopyKernel}}
+\index{compileCopyKernel@{compileCopyKernel}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{compileCopyKernel()}{compileCopyKernel()}}
+{\footnotesize\ttfamily cl\+::\+Program compile\+Copy\+Kernel (\begin{DoxyParamCaption}\item[{cl\+::\+Context}]{context,  }\item[{cl\+::\+Device}]{default\+\_\+device }\end{DoxyParamCaption})}
+
+
+
+Definition at line 284 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{_open_c_l-_open_g_l_01__test_8cpp_a708f610f4ec78537f4da966770d9b57b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a5180f7bf2b71421af837035824a8c8ac}\label{_open_c_l-_open_g_l_01__test_8cpp_a5180f7bf2b71421af837035824a8c8ac}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!framebuffer\_size\_callback@{framebuffer\_size\_callback}}
+\index{framebuffer\_size\_callback@{framebuffer\_size\_callback}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{framebuffer\_size\_callback()}{framebuffer\_size\_callback()}}
+{\footnotesize\ttfamily void framebuffer\+\_\+size\+\_\+callback (\begin{DoxyParamCaption}\item[{GLFWwindow $\ast$}]{window,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 326 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{_open_c_l-_open_g_l_01__test_8cpp_a5180f7bf2b71421af837035824a8c8ac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_ab2119ec4795ddf5fc1623287f78d03d6}\label{_open_c_l-_open_g_l_01__test_8cpp_ab2119ec4795ddf5fc1623287f78d03d6}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!getDefaultClDevice@{getDefaultClDevice}}
+\index{getDefaultClDevice@{getDefaultClDevice}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{getDefaultClDevice()}{getDefaultClDevice()}}
+{\footnotesize\ttfamily cl\+::\+Device get\+Default\+Cl\+Device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 245 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{_open_c_l-_open_g_l_01__test_8cpp_ab2119ec4795ddf5fc1623287f78d03d6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638}\label{_open_c_l-_open_g_l_01__test_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!glfwErrorCallback@{glfwErrorCallback}}
+\index{glfwErrorCallback@{glfwErrorCallback}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{glfwErrorCallback()}{glfwErrorCallback()}}
+{\footnotesize\ttfamily void glfw\+Error\+Callback (\begin{DoxyParamCaption}\item[{int}]{error,  }\item[{const char $\ast$}]{description }\end{DoxyParamCaption})}
+
+
+
+Definition at line 322 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_open_c_l-_open_g_l_01__test_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_af57c0cf94e3fb70fc5a93d57e9fc5e2b}\label{_open_c_l-_open_g_l_01__test_8cpp_af57c0cf94e3fb70fc5a93d57e9fc5e2b}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!initializeGLFW@{initializeGLFW}}
+\index{initializeGLFW@{initializeGLFW}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{initializeGLFW()}{initializeGLFW()}}
+{\footnotesize\ttfamily GLFWwindow$\ast$ initialize\+GLFW (\begin{DoxyParamCaption}\item[{uint}]{height,  }\item[{uint}]{width }\end{DoxyParamCaption})}
+
+
+
+Definition at line 223 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{_open_c_l-_open_g_l_01__test_8cpp_af57c0cf94e3fb70fc5a93d57e9fc5e2b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{_open_c_l-_open_g_l_01__test_8cpp_af57c0cf94e3fb70fc5a93d57e9fc5e2b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{_open_c_l-_open_g_l_01__test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!main@{main}}
+\index{main@{main}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 50 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_open_c_l-_open_g_l_01__test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a2d03c6f2666863543429a06ef642fe6a}\label{_open_c_l-_open_g_l_01__test_8cpp_a2d03c6f2666863543429a06ef642fe6a}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!processInput@{processInput}}
+\index{processInput@{processInput}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{processInput()}{processInput()}}
+{\footnotesize\ttfamily void process\+Input (\begin{DoxyParamCaption}\item[{GLFWwindow $\ast$}]{window }\end{DoxyParamCaption})}
+
+
+
+Definition at line 333 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{_open_c_l-_open_g_l_01__test_8cpp_a2d03c6f2666863543429a06ef642fe6a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_afd9cc194bc58f807c63dc9ad6ed7bec1}\label{_open_c_l-_open_g_l_01__test_8cpp_afd9cc194bc58f807c63dc9ad6ed7bec1}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!FALLBACK@{FALLBACK}}
+\index{FALLBACK@{FALLBACK}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{FALLBACK}{FALLBACK}}
+{\footnotesize\ttfamily bool FALLBACK = false}
+
+
+
+Definition at line 48 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a3b742dda5bdb4e360f14bfbe00340439}\label{_open_c_l-_open_g_l_01__test_8cpp_a3b742dda5bdb4e360f14bfbe00340439}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!fboId@{fboId}}
+\index{fboId@{fboId}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{fboId}{fboId}}
+{\footnotesize\ttfamily GLuint fbo\+Id}
+
+
+
+Definition at line 45 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}\label{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!height@{height}}
+\index{height@{height}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily int height = 1024}
+
+
+
+Definition at line 41 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_ac9b8e938285a9b837c60f501e59c0540}\label{_open_c_l-_open_g_l_01__test_8cpp_ac9b8e938285a9b837c60f501e59c0540}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!localXsize@{localXsize}}
+\index{localXsize@{localXsize}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{localXsize}{localXsize}}
+{\footnotesize\ttfamily uint local\+Xsize = 16}
+
+
+
+Definition at line 38 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_acb0a5199dcd35d969378873976619027}\label{_open_c_l-_open_g_l_01__test_8cpp_acb0a5199dcd35d969378873976619027}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!localYsize@{localYsize}}
+\index{localYsize@{localYsize}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{localYsize}{localYsize}}
+{\footnotesize\ttfamily uint local\+Ysize = 16}
+
+
+
+Definition at line 39 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a8dcd4760dbb89b843e5259a7b290938d}\label{_open_c_l-_open_g_l_01__test_8cpp_a8dcd4760dbb89b843e5259a7b290938d}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!PBO@{PBO}}
+\index{PBO@{PBO}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{PBO}{PBO}}
+{\footnotesize\ttfamily GLuint PBO}
+
+
+
+Definition at line 43 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}\label{_open_c_l-_open_g_l_01__test_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!texture@{texture}}
+\index{texture@{texture}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily GLuint texture}
+
+
+
+Definition at line 44 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+\mbox{\Hypertarget{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}\label{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}} 
+\index{OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}!width@{width}}
+\index{width@{width}!OpenCL-\/OpenGL \_test.cpp@{OpenCL-\/OpenGL \_test.cpp}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily int width = 1024}
+
+
+
+Definition at line 41 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+

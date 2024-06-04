@@ -1,0 +1,7 @@
+<map id="TransformStack::Inverse" name="TransformStack::Inverse">
+<area shape="rect" id="node1" title="Replaces matrix at the top of stack with its inverse." alt="" coords="5,31,184,57"/>
+<area shape="rect" id="node2" href="$class_matrix.html#ac1e575ac083839c44cd50f56e627a320" title=" " alt="" coords="232,31,352,57"/>
+<area shape="rect" id="node3" href="$class_matrix.html#a1960e8bd2a01c25ac29c99f176a9a830" title=" " alt="" coords="414,5,569,32"/>
+<area shape="rect" id="node4" href="$class_matrix.html#a851b1609bb3ebe21def76af3809e77f0" title=" " alt="" coords="400,56,583,83"/>
+<area shape="rect" id="node5" href="$class_matrix.html#a56b80ab6d217060323cc70fa824cc08a" title=" " alt="" coords="631,56,740,83"/>
+</map>

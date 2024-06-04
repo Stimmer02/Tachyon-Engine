@@ -1,0 +1,246 @@
+\hypertarget{class_fps_limiter}{}\doxysection{Fps\+Limiter Class Reference}
+\label{class_fps_limiter}\index{FpsLimiter@{FpsLimiter}}
+
+
+{\ttfamily \#include $<$Fps\+Limiter.\+h$>$}
+
+
+
+Inheritance diagram for Fps\+Limiter\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_fps_limiter__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Fps\+Limiter\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fps_limiter__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_fps_limiter_a3f995da8c8694d921a3ee6c8346fe84f}{Fps\+Limiter}} ()
+\item 
+\mbox{\hyperlink{class_fps_limiter_aa3bec16c4ef3ebfbbcb01e3251027b5e}{$\sim$\+Fps\+Limiter}} ()
+\item 
+void \mbox{\hyperlink{class_fps_limiter_a364cf369f4c61e9037d824000fadf02a}{Share}} (\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$snr) override
+\begin{DoxyCompactList}\small\item\em This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_fps_limiter_a85a54b7b7b48b8ae38135813106c3944}{On\+Load}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_fps_limiter_a0f21abad0ea445b19b8b409c6158be5f}{On\+Unload}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system shutdown and by default does nothing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_fps_limiter_a78f52ef196dfb98235232248a3e72050}{Execute}} () override
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$ \mbox{\hyperlink{class_fps_limiter_ab8df896ea34f329755eda020c4df1703}{resource\+Manager}}
+\item 
+\mbox{\hyperlink{_timer_8h_a01c67b695032cccbb6e4e2021b2e0d9e}{Timepoint}} \mbox{\hyperlink{class_fps_limiter_a2795eaca0b5eb3f2e38c1adf39b3685b}{last\+Timepoint}}
+\item 
+const char $\ast$ \mbox{\hyperlink{class_fps_limiter_ac0c46a170e77e1861e6f88acaf593f7a}{PPConfig\+Path}}
+\item 
+float \mbox{\hyperlink{class_fps_limiter_a1301485e1e0262c3754308e5768548d4}{fps}}
+\item 
+\mbox{\hyperlink{class_timer}{Timer}} $\ast$ \mbox{\hyperlink{class_fps_limiter_aad0b9a81c6cac1ffb75fc7bf0d697484}{timer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 12 of file Fps\+Limiter.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_fps_limiter_a3f995da8c8694d921a3ee6c8346fe84f}\label{class_fps_limiter_a3f995da8c8694d921a3ee6c8346fe84f}} 
+\index{FpsLimiter@{FpsLimiter}!FpsLimiter@{FpsLimiter}}
+\index{FpsLimiter@{FpsLimiter}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{FpsLimiter()}{FpsLimiter()}}
+{\footnotesize\ttfamily Fps\+Limiter\+::\+Fps\+Limiter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Fps\+Limiter.\+cpp.
+
+\mbox{\Hypertarget{class_fps_limiter_aa3bec16c4ef3ebfbbcb01e3251027b5e}\label{class_fps_limiter_aa3bec16c4ef3ebfbbcb01e3251027b5e}} 
+\index{FpsLimiter@{FpsLimiter}!````~FpsLimiter@{$\sim$FpsLimiter}}
+\index{````~FpsLimiter@{$\sim$FpsLimiter}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{$\sim$FpsLimiter()}{~FpsLimiter()}}
+{\footnotesize\ttfamily Fps\+Limiter\+::$\sim$\+Fps\+Limiter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file Fps\+Limiter.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_fps_limiter_a78f52ef196dfb98235232248a3e72050}\label{class_fps_limiter_a78f52ef196dfb98235232248a3e72050}} 
+\index{FpsLimiter@{FpsLimiter}!Execute@{Execute}}
+\index{Execute@{Execute}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void Fps\+Limiter\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implements \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{System}}.
+
+
+
+Definition at line 35 of file Fps\+Limiter.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fps_limiter_a78f52ef196dfb98235232248a3e72050_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_fps_limiter_a85a54b7b7b48b8ae38135813106c3944}\label{class_fps_limiter_a85a54b7b7b48b8ae38135813106c3944}} 
+\index{FpsLimiter@{FpsLimiter}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void Fps\+Limiter\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{System}}.
+
+
+
+Definition at line 19 of file Fps\+Limiter.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fps_limiter_a85a54b7b7b48b8ae38135813106c3944_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_fps_limiter_a0f21abad0ea445b19b8b409c6158be5f}\label{class_fps_limiter_a0f21abad0ea445b19b8b409c6158be5f}} 
+\index{FpsLimiter@{FpsLimiter}!OnUnload@{OnUnload}}
+\index{OnUnload@{OnUnload}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{OnUnload()}{OnUnload()}}
+{\footnotesize\ttfamily void Fps\+Limiter\+::\+On\+Unload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system shutdown and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a79d6f674effc2030b94f439543b9bbaa}{System}}.
+
+
+
+Definition at line 31 of file Fps\+Limiter.\+cpp.
+
+\mbox{\Hypertarget{class_fps_limiter_a364cf369f4c61e9037d824000fadf02a}\label{class_fps_limiter_a364cf369f4c61e9037d824000fadf02a}} 
+\index{FpsLimiter@{FpsLimiter}!Share@{Share}}
+\index{Share@{Share}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily void Fps\+Limiter\+::\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$}]{resource\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}{System}}.
+
+
+
+Definition at line 12 of file Fps\+Limiter.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_fps_limiter_a364cf369f4c61e9037d824000fadf02a_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_fps_limiter_a1301485e1e0262c3754308e5768548d4}\label{class_fps_limiter_a1301485e1e0262c3754308e5768548d4}} 
+\index{FpsLimiter@{FpsLimiter}!fps@{fps}}
+\index{fps@{fps}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{fps}{fps}}
+{\footnotesize\ttfamily float Fps\+Limiter\+::fps\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file Fps\+Limiter.\+h.
+
+\mbox{\Hypertarget{class_fps_limiter_a2795eaca0b5eb3f2e38c1adf39b3685b}\label{class_fps_limiter_a2795eaca0b5eb3f2e38c1adf39b3685b}} 
+\index{FpsLimiter@{FpsLimiter}!lastTimepoint@{lastTimepoint}}
+\index{lastTimepoint@{lastTimepoint}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{lastTimepoint}{lastTimepoint}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_timer_8h_a01c67b695032cccbb6e4e2021b2e0d9e}{Timepoint}} Fps\+Limiter\+::last\+Timepoint\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file Fps\+Limiter.\+h.
+
+\mbox{\Hypertarget{class_fps_limiter_ac0c46a170e77e1861e6f88acaf593f7a}\label{class_fps_limiter_ac0c46a170e77e1861e6f88acaf593f7a}} 
+\index{FpsLimiter@{FpsLimiter}!PPConfigPath@{PPConfigPath}}
+\index{PPConfigPath@{PPConfigPath}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{PPConfigPath}{PPConfigPath}}
+{\footnotesize\ttfamily const char$\ast$ Fps\+Limiter\+::\+PPConfig\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file Fps\+Limiter.\+h.
+
+\mbox{\Hypertarget{class_fps_limiter_ab8df896ea34f329755eda020c4df1703}\label{class_fps_limiter_ab8df896ea34f329755eda020c4df1703}} 
+\index{FpsLimiter@{FpsLimiter}!resourceManager@{resourceManager}}
+\index{resourceManager@{resourceManager}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{resourceManager}{resourceManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}}$\ast$ Fps\+Limiter\+::resource\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file Fps\+Limiter.\+h.
+
+\mbox{\Hypertarget{class_fps_limiter_aad0b9a81c6cac1ffb75fc7bf0d697484}\label{class_fps_limiter_aad0b9a81c6cac1ffb75fc7bf0d697484}} 
+\index{FpsLimiter@{FpsLimiter}!timer@{timer}}
+\index{timer@{timer}!FpsLimiter@{FpsLimiter}}
+\doxysubsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer}{Timer}}$\ast$ Fps\+Limiter\+::timer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 30 of file Fps\+Limiter.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_fps_limiter_8h}{Fps\+Limiter.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_fps_limiter_8cpp}{Fps\+Limiter.\+cpp}}\end{DoxyCompactItemize}

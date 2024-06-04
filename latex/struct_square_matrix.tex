@@ -1,0 +1,130 @@
+\hypertarget{struct_square_matrix}{}\doxysection{Square\+Matrix$<$ T $>$ Struct Template Reference}
+\label{struct_square_matrix}\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Square\+Matrix.\+h$>$}
+
+
+
+Collaboration diagram for Square\+Matrix$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{struct_square_matrix__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{struct_square_matrix_aaa4ed37ee32f731aa494e385ae61ae6e}{set\+Arr}} (T $\ast$$\ast$values, const unsigned int \&new\+Size)
+\item 
+void \mbox{\hyperlink{struct_square_matrix_ad3ad67c01c1cdf2df8be5349aaefe169}{fast\+Set\+ArrR}} (const \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$ \&sm, const unsigned int \&new\+Size, const unsigned int \&row\+Id)
+\item 
+void \mbox{\hyperlink{struct_square_matrix_a3776c624df4af5e54b016a8232dc6e92}{fast\+Set\+ArrC}} (const \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$ \&sm, const unsigned int \&new\+Size, const unsigned int \&col\+Id)
+\item 
+T \mbox{\hyperlink{struct_square_matrix_a5f1de37f1144866656c93eaca3e0aff6}{get\+Determinant}} ()
+\item 
+T \mbox{\hyperlink{struct_square_matrix_ae9b96a57a867c17644c623935d2d0e85}{get\+Sub\+Determinant}} (const int \&useless\+Col)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{struct_square_matrix_ad6735c329c44199a4d5ee891b366ee60}{size}}
+\item 
+T $\ast$$\ast$ \mbox{\hyperlink{struct_square_matrix_af46a64d97fcef2a70d7609530690423c}{arr}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+struct Square\+Matrix$<$ T $>$}
+
+
+
+Definition at line 6 of file Square\+Matrix.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_square_matrix_a3776c624df4af5e54b016a8232dc6e92}\label{struct_square_matrix_a3776c624df4af5e54b016a8232dc6e92}} 
+\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}!fastSetArrC@{fastSetArrC}}
+\index{fastSetArrC@{fastSetArrC}!SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{fastSetArrC()}{fastSetArrC()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$\+::fast\+Set\+ArrC (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$ \&}]{sm,  }\item[{const unsigned int \&}]{new\+Size,  }\item[{const unsigned int \&}]{col\+Id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{struct_square_matrix_ad3ad67c01c1cdf2df8be5349aaefe169}\label{struct_square_matrix_ad3ad67c01c1cdf2df8be5349aaefe169}} 
+\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}!fastSetArrR@{fastSetArrR}}
+\index{fastSetArrR@{fastSetArrR}!SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{fastSetArrR()}{fastSetArrR()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$\+::fast\+Set\+ArrR (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$ \&}]{sm,  }\item[{const unsigned int \&}]{new\+Size,  }\item[{const unsigned int \&}]{row\+Id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{struct_square_matrix_a5f1de37f1144866656c93eaca3e0aff6}\label{struct_square_matrix_a5f1de37f1144866656c93eaca3e0aff6}} 
+\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}!getDeterminant@{getDeterminant}}
+\index{getDeterminant@{getDeterminant}!SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getDeterminant()}{getDeterminant()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$\+::get\+Determinant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{struct_square_matrix_ae9b96a57a867c17644c623935d2d0e85}\label{struct_square_matrix_ae9b96a57a867c17644c623935d2d0e85}} 
+\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}!getSubDeterminant@{getSubDeterminant}}
+\index{getSubDeterminant@{getSubDeterminant}!SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getSubDeterminant()}{getSubDeterminant()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$\+::get\+Sub\+Determinant (\begin{DoxyParamCaption}\item[{const int \&}]{useless\+Col }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_square_matrix_ae9b96a57a867c17644c623935d2d0e85_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{struct_square_matrix_aaa4ed37ee32f731aa494e385ae61ae6e}\label{struct_square_matrix_aaa4ed37ee32f731aa494e385ae61ae6e}} 
+\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}!setArr@{setArr}}
+\index{setArr@{setArr}!SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{setArr()}{setArr()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$\+::set\+Arr (\begin{DoxyParamCaption}\item[{T $\ast$$\ast$}]{values,  }\item[{const unsigned int \&}]{new\+Size }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_square_matrix_aaa4ed37ee32f731aa494e385ae61ae6e_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_square_matrix_af46a64d97fcef2a70d7609530690423c}\label{struct_square_matrix_af46a64d97fcef2a70d7609530690423c}} 
+\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}!arr@{arr}}
+\index{arr@{arr}!SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{arr}{arr}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$$\ast$ \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$\+::arr}
+
+
+
+Definition at line 9 of file Square\+Matrix.\+h.
+
+\mbox{\Hypertarget{struct_square_matrix_ad6735c329c44199a4d5ee891b366ee60}\label{struct_square_matrix_ad6735c329c44199a4d5ee891b366ee60}} 
+\index{SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}!size@{size}}
+\index{size@{size}!SquareMatrix$<$ T $>$@{SquareMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+unsigned int \mbox{\hyperlink{struct_square_matrix}{Square\+Matrix}}$<$ T $>$\+::size}
+
+
+
+Definition at line 8 of file Square\+Matrix.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_square_matrix_8h}{Square\+Matrix.\+h}}\end{DoxyCompactItemize}

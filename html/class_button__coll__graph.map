@@ -1,0 +1,9 @@
+<map id="Button" name="Button">
+<area shape="rect" id="node1" title=" " alt="" coords="55,1039,148,1131"/>
+<area shape="rect" id="node2" href="$class_interactive_component.html" title=" " alt="" coords="5,868,197,989"/>
+<area shape="rect" id="node3" href="$class_i_event_listener.html" title=" " alt="" coords="28,639,143,716"/>
+<area shape="rect" id="node4" href="$class_component.html" title=" " alt="" coords="167,536,291,819"/>
+<area shape="rect" id="node5" href="$class_sprite2_d.html" title=" " alt="" coords="60,205,212,473"/>
+<area shape="rect" id="node6" href="$class_sprite.html" title=" " alt="" coords="60,5,212,156"/>
+<area shape="rect" id="node7" href="$struct_color.html" title=" " alt="" coords="237,279,339,400"/>
+</map>

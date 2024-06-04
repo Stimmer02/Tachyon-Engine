@@ -1,0 +1,4 @@
+<map id="Channel::Send" name="Channel::Send">
+<area shape="rect" id="node1" title="Sends oldest message from queue to all or specified client." alt="" coords="5,5,120,32"/>
+<area shape="rect" id="node2" href="$class_i_client.html#ad7663ac69905b527453712d2de8a3ea4" title="Enables handling of received messages." alt="" coords="168,5,351,32"/>
+</map>

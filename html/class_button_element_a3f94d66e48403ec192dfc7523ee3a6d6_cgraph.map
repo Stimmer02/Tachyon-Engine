@@ -1,0 +1,7 @@
+<map id="ButtonElement::Render" name="ButtonElement::Render">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,179,83"/>
+<area shape="rect" id="node2" href="$class_sprite.html#a7157f052d53e9db60d4d66d3637e172f" title="Method loads current sprite to texture buffer." alt="" coords="279,5,377,32"/>
+<area shape="rect" id="node3" href="$class_g_l_shader.html#a52a56546d0a1f4b6bb06e67f0dd75466" title=" " alt="" coords="227,56,429,83"/>
+<area shape="rect" id="node5" href="$class_sprite.html#ade7895e85f3dc02a8c6334e5647b42dc" title="Method unloads current sprite from texture buffer." alt="" coords="269,107,387,133"/>
+<area shape="rect" id="node4" href="$class_g_l_shader.html#ac85dbe6852f4fcf6ffa880ad6599da52" title=" " alt="" coords="477,56,700,83"/>
+</map>

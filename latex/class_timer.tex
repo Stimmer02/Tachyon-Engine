@@ -1,0 +1,286 @@
+\hypertarget{class_timer}{}\doxysection{Timer Class Reference}
+\label{class_timer}\index{Timer@{Timer}}
+
+
+{\ttfamily \#include $<$Timer.\+h$>$}
+
+
+
+Collaboration diagram for Timer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{class_timer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_timer_a5f16e8da27d2a5a5242dead46de05d97}{Timer}} ()
+\item 
+void \mbox{\hyperlink{class_timer_a84ddc4f433cb9b40012ff4aac61445f6}{Tic\+Tac}} ()
+\item 
+double \& \mbox{\hyperlink{class_timer_abba81f734e2ffd71f2b1ae19e004104f}{Get\+Delta\+Time}} ()
+\item 
+double \& \mbox{\hyperlink{class_timer_acfc3bc7007902ca94d07742ce891ed5d}{Get\+Delta\+Frame}} ()
+\item 
+uint32\+\_\+t \& \mbox{\hyperlink{class_timer_aa6a17400d5739c6fc94a6b262e313f26}{Get\+Frame\+Count}} ()
+\item 
+double \& \mbox{\hyperlink{class_timer_a7c5bdd195b72001531ada53c2518226e}{Get\+Accumulated\+Time}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{_timer_8h_a01c67b695032cccbb6e4e2021b2e0d9e}{Timepoint}} \mbox{\hyperlink{class_timer_afe6517a499ea588a44fb694f856cdb28}{Get\+Current\+Time}} ()
+\item 
+static double \mbox{\hyperlink{class_timer_a220109b9eb5d12fdedfcae13e3e1888b}{Get\+Duration\+In\+Seconds}} (const std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::duration \&duration)
+\item 
+static double \mbox{\hyperlink{class_timer_acdd219ac650aacfde707a9d2283c35d5}{Get\+Duration\+In\+Miliseconds}} (const std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::duration \&duration)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_timer_8h_a01c67b695032cccbb6e4e2021b2e0d9e}{Timepoint}} \mbox{\hyperlink{class_timer_a26c07380df97bc82925fe68036d703b8}{last\+Time}}
+\item 
+double \mbox{\hyperlink{class_timer_a1e19457b65d21687924b48e2a1d73c11}{accumulated\+Time}}
+\item 
+double \mbox{\hyperlink{class_timer_a35d5bc80da7d4a10589fcb353e762d5f}{delta\+Frame}}
+\item 
+double \mbox{\hyperlink{class_timer_a1a391b2b02a45aa4220f8d466ae63237}{delta\+Time}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_timer_a6b176d5656dd5f3e7ce9625460cee0c7}{last\+Frame\+Count}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file Timer.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_timer_a5f16e8da27d2a5a5242dead46de05d97}\label{class_timer_a5f16e8da27d2a5a5242dead46de05d97}} 
+\index{Timer@{Timer}!Timer@{Timer}}
+\index{Timer@{Timer}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{Timer()}{Timer()}}
+{\footnotesize\ttfamily Timer\+::\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 23 of file Timer.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{class_timer_a5f16e8da27d2a5a5242dead46de05d97_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_timer_a7c5bdd195b72001531ada53c2518226e}\label{class_timer_a7c5bdd195b72001531ada53c2518226e}} 
+\index{Timer@{Timer}!GetAccumulatedTime@{GetAccumulatedTime}}
+\index{GetAccumulatedTime@{GetAccumulatedTime}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{GetAccumulatedTime()}{GetAccumulatedTime()}}
+{\footnotesize\ttfamily double\& Timer\+::\+Get\+Accumulated\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 52 of file Timer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_a7c5bdd195b72001531ada53c2518226e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_timer_afe6517a499ea588a44fb694f856cdb28}\label{class_timer_afe6517a499ea588a44fb694f856cdb28}} 
+\index{Timer@{Timer}!GetCurrentTime@{GetCurrentTime}}
+\index{GetCurrentTime@{GetCurrentTime}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{GetCurrentTime()}{GetCurrentTime()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{_timer_8h_a01c67b695032cccbb6e4e2021b2e0d9e}{Timepoint}} Timer\+::\+Get\+Current\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 56 of file Timer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_afe6517a499ea588a44fb694f856cdb28_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_timer_acfc3bc7007902ca94d07742ce891ed5d}\label{class_timer_acfc3bc7007902ca94d07742ce891ed5d}} 
+\index{Timer@{Timer}!GetDeltaFrame@{GetDeltaFrame}}
+\index{GetDeltaFrame@{GetDeltaFrame}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{GetDeltaFrame()}{GetDeltaFrame()}}
+{\footnotesize\ttfamily double\& Timer\+::\+Get\+Delta\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 44 of file Timer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_acfc3bc7007902ca94d07742ce891ed5d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_timer_abba81f734e2ffd71f2b1ae19e004104f}\label{class_timer_abba81f734e2ffd71f2b1ae19e004104f}} 
+\index{Timer@{Timer}!GetDeltaTime@{GetDeltaTime}}
+\index{GetDeltaTime@{GetDeltaTime}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{GetDeltaTime()}{GetDeltaTime()}}
+{\footnotesize\ttfamily double\& Timer\+::\+Get\+Delta\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 40 of file Timer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_abba81f734e2ffd71f2b1ae19e004104f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_timer_acdd219ac650aacfde707a9d2283c35d5}\label{class_timer_acdd219ac650aacfde707a9d2283c35d5}} 
+\index{Timer@{Timer}!GetDurationInMiliseconds@{GetDurationInMiliseconds}}
+\index{GetDurationInMiliseconds@{GetDurationInMiliseconds}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{GetDurationInMiliseconds()}{GetDurationInMiliseconds()}}
+{\footnotesize\ttfamily static double Timer\+::\+Get\+Duration\+In\+Miliseconds (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::duration \&}]{duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 64 of file Timer.\+h.
+
+\mbox{\Hypertarget{class_timer_a220109b9eb5d12fdedfcae13e3e1888b}\label{class_timer_a220109b9eb5d12fdedfcae13e3e1888b}} 
+\index{Timer@{Timer}!GetDurationInSeconds@{GetDurationInSeconds}}
+\index{GetDurationInSeconds@{GetDurationInSeconds}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{GetDurationInSeconds()}{GetDurationInSeconds()}}
+{\footnotesize\ttfamily static double Timer\+::\+Get\+Duration\+In\+Seconds (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::duration \&}]{duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 60 of file Timer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_a220109b9eb5d12fdedfcae13e3e1888b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_timer_aa6a17400d5739c6fc94a6b262e313f26}\label{class_timer_aa6a17400d5739c6fc94a6b262e313f26}} 
+\index{Timer@{Timer}!GetFrameCount@{GetFrameCount}}
+\index{GetFrameCount@{GetFrameCount}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{GetFrameCount()}{GetFrameCount()}}
+{\footnotesize\ttfamily uint32\+\_\+t\& Timer\+::\+Get\+Frame\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 48 of file Timer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_aa6a17400d5739c6fc94a6b262e313f26_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_timer_a84ddc4f433cb9b40012ff4aac61445f6}\label{class_timer_a84ddc4f433cb9b40012ff4aac61445f6}} 
+\index{Timer@{Timer}!TicTac@{TicTac}}
+\index{TicTac@{TicTac}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{TicTac()}{TicTac()}}
+{\footnotesize\ttfamily void Timer\+::\+Tic\+Tac (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 28 of file Timer.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_a84ddc4f433cb9b40012ff4aac61445f6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_timer_a84ddc4f433cb9b40012ff4aac61445f6_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_timer_a1e19457b65d21687924b48e2a1d73c11}\label{class_timer_a1e19457b65d21687924b48e2a1d73c11}} 
+\index{Timer@{Timer}!accumulatedTime@{accumulatedTime}}
+\index{accumulatedTime@{accumulatedTime}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{accumulatedTime}{accumulatedTime}}
+{\footnotesize\ttfamily double Timer\+::accumulated\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Timer.\+h.
+
+\mbox{\Hypertarget{class_timer_a35d5bc80da7d4a10589fcb353e762d5f}\label{class_timer_a35d5bc80da7d4a10589fcb353e762d5f}} 
+\index{Timer@{Timer}!deltaFrame@{deltaFrame}}
+\index{deltaFrame@{deltaFrame}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{deltaFrame}{deltaFrame}}
+{\footnotesize\ttfamily double Timer\+::delta\+Frame\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Timer.\+h.
+
+\mbox{\Hypertarget{class_timer_a1a391b2b02a45aa4220f8d466ae63237}\label{class_timer_a1a391b2b02a45aa4220f8d466ae63237}} 
+\index{Timer@{Timer}!deltaTime@{deltaTime}}
+\index{deltaTime@{deltaTime}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{deltaTime}{deltaTime}}
+{\footnotesize\ttfamily double Timer\+::delta\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Timer.\+h.
+
+\mbox{\Hypertarget{class_timer_a6b176d5656dd5f3e7ce9625460cee0c7}\label{class_timer_a6b176d5656dd5f3e7ce9625460cee0c7}} 
+\index{Timer@{Timer}!lastFrameCount@{lastFrameCount}}
+\index{lastFrameCount@{lastFrameCount}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{lastFrameCount}{lastFrameCount}}
+{\footnotesize\ttfamily uint32\+\_\+t Timer\+::last\+Frame\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Timer.\+h.
+
+\mbox{\Hypertarget{class_timer_a26c07380df97bc82925fe68036d703b8}\label{class_timer_a26c07380df97bc82925fe68036d703b8}} 
+\index{Timer@{Timer}!lastTime@{lastTime}}
+\index{lastTime@{lastTime}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{lastTime}{lastTime}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_timer_8h_a01c67b695032cccbb6e4e2021b2e0d9e}{Timepoint}} Timer\+::last\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Timer.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_timer_8h}{Timer.\+h}}\end{DoxyCompactItemize}

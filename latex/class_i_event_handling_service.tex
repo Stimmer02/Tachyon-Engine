@@ -1,0 +1,138 @@
+\hypertarget{class_i_event_handling_service}{}\doxysection{IEvent\+Handling\+Service Class Reference}
+\label{class_i_event_handling_service}\index{IEventHandlingService@{IEventHandlingService}}
+
+
+{\ttfamily \#include $<$IEvent\+Handling\+Service.\+h$>$}
+
+
+
+Inheritance diagram for IEvent\+Handling\+Service\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{class_i_event_handling_service__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for IEvent\+Handling\+Service\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{class_i_event_handling_service__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_event_handling_service_a2c2674f6c93aee586bb2a09c46cadd2e}{Subscribe}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event, const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$listener)=0
+\begin{DoxyCompactList}\small\item\em Function attach listener to listeners collection. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_event_handling_service_aba31bdfbfa92bd7a053f36bcdee05350}{Unsubscribe}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event, const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$listener)=0
+\begin{DoxyCompactList}\small\item\em Function removes listener from listeners collection. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_event_handling_service_a7f4f9e9a706cf3661209827f0410bc9e}{Publish}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event, const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$listener)=0
+\begin{DoxyCompactList}\small\item\em Function invokes specified event on concrete listener. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_event_handling_service_a3e02438a394c6e38fce722034368ae28}{Publish}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event)=0
+\begin{DoxyCompactList}\small\item\em Function calls all assigned members of specified event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file IEvent\+Handling\+Service.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_event_handling_service_a3e02438a394c6e38fce722034368ae28}\label{class_i_event_handling_service_a3e02438a394c6e38fce722034368ae28}} 
+\index{IEventHandlingService@{IEventHandlingService}!Publish@{Publish}}
+\index{Publish@{Publish}!IEventHandlingService@{IEventHandlingService}}
+\doxysubsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void IEvent\+Handling\+Service\+::\+Publish (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Function calls all assigned members of specified event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & type of event \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_event_manager_a3cc3e53906681aefe83b89ec837ca3af}{Event\+Manager}}.
+
+\mbox{\Hypertarget{class_i_event_handling_service_a7f4f9e9a706cf3661209827f0410bc9e}\label{class_i_event_handling_service_a7f4f9e9a706cf3661209827f0410bc9e}} 
+\index{IEventHandlingService@{IEventHandlingService}!Publish@{Publish}}
+\index{Publish@{Publish}!IEventHandlingService@{IEventHandlingService}}
+\doxysubsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void IEvent\+Handling\+Service\+::\+Publish (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event,  }\item[{const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Function invokes specified event on concrete listener. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & type of event \\
+\hline
+{\em listener} & pointer to concrete listener \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_event_manager_aa8a7bbe1267b180afa0eae939e0f360a}{Event\+Manager}}.
+
+\mbox{\Hypertarget{class_i_event_handling_service_a2c2674f6c93aee586bb2a09c46cadd2e}\label{class_i_event_handling_service_a2c2674f6c93aee586bb2a09c46cadd2e}} 
+\index{IEventHandlingService@{IEventHandlingService}!Subscribe@{Subscribe}}
+\index{Subscribe@{Subscribe}!IEventHandlingService@{IEventHandlingService}}
+\doxysubsubsection{\texorpdfstring{Subscribe()}{Subscribe()}}
+{\footnotesize\ttfamily virtual void IEvent\+Handling\+Service\+::\+Subscribe (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event,  }\item[{const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Function attach listener to listeners collection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em listener} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_event_manager_af05dd0697bc00db48bc31c55b6a36df2}{Event\+Manager}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_event_handling_service_a2c2674f6c93aee586bb2a09c46cadd2e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_i_event_handling_service_aba31bdfbfa92bd7a053f36bcdee05350}\label{class_i_event_handling_service_aba31bdfbfa92bd7a053f36bcdee05350}} 
+\index{IEventHandlingService@{IEventHandlingService}!Unsubscribe@{Unsubscribe}}
+\index{Unsubscribe@{Unsubscribe}!IEventHandlingService@{IEventHandlingService}}
+\doxysubsubsection{\texorpdfstring{Unsubscribe()}{Unsubscribe()}}
+{\footnotesize\ttfamily virtual void IEvent\+Handling\+Service\+::\+Unsubscribe (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event,  }\item[{const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Function removes listener from listeners collection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em listener} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_event_manager_a5cd0bb362dac16a344d6c660b8c3d05e}{Event\+Manager}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_i_event_handling_service_8h}{IEvent\+Handling\+Service.\+h}}\end{DoxyCompactItemize}

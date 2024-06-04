@@ -1,0 +1,266 @@
+\hypertarget{_8main__old_8cpp}{}\doxysection{old\+\_\+system/.main\+\_\+old.\+cpp File Reference}
+\label{_8main__old_8cpp}\index{old\_system/.main\_old.cpp@{old\_system/.main\_old.cpp}}
+{\ttfamily \#include \char`\"{}Physics\+Processor/\+Physics\+Processor\+Builder.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$CL/opencl.\+hpp$>$}\newline
+{\ttfamily \#include $<$GL/glew.\+h$>$}\newline
+{\ttfamily \#include $<$GLFW/glfw3.\+h$>$}\newline
+{\ttfamily \#include $<$CL/cl\+\_\+gl.\+h$>$}\newline
+{\ttfamily \#include $<$GL/glx.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+Include dependency graph for .main\+\_\+old.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_8main__old_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_8main__old_8cpp_a37ea07405ca286c1570612b42d43b345}{CL\+\_\+\+HPP\+\_\+\+TARGET\+\_\+\+OPENCL\+\_\+\+VERSION}}~200
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_8main__old_8cpp_a2d03c6f2666863543429a06ef642fe6a}{process\+Input}} (GLFWwindow $\ast$window)
+\item 
+GLFWwindow $\ast$ \mbox{\hyperlink{_8main__old_8cpp_a173d0b0ae4ac00db7ff766ed8bc4e2c7}{initialize\+GLFW}} (uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}, uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}})
+\item 
+cl\+::\+Program \mbox{\hyperlink{_8main__old_8cpp_a708f610f4ec78537f4da966770d9b57b}{compile\+Copy\+Kernel}} (cl\+::\+Context context, cl\+::\+Device default\+\_\+device)
+\item 
+void \mbox{\hyperlink{_8main__old_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638}{glfw\+Error\+Callback}} (int error, const char $\ast$description)
+\item 
+int \mbox{\hyperlink{_8main__old_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint \mbox{\hyperlink{_8main__old_8cpp_ac9b8e938285a9b837c60f501e59c0540}{local\+Xsize}} = 16
+\item 
+uint \mbox{\hyperlink{_8main__old_8cpp_acb0a5199dcd35d969378873976619027}{local\+Ysize}} = 16
+\item 
+int \mbox{\hyperlink{_8main__old_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}} = 1024
+\item 
+int \mbox{\hyperlink{_8main__old_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}} = 1024
+\item 
+bool \mbox{\hyperlink{_8main__old_8cpp_a9e9483098282f7e475601c37b1f6496d}{is\+Paused}} = true
+\item 
+GLuint \mbox{\hyperlink{_8main__old_8cpp_a8dcd4760dbb89b843e5259a7b290938d}{PBO}}
+\item 
+GLuint \mbox{\hyperlink{_8main__old_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}{texture}}
+\item 
+GLuint \mbox{\hyperlink{_8main__old_8cpp_a3b742dda5bdb4e360f14bfbe00340439}{fbo\+Id}}
+\item 
+\mbox{\hyperlink{class_i_physics_processor}{IPhysics\+Processor}} $\ast$ \mbox{\hyperlink{_8main__old_8cpp_a5be50097eee60161284c5dcb9a43d638}{physics\+Processor}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_8main__old_8cpp_a37ea07405ca286c1570612b42d43b345}\label{_8main__old_8cpp_a37ea07405ca286c1570612b42d43b345}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!CL\_HPP\_TARGET\_OPENCL\_VERSION@{CL\_HPP\_TARGET\_OPENCL\_VERSION}}
+\index{CL\_HPP\_TARGET\_OPENCL\_VERSION@{CL\_HPP\_TARGET\_OPENCL\_VERSION}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{CL\_HPP\_TARGET\_OPENCL\_VERSION}{CL\_HPP\_TARGET\_OPENCL\_VERSION}}
+{\footnotesize\ttfamily \#define CL\+\_\+\+HPP\+\_\+\+TARGET\+\_\+\+OPENCL\+\_\+\+VERSION~200}
+
+
+
+Definition at line 3 of file .\+main\+\_\+old.\+cpp.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_8main__old_8cpp_a708f610f4ec78537f4da966770d9b57b}\label{_8main__old_8cpp_a708f610f4ec78537f4da966770d9b57b}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!compileCopyKernel@{compileCopyKernel}}
+\index{compileCopyKernel@{compileCopyKernel}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{compileCopyKernel()}{compileCopyKernel()}}
+{\footnotesize\ttfamily cl\+::\+Program compile\+Copy\+Kernel (\begin{DoxyParamCaption}\item[{cl\+::\+Context}]{context,  }\item[{cl\+::\+Device}]{default\+\_\+device }\end{DoxyParamCaption})}
+
+
+
+Definition at line 284 of file Open\+CL-\/\+Open\+GL \+\_\+test.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{_8main__old_8cpp_a708f610f4ec78537f4da966770d9b57b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_8main__old_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638}\label{_8main__old_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!glfwErrorCallback@{glfwErrorCallback}}
+\index{glfwErrorCallback@{glfwErrorCallback}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{glfwErrorCallback()}{glfwErrorCallback()}}
+{\footnotesize\ttfamily void glfw\+Error\+Callback (\begin{DoxyParamCaption}\item[{int}]{error,  }\item[{const char $\ast$}]{description }\end{DoxyParamCaption})}
+
+
+
+Definition at line 213 of file .\+main\+\_\+old.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_8main__old_8cpp_a7f9c09fcd855cc9b01d97178ac5ca638_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_8main__old_8cpp_a173d0b0ae4ac00db7ff766ed8bc4e2c7}\label{_8main__old_8cpp_a173d0b0ae4ac00db7ff766ed8bc4e2c7}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!initializeGLFW@{initializeGLFW}}
+\index{initializeGLFW@{initializeGLFW}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{initializeGLFW()}{initializeGLFW()}}
+{\footnotesize\ttfamily GLFWwindow $\ast$ initialize\+GLFW (\begin{DoxyParamCaption}\item[{uint}]{height,  }\item[{uint}]{width }\end{DoxyParamCaption})}
+
+
+
+Definition at line 179 of file .\+main\+\_\+old.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{_8main__old_8cpp_a173d0b0ae4ac00db7ff766ed8bc4e2c7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{_8main__old_8cpp_a173d0b0ae4ac00db7ff766ed8bc4e2c7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_8main__old_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{_8main__old_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!main@{main}}
+\index{main@{main}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 63 of file .\+main\+\_\+old.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_8main__old_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{_8main__old_8cpp_a2d03c6f2666863543429a06ef642fe6a}\label{_8main__old_8cpp_a2d03c6f2666863543429a06ef642fe6a}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!processInput@{processInput}}
+\index{processInput@{processInput}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{processInput()}{processInput()}}
+{\footnotesize\ttfamily void process\+Input (\begin{DoxyParamCaption}\item[{GLFWwindow $\ast$}]{window }\end{DoxyParamCaption})}
+
+
+
+Definition at line 201 of file .\+main\+\_\+old.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{_8main__old_8cpp_a2d03c6f2666863543429a06ef642fe6a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{_8main__old_8cpp_a3b742dda5bdb4e360f14bfbe00340439}\label{_8main__old_8cpp_a3b742dda5bdb4e360f14bfbe00340439}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!fboId@{fboId}}
+\index{fboId@{fboId}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{fboId}{fboId}}
+{\footnotesize\ttfamily GLuint fbo\+Id}
+
+
+
+Definition at line 57 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_ad12fc34ce789bce6c8a05d8a17138534}\label{_8main__old_8cpp_ad12fc34ce789bce6c8a05d8a17138534}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!height@{height}}
+\index{height@{height}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily int height = 1024}
+
+
+
+Definition at line 52 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_a9e9483098282f7e475601c37b1f6496d}\label{_8main__old_8cpp_a9e9483098282f7e475601c37b1f6496d}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!isPaused@{isPaused}}
+\index{isPaused@{isPaused}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{isPaused}{isPaused}}
+{\footnotesize\ttfamily bool is\+Paused = true}
+
+
+
+Definition at line 53 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_ac9b8e938285a9b837c60f501e59c0540}\label{_8main__old_8cpp_ac9b8e938285a9b837c60f501e59c0540}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!localXsize@{localXsize}}
+\index{localXsize@{localXsize}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{localXsize}{localXsize}}
+{\footnotesize\ttfamily uint local\+Xsize = 16}
+
+
+
+Definition at line 50 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_acb0a5199dcd35d969378873976619027}\label{_8main__old_8cpp_acb0a5199dcd35d969378873976619027}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!localYsize@{localYsize}}
+\index{localYsize@{localYsize}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{localYsize}{localYsize}}
+{\footnotesize\ttfamily uint local\+Ysize = 16}
+
+
+
+Definition at line 51 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_a8dcd4760dbb89b843e5259a7b290938d}\label{_8main__old_8cpp_a8dcd4760dbb89b843e5259a7b290938d}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!PBO@{PBO}}
+\index{PBO@{PBO}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{PBO}{PBO}}
+{\footnotesize\ttfamily GLuint PBO}
+
+
+
+Definition at line 55 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_a5be50097eee60161284c5dcb9a43d638}\label{_8main__old_8cpp_a5be50097eee60161284c5dcb9a43d638}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!physicsProcessor@{physicsProcessor}}
+\index{physicsProcessor@{physicsProcessor}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{physicsProcessor}{physicsProcessor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_physics_processor}{IPhysics\+Processor}}$\ast$ physics\+Processor}
+
+
+
+Definition at line 59 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}\label{_8main__old_8cpp_a0704dfe56dec926cb35f7bdc0834ecd0}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!texture@{texture}}
+\index{texture@{texture}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily GLuint texture}
+
+
+
+Definition at line 56 of file .\+main\+\_\+old.\+cpp.
+
+\mbox{\Hypertarget{_8main__old_8cpp_a2474a5474cbff19523a51eb1de01cda4}\label{_8main__old_8cpp_a2474a5474cbff19523a51eb1de01cda4}} 
+\index{.main\_old.cpp@{.main\_old.cpp}!width@{width}}
+\index{width@{width}!.main\_old.cpp@{.main\_old.cpp}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily int width = 1024}
+
+
+
+Definition at line 52 of file .\+main\+\_\+old.\+cpp.
+

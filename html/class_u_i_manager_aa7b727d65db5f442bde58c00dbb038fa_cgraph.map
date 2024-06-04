@@ -1,0 +1,4 @@
+<map id="UIManager::HandleEvents" name="UIManager::HandleEvents">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node2" href="$class_i_input_handler.html#aaf8747c43c0dc1364e70783eaec0cc86" title="Method returns structure which describe event type and last known position of that event." alt="" coords="244,5,401,32"/>
+</map>

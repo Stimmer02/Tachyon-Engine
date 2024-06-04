@@ -1,0 +1,154 @@
+\hypertarget{class_bitmap_reader}{}\doxysection{Bitmap\+Reader Class Reference}
+\label{class_bitmap_reader}\index{BitmapReader@{BitmapReader}}
+
+
+{\ttfamily \#include $<$Bitmap\+Reader.\+h$>$}
+
+
+
+Collaboration diagram for Bitmap\+Reader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=197pt]{class_bitmap_reader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{struct_image}{Image}} \mbox{\hyperlink{class_bitmap_reader_a3b80c5fd4316f403c272fbb1b8ac821f}{Read\+File}} (const char $\ast$filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_bitmap_reader_a088ae31dded1126893fb0b7e3afbcf27}{Parse\+Data}} (char $\ast$destintation, const char $\ast$source, uint32\+\_\+t \&offset, const int32\+\_\+t length)
+\item 
+static void \mbox{\hyperlink{class_bitmap_reader_a5241976ec2563b53895627241247d141}{Parse\+Header}} (const char $\ast$source, uint32\+\_\+t \&offset)
+\item 
+static void \mbox{\hyperlink{class_bitmap_reader_a41dfc73e89c0751692fde59b5ebc01f7}{Parse\+Info}} (const char $\ast$source, uint32\+\_\+t \&offset)
+\item 
+static void \mbox{\hyperlink{class_bitmap_reader_a53c15a0d7032bea718079f10657892fd}{Change\+Endianess}} (char $\ast$data, const uint32\+\_\+t \&length)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 51 of file Bitmap\+Reader.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bitmap_reader_a53c15a0d7032bea718079f10657892fd}\label{class_bitmap_reader_a53c15a0d7032bea718079f10657892fd}} 
+\index{BitmapReader@{BitmapReader}!ChangeEndianess@{ChangeEndianess}}
+\index{ChangeEndianess@{ChangeEndianess}!BitmapReader@{BitmapReader}}
+\doxysubsubsection{\texorpdfstring{ChangeEndianess()}{ChangeEndianess()}}
+{\footnotesize\ttfamily void Bitmap\+Reader\+::\+Change\+Endianess (\begin{DoxyParamCaption}\item[{char $\ast$}]{data,  }\item[{const uint32\+\_\+t \&}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 6 of file Bitmap\+Reader.\+cpp.
+
+\mbox{\Hypertarget{class_bitmap_reader_a088ae31dded1126893fb0b7e3afbcf27}\label{class_bitmap_reader_a088ae31dded1126893fb0b7e3afbcf27}} 
+\index{BitmapReader@{BitmapReader}!ParseData@{ParseData}}
+\index{ParseData@{ParseData}!BitmapReader@{BitmapReader}}
+\doxysubsubsection{\texorpdfstring{ParseData()}{ParseData()}}
+{\footnotesize\ttfamily void Bitmap\+Reader\+::\+Parse\+Data (\begin{DoxyParamCaption}\item[{char $\ast$}]{destintation,  }\item[{const char $\ast$}]{source,  }\item[{uint32\+\_\+t \&}]{offset,  }\item[{const int32\+\_\+t}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Bitmap\+Reader.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bitmap_reader_a088ae31dded1126893fb0b7e3afbcf27_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_bitmap_reader_a5241976ec2563b53895627241247d141}\label{class_bitmap_reader_a5241976ec2563b53895627241247d141}} 
+\index{BitmapReader@{BitmapReader}!ParseHeader@{ParseHeader}}
+\index{ParseHeader@{ParseHeader}!BitmapReader@{BitmapReader}}
+\doxysubsubsection{\texorpdfstring{ParseHeader()}{ParseHeader()}}
+{\footnotesize\ttfamily void Bitmap\+Reader\+::\+Parse\+Header (\begin{DoxyParamCaption}\item[{const char $\ast$}]{source,  }\item[{uint32\+\_\+t \&}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 24 of file Bitmap\+Reader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bitmap_reader_a5241976ec2563b53895627241247d141_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bitmap_reader_a5241976ec2563b53895627241247d141_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_bitmap_reader_a41dfc73e89c0751692fde59b5ebc01f7}\label{class_bitmap_reader_a41dfc73e89c0751692fde59b5ebc01f7}} 
+\index{BitmapReader@{BitmapReader}!ParseInfo@{ParseInfo}}
+\index{ParseInfo@{ParseInfo}!BitmapReader@{BitmapReader}}
+\doxysubsubsection{\texorpdfstring{ParseInfo()}{ParseInfo()}}
+{\footnotesize\ttfamily void Bitmap\+Reader\+::\+Parse\+Info (\begin{DoxyParamCaption}\item[{const char $\ast$}]{source,  }\item[{uint32\+\_\+t \&}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 33 of file Bitmap\+Reader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bitmap_reader_a41dfc73e89c0751692fde59b5ebc01f7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bitmap_reader_a41dfc73e89c0751692fde59b5ebc01f7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_bitmap_reader_a3b80c5fd4316f403c272fbb1b8ac821f}\label{class_bitmap_reader_a3b80c5fd4316f403c272fbb1b8ac821f}} 
+\index{BitmapReader@{BitmapReader}!ReadFile@{ReadFile}}
+\index{ReadFile@{ReadFile}!BitmapReader@{BitmapReader}}
+\doxysubsubsection{\texorpdfstring{ReadFile()}{ReadFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_image}{Image}} Bitmap\+Reader\+::\+Read\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 82 of file Bitmap\+Reader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bitmap_reader_a3b80c5fd4316f403c272fbb1b8ac821f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bitmap_reader_a3b80c5fd4316f403c272fbb1b8ac821f_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_bitmap_reader_8h}{Bitmap\+Reader.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_bitmap_reader_8cpp}{Bitmap\+Reader.\+cpp}}\end{DoxyCompactItemize}

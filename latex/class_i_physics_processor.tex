@@ -1,0 +1,131 @@
+\hypertarget{class_i_physics_processor}{}\doxysection{IPhysics\+Processor Class Reference}
+\label{class_i_physics_processor}\index{IPhysicsProcessor@{IPhysicsProcessor}}
+
+
+{\ttfamily \#include $<$.\+IPhysics\+Processor.\+h$>$}
+
+
+
+Inheritance diagram for IPhysics\+Processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_physics_processor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for IPhysics\+Processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{class_i_physics_processor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_i_physics_processor_ab4859f680556e2f98cde14cf3d10e8cb}{$\sim$\+IPhysics\+Processor}} ()
+\item 
+virtual void \mbox{\hyperlink{class_i_physics_processor_ad16ea81412141168a11d88d917200b1f}{generate\+Frame}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_i_physics_processor_ae94f0ebf1124c76e0d4a936a60622adb}{spawn\+Voxel}} (uint x, uint y, uint substance\+ID)=0
+\item 
+virtual uint \mbox{\hyperlink{class_i_physics_processor_a515d6d2ab130af45dabba09defdc5957}{count\+Voxels}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_i_physics_processor_a443995f85cc3c72bde41a00345a7b4a4}{spawn\+Voxel\+In\+Area}} (uint x, uint y, uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, uint \mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}, uint substance\+ID)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 87 of file .\+IPhysics\+Processor.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_i_physics_processor_ab4859f680556e2f98cde14cf3d10e8cb}\label{class_i_physics_processor_ab4859f680556e2f98cde14cf3d10e8cb}} 
+\index{IPhysicsProcessor@{IPhysicsProcessor}!````~IPhysicsProcessor@{$\sim$IPhysicsProcessor}}
+\index{````~IPhysicsProcessor@{$\sim$IPhysicsProcessor}!IPhysicsProcessor@{IPhysicsProcessor}}
+\doxysubsubsection{\texorpdfstring{$\sim$IPhysicsProcessor()}{~IPhysicsProcessor()}}
+{\footnotesize\ttfamily virtual IPhysics\+Processor\+::$\sim$\+IPhysics\+Processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 89 of file .\+IPhysics\+Processor.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_physics_processor_a515d6d2ab130af45dabba09defdc5957}\label{class_i_physics_processor_a515d6d2ab130af45dabba09defdc5957}} 
+\index{IPhysicsProcessor@{IPhysicsProcessor}!countVoxels@{countVoxels}}
+\index{countVoxels@{countVoxels}!IPhysicsProcessor@{IPhysicsProcessor}}
+\doxysubsubsection{\texorpdfstring{countVoxels()}{countVoxels()}}
+{\footnotesize\ttfamily virtual uint IPhysics\+Processor\+::count\+Voxels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_physics_processor_a9f9b8cfd16ed9619ca48a4f3f22efea8}{Physics\+Processor}}, \mbox{\hyperlink{class_physics_processor___fallback_ae6fcf2559c09160a68d335127b2f3ff3}{Physics\+Processor\+\_\+\+Fallback}}, and \mbox{\hyperlink{class_physics_processor_a377014e3396efe200e541147cfc0fa15}{Physics\+Processor}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{class_i_physics_processor_a515d6d2ab130af45dabba09defdc5957_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_i_physics_processor_ad16ea81412141168a11d88d917200b1f}\label{class_i_physics_processor_ad16ea81412141168a11d88d917200b1f}} 
+\index{IPhysicsProcessor@{IPhysicsProcessor}!generateFrame@{generateFrame}}
+\index{generateFrame@{generateFrame}!IPhysicsProcessor@{IPhysicsProcessor}}
+\doxysubsubsection{\texorpdfstring{generateFrame()}{generateFrame()}}
+{\footnotesize\ttfamily virtual void IPhysics\+Processor\+::generate\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_physics_processor_ac72146bd09d5043ce63e1339d4935568}{Physics\+Processor}}, \mbox{\hyperlink{class_physics_processor___fallback_accc323475d66cea896c2cd97edcaf507}{Physics\+Processor\+\_\+\+Fallback}}, and \mbox{\hyperlink{class_physics_processor_a8de6f4ce22cf33f6fe48a8d2bd4abc6c}{Physics\+Processor}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{class_i_physics_processor_ad16ea81412141168a11d88d917200b1f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_i_physics_processor_ae94f0ebf1124c76e0d4a936a60622adb}\label{class_i_physics_processor_ae94f0ebf1124c76e0d4a936a60622adb}} 
+\index{IPhysicsProcessor@{IPhysicsProcessor}!spawnVoxel@{spawnVoxel}}
+\index{spawnVoxel@{spawnVoxel}!IPhysicsProcessor@{IPhysicsProcessor}}
+\doxysubsubsection{\texorpdfstring{spawnVoxel()}{spawnVoxel()}}
+{\footnotesize\ttfamily virtual void IPhysics\+Processor\+::spawn\+Voxel (\begin{DoxyParamCaption}\item[{uint}]{x,  }\item[{uint}]{y,  }\item[{uint}]{substance\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_physics_processor_ad4afd6fe5426bfa23a7ff2230cd15af1}{Physics\+Processor}}, and \mbox{\hyperlink{class_physics_processor___fallback_ab6415fe53d81eb37f93e5fd1b0a7b162}{Physics\+Processor\+\_\+\+Fallback}}.
+
+\mbox{\Hypertarget{class_i_physics_processor_a443995f85cc3c72bde41a00345a7b4a4}\label{class_i_physics_processor_a443995f85cc3c72bde41a00345a7b4a4}} 
+\index{IPhysicsProcessor@{IPhysicsProcessor}!spawnVoxelInArea@{spawnVoxelInArea}}
+\index{spawnVoxelInArea@{spawnVoxelInArea}!IPhysicsProcessor@{IPhysicsProcessor}}
+\doxysubsubsection{\texorpdfstring{spawnVoxelInArea()}{spawnVoxelInArea()}}
+{\footnotesize\ttfamily virtual void IPhysics\+Processor\+::spawn\+Voxel\+In\+Area (\begin{DoxyParamCaption}\item[{uint}]{x,  }\item[{uint}]{y,  }\item[{uint}]{width,  }\item[{uint}]{height,  }\item[{uint}]{substance\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_physics_processor_ad9d4b35d136ec023d69f723a15c86d58}{Physics\+Processor}}, and \mbox{\hyperlink{class_physics_processor___fallback_a94c523ef2b766b709534f8c35250b1d2}{Physics\+Processor\+\_\+\+Fallback}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{class_i_physics_processor_a443995f85cc3c72bde41a00345a7b4a4_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+old\+\_\+system/\mbox{\hyperlink{_8_i_physics_processor_8h}{.\+IPhysics\+Processor.\+h}}\end{DoxyCompactItemize}

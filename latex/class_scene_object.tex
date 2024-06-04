@@ -1,0 +1,377 @@
+\hypertarget{class_scene_object}{}\doxysection{Scene\+Object Class Reference}
+\label{class_scene_object}\index{SceneObject@{SceneObject}}
+
+
+{\ttfamily \#include $<$Scene\+Object.\+h$>$}
+
+
+
+Collaboration diagram for Scene\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene_object_ac480f1288e2b892f8c82c72a91f08b09}{Scene\+Object}} (const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&\mbox{\hyperlink{class_scene_object_a237761d9c226647c9cf61759562b2d0d}{ID}})
+\item 
+void \mbox{\hyperlink{class_scene_object_a120d1617261e40ea5b48a251ff26685b}{Set\+Parent}} (\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$\mbox{\hyperlink{class_scene_object_a355214c4424776ce9458ac82e14ec8f5}{parent}})
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$ $>$ \& \mbox{\hyperlink{class_scene_object_a39494b155cb21c3c378e5f45403b98fc}{Get\+Childrens}} ()
+\item 
+void \mbox{\hyperlink{class_scene_object_a4cc1de6a281ecf74fba02dd997cb5f25}{Add\+Children}} (\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$children)
+\item 
+void \mbox{\hyperlink{class_scene_object_a6016ade60991768482dccfa46b49a0ee}{Remove\+Children}} (\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$children)
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \& \mbox{\hyperlink{class_scene_object_a484f688451e203f464916b939fa521aa}{Get\+Model}} ()
+\item 
+\mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \& \mbox{\hyperlink{class_scene_object_af43f86fa570229cdd3cc4236b7f11d3f}{Get\+Entity\+ID}} ()
+\item 
+\mbox{\hyperlink{_attribute_8h_a0973f3631d3290f8f7bbaa8b5e14bdc6}{Archetype}} \& \mbox{\hyperlink{class_scene_object_ad671072c0509c236f6c73d17c1d31dc2}{Get\+Archetype}} ()
+\item 
+void \mbox{\hyperlink{class_scene_object_a6fa2e535bb56adeb9799096125b7e1a8}{Update}} ()
+\item 
+{\footnotesize template$<$typename T , typename... Args$>$ }\\T $\ast$ \mbox{\hyperlink{class_scene_object_aaa879a14cc761e54b110239807e6f2b0}{Add\+Attribute}} (Args \&\&... args)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_scene_object_a4e2bd8b241ac2d154ce4ff37f140df84}{Remove\+Attribute}} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \mbox{\hyperlink{class_scene_object_a416d0929cf478d9ebd1d8038307bbad5}{Get\+Attribute}} ()
+\item 
+\mbox{\hyperlink{class_scene_object_ab258d6b94e982d5ae71ad4d7652381f4}{$\sim$\+Scene\+Object}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_material}{Material}} $\ast$ \mbox{\hyperlink{class_scene_object_a4d8054106181076a01056a0508cdfbd4}{material}}
+\item 
+\mbox{\hyperlink{class_transform}{Transform}} \mbox{\hyperlink{class_scene_object_acc41820565467dc4384d5717b5ef5a65}{transform}}
+\item 
+bool \mbox{\hyperlink{class_scene_object_ad1527ab0f711b3543b38dea5f080414f}{is\+Active}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \mbox{\hyperlink{class_scene_object_a237761d9c226647c9cf61759562b2d0d}{ID}}
+\item 
+\mbox{\hyperlink{_attribute_8h_a0973f3631d3290f8f7bbaa8b5e14bdc6}{Archetype}} \mbox{\hyperlink{class_scene_object_a8f5b58dacd81f52bc4ceaf66718dea20}{archetype}}
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_scene_object_a13e80e77428f96885e4a6c600f0e28d3}{model}}
+\item 
+\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$ \mbox{\hyperlink{class_scene_object_a355214c4424776ce9458ac82e14ec8f5}{parent}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$ $>$ \mbox{\hyperlink{class_scene_object_ab82563745ce1de709fac4e429fe7e109}{childrens}}
+\item 
+\mbox{\hyperlink{class_attribute_manager}{Attribute\+Manager}} $\ast$ \mbox{\hyperlink{class_scene_object_a90ef2c152aeeb5b90bf090c9740accee}{manager}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 12 of file Scene\+Object.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scene_object_ac480f1288e2b892f8c82c72a91f08b09}\label{class_scene_object_ac480f1288e2b892f8c82c72a91f08b09}} 
+\index{SceneObject@{SceneObject}!SceneObject@{SceneObject}}
+\index{SceneObject@{SceneObject}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{SceneObject()}{SceneObject()}}
+{\footnotesize\ttfamily Scene\+Object\+::\+Scene\+Object (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&}]{ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 31 of file Scene\+Object.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object_ac480f1288e2b892f8c82c72a91f08b09_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_scene_object_ab258d6b94e982d5ae71ad4d7652381f4}\label{class_scene_object_ab258d6b94e982d5ae71ad4d7652381f4}} 
+\index{SceneObject@{SceneObject}!````~SceneObject@{$\sim$SceneObject}}
+\index{````~SceneObject@{$\sim$SceneObject}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{$\sim$SceneObject()}{~SceneObject()}}
+{\footnotesize\ttfamily Scene\+Object\+::$\sim$\+Scene\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 147 of file Scene\+Object.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object_ab258d6b94e982d5ae71ad4d7652381f4_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_object_aaa879a14cc761e54b110239807e6f2b0}\label{class_scene_object_aaa879a14cc761e54b110239807e6f2b0}} 
+\index{SceneObject@{SceneObject}!AddAttribute@{AddAttribute}}
+\index{AddAttribute@{AddAttribute}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{AddAttribute()}{AddAttribute()}}
+{\footnotesize\ttfamily template$<$typename T , typename... Args$>$ \\
+T$\ast$ Scene\+Object\+::\+Add\+Attribute (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 107 of file Scene\+Object.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object_aaa879a14cc761e54b110239807e6f2b0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object_aaa879a14cc761e54b110239807e6f2b0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_scene_object_a4cc1de6a281ecf74fba02dd997cb5f25}\label{class_scene_object_a4cc1de6a281ecf74fba02dd997cb5f25}} 
+\index{SceneObject@{SceneObject}!AddChildren@{AddChildren}}
+\index{AddChildren@{AddChildren}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{AddChildren()}{AddChildren()}}
+{\footnotesize\ttfamily void Scene\+Object\+::\+Add\+Children (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$}]{children }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 48 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_ad671072c0509c236f6c73d17c1d31dc2}\label{class_scene_object_ad671072c0509c236f6c73d17c1d31dc2}} 
+\index{SceneObject@{SceneObject}!GetArchetype@{GetArchetype}}
+\index{GetArchetype@{GetArchetype}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{GetArchetype()}{GetArchetype()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_attribute_8h_a0973f3631d3290f8f7bbaa8b5e14bdc6}{Archetype}}\& Scene\+Object\+::\+Get\+Archetype (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 79 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a416d0929cf478d9ebd1d8038307bbad5}\label{class_scene_object_a416d0929cf478d9ebd1d8038307bbad5}} 
+\index{SceneObject@{SceneObject}!GetAttribute@{GetAttribute}}
+\index{GetAttribute@{GetAttribute}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{GetAttribute()}{GetAttribute()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$ Scene\+Object\+::\+Get\+Attribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 143 of file Scene\+Object.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object_a416d0929cf478d9ebd1d8038307bbad5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_scene_object_a39494b155cb21c3c378e5f45403b98fc}\label{class_scene_object_a39494b155cb21c3c378e5f45403b98fc}} 
+\index{SceneObject@{SceneObject}!GetChildrens@{GetChildrens}}
+\index{GetChildrens@{GetChildrens}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{GetChildrens()}{GetChildrens()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_scene_object}{Scene\+Object}}$\ast$$>$\& Scene\+Object\+::\+Get\+Childrens (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 44 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_af43f86fa570229cdd3cc4236b7f11d3f}\label{class_scene_object_af43f86fa570229cdd3cc4236b7f11d3f}} 
+\index{SceneObject@{SceneObject}!GetEntityID@{GetEntityID}}
+\index{GetEntityID@{GetEntityID}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{GetEntityID()}{GetEntityID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}\& Scene\+Object\+::\+Get\+Entity\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 75 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a484f688451e203f464916b939fa521aa}\label{class_scene_object_a484f688451e203f464916b939fa521aa}} 
+\index{SceneObject@{SceneObject}!GetModel@{GetModel}}
+\index{GetModel@{GetModel}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{GetModel()}{GetModel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}}\& Scene\+Object\+::\+Get\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 71 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a4e2bd8b241ac2d154ce4ff37f140df84}\label{class_scene_object_a4e2bd8b241ac2d154ce4ff37f140df84}} 
+\index{SceneObject@{SceneObject}!RemoveAttribute@{RemoveAttribute}}
+\index{RemoveAttribute@{RemoveAttribute}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{RemoveAttribute()}{RemoveAttribute()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Scene\+Object\+::\+Remove\+Attribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 125 of file Scene\+Object.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object_a4e2bd8b241ac2d154ce4ff37f140df84_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_scene_object_a6016ade60991768482dccfa46b49a0ee}\label{class_scene_object_a6016ade60991768482dccfa46b49a0ee}} 
+\index{SceneObject@{SceneObject}!RemoveChildren@{RemoveChildren}}
+\index{RemoveChildren@{RemoveChildren}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{RemoveChildren()}{RemoveChildren()}}
+{\footnotesize\ttfamily void Scene\+Object\+::\+Remove\+Children (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$}]{children }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 53 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a120d1617261e40ea5b48a251ff26685b}\label{class_scene_object_a120d1617261e40ea5b48a251ff26685b}} 
+\index{SceneObject@{SceneObject}!SetParent@{SetParent}}
+\index{SetParent@{SetParent}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{SetParent()}{SetParent()}}
+{\footnotesize\ttfamily void Scene\+Object\+::\+Set\+Parent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 40 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a6fa2e535bb56adeb9799096125b7e1a8}\label{class_scene_object_a6fa2e535bb56adeb9799096125b7e1a8}} 
+\index{SceneObject@{SceneObject}!Update@{Update}}
+\index{Update@{Update}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Scene\+Object\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 83 of file Scene\+Object.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scene_object_a6fa2e535bb56adeb9799096125b7e1a8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{class_scene_object_a6fa2e535bb56adeb9799096125b7e1a8_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_scene_object_a8f5b58dacd81f52bc4ceaf66718dea20}\label{class_scene_object_a8f5b58dacd81f52bc4ceaf66718dea20}} 
+\index{SceneObject@{SceneObject}!archetype@{archetype}}
+\index{archetype@{archetype}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{archetype}{archetype}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_attribute_8h_a0973f3631d3290f8f7bbaa8b5e14bdc6}{Archetype}} Scene\+Object\+::archetype\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_ab82563745ce1de709fac4e429fe7e109}\label{class_scene_object_ab82563745ce1de709fac4e429fe7e109}} 
+\index{SceneObject@{SceneObject}!childrens@{childrens}}
+\index{childrens@{childrens}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{childrens}{childrens}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_scene_object}{Scene\+Object}}$\ast$$>$ Scene\+Object\+::childrens\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a237761d9c226647c9cf61759562b2d0d}\label{class_scene_object_a237761d9c226647c9cf61759562b2d0d}} 
+\index{SceneObject@{SceneObject}!ID@{ID}}
+\index{ID@{ID}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} Scene\+Object\+::\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_ad1527ab0f711b3543b38dea5f080414f}\label{class_scene_object_ad1527ab0f711b3543b38dea5f080414f}} 
+\index{SceneObject@{SceneObject}!isActive@{isActive}}
+\index{isActive@{isActive}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{isActive}{isActive}}
+{\footnotesize\ttfamily bool Scene\+Object\+::is\+Active}
+
+
+
+Definition at line 29 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a90ef2c152aeeb5b90bf090c9740accee}\label{class_scene_object_a90ef2c152aeeb5b90bf090c9740accee}} 
+\index{SceneObject@{SceneObject}!manager@{manager}}
+\index{manager@{manager}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{manager}{manager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_attribute_manager}{Attribute\+Manager}}$\ast$ Scene\+Object\+::manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 23 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a4d8054106181076a01056a0508cdfbd4}\label{class_scene_object_a4d8054106181076a01056a0508cdfbd4}} 
+\index{SceneObject@{SceneObject}!material@{material}}
+\index{material@{material}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{material}{material}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_material}{Material}}$\ast$ Scene\+Object\+::material}
+
+
+
+Definition at line 26 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a13e80e77428f96885e4a6c600f0e28d3}\label{class_scene_object_a13e80e77428f96885e4a6c600f0e28d3}} 
+\index{SceneObject@{SceneObject}!model@{model}}
+\index{model@{model}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Scene\+Object\+::model\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_a355214c4424776ce9458ac82e14ec8f5}\label{class_scene_object_a355214c4424776ce9458ac82e14ec8f5}} 
+\index{SceneObject@{SceneObject}!parent@{parent}}
+\index{parent@{parent}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_object}{Scene\+Object}}$\ast$ Scene\+Object\+::parent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file Scene\+Object.\+h.
+
+\mbox{\Hypertarget{class_scene_object_acc41820565467dc4384d5717b5ef5a65}\label{class_scene_object_acc41820565467dc4384d5717b5ef5a65}} 
+\index{SceneObject@{SceneObject}!transform@{transform}}
+\index{transform@{transform}!SceneObject@{SceneObject}}
+\doxysubsubsection{\texorpdfstring{transform}{transform}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_transform}{Transform}} Scene\+Object\+::transform}
+
+
+
+Definition at line 28 of file Scene\+Object.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_scene_object_8h}{Scene\+Object.\+h}}\end{DoxyCompactItemize}

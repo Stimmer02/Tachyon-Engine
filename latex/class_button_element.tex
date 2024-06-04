@@ -1,0 +1,193 @@
+\hypertarget{class_button_element}{}\doxysection{Button\+Element Class Reference}
+\label{class_button_element}\index{ButtonElement@{ButtonElement}}
+
+
+{\ttfamily \#include $<$Button\+Element.\+h$>$}
+
+
+
+Inheritance diagram for Button\+Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{class_button_element__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Button\+Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_button_element__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_button_element_a7314d75f5460c4eebee210572947063d}{Button\+Element}} (const int \mbox{\hyperlink{class_interactive_element_a9177e65ce43991cebfe3897d13b507eb}{width}}, const int \mbox{\hyperlink{class_interactive_element_a0c97fd2a517e80d091e6f9e23c26b078}{height}}, const \mbox{\hyperlink{_interactive_element_8h_a9f4d3f1692b57758c10763bea8a50a04}{Callback}} callback\+Func)
+\item 
+void \mbox{\hyperlink{class_button_element_affee52cb05a0741c7452272ecf7f2e0d}{Set\+Texture}} (\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$\mbox{\hyperlink{class_button_element_a594e9a66cfa3d58137d71895687cd173}{texture}})
+\item 
+void \mbox{\hyperlink{class_button_element_a3f94d66e48403ec192dfc7523ee3a6d6}{Render}} () override
+\item 
+\mbox{\hyperlink{class_button_element_ac2cffdd95b10d224d5a9f37c121fe93d}{$\sim$\+Button\+Element}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_button_element_aff7d280caf71801e95ec8545ce1bd748}{Allocate\+Buffers}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+GLuint \mbox{\hyperlink{class_button_element_aefed6aac0680381f522aec3c70940e2c}{vao}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_button_element_a8d63c4b7f7213e6ffe4916b9f6822219}{vbo}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_button_element_a61ce1ed9e7b5477083e1adeef0a3969a}{tbo}} = 0
+\item 
+\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$ \mbox{\hyperlink{class_button_element_a594e9a66cfa3d58137d71895687cd173}{texture}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file Button\+Element.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_button_element_a7314d75f5460c4eebee210572947063d}\label{class_button_element_a7314d75f5460c4eebee210572947063d}} 
+\index{ButtonElement@{ButtonElement}!ButtonElement@{ButtonElement}}
+\index{ButtonElement@{ButtonElement}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{ButtonElement()}{ButtonElement()}}
+{\footnotesize\ttfamily Button\+Element\+::\+Button\+Element (\begin{DoxyParamCaption}\item[{const int}]{width,  }\item[{const int}]{height,  }\item[{const \mbox{\hyperlink{_interactive_element_8h_a9f4d3f1692b57758c10763bea8a50a04}{Callback}}}]{callback\+Func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 59 of file Button\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_button_element_a7314d75f5460c4eebee210572947063d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_button_element_ac2cffdd95b10d224d5a9f37c121fe93d}\label{class_button_element_ac2cffdd95b10d224d5a9f37c121fe93d}} 
+\index{ButtonElement@{ButtonElement}!````~ButtonElement@{$\sim$ButtonElement}}
+\index{````~ButtonElement@{$\sim$ButtonElement}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{$\sim$ButtonElement()}{~ButtonElement()}}
+{\footnotesize\ttfamily Button\+Element\+::$\sim$\+Button\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 100 of file Button\+Element.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_button_element_aff7d280caf71801e95ec8545ce1bd748}\label{class_button_element_aff7d280caf71801e95ec8545ce1bd748}} 
+\index{ButtonElement@{ButtonElement}!AllocateBuffers@{AllocateBuffers}}
+\index{AllocateBuffers@{AllocateBuffers}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{AllocateBuffers()}{AllocateBuffers()}}
+{\footnotesize\ttfamily void Button\+Element\+::\+Allocate\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Button\+Element.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_button_element_aff7d280caf71801e95ec8545ce1bd748_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_button_element_a3f94d66e48403ec192dfc7523ee3a6d6}\label{class_button_element_a3f94d66e48403ec192dfc7523ee3a6d6}} 
+\index{ButtonElement@{ButtonElement}!Render@{Render}}
+\index{Render@{Render}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily void Button\+Element\+::\+Render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_interactive_element_a16ffa8257383947d247e1ea16d679469}{Interactive\+Element}}.
+
+
+
+Definition at line 82 of file Button\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_button_element_a3f94d66e48403ec192dfc7523ee3a6d6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_button_element_affee52cb05a0741c7452272ecf7f2e0d}\label{class_button_element_affee52cb05a0741c7452272ecf7f2e0d}} 
+\index{ButtonElement@{ButtonElement}!SetTexture@{SetTexture}}
+\index{SetTexture@{SetTexture}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{SetTexture()}{SetTexture()}}
+{\footnotesize\ttfamily void Button\+Element\+::\+Set\+Texture (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$}]{texture }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 78 of file Button\+Element.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_button_element_a61ce1ed9e7b5477083e1adeef0a3969a}\label{class_button_element_a61ce1ed9e7b5477083e1adeef0a3969a}} 
+\index{ButtonElement@{ButtonElement}!tbo@{tbo}}
+\index{tbo@{tbo}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{tbo}{tbo}}
+{\footnotesize\ttfamily GLuint Button\+Element\+::tbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Button\+Element.\+h.
+
+\mbox{\Hypertarget{class_button_element_a594e9a66cfa3d58137d71895687cd173}\label{class_button_element_a594e9a66cfa3d58137d71895687cd173}} 
+\index{ButtonElement@{ButtonElement}!texture@{texture}}
+\index{texture@{texture}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite}{Sprite}}$\ast$ Button\+Element\+::texture\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Button\+Element.\+h.
+
+\mbox{\Hypertarget{class_button_element_aefed6aac0680381f522aec3c70940e2c}\label{class_button_element_aefed6aac0680381f522aec3c70940e2c}} 
+\index{ButtonElement@{ButtonElement}!vao@{vao}}
+\index{vao@{vao}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{vao}{vao}}
+{\footnotesize\ttfamily GLuint Button\+Element\+::vao = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Button\+Element.\+h.
+
+\mbox{\Hypertarget{class_button_element_a8d63c4b7f7213e6ffe4916b9f6822219}\label{class_button_element_a8d63c4b7f7213e6ffe4916b9f6822219}} 
+\index{ButtonElement@{ButtonElement}!vbo@{vbo}}
+\index{vbo@{vbo}!ButtonElement@{ButtonElement}}
+\doxysubsubsection{\texorpdfstring{vbo}{vbo}}
+{\footnotesize\ttfamily GLuint Button\+Element\+::vbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Button\+Element.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_button_element_8h}{Button\+Element.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,23 @@
+<map id="BoidsSystem::OnLoad" name="BoidsSystem::OnLoad">
+<area shape="rect" id="node1" title="This method is called on system startup and by default does nothing." alt="" coords="5,171,169,197"/>
+<area shape="rect" id="node2" href="$class_scene_object.html#aaa879a14cc761e54b110239807e6f2b0" title=" " alt="" coords="217,44,411,71"/>
+<area shape="rect" id="node6" href="$class_scene.html#ab0531169066cfaa0fd0942243df917b5" title=" " alt="" coords="221,95,407,121"/>
+<area shape="rect" id="node7" href="$class_g_l_shader.html#acdc560a9a8390681735bf134f9e98de2" title=" " alt="" coords="251,145,377,172"/>
+<area shape="rect" id="node9" href="$class_scene.html#abed242422ea01190a6ba10604bbe49e9" title=" " alt="" coords="239,196,389,223"/>
+<area shape="rect" id="node11" href="$class_mesh.html#ab177f7e7443fdafa508f2db5abf1c661" title=" " alt="" coords="252,335,376,361"/>
+<area shape="rect" id="node20" href="$class_g_l_shader.html#a521024d058db5ce31d3bcc0a4a5f3f1e" title=" " alt="" coords="232,461,396,488"/>
+<area shape="rect" id="node3" href="$class_attribute_manager.html#abba0e3fb83a25eeafd899aacf9774968" title=" " alt="" coords="459,5,686,32"/>
+<area shape="rect" id="node5" href="$class_attribute.html#a7555a70c17061aa77f6222a264a489f7" title=" " alt="" coords="482,56,663,83"/>
+<area shape="rect" id="node4" href="$class_attribute.html#ac6850652b6e124ed1cc4eb289423a0b1" title=" " alt="" coords="735,5,884,32"/>
+<area shape="rect" id="node8" href="$class_g_l_shader.html#a6a67e061e3198722de9732091ca391de" title=" " alt="" coords="459,132,687,159"/>
+<area shape="rect" id="node10" href="$class_entity_container.html#a373ffc4c8f03ab286761690e4f79483e" title=" " alt="" coords="485,183,660,209"/>
+<area shape="rect" id="node12" href="$class_vector3.html#a18ee4be607a73523d3b5b3e7d0582699" title=" " alt="" coords="515,233,630,260"/>
+<area shape="rect" id="node14" href="$class_vector3.html#a8a8cb236aae8602af246f4f56495f159" title=" " alt="" coords="499,284,646,311"/>
+<area shape="rect" id="node16" href="$class_mesh.html#ab6faf69db9db29176300f581b89fff5d" title=" " alt="" coords="507,335,639,361"/>
+<area shape="rect" id="node17" href="$class_mesh.html#a6b272394c09ebace65b26bf428245189" title=" " alt="" coords="502,385,643,412"/>
+<area shape="rect" id="node18" href="$class_mesh.html#a1cf1c6c760f46c7518e100da9b78c49f" title=" " alt="" coords="496,436,649,463"/>
+<area shape="rect" id="node19" href="$class_mesh.html#a931a8cddc048a74891f988b062c78709" title=" " alt="" coords="503,487,642,513"/>
+<area shape="rect" id="node13" href="$class_vector3.html#a0f49191f7e001e7f7ae1cb49522118b4" title=" " alt="" coords="745,233,873,260"/>
+<area shape="rect" id="node15" href="$class_vector3.html#a94c30ca7427965f94ae1af09a9c67179" title=" " alt="" coords="735,284,883,311"/>
+<area shape="rect" id="node21" href="$class_g_l_shader.html#ab1c263456438e38f08ddca57e9d50c98" title=" " alt="" coords="463,537,682,564"/>
+</map>

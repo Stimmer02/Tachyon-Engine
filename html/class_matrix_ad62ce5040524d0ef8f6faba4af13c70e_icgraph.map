@@ -1,0 +1,9 @@
+<map id="Matrix::Scale" name="Matrix::Scale">
+<area shape="rect" id="node1" title=" " alt="" coords="752,81,859,108"/>
+<area shape="rect" id="node2" href="$class_button_element.html#a7314d75f5460c4eebee210572947063d" title=" " alt="" coords="480,5,704,32"/>
+<area shape="rect" id="node3" href="$class_g_u_i_element.html#a9d9087f4d8527d51636151fb15f6e516" title=" " alt="" coords="507,56,677,83"/>
+<area shape="rect" id="node6" href="$class_text_element.html#a1adc9f3c483f07c160cd433d7837ede0" title=" " alt="" coords="513,107,671,133"/>
+<area shape="rect" id="node7" href="$class_scene_object.html#a6fa2e535bb56adeb9799096125b7e1a8" title=" " alt="" coords="513,181,671,208"/>
+<area shape="rect" id="node4" href="$class_graphic_system.html#a25dd561bce7252dceb78a938005b11fa" title=" " alt="" coords="233,56,432,83"/>
+<area shape="rect" id="node5" href="$class_graphic_system.html#a475435ae066476e245ddbbb70e025f28" title="This abstract method is called every iteration of system loop and must be defined by specified system..." alt="" coords="5,56,185,83"/>
+</map>

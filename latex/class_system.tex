@@ -1,0 +1,396 @@
+\hypertarget{class_system}{}\doxysection{System Class Reference}
+\label{class_system}\index{System@{System}}
+
+
+{\ttfamily \#include $<$System.\+h$>$}
+
+
+
+Inheritance diagram for System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_system__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_system__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_system_ae317936c9bcf1374d61745572e0f2f8a}{System}} ()
+\item 
+virtual void \mbox{\hyperlink{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}{Share}} (\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$resource\+Manager)
+\begin{DoxyCompactList}\small\item\em This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{On\+Load}} ()
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_system_a12e3e88fca7b79880cc528256850e23b}{Run}} ()
+\begin{DoxyCompactList}\small\item\em Executes system loop. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_system_a157fb27012e212d5f2cf5904ad6145d8}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Sends stop signal to system thread. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_system_a79d6f674effc2030b94f439543b9bbaa}{On\+Unload}} ()
+\begin{DoxyCompactList}\small\item\em This method is called on system shutdown and by default does nothing. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_system_a3be70bb338e3f062f821173fd15680d0}{$\sim$\+System}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{Execute}} ()=0
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_system_ad1eaf285786da435b06063511e495e9f}{Handle\+Message}} (const \mbox{\hyperlink{struct_message}{Message}} \&message)
+\begin{DoxyCompactList}\small\item\em This method is called when system have any pending messages stored in internal queue and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_system_a26c9fb10762fd84f20b50bf3065d8ea6}{Send\+Message}} (const std\+::string \&channel, \mbox{\hyperlink{class_i_client}{IClient}} $\ast$receiver, const \mbox{\hyperlink{_message_8h_ac6606ebe91c8ac66a2c314c79f5ab013}{Message\+Type}} \&type, void $\ast$data)
+\begin{DoxyCompactList}\small\item\em This method is used to send message to specified channel within message bus scope. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_system_a818016e4e14758f964f054b5d8a7f23a}{Receive\+Message}} (const \mbox{\hyperlink{struct_message}{Message}} \&\+\_\+message)
+\begin{DoxyCompactList}\small\item\em This method is called only if system receive any message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{class_system_a80c79ce9aa3ebe5f8e95e579715bb84a}{is\+Running}}
+\item 
+std\+::mutex \mbox{\hyperlink{class_system_a1e971fd78525c3655662b81ecd808f9b}{mutex}}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{struct_message}{Message}} $>$ \mbox{\hyperlink{class_system_af0be78d17b345c9c95c06ea76f9ce2d0}{messages}}
+\item 
+\mbox{\hyperlink{class_message_bus}{Message\+Bus}} $\ast$ \mbox{\hyperlink{class_system_a15776de01d2be83c7f42b10b9db2b1c8}{message\+Bus}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 11 of file System.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_system_ae317936c9bcf1374d61745572e0f2f8a}\label{class_system_ae317936c9bcf1374d61745572e0f2f8a}} 
+\index{System@{System}!System@{System}}
+\index{System@{System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{System()}{System()}}
+{\footnotesize\ttfamily System\+::\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 16 of file System.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_system_ae317936c9bcf1374d61745572e0f2f8a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_a3be70bb338e3f062f821173fd15680d0}\label{class_system_a3be70bb338e3f062f821173fd15680d0}} 
+\index{System@{System}!````~System@{$\sim$System}}
+\index{````~System@{$\sim$System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{$\sim$System()}{~System()}}
+{\footnotesize\ttfamily System\+::$\sim$\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 30 of file System.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_system_a3be70bb338e3f062f821173fd15680d0_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_system_ada4f1974bb3502185af62cd51c8fce30}\label{class_system_ada4f1974bb3502185af62cd51c8fce30}} 
+\index{System@{System}!Execute@{Execute}}
+\index{Execute@{Execute}!System@{System}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily virtual void System\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implemented in \mbox{\hyperlink{class_physics_processor_system_a341bffe39467948fe01950b3f6fb0484}{Physics\+Processor\+System}}, \mbox{\hyperlink{class_fps_limiter_a78f52ef196dfb98235232248a3e72050}{Fps\+Limiter}}, \mbox{\hyperlink{class_interaction_system_a18ff608a238836feb0755efc52fa327f}{Interaction\+System}}, \mbox{\hyperlink{class_graphic_system_a475435ae066476e245ddbbb70e025f28}{Graphic\+System}}, \mbox{\hyperlink{class_lines_system_aa460b4e2a8a801417dc041dc9df631e6}{Lines\+System}}, \mbox{\hyperlink{class_fractal_system_a8a656d45d3d591d14acb54fdacb29e9d}{Fractal\+System}}, and \mbox{\hyperlink{class_boids_system_ac9a830ceb3cb401526fb0242adbb8978}{Boids\+System}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_system_ada4f1974bb3502185af62cd51c8fce30_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_ad1eaf285786da435b06063511e495e9f}\label{class_system_ad1eaf285786da435b06063511e495e9f}} 
+\index{System@{System}!HandleMessage@{HandleMessage}}
+\index{HandleMessage@{HandleMessage}!System@{System}}
+\doxysubsubsection{\texorpdfstring{HandleMessage()}{HandleMessage()}}
+{\footnotesize\ttfamily void System\+::\+Handle\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_message}{Message}} \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+This method is called when system have any pending messages stored in internal queue and by default does nothing. 
+
+
+
+Definition at line 55 of file System.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{class_system_ad1eaf285786da435b06063511e495e9f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_ac138c3ef20fdf8422d5548a8f005db02}\label{class_system_ac138c3ef20fdf8422d5548a8f005db02}} 
+\index{System@{System}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!System@{System}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void System\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_physics_processor_system_a97a20d1bc5573cd0d264ee5d87d7095a}{Physics\+Processor\+System}}, \mbox{\hyperlink{class_fps_limiter_a85a54b7b7b48b8ae38135813106c3944}{Fps\+Limiter}}, \mbox{\hyperlink{class_interaction_system_aca7fd3d015b9995ee712e490c57f7852}{Interaction\+System}}, \mbox{\hyperlink{class_graphic_system_a7451b4acda7534324269e532cc7c286d}{Graphic\+System}}, \mbox{\hyperlink{class_lines_system_a45603bc5268ac28b498d0f9c28c8d79b}{Lines\+System}}, \mbox{\hyperlink{class_fractal_system_a561d77400b6937c319cb7a4e8b5b487f}{Fractal\+System}}, and \mbox{\hyperlink{class_boids_system_a1c37923a26b13b6e08070adeabbdbc31}{Boids\+System}}.
+
+
+
+Definition at line 47 of file System.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_system_ac138c3ef20fdf8422d5548a8f005db02_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_a79d6f674effc2030b94f439543b9bbaa}\label{class_system_a79d6f674effc2030b94f439543b9bbaa}} 
+\index{System@{System}!OnUnload@{OnUnload}}
+\index{OnUnload@{OnUnload}!System@{System}}
+\doxysubsubsection{\texorpdfstring{OnUnload()}{OnUnload()}}
+{\footnotesize\ttfamily void System\+::\+On\+Unload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This method is called on system shutdown and by default does nothing. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_physics_processor_system_aeedb40af64cc3372f2f96d7b9bfe6b20}{Physics\+Processor\+System}}, \mbox{\hyperlink{class_fps_limiter_a0f21abad0ea445b19b8b409c6158be5f}{Fps\+Limiter}}, and \mbox{\hyperlink{class_interaction_system_a32dcfb7ddca7e8659e5e35eb2f1cb25e}{Interaction\+System}}.
+
+
+
+Definition at line 51 of file System.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_system_a79d6f674effc2030b94f439543b9bbaa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_a818016e4e14758f964f054b5d8a7f23a}\label{class_system_a818016e4e14758f964f054b5d8a7f23a}} 
+\index{System@{System}!ReceiveMessage@{ReceiveMessage}}
+\index{ReceiveMessage@{ReceiveMessage}!System@{System}}
+\doxysubsubsection{\texorpdfstring{ReceiveMessage()}{ReceiveMessage()}}
+{\footnotesize\ttfamily void System\+::\+Receive\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_message}{Message}} \&}]{\+\_\+message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This method is called only if system receive any message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_client_ad7663ac69905b527453712d2de8a3ea4}{IClient}}.
+
+
+
+Definition at line 42 of file System.\+cpp.
+
+\mbox{\Hypertarget{class_system_a12e3e88fca7b79880cc528256850e23b}\label{class_system_a12e3e88fca7b79880cc528256850e23b}} 
+\index{System@{System}!Run@{Run}}
+\index{Run@{Run}!System@{System}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily void System\+::\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Executes system loop. 
+
+
+
+Implements \mbox{\hyperlink{class_i_runnable_a9dd6c9c586b9b75c81931226ee0a3b4e}{IRunnable}}.
+
+
+
+Definition at line 63 of file System.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{class_system_a12e3e88fca7b79880cc528256850e23b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_a26c9fb10762fd84f20b50bf3065d8ea6}\label{class_system_a26c9fb10762fd84f20b50bf3065d8ea6}} 
+\index{System@{System}!SendMessage@{SendMessage}}
+\index{SendMessage@{SendMessage}!System@{System}}
+\doxysubsubsection{\texorpdfstring{SendMessage()}{SendMessage()}}
+{\footnotesize\ttfamily void System\+::\+Send\+Message (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{channel,  }\item[{\mbox{\hyperlink{class_i_client}{IClient}} $\ast$}]{receiver,  }\item[{const \mbox{\hyperlink{_message_8h_ac6606ebe91c8ac66a2c314c79f5ab013}{Message\+Type}} \&}]{type,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+This method is used to send message to specified channel within message bus scope. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & name of channel \\
+\hline
+{\em receiver} & pointer to receiver \\
+\hline
+{\em type} & type of messsage \\
+\hline
+{\em data} & pointer to data \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_client_a7fb9ed7e2ac8a31a71230f6b440adbbf}{IClient}}.
+
+
+
+Definition at line 4 of file System.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_system_a26c9fb10762fd84f20b50bf3065d8ea6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}\label{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}} 
+\index{System@{System}!Share@{Share}}
+\index{Share@{Share}!System@{System}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily virtual void System\+::\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$}]{resource\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. 
+
+
+
+Implements \mbox{\hyperlink{class_i_shareable_af0e7c8437e8457337a1c1f31eb9dd79e}{IShareable}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_physics_processor_system_ad96a65a96076a972a58415ed18cab779}{Physics\+Processor\+System}}, \mbox{\hyperlink{class_fps_limiter_a364cf369f4c61e9037d824000fadf02a}{Fps\+Limiter}}, \mbox{\hyperlink{class_graphic_system_a98f48779b685382bc6bdc5b92da7812a}{Graphic\+System}}, \mbox{\hyperlink{class_lines_system_ab723d4c56894a739f84d83cb4f2766d4}{Lines\+System}}, \mbox{\hyperlink{class_fractal_system_ac185e348e9742b1886ac3d90b4e3cd18}{Fractal\+System}}, and \mbox{\hyperlink{class_boids_system_aaf42608be5a0f42a8e945ec8034ccbd3}{Boids\+System}}.
+
+
+
+Definition at line 44 of file System.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_system_a157fb27012e212d5f2cf5904ad6145d8}\label{class_system_a157fb27012e212d5f2cf5904ad6145d8}} 
+\index{System@{System}!Stop@{Stop}}
+\index{Stop@{Stop}!System@{System}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily void System\+::\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Sends stop signal to system thread. 
+
+
+
+Implements \mbox{\hyperlink{class_i_runnable_a81e8a59d5860aec7bc3ef434653d1047}{IRunnable}}.
+
+
+
+Definition at line 59 of file System.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_system_a80c79ce9aa3ebe5f8e95e579715bb84a}\label{class_system_a80c79ce9aa3ebe5f8e95e579715bb84a}} 
+\index{System@{System}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!System@{System}}
+\doxysubsubsection{\texorpdfstring{isRunning}{isRunning}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ System\+::is\+Running\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file System.\+h.
+
+\mbox{\Hypertarget{class_system_a15776de01d2be83c7f42b10b9db2b1c8}\label{class_system_a15776de01d2be83c7f42b10b9db2b1c8}} 
+\index{System@{System}!messageBus@{messageBus}}
+\index{messageBus@{messageBus}!System@{System}}
+\doxysubsubsection{\texorpdfstring{messageBus}{messageBus}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_message_bus}{Message\+Bus}}$\ast$ System\+::message\+Bus\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file System.\+h.
+
+\mbox{\Hypertarget{class_system_af0be78d17b345c9c95c06ea76f9ce2d0}\label{class_system_af0be78d17b345c9c95c06ea76f9ce2d0}} 
+\index{System@{System}!messages@{messages}}
+\index{messages@{messages}!System@{System}}
+\doxysubsubsection{\texorpdfstring{messages}{messages}}
+{\footnotesize\ttfamily std\+::queue$<$\mbox{\hyperlink{struct_message}{Message}}$>$ System\+::messages\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file System.\+h.
+
+\mbox{\Hypertarget{class_system_a1e971fd78525c3655662b81ecd808f9b}\label{class_system_a1e971fd78525c3655662b81ecd808f9b}} 
+\index{System@{System}!mutex@{mutex}}
+\index{mutex@{mutex}!System@{System}}
+\doxysubsubsection{\texorpdfstring{mutex}{mutex}}
+{\footnotesize\ttfamily std\+::mutex System\+::mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file System.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_system_8h}{System.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_system_8cpp}{System.\+cpp}}\end{DoxyCompactItemize}

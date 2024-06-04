@@ -1,0 +1,151 @@
+\hypertarget{class_cl_struct_parser}{}\doxysection{Cl\+Struct\+Parser Class Reference}
+\label{class_cl_struct_parser}\index{ClStructParser@{ClStructParser}}
+
+
+{\ttfamily \#include $<$Cl\+Struct\+Parser.\+h$>$}
+
+
+
+Collaboration diagram for Cl\+Struct\+Parser\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{class_cl_struct_parser__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cl_struct_parser_ae72a14a828b54b90e58cf4e2aa0f5627}{Cl\+Struct\+Parser}} (\mbox{\hyperlink{class_macro_manager}{Macro\+Manager}} $\ast$\mbox{\hyperlink{class_cl_struct_parser_a62e662ba672f381a5bd55d37d0378ca7}{macro\+Manager}})
+\item 
+\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$ \mbox{\hyperlink{class_cl_struct_parser_ab3c43f1cda873e42fac6212c645a892a}{process\+Struct}} (std\+::string struct\+Code)
+\item 
+std\+::string \mbox{\hyperlink{class_cl_struct_parser_a4845adcd30cc53bab2d29b0443cbbf5b}{get\+Error}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structengine_struct_a8b215f45a596e79c9fb2524147f1d718}{engine\+Struct\+::cl\+\_\+type}} \mbox{\hyperlink{class_cl_struct_parser_af14cb74ca60fe834bb12a01df23880e7}{string\+To\+Cl\+Type}} (const char $\ast$word)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_macro_manager}{Macro\+Manager}} $\ast$ \mbox{\hyperlink{class_cl_struct_parser_a62e662ba672f381a5bd55d37d0378ca7}{macro\+Manager}}
+\item 
+std\+::string \mbox{\hyperlink{class_cl_struct_parser_a3592de798cb9342ece6cd5625a519948}{error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 15 of file Cl\+Struct\+Parser.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_cl_struct_parser_ae72a14a828b54b90e58cf4e2aa0f5627}\label{class_cl_struct_parser_ae72a14a828b54b90e58cf4e2aa0f5627}} 
+\index{ClStructParser@{ClStructParser}!ClStructParser@{ClStructParser}}
+\index{ClStructParser@{ClStructParser}!ClStructParser@{ClStructParser}}
+\doxysubsubsection{\texorpdfstring{ClStructParser()}{ClStructParser()}}
+{\footnotesize\ttfamily Cl\+Struct\+Parser\+::\+Cl\+Struct\+Parser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_macro_manager}{Macro\+Manager}} $\ast$}]{macro\+Manager }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Cl\+Struct\+Parser.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_cl_struct_parser_a4845adcd30cc53bab2d29b0443cbbf5b}\label{class_cl_struct_parser_a4845adcd30cc53bab2d29b0443cbbf5b}} 
+\index{ClStructParser@{ClStructParser}!getError@{getError}}
+\index{getError@{getError}!ClStructParser@{ClStructParser}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily std\+::string Cl\+Struct\+Parser\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 251 of file Cl\+Struct\+Parser.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cl_struct_parser_a4845adcd30cc53bab2d29b0443cbbf5b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_cl_struct_parser_ab3c43f1cda873e42fac6212c645a892a}\label{class_cl_struct_parser_ab3c43f1cda873e42fac6212c645a892a}} 
+\index{ClStructParser@{ClStructParser}!processStruct@{processStruct}}
+\index{processStruct@{processStruct}!ClStructParser@{ClStructParser}}
+\doxysubsubsection{\texorpdfstring{processStruct()}{processStruct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$ Cl\+Struct\+Parser\+::process\+Struct (\begin{DoxyParamCaption}\item[{std\+::string}]{struct\+Code }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file Cl\+Struct\+Parser.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cl_struct_parser_ab3c43f1cda873e42fac6212c645a892a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cl_struct_parser_ab3c43f1cda873e42fac6212c645a892a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_cl_struct_parser_af14cb74ca60fe834bb12a01df23880e7}\label{class_cl_struct_parser_af14cb74ca60fe834bb12a01df23880e7}} 
+\index{ClStructParser@{ClStructParser}!stringToClType@{stringToClType}}
+\index{stringToClType@{stringToClType}!ClStructParser@{ClStructParser}}
+\doxysubsubsection{\texorpdfstring{stringToClType()}{stringToClType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structengine_struct_a8b215f45a596e79c9fb2524147f1d718}{engine\+Struct\+::cl\+\_\+type}} Cl\+Struct\+Parser\+::string\+To\+Cl\+Type (\begin{DoxyParamCaption}\item[{const char $\ast$}]{word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 255 of file Cl\+Struct\+Parser.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cl_struct_parser_af14cb74ca60fe834bb12a01df23880e7_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_cl_struct_parser_a3592de798cb9342ece6cd5625a519948}\label{class_cl_struct_parser_a3592de798cb9342ece6cd5625a519948}} 
+\index{ClStructParser@{ClStructParser}!error@{error}}
+\index{error@{error}!ClStructParser@{ClStructParser}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily std\+::string Cl\+Struct\+Parser\+::error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file Cl\+Struct\+Parser.\+h.
+
+\mbox{\Hypertarget{class_cl_struct_parser_a62e662ba672f381a5bd55d37d0378ca7}\label{class_cl_struct_parser_a62e662ba672f381a5bd55d37d0378ca7}} 
+\index{ClStructParser@{ClStructParser}!macroManager@{macroManager}}
+\index{macroManager@{macroManager}!ClStructParser@{ClStructParser}}
+\doxysubsubsection{\texorpdfstring{macroManager}{macroManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_macro_manager}{Macro\+Manager}}$\ast$ Cl\+Struct\+Parser\+::macro\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file Cl\+Struct\+Parser.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_cl_struct_parser_8h}{Cl\+Struct\+Parser.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_cl_struct_parser_8cpp}{Cl\+Struct\+Parser.\+cpp}}\end{DoxyCompactItemize}

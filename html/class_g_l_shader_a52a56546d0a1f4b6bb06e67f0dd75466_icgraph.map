@@ -1,0 +1,11 @@
+<map id="GLShader::TransferToShader" name="GLShader::TransferToShader">
+<area shape="rect" id="node1" title=" " alt="" coords="496,176,699,203"/>
+<area shape="rect" id="node2" href="$class_graphic_system.html#a475435ae066476e245ddbbb70e025f28" title="This abstract method is called every iteration of system loop and must be defined by specified system..." alt="" coords="5,252,185,279"/>
+<area shape="rect" id="node3" href="$class_multi_sprite.html#ab83bb19eeced6bdc32503e103825aa26" title="Method loads current sprite to texture buffer." alt="" coords="275,49,407,76"/>
+<area shape="rect" id="node4" href="$class_button_element.html#a3f94d66e48403ec192dfc7523ee3a6d6" title=" " alt="" coords="254,100,427,127"/>
+<area shape="rect" id="node5" href="$class_canvas_element.html#a3b7a492ec72fcd2ec90469768fd8f869" title=" " alt="" coords="251,151,430,177"/>
+<area shape="rect" id="node6" href="$class_text_element.html#a1adc9f3c483f07c160cd433d7837ede0" title=" " alt="" coords="262,201,419,228"/>
+<area shape="rect" id="node7" href="$class_graphic_system.html#a25dd561bce7252dceb78a938005b11fa" title=" " alt="" coords="241,252,440,279"/>
+<area shape="rect" id="node8" href="$class_graphic_system.html#a798d6ba54a138cac45524233bd945e39" title=" " alt="" coords="233,303,448,345"/>
+<area shape="rect" id="node9" href="$class_material.html#ac4195ba31c71f73be5eab0b0a5de5ace" title=" " alt="" coords="286,369,395,396"/>
+</map>

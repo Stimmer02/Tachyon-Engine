@@ -1,0 +1,14 @@
+<map id="LinesSystem::CreateShader" name="LinesSystem::CreateShader">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,207,159"/>
+<area shape="rect" id="node2" href="$class_g_l_shader.html#acdc560a9a8390681735bf134f9e98de2" title=" " alt="" coords="295,12,421,39"/>
+<area shape="rect" id="node4" href="$class_g_l_shader.html#a521024d058db5ce31d3bcc0a4a5f3f1e" title=" " alt="" coords="276,69,440,96"/>
+<area shape="rect" id="node6" href="$class_bitmap_reader.html#a3b80c5fd4316f403c272fbb1b8ac821f" title=" " alt="" coords="269,132,447,159"/>
+<area shape="rect" id="node10" href="$class_multi_sprite.html#a5caa3c0ecc29c2e65be6c6ca1db0138f" title=" " alt="" coords="273,183,443,209"/>
+<area shape="rect" id="node12" href="$class_multi_sprite.html#aff59be13f2259024085ae0e6c9dabb6d" title="Method sets value correlated to texture attribute." alt="" coords="255,233,461,260"/>
+<area shape="rect" id="node3" href="$class_g_l_shader.html#a6a67e061e3198722de9732091ca391de" title=" " alt="" coords="509,5,737,32"/>
+<area shape="rect" id="node5" href="$class_g_l_shader.html#ab1c263456438e38f08ddca57e9d50c98" title=" " alt="" coords="514,56,733,83"/>
+<area shape="rect" id="node7" href="$class_bitmap_reader.html#a088ae31dded1126893fb0b7e3afbcf27" title=" " alt="" coords="785,157,975,184"/>
+<area shape="rect" id="node8" href="$class_bitmap_reader.html#a5241976ec2563b53895627241247d141" title=" " alt="" coords="521,157,726,184"/>
+<area shape="rect" id="node9" href="$class_bitmap_reader.html#a41dfc73e89c0751692fde59b5ebc01f7" title=" " alt="" coords="532,208,715,235"/>
+<area shape="rect" id="node11" href="$class_sprite2_d.html#aaa5e68e2b2970bf5854a7e855c92c1d5" title=" " alt="" coords="533,259,714,285"/>
+</map>

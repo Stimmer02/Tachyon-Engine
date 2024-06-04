@@ -1,0 +1,189 @@
+\hypertarget{class_interaction_system}{}\doxysection{Interaction\+System Class Reference}
+\label{class_interaction_system}\index{InteractionSystem@{InteractionSystem}}
+
+
+{\ttfamily \#include $<$Interaction\+System.\+h$>$}
+
+
+
+Inheritance diagram for Interaction\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interaction_system__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Interaction\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interaction_system__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interaction_system_a2240d82b91c21d8960c9c608aef7bb6d}{Interaction\+System}} (\mbox{\hyperlink{class_window_context}{Window\+Context}} $\ast$\mbox{\hyperlink{class_interaction_system_a0956d3abafd3d67df17ce874bf5088d0}{context}}, Mouse\+Button\+Monitor $\ast$\mbox{\hyperlink{class_interaction_system_ae9fe3608f40fe5e2e7dfce0b81b058b1}{mouse\+Monitor}}, Keyboard\+Monitor $\ast$\mbox{\hyperlink{class_interaction_system_aa955c523cfcb77c7c713249eca08a42e}{keyboard\+Monitor}})
+\item 
+void \mbox{\hyperlink{class_interaction_system_ac91e2eedb29b8de3baecdad9d839d18b}{Share}} () override
+\item 
+\mbox{\hyperlink{class_interaction_system_a16294086d1f16c35162e6acc3b41b6ef}{$\sim$\+Interaction\+System}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_interaction_system_aca7fd3d015b9995ee712e490c57f7852}{On\+Load}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interaction_system_a32dcfb7ddca7e8659e5e35eb2f1cb25e}{On\+Unload}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system shutdown and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interaction_system_a18ff608a238836feb0755efc52fa327f}{Execute}} () override
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_window_context}{Window\+Context}} $\ast$ \mbox{\hyperlink{class_interaction_system_a0956d3abafd3d67df17ce874bf5088d0}{context}}
+\item 
+Mouse\+Button\+Monitor $\ast$ \mbox{\hyperlink{class_interaction_system_ae9fe3608f40fe5e2e7dfce0b81b058b1}{mouse\+Monitor}}
+\item 
+Keyboard\+Monitor $\ast$ \mbox{\hyperlink{class_interaction_system_aa955c523cfcb77c7c713249eca08a42e}{keyboard\+Monitor}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 11 of file Interaction\+System.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_interaction_system_a2240d82b91c21d8960c9c608aef7bb6d}\label{class_interaction_system_a2240d82b91c21d8960c9c608aef7bb6d}} 
+\index{InteractionSystem@{InteractionSystem}!InteractionSystem@{InteractionSystem}}
+\index{InteractionSystem@{InteractionSystem}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{InteractionSystem()}{InteractionSystem()}}
+{\footnotesize\ttfamily Interaction\+System\+::\+Interaction\+System (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_window_context}{Window\+Context}} $\ast$}]{context,  }\item[{Mouse\+Button\+Monitor $\ast$}]{mouse\+Monitor,  }\item[{Keyboard\+Monitor $\ast$}]{keyboard\+Monitor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 32 of file Interaction\+System.\+h.
+
+\mbox{\Hypertarget{class_interaction_system_a16294086d1f16c35162e6acc3b41b6ef}\label{class_interaction_system_a16294086d1f16c35162e6acc3b41b6ef}} 
+\index{InteractionSystem@{InteractionSystem}!````~InteractionSystem@{$\sim$InteractionSystem}}
+\index{````~InteractionSystem@{$\sim$InteractionSystem}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{$\sim$InteractionSystem()}{~InteractionSystem()}}
+{\footnotesize\ttfamily Interaction\+System\+::$\sim$\+Interaction\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 42 of file Interaction\+System.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_interaction_system_a18ff608a238836feb0755efc52fa327f}\label{class_interaction_system_a18ff608a238836feb0755efc52fa327f}} 
+\index{InteractionSystem@{InteractionSystem}!Execute@{Execute}}
+\index{Execute@{Execute}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void Interaction\+System\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implements \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{System}}.
+
+
+
+Definition at line 26 of file Interaction\+System.\+h.
+
+\mbox{\Hypertarget{class_interaction_system_aca7fd3d015b9995ee712e490c57f7852}\label{class_interaction_system_aca7fd3d015b9995ee712e490c57f7852}} 
+\index{InteractionSystem@{InteractionSystem}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void Interaction\+System\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{System}}.
+
+
+
+Definition at line 18 of file Interaction\+System.\+h.
+
+\mbox{\Hypertarget{class_interaction_system_a32dcfb7ddca7e8659e5e35eb2f1cb25e}\label{class_interaction_system_a32dcfb7ddca7e8659e5e35eb2f1cb25e}} 
+\index{InteractionSystem@{InteractionSystem}!OnUnload@{OnUnload}}
+\index{OnUnload@{OnUnload}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{OnUnload()}{OnUnload()}}
+{\footnotesize\ttfamily void Interaction\+System\+::\+On\+Unload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system shutdown and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a79d6f674effc2030b94f439543b9bbaa}{System}}.
+
+
+
+Definition at line 22 of file Interaction\+System.\+h.
+
+\mbox{\Hypertarget{class_interaction_system_ac91e2eedb29b8de3baecdad9d839d18b}\label{class_interaction_system_ac91e2eedb29b8de3baecdad9d839d18b}} 
+\index{InteractionSystem@{InteractionSystem}!Share@{Share}}
+\index{Share@{Share}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily void Interaction\+System\+::\+Share (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+Definition at line 38 of file Interaction\+System.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_interaction_system_a0956d3abafd3d67df17ce874bf5088d0}\label{class_interaction_system_a0956d3abafd3d67df17ce874bf5088d0}} 
+\index{InteractionSystem@{InteractionSystem}!context@{context}}
+\index{context@{context}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_window_context}{Window\+Context}}$\ast$ Interaction\+System\+::context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Interaction\+System.\+h.
+
+\mbox{\Hypertarget{class_interaction_system_aa955c523cfcb77c7c713249eca08a42e}\label{class_interaction_system_aa955c523cfcb77c7c713249eca08a42e}} 
+\index{InteractionSystem@{InteractionSystem}!keyboardMonitor@{keyboardMonitor}}
+\index{keyboardMonitor@{keyboardMonitor}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{keyboardMonitor}{keyboardMonitor}}
+{\footnotesize\ttfamily Keyboard\+Monitor$\ast$ Interaction\+System\+::keyboard\+Monitor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Interaction\+System.\+h.
+
+\mbox{\Hypertarget{class_interaction_system_ae9fe3608f40fe5e2e7dfce0b81b058b1}\label{class_interaction_system_ae9fe3608f40fe5e2e7dfce0b81b058b1}} 
+\index{InteractionSystem@{InteractionSystem}!mouseMonitor@{mouseMonitor}}
+\index{mouseMonitor@{mouseMonitor}!InteractionSystem@{InteractionSystem}}
+\doxysubsubsection{\texorpdfstring{mouseMonitor}{mouseMonitor}}
+{\footnotesize\ttfamily Mouse\+Button\+Monitor$\ast$ Interaction\+System\+::mouse\+Monitor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Interaction\+System.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_interaction_system_8h}{Interaction\+System.\+h}}\end{DoxyCompactItemize}

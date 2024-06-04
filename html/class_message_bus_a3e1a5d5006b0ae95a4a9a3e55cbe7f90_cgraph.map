@@ -1,0 +1,5 @@
+<map id="MessageBus::SendToChannel" name="MessageBus::SendToChannel">
+<area shape="rect" id="node1" title="Sends message to all users in specified channel." alt="" coords="5,31,216,57"/>
+<area shape="rect" id="node2" href="$class_channel.html#a43bfa0d9477e5d7207bf2bbcf2f3efe3" title="Emplaces message on message queue." alt="" coords="264,5,461,32"/>
+<area shape="rect" id="node3" href="$class_channel.html#ae1861cb9fb2ce4c850c4cd0e082897d5" title="Returns number of clients present in current channel." alt="" coords="271,56,454,83"/>
+</map>

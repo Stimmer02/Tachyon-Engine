@@ -1,0 +1,191 @@
+\hypertarget{class_kernel_collector}{}\doxysection{Kernel\+Collector Class Reference}
+\label{class_kernel_collector}\index{KernelCollector@{KernelCollector}}
+
+
+{\ttfamily \#include $<$Kernel\+Collector.\+h$>$}
+
+
+
+Collaboration diagram for Kernel\+Collector\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{class_kernel_collector__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_kernel_collector_ae3f419f62a91ca9ecc2e55da4bc10257}{Kernel\+Collector}} ()
+\item 
+char \mbox{\hyperlink{class_kernel_collector_ab432e38f0cb79925ee159944b604e078}{add\+Kernel}} (std\+::string path, std\+::string \&kernel\+Name)
+\item 
+char \mbox{\hyperlink{class_kernel_collector_a0aa15de94d41f6160a033e5bb45b453b}{add\+Kernel\+Code}} (const std\+::string \&code, const std\+::string \&kernel\+Name)
+\item 
+std\+::string \mbox{\hyperlink{class_kernel_collector_a9607f52e31ed0bc8a00e496525c287f2}{get\+Kernels}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_kernel_collector_aac41c574f57ceb1e4f133966b20c4182}{get\+Error}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{class_kernel_collector_aee32cab9e4d7f5c2a0a650780f940003}{check\+Kernel}} (std\+::string $\ast$kernel, std\+::string \&kernel\+Name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structkernel_data}{kernel\+Data}} $>$ \mbox{\hyperlink{class_kernel_collector_a6df6dc01784cfcf68cc6351ad2b30f77}{kernels}}
+\item 
+std\+::string \mbox{\hyperlink{class_kernel_collector_a1a7ffac9b502948376d821cb20c5fba4}{error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file Kernel\+Collector.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_kernel_collector_ae3f419f62a91ca9ecc2e55da4bc10257}\label{class_kernel_collector_ae3f419f62a91ca9ecc2e55da4bc10257}} 
+\index{KernelCollector@{KernelCollector}!KernelCollector@{KernelCollector}}
+\index{KernelCollector@{KernelCollector}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{KernelCollector()}{KernelCollector()}}
+{\footnotesize\ttfamily Kernel\+Collector\+::\+Kernel\+Collector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Kernel\+Collector.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_kernel_collector_ab432e38f0cb79925ee159944b604e078}\label{class_kernel_collector_ab432e38f0cb79925ee159944b604e078}} 
+\index{KernelCollector@{KernelCollector}!addKernel@{addKernel}}
+\index{addKernel@{addKernel}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{addKernel()}{addKernel()}}
+{\footnotesize\ttfamily char Kernel\+Collector\+::add\+Kernel (\begin{DoxyParamCaption}\item[{std\+::string}]{path,  }\item[{std\+::string \&}]{kernel\+Name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file Kernel\+Collector.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_collector_ab432e38f0cb79925ee159944b604e078_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_collector_ab432e38f0cb79925ee159944b604e078_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_collector_a0aa15de94d41f6160a033e5bb45b453b}\label{class_kernel_collector_a0aa15de94d41f6160a033e5bb45b453b}} 
+\index{KernelCollector@{KernelCollector}!addKernelCode@{addKernelCode}}
+\index{addKernelCode@{addKernelCode}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{addKernelCode()}{addKernelCode()}}
+{\footnotesize\ttfamily char Kernel\+Collector\+::add\+Kernel\+Code (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{code,  }\item[{const std\+::string \&}]{kernel\+Name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file Kernel\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_collector_a0aa15de94d41f6160a033e5bb45b453b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_collector_aee32cab9e4d7f5c2a0a650780f940003}\label{class_kernel_collector_aee32cab9e4d7f5c2a0a650780f940003}} 
+\index{KernelCollector@{KernelCollector}!checkKernel@{checkKernel}}
+\index{checkKernel@{checkKernel}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{checkKernel()}{checkKernel()}}
+{\footnotesize\ttfamily char Kernel\+Collector\+::check\+Kernel (\begin{DoxyParamCaption}\item[{std\+::string $\ast$}]{kernel,  }\item[{std\+::string \&}]{kernel\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 49 of file Kernel\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_collector_aee32cab9e4d7f5c2a0a650780f940003_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_collector_aac41c574f57ceb1e4f133966b20c4182}\label{class_kernel_collector_aac41c574f57ceb1e4f133966b20c4182}} 
+\index{KernelCollector@{KernelCollector}!getError@{getError}}
+\index{getError@{getError}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily std\+::string Kernel\+Collector\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file Kernel\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_collector_aac41c574f57ceb1e4f133966b20c4182_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_kernel_collector_a9607f52e31ed0bc8a00e496525c287f2}\label{class_kernel_collector_a9607f52e31ed0bc8a00e496525c287f2}} 
+\index{KernelCollector@{KernelCollector}!getKernels@{getKernels}}
+\index{getKernels@{getKernels}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{getKernels()}{getKernels()}}
+{\footnotesize\ttfamily std\+::string Kernel\+Collector\+::get\+Kernels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file Kernel\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_kernel_collector_a9607f52e31ed0bc8a00e496525c287f2_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_kernel_collector_a1a7ffac9b502948376d821cb20c5fba4}\label{class_kernel_collector_a1a7ffac9b502948376d821cb20c5fba4}} 
+\index{KernelCollector@{KernelCollector}!error@{error}}
+\index{error@{error}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily std\+::string Kernel\+Collector\+::error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 22 of file Kernel\+Collector.\+h.
+
+\mbox{\Hypertarget{class_kernel_collector_a6df6dc01784cfcf68cc6351ad2b30f77}\label{class_kernel_collector_a6df6dc01784cfcf68cc6351ad2b30f77}} 
+\index{KernelCollector@{KernelCollector}!kernels@{kernels}}
+\index{kernels@{kernels}!KernelCollector@{KernelCollector}}
+\doxysubsubsection{\texorpdfstring{kernels}{kernels}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structkernel_data}{kernel\+Data}}$>$ Kernel\+Collector\+::kernels\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file Kernel\+Collector.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_kernel_collector_8h}{Kernel\+Collector.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_kernel_collector_8cpp}{Kernel\+Collector.\+cpp}}\end{DoxyCompactItemize}

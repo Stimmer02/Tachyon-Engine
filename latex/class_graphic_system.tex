@@ -1,0 +1,433 @@
+\hypertarget{class_graphic_system}{}\doxysection{Graphic\+System Class Reference}
+\label{class_graphic_system}\index{GraphicSystem@{GraphicSystem}}
+
+
+{\ttfamily \#include $<$Graphic\+System.\+h$>$}
+
+
+
+Inheritance diagram for Graphic\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_graphic_system__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Graphic\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graphic_system_a804d4815c2832e235a112ca4f1cbb87a}{Graphic\+System}} ()
+\item 
+void \mbox{\hyperlink{class_graphic_system_a7451b4acda7534324269e532cc7c286d}{On\+Load}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graphic_system_a98f48779b685382bc6bdc5b92da7812a}{Share}} (\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$resource\+Manager) override
+\begin{DoxyCompactList}\small\item\em This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_graphic_system_af9501d9ddded7f966329ec1a185ded88}{$\sim$\+Graphic\+System}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_graphic_system_a798d6ba54a138cac45524233bd945e39}{Render\+Scene\+Objects}} (\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$object)
+\item 
+void \mbox{\hyperlink{class_graphic_system_a25dd561bce7252dceb78a938005b11fa}{Render\+GUI}} (\mbox{\hyperlink{class_g_u_i_element}{GUIElement}} $\ast$gui\+Element)
+\item 
+void \mbox{\hyperlink{class_graphic_system_a475435ae066476e245ddbbb70e025f28}{Execute}} () override
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graphic_system_ac99761997933cf38c9ea18789e631093}{Setup\+Unhandled\+Components}} ()
+\item 
+void \mbox{\hyperlink{class_graphic_system_a9c3d3146d7aea4c88be1378207801c23}{Upload\+Main\+Shaders}} ()
+\item 
+void \mbox{\hyperlink{class_graphic_system_ae5e707205d4229e8d698d1805baf5355}{Setup\+Archetype\+Func}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene}{Scene}} $\ast$ \mbox{\hyperlink{class_graphic_system_a80f10399adc601647707dcf5d343c306}{scene}}
+\item 
+\mbox{\hyperlink{class_window_context}{Window\+Context}} $\ast$ \mbox{\hyperlink{class_graphic_system_a0ac7af4bace351f29bb6114dbf1d7bfe}{context}}
+\item 
+\mbox{\hyperlink{class_camera}{Camera}} \mbox{\hyperlink{class_graphic_system_ab1b1b9a08c3e34434cea06d29876cd02}{main\+Camera}}
+\item 
+\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$ \mbox{\hyperlink{class_graphic_system_aaa4f7c609c49a6ab4a3a252e4573d550}{main\+Shader}}
+\item 
+\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$ \mbox{\hyperlink{class_graphic_system_a3b6a26d8cd194e42e21c9a712b1ee30d}{gui\+Shader}}
+\item 
+\mbox{\hyperlink{class_i_log}{ILog}} $\ast$ \mbox{\hyperlink{class_graphic_system_ac675a37ceb64c05523bfe29a3c6b44fa}{context\+Logger}}
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_graphic_system_a90dfde1cc249254309356b07439cd29f}{projection\+Matrix}}
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_graphic_system_a82a332bb4249b5e12ab1e9555c2a6af6}{gui\+Projection\+Matrix}}
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_graphic_system_a93b0ed1ef57a9b055f52b5cc36614f6b}{view\+Projection\+Matrix}}
+\item 
+\mbox{\hyperlink{_graphic_system_8h_ad951946e6d7a2243ce9e8e3f6ca13a4b}{Archetype\+Render\+Func}} \mbox{\hyperlink{class_graphic_system_a7c623ba54e0a2dfc65e7d03245445128}{archetype\+Func}} \mbox{[}\mbox{\hyperlink{_attribute_8h_adccbfe368968765c54982fd204053eb3a27cecd8100217784d28428edfbbcc657}{Rendering\+Attributes\+::\+ATTRIB\+\_\+\+MAX}}\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 25 of file Graphic\+System.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graphic_system_a804d4815c2832e235a112ca4f1cbb87a}\label{class_graphic_system_a804d4815c2832e235a112ca4f1cbb87a}} 
+\index{GraphicSystem@{GraphicSystem}!GraphicSystem@{GraphicSystem}}
+\index{GraphicSystem@{GraphicSystem}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{GraphicSystem()}{GraphicSystem()}}
+{\footnotesize\ttfamily Graphic\+System\+::\+Graphic\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 157 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a804d4815c2832e235a112ca4f1cbb87a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_af9501d9ddded7f966329ec1a185ded88}\label{class_graphic_system_af9501d9ddded7f966329ec1a185ded88}} 
+\index{GraphicSystem@{GraphicSystem}!````~GraphicSystem@{$\sim$GraphicSystem}}
+\index{````~GraphicSystem@{$\sim$GraphicSystem}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{$\sim$GraphicSystem()}{~GraphicSystem()}}
+{\footnotesize\ttfamily Graphic\+System\+::$\sim$\+Graphic\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 191 of file Graphic\+System.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graphic_system_a475435ae066476e245ddbbb70e025f28}\label{class_graphic_system_a475435ae066476e245ddbbb70e025f28}} 
+\index{GraphicSystem@{GraphicSystem}!Execute@{Execute}}
+\index{Execute@{Execute}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implements \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{System}}.
+
+
+
+Definition at line 77 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a475435ae066476e245ddbbb70e025f28_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_a7451b4acda7534324269e532cc7c286d}\label{class_graphic_system_a7451b4acda7534324269e532cc7c286d}} 
+\index{GraphicSystem@{GraphicSystem}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{System}}.
+
+
+
+Definition at line 171 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a7451b4acda7534324269e532cc7c286d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_a25dd561bce7252dceb78a938005b11fa}\label{class_graphic_system_a25dd561bce7252dceb78a938005b11fa}} 
+\index{GraphicSystem@{GraphicSystem}!RenderGUI@{RenderGUI}}
+\index{RenderGUI@{RenderGUI}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{RenderGUI()}{RenderGUI()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+Render\+GUI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_u_i_element}{GUIElement}} $\ast$}]{gui\+Element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 64 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a25dd561bce7252dceb78a938005b11fa_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a25dd561bce7252dceb78a938005b11fa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_a798d6ba54a138cac45524233bd945e39}\label{class_graphic_system_a798d6ba54a138cac45524233bd945e39}} 
+\index{GraphicSystem@{GraphicSystem}!RenderSceneObjects@{RenderSceneObjects}}
+\index{RenderSceneObjects@{RenderSceneObjects}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{RenderSceneObjects()}{RenderSceneObjects()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+Render\+Scene\+Objects (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$}]{object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 44 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a798d6ba54a138cac45524233bd945e39_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a798d6ba54a138cac45524233bd945e39_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_ae5e707205d4229e8d698d1805baf5355}\label{class_graphic_system_ae5e707205d4229e8d698d1805baf5355}} 
+\index{GraphicSystem@{GraphicSystem}!SetupArchetypeFunc@{SetupArchetypeFunc}}
+\index{SetupArchetypeFunc@{SetupArchetypeFunc}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{SetupArchetypeFunc()}{SetupArchetypeFunc()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+Setup\+Archetype\+Func (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 132 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_ae5e707205d4229e8d698d1805baf5355_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_ae5e707205d4229e8d698d1805baf5355_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_ac99761997933cf38c9ea18789e631093}\label{class_graphic_system_ac99761997933cf38c9ea18789e631093}} 
+\index{GraphicSystem@{GraphicSystem}!SetupUnhandledComponents@{SetupUnhandledComponents}}
+\index{SetupUnhandledComponents@{SetupUnhandledComponents}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{SetupUnhandledComponents()}{SetupUnhandledComponents()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+Setup\+Unhandled\+Components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 106 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_ac99761997933cf38c9ea18789e631093_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_ac99761997933cf38c9ea18789e631093_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_a98f48779b685382bc6bdc5b92da7812a}\label{class_graphic_system_a98f48779b685382bc6bdc5b92da7812a}} 
+\index{GraphicSystem@{GraphicSystem}!Share@{Share}}
+\index{Share@{Share}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$}]{resource\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}{System}}.
+
+
+
+Definition at line 185 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a98f48779b685382bc6bdc5b92da7812a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_graphic_system_a9c3d3146d7aea4c88be1378207801c23}\label{class_graphic_system_a9c3d3146d7aea4c88be1378207801c23}} 
+\index{GraphicSystem@{GraphicSystem}!UploadMainShaders@{UploadMainShaders}}
+\index{UploadMainShaders@{UploadMainShaders}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{UploadMainShaders()}{UploadMainShaders()}}
+{\footnotesize\ttfamily void Graphic\+System\+::\+Upload\+Main\+Shaders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 117 of file Graphic\+System.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a9c3d3146d7aea4c88be1378207801c23_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_graphic_system_a9c3d3146d7aea4c88be1378207801c23_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_graphic_system_a7c623ba54e0a2dfc65e7d03245445128}\label{class_graphic_system_a7c623ba54e0a2dfc65e7d03245445128}} 
+\index{GraphicSystem@{GraphicSystem}!archetypeFunc@{archetypeFunc}}
+\index{archetypeFunc@{archetypeFunc}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{archetypeFunc}{archetypeFunc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_graphic_system_8h_ad951946e6d7a2243ce9e8e3f6ca13a4b}{Archetype\+Render\+Func}} Graphic\+System\+::archetype\+Func\mbox{[}\mbox{\hyperlink{_attribute_8h_adccbfe368968765c54982fd204053eb3a27cecd8100217784d28428edfbbcc657}{Rendering\+Attributes\+::\+ATTRIB\+\_\+\+MAX}}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 42 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_a0ac7af4bace351f29bb6114dbf1d7bfe}\label{class_graphic_system_a0ac7af4bace351f29bb6114dbf1d7bfe}} 
+\index{GraphicSystem@{GraphicSystem}!context@{context}}
+\index{context@{context}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_window_context}{Window\+Context}}$\ast$ Graphic\+System\+::context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_ac675a37ceb64c05523bfe29a3c6b44fa}\label{class_graphic_system_ac675a37ceb64c05523bfe29a3c6b44fa}} 
+\index{GraphicSystem@{GraphicSystem}!contextLogger@{contextLogger}}
+\index{contextLogger@{contextLogger}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{contextLogger}{contextLogger}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_log}{ILog}}$\ast$ Graphic\+System\+::context\+Logger\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 36 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_a82a332bb4249b5e12ab1e9555c2a6af6}\label{class_graphic_system_a82a332bb4249b5e12ab1e9555c2a6af6}} 
+\index{GraphicSystem@{GraphicSystem}!guiProjectionMatrix@{guiProjectionMatrix}}
+\index{guiProjectionMatrix@{guiProjectionMatrix}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{guiProjectionMatrix}{guiProjectionMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Graphic\+System\+::gui\+Projection\+Matrix\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 39 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_a3b6a26d8cd194e42e21c9a712b1ee30d}\label{class_graphic_system_a3b6a26d8cd194e42e21c9a712b1ee30d}} 
+\index{GraphicSystem@{GraphicSystem}!guiShader@{guiShader}}
+\index{guiShader@{guiShader}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{guiShader}{guiShader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_shader}{GLShader}}$\ast$ Graphic\+System\+::gui\+Shader\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 34 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_ab1b1b9a08c3e34434cea06d29876cd02}\label{class_graphic_system_ab1b1b9a08c3e34434cea06d29876cd02}} 
+\index{GraphicSystem@{GraphicSystem}!mainCamera@{mainCamera}}
+\index{mainCamera@{mainCamera}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{mainCamera}{mainCamera}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_camera}{Camera}} Graphic\+System\+::main\+Camera\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 31 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_aaa4f7c609c49a6ab4a3a252e4573d550}\label{class_graphic_system_aaa4f7c609c49a6ab4a3a252e4573d550}} 
+\index{GraphicSystem@{GraphicSystem}!mainShader@{mainShader}}
+\index{mainShader@{mainShader}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{mainShader}{mainShader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_shader}{GLShader}}$\ast$ Graphic\+System\+::main\+Shader\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 33 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_a90dfde1cc249254309356b07439cd29f}\label{class_graphic_system_a90dfde1cc249254309356b07439cd29f}} 
+\index{GraphicSystem@{GraphicSystem}!projectionMatrix@{projectionMatrix}}
+\index{projectionMatrix@{projectionMatrix}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{projectionMatrix}{projectionMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Graphic\+System\+::projection\+Matrix\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 38 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_a80f10399adc601647707dcf5d343c306}\label{class_graphic_system_a80f10399adc601647707dcf5d343c306}} 
+\index{GraphicSystem@{GraphicSystem}!scene@{scene}}
+\index{scene@{scene}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene}{Scene}}$\ast$ Graphic\+System\+::scene\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file Graphic\+System.\+h.
+
+\mbox{\Hypertarget{class_graphic_system_a93b0ed1ef57a9b055f52b5cc36614f6b}\label{class_graphic_system_a93b0ed1ef57a9b055f52b5cc36614f6b}} 
+\index{GraphicSystem@{GraphicSystem}!viewProjectionMatrix@{viewProjectionMatrix}}
+\index{viewProjectionMatrix@{viewProjectionMatrix}!GraphicSystem@{GraphicSystem}}
+\doxysubsubsection{\texorpdfstring{viewProjectionMatrix}{viewProjectionMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Graphic\+System\+::view\+Projection\+Matrix\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 40 of file Graphic\+System.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_graphic_system_8h}{Graphic\+System.\+h}}\end{DoxyCompactItemize}

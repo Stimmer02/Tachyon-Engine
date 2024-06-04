@@ -1,0 +1,5 @@
+<map id="System::Run" name="System::Run">
+<area shape="rect" id="node1" title="Executes system loop." alt="" coords="5,31,109,57"/>
+<area shape="rect" id="node2" href="$class_system.html#ada4f1974bb3502185af62cd51c8fce30" title="This abstract method is called every iteration of system loop and must be defined by specified system..." alt="" coords="183,5,314,32"/>
+<area shape="rect" id="node3" href="$class_system.html#ad1eaf285786da435b06063511e495e9f" title="This method is called when system have any pending messages stored in internal queue and by default d..." alt="" coords="157,56,340,83"/>
+</map>

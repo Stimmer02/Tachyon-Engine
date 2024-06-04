@@ -1,0 +1,153 @@
+\hypertarget{class_macro_manager}{}\doxysection{Macro\+Manager Class Reference}
+\label{class_macro_manager}\index{MacroManager@{MacroManager}}
+
+
+{\ttfamily \#include $<$Macro\+Manager.\+h$>$}
+
+
+
+Collaboration diagram for Macro\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_macro_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_macro_manager_ab0eaf5cbfcfbd007f767fb90084f7971}{add\+Macro}} (std\+::string keyword, float value)
+\item 
+float $\ast$ \mbox{\hyperlink{class_macro_manager_a2d3e8d048f6514272af3db17945b523c}{get\+Macro}} (std\+::string keyword)
+\item 
+char \mbox{\hyperlink{class_macro_manager_a980b71903d3fc4f7868dfaf58a863719}{parse\+File}} (std\+::string filename)
+\item 
+std\+::string \mbox{\hyperlink{class_macro_manager_a6493977527e3f50d6173ff375f649014}{get\+Error}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, float $>$ \mbox{\hyperlink{class_macro_manager_acd79409cb685e061a24f6eeb52378f06}{macros}}
+\item 
+std\+::string \mbox{\hyperlink{class_macro_manager_a841aeb373902c9c2ad3f9e1c9923991e}{error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file Macro\+Manager.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_macro_manager_ab0eaf5cbfcfbd007f767fb90084f7971}\label{class_macro_manager_ab0eaf5cbfcfbd007f767fb90084f7971}} 
+\index{MacroManager@{MacroManager}!addMacro@{addMacro}}
+\index{addMacro@{addMacro}!MacroManager@{MacroManager}}
+\doxysubsubsection{\texorpdfstring{addMacro()}{addMacro()}}
+{\footnotesize\ttfamily void Macro\+Manager\+::add\+Macro (\begin{DoxyParamCaption}\item[{std\+::string}]{keyword,  }\item[{float}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Macro\+Manager.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_macro_manager_ab0eaf5cbfcfbd007f767fb90084f7971_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_macro_manager_a6493977527e3f50d6173ff375f649014}\label{class_macro_manager_a6493977527e3f50d6173ff375f649014}} 
+\index{MacroManager@{MacroManager}!getError@{getError}}
+\index{getError@{getError}!MacroManager@{MacroManager}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily std\+::string Macro\+Manager\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file Macro\+Manager.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_macro_manager_a6493977527e3f50d6173ff375f649014_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_macro_manager_a2d3e8d048f6514272af3db17945b523c}\label{class_macro_manager_a2d3e8d048f6514272af3db17945b523c}} 
+\index{MacroManager@{MacroManager}!getMacro@{getMacro}}
+\index{getMacro@{getMacro}!MacroManager@{MacroManager}}
+\doxysubsubsection{\texorpdfstring{getMacro()}{getMacro()}}
+{\footnotesize\ttfamily float $\ast$ Macro\+Manager\+::get\+Macro (\begin{DoxyParamCaption}\item[{std\+::string}]{keyword }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file Macro\+Manager.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_macro_manager_a2d3e8d048f6514272af3db17945b523c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_macro_manager_a980b71903d3fc4f7868dfaf58a863719}\label{class_macro_manager_a980b71903d3fc4f7868dfaf58a863719}} 
+\index{MacroManager@{MacroManager}!parseFile@{parseFile}}
+\index{parseFile@{parseFile}!MacroManager@{MacroManager}}
+\doxysubsubsection{\texorpdfstring{parseFile()}{parseFile()}}
+{\footnotesize\ttfamily char Macro\+Manager\+::parse\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file Macro\+Manager.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_macro_manager_a980b71903d3fc4f7868dfaf58a863719_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_macro_manager_a980b71903d3fc4f7868dfaf58a863719_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_macro_manager_a841aeb373902c9c2ad3f9e1c9923991e}\label{class_macro_manager_a841aeb373902c9c2ad3f9e1c9923991e}} 
+\index{MacroManager@{MacroManager}!error@{error}}
+\index{error@{error}!MacroManager@{MacroManager}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily std\+::string Macro\+Manager\+::error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Macro\+Manager.\+h.
+
+\mbox{\Hypertarget{class_macro_manager_acd79409cb685e061a24f6eeb52378f06}\label{class_macro_manager_acd79409cb685e061a24f6eeb52378f06}} 
+\index{MacroManager@{MacroManager}!macros@{macros}}
+\index{macros@{macros}!MacroManager@{MacroManager}}
+\doxysubsubsection{\texorpdfstring{macros}{macros}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, float$>$ Macro\+Manager\+::macros\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Macro\+Manager.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_macro_manager_8h}{Macro\+Manager.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_macro_manager_8cpp}{Macro\+Manager.\+cpp}}\end{DoxyCompactItemize}

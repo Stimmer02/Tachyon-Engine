@@ -1,0 +1,6 @@
+<map id="FractalSystem::OnLoad" name="FractalSystem::OnLoad">
+<area shape="rect" id="node1" title="This method is called on system startup and by default does nothing." alt="" coords="5,64,177,91"/>
+<area shape="rect" id="node2" href="$class_scene.html#adbcfa2da2dcdd1f39090eac8a1f4f4be" title=" " alt="" coords="235,5,406,32"/>
+<area shape="rect" id="node3" href="$class_shared_name_resolver.html#a97ec2b09d7b2f47cfb439b938b8d3b0c" title=" " alt="" coords="239,57,402,98"/>
+<area shape="rect" id="node4" href="$class_canvas_element.html#a9ece35a68dc9318180609efa628576e1" title=" " alt="" coords="225,123,416,149"/>
+</map>

@@ -1,0 +1,131 @@
+\hypertarget{class_entity_container}{}\doxysection{Entity\+Container Class Reference}
+\label{class_entity_container}\index{EntityContainer@{EntityContainer}}
+
+
+{\ttfamily \#include $<$Entity\+Container.\+h$>$}
+
+
+
+Collaboration diagram for Entity\+Container\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{class_entity_container__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_container_ab899fa67f1f932a907064a6785e51d37}{Entity\+Container}} ()
+\item 
+\mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \mbox{\hyperlink{class_entity_container_a373ffc4c8f03ab286761690e4f79483e}{Create}} ()
+\item 
+void \mbox{\hyperlink{class_entity_container_a652be19316b466c66d51cb0def66894d}{Destroy}} (const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&\+\_\+entity)
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} $>$ \& \mbox{\hyperlink{class_entity_container_abb4028e154bb7aefe34e8e2b0408cdec}{Get\+Entities}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} $>$ \mbox{\hyperlink{class_entity_container_a002e78d1b5b4276414ab052892b22736}{entities}}
+\item 
+std\+::priority\+\_\+queue$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}, std\+::vector$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} $>$, std\+::greater$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} $>$ $>$ \mbox{\hyperlink{class_entity_container_a8b4436f1544444e5d7668f670d12fb6b}{free\+IDs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 13 of file Entity\+Container.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_entity_container_ab899fa67f1f932a907064a6785e51d37}\label{class_entity_container_ab899fa67f1f932a907064a6785e51d37}} 
+\index{EntityContainer@{EntityContainer}!EntityContainer@{EntityContainer}}
+\index{EntityContainer@{EntityContainer}!EntityContainer@{EntityContainer}}
+\doxysubsubsection{\texorpdfstring{EntityContainer()}{EntityContainer()}}
+{\footnotesize\ttfamily Entity\+Container\+::\+Entity\+Container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 23 of file Entity\+Container.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_entity_container_a373ffc4c8f03ab286761690e4f79483e}\label{class_entity_container_a373ffc4c8f03ab286761690e4f79483e}} 
+\index{EntityContainer@{EntityContainer}!Create@{Create}}
+\index{Create@{Create}!EntityContainer@{EntityContainer}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} Entity\+Container\+::\+Create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 27 of file Entity\+Container.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_entity_container_a373ffc4c8f03ab286761690e4f79483e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_entity_container_a652be19316b466c66d51cb0def66894d}\label{class_entity_container_a652be19316b466c66d51cb0def66894d}} 
+\index{EntityContainer@{EntityContainer}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!EntityContainer@{EntityContainer}}
+\doxysubsubsection{\texorpdfstring{Destroy()}{Destroy()}}
+{\footnotesize\ttfamily void Entity\+Container\+::\+Destroy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&}]{\+\_\+entity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 46 of file Entity\+Container.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_entity_container_a652be19316b466c66d51cb0def66894d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_entity_container_abb4028e154bb7aefe34e8e2b0408cdec}\label{class_entity_container_abb4028e154bb7aefe34e8e2b0408cdec}} 
+\index{EntityContainer@{EntityContainer}!GetEntities@{GetEntities}}
+\index{GetEntities@{GetEntities}!EntityContainer@{EntityContainer}}
+\doxysubsubsection{\texorpdfstring{GetEntities()}{GetEntities()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$\mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}$>$\& Entity\+Container\+::\+Get\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 57 of file Entity\+Container.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_entity_container_a002e78d1b5b4276414ab052892b22736}\label{class_entity_container_a002e78d1b5b4276414ab052892b22736}} 
+\index{EntityContainer@{EntityContainer}!entities@{entities}}
+\index{entities@{entities}!EntityContainer@{EntityContainer}}
+\doxysubsubsection{\texorpdfstring{entities}{entities}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$\mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}$>$ Entity\+Container\+::entities\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Entity\+Container.\+h.
+
+\mbox{\Hypertarget{class_entity_container_a8b4436f1544444e5d7668f670d12fb6b}\label{class_entity_container_a8b4436f1544444e5d7668f670d12fb6b}} 
+\index{EntityContainer@{EntityContainer}!freeIDs@{freeIDs}}
+\index{freeIDs@{freeIDs}!EntityContainer@{EntityContainer}}
+\doxysubsubsection{\texorpdfstring{freeIDs}{freeIDs}}
+{\footnotesize\ttfamily std\+::priority\+\_\+queue$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}, std\+::vector$<$\mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}$>$, std\+::greater$<$\mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}$>$ $>$ Entity\+Container\+::free\+IDs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Entity\+Container.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_entity_container_8h}{Entity\+Container.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,5 @@
+<map id="Button::Render" name="Button::Render">
+<area shape="rect" id="node1" title="Renders current component on screen." alt="" coords="5,31,124,57"/>
+<area shape="rect" id="node2" href="$class_sprite2_d.html#a47305cfab61267f4bf7cd51ab7fb4733" title="Method loads current sprite to texture buffer." alt="" coords="181,5,298,32"/>
+<area shape="rect" id="node3" href="$class_sprite2_d.html#a0f0a5201f4aa2d626c65883c71f40bc4" title="Method unloads current sprite from texture buffer." alt="" coords="172,56,307,83"/>
+</map>

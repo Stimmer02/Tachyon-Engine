@@ -1,0 +1,341 @@
+\hypertarget{class_camera}{}\doxysection{Camera Class Reference}
+\label{class_camera}\index{Camera@{Camera}}
+
+
+{\ttfamily \#include $<$Camera.\+h$>$}
+
+
+
+Collaboration diagram for Camera\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_camera__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_camera_a01f94c3543f56ede7af49dc778f19331}{Camera}} ()
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_camera_a5702b2ee88842736a89034ec2c603ed9}{Get\+View\+Matrix}} () const
+\item 
+void \mbox{\hyperlink{class_camera_a3f6134be8b4bd718a3debcb53067904e}{Reset\+View}} ()
+\item 
+void \mbox{\hyperlink{class_camera_af91e2c84d5b3fd716d1059181bf31436}{Look\+At}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&target=\mbox{\hyperlink{class_vector3}{Vector3}}(0.\+0f, 0.\+0f, 0.\+0f))
+\item 
+void \mbox{\hyperlink{class_camera_a5fb1a1345875481aa3f9d56d4f9f78cf}{Rotate\+By}} (const float \&x\+Offset, const float \&y\+Offset)
+\item 
+void \mbox{\hyperlink{class_camera_ab4291cc1ef851a0b20f20569cba9142d}{Move\+By}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&direction, const float \&delta\+Time)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_camera_a3b229874a00253021a1b6c61657fa5ab}{position}}
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_camera_a5df07cb5685e533780db3103f0f7a709}{right}}
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_camera_ab76ce866ca2acd6ab54447f474077245}{up}}
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_camera_af8f705d34f633026c2a0a82e73a3db3a}{front}}
+\item 
+float \mbox{\hyperlink{class_camera_ad76701b22630f2df28a0ae15f0497a3a}{yaw}}
+\item 
+float \mbox{\hyperlink{class_camera_ab56fcb39f580e8d2159cf2c9c6d9a65a}{pitch}}
+\item 
+float \mbox{\hyperlink{class_camera_a08d9c6119a859e664d74ca07db4fe3d3}{roll}}
+\item 
+float \mbox{\hyperlink{class_camera_aff7393c9cfbccd7e369091f00008da93}{fov}} = 45.\+0f
+\item 
+float \mbox{\hyperlink{class_camera_a03987cf3bbf312be16bb881939382d83}{movement\+Speed}} = 1.\+0f
+\item 
+float \mbox{\hyperlink{class_camera_a5431c8caefafb42a667ca4c801bef07f}{sensitivity}} = 0.\+1f
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_camera_ae94de322124a68e32113235eeec78008}{Update\+Vectors}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_camera_a2dd027cc00ec51853997fcd9c26325c1}{projection}}
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_camera_a37b2a5b7bf196608cf53ecc7d0c5669c}{view}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file Camera.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_camera_a01f94c3543f56ede7af49dc778f19331}\label{class_camera_a01f94c3543f56ede7af49dc778f19331}} 
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}}
+{\footnotesize\ttfamily Camera\+::\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 50 of file Camera.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_a01f94c3543f56ede7af49dc778f19331_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_camera_a5702b2ee88842736a89034ec2c603ed9}\label{class_camera_a5702b2ee88842736a89034ec2c603ed9}} 
+\index{Camera@{Camera}!GetViewMatrix@{GetViewMatrix}}
+\index{GetViewMatrix@{GetViewMatrix}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{GetViewMatrix()}{GetViewMatrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Camera\+::\+Get\+View\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 59 of file Camera.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_a5702b2ee88842736a89034ec2c603ed9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_a5702b2ee88842736a89034ec2c603ed9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_camera_af91e2c84d5b3fd716d1059181bf31436}\label{class_camera_af91e2c84d5b3fd716d1059181bf31436}} 
+\index{Camera@{Camera}!LookAt@{LookAt}}
+\index{LookAt@{LookAt}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{LookAt()}{LookAt()}}
+{\footnotesize\ttfamily void Camera\+::\+Look\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{target = {\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}}(0.0f,~0.0f,~0.0f)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 76 of file Camera.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_af91e2c84d5b3fd716d1059181bf31436_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_camera_ab4291cc1ef851a0b20f20569cba9142d}\label{class_camera_ab4291cc1ef851a0b20f20569cba9142d}} 
+\index{Camera@{Camera}!MoveBy@{MoveBy}}
+\index{MoveBy@{MoveBy}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{MoveBy()}{MoveBy()}}
+{\footnotesize\ttfamily void Camera\+::\+Move\+By (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{direction,  }\item[{const float \&}]{delta\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 104 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a3f6134be8b4bd718a3debcb53067904e}\label{class_camera_a3f6134be8b4bd718a3debcb53067904e}} 
+\index{Camera@{Camera}!ResetView@{ResetView}}
+\index{ResetView@{ResetView}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{ResetView()}{ResetView()}}
+{\footnotesize\ttfamily void Camera\+::\+Reset\+View (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 66 of file Camera.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_a3f6134be8b4bd718a3debcb53067904e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_camera_a5fb1a1345875481aa3f9d56d4f9f78cf}\label{class_camera_a5fb1a1345875481aa3f9d56d4f9f78cf}} 
+\index{Camera@{Camera}!RotateBy@{RotateBy}}
+\index{RotateBy@{RotateBy}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{RotateBy()}{RotateBy()}}
+{\footnotesize\ttfamily void Camera\+::\+Rotate\+By (\begin{DoxyParamCaption}\item[{const float \&}]{x\+Offset,  }\item[{const float \&}]{y\+Offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 90 of file Camera.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_a5fb1a1345875481aa3f9d56d4f9f78cf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_camera_ae94de322124a68e32113235eeec78008}\label{class_camera_ae94de322124a68e32113235eeec78008}} 
+\index{Camera@{Camera}!UpdateVectors@{UpdateVectors}}
+\index{UpdateVectors@{UpdateVectors}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{UpdateVectors()}{UpdateVectors()}}
+{\footnotesize\ttfamily void Camera\+::\+Update\+Vectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 31 of file Camera.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_ae94de322124a68e32113235eeec78008_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_camera_ae94de322124a68e32113235eeec78008_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_camera_aff7393c9cfbccd7e369091f00008da93}\label{class_camera_aff7393c9cfbccd7e369091f00008da93}} 
+\index{Camera@{Camera}!fov@{fov}}
+\index{fov@{fov}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{fov}{fov}}
+{\footnotesize\ttfamily float Camera\+::fov = 45.\+0f}
+
+
+
+Definition at line 22 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_af8f705d34f633026c2a0a82e73a3db3a}\label{class_camera_af8f705d34f633026c2a0a82e73a3db3a}} 
+\index{Camera@{Camera}!front@{front}}
+\index{front@{front}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{front}{front}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Camera\+::front}
+
+
+
+Definition at line 16 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a03987cf3bbf312be16bb881939382d83}\label{class_camera_a03987cf3bbf312be16bb881939382d83}} 
+\index{Camera@{Camera}!movementSpeed@{movementSpeed}}
+\index{movementSpeed@{movementSpeed}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{movementSpeed}{movementSpeed}}
+{\footnotesize\ttfamily float Camera\+::movement\+Speed = 1.\+0f}
+
+
+
+Definition at line 23 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_ab56fcb39f580e8d2159cf2c9c6d9a65a}\label{class_camera_ab56fcb39f580e8d2159cf2c9c6d9a65a}} 
+\index{Camera@{Camera}!pitch@{pitch}}
+\index{pitch@{pitch}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{pitch}{pitch}}
+{\footnotesize\ttfamily float Camera\+::pitch}
+
+
+
+Definition at line 19 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a3b229874a00253021a1b6c61657fa5ab}\label{class_camera_a3b229874a00253021a1b6c61657fa5ab}} 
+\index{Camera@{Camera}!position@{position}}
+\index{position@{position}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Camera\+::position}
+
+
+
+Definition at line 12 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a2dd027cc00ec51853997fcd9c26325c1}\label{class_camera_a2dd027cc00ec51853997fcd9c26325c1}} 
+\index{Camera@{Camera}!projection@{projection}}
+\index{projection@{projection}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{projection}{projection}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Camera\+::projection\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a5df07cb5685e533780db3103f0f7a709}\label{class_camera_a5df07cb5685e533780db3103f0f7a709}} 
+\index{Camera@{Camera}!right@{right}}
+\index{right@{right}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{right}{right}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Camera\+::right}
+
+
+
+Definition at line 14 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a08d9c6119a859e664d74ca07db4fe3d3}\label{class_camera_a08d9c6119a859e664d74ca07db4fe3d3}} 
+\index{Camera@{Camera}!roll@{roll}}
+\index{roll@{roll}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{roll}{roll}}
+{\footnotesize\ttfamily float Camera\+::roll}
+
+
+
+Definition at line 20 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a5431c8caefafb42a667ca4c801bef07f}\label{class_camera_a5431c8caefafb42a667ca4c801bef07f}} 
+\index{Camera@{Camera}!sensitivity@{sensitivity}}
+\index{sensitivity@{sensitivity}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{sensitivity}{sensitivity}}
+{\footnotesize\ttfamily float Camera\+::sensitivity = 0.\+1f}
+
+
+
+Definition at line 24 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_ab76ce866ca2acd6ab54447f474077245}\label{class_camera_ab76ce866ca2acd6ab54447f474077245}} 
+\index{Camera@{Camera}!up@{up}}
+\index{up@{up}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{up}{up}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Camera\+::up}
+
+
+
+Definition at line 15 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_a37b2a5b7bf196608cf53ecc7d0c5669c}\label{class_camera_a37b2a5b7bf196608cf53ecc7d0c5669c}} 
+\index{Camera@{Camera}!view@{view}}
+\index{view@{view}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{view}{view}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Camera\+::view\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file Camera.\+h.
+
+\mbox{\Hypertarget{class_camera_ad76701b22630f2df28a0ae15f0497a3a}\label{class_camera_ad76701b22630f2df28a0ae15f0497a3a}} 
+\index{Camera@{Camera}!yaw@{yaw}}
+\index{yaw@{yaw}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{yaw}{yaw}}
+{\footnotesize\ttfamily float Camera\+::yaw}
+
+
+
+Definition at line 18 of file Camera.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_camera_8h}{Camera.\+h}}\end{DoxyCompactItemize}

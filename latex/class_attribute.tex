@@ -1,0 +1,141 @@
+\hypertarget{class_attribute}{}\doxysection{Attribute Class Reference}
+\label{class_attribute}\index{Attribute@{Attribute}}
+
+
+{\ttfamily \#include $<$Attribute.\+h$>$}
+
+
+
+Inheritance diagram for Attribute\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Attribute\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{class_attribute__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{_attribute_8h_a6450db6a3ee75bfc2a198516e9f8e31d}{Attribute\+ID}} \mbox{\hyperlink{class_attribute_a7555a70c17061aa77f6222a264a489f7}{Get\+Attribute\+ID}} () const
+\item 
+void \mbox{\hyperlink{class_attribute_ac6850652b6e124ed1cc4eb289423a0b1}{Set\+Parent}} (const \mbox{\hyperlink{_attribute_8h_a2d13d887e6659fb38788bd634bcba49b}{Entity\+ID}} \&\mbox{\hyperlink{class_attribute_a3c19d8610146907f395812be4dd1160f}{parent}})
+\item 
+\mbox{\hyperlink{_attribute_8h_a2d13d887e6659fb38788bd634bcba49b}{Entity\+ID}} \& \mbox{\hyperlink{class_attribute_a59a8ecb4d4563d8c6efc5d79c7f1575f}{Get\+Parent}} ()
+\item 
+virtual \mbox{\hyperlink{class_attribute_ab90d3b6dd9dcb09b5886c3065c99cade}{$\sim$\+Attribute}} ()=default
+\item 
+virtual void \mbox{\hyperlink{class_attribute_aa9dbf9f8f4098d42127c6513362dfd32}{Update}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_attribute_8h_a2d13d887e6659fb38788bd634bcba49b}{Entity\+ID}} \mbox{\hyperlink{class_attribute_a3c19d8610146907f395812be4dd1160f}{parent}} = -\/1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 15 of file Attribute.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_attribute_ab90d3b6dd9dcb09b5886c3065c99cade}\label{class_attribute_ab90d3b6dd9dcb09b5886c3065c99cade}} 
+\index{Attribute@{Attribute}!````~Attribute@{$\sim$Attribute}}
+\index{````~Attribute@{$\sim$Attribute}!Attribute@{Attribute}}
+\doxysubsubsection{\texorpdfstring{$\sim$Attribute()}{~Attribute()}}
+{\footnotesize\ttfamily virtual Attribute\+::$\sim$\+Attribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_attribute_a7555a70c17061aa77f6222a264a489f7}\label{class_attribute_a7555a70c17061aa77f6222a264a489f7}} 
+\index{Attribute@{Attribute}!GetAttributeID@{GetAttributeID}}
+\index{GetAttributeID@{GetAttributeID}!Attribute@{Attribute}}
+\doxysubsubsection{\texorpdfstring{GetAttributeID()}{GetAttributeID()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{_attribute_8h_a6450db6a3ee75bfc2a198516e9f8e31d}{Attribute\+ID}} Attribute\+::\+Get\+Attribute\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_mesh_af04c75c0fadfaf15e50dfe42ebba5507}{Mesh}}, and \mbox{\hyperlink{class_line_renderer_a9dcdee068c33a93b17d8c1350c3a8837}{Line\+Renderer}}.
+
+
+
+Definition at line 22 of file Attribute.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_a7555a70c17061aa77f6222a264a489f7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_a59a8ecb4d4563d8c6efc5d79c7f1575f}\label{class_attribute_a59a8ecb4d4563d8c6efc5d79c7f1575f}} 
+\index{Attribute@{Attribute}!GetParent@{GetParent}}
+\index{GetParent@{GetParent}!Attribute@{Attribute}}
+\doxysubsubsection{\texorpdfstring{GetParent()}{GetParent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_attribute_8h_a2d13d887e6659fb38788bd634bcba49b}{Entity\+ID}}\& Attribute\+::\+Get\+Parent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 30 of file Attribute.\+h.
+
+\mbox{\Hypertarget{class_attribute_ac6850652b6e124ed1cc4eb289423a0b1}\label{class_attribute_ac6850652b6e124ed1cc4eb289423a0b1}} 
+\index{Attribute@{Attribute}!SetParent@{SetParent}}
+\index{SetParent@{SetParent}!Attribute@{Attribute}}
+\doxysubsubsection{\texorpdfstring{SetParent()}{SetParent()}}
+{\footnotesize\ttfamily void Attribute\+::\+Set\+Parent (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_attribute_8h_a2d13d887e6659fb38788bd634bcba49b}{Entity\+ID}} \&}]{parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 26 of file Attribute.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_ac6850652b6e124ed1cc4eb289423a0b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_aa9dbf9f8f4098d42127c6513362dfd32}\label{class_attribute_aa9dbf9f8f4098d42127c6513362dfd32}} 
+\index{Attribute@{Attribute}!Update@{Update}}
+\index{Update@{Update}!Attribute@{Attribute}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily virtual void Attribute\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 36 of file Attribute.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_attribute_a3c19d8610146907f395812be4dd1160f}\label{class_attribute_a3c19d8610146907f395812be4dd1160f}} 
+\index{Attribute@{Attribute}!parent@{parent}}
+\index{parent@{parent}!Attribute@{Attribute}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_attribute_8h_a2d13d887e6659fb38788bd634bcba49b}{Entity\+ID}} Attribute\+::parent = -\/1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 18 of file Attribute.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_attribute_8h}{Attribute.\+h}}\end{DoxyCompactItemize}

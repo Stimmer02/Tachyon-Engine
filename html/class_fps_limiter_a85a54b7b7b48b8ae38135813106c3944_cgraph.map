@@ -1,0 +1,5 @@
+<map id="FpsLimiter::OnLoad" name="FpsLimiter::OnLoad">
+<area shape="rect" id="node1" title="This method is called on system startup and by default does nothing." alt="" coords="5,31,153,57"/>
+<area shape="rect" id="node2" href="$class_timer.html#afe6517a499ea588a44fb694f856cdb28" title=" " alt="" coords="205,5,377,32"/>
+<area shape="rect" id="node3" href="$class_configurator.html#a1ae22db18fb07c86d24f5b2a4e431b6d" title=" " alt="" coords="201,56,380,83"/>
+</map>

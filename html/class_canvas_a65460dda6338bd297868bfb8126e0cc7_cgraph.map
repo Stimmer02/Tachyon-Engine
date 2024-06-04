@@ -1,0 +1,5 @@
+<map id="Canvas::Render" name="Canvas::Render">
+<area shape="rect" id="node1" title="Renders current component on screen." alt="" coords="5,31,129,57"/>
+<area shape="rect" id="node2" href="$class_sprite2_d.html#a47305cfab61267f4bf7cd51ab7fb4733" title="Method loads current sprite to texture buffer." alt="" coords="186,5,303,32"/>
+<area shape="rect" id="node3" href="$class_sprite2_d.html#a0f0a5201f4aa2d626c65883c71f40bc4" title="Method unloads current sprite from texture buffer." alt="" coords="177,56,312,83"/>
+</map>

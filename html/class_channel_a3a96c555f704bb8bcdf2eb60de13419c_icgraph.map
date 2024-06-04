@@ -1,0 +1,4 @@
+<map id="Channel::BindClient" name="Channel::BindClient">
+<area shape="rect" id="node1" title="Binds client to current channel." alt="" coords="296,5,447,32"/>
+<area shape="rect" id="node2" href="$class_message_bus.html#a484d72d2ea103bb1cbef93fad4a9b0ac" title="Binds client to specified communication channel." alt="" coords="5,5,248,32"/>
+</map>

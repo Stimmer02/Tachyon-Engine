@@ -1,0 +1,297 @@
+\hypertarget{class_input}{}\doxysection{Input Class Reference}
+\label{class_input}\index{Input@{Input}}
+
+
+{\ttfamily \#include $<$Input.\+h$>$}
+
+
+
+Collaboration diagram for Input\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_input__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_input_af80dcfde6dbfe39bf3bc0345c75595ce}{Update}} ()
+\item 
+\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \mbox{\hyperlink{class_input_ac94a5801e9295fd2f9261ef95e1fa02f}{Get\+Key\+State}} (const int \&key)
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_input_a4e7b0e0d95b918f02d40ccb1a9740e98}{Get\+Mouse\+Position}} ()
+\item 
+\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \mbox{\hyperlink{class_input_a23e46b9fe05a9761ae243f92e48b1796}{Get\+Button\+State}} (const int \&button)
+\item 
+void \mbox{\hyperlink{class_input_ab7e2b8dff6069d00a59dda5e8425b7f3}{Set\+Context}} (\mbox{\hyperlink{class_window_context}{Window\+Context}} $\ast$\mbox{\hyperlink{class_input_ac7267e9f86bc505fb9d5bfe557722684}{context}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_input}{Input}} \& \mbox{\hyperlink{class_input_ab7da53f96545a2fb8305860bab44ff5a}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_input_afd2df01f575026fe3c7f6722faee5a65}{Update\+Key}} (const int \&key)
+\item 
+void \mbox{\hyperlink{class_input_a527434c73a690bcfefd80ed81e92920a}{Update\+Button}} (const int \&button)
+\item 
+\mbox{\hyperlink{class_input_abae3f379d3f157cf42dc857309832dba}{Input}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_window_context}{Window\+Context}} $\ast$ \mbox{\hyperlink{class_input_ac7267e9f86bc505fb9d5bfe557722684}{context}}
+\item 
+double \mbox{\hyperlink{class_input_ab5b2fe48bc16df6c7d7df049af643aa5}{last\+XPosition}}
+\item 
+double \mbox{\hyperlink{class_input_a66b56c9b4ed15def4209005dd043c1c3}{last\+YPosition}}
+\item 
+\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \mbox{\hyperlink{class_input_a617f5481cfe66a2e1c3e0cc5ac485510}{last\+Mouse\+States}} \mbox{[}GLFW\+\_\+\+MOUSE\+\_\+\+BUTTON\+\_\+\+LAST+1\mbox{]}
+\item 
+\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \mbox{\hyperlink{class_input_a5ddd730e8840f503ca33e754db8eea9d}{last\+Keyboard\+States}} \mbox{[}GLFW\+\_\+\+KEY\+\_\+\+LAST+1\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file Input.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_input_abae3f379d3f157cf42dc857309832dba}\label{class_input_abae3f379d3f157cf42dc857309832dba}} 
+\index{Input@{Input}!Input@{Input}}
+\index{Input@{Input}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{Input()}{Input()}}
+{\footnotesize\ttfamily Input\+::\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 99 of file Input.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_input_a23e46b9fe05a9761ae243f92e48b1796}\label{class_input_a23e46b9fe05a9761ae243f92e48b1796}} 
+\index{Input@{Input}!GetButtonState@{GetButtonState}}
+\index{GetButtonState@{GetButtonState}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{GetButtonState()}{GetButtonState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} Input\+::\+Get\+Button\+State (\begin{DoxyParamCaption}\item[{const int \&}]{button }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 133 of file Input.\+h.
+
+\mbox{\Hypertarget{class_input_ab7da53f96545a2fb8305860bab44ff5a}\label{class_input_ab7da53f96545a2fb8305860bab44ff5a}} 
+\index{Input@{Input}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_input}{Input}}\& Input\+::\+Get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 146 of file Input.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_ab7da53f96545a2fb8305860bab44ff5a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_input_ac94a5801e9295fd2f9261ef95e1fa02f}\label{class_input_ac94a5801e9295fd2f9261ef95e1fa02f}} 
+\index{Input@{Input}!GetKeyState@{GetKeyState}}
+\index{GetKeyState@{GetKeyState}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{GetKeyState()}{GetKeyState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} Input\+::\+Get\+Key\+State (\begin{DoxyParamCaption}\item[{const int \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 121 of file Input.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_ac94a5801e9295fd2f9261ef95e1fa02f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_input_a4e7b0e0d95b918f02d40ccb1a9740e98}\label{class_input_a4e7b0e0d95b918f02d40ccb1a9740e98}} 
+\index{Input@{Input}!GetMousePosition@{GetMousePosition}}
+\index{GetMousePosition@{GetMousePosition}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{GetMousePosition()}{GetMousePosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Input\+::\+Get\+Mouse\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 129 of file Input.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_a4e7b0e0d95b918f02d40ccb1a9740e98_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_input_ab7e2b8dff6069d00a59dda5e8425b7f3}\label{class_input_ab7e2b8dff6069d00a59dda5e8425b7f3}} 
+\index{Input@{Input}!SetContext@{SetContext}}
+\index{SetContext@{SetContext}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{SetContext()}{SetContext()}}
+{\footnotesize\ttfamily void Input\+::\+Set\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_window_context}{Window\+Context}} $\ast$}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 141 of file Input.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{class_input_ab7e2b8dff6069d00a59dda5e8425b7f3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_input_af80dcfde6dbfe39bf3bc0345c75595ce}\label{class_input_af80dcfde6dbfe39bf3bc0345c75595ce}} 
+\index{Input@{Input}!Update@{Update}}
+\index{Update@{Update}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Input\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 111 of file Input.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_af80dcfde6dbfe39bf3bc0345c75595ce_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_af80dcfde6dbfe39bf3bc0345c75595ce_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_input_a527434c73a690bcfefd80ed81e92920a}\label{class_input_a527434c73a690bcfefd80ed81e92920a}} 
+\index{Input@{Input}!UpdateButton@{UpdateButton}}
+\index{UpdateButton@{UpdateButton}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{UpdateButton()}{UpdateButton()}}
+{\footnotesize\ttfamily void Input\+::\+Update\+Button (\begin{DoxyParamCaption}\item[{const int \&}]{button }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 47 of file Input.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_a527434c73a690bcfefd80ed81e92920a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_a527434c73a690bcfefd80ed81e92920a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_input_afd2df01f575026fe3c7f6722faee5a65}\label{class_input_afd2df01f575026fe3c7f6722faee5a65}} 
+\index{Input@{Input}!UpdateKey@{UpdateKey}}
+\index{UpdateKey@{UpdateKey}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{UpdateKey()}{UpdateKey()}}
+{\footnotesize\ttfamily void Input\+::\+Update\+Key (\begin{DoxyParamCaption}\item[{const int \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Input.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_afd2df01f575026fe3c7f6722faee5a65_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_afd2df01f575026fe3c7f6722faee5a65_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_input_ac7267e9f86bc505fb9d5bfe557722684}\label{class_input_ac7267e9f86bc505fb9d5bfe557722684}} 
+\index{Input@{Input}!context@{context}}
+\index{context@{context}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_window_context}{Window\+Context}}$\ast$ Input\+::context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Input.\+h.
+
+\mbox{\Hypertarget{class_input_a5ddd730e8840f503ca33e754db8eea9d}\label{class_input_a5ddd730e8840f503ca33e754db8eea9d}} 
+\index{Input@{Input}!lastKeyboardStates@{lastKeyboardStates}}
+\index{lastKeyboardStates@{lastKeyboardStates}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{lastKeyboardStates}{lastKeyboardStates}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} Input\+::last\+Keyboard\+States\mbox{[}GLFW\+\_\+\+KEY\+\_\+\+LAST+1\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Input.\+h.
+
+\mbox{\Hypertarget{class_input_a617f5481cfe66a2e1c3e0cc5ac485510}\label{class_input_a617f5481cfe66a2e1c3e0cc5ac485510}} 
+\index{Input@{Input}!lastMouseStates@{lastMouseStates}}
+\index{lastMouseStates@{lastMouseStates}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{lastMouseStates}{lastMouseStates}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} Input\+::last\+Mouse\+States\mbox{[}GLFW\+\_\+\+MOUSE\+\_\+\+BUTTON\+\_\+\+LAST+1\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Input.\+h.
+
+\mbox{\Hypertarget{class_input_ab5b2fe48bc16df6c7d7df049af643aa5}\label{class_input_ab5b2fe48bc16df6c7d7df049af643aa5}} 
+\index{Input@{Input}!lastXPosition@{lastXPosition}}
+\index{lastXPosition@{lastXPosition}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{lastXPosition}{lastXPosition}}
+{\footnotesize\ttfamily double Input\+::last\+XPosition\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Input.\+h.
+
+\mbox{\Hypertarget{class_input_a66b56c9b4ed15def4209005dd043c1c3}\label{class_input_a66b56c9b4ed15def4209005dd043c1c3}} 
+\index{Input@{Input}!lastYPosition@{lastYPosition}}
+\index{lastYPosition@{lastYPosition}!Input@{Input}}
+\doxysubsubsection{\texorpdfstring{lastYPosition}{lastYPosition}}
+{\footnotesize\ttfamily double Input\+::last\+YPosition\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Input.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_input_8h}{Input.\+h}}\end{DoxyCompactItemize}

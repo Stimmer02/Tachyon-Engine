@@ -1,0 +1,350 @@
+\hypertarget{class_g_l_shader}{}\doxysection{GLShader Class Reference}
+\label{class_g_l_shader}\index{GLShader@{GLShader}}
+
+
+{\ttfamily \#include $<$GLShader.\+h$>$}
+
+
+
+Collaboration diagram for GLShader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{class_g_l_shader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_l_shader_a71d842a6a99dac037c8d0f91e4de593b}{GLShader}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_shader_a521024d058db5ce31d3bcc0a4a5f3f1e}{Link\+Shader}} (const std\+::string \&shader\+Path, const GLenum type)
+\item 
+void \mbox{\hyperlink{class_g_l_shader_acdc560a9a8390681735bf134f9e98de2}{Build}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_shader_a321b38559d2082b1485501e77676a7e4}{Use}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_shader_a162ffc28617b60b5fe04b63b0cbc60eb}{Dispose}} ()
+\item 
+GLint \mbox{\hyperlink{class_g_l_shader_ac85dbe6852f4fcf6ffa880ad6599da52}{Get\+Uniform\+Location}} (const std\+::string \&uniform\+Name)
+\item 
+void \mbox{\hyperlink{class_g_l_shader_a52a56546d0a1f4b6bb06e67f0dd75466}{Transfer\+To\+Shader}} (const std\+::string \&uniform\+Name, const float \&value)
+\item 
+void \mbox{\hyperlink{class_g_l_shader_a0d1edac50d7d4c2861bbcec69de795a9}{Transfer\+To\+Shader}} (const std\+::string \&uniform\+Name, const int \&value)
+\item 
+void \mbox{\hyperlink{class_g_l_shader_aedab5630ce2ae5e0af0854228270ccc5}{Transfer\+To\+Shader}} (const std\+::string \&uniform\+Name, const \mbox{\hyperlink{class_vector3}{Vector3}} \&vector)
+\item 
+void \mbox{\hyperlink{class_g_l_shader_af594fc3fce111a449f2568fbab224b3e}{Transfer\+To\+Shader}} (const std\+::string \&uniform\+Name, const \mbox{\hyperlink{class_matrix}{Matrix}} \&matrix)
+\item 
+\mbox{\hyperlink{class_g_l_shader_a2207b841d8547222303be9fec1236ad9}{$\sim$\+GLShader}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_g_l_shader_a6a67e061e3198722de9732091ca391de}{Check\+Program\+Status}} ()
+\item 
+bool \mbox{\hyperlink{class_g_l_shader_ab1c263456438e38f08ddca57e9d50c98}{Check\+Shader\+Status}} (GLuint shader)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ GLuint $>$ \mbox{\hyperlink{class_g_l_shader_aa344b45427a9bc1e8229182c0badf01f}{shaders}}
+\item 
+std\+::map$<$ std\+::string, GLint $>$ \mbox{\hyperlink{class_g_l_shader_aa6cc34bf4ab26e7bc2b437b448ccdb4c}{uniforms}}
+\item 
+GLuint \mbox{\hyperlink{class_g_l_shader_a13179c617e369bf8eff537f0d652b42c}{shader\+Program}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 20 of file GLShader.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_g_l_shader_a71d842a6a99dac037c8d0f91e4de593b}\label{class_g_l_shader_a71d842a6a99dac037c8d0f91e4de593b}} 
+\index{GLShader@{GLShader}!GLShader@{GLShader}}
+\index{GLShader@{GLShader}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{GLShader()}{GLShader()}}
+{\footnotesize\ttfamily GLShader\+::\+GLShader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 64 of file GLShader.\+h.
+
+\mbox{\Hypertarget{class_g_l_shader_a2207b841d8547222303be9fec1236ad9}\label{class_g_l_shader_a2207b841d8547222303be9fec1236ad9}} 
+\index{GLShader@{GLShader}!````~GLShader@{$\sim$GLShader}}
+\index{````~GLShader@{$\sim$GLShader}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{$\sim$GLShader()}{~GLShader()}}
+{\footnotesize\ttfamily GLShader\+::$\sim$\+GLShader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 181 of file GLShader.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_shader_acdc560a9a8390681735bf134f9e98de2}\label{class_g_l_shader_acdc560a9a8390681735bf134f9e98de2}} 
+\index{GLShader@{GLShader}!Build@{Build}}
+\index{Build@{Build}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily void GLShader\+::\+Build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 101 of file GLShader.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_acdc560a9a8390681735bf134f9e98de2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_acdc560a9a8390681735bf134f9e98de2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_a6a67e061e3198722de9732091ca391de}\label{class_g_l_shader_a6a67e061e3198722de9732091ca391de}} 
+\index{GLShader@{GLShader}!CheckProgramStatus@{CheckProgramStatus}}
+\index{CheckProgramStatus@{CheckProgramStatus}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{CheckProgramStatus()}{CheckProgramStatus()}}
+{\footnotesize\ttfamily bool GLShader\+::\+Check\+Program\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 28 of file GLShader.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_a6a67e061e3198722de9732091ca391de_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_ab1c263456438e38f08ddca57e9d50c98}\label{class_g_l_shader_ab1c263456438e38f08ddca57e9d50c98}} 
+\index{GLShader@{GLShader}!CheckShaderStatus@{CheckShaderStatus}}
+\index{CheckShaderStatus@{CheckShaderStatus}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{CheckShaderStatus()}{CheckShaderStatus()}}
+{\footnotesize\ttfamily bool GLShader\+::\+Check\+Shader\+Status (\begin{DoxyParamCaption}\item[{GLuint}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 45 of file GLShader.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_ab1c263456438e38f08ddca57e9d50c98_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_a162ffc28617b60b5fe04b63b0cbc60eb}\label{class_g_l_shader_a162ffc28617b60b5fe04b63b0cbc60eb}} 
+\index{GLShader@{GLShader}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily void GLShader\+::\+Dispose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 116 of file GLShader.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_a162ffc28617b60b5fe04b63b0cbc60eb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_ac85dbe6852f4fcf6ffa880ad6599da52}\label{class_g_l_shader_ac85dbe6852f4fcf6ffa880ad6599da52}} 
+\index{GLShader@{GLShader}!GetUniformLocation@{GetUniformLocation}}
+\index{GetUniformLocation@{GetUniformLocation}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{GetUniformLocation()}{GetUniformLocation()}}
+{\footnotesize\ttfamily GLint GLShader\+::\+Get\+Uniform\+Location (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{uniform\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 120 of file GLShader.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_ac85dbe6852f4fcf6ffa880ad6599da52_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_a521024d058db5ce31d3bcc0a4a5f3f1e}\label{class_g_l_shader_a521024d058db5ce31d3bcc0a4a5f3f1e}} 
+\index{GLShader@{GLShader}!LinkShader@{LinkShader}}
+\index{LinkShader@{LinkShader}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{LinkShader()}{LinkShader()}}
+{\footnotesize\ttfamily void GLShader\+::\+Link\+Shader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{shader\+Path,  }\item[{const GLenum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 76 of file GLShader.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_a521024d058db5ce31d3bcc0a4a5f3f1e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_a521024d058db5ce31d3bcc0a4a5f3f1e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_a52a56546d0a1f4b6bb06e67f0dd75466}\label{class_g_l_shader_a52a56546d0a1f4b6bb06e67f0dd75466}} 
+\index{GLShader@{GLShader}!TransferToShader@{TransferToShader}}
+\index{TransferToShader@{TransferToShader}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{TransferToShader()}{TransferToShader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void GLShader\+::\+Transfer\+To\+Shader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{uniform\+Name,  }\item[{const float \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 137 of file GLShader.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_a52a56546d0a1f4b6bb06e67f0dd75466_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_a52a56546d0a1f4b6bb06e67f0dd75466_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_a0d1edac50d7d4c2861bbcec69de795a9}\label{class_g_l_shader_a0d1edac50d7d4c2861bbcec69de795a9}} 
+\index{GLShader@{GLShader}!TransferToShader@{TransferToShader}}
+\index{TransferToShader@{TransferToShader}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{TransferToShader()}{TransferToShader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void GLShader\+::\+Transfer\+To\+Shader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{uniform\+Name,  }\item[{const int \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 148 of file GLShader.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_a0d1edac50d7d4c2861bbcec69de795a9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_af594fc3fce111a449f2568fbab224b3e}\label{class_g_l_shader_af594fc3fce111a449f2568fbab224b3e}} 
+\index{GLShader@{GLShader}!TransferToShader@{TransferToShader}}
+\index{TransferToShader@{TransferToShader}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{TransferToShader()}{TransferToShader()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void GLShader\+::\+Transfer\+To\+Shader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{uniform\+Name,  }\item[{const \mbox{\hyperlink{class_matrix}{Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 170 of file GLShader.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_af594fc3fce111a449f2568fbab224b3e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_aedab5630ce2ae5e0af0854228270ccc5}\label{class_g_l_shader_aedab5630ce2ae5e0af0854228270ccc5}} 
+\index{GLShader@{GLShader}!TransferToShader@{TransferToShader}}
+\index{TransferToShader@{TransferToShader}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{TransferToShader()}{TransferToShader()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void GLShader\+::\+Transfer\+To\+Shader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{uniform\+Name,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 159 of file GLShader.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_g_l_shader_aedab5630ce2ae5e0af0854228270ccc5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_g_l_shader_a321b38559d2082b1485501e77676a7e4}\label{class_g_l_shader_a321b38559d2082b1485501e77676a7e4}} 
+\index{GLShader@{GLShader}!Use@{Use}}
+\index{Use@{Use}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{Use()}{Use()}}
+{\footnotesize\ttfamily void GLShader\+::\+Use (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 111 of file GLShader.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_g_l_shader_a321b38559d2082b1485501e77676a7e4_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_g_l_shader_a13179c617e369bf8eff537f0d652b42c}\label{class_g_l_shader_a13179c617e369bf8eff537f0d652b42c}} 
+\index{GLShader@{GLShader}!shaderProgram@{shaderProgram}}
+\index{shaderProgram@{shaderProgram}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{shaderProgram}{shaderProgram}}
+{\footnotesize\ttfamily GLuint GLShader\+::shader\+Program\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file GLShader.\+h.
+
+\mbox{\Hypertarget{class_g_l_shader_aa344b45427a9bc1e8229182c0badf01f}\label{class_g_l_shader_aa344b45427a9bc1e8229182c0badf01f}} 
+\index{GLShader@{GLShader}!shaders@{shaders}}
+\index{shaders@{shaders}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{shaders}{shaders}}
+{\footnotesize\ttfamily std\+::list$<$GLuint$>$ GLShader\+::shaders\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 23 of file GLShader.\+h.
+
+\mbox{\Hypertarget{class_g_l_shader_aa6cc34bf4ab26e7bc2b437b448ccdb4c}\label{class_g_l_shader_aa6cc34bf4ab26e7bc2b437b448ccdb4c}} 
+\index{GLShader@{GLShader}!uniforms@{uniforms}}
+\index{uniforms@{uniforms}!GLShader@{GLShader}}
+\doxysubsubsection{\texorpdfstring{uniforms}{uniforms}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, GLint$>$ GLShader\+::uniforms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 24 of file GLShader.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_g_l_shader_8h}{GLShader.\+h}}\end{DoxyCompactItemize}

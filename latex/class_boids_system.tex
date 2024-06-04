@@ -1,0 +1,433 @@
+\hypertarget{class_boids_system}{}\doxysection{Boids\+System Class Reference}
+\label{class_boids_system}\index{BoidsSystem@{BoidsSystem}}
+
+
+{\ttfamily \#include $<$Boids.\+h$>$}
+
+
+
+Inheritance diagram for Boids\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_boids_system__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Boids\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_boids_system_ad7eab382f16a5b155d8fde8684382e3c}{Boids\+System}} ()
+\item 
+\mbox{\hyperlink{class_boids_system_a40c008ae2872e26e1a33ea1c5bada40f}{$\sim$\+Boids\+System}} ()
+\item 
+void \mbox{\hyperlink{class_boids_system_a1c37923a26b13b6e08070adeabbdbc31}{On\+Load}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_boids_system_aaf42608be5a0f42a8e945ec8034ccbd3}{Share}} (\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$resource\+Manager) override
+\begin{DoxyCompactList}\small\item\em This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_boids_system_abdbb081817019bbc61f08737a4518a18}{Update\+Grid}} ()
+\item 
+std\+::vector$<$ size\+\_\+t $>$ \mbox{\hyperlink{class_boids_system_ac6441adf12826e182495d5035d8bceb9}{Get\+Nearby\+Boids}} (int cellX, int cellY)
+\item 
+void \mbox{\hyperlink{class_boids_system_a98e7df3a7da32881898ed5d476adb021}{Update\+Leader\+Targets}} ()
+\item 
+void \mbox{\hyperlink{class_boids_system_ac9a830ceb3cb401526fb0242adbb8978}{Execute}} () override
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene}{Scene}} $\ast$ \mbox{\hyperlink{class_boids_system_a12419c9d0c5123bb1c4726ab89f42000}{scene}}
+\item 
+\mbox{\hyperlink{class_timer}{Timer}} $\ast$ \mbox{\hyperlink{class_boids_system_af613f0f5253467d5dc4abfbfd89606c8}{timer}}
+\item 
+\mbox{\hyperlink{class_input}{Input}} $\ast$ \mbox{\hyperlink{class_boids_system_ad4f3f18ecac5009333aff1bdf18bdcd5}{input}}
+\item 
+\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$ \mbox{\hyperlink{class_boids_system_a106cc676d54f5a6caf47d4d4fb104259}{regular\+Sprite}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$ $>$ \mbox{\hyperlink{class_boids_system_a57dabd265808640f68697b6ea85d4768}{boids}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ \mbox{\hyperlink{class_boids_system_a63991759bb153ff867934ff376192ffe}{velocities}}
+\item 
+std\+::vector$<$ bool $>$ \mbox{\hyperlink{class_boids_system_ac545f44935ad0f047f67bac857f0e05c}{is\+Leader}}
+\item 
+const int \mbox{\hyperlink{class_boids_system_a39420d36e36288cf4792b1d11c44543f}{num\+Boids}} = 100
+\item 
+const int \mbox{\hyperlink{class_boids_system_a15c91831f77c407f563bb8ca046b1611}{num\+Leaders}} = 5
+\item 
+const float \mbox{\hyperlink{class_boids_system_af9eaa777e9e9bb1f1cb3707a4f824e5f}{max\+Speed}} = 20.\+0f
+\item 
+const float \mbox{\hyperlink{class_boids_system_a06a65934dc4f00eea8faad63155ed165}{max\+Force}} = 10.\+0f
+\item 
+const float \mbox{\hyperlink{class_boids_system_a4ceb17f48c26ca2a923f67fc690bce05}{cell\+Size}} = 50.\+0f
+\item 
+std\+::unordered\+\_\+map$<$ int, std\+::unordered\+\_\+map$<$ int, std\+::vector$<$ size\+\_\+t $>$ $>$ $>$ \mbox{\hyperlink{class_boids_system_a751b09b615becb244773238afc281ac1}{grid}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ \mbox{\hyperlink{class_boids_system_a92a2c0198feef50ba73d8d9a6d2ca8c0}{leader\+Targets}}
+\item 
+\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$ \mbox{\hyperlink{class_boids_system_a80974082f879f68305385bd094664a79}{shader}}
+\item 
+\mbox{\hyperlink{class_mesh}{Mesh}} $\ast$ \mbox{\hyperlink{class_boids_system_a11bb8e736df9767c1aea7e54a92b6e51}{mesh}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file Boids.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_boids_system_ad7eab382f16a5b155d8fde8684382e3c}\label{class_boids_system_ad7eab382f16a5b155d8fde8684382e3c}} 
+\index{BoidsSystem@{BoidsSystem}!BoidsSystem@{BoidsSystem}}
+\index{BoidsSystem@{BoidsSystem}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{BoidsSystem()}{BoidsSystem()}}
+{\footnotesize\ttfamily Boids\+System\+::\+Boids\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 144 of file Boids.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_ad7eab382f16a5b155d8fde8684382e3c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_boids_system_a40c008ae2872e26e1a33ea1c5bada40f}\label{class_boids_system_a40c008ae2872e26e1a33ea1c5bada40f}} 
+\index{BoidsSystem@{BoidsSystem}!````~BoidsSystem@{$\sim$BoidsSystem}}
+\index{````~BoidsSystem@{$\sim$BoidsSystem}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{$\sim$BoidsSystem()}{~BoidsSystem()}}
+{\footnotesize\ttfamily Boids\+System\+::$\sim$\+Boids\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 148 of file Boids.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_a40c008ae2872e26e1a33ea1c5bada40f_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_boids_system_ac9a830ceb3cb401526fb0242adbb8978}\label{class_boids_system_ac9a830ceb3cb401526fb0242adbb8978}} 
+\index{BoidsSystem@{BoidsSystem}!Execute@{Execute}}
+\index{Execute@{Execute}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void Boids\+System\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implements \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{System}}.
+
+
+
+Definition at line 64 of file Boids.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_ac9a830ceb3cb401526fb0242adbb8978_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_boids_system_ac6441adf12826e182495d5035d8bceb9}\label{class_boids_system_ac6441adf12826e182495d5035d8bceb9}} 
+\index{BoidsSystem@{BoidsSystem}!GetNearbyBoids@{GetNearbyBoids}}
+\index{GetNearbyBoids@{GetNearbyBoids}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{GetNearbyBoids()}{GetNearbyBoids()}}
+{\footnotesize\ttfamily std\+::vector$<$size\+\_\+t$>$ Boids\+System\+::\+Get\+Nearby\+Boids (\begin{DoxyParamCaption}\item[{int}]{cellX,  }\item[{int}]{cellY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 39 of file Boids.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_ac6441adf12826e182495d5035d8bceb9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_boids_system_a1c37923a26b13b6e08070adeabbdbc31}\label{class_boids_system_a1c37923a26b13b6e08070adeabbdbc31}} 
+\index{BoidsSystem@{BoidsSystem}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void Boids\+System\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{System}}.
+
+
+
+Definition at line 154 of file Boids.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_a1c37923a26b13b6e08070adeabbdbc31_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_boids_system_aaf42608be5a0f42a8e945ec8034ccbd3}\label{class_boids_system_aaf42608be5a0f42a8e945ec8034ccbd3}} 
+\index{BoidsSystem@{BoidsSystem}!Share@{Share}}
+\index{Share@{Share}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily void Boids\+System\+::\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$}]{resource\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}{System}}.
+
+
+
+Definition at line 201 of file Boids.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_aaf42608be5a0f42a8e945ec8034ccbd3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_boids_system_abdbb081817019bbc61f08737a4518a18}\label{class_boids_system_abdbb081817019bbc61f08737a4518a18}} 
+\index{BoidsSystem@{BoidsSystem}!UpdateGrid@{UpdateGrid}}
+\index{UpdateGrid@{UpdateGrid}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{UpdateGrid()}{UpdateGrid()}}
+{\footnotesize\ttfamily void Boids\+System\+::\+Update\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 29 of file Boids.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_abdbb081817019bbc61f08737a4518a18_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_boids_system_a98e7df3a7da32881898ed5d476adb021}\label{class_boids_system_a98e7df3a7da32881898ed5d476adb021}} 
+\index{BoidsSystem@{BoidsSystem}!UpdateLeaderTargets@{UpdateLeaderTargets}}
+\index{UpdateLeaderTargets@{UpdateLeaderTargets}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{UpdateLeaderTargets()}{UpdateLeaderTargets()}}
+{\footnotesize\ttfamily void Boids\+System\+::\+Update\+Leader\+Targets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 51 of file Boids.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_boids_system_a98e7df3a7da32881898ed5d476adb021_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_boids_system_a57dabd265808640f68697b6ea85d4768}\label{class_boids_system_a57dabd265808640f68697b6ea85d4768}} 
+\index{BoidsSystem@{BoidsSystem}!boids@{boids}}
+\index{boids@{boids}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{boids}{boids}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_scene_object}{Scene\+Object}}$\ast$$>$ Boids\+System\+::boids\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a4ceb17f48c26ca2a923f67fc690bce05}\label{class_boids_system_a4ceb17f48c26ca2a923f67fc690bce05}} 
+\index{BoidsSystem@{BoidsSystem}!cellSize@{cellSize}}
+\index{cellSize@{cellSize}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{cellSize}{cellSize}}
+{\footnotesize\ttfamily const float Boids\+System\+::cell\+Size = 50.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 24 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a751b09b615becb244773238afc281ac1}\label{class_boids_system_a751b09b615becb244773238afc281ac1}} 
+\index{BoidsSystem@{BoidsSystem}!grid@{grid}}
+\index{grid@{grid}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{grid}{grid}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$int, std\+::unordered\+\_\+map$<$int, std\+::vector$<$size\+\_\+t$>$ $>$ $>$ Boids\+System\+::grid\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_ad4f3f18ecac5009333aff1bdf18bdcd5}\label{class_boids_system_ad4f3f18ecac5009333aff1bdf18bdcd5}} 
+\index{BoidsSystem@{BoidsSystem}!input@{input}}
+\index{input@{input}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_input}{Input}}$\ast$ Boids\+System\+::input\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_ac545f44935ad0f047f67bac857f0e05c}\label{class_boids_system_ac545f44935ad0f047f67bac857f0e05c}} 
+\index{BoidsSystem@{BoidsSystem}!isLeader@{isLeader}}
+\index{isLeader@{isLeader}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{isLeader}{isLeader}}
+{\footnotesize\ttfamily std\+::vector$<$bool$>$ Boids\+System\+::is\+Leader\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a92a2c0198feef50ba73d8d9a6d2ca8c0}\label{class_boids_system_a92a2c0198feef50ba73d8d9a6d2ca8c0}} 
+\index{BoidsSystem@{BoidsSystem}!leaderTargets@{leaderTargets}}
+\index{leaderTargets@{leaderTargets}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{leaderTargets}{leaderTargets}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_vector3}{Vector3}}$>$ Boids\+System\+::leader\+Targets\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a06a65934dc4f00eea8faad63155ed165}\label{class_boids_system_a06a65934dc4f00eea8faad63155ed165}} 
+\index{BoidsSystem@{BoidsSystem}!maxForce@{maxForce}}
+\index{maxForce@{maxForce}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{maxForce}{maxForce}}
+{\footnotesize\ttfamily const float Boids\+System\+::max\+Force = 10.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 22 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_af9eaa777e9e9bb1f1cb3707a4f824e5f}\label{class_boids_system_af9eaa777e9e9bb1f1cb3707a4f824e5f}} 
+\index{BoidsSystem@{BoidsSystem}!maxSpeed@{maxSpeed}}
+\index{maxSpeed@{maxSpeed}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{maxSpeed}{maxSpeed}}
+{\footnotesize\ttfamily const float Boids\+System\+::max\+Speed = 20.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a11bb8e736df9767c1aea7e54a92b6e51}\label{class_boids_system_a11bb8e736df9767c1aea7e54a92b6e51}} 
+\index{BoidsSystem@{BoidsSystem}!mesh@{mesh}}
+\index{mesh@{mesh}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{mesh}{mesh}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_mesh}{Mesh}}$\ast$ Boids\+System\+::mesh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 141 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a39420d36e36288cf4792b1d11c44543f}\label{class_boids_system_a39420d36e36288cf4792b1d11c44543f}} 
+\index{BoidsSystem@{BoidsSystem}!numBoids@{numBoids}}
+\index{numBoids@{numBoids}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{numBoids}{numBoids}}
+{\footnotesize\ttfamily const int Boids\+System\+::num\+Boids = 100\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a15c91831f77c407f563bb8ca046b1611}\label{class_boids_system_a15c91831f77c407f563bb8ca046b1611}} 
+\index{BoidsSystem@{BoidsSystem}!numLeaders@{numLeaders}}
+\index{numLeaders@{numLeaders}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{numLeaders}{numLeaders}}
+{\footnotesize\ttfamily const int Boids\+System\+::num\+Leaders = 5\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a106cc676d54f5a6caf47d4d4fb104259}\label{class_boids_system_a106cc676d54f5a6caf47d4d4fb104259}} 
+\index{BoidsSystem@{BoidsSystem}!regularSprite@{regularSprite}}
+\index{regularSprite@{regularSprite}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{regularSprite}{regularSprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite2_d}{Sprite2D}}$\ast$ Boids\+System\+::regular\+Sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a12419c9d0c5123bb1c4726ab89f42000}\label{class_boids_system_a12419c9d0c5123bb1c4726ab89f42000}} 
+\index{BoidsSystem@{BoidsSystem}!scene@{scene}}
+\index{scene@{scene}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene}{Scene}}$\ast$ Boids\+System\+::scene\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 9 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a80974082f879f68305385bd094664a79}\label{class_boids_system_a80974082f879f68305385bd094664a79}} 
+\index{BoidsSystem@{BoidsSystem}!shader@{shader}}
+\index{shader@{shader}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{shader}{shader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_shader}{GLShader}}$\ast$ Boids\+System\+::shader\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 140 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_af613f0f5253467d5dc4abfbfd89606c8}\label{class_boids_system_af613f0f5253467d5dc4abfbfd89606c8}} 
+\index{BoidsSystem@{BoidsSystem}!timer@{timer}}
+\index{timer@{timer}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer}{Timer}}$\ast$ Boids\+System\+::timer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 10 of file Boids.\+h.
+
+\mbox{\Hypertarget{class_boids_system_a63991759bb153ff867934ff376192ffe}\label{class_boids_system_a63991759bb153ff867934ff376192ffe}} 
+\index{BoidsSystem@{BoidsSystem}!velocities@{velocities}}
+\index{velocities@{velocities}!BoidsSystem@{BoidsSystem}}
+\doxysubsubsection{\texorpdfstring{velocities}{velocities}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_vector3}{Vector3}}$>$ Boids\+System\+::velocities\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Boids.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+editor/\mbox{\hyperlink{_boids_8h}{Boids.\+h}}\end{DoxyCompactItemize}

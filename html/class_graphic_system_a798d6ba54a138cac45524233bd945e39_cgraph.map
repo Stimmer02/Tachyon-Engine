@@ -1,0 +1,12 @@
+<map id="GraphicSystem::RenderSceneObjects" name="GraphicSystem::RenderSceneObjects">
+<area shape="rect" id="node1" title=" " alt="" coords="5,99,220,141"/>
+<area shape="rect" id="node2" href="$class_camera.html#a5702b2ee88842736a89034ec2c603ed9" title=" " alt="" coords="280,69,459,96"/>
+<area shape="rect" id="node9" href="$class_g_l_shader.html#a52a56546d0a1f4b6bb06e67f0dd75466" title=" " alt="" coords="268,132,471,159"/>
+<area shape="rect" id="node3" href="$class_vector3.html#a18ee4be607a73523d3b5b3e7d0582699" title=" " alt="" coords="573,56,687,83"/>
+<area shape="rect" id="node5" href="$class_matrix.html#aea09d6e52a209619c603c9327d2c60fd" title=" " alt="" coords="571,107,689,133"/>
+<area shape="rect" id="node7" href="$class_vector3.html#a8a8cb236aae8602af246f4f56495f159" title=" " alt="" coords="557,5,703,32"/>
+<area shape="rect" id="node4" href="$class_vector3.html#a0f49191f7e001e7f7ae1cb49522118b4" title=" " alt="" coords="799,56,927,83"/>
+<area shape="rect" id="node6" href="$class_matrix.html#a84b5ab1357d3d33a5266507d3c9b0767" title=" " alt="" coords="812,107,915,133"/>
+<area shape="rect" id="node8" href="$class_vector3.html#a94c30ca7427965f94ae1af09a9c67179" title=" " alt="" coords="789,5,937,32"/>
+<area shape="rect" id="node10" href="$class_g_l_shader.html#ac85dbe6852f4fcf6ffa880ad6599da52" title=" " alt="" coords="519,157,741,184"/>
+</map>

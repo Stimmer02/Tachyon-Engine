@@ -1,0 +1,5 @@
+<map id="Matrix::LoadIdentity" name="Matrix::LoadIdentity">
+<area shape="rect" id="node1" title=" " alt="" coords="240,31,393,57"/>
+<area shape="rect" id="node2" href="$class_transform_stack.html#a6f15e82f4a143ef3f6b4fa31778f4c82" title="Initializes transformation stack with identity matrix." alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node3" href="$class_matrix.html#a2dba13c45127354c9f75ef576f49269b" title=" " alt="" coords="41,56,156,83"/>
+</map>

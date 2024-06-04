@@ -1,0 +1,350 @@
+\hypertarget{class_k_d_t}{}\doxysection{KDT Class Reference}
+\label{class_k_d_t}\index{KDT@{KDT}}
+
+
+{\ttfamily \#include $<$KDT.\+h$>$}
+
+
+
+Collaboration diagram for KDT\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_k_d_t__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_k_d_t_a5e293beb8c0fb17c3ba272495c5a0ec5}{KDT}} ()
+\item 
+\mbox{\hyperlink{class_k_d_t_a6cfaf37e1ab018c605356280e8d5a0af}{$\sim$\+KDT}} ()
+\item 
+void \mbox{\hyperlink{class_k_d_t_af4bd258bdbc01e4d4d70ef99a8124b59}{build\+Tree}} (const std\+::vector$<$ \mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ $>$ \&components)
+\item 
+\mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ \mbox{\hyperlink{class_k_d_t_a47c84eb5a260ff7c225601bca2eb3d73}{find}} (const float \&x, const float \&y)
+\item 
+void \mbox{\hyperlink{class_k_d_t_a24d11420c3c5476bb8e0fb648aac31c9}{clear}} ()
+\item 
+void \mbox{\hyperlink{class_k_d_t_a43c98407ab1deef1b4a53d95aaf6b9ce}{rebuild}} (const std\+::vector$<$ \mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ $>$ \&components)
+\item 
+void \mbox{\hyperlink{class_k_d_t_a6b582f5b1dce092ddcfcfe1840e47a80}{print\+Tree}} (\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$sub\+Root)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_k_d_t_afa78f8f3cdf676a481032bba5d17e0c9}{bin\+Search\+Middle\+KDTElement}} (\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$$\ast$elements\+Array, const int \&elements\+Array\+Size, const bool \&x\+OrY)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ \mbox{\hyperlink{class_k_d_t_a1eee0ed4e81d3c90a5abf05ad7b5705e}{find\+RecX}} (const float \&x, const float \&y, \mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$element)
+\item 
+\mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ \mbox{\hyperlink{class_k_d_t_aafe260cd7027dba5d3f5a637d5e97492}{find\+RecY}} (const float \&x, const float \&y, \mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$element)
+\item 
+void \mbox{\hyperlink{class_k_d_t_af222a09a84162772a0509c7818c3ac67}{build\+Left\+Sub\+Tree\+Rec}} (\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$$\ast$elements\+Array, \mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$sub\+Tree\+Root, const int \&elements\+Array\+Size, const bool x\+OrY)
+\item 
+void \mbox{\hyperlink{class_k_d_t_adf84794450474eb910900ebe6bdbc3ef}{build\+Right\+Sub\+Tree\+Rec}} (\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$$\ast$elements\+Array, \mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$sub\+Tree\+Root, const int \&elements\+Array\+Size, const bool x\+OrY)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$ \mbox{\hyperlink{class_k_d_t_a225a3295f721064cac3d2fe49881c3ba}{root}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file KDT.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_k_d_t_a5e293beb8c0fb17c3ba272495c5a0ec5}\label{class_k_d_t_a5e293beb8c0fb17c3ba272495c5a0ec5}} 
+\index{KDT@{KDT}!KDT@{KDT}}
+\index{KDT@{KDT}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{KDT()}{KDT()}}
+{\footnotesize\ttfamily KDT\+::\+KDT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file KDT.\+cpp.
+
+\mbox{\Hypertarget{class_k_d_t_a6cfaf37e1ab018c605356280e8d5a0af}\label{class_k_d_t_a6cfaf37e1ab018c605356280e8d5a0af}} 
+\index{KDT@{KDT}!````~KDT@{$\sim$KDT}}
+\index{````~KDT@{$\sim$KDT}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{$\sim$KDT()}{~KDT()}}
+{\footnotesize\ttfamily KDT\+::$\sim$\+KDT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file KDT.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_k_d_t_afa78f8f3cdf676a481032bba5d17e0c9}\label{class_k_d_t_afa78f8f3cdf676a481032bba5d17e0c9}} 
+\index{KDT@{KDT}!binSearchMiddleKDTElement@{binSearchMiddleKDTElement}}
+\index{binSearchMiddleKDTElement@{binSearchMiddleKDTElement}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{binSearchMiddleKDTElement()}{binSearchMiddleKDTElement()}}
+{\footnotesize\ttfamily int KDT\+::bin\+Search\+Middle\+KDTElement (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$$\ast$}]{elements\+Array,  }\item[{const int \&}]{elements\+Array\+Size,  }\item[{const bool \&}]{x\+OrY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 204 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_afa78f8f3cdf676a481032bba5d17e0c9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_afa78f8f3cdf676a481032bba5d17e0c9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_af222a09a84162772a0509c7818c3ac67}\label{class_k_d_t_af222a09a84162772a0509c7818c3ac67}} 
+\index{KDT@{KDT}!buildLeftSubTreeRec@{buildLeftSubTreeRec}}
+\index{buildLeftSubTreeRec@{buildLeftSubTreeRec}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{buildLeftSubTreeRec()}{buildLeftSubTreeRec()}}
+{\footnotesize\ttfamily void KDT\+::build\+Left\+Sub\+Tree\+Rec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$$\ast$}]{elements\+Array,  }\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$}]{sub\+Tree\+Root,  }\item[{const int \&}]{elements\+Array\+Size,  }\item[{const bool}]{x\+OrY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 38 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_af222a09a84162772a0509c7818c3ac67_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_af222a09a84162772a0509c7818c3ac67_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_adf84794450474eb910900ebe6bdbc3ef}\label{class_k_d_t_adf84794450474eb910900ebe6bdbc3ef}} 
+\index{KDT@{KDT}!buildRightSubTreeRec@{buildRightSubTreeRec}}
+\index{buildRightSubTreeRec@{buildRightSubTreeRec}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{buildRightSubTreeRec()}{buildRightSubTreeRec()}}
+{\footnotesize\ttfamily void KDT\+::build\+Right\+Sub\+Tree\+Rec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$$\ast$}]{elements\+Array,  }\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$}]{sub\+Tree\+Root,  }\item[{const int \&}]{elements\+Array\+Size,  }\item[{const bool}]{x\+OrY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 72 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_adf84794450474eb910900ebe6bdbc3ef_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_adf84794450474eb910900ebe6bdbc3ef_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_af4bd258bdbc01e4d4d70ef99a8124b59}\label{class_k_d_t_af4bd258bdbc01e4d4d70ef99a8124b59}} 
+\index{KDT@{KDT}!buildTree@{buildTree}}
+\index{buildTree@{buildTree}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{buildTree()}{buildTree()}}
+{\footnotesize\ttfamily void KDT\+::build\+Tree (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ $>$ \&}]{components }\end{DoxyParamCaption})}
+
+
+
+Definition at line 11 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_af4bd258bdbc01e4d4d70ef99a8124b59_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_af4bd258bdbc01e4d4d70ef99a8124b59_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_a24d11420c3c5476bb8e0fb648aac31c9}\label{class_k_d_t_a24d11420c3c5476bb8e0fb648aac31c9}} 
+\index{KDT@{KDT}!clear@{clear}}
+\index{clear@{clear}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void KDT\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 181 of file KDT.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{class_k_d_t_a24d11420c3c5476bb8e0fb648aac31c9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_a47c84eb5a260ff7c225601bca2eb3d73}\label{class_k_d_t_a47c84eb5a260ff7c225601bca2eb3d73}} 
+\index{KDT@{KDT}!find@{find}}
+\index{find@{find}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ KDT\+::find (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y }\end{DoxyParamCaption})}
+
+
+
+Definition at line 104 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_a47c84eb5a260ff7c225601bca2eb3d73_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_a47c84eb5a260ff7c225601bca2eb3d73_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_a1eee0ed4e81d3c90a5abf05ad7b5705e}\label{class_k_d_t_a1eee0ed4e81d3c90a5abf05ad7b5705e}} 
+\index{KDT@{KDT}!findRecX@{findRecX}}
+\index{findRecX@{findRecX}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{findRecX()}{findRecX()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ KDT\+::find\+RecX (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y,  }\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$}]{element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 112 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_a1eee0ed4e81d3c90a5abf05ad7b5705e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_a1eee0ed4e81d3c90a5abf05ad7b5705e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_aafe260cd7027dba5d3f5a637d5e97492}\label{class_k_d_t_aafe260cd7027dba5d3f5a637d5e97492}} 
+\index{KDT@{KDT}!findRecY@{findRecY}}
+\index{findRecY@{findRecY}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{findRecY()}{findRecY()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ KDT\+::find\+RecY (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y,  }\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$}]{element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 146 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_aafe260cd7027dba5d3f5a637d5e97492_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_aafe260cd7027dba5d3f5a637d5e97492_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_a6b582f5b1dce092ddcfcfe1840e47a80}\label{class_k_d_t_a6b582f5b1dce092ddcfcfe1840e47a80}} 
+\index{KDT@{KDT}!printTree@{printTree}}
+\index{printTree@{printTree}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{printTree()}{printTree()}}
+{\footnotesize\ttfamily void KDT\+::print\+Tree (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_k_d_t_element}{KDTElement}} $\ast$}]{sub\+Root }\end{DoxyParamCaption})}
+
+
+
+Definition at line 192 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_k_d_t_a6b582f5b1dce092ddcfcfe1840e47a80_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_a6b582f5b1dce092ddcfcfe1840e47a80_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_k_d_t_a43c98407ab1deef1b4a53d95aaf6b9ce}\label{class_k_d_t_a43c98407ab1deef1b4a53d95aaf6b9ce}} 
+\index{KDT@{KDT}!rebuild@{rebuild}}
+\index{rebuild@{rebuild}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{rebuild()}{rebuild()}}
+{\footnotesize\ttfamily void KDT\+::rebuild (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_interactive_element}{Interactive\+Element}} $\ast$ $>$ \&}]{components }\end{DoxyParamCaption})}
+
+
+
+Definition at line 186 of file KDT.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_k_d_t_a43c98407ab1deef1b4a53d95aaf6b9ce_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_k_d_t_a225a3295f721064cac3d2fe49881c3ba}\label{class_k_d_t_a225a3295f721064cac3d2fe49881c3ba}} 
+\index{KDT@{KDT}!root@{root}}
+\index{root@{root}!KDT@{KDT}}
+\doxysubsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_k_d_t_element}{KDTElement}}$\ast$ KDT\+::root\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 11 of file KDT.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_k_d_t_8h}{KDT.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_k_d_t_8cpp}{KDT.\+cpp}}\end{DoxyCompactItemize}

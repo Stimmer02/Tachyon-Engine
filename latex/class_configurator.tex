@@ -1,0 +1,160 @@
+\hypertarget{class_configurator}{}\doxysection{Configurator Class Reference}
+\label{class_configurator}\index{Configurator@{Configurator}}
+
+
+{\ttfamily \#include $<$Configurator.\+h$>$}
+
+
+
+Collaboration diagram for Configurator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_configurator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_configurator_a7c73a2ef599be5d22dc00c753c876551}{Configurator}} (const std\+::string \&file\+Path)
+\item 
+void \mbox{\hyperlink{class_configurator_a11531a0bb60ce93b8babfbeeaf4ce752}{Parse\+Int}} (const std\+::string \&var\+Name, int \&value, const int \&default\+Value=0) const
+\item 
+void \mbox{\hyperlink{class_configurator_a1ae22db18fb07c86d24f5b2a4e431b6d}{Parse\+Float}} (const std\+::string \&var\+Name, float \&value, const float \&default\+Value=0.\+0f) const
+\item 
+void \mbox{\hyperlink{class_configurator_a18e6b08bf9d86dc65f2353700f3ad066}{Parse\+Double}} (const std\+::string \&var\+Name, double \&value, const double \&default\+Value=0.\+0) const
+\item 
+void \mbox{\hyperlink{class_configurator_a927935d877ad2c49c061079744a0fe92}{Parse\+String}} (const std\+::string \&var\+Name, std\+::string \&value, const std\+::string \&default\+Value=\char`\"{}null\char`\"{}) const
+\item 
+void \mbox{\hyperlink{class_configurator_a9179ed5f084dca47bf6bb2f745e00f46}{Parse\+Boolean}} (const std\+::string \&var\+Name, bool \&value, const bool \&default\+Value=false) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{class_configurator_a97ed118a9e275647693ac6093f7e9e3a}{config\+Map}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file Configurator.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_configurator_a7c73a2ef599be5d22dc00c753c876551}\label{class_configurator_a7c73a2ef599be5d22dc00c753c876551}} 
+\index{Configurator@{Configurator}!Configurator@{Configurator}}
+\index{Configurator@{Configurator}!Configurator@{Configurator}}
+\doxysubsubsection{\texorpdfstring{Configurator()}{Configurator()}}
+{\footnotesize\ttfamily Configurator\+::\+Configurator (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{file\+Path }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Configurator.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_configurator_a9179ed5f084dca47bf6bb2f745e00f46}\label{class_configurator_a9179ed5f084dca47bf6bb2f745e00f46}} 
+\index{Configurator@{Configurator}!ParseBoolean@{ParseBoolean}}
+\index{ParseBoolean@{ParseBoolean}!Configurator@{Configurator}}
+\doxysubsubsection{\texorpdfstring{ParseBoolean()}{ParseBoolean()}}
+{\footnotesize\ttfamily void Configurator\+::\+Parse\+Boolean (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{var\+Name,  }\item[{bool \&}]{value,  }\item[{const bool \&}]{default\+Value = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 90 of file Configurator.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configurator_a9179ed5f084dca47bf6bb2f745e00f46_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_configurator_a18e6b08bf9d86dc65f2353700f3ad066}\label{class_configurator_a18e6b08bf9d86dc65f2353700f3ad066}} 
+\index{Configurator@{Configurator}!ParseDouble@{ParseDouble}}
+\index{ParseDouble@{ParseDouble}!Configurator@{Configurator}}
+\doxysubsubsection{\texorpdfstring{ParseDouble()}{ParseDouble()}}
+{\footnotesize\ttfamily void Configurator\+::\+Parse\+Double (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{var\+Name,  }\item[{double \&}]{value,  }\item[{const double \&}]{default\+Value = {\ttfamily 0.0} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 63 of file Configurator.\+cpp.
+
+\mbox{\Hypertarget{class_configurator_a1ae22db18fb07c86d24f5b2a4e431b6d}\label{class_configurator_a1ae22db18fb07c86d24f5b2a4e431b6d}} 
+\index{Configurator@{Configurator}!ParseFloat@{ParseFloat}}
+\index{ParseFloat@{ParseFloat}!Configurator@{Configurator}}
+\doxysubsubsection{\texorpdfstring{ParseFloat()}{ParseFloat()}}
+{\footnotesize\ttfamily void Configurator\+::\+Parse\+Float (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{var\+Name,  }\item[{float \&}]{value,  }\item[{const float \&}]{default\+Value = {\ttfamily 0.0f} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 45 of file Configurator.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configurator_a1ae22db18fb07c86d24f5b2a4e431b6d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_configurator_a11531a0bb60ce93b8babfbeeaf4ce752}\label{class_configurator_a11531a0bb60ce93b8babfbeeaf4ce752}} 
+\index{Configurator@{Configurator}!ParseInt@{ParseInt}}
+\index{ParseInt@{ParseInt}!Configurator@{Configurator}}
+\doxysubsubsection{\texorpdfstring{ParseInt()}{ParseInt()}}
+{\footnotesize\ttfamily void Configurator\+::\+Parse\+Int (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{var\+Name,  }\item[{int \&}]{value,  }\item[{const int \&}]{default\+Value = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 27 of file Configurator.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configurator_a11531a0bb60ce93b8babfbeeaf4ce752_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_configurator_a927935d877ad2c49c061079744a0fe92}\label{class_configurator_a927935d877ad2c49c061079744a0fe92}} 
+\index{Configurator@{Configurator}!ParseString@{ParseString}}
+\index{ParseString@{ParseString}!Configurator@{Configurator}}
+\doxysubsubsection{\texorpdfstring{ParseString()}{ParseString()}}
+{\footnotesize\ttfamily void Configurator\+::\+Parse\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{var\+Name,  }\item[{std\+::string \&}]{value,  }\item[{const std\+::string \&}]{default\+Value = {\ttfamily \char`\"{}null\char`\"{}} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 80 of file Configurator.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configurator_a927935d877ad2c49c061079744a0fe92_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_configurator_a97ed118a9e275647693ac6093f7e9e3a}\label{class_configurator_a97ed118a9e275647693ac6093f7e9e3a}} 
+\index{Configurator@{Configurator}!configMap@{configMap}}
+\index{configMap@{configMap}!Configurator@{Configurator}}
+\doxysubsubsection{\texorpdfstring{configMap}{configMap}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ Configurator\+::config\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Configurator.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_configurator_8h}{Configurator.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_configurator_8cpp}{Configurator.\+cpp}}\end{DoxyCompactItemize}

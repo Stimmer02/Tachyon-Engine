@@ -1,0 +1,8 @@
+<map id="SharedNameResolver::Emplace" name="SharedNameResolver::Emplace">
+<area shape="rect" id="node1" title=" " alt="" coords="332,74,495,115"/>
+<area shape="rect" id="node2" href="$class_application.html#afa8cc05ce6b6092be5ecdfdae44e05f8" title=" " alt="" coords="108,5,284,32"/>
+<area shape="rect" id="node3" href="$class_application.html#a22c1d856df9837ee6633f6c8cc354642" title=" " alt="" coords="109,56,283,83"/>
+<area shape="rect" id="node5" href="$class_fractal_system.html#a561d77400b6937c319cb7a4e8b5b487f" title="This method is called on system startup and by default does nothing." alt="" coords="110,107,282,133"/>
+<area shape="rect" id="node6" href="$class_graphic_system.html#a98f48779b685382bc6bdc5b92da7812a" title="This method is called once after registration system within microkernel scope it is used to share int..." alt="" coords="113,157,279,184"/>
+<area shape="rect" id="node4" href="$editor_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,56,60,83"/>
+</map>
