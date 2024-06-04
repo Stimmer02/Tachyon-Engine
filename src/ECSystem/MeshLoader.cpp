@@ -166,13 +166,12 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
             triangulationInput.push_back(helperIdxArray[i]);
         }
     }
-    // std::cout << triangulationInput.size() << '\n';
+    //std::cout << triangulationInput.size() << '\n';
     // std::cout.flush();
     triangulationResult = computeTriangulation(triangulationInput);
 
     if(caseId == 0){
         for(int i = 0; i < triangulationResult.size(); i += 3){
-
             edge1 = (verticesVector[triangulationResult[i + 2]] - verticesVector[triangulationResult[i]]).Normalize();
             edge2 = (verticesVector[triangulationResult[i + 1]] - verticesVector[triangulationResult[i]]).Normalize();
 
