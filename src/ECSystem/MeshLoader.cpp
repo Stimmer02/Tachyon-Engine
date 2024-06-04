@@ -278,9 +278,9 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
     // }
 
 
-    for(int i = 0; i < numIndices; ++i){
-        std::cout << indicesVector[i] << ' ' << indicesVector[i] << ' ' << indicesVector[i] << '\n';
-    }
+    // for(int i = 0; i < numIndices; ++i){
+    //     std::cout << indicesVector[i] << ' ' << indicesVector[i] << ' ' << indicesVector[i] << '\n';
+    // }
 
     // for(int i = 0; i < numNormals; ++i){
     //     std::cout << normals[i].x << ' ' << normals[i].y << ' ' << normals[i].z << '\n';
@@ -321,7 +321,7 @@ void MeshLoader::parseMesh(const std::string &pathToFile, Mesh* mesh){
 
     if(!file){
         //tutaj coś trzeba by dodać innego ale najszybciej na razie jest dać cout;
-        std::cout << "Brak Pliku";
+        // std::cout << "Brak Pliku";
     }
 
     while(std::getline(file, helper)){
