@@ -26,7 +26,7 @@ EventRegister::~EventRegister(){
 
 void EventRegister::Write(enum LogMessageType _type, const char * _format, ...){
     std::chrono::nanoseconds currentTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch());
-    char helper[4096] = {}; //tyle powinno wystarczyć
+    char helper[4096*10] = {}; //tyle powinno wystarczyć
     EventQueueElement elementToAdd;
 
     va_list args;
