@@ -52,6 +52,33 @@ uint32_t PhysicsProcessor::countVoxels(){
     return returnValue;
 }
 
+char PhysicsProcessor::loadSimulation(const std::string& path){
+    std::ifstream file(path, std::ios::binary);
+    if (!file.is_open()){
+        return 1;
+    }
+    int width, height;
+    file >> width >> height;
+
+    if (width != globalWorkSize[0] || height != globalWorkSize[1]){
+        return 2;
+    }
+
+    int* arr = new int[width * height];
+    cl::Buffer buffer(context, CL_MEM_READ_ONLY, sizeof(int) * width * height);
+
+    file.read((char*)arr, sizeof(int) * width * height);
+    file.close();
+
+    queue.enqueueWriteBuffer(buffer, CL_TRUE, 0, sizeof(int) * width * height, arr);
+
+    load_simulationKernel.setArg(2, buffer);
+    queue.enqueueNDRangeKernel(load_simulationKernel, cl::NullRange, globalWorkSize);
+
+    delete[] arr;
+    return 0;
+}
+
 void PhysicsProcessor::generateFrame(){
     for (uint32_t i = 0; i < engineSize; i++){
         queue.enqueueNDRangeKernel(engine[i], cl::NullRange, globalWorkSize, localWorkSize);

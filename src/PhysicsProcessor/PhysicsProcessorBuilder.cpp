@@ -57,10 +57,6 @@ PhysicsProcessorBuilder::~PhysicsProcessorBuilder(){
     if (configStructure != nullptr){
         delete configStructure;
     }
-
-    // if (clErrorFunction != nullptr){ probably handeled higher
-    //     delete clErrorFunction;
-    // }
 }
 
 
@@ -497,39 +493,39 @@ char PhysicsProcessorBuilder::build(bool verbose){
     if (verbose)std::printf("Acquiring GL object from TBO\n");
     if (acquireGlObjectFromTBO() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to acquire GL object from TBO\n";
-        return 19;
+        return 17;
     }
 
     if (verbose)std::printf("Allocating GPU resources memory\n");
     uint allocatedMemory = 0;
     if (allocateGPUResourcesMemory(allocatedMemory) != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory\n";
-        return 20;
+        return 18;
     }
     if (verbose)std::printf("    Allocated overall %.0fMB\n", float(allocatedMemory)/(1024*1024));
 
     if (verbose)std::printf("Allocating GPU config structure\n");
     if (allocateGPUConfigStructure() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate GPU memory for config structure\n";
-        return 21;
+        return 19;
     }
 
     if (verbose)std::printf("Allocating rest of GPU buffers\n");
     if (allocateGPUWorkBuffers() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to allocate rest of GPU buffers\n";
-        return 22;
+        return 20;
     }
 
     if (verbose)std::printf("Setting mandatory kernels\n");
     if (setMandatoryKernels() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set mandatory kernels\n";
-        return 17;
+        return 21;
     }
 
     if (verbose)std::printf("Setting kernel queue (engine)\n");
     if (setKernelQueue() != 0){
         error += "ERR: PhysicsProcessorBuilder::build failed to set kernel queue\n";
-        return 18;
+        return 22;
     }
 
     if (verbose)std::printf("Done\n");
@@ -884,9 +880,24 @@ char PhysicsProcessorBuilder::addMandatoryKernels(){
         return 3;
     }
 
+    const std::string loadSimulationKernelName = "load_simulation";
+    std::string loadSimulationKernelCode;
+    std::ifstream file4(mandatoryKernelsDir + loadSimulationKernelName + ".cl");
+    if (file4.is_open()){
+        std::string line;
+        while (std::getline(file4, line)){
+            loadSimulationKernelCode += line + "\n";
+        }
+        file4.close();
+    } else {
+        error += "ERR: PhysicsProcessorBuilder::addMandatoryKernels failed to open file: " + mandatoryKernelsDir + loadSimulationKernelName + ".cl\n";
+        return 4;
+    }
+
     kernelCollector->addKernelCode(spawnVoxelKernelCode, spawnVoxelKernelName);
     kernelCollector->addKernelCode(spawnVoxelsInAreaKernelCode, spawnVoxelsInAreaKernelName);
     kernelCollector->addKernelCode(countVoxelsKernelCode, countVoxelsKernelName);
+    kernelCollector->addKernelCode(loadSimulationKernelCode, loadSimulationKernelName);
 
     return 0;
 }
@@ -1302,6 +1313,14 @@ char PhysicsProcessorBuilder::setMandatoryKernels(){
     physicsProcessor->count_voxelKernel.setArg(1, physicsProcessor->countVoxelWorkMemory);
     physicsProcessor->count_voxelKernel.setArg(2, simHeight * simHeight);
     physicsProcessor->count_voxelKernel.setArg(3, physicsProcessor->countVoxelReturnValue);
+
+    physicsProcessor->load_simulationKernel = cl::Kernel(program, "load_simulation");
+    if (physicsProcessor->load_simulationKernel() == NULL){
+        error += "ERR: PhysicsProcessorBuilder::setMandatoryKernels failed to create load_simulation kernel\n";
+        return 4;
+    }
+    physicsProcessor->load_simulationKernel.setArg(0, *physicsProcessor->engineResources);
+    physicsProcessor->load_simulationKernel.setArg(1, physicsProcessor->engineConfig);
 
     return 0;
 }

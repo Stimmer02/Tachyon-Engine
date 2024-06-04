@@ -4,6 +4,7 @@
 #include "../Headers.h"
 
 #include <stdint.h>
+#include <fstream>
 
 class PhysicsProcessor{
     friend class PhysicsProcessorBuilder;
@@ -13,6 +14,8 @@ public:
     void spawnVoxel(uint32_t x, uint32_t y, uint32_t substanceID);
     void spawnVoxelsInArea(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t substanceID);
     uint32_t countVoxels();
+
+    char loadSimulation(const std::string& path);
 
     void generateFrame();
 
@@ -44,6 +47,7 @@ private:
     cl::Kernel spawn_voxelKernel;
     cl::Kernel spawn_voxel_in_areaKernel;
     cl::Kernel count_voxelKernel;
+    cl::Kernel load_simulationKernel;
 
     cl::Buffer* engineResources;//contains all the resources for the engine
     cl::Buffer engineConfig;//contains the configuration for the engine
