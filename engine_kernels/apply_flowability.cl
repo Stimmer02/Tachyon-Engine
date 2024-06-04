@@ -9,16 +9,11 @@ void kernel apply_flowability(global struct engineConfig* config, global struct 
     if (thisVoxel.state == 0){
         return;
     }
-    resources->voxelsCopy[global_ID].state = 0;
 
     private float jammingFactor = resources->SUBSTANCES[thisVoxel.substanceID].JAMMING_FACTOR;
 
     if (jammingFactor > 0.75f){
         return;
-    }
-
-    if (jammingFactor == 0){
-        jammingFactor = -4;
     }
 
     private bool leftBorder = get_global_id(0) == 0;
@@ -40,5 +35,5 @@ void kernel apply_flowability(global struct engineConfig* config, global struct 
         moveRight = !moveLeft;
     }
 
-    resources->voxelsCopy[global_ID].forceVector.x = thisVoxel.forceVector.x + 4*(1-jammingFactor)*(moveRight - moveLeft);
+    resources->voxelsCopy[global_ID].forceVector.x = thisVoxel.forceVector.x + (2-jammingFactor)*(moveRight - moveLeft);
 }
