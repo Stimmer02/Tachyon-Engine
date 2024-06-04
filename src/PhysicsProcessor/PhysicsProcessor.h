@@ -18,6 +18,9 @@ public:
     char loadSimulation(const std::string& path);
     char saveSimulation(const std::string& path);
 
+    int getSumulationWidth();
+    int getSumulationHeight();
+
     void generateFrame();
 
 private:

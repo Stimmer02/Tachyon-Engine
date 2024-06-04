@@ -112,6 +112,14 @@ char PhysicsProcessor::saveSimulation(const std::string& path){
     return 0;
 }
 
+int PhysicsProcessor::getSumulationWidth(){
+    return globalWorkSize[0];
+}
+
+int PhysicsProcessor::getSumulationHeight(){
+    return globalWorkSize[1];
+}
+
 
 void PhysicsProcessor::generateFrame(){
     for (uint32_t i = 0; i < engineSize; i++){

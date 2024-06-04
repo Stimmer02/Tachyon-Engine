@@ -5,6 +5,8 @@ PhysicsProcessorSystem::PhysicsProcessorSystem(){
     errorFunction = nullptr;
     PPConfigPath = nullptr;
     TBO = 0;
+    pause = false;
+    pauseKeyPressed = false;
 }
 
 PhysicsProcessorSystem::~PhysicsProcessorSystem(){
@@ -12,6 +14,7 @@ PhysicsProcessorSystem::~PhysicsProcessorSystem(){
     if (errorFunction != nullptr){
         delete errorFunction;
     }
+
 }
 
 void PhysicsProcessorSystem::Share(SharedNameResolver* snr){
@@ -74,8 +77,8 @@ void PhysicsProcessorSystem::OnLoad(){
         log->Flush();
     }
 
-    physicsProcessor = builder.getPhysicsProcessor();
 
+    physicsProcessor = builder.getPhysicsProcessor();
 
     // load simulation
     Configurator config(PPConfigPath);
@@ -95,24 +98,34 @@ void PhysicsProcessorSystem::OnLoad(){
                 break;
             default:
                 log->Write(LogMessageType::M_INFO, "Simulation loaded successfully: %s\n", simulationPath.c_str());
-                uint voxelCount = physicsProcessor->countVoxels();
-                log->Write(LogMessageType::M_INFO, "Voxel count: %d\n", voxelCount);
                 break;
         }
     }
 
+    // setup pause
 
-    
+    input = &Input::GetInstance();
+    config.ParseBoolean("START_PAUSED", pause, false);
 
-    // physicsProcessor->spawnVoxelsInArea(512-128/2, 0, 128, 128, 2);
-    // physicsProcessor->spawnVoxelsInArea(8, 1024-32, 1024-8, 24, 3);
 
-    // physicsProcessor->spawnVoxelsInArea(0, 1024-8, 1024, 8, 1);
-    // physicsProcessor->spawnVoxelsInArea(1024-8, 0, 8, 1024, 1);
-    // physicsProcessor->spawnVoxelsInArea(0, 0, 8, 1024, 1);
+    int drawFrame;
+    config.ParseInt("DRAW_FRAME", drawFrame, 0);
 
-    // voxelCount = physicsProcessor->countVoxels();
-    // std::printf("Voxel count: %d\n", voxelCount);
+    int simWidth = physicsProcessor->getSumulationWidth();
+    int simHeight = physicsProcessor->getSumulationHeight();
+
+    if (drawFrame){
+        physicsProcessor->spawnVoxelsInArea(0, 0, simWidth, 8, drawFrame);
+        physicsProcessor->spawnVoxelsInArea(0, 0, 8, simWidth, drawFrame);
+        physicsProcessor->spawnVoxelsInArea(0, simHeight-8, simWidth, 8, drawFrame);
+        physicsProcessor->spawnVoxelsInArea(simWidth-8, 0, 8, simHeight, drawFrame);
+    }
+
+    uint voxelCount = physicsProcessor->countVoxels();
+    log->Write(LogMessageType::M_INFO, "Simulation starts at voxel count: %d\n", voxelCount);
+
+
+    physicsProcessor->generateFrame();
 }
 
 void PhysicsProcessorSystem::OnUnload(){
@@ -120,7 +133,11 @@ void PhysicsProcessorSystem::OnUnload(){
 }
 
 void PhysicsProcessorSystem::Execute(){
-    physicsProcessor->generateFrame();
-    // uint voxelCount = physicsProcessor->countVoxels();
-    // std::printf("Voxel count: %d\n", voxelCount);
+    bool pressed = input->GetKeyState(GLFW_KEY_SPACE) == ONHOLD;
+    pause = (pauseKeyPressed == false && pressed) ^ pause;
+    pauseKeyPressed = pressed;
+
+    if (pause == false){
+        physicsProcessor->generateFrame();
+    }
 }
