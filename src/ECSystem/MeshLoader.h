@@ -3,15 +3,18 @@
 
 #include <string>
 #include <vector>
+#include <set>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
 #include <map>
+#include <queue>
 
 class Mesh;
 
 #include "Tetrahedron.h"
 #include "Vector3.h"
+#include "Triangle.cpp"
 
 class MeshLoader{
 public:

@@ -112,7 +112,9 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
     // std::cout << indexLine << '\n';
     for(int i = 2;; ++i){
         if(indexLine[i] == ' ' || indexLine[i] == '\n' || indexLine[i] == '\0' || indexLine[i] == '/'){
-            helperIdxArray.push_back(std::atoi(singleCoord.c_str()));
+            if(singleCoord.size() != 0){
+                helperIdxArray.push_back(std::atoi(singleCoord.c_str()));
+            }
             singleCoord.clear();
             if(indexLine[i] == '\n' || indexLine[i] == '\0'){
                 break;
@@ -136,16 +138,21 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
         }
     }
 
+    // for(int i = 0; i < helperIdxArray.size(); ++i){
+    //     std::cout << helperIdxArray[i] << ' ';
+    // }
+
     if(caseId == 0){
         for(int i = 0; i < helperIdxArray.size(); ++i){
             helperIdxArray[i]--;
         }
         triangulationInput = helperIdxArray;
-        
+
     }
     else if(caseId == 1){
         for(int i = 0 ; i < helperIdxArray.size(); i+=2){
             helperIdxArray[i]--;
+            // std::cout << "ASD: " << helperIdxArray[i + 1] << '\n';
             normalsList[helperIdxArray[i]].push_back(normalsVector[helperIdxArray[i + 1] - 1]);
             triangulationInput.push_back(helperIdxArray[i]);
         }
@@ -165,11 +172,12 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
 
     if(caseId == 0){
         for(int i = 0; i < triangulationResult.size(); i += 3){
+
             edge1 = (verticesVector[triangulationResult[i + 2]] - verticesVector[triangulationResult[i]]).Normalize();
             edge2 = (verticesVector[triangulationResult[i + 1]] - verticesVector[triangulationResult[i]]).Normalize();
 
             helperNormal = Vector3::Cross(edge1, edge2).Normalize();
-             
+
             normalsList[triangulationResult[i]].push_back(helperNormal);
 
 
@@ -186,23 +194,22 @@ void MeshLoader::addSingleIndex(const std::string &indexLine){
 
             helperNormal = Vector3::Cross(edge1, edge2).Normalize();
 
-            normalsList[triangulationResult[i]].push_back(helperNormal);
+            normalsList[triangulationResult[i + 2]].push_back(helperNormal);
         }
     }
-    
-    for(int i = 0; i < triangulationResult.size(); ++i){
-        for(int j = i; j >= 1; --j){
-            if(triangulationResult[j] < triangulationResult[j - 1]){
-                std::swap(triangulationResult[i], triangulationResult[i - 1]);
-            }
-        }
-    }
-    
-    for(int i = 0; i < triangulationResult.size(); ++i){
-        std::cout << triangulationResult[i] << '\n';
-    }
-    std::cout.flush();
-    
+
+    // std::cout << triangulationResult.size() << '\n';
+
+
+    // for(int i = 0; i < triangulationResult.size(); ++i){
+    //     std::cout << triangulationResult[i] << '\n';
+    // }
+    // std::cout << '\n';
+    // std::cout << '\n';
+    // std::cout.flush();
+
+
+
     for(int i: triangulationResult){
         indicesVector.push_back(i);
     }
@@ -244,28 +251,62 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
 
     for(int i = 0; i < numVertices; ++i){
         helperNormal = {0.0f, 0.0f, 0.0f};
-        for(int j = 0; j < normalsList[i].size(); ++i){
+        for(int j = 0; j < normalsList[i].size(); ++j){
             helperNormal += normalsList[i][j];
         }
-        if(normalsList[i].size() != 0){
-            helperNormal /= float(normalsList[i].size());
-        }
+        // if(normalsList[i].size() != 0){
+        //     helperNormal /= float(normalsList[i].size());
+        // }
         helperNormal = helperNormal.Normalize();
         normals[i] = helperNormal;
     }
-    
-    
-    
-    // std::cout << indicesVector.size() << '\n';
+
+
+
+    // std::cout << normalsList.size() << '\n';
     // std::cout.flush();
-    // for(int i = 0; i < indicesVector.size(); ++i){
-    //     std::cout << indicesVector[i] << ' ';
+    // for(int i = 0; i < normalsList.size(); ++i){
+    //     for(int j = 0; j < normalsList[i].size(); ++j){
+    //         std::cout << normalsList[i][j].x << ' ' << normalsList[i][j].y << ' ' << normalsList[i][j].z << '\n';
+    //     }
+    //     std::cout << '\n';
     // }
     // std::cout.flush();
 
+    // for(int i = 0; i < verticesVector.size(); ++i){
+    //     std::cout << verticesVector[i].x << ' ' << verticesVector[i].y << ' ' << verticesVector[i].z << '\n';
+    // }
+
+
+    // for(int i = 0; i < numIndices; ++i){
+    //     std::cout << indicesVector[i] << ' ' << indicesVector[i] << ' ' << indicesVector[i] << '\n';
+    // }
+
+    // for(int i = 0; i < numNormals; ++i){
+    //     std::cout << normals[i].x << ' ' << normals[i].y << ' ' << normals[i].z << '\n';
+    // }
+    numTexCoords = 2 * numVertices;
+    float* textCoordsArr = new float[numTexCoords];
+    if(caseId == 0 || caseId == 1){
+        for(int i = 0; i < numVertices; ++i){
+            textCoordsArr[i] = 0.0f;
+            textCoordsArr[i + 1] = 0.0f;
+        }
+    }
+    else{
+        for(int i = 0; i < numVertices; ++i){
+            // std::cout << texCoordsVector[texturesIdx[i]] << ' ' << texCoordsVector[texturesIdx[i] + 1] << '\n';
+            textCoordsArr[2 * i] = texCoordsVector[texturesIdx[i]];
+            textCoordsArr[2 * i + 1] = texCoordsVector[texturesIdx[i] + 1];
+        }
+    }
+
+    // for(int i = 0; i < numTexCoords; ++i){
+    //     std::cout << textCoordsArr[i] << ' ';
+    // }
     mesh->SetVertices(verticesVector.data(), numVertices);
     mesh->SetNormals(normals, numNormals);
-    mesh->SetTexCoords(texCoordsVector.data(), numTexCoords);
+    mesh->SetTexCoords(textCoordsArr, numTexCoords);
     mesh->SetIndices(indicesVector.data(), numIndices);
 
     delete [] normals;
@@ -280,81 +321,14 @@ void MeshLoader::finalizeParsing(Mesh* mesh){
 }
 
 std::vector<int> MeshLoader::computeTriangulation(const std::vector<int> &inputPoints){
-    
+
     if(inputPoints.size() == 3){
         return inputPoints;
     }
-    // Something there is segmentation fault
 
-    std::vector<Tetrahedron> tetrahedrons;
-    std::map< std::pair< std::pair<int, int>, int >, int > trianglesCount;
-    std::vector<int> result;
-
-    float helper = 0.0f;
-    
-    for(int i = 0; i < inputPoints.size(); ++i){
-        // std::cout << i << '\n';
-        // std::cout.flush();
-        helper = std::max(helper, fabs(verticesVector[inputPoints[i]].x));
-        helper = std::max(helper, fabs(verticesVector[inputPoints[i]].y));
-        helper = std::max(helper, fabs(verticesVector[inputPoints[i]].z));
-    }
-    
-    helper *= 100.0f;
-    
-    verticesVector.push_back({-helper, -helper, -helper});
-    verticesVector.push_back({helper, -helper, -helper});
-    verticesVector.push_back({0, helper, -helper});
-    verticesVector.push_back({0, 0, helper});
-
-    tetrahedrons.push_back({numVertices, numVertices + 1, numVertices + 2, numVertices + 3});
-
-
-    for(int i = 0; i < inputPoints.size(); ++i){
-        for(int j = 0; j < tetrahedrons.size(); ++j){
-            if(tetrahedrons[j].isPointInsideTetrahedron(inputPoints[i])){
-
-                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[1], tetrahedrons[j].points[2], inputPoints[i]});
-                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[1], tetrahedrons[j].points[3], inputPoints[i]});
-                tetrahedrons.push_back({tetrahedrons[j].points[0], tetrahedrons[j].points[2], tetrahedrons[j].points[3], inputPoints[i]});
-                tetrahedrons.push_back({tetrahedrons[j].points[1], tetrahedrons[j].points[2], tetrahedrons[j].points[3], inputPoints[i]});
-
-                std::swap(tetrahedrons[j], tetrahedrons[tetrahedrons.size() - 1]);
-
-                tetrahedrons.pop_back();
-
-                break;
-            }
-        }
-    }
-
-    for(Tetrahedron &t: tetrahedrons){
-
-        std::sort(t.points, t.points + 4);
-
-        trianglesCount[{{t.points[0], t.points[1]}, t.points[2]}]++;
-        trianglesCount[{{t.points[0], t.points[1]}, t.points[3]}]++;
-        trianglesCount[{{t.points[0], t.points[2]}, t.points[3]}]++;
-        trianglesCount[{{t.points[1], t.points[2]}, t.points[3]}]++;
-    }
-
-
-    for(auto i = trianglesCount.begin(); i != trianglesCount.end(); ++i){
-        if(i->second == 1 && i->first.first.first <= numVertices && i->first.first.second <= numVertices && i->first.second <= numVertices){
-            result.push_back(i->first.first.first);
-            result.push_back(i->first.first.second);
-            result.push_back(i->first.second);
-        }
-    }
-
-    verticesVector.pop_back();
-    verticesVector.pop_back();
-    verticesVector.pop_back();
-    verticesVector.pop_back();
-    
-    
-    // std::cout << "result.size() " << result.size() << '\n';
-    return result;
+    //Tutaj jest miejsce na ewentualny rozwój projektu.
+    std::vector<int> empty;
+    return empty;
 }
 
 void MeshLoader::parseMesh(const std::string &pathToFile, Mesh* mesh){
@@ -365,7 +339,7 @@ void MeshLoader::parseMesh(const std::string &pathToFile, Mesh* mesh){
 
     if(!file){
         //tutaj coś trzeba by dodać innego ale najszybciej na razie jest dać cout;
-        std::cout << "Brak Pliku";
+        // std::cout << "Brak Pliku";
     }
 
     while(std::getline(file, helper)){
