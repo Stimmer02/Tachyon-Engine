@@ -1,0 +1,190 @@
+\hypertarget{class_material}{}\doxysection{Material Class Reference}
+\label{class_material}\index{Material@{Material}}
+
+
+{\ttfamily \#include $<$Material.\+h$>$}
+
+
+
+Collaboration diagram for Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_material__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_material_ae2aec70c9c59cad6369d83ccffbe778d}{Material}} (const \mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$\mbox{\hyperlink{class_material_aea59d8a41fc5bc1b78364984e37f8a62}{shader}})
+\item 
+\mbox{\hyperlink{class_material_a409561467835a522dc5328ae708b78af}{Material}} (const \mbox{\hyperlink{class_material}{Material}} $\ast$material)
+\item 
+virtual void \mbox{\hyperlink{class_material_ac4195ba31c71f73be5eab0b0a5de5ace}{Use}} ()
+\item 
+bool \mbox{\hyperlink{class_material_acabed06a9ea9e7b8f56bd93785f81028}{operator==}} (const \mbox{\hyperlink{class_material}{Material}} \&other) const
+\item 
+bool \mbox{\hyperlink{class_material_a16d6175216c74057b2eab09ccaa7986c}{operator!=}} (const \mbox{\hyperlink{class_material}{Material}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$ \mbox{\hyperlink{class_material_aea59d8a41fc5bc1b78364984e37f8a62}{shader}}
+\item 
+\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$ \mbox{\hyperlink{class_material_af51aa7cd6519cc3f24fab6997a377138}{main\+Texture}}
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_material_ace9c3d239bbe1d31d57877a58310c132}{color}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_material_ae2693df4e31b6c28276b14ec8f376625}{checksum}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_material_a5a2b878a3bbcfa417f3316a7ecd2f182}{Calculate\+Checksum}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file Material.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_material_ae2aec70c9c59cad6369d83ccffbe778d}\label{class_material_ae2aec70c9c59cad6369d83ccffbe778d}} 
+\index{Material@{Material}!Material@{Material}}
+\index{Material@{Material}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{Material()}{Material()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Material\+::\+Material (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 34 of file Material.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_material_ae2aec70c9c59cad6369d83ccffbe778d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_material_a409561467835a522dc5328ae708b78af}\label{class_material_a409561467835a522dc5328ae708b78af}} 
+\index{Material@{Material}!Material@{Material}}
+\index{Material@{Material}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{Material()}{Material()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Material\+::\+Material (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_material}{Material}} $\ast$}]{material }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 40 of file Material.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_material_a5a2b878a3bbcfa417f3316a7ecd2f182}\label{class_material_a5a2b878a3bbcfa417f3316a7ecd2f182}} 
+\index{Material@{Material}!CalculateChecksum@{CalculateChecksum}}
+\index{CalculateChecksum@{CalculateChecksum}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{CalculateChecksum()}{CalculateChecksum()}}
+{\footnotesize\ttfamily uint32\+\_\+t Material\+::\+Calculate\+Checksum (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Material.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_material_a5a2b878a3bbcfa417f3316a7ecd2f182_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_material_a16d6175216c74057b2eab09ccaa7986c}\label{class_material_a16d6175216c74057b2eab09ccaa7986c}} 
+\index{Material@{Material}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Material\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_material}{Material}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 57 of file Material.\+h.
+
+\mbox{\Hypertarget{class_material_acabed06a9ea9e7b8f56bd93785f81028}\label{class_material_acabed06a9ea9e7b8f56bd93785f81028}} 
+\index{Material@{Material}!operator==@{operator==}}
+\index{operator==@{operator==}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Material\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_material}{Material}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 53 of file Material.\+h.
+
+\mbox{\Hypertarget{class_material_ac4195ba31c71f73be5eab0b0a5de5ace}\label{class_material_ac4195ba31c71f73be5eab0b0a5de5ace}} 
+\index{Material@{Material}!Use@{Use}}
+\index{Use@{Use}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{Use()}{Use()}}
+{\footnotesize\ttfamily virtual void Material\+::\+Use (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 47 of file Material.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_material_ac4195ba31c71f73be5eab0b0a5de5ace_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_material_ae2693df4e31b6c28276b14ec8f376625}\label{class_material_ae2693df4e31b6c28276b14ec8f376625}} 
+\index{Material@{Material}!checksum@{checksum}}
+\index{checksum@{checksum}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{checksum}{checksum}}
+{\footnotesize\ttfamily uint32\+\_\+t Material\+::checksum}
+
+
+
+Definition at line 32 of file Material.\+h.
+
+\mbox{\Hypertarget{class_material_ace9c3d239bbe1d31d57877a58310c132}\label{class_material_ace9c3d239bbe1d31d57877a58310c132}} 
+\index{Material@{Material}!color@{color}}
+\index{color@{color}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Material\+::color}
+
+
+
+Definition at line 30 of file Material.\+h.
+
+\mbox{\Hypertarget{class_material_af51aa7cd6519cc3f24fab6997a377138}\label{class_material_af51aa7cd6519cc3f24fab6997a377138}} 
+\index{Material@{Material}!mainTexture@{mainTexture}}
+\index{mainTexture@{mainTexture}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{mainTexture}{mainTexture}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite}{Sprite}}$\ast$ Material\+::main\+Texture}
+
+
+
+Definition at line 29 of file Material.\+h.
+
+\mbox{\Hypertarget{class_material_aea59d8a41fc5bc1b78364984e37f8a62}\label{class_material_aea59d8a41fc5bc1b78364984e37f8a62}} 
+\index{Material@{Material}!shader@{shader}}
+\index{shader@{shader}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{shader}{shader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_shader}{GLShader}}$\ast$ Material\+::shader}
+
+
+
+Definition at line 28 of file Material.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_material_8h}{Material.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,341 @@
+\hypertarget{class_line_renderer}{}\doxysection{Line\+Renderer Class Reference}
+\label{class_line_renderer}\index{LineRenderer@{LineRenderer}}
+
+
+{\ttfamily \#include $<$Line\+Renderer.\+h$>$}
+
+
+
+Inheritance diagram for Line\+Renderer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_line_renderer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Line\+Renderer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_line_renderer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_line_renderer_a1c0f5dc2464f6e7cab48d093957857eb}{Line\+Renderer}} ()
+\item 
+\mbox{\hyperlink{class_line_renderer_a71254d7e71255b704d095a29c25344ea}{Line\+Renderer}} (\mbox{\hyperlink{class_line_renderer}{Line\+Renderer}} $\ast$renderer)
+\item 
+void \mbox{\hyperlink{class_line_renderer_a09ed270fdf81beb54d555f2350e7e338}{Set\+Line\+Width}} (const float \&\mbox{\hyperlink{class_line_renderer_a40907e30ef2f2bcc2b90ad6c93401e54}{start\+Width}}, const float \&\mbox{\hyperlink{class_line_renderer_a665ce77df5c7378e3878aefc02248227}{end\+Width}})
+\item 
+void \mbox{\hyperlink{class_line_renderer_a2c6cc3b9f85a27f70e227472870739de}{Set\+Render\+Mode}} (const GLenum \&mode)
+\item 
+\mbox{\hyperlink{_attribute_8h_a6450db6a3ee75bfc2a198516e9f8e31d}{Attribute\+ID}} \mbox{\hyperlink{class_line_renderer_a9dcdee068c33a93b17d8c1350c3a8837}{Get\+Attribute\+ID}} () const override
+\item 
+void \mbox{\hyperlink{class_line_renderer_a0e0751baced356804fd95287598db749}{Set\+Vertices}} (const \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$\mbox{\hyperlink{class_line_renderer_a19d95613e1fa6f8d2e2105f34dfd7c38}{vertices}}, const unsigned int \&\mbox{\hyperlink{class_line_renderer_a17cb69fafc5573551c03fa1e3f3e7f6c}{num\+Vertices}})
+\item 
+void \mbox{\hyperlink{class_line_renderer_a890333180678a1c03f067840e65a50e8}{Draw}} ()
+\item 
+\mbox{\hyperlink{class_line_renderer_abc8e1d015197802ceb816c3723aec4eb}{$\sim$\+Line\+Renderer}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_line_renderer_a4315dae58ab7caee7c00f981c79ac7b3}{Rebuild\+Quads}} ()
+\item 
+void \mbox{\hyperlink{class_line_renderer_a12db4e7dd95b851659d907601acc9b16}{Rebuild\+Texture\+Coords}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+GLuint \mbox{\hyperlink{class_line_renderer_ac357c50f0e102121b2e4e6c36b0bc594}{vao}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_line_renderer_a21eaa45d9061d949b22571b1306f2daa}{vbo}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_line_renderer_a166118a8508f8e0adbeba1d666d1bda5}{ebo}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_line_renderer_a0ca98883d6fa31219dd10b7bae09d1f4}{tbo}} = 0
+\item 
+GLenum \mbox{\hyperlink{class_line_renderer_ab08bc0f436480bccdb1f470af715e5f6}{render\+Mode}}
+\item 
+int \mbox{\hyperlink{class_line_renderer_a17cb69fafc5573551c03fa1e3f3e7f6c}{num\+Vertices}} = 0
+\item 
+int \mbox{\hyperlink{class_line_renderer_a26839693d9f3b93517e56875c675be0c}{num\+Indices}} = 0
+\item 
+float \mbox{\hyperlink{class_line_renderer_a40907e30ef2f2bcc2b90ad6c93401e54}{start\+Width}}
+\item 
+float \mbox{\hyperlink{class_line_renderer_a665ce77df5c7378e3878aefc02248227}{end\+Width}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ \mbox{\hyperlink{class_line_renderer_a19d95613e1fa6f8d2e2105f34dfd7c38}{vertices}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file Line\+Renderer.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_line_renderer_a1c0f5dc2464f6e7cab48d093957857eb}\label{class_line_renderer_a1c0f5dc2464f6e7cab48d093957857eb}} 
+\index{LineRenderer@{LineRenderer}!LineRenderer@{LineRenderer}}
+\index{LineRenderer@{LineRenderer}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{LineRenderer()}{LineRenderer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Line\+Renderer\+::\+Line\+Renderer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 150 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a71254d7e71255b704d095a29c25344ea}\label{class_line_renderer_a71254d7e71255b704d095a29c25344ea}} 
+\index{LineRenderer@{LineRenderer}!LineRenderer@{LineRenderer}}
+\index{LineRenderer@{LineRenderer}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{LineRenderer()}{LineRenderer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Line\+Renderer\+::\+Line\+Renderer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_line_renderer}{Line\+Renderer}} $\ast$}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 157 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_abc8e1d015197802ceb816c3723aec4eb}\label{class_line_renderer_abc8e1d015197802ceb816c3723aec4eb}} 
+\index{LineRenderer@{LineRenderer}!````~LineRenderer@{$\sim$LineRenderer}}
+\index{````~LineRenderer@{$\sim$LineRenderer}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{$\sim$LineRenderer()}{~LineRenderer()}}
+{\footnotesize\ttfamily Line\+Renderer\+::$\sim$\+Line\+Renderer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 208 of file Line\+Renderer.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_line_renderer_a890333180678a1c03f067840e65a50e8}\label{class_line_renderer_a890333180678a1c03f067840e65a50e8}} 
+\index{LineRenderer@{LineRenderer}!Draw@{Draw}}
+\index{Draw@{Draw}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Line\+Renderer\+::\+Draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 196 of file Line\+Renderer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_line_renderer_a890333180678a1c03f067840e65a50e8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_line_renderer_a9dcdee068c33a93b17d8c1350c3a8837}\label{class_line_renderer_a9dcdee068c33a93b17d8c1350c3a8837}} 
+\index{LineRenderer@{LineRenderer}!GetAttributeID@{GetAttributeID}}
+\index{GetAttributeID@{GetAttributeID}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{GetAttributeID()}{GetAttributeID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_attribute_8h_a6450db6a3ee75bfc2a198516e9f8e31d}{Attribute\+ID}} Line\+Renderer\+::\+Get\+Attribute\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_attribute_a7555a70c17061aa77f6222a264a489f7}{Attribute}}.
+
+
+
+Definition at line 181 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a4315dae58ab7caee7c00f981c79ac7b3}\label{class_line_renderer_a4315dae58ab7caee7c00f981c79ac7b3}} 
+\index{LineRenderer@{LineRenderer}!RebuildQuads@{RebuildQuads}}
+\index{RebuildQuads@{RebuildQuads}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{RebuildQuads()}{RebuildQuads()}}
+{\footnotesize\ttfamily void Line\+Renderer\+::\+Rebuild\+Quads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 27 of file Line\+Renderer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_line_renderer_a4315dae58ab7caee7c00f981c79ac7b3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_line_renderer_a12db4e7dd95b851659d907601acc9b16}\label{class_line_renderer_a12db4e7dd95b851659d907601acc9b16}} 
+\index{LineRenderer@{LineRenderer}!RebuildTextureCoords@{RebuildTextureCoords}}
+\index{RebuildTextureCoords@{RebuildTextureCoords}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{RebuildTextureCoords()}{RebuildTextureCoords()}}
+{\footnotesize\ttfamily void Line\+Renderer\+::\+Rebuild\+Texture\+Coords (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 99 of file Line\+Renderer.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_line_renderer_a12db4e7dd95b851659d907601acc9b16_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_line_renderer_a09ed270fdf81beb54d555f2350e7e338}\label{class_line_renderer_a09ed270fdf81beb54d555f2350e7e338}} 
+\index{LineRenderer@{LineRenderer}!SetLineWidth@{SetLineWidth}}
+\index{SetLineWidth@{SetLineWidth}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{SetLineWidth()}{SetLineWidth()}}
+{\footnotesize\ttfamily void Line\+Renderer\+::\+Set\+Line\+Width (\begin{DoxyParamCaption}\item[{const float \&}]{start\+Width,  }\item[{const float \&}]{end\+Width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 171 of file Line\+Renderer.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_line_renderer_a09ed270fdf81beb54d555f2350e7e338_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_line_renderer_a2c6cc3b9f85a27f70e227472870739de}\label{class_line_renderer_a2c6cc3b9f85a27f70e227472870739de}} 
+\index{LineRenderer@{LineRenderer}!SetRenderMode@{SetRenderMode}}
+\index{SetRenderMode@{SetRenderMode}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{SetRenderMode()}{SetRenderMode()}}
+{\footnotesize\ttfamily void Line\+Renderer\+::\+Set\+Render\+Mode (\begin{DoxyParamCaption}\item[{const GLenum \&}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 177 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a0e0751baced356804fd95287598db749}\label{class_line_renderer_a0e0751baced356804fd95287598db749}} 
+\index{LineRenderer@{LineRenderer}!SetVertices@{SetVertices}}
+\index{SetVertices@{SetVertices}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{SetVertices()}{SetVertices()}}
+{\footnotesize\ttfamily void Line\+Renderer\+::\+Set\+Vertices (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$}]{vertices,  }\item[{const unsigned int \&}]{num\+Vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 185 of file Line\+Renderer.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_line_renderer_a0e0751baced356804fd95287598db749_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_line_renderer_a166118a8508f8e0adbeba1d666d1bda5}\label{class_line_renderer_a166118a8508f8e0adbeba1d666d1bda5}} 
+\index{LineRenderer@{LineRenderer}!ebo@{ebo}}
+\index{ebo@{ebo}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{ebo}{ebo}}
+{\footnotesize\ttfamily GLuint Line\+Renderer\+::ebo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a665ce77df5c7378e3878aefc02248227}\label{class_line_renderer_a665ce77df5c7378e3878aefc02248227}} 
+\index{LineRenderer@{LineRenderer}!endWidth@{endWidth}}
+\index{endWidth@{endWidth}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{endWidth}{endWidth}}
+{\footnotesize\ttfamily float Line\+Renderer\+::end\+Width\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 23 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a26839693d9f3b93517e56875c675be0c}\label{class_line_renderer_a26839693d9f3b93517e56875c675be0c}} 
+\index{LineRenderer@{LineRenderer}!numIndices@{numIndices}}
+\index{numIndices@{numIndices}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{numIndices}{numIndices}}
+{\footnotesize\ttfamily int Line\+Renderer\+::num\+Indices = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a17cb69fafc5573551c03fa1e3f3e7f6c}\label{class_line_renderer_a17cb69fafc5573551c03fa1e3f3e7f6c}} 
+\index{LineRenderer@{LineRenderer}!numVertices@{numVertices}}
+\index{numVertices@{numVertices}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{numVertices}{numVertices}}
+{\footnotesize\ttfamily int Line\+Renderer\+::num\+Vertices = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_ab08bc0f436480bccdb1f470af715e5f6}\label{class_line_renderer_ab08bc0f436480bccdb1f470af715e5f6}} 
+\index{LineRenderer@{LineRenderer}!renderMode@{renderMode}}
+\index{renderMode@{renderMode}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{renderMode}{renderMode}}
+{\footnotesize\ttfamily GLenum Line\+Renderer\+::render\+Mode\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a40907e30ef2f2bcc2b90ad6c93401e54}\label{class_line_renderer_a40907e30ef2f2bcc2b90ad6c93401e54}} 
+\index{LineRenderer@{LineRenderer}!startWidth@{startWidth}}
+\index{startWidth@{startWidth}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{startWidth}{startWidth}}
+{\footnotesize\ttfamily float Line\+Renderer\+::start\+Width\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 22 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a0ca98883d6fa31219dd10b7bae09d1f4}\label{class_line_renderer_a0ca98883d6fa31219dd10b7bae09d1f4}} 
+\index{LineRenderer@{LineRenderer}!tbo@{tbo}}
+\index{tbo@{tbo}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{tbo}{tbo}}
+{\footnotesize\ttfamily GLuint Line\+Renderer\+::tbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_ac357c50f0e102121b2e4e6c36b0bc594}\label{class_line_renderer_ac357c50f0e102121b2e4e6c36b0bc594}} 
+\index{LineRenderer@{LineRenderer}!vao@{vao}}
+\index{vao@{vao}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{vao}{vao}}
+{\footnotesize\ttfamily GLuint Line\+Renderer\+::vao = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a21eaa45d9061d949b22571b1306f2daa}\label{class_line_renderer_a21eaa45d9061d949b22571b1306f2daa}} 
+\index{LineRenderer@{LineRenderer}!vbo@{vbo}}
+\index{vbo@{vbo}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{vbo}{vbo}}
+{\footnotesize\ttfamily GLuint Line\+Renderer\+::vbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Line\+Renderer.\+h.
+
+\mbox{\Hypertarget{class_line_renderer_a19d95613e1fa6f8d2e2105f34dfd7c38}\label{class_line_renderer_a19d95613e1fa6f8d2e2105f34dfd7c38}} 
+\index{LineRenderer@{LineRenderer}!vertices@{vertices}}
+\index{vertices@{vertices}!LineRenderer@{LineRenderer}}
+\doxysubsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_vector3}{Vector3}}$>$ Line\+Renderer\+::vertices\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file Line\+Renderer.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_line_renderer_8h}{Line\+Renderer.\+h}}\end{DoxyCompactItemize}

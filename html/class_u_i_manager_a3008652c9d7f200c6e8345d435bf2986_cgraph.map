@@ -1,0 +1,6 @@
+<map id="UIManager::Update" name="UIManager::Update">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,153,57"/>
+<area shape="rect" id="node2" href="$class_u_i_manager.html#aa7b727d65db5f442bde58c00dbb038fa" title=" " alt="" coords="201,5,392,32"/>
+<area shape="rect" id="node4" href="$class_u_i_manager.html#a0365577ef816226f48fcd566f6737d8c" title=" " alt="" coords="223,56,370,83"/>
+<area shape="rect" id="node3" href="$class_i_input_handler.html#aaf8747c43c0dc1364e70783eaec0cc86" title="Method returns structure which describe event type and last known position of that event." alt="" coords="440,5,597,32"/>
+</map>

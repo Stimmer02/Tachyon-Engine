@@ -1,0 +1,18 @@
+<map id="LinesSystem::OnLoad" name="LinesSystem::OnLoad">
+<area shape="rect" id="node1" title="This method is called on system startup and by default does nothing." alt="" coords="5,56,168,83"/>
+<area shape="rect" id="node2" href="$class_scene.html#ab0531169066cfaa0fd0942243df917b5" title=" " alt="" coords="224,5,409,32"/>
+<area shape="rect" id="node3" href="$class_scene.html#abed242422ea01190a6ba10604bbe49e9" title=" " alt="" coords="241,56,392,83"/>
+<area shape="rect" id="node5" href="$class_lines_system.html#a1584568afc9b576aa93e4457fb39b621" title=" " alt="" coords="216,144,417,171"/>
+<area shape="rect" id="node4" href="$class_entity_container.html#a373ffc4c8f03ab286761690e4f79483e" title=" " alt="" coords="481,17,656,44"/>
+<area shape="rect" id="node6" href="$class_g_l_shader.html#acdc560a9a8390681735bf134f9e98de2" title=" " alt="" coords="506,68,631,95"/>
+<area shape="rect" id="node8" href="$class_g_l_shader.html#a521024d058db5ce31d3bcc0a4a5f3f1e" title=" " alt="" coords="487,119,651,145"/>
+<area shape="rect" id="node10" href="$class_bitmap_reader.html#a3b80c5fd4316f403c272fbb1b8ac821f" title=" " alt="" coords="479,169,658,196"/>
+<area shape="rect" id="node14" href="$class_multi_sprite.html#a5caa3c0ecc29c2e65be6c6ca1db0138f" title=" " alt="" coords="483,220,654,247"/>
+<area shape="rect" id="node16" href="$class_multi_sprite.html#aff59be13f2259024085ae0e6c9dabb6d" title="Method sets value correlated to texture attribute." alt="" coords="465,271,672,297"/>
+<area shape="rect" id="node7" href="$class_g_l_shader.html#a6a67e061e3198722de9732091ca391de" title=" " alt="" coords="720,43,948,69"/>
+<area shape="rect" id="node9" href="$class_g_l_shader.html#ab1c263456438e38f08ddca57e9d50c98" title=" " alt="" coords="725,93,943,120"/>
+<area shape="rect" id="node11" href="$class_bitmap_reader.html#a088ae31dded1126893fb0b7e3afbcf27" title=" " alt="" coords="996,195,1185,221"/>
+<area shape="rect" id="node12" href="$class_bitmap_reader.html#a5241976ec2563b53895627241247d141" title=" " alt="" coords="731,195,937,221"/>
+<area shape="rect" id="node13" href="$class_bitmap_reader.html#a41dfc73e89c0751692fde59b5ebc01f7" title=" " alt="" coords="743,245,925,272"/>
+<area shape="rect" id="node15" href="$class_sprite2_d.html#aaa5e68e2b2970bf5854a7e855c92c1d5" title=" " alt="" coords="743,296,925,323"/>
+</map>

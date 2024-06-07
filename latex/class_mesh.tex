@@ -1,0 +1,442 @@
+\hypertarget{class_mesh}{}\doxysection{Mesh Class Reference}
+\label{class_mesh}\index{Mesh@{Mesh}}
+
+
+{\ttfamily \#include $<$Mesh.\+h$>$}
+
+
+
+Inheritance diagram for Mesh\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_mesh__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Mesh\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_mesh__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_mesh_a0e70398077181af5e83226a45bc69b0c}{Mesh}} (const std\+::string \&filename)
+\item 
+\mbox{\hyperlink{class_mesh_ac0204336e4e36f9ab76404b7bbbc7643}{Mesh}} (const \mbox{\hyperlink{class_mesh}{Mesh}} $\ast$mesh)
+\item 
+\mbox{\hyperlink{class_mesh_a3b1b33a48ad9715ab333b6a38688c63a}{Mesh}} (const GLenum \&mode=GL\+\_\+\+TRIANGLE\+\_\+\+FAN)
+\item 
+void \mbox{\hyperlink{class_mesh_a67987e0be7cb94b4fe1fe176c8259c5b}{Set\+Render\+Mode}} (const GLenum \&mode)
+\item 
+void \mbox{\hyperlink{class_mesh_a3d232a808de3ea9353bb9538ff26bbfb}{Gen\+Torus}} (const float \&major\+Radius=1.\+0f, const float \&minor\+Radius=0.\+3f, const unsigned int \&num\+Major\+Segments=32, const unsigned int \&num\+Minor\+Segments=16)
+\item 
+void \mbox{\hyperlink{class_mesh_ab177f7e7443fdafa508f2db5abf1c661}{Gen\+Cone}} (const float \&base\+Radius=1.\+0f, const float \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}=2.\+0f, const unsigned int \&num\+Segments=32)
+\item 
+void \mbox{\hyperlink{class_mesh_a4384e3114f009123cbabc03104a00e45}{Gen\+Sphere}} (const float \&radius=1.\+0f, const unsigned int \&num\+Slices=32, const unsigned int \&num\+Stacks=10)
+\item 
+void \mbox{\hyperlink{class_mesh_ac29b9974a8e6a9161133960962d6f0bf}{Gen\+Quad}} (const float \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, const float \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}})
+\item 
+void \mbox{\hyperlink{class_mesh_ac71136463249fab505ba00b04f0bc6a2}{Gen\+Cube}} (const float \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, const float \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}, const float \&depth)
+\item 
+void \mbox{\hyperlink{class_mesh_a931a8cddc048a74891f988b062c78709}{Set\+Vertices}} (const \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$vertices, const unsigned int \&\mbox{\hyperlink{class_mesh_a66e6602c0471116c2b08c56f58e0a9d9}{num\+Vertices}})
+\item 
+void \mbox{\hyperlink{class_mesh_a6b272394c09ebace65b26bf428245189}{Set\+Normals}} (const \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$normals, const unsigned int \&num\+Normals)
+\item 
+void \mbox{\hyperlink{class_mesh_ab6faf69db9db29176300f581b89fff5d}{Set\+Indices}} (const unsigned int $\ast$indices, const unsigned int \&\mbox{\hyperlink{class_mesh_a0209c294d635e0f6ae2df61656b314b5}{num\+Indices}})
+\item 
+\mbox{\hyperlink{_attribute_8h_a6450db6a3ee75bfc2a198516e9f8e31d}{Attribute\+ID}} \mbox{\hyperlink{class_mesh_af04c75c0fadfaf15e50dfe42ebba5507}{Get\+Attribute\+ID}} () const override
+\item 
+void \mbox{\hyperlink{class_mesh_a1cf1c6c760f46c7518e100da9b78c49f}{Set\+Tex\+Coords}} (const float $\ast$tex\+Coords, const unsigned int \&num\+Tex\+Coords)
+\item 
+void \mbox{\hyperlink{class_mesh_afdd95c079fd0442afef8a6c421c8bfc9}{Draw}} ()
+\item 
+\mbox{\hyperlink{class_mesh_a5efe4da1a4c0971cfb037bd70304c303}{$\sim$\+Mesh}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+GLuint \mbox{\hyperlink{class_mesh_a101a39d88bc5c8d33f0ebd6e77a60129}{vao}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_mesh_ad8eff04c857fc1f1f42584af599f8267}{vbo}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_mesh_a17bb0f1901ce2f3bc62e7d6d2ca9e2f7}{ebo}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_mesh_a01ce7bc9cb103200a2a9093cc350c2b4}{tbo}} = 0
+\item 
+GLuint \mbox{\hyperlink{class_mesh_ac89e02c61b971980360e608908da920b}{nbo}} = 0
+\item 
+GLenum \mbox{\hyperlink{class_mesh_ad48d70dc619cd5cd4283c3cc860b912b}{render\+Mode}}
+\item 
+int \mbox{\hyperlink{class_mesh_a0209c294d635e0f6ae2df61656b314b5}{num\+Indices}} = 0
+\item 
+int \mbox{\hyperlink{class_mesh_a66e6602c0471116c2b08c56f58e0a9d9}{num\+Vertices}} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file Mesh.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_mesh_a0e70398077181af5e83226a45bc69b0c}\label{class_mesh_a0e70398077181af5e83226a45bc69b0c}} 
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Mesh()}{Mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Mesh\+::\+Mesh (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 26 of file Mesh.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_a0e70398077181af5e83226a45bc69b0c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_ac0204336e4e36f9ab76404b7bbbc7643}\label{class_mesh_ac0204336e4e36f9ab76404b7bbbc7643}} 
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Mesh()}{Mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Mesh\+::\+Mesh (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_mesh}{Mesh}} $\ast$}]{mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 34 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_a3b1b33a48ad9715ab333b6a38688c63a}\label{class_mesh_a3b1b33a48ad9715ab333b6a38688c63a}} 
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Mesh()}{Mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Mesh\+::\+Mesh (\begin{DoxyParamCaption}\item[{const GLenum \&}]{mode = {\ttfamily GL\+\_\+TRIANGLE\+\_\+FAN} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 46 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_a5efe4da1a4c0971cfb037bd70304c303}\label{class_mesh_a5efe4da1a4c0971cfb037bd70304c303}} 
+\index{Mesh@{Mesh}!````~Mesh@{$\sim$Mesh}}
+\index{````~Mesh@{$\sim$Mesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{$\sim$Mesh()}{~Mesh()}}
+{\footnotesize\ttfamily Mesh\+::$\sim$\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 407 of file Mesh.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mesh_afdd95c079fd0442afef8a6c421c8bfc9}\label{class_mesh_afdd95c079fd0442afef8a6c421c8bfc9}} 
+\index{Mesh@{Mesh}!Draw@{Draw}}
+\index{Draw@{Draw}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Mesh\+::\+Draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 391 of file Mesh.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_afdd95c079fd0442afef8a6c421c8bfc9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_ab177f7e7443fdafa508f2db5abf1c661}\label{class_mesh_ab177f7e7443fdafa508f2db5abf1c661}} 
+\index{Mesh@{Mesh}!GenCone@{GenCone}}
+\index{GenCone@{GenCone}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{GenCone()}{GenCone()}}
+{\footnotesize\ttfamily void Mesh\+::\+Gen\+Cone (\begin{DoxyParamCaption}\item[{const float \&}]{base\+Radius = {\ttfamily 1.0f},  }\item[{const float \&}]{height = {\ttfamily 2.0f},  }\item[{const unsigned int \&}]{num\+Segments = {\ttfamily 32} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 117 of file Mesh.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_ab177f7e7443fdafa508f2db5abf1c661_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{class_mesh_ab177f7e7443fdafa508f2db5abf1c661_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_ac71136463249fab505ba00b04f0bc6a2}\label{class_mesh_ac71136463249fab505ba00b04f0bc6a2}} 
+\index{Mesh@{Mesh}!GenCube@{GenCube}}
+\index{GenCube@{GenCube}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{GenCube()}{GenCube()}}
+{\footnotesize\ttfamily void Mesh\+::\+Gen\+Cube (\begin{DoxyParamCaption}\item[{const float \&}]{width,  }\item[{const float \&}]{height,  }\item[{const float \&}]{depth }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 262 of file Mesh.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{class_mesh_ac71136463249fab505ba00b04f0bc6a2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_ac29b9974a8e6a9161133960962d6f0bf}\label{class_mesh_ac29b9974a8e6a9161133960962d6f0bf}} 
+\index{Mesh@{Mesh}!GenQuad@{GenQuad}}
+\index{GenQuad@{GenQuad}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{GenQuad()}{GenQuad()}}
+{\footnotesize\ttfamily void Mesh\+::\+Gen\+Quad (\begin{DoxyParamCaption}\item[{const float \&}]{width,  }\item[{const float \&}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 233 of file Mesh.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{class_mesh_ac29b9974a8e6a9161133960962d6f0bf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_a4384e3114f009123cbabc03104a00e45}\label{class_mesh_a4384e3114f009123cbabc03104a00e45}} 
+\index{Mesh@{Mesh}!GenSphere@{GenSphere}}
+\index{GenSphere@{GenSphere}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{GenSphere()}{GenSphere()}}
+{\footnotesize\ttfamily void Mesh\+::\+Gen\+Sphere (\begin{DoxyParamCaption}\item[{const float \&}]{radius = {\ttfamily 1.0f},  }\item[{const unsigned int \&}]{num\+Slices = {\ttfamily 32},  }\item[{const unsigned int \&}]{num\+Stacks = {\ttfamily 10} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 171 of file Mesh.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{class_mesh_a4384e3114f009123cbabc03104a00e45_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_a3d232a808de3ea9353bb9538ff26bbfb}\label{class_mesh_a3d232a808de3ea9353bb9538ff26bbfb}} 
+\index{Mesh@{Mesh}!GenTorus@{GenTorus}}
+\index{GenTorus@{GenTorus}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{GenTorus()}{GenTorus()}}
+{\footnotesize\ttfamily void Mesh\+::\+Gen\+Torus (\begin{DoxyParamCaption}\item[{const float \&}]{major\+Radius = {\ttfamily 1.0f},  }\item[{const float \&}]{minor\+Radius = {\ttfamily 0.3f},  }\item[{const unsigned int \&}]{num\+Major\+Segments = {\ttfamily 32},  }\item[{const unsigned int \&}]{num\+Minor\+Segments = {\ttfamily 16} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 55 of file Mesh.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_a3d232a808de3ea9353bb9538ff26bbfb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_af04c75c0fadfaf15e50dfe42ebba5507}\label{class_mesh_af04c75c0fadfaf15e50dfe42ebba5507}} 
+\index{Mesh@{Mesh}!GetAttributeID@{GetAttributeID}}
+\index{GetAttributeID@{GetAttributeID}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{GetAttributeID()}{GetAttributeID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_attribute_8h_a6450db6a3ee75bfc2a198516e9f8e31d}{Attribute\+ID}} Mesh\+::\+Get\+Attribute\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_attribute_a7555a70c17061aa77f6222a264a489f7}{Attribute}}.
+
+
+
+Definition at line 369 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_ab6faf69db9db29176300f581b89fff5d}\label{class_mesh_ab6faf69db9db29176300f581b89fff5d}} 
+\index{Mesh@{Mesh}!SetIndices@{SetIndices}}
+\index{SetIndices@{SetIndices}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{SetIndices()}{SetIndices()}}
+{\footnotesize\ttfamily void Mesh\+::\+Set\+Indices (\begin{DoxyParamCaption}\item[{const unsigned int $\ast$}]{indices,  }\item[{const unsigned int \&}]{num\+Indices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 352 of file Mesh.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_ab6faf69db9db29176300f581b89fff5d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_a6b272394c09ebace65b26bf428245189}\label{class_mesh_a6b272394c09ebace65b26bf428245189}} 
+\index{Mesh@{Mesh}!SetNormals@{SetNormals}}
+\index{SetNormals@{SetNormals}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{SetNormals()}{SetNormals()}}
+{\footnotesize\ttfamily void Mesh\+::\+Set\+Normals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$}]{normals,  }\item[{const unsigned int \&}]{num\+Normals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 333 of file Mesh.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_a6b272394c09ebace65b26bf428245189_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_a67987e0be7cb94b4fe1fe176c8259c5b}\label{class_mesh_a67987e0be7cb94b4fe1fe176c8259c5b}} 
+\index{Mesh@{Mesh}!SetRenderMode@{SetRenderMode}}
+\index{SetRenderMode@{SetRenderMode}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{SetRenderMode()}{SetRenderMode()}}
+{\footnotesize\ttfamily void Mesh\+::\+Set\+Render\+Mode (\begin{DoxyParamCaption}\item[{const GLenum \&}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 51 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_a1cf1c6c760f46c7518e100da9b78c49f}\label{class_mesh_a1cf1c6c760f46c7518e100da9b78c49f}} 
+\index{Mesh@{Mesh}!SetTexCoords@{SetTexCoords}}
+\index{SetTexCoords@{SetTexCoords}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{SetTexCoords()}{SetTexCoords()}}
+{\footnotesize\ttfamily void Mesh\+::\+Set\+Tex\+Coords (\begin{DoxyParamCaption}\item[{const float $\ast$}]{tex\+Coords,  }\item[{const unsigned int \&}]{num\+Tex\+Coords }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 373 of file Mesh.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_a1cf1c6c760f46c7518e100da9b78c49f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_a931a8cddc048a74891f988b062c78709}\label{class_mesh_a931a8cddc048a74891f988b062c78709}} 
+\index{Mesh@{Mesh}!SetVertices@{SetVertices}}
+\index{SetVertices@{SetVertices}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{SetVertices()}{SetVertices()}}
+{\footnotesize\ttfamily void Mesh\+::\+Set\+Vertices (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$}]{vertices,  }\item[{const unsigned int \&}]{num\+Vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 313 of file Mesh.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_a931a8cddc048a74891f988b062c78709_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_mesh_a17bb0f1901ce2f3bc62e7d6d2ca9e2f7}\label{class_mesh_a17bb0f1901ce2f3bc62e7d6d2ca9e2f7}} 
+\index{Mesh@{Mesh}!ebo@{ebo}}
+\index{ebo@{ebo}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{ebo}{ebo}}
+{\footnotesize\ttfamily GLuint Mesh\+::ebo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_ac89e02c61b971980360e608908da920b}\label{class_mesh_ac89e02c61b971980360e608908da920b}} 
+\index{Mesh@{Mesh}!nbo@{nbo}}
+\index{nbo@{nbo}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{nbo}{nbo}}
+{\footnotesize\ttfamily GLuint Mesh\+::nbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_a0209c294d635e0f6ae2df61656b314b5}\label{class_mesh_a0209c294d635e0f6ae2df61656b314b5}} 
+\index{Mesh@{Mesh}!numIndices@{numIndices}}
+\index{numIndices@{numIndices}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{numIndices}{numIndices}}
+{\footnotesize\ttfamily int Mesh\+::num\+Indices = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_a66e6602c0471116c2b08c56f58e0a9d9}\label{class_mesh_a66e6602c0471116c2b08c56f58e0a9d9}} 
+\index{Mesh@{Mesh}!numVertices@{numVertices}}
+\index{numVertices@{numVertices}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{numVertices}{numVertices}}
+{\footnotesize\ttfamily int Mesh\+::num\+Vertices = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 22 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_ad48d70dc619cd5cd4283c3cc860b912b}\label{class_mesh_ad48d70dc619cd5cd4283c3cc860b912b}} 
+\index{Mesh@{Mesh}!renderMode@{renderMode}}
+\index{renderMode@{renderMode}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{renderMode}{renderMode}}
+{\footnotesize\ttfamily GLenum Mesh\+::render\+Mode\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_a01ce7bc9cb103200a2a9093cc350c2b4}\label{class_mesh_a01ce7bc9cb103200a2a9093cc350c2b4}} 
+\index{Mesh@{Mesh}!tbo@{tbo}}
+\index{tbo@{tbo}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{tbo}{tbo}}
+{\footnotesize\ttfamily GLuint Mesh\+::tbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_a101a39d88bc5c8d33f0ebd6e77a60129}\label{class_mesh_a101a39d88bc5c8d33f0ebd6e77a60129}} 
+\index{Mesh@{Mesh}!vao@{vao}}
+\index{vao@{vao}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{vao}{vao}}
+{\footnotesize\ttfamily GLuint Mesh\+::vao = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Mesh.\+h.
+
+\mbox{\Hypertarget{class_mesh_ad8eff04c857fc1f1f42584af599f8267}\label{class_mesh_ad8eff04c857fc1f1f42584af599f8267}} 
+\index{Mesh@{Mesh}!vbo@{vbo}}
+\index{vbo@{vbo}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{vbo}{vbo}}
+{\footnotesize\ttfamily GLuint Mesh\+::vbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Mesh.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_mesh_8h}{Mesh.\+h}}\end{DoxyCompactItemize}

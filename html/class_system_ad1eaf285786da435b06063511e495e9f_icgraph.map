@@ -1,0 +1,4 @@
+<map id="System::HandleMessage" name="System::HandleMessage">
+<area shape="rect" id="node1" title="This method is called when system have any pending messages stored in internal queue and by default d..." alt="" coords="157,5,340,32"/>
+<area shape="rect" id="node2" href="$class_system.html#a12e3e88fca7b79880cc528256850e23b" title="Executes system loop." alt="" coords="5,5,109,32"/>
+</map>

@@ -1,0 +1,171 @@
+\hypertarget{class_shared_name_resolver}{}\doxysection{Shared\+Name\+Resolver Class Reference}
+\label{class_shared_name_resolver}\index{SharedNameResolver@{SharedNameResolver}}
+
+
+{\ttfamily \#include $<$Shared\+Name\+Resolver.\+h$>$}
+
+
+
+Collaboration diagram for Shared\+Name\+Resolver\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_shared_name_resolver__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_shared_name_resolver_ad0ac5165b1a38dd3a81d2f2b41bf1d65}{Shared\+Name\+Resolver}} ()
+\item 
+void \mbox{\hyperlink{class_shared_name_resolver_a97ec2b09d7b2f47cfb439b938b8d3b0c}{Emplace}} (const std\+::string \&\+\_\+name, const void $\ast$\+\_\+pointer, const int32\+\_\+t \&\+\_\+size=1)
+\item 
+void $\ast$ \mbox{\hyperlink{class_shared_name_resolver_a36556c2b8a67b145b780a038a9f03b8a}{Find}} (const std\+::string \&\+\_\+name, const int32\+\_\+t \&\+\_\+elem\+\_\+size=0, const int32\+\_\+t \&\+\_\+element=0)
+\item 
+void \mbox{\hyperlink{class_shared_name_resolver_aef12a2c2a5cd1c99d736492b0a652121}{Resize}} (const std\+::string \&\+\_\+name, const int32\+\_\+t \&\+\_\+size)
+\item 
+void \mbox{\hyperlink{class_shared_name_resolver_aed29c237713850a68f13e2ec2d218547}{Traverse}} ()
+\item 
+\mbox{\hyperlink{class_shared_name_resolver_a9f25933e9d604bebd839076e3c1eef74}{$\sim$\+Shared\+Name\+Resolver}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_shared_name_resolver_abcf7ba9b256f3973c65cc7ebb1a16be7}{Delete\+Node}} (\mbox{\hyperlink{struct_node}{Node}} $\ast$node)
+\item 
+void \mbox{\hyperlink{class_shared_name_resolver_a6f9539cdd8a46fefd0395e76558e6813}{Traverse}} (\mbox{\hyperlink{struct_node}{Node}} $\ast$node, std\+::string current\+\_\+name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_node}{Node}} $\ast$ \mbox{\hyperlink{class_shared_name_resolver_a67699100cec5169e415ba3872215cd21}{root}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 24 of file Shared\+Name\+Resolver.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_shared_name_resolver_ad0ac5165b1a38dd3a81d2f2b41bf1d65}\label{class_shared_name_resolver_ad0ac5165b1a38dd3a81d2f2b41bf1d65}} 
+\index{SharedNameResolver@{SharedNameResolver}!SharedNameResolver@{SharedNameResolver}}
+\index{SharedNameResolver@{SharedNameResolver}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{SharedNameResolver()}{SharedNameResolver()}}
+{\footnotesize\ttfamily Shared\+Name\+Resolver\+::\+Shared\+Name\+Resolver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 5 of file Shared\+Name\+Resolver.\+cpp.
+
+\mbox{\Hypertarget{class_shared_name_resolver_a9f25933e9d604bebd839076e3c1eef74}\label{class_shared_name_resolver_a9f25933e9d604bebd839076e3c1eef74}} 
+\index{SharedNameResolver@{SharedNameResolver}!````~SharedNameResolver@{$\sim$SharedNameResolver}}
+\index{````~SharedNameResolver@{$\sim$SharedNameResolver}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{$\sim$SharedNameResolver()}{~SharedNameResolver()}}
+{\footnotesize\ttfamily Shared\+Name\+Resolver\+::$\sim$\+Shared\+Name\+Resolver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 132 of file Shared\+Name\+Resolver.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_shared_name_resolver_abcf7ba9b256f3973c65cc7ebb1a16be7}\label{class_shared_name_resolver_abcf7ba9b256f3973c65cc7ebb1a16be7}} 
+\index{SharedNameResolver@{SharedNameResolver}!DeleteNode@{DeleteNode}}
+\index{DeleteNode@{DeleteNode}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{DeleteNode()}{DeleteNode()}}
+{\footnotesize\ttfamily void Shared\+Name\+Resolver\+::\+Delete\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_node}{Node}} $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 121 of file Shared\+Name\+Resolver.\+cpp.
+
+\mbox{\Hypertarget{class_shared_name_resolver_a97ec2b09d7b2f47cfb439b938b8d3b0c}\label{class_shared_name_resolver_a97ec2b09d7b2f47cfb439b938b8d3b0c}} 
+\index{SharedNameResolver@{SharedNameResolver}!Emplace@{Emplace}}
+\index{Emplace@{Emplace}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{Emplace()}{Emplace()}}
+{\footnotesize\ttfamily void Shared\+Name\+Resolver\+::\+Emplace (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+name,  }\item[{const void $\ast$}]{\+\_\+pointer,  }\item[{const int32\+\_\+t \&}]{\+\_\+size = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 9 of file Shared\+Name\+Resolver.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_shared_name_resolver_a97ec2b09d7b2f47cfb439b938b8d3b0c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shared_name_resolver_a36556c2b8a67b145b780a038a9f03b8a}\label{class_shared_name_resolver_a36556c2b8a67b145b780a038a9f03b8a}} 
+\index{SharedNameResolver@{SharedNameResolver}!Find@{Find}}
+\index{Find@{Find}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily void $\ast$ Shared\+Name\+Resolver\+::\+Find (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+name,  }\item[{const int32\+\_\+t \&}]{\+\_\+elem\+\_\+size = {\ttfamily 0},  }\item[{const int32\+\_\+t \&}]{\+\_\+element = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 53 of file Shared\+Name\+Resolver.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_shared_name_resolver_a36556c2b8a67b145b780a038a9f03b8a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shared_name_resolver_aef12a2c2a5cd1c99d736492b0a652121}\label{class_shared_name_resolver_aef12a2c2a5cd1c99d736492b0a652121}} 
+\index{SharedNameResolver@{SharedNameResolver}!Resize@{Resize}}
+\index{Resize@{Resize}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}}
+{\footnotesize\ttfamily void Shared\+Name\+Resolver\+::\+Resize (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+name,  }\item[{const int32\+\_\+t \&}]{\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Definition at line 76 of file Shared\+Name\+Resolver.\+cpp.
+
+\mbox{\Hypertarget{class_shared_name_resolver_aed29c237713850a68f13e2ec2d218547}\label{class_shared_name_resolver_aed29c237713850a68f13e2ec2d218547}} 
+\index{SharedNameResolver@{SharedNameResolver}!Traverse@{Traverse}}
+\index{Traverse@{Traverse}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{Traverse()}{Traverse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Shared\+Name\+Resolver\+::\+Traverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 105 of file Shared\+Name\+Resolver.\+cpp.
+
+\mbox{\Hypertarget{class_shared_name_resolver_a6f9539cdd8a46fefd0395e76558e6813}\label{class_shared_name_resolver_a6f9539cdd8a46fefd0395e76558e6813}} 
+\index{SharedNameResolver@{SharedNameResolver}!Traverse@{Traverse}}
+\index{Traverse@{Traverse}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{Traverse()}{Traverse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Shared\+Name\+Resolver\+::\+Traverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_node}{Node}} $\ast$}]{node,  }\item[{std\+::string}]{current\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 109 of file Shared\+Name\+Resolver.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_shared_name_resolver_a67699100cec5169e415ba3872215cd21}\label{class_shared_name_resolver_a67699100cec5169e415ba3872215cd21}} 
+\index{SharedNameResolver@{SharedNameResolver}!root@{root}}
+\index{root@{root}!SharedNameResolver@{SharedNameResolver}}
+\doxysubsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_node}{Node}}$\ast$ Shared\+Name\+Resolver\+::root\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 27 of file Shared\+Name\+Resolver.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_shared_name_resolver_8h}{Shared\+Name\+Resolver.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_shared_name_resolver_8cpp}{Shared\+Name\+Resolver.\+cpp}}\end{DoxyCompactItemize}

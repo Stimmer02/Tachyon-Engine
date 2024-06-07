@@ -1,0 +1,6 @@
+<map id="Material" name="Material">
+<area shape="rect" id="node1" title=" " alt="" coords="165,468,336,619"/>
+<area shape="rect" id="node2" href="$class_sprite.html" title=" " alt="" coords="5,130,157,281"/>
+<area shape="rect" id="node3" href="$class_vector3.html" title=" " alt="" coords="182,5,319,405"/>
+<area shape="rect" id="node4" href="$class_g_l_shader.html" title=" " alt="" coords="344,64,523,347"/>
+</map>

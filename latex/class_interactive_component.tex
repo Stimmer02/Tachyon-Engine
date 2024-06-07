@@ -1,0 +1,155 @@
+\hypertarget{class_interactive_component}{}\doxysection{Interactive\+Component Class Reference}
+\label{class_interactive_component}\index{InteractiveComponent@{InteractiveComponent}}
+
+
+{\ttfamily \#include $<$Interactive\+Component.\+h$>$}
+
+
+
+Inheritance diagram for Interactive\+Component\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{class_interactive_component__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Interactive\+Component\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_interactive_component__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interactive_component_a088137859bd837a88ba4109710bdcc53}{Interactive\+Component}} (const int \&\mbox{\hyperlink{class_component_a983197ffe7c916735dc326aca23882ae}{x}}, const int \&\mbox{\hyperlink{class_component_ae00362fa4e86836e72ab06c7ec5411d5}{y}}, const int \&\mbox{\hyperlink{class_component_aa632c590f9cde779a5f7de81b224585b}{width}}, const int \&\mbox{\hyperlink{class_component_a729075b3ea8148bb9d8c8fb2636b6cc7}{height}})
+\item 
+void \mbox{\hyperlink{class_interactive_component_af0078da402d3ef2fc6e03f3ada756efc}{Assign\+Event}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event, \mbox{\hyperlink{_interactive_component_8h_ad9d31aee7bb4a078d23840e135ccdc78}{Function}} delegate)
+\begin{DoxyCompactList}\small\item\em Function assigns action which will happen after specific event occur. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_interactive_component_ac7d4f2bbff57371ad7b03ca187686f71}{On\+Event}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event)
+\begin{DoxyCompactList}\small\item\em Invokes action assigned with specified event. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_interactive_component_a5c60fb2df9daab151907701c6316a83b}{Render}} ()=0
+\begin{DoxyCompactList}\small\item\em Renders current component on screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, \mbox{\hyperlink{_interactive_component_8h_ad9d31aee7bb4a078d23840e135ccdc78}{Function}} $>$ \mbox{\hyperlink{class_interactive_component_ab61cfdce6f315de4525f7e6f82c281d5}{events}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 13 of file Interactive\+Component.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_interactive_component_a088137859bd837a88ba4109710bdcc53}\label{class_interactive_component_a088137859bd837a88ba4109710bdcc53}} 
+\index{InteractiveComponent@{InteractiveComponent}!InteractiveComponent@{InteractiveComponent}}
+\index{InteractiveComponent@{InteractiveComponent}!InteractiveComponent@{InteractiveComponent}}
+\doxysubsubsection{\texorpdfstring{InteractiveComponent()}{InteractiveComponent()}}
+{\footnotesize\ttfamily Interactive\+Component\+::\+Interactive\+Component (\begin{DoxyParamCaption}\item[{const int \&}]{x,  }\item[{const int \&}]{y,  }\item[{const int \&}]{width,  }\item[{const int \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Interactive\+Component.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_interactive_component_af0078da402d3ef2fc6e03f3ada756efc}\label{class_interactive_component_af0078da402d3ef2fc6e03f3ada756efc}} 
+\index{InteractiveComponent@{InteractiveComponent}!AssignEvent@{AssignEvent}}
+\index{AssignEvent@{AssignEvent}!InteractiveComponent@{InteractiveComponent}}
+\doxysubsubsection{\texorpdfstring{AssignEvent()}{AssignEvent()}}
+{\footnotesize\ttfamily void Interactive\+Component\+::\+Assign\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event,  }\item[{\mbox{\hyperlink{_interactive_component_8h_ad9d31aee7bb4a078d23840e135ccdc78}{Function}}}]{delegate }\end{DoxyParamCaption})}
+
+
+
+Function assigns action which will happen after specific event occur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & type of event \\
+\hline
+{\em delegate} & action represented as void ($\ast$)() or lambda \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 12 of file Interactive\+Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_component_af0078da402d3ef2fc6e03f3ada756efc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_interactive_component_ac7d4f2bbff57371ad7b03ca187686f71}\label{class_interactive_component_ac7d4f2bbff57371ad7b03ca187686f71}} 
+\index{InteractiveComponent@{InteractiveComponent}!OnEvent@{OnEvent}}
+\index{OnEvent@{OnEvent}!InteractiveComponent@{InteractiveComponent}}
+\doxysubsubsection{\texorpdfstring{OnEvent()}{OnEvent()}}
+{\footnotesize\ttfamily void Interactive\+Component\+::\+On\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Invokes action assigned with specified event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & type of event \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_event_listener_a0acd4b93ea14fd350d8a70ae7aa64bf5}{IEvent\+Listener}}.
+
+
+
+Definition at line 22 of file Interactive\+Component.\+cpp.
+
+\mbox{\Hypertarget{class_interactive_component_a5c60fb2df9daab151907701c6316a83b}\label{class_interactive_component_a5c60fb2df9daab151907701c6316a83b}} 
+\index{InteractiveComponent@{InteractiveComponent}!Render@{Render}}
+\index{Render@{Render}!InteractiveComponent@{InteractiveComponent}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily virtual void Interactive\+Component\+::\+Render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Renders current component on screen. 
+
+
+
+Implements \mbox{\hyperlink{class_component_a0c67ccdaf754b96520e3428284a74a7f}{Component}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_canvas_a65460dda6338bd297868bfb8126e0cc7}{Canvas}}, and \mbox{\hyperlink{class_button_a0e48e98c9c4f41c91c3836357ccac40f}{Button}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_interactive_component_ab61cfdce6f315de4525f7e6f82c281d5}\label{class_interactive_component_ab61cfdce6f315de4525f7e6f82c281d5}} 
+\index{InteractiveComponent@{InteractiveComponent}!events@{events}}
+\index{events@{events}!InteractiveComponent@{InteractiveComponent}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, \mbox{\hyperlink{_interactive_component_8h_ad9d31aee7bb4a078d23840e135ccdc78}{Function}}$>$ Interactive\+Component\+::events\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Interactive\+Component.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_interactive_component_8h}{Interactive\+Component.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_interactive_component_8cpp}{Interactive\+Component.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,22 @@
+<map id="src/GUIRenderer/GUIElement.h" name="src/GUIRenderer/GUIElement.h">
+<area shape="rect" id="node1" title=" " alt="" coords="695,5,918,32"/>
+<area shape="rect" id="node2" href="$_interactive_element_8h.html" title=" " alt="" coords="383,80,585,121"/>
+<area shape="rect" id="node17" href="$_scene_8h.html" title=" " alt="" coords="865,169,1047,196"/>
+<area shape="rect" id="node20" href="$_text_element_8h.html" title=" " alt="" coords="694,87,919,114"/>
+<area shape="rect" id="node3" href="$_button_element_8h.html" title=" " alt="" coords="278,169,519,196"/>
+<area shape="rect" id="node11" href="$_canvas_element_8h.html" title=" " alt="" coords="543,169,790,196"/>
+<area shape="rect" id="node12" href="$_k_d_t_element_8h.html" title=" " alt="" coords="29,169,254,196"/>
+<area shape="rect" id="node4" href="$_graphic_system_8h.html" title=" " alt="" coords="575,244,801,271"/>
+<area shape="rect" id="node10" href="$_k_d_t_test_8cpp.html" title=" " alt="" coords="213,326,352,353"/>
+<area shape="rect" id="node5" href="$_application_8h.html" title=" " alt="" coords="657,408,857,435"/>
+<area shape="rect" id="node6" href="$_boids_8h.html" title=" " alt="" coords="561,483,673,509"/>
+<area shape="rect" id="node8" href="$_fractal_8h.html" title=" " alt="" coords="697,483,817,509"/>
+<area shape="rect" id="node9" href="$_lines_8h.html" title=" " alt="" coords="842,483,953,509"/>
+<area shape="rect" id="node7" href="$editor_2main_8cpp.html" title=" " alt="" coords="695,557,819,584"/>
+<area shape="rect" id="node13" href="$_k_d_t_8h.html" title=" " alt="" coords="379,244,549,271"/>
+<area shape="rect" id="node16" href="$_k_d_t_element_8cpp.html" title=" " alt="" coords="5,244,245,271"/>
+<area shape="rect" id="node14" href="$_interaction_manager_8h.html" title=" " alt="" coords="587,319,789,360"/>
+<area shape="rect" id="node15" href="$_k_d_t_8cpp.html" title=" " alt="" coords="377,326,562,353"/>
+<area shape="rect" id="node18" href="$_u_i_manager_8h.html" title=" " alt="" coords="877,244,1091,271"/>
+<area shape="rect" id="node19" href="$_u_i_manager_8cpp.html" title=" " alt="" coords="869,326,1099,353"/>
+</map>

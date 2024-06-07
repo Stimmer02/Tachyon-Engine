@@ -1,0 +1,4 @@
+<map id="GraphicSystem::RenderGUI" name="GraphicSystem::RenderGUI">
+<area shape="rect" id="node1" title=" " alt="" coords="233,5,432,32"/>
+<area shape="rect" id="node2" href="$class_graphic_system.html#a475435ae066476e245ddbbb70e025f28" title="This abstract method is called every iteration of system loop and must be defined by specified system..." alt="" coords="5,5,185,32"/>
+</map>

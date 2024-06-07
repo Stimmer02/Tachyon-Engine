@@ -1,0 +1,7 @@
+<map id="InteractiveComponent" name="InteractiveComponent">
+<area shape="rect" id="node1" title=" " alt="" coords="39,365,231,487"/>
+<area shape="rect" id="node4" href="$class_button.html" title=" " alt="" coords="29,535,123,627"/>
+<area shape="rect" id="node5" href="$class_canvas.html" title=" " alt="" coords="147,535,242,627"/>
+<area shape="rect" id="node2" href="$class_i_event_listener.html" title=" " alt="" coords="5,123,120,200"/>
+<area shape="rect" id="node3" href="$class_component.html" title=" " alt="" coords="145,5,269,317"/>
+</map>

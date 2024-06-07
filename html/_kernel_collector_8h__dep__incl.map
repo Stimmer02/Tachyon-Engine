@@ -1,0 +1,11 @@
+<map id="src/PhysicsProcessor/KernelCollector.h" name="src/PhysicsProcessor/KernelCollector.h">
+<area shape="rect" id="node1" title=" " alt="" coords="192,5,349,47"/>
+<area shape="rect" id="node2" href="$_kernel_collector_8cpp.html" title=" " alt="" coords="5,95,163,136"/>
+<area shape="rect" id="node3" href="$_kernel_queue_builder_8h.html" title=" " alt="" coords="187,95,354,136"/>
+<area shape="rect" id="node5" href="$_physics_processor_builder_8h.html" title=" " alt="" coords="295,184,489,225"/>
+<area shape="rect" id="node4" href="$_kernel_queue_builder_8cpp.html" title=" " alt="" coords="89,184,271,225"/>
+<area shape="rect" id="node6" href="$src_2main_8cpp.html" title=" " alt="" coords="158,281,263,307"/>
+<area shape="rect" id="node7" href="$_physics_processor_builder_8cpp.html" title=" " alt="" coords="287,273,497,315"/>
+<area shape="rect" id="node8" href="$_physics_processor_system_8h.html" title=" " alt="" coords="521,273,719,315"/>
+<area shape="rect" id="node9" href="$_physics_processor_system_8cpp.html" title=" " alt="" coords="513,363,727,404"/>
+</map>

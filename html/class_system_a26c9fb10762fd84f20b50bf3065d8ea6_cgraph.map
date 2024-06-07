@@ -1,0 +1,6 @@
+<map id="System::SendMessage" name="System::SendMessage">
+<area shape="rect" id="node1" title="This method is used to send message to specified channel within message bus scope." alt="" coords="5,31,175,57"/>
+<area shape="rect" id="node2" href="$class_message_bus.html#a3e1a5d5006b0ae95a4a9a3e55cbe7f90" title="Sends message to all users in specified channel." alt="" coords="223,31,433,57"/>
+<area shape="rect" id="node3" href="$class_channel.html#a43bfa0d9477e5d7207bf2bbcf2f3efe3" title="Emplaces message on message queue." alt="" coords="481,5,679,32"/>
+<area shape="rect" id="node4" href="$class_channel.html#ae1861cb9fb2ce4c850c4cd0e082897d5" title="Returns number of clients present in current channel." alt="" coords="489,56,671,83"/>
+</map>

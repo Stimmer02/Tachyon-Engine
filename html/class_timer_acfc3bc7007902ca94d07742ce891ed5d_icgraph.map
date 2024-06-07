@@ -1,0 +1,4 @@
+<map id="Timer::GetDeltaFrame" name="Timer::GetDeltaFrame">
+<area shape="rect" id="node1" title=" " alt="" coords="217,5,384,32"/>
+<area shape="rect" id="node2" href="$class_lines_system.html#aa460b4e2a8a801417dc041dc9df631e6" title="This abstract method is called every iteration of system loop and must be defined by specified system..." alt="" coords="5,5,169,32"/>
+</map>

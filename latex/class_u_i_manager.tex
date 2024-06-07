@@ -1,0 +1,223 @@
+\hypertarget{class_u_i_manager}{}\doxysection{UIManager Class Reference}
+\label{class_u_i_manager}\index{UIManager@{UIManager}}
+
+
+{\ttfamily \#include $<$UIManager.\+h$>$}
+
+
+
+Collaboration diagram for UIManager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_u_i_manager_aa727da79d1ab092c392f9c2e6e10afe3}{UIManager}} (const int \&window\+Width, const int \&window\+Height, const char $\ast$window\+Title, const bool \&enable\+VSync)
+\item 
+void \mbox{\hyperlink{class_u_i_manager_ab0a6fd292c200029988005e4c0c75bce}{Assign\+Event\+Handling\+Service}} (\mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$\+\_\+event\+Handling)
+\item 
+void \mbox{\hyperlink{class_u_i_manager_a636d79301999911df88d00caea7134dc}{Add\+Component\+To\+Scene}} (\mbox{\hyperlink{class_component}{Component}} $\ast$component)
+\item 
+void \mbox{\hyperlink{class_u_i_manager_a3008652c9d7f200c6e8345d435bf2986}{Update}} ()
+\item 
+bool \mbox{\hyperlink{class_u_i_manager_a4c60cde2f6f15ef8e1d16b8498403eda}{Should\+Close}} ()
+\item 
+\mbox{\hyperlink{class_u_i_manager_aeac3e2a8fd4ba49821ce653f4d2fa6b6}{$\sim$\+UIManager}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_u_i_manager_aa7b727d65db5f442bde58c00dbb038fa}{Handle\+Events}} ()
+\item 
+void \mbox{\hyperlink{class_u_i_manager_a0365577ef816226f48fcd566f6737d8c}{Render}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$ \mbox{\hyperlink{class_u_i_manager_a46b38b64a65dd03c1ec590461cca1c5d}{event\+Handling\+Service}}
+\item 
+\mbox{\hyperlink{class_i_input_handler}{IInput\+Handler}} $\ast$ \mbox{\hyperlink{class_u_i_manager_a5ff0bab724e8b287a54d09513b00fe31}{input\+Handling\+Service}}
+\item 
+GLFWwindow $\ast$ \mbox{\hyperlink{class_u_i_manager_a41fd8a3a1a33233b7a70d2c196a02be7}{window}}
+\item 
+\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \mbox{\hyperlink{class_u_i_manager_a3a0548558b206a788609ef8d2fe4555b}{event\+Type}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 15 of file UIManager.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_u_i_manager_aa727da79d1ab092c392f9c2e6e10afe3}\label{class_u_i_manager_aa727da79d1ab092c392f9c2e6e10afe3}} 
+\index{UIManager@{UIManager}!UIManager@{UIManager}}
+\index{UIManager@{UIManager}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{UIManager()}{UIManager()}}
+{\footnotesize\ttfamily UIManager\+::\+UIManager (\begin{DoxyParamCaption}\item[{const int \&}]{window\+Width,  }\item[{const int \&}]{window\+Height,  }\item[{const char $\ast$}]{window\+Title,  }\item[{const bool \&}]{enable\+VSync }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file UIManager.\+cpp.
+
+\mbox{\Hypertarget{class_u_i_manager_aeac3e2a8fd4ba49821ce653f4d2fa6b6}\label{class_u_i_manager_aeac3e2a8fd4ba49821ce653f4d2fa6b6}} 
+\index{UIManager@{UIManager}!````~UIManager@{$\sim$UIManager}}
+\index{````~UIManager@{$\sim$UIManager}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{$\sim$UIManager()}{~UIManager()}}
+{\footnotesize\ttfamily UIManager\+::$\sim$\+UIManager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 108 of file UIManager.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_u_i_manager_a636d79301999911df88d00caea7134dc}\label{class_u_i_manager_a636d79301999911df88d00caea7134dc}} 
+\index{UIManager@{UIManager}!AddComponentToScene@{AddComponentToScene}}
+\index{AddComponentToScene@{AddComponentToScene}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{AddComponentToScene()}{AddComponentToScene()}}
+{\footnotesize\ttfamily void UIManager\+::\+Add\+Component\+To\+Scene (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_component}{Component}} $\ast$}]{component }\end{DoxyParamCaption})}
+
+
+
+Definition at line 55 of file UIManager.\+cpp.
+
+\mbox{\Hypertarget{class_u_i_manager_ab0a6fd292c200029988005e4c0c75bce}\label{class_u_i_manager_ab0a6fd292c200029988005e4c0c75bce}} 
+\index{UIManager@{UIManager}!AssignEventHandlingService@{AssignEventHandlingService}}
+\index{AssignEventHandlingService@{AssignEventHandlingService}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{AssignEventHandlingService()}{AssignEventHandlingService()}}
+{\footnotesize\ttfamily void UIManager\+::\+Assign\+Event\+Handling\+Service (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$}]{\+\_\+event\+Handling }\end{DoxyParamCaption})}
+
+
+
+Definition at line 51 of file UIManager.\+cpp.
+
+\mbox{\Hypertarget{class_u_i_manager_aa7b727d65db5f442bde58c00dbb038fa}\label{class_u_i_manager_aa7b727d65db5f442bde58c00dbb038fa}} 
+\index{UIManager@{UIManager}!HandleEvents@{HandleEvents}}
+\index{HandleEvents@{HandleEvents}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{HandleEvents()}{HandleEvents()}}
+{\footnotesize\ttfamily void UIManager\+::\+Handle\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 59 of file UIManager.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_manager_aa7b727d65db5f442bde58c00dbb038fa_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_manager_aa7b727d65db5f442bde58c00dbb038fa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_manager_a0365577ef816226f48fcd566f6737d8c}\label{class_u_i_manager_a0365577ef816226f48fcd566f6737d8c}} 
+\index{UIManager@{UIManager}!Render@{Render}}
+\index{Render@{Render}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily void UIManager\+::\+Render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 100 of file UIManager.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{class_u_i_manager_a0365577ef816226f48fcd566f6737d8c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_manager_a4c60cde2f6f15ef8e1d16b8498403eda}\label{class_u_i_manager_a4c60cde2f6f15ef8e1d16b8498403eda}} 
+\index{UIManager@{UIManager}!ShouldClose@{ShouldClose}}
+\index{ShouldClose@{ShouldClose}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{ShouldClose()}{ShouldClose()}}
+{\footnotesize\ttfamily bool UIManager\+::\+Should\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 104 of file UIManager.\+cpp.
+
+\mbox{\Hypertarget{class_u_i_manager_a3008652c9d7f200c6e8345d435bf2986}\label{class_u_i_manager_a3008652c9d7f200c6e8345d435bf2986}} 
+\index{UIManager@{UIManager}!Update@{Update}}
+\index{Update@{Update}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void UIManager\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 83 of file UIManager.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_manager_a3008652c9d7f200c6e8345d435bf2986_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_u_i_manager_a46b38b64a65dd03c1ec590461cca1c5d}\label{class_u_i_manager_a46b38b64a65dd03c1ec590461cca1c5d}} 
+\index{UIManager@{UIManager}!eventHandlingService@{eventHandlingService}}
+\index{eventHandlingService@{eventHandlingService}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{eventHandlingService}{eventHandlingService}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}}$\ast$ UIManager\+::event\+Handling\+Service\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file UIManager.\+h.
+
+\mbox{\Hypertarget{class_u_i_manager_a3a0548558b206a788609ef8d2fe4555b}\label{class_u_i_manager_a3a0548558b206a788609ef8d2fe4555b}} 
+\index{UIManager@{UIManager}!eventType@{eventType}}
+\index{eventType@{eventType}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{eventType}{eventType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} UIManager\+::event\+Type\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file UIManager.\+h.
+
+\mbox{\Hypertarget{class_u_i_manager_a5ff0bab724e8b287a54d09513b00fe31}\label{class_u_i_manager_a5ff0bab724e8b287a54d09513b00fe31}} 
+\index{UIManager@{UIManager}!inputHandlingService@{inputHandlingService}}
+\index{inputHandlingService@{inputHandlingService}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{inputHandlingService}{inputHandlingService}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_input_handler}{IInput\+Handler}}$\ast$ UIManager\+::input\+Handling\+Service\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file UIManager.\+h.
+
+\mbox{\Hypertarget{class_u_i_manager_a41fd8a3a1a33233b7a70d2c196a02be7}\label{class_u_i_manager_a41fd8a3a1a33233b7a70d2c196a02be7}} 
+\index{UIManager@{UIManager}!window@{window}}
+\index{window@{window}!UIManager@{UIManager}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily GLFWwindow$\ast$ UIManager\+::window\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file UIManager.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_u_i_manager_8h}{UIManager.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_u_i_manager_8cpp}{UIManager.\+cpp}}\end{DoxyCompactItemize}

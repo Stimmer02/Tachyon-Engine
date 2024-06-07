@@ -1,0 +1,341 @@
+\hypertarget{class_sprite2_d}{}\doxysection{Sprite2D Class Reference}
+\label{class_sprite2_d}\index{Sprite2D@{Sprite2D}}
+
+
+{\ttfamily \#include $<$Sprite2\+D.\+h$>$}
+
+
+
+Inheritance diagram for Sprite2D\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_sprite2_d__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Sprite2D\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_sprite2_d__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sprite2_d_a2c5eff5248b9e0b4034dd33800c9f63c}{Sprite2D}} (const \mbox{\hyperlink{struct_color}{Color}} $\ast$pixels, const uint32\+\_\+t \&\mbox{\hyperlink{class_sprite2_d_a46a7d49f35c0cabe49d4a2fde6ecc2ef}{width}}, const uint32\+\_\+t \&\mbox{\hyperlink{class_sprite2_d_a8cf447daa51d100648e0eb34889f95e0}{height}})
+\item 
+\mbox{\hyperlink{class_sprite2_d_a072b5f033a85d9dea0d357253a776f20}{Sprite2D}} (const \mbox{\hyperlink{struct_image}{Image}} $\ast$image)
+\item 
+\mbox{\hyperlink{class_sprite2_d_aaf7103a693d69da8741cb13cee683a1a}{Sprite2D}} (const char $\ast$filepath)
+\item 
+\mbox{\hyperlink{class_sprite2_d_abe9d5de553b04711a5a98cecad252942}{Sprite2D}} (const \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$sprite)
+\item 
+void \mbox{\hyperlink{class_sprite2_d_aaa5e68e2b2970bf5854a7e855c92c1d5}{Update\+Texture}} (const \mbox{\hyperlink{struct_color}{Color}} $\ast$pixels, const uint32\+\_\+t \&\mbox{\hyperlink{class_sprite2_d_a46a7d49f35c0cabe49d4a2fde6ecc2ef}{width}}, const uint32\+\_\+t \&\mbox{\hyperlink{class_sprite2_d_a8cf447daa51d100648e0eb34889f95e0}{height}})
+\item 
+void \mbox{\hyperlink{class_sprite2_d_a488f08e97cc96a85d17120bcbba306d6}{Set\+Texture\+Attrib}} (const GLenum \&attrib, const GLint \&value) override
+\begin{DoxyCompactList}\small\item\em Method sets value correlated to texture attribute. \end{DoxyCompactList}\item 
+GLuint \mbox{\hyperlink{class_sprite2_d_a117eece3ea8479ccaef68e9d56e79e08}{Get\+Texture\+ID}} () override
+\begin{DoxyCompactList}\small\item\em Method returns texture id of current sprite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sprite2_d_a91f2cd28375e00b9b5709d18ca77ad84}{Set\+Pixel}} (const uint32\+\_\+t \&x, const uint32\+\_\+t \&y, const \mbox{\hyperlink{struct_color}{Color}} \&\mbox{\hyperlink{structcolor}{color}})
+\item 
+void \mbox{\hyperlink{class_sprite2_d_a47305cfab61267f4bf7cd51ab7fb4733}{Load}} (\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$shader) override
+\begin{DoxyCompactList}\small\item\em Method loads current sprite to texture buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sprite2_d_a0f0a5201f4aa2d626c65883c71f40bc4}{Un\+Load}} () override
+\begin{DoxyCompactList}\small\item\em Method unloads current sprite from texture buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sprite2_d_a768ed05cabc21118bdd6a0fbeb56a49f}{Clear\+Color}} (const \mbox{\hyperlink{struct_color}{Color}} \&clear\+Color) override
+\begin{DoxyCompactList}\small\item\em Method fills texture with provided color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sprite2_d_a8d4b38f44d924c68a215aef15c5d2455}{$\sim$\+Sprite2D}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+GLuint \mbox{\hyperlink{class_sprite2_d_a18f3b49f4c015a7a9897b9d6413e805d}{texture}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_sprite2_d_a46a7d49f35c0cabe49d4a2fde6ecc2ef}{width}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_sprite2_d_a8cf447daa51d100648e0eb34889f95e0}{height}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file Sprite2\+D.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sprite2_d_a2c5eff5248b9e0b4034dd33800c9f63c}\label{class_sprite2_d_a2c5eff5248b9e0b4034dd33800c9f63c}} 
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{Sprite2D()}{Sprite2D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Sprite2\+D\+::\+Sprite2D (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} $\ast$}]{pixels,  }\item[{const uint32\+\_\+t \&}]{width,  }\item[{const uint32\+\_\+t \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Sprite2\+D.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sprite2_d_a2c5eff5248b9e0b4034dd33800c9f63c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite2_d_a072b5f033a85d9dea0d357253a776f20}\label{class_sprite2_d_a072b5f033a85d9dea0d357253a776f20}} 
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{Sprite2D()}{Sprite2D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Sprite2\+D\+::\+Sprite2D (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_image}{Image}} $\ast$}]{image }\end{DoxyParamCaption})}
+
+
+
+Definition at line 25 of file Sprite2\+D.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sprite2_d_a072b5f033a85d9dea0d357253a776f20_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite2_d_aaf7103a693d69da8741cb13cee683a1a}\label{class_sprite2_d_aaf7103a693d69da8741cb13cee683a1a}} 
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{Sprite2D()}{Sprite2D()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Sprite2\+D\+::\+Sprite2D (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filepath }\end{DoxyParamCaption})}
+
+
+
+Definition at line 11 of file Sprite2\+D.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sprite2_d_aaf7103a693d69da8741cb13cee683a1a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite2_d_abe9d5de553b04711a5a98cecad252942}\label{class_sprite2_d_abe9d5de553b04711a5a98cecad252942}} 
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\index{Sprite2D@{Sprite2D}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{Sprite2D()}{Sprite2D()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Sprite2\+D\+::\+Sprite2D (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$}]{sprite }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file Sprite2\+D.\+cpp.
+
+\mbox{\Hypertarget{class_sprite2_d_a8d4b38f44d924c68a215aef15c5d2455}\label{class_sprite2_d_a8d4b38f44d924c68a215aef15c5d2455}} 
+\index{Sprite2D@{Sprite2D}!````~Sprite2D@{$\sim$Sprite2D}}
+\index{````~Sprite2D@{$\sim$Sprite2D}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{$\sim$Sprite2D()}{~Sprite2D()}}
+{\footnotesize\ttfamily Sprite2\+D\+::$\sim$\+Sprite2D (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 127 of file Sprite2\+D.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sprite2_d_a768ed05cabc21118bdd6a0fbeb56a49f}\label{class_sprite2_d_a768ed05cabc21118bdd6a0fbeb56a49f}} 
+\index{Sprite2D@{Sprite2D}!ClearColor@{ClearColor}}
+\index{ClearColor@{ClearColor}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{ClearColor()}{ClearColor()}}
+{\footnotesize\ttfamily void Sprite2\+D\+::\+Clear\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{clear\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method fills texture with provided color. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_a34404a9e5f31096d75d9a8f22a1d97cc}{Sprite}}.
+
+
+
+Definition at line 116 of file Sprite2\+D.\+cpp.
+
+\mbox{\Hypertarget{class_sprite2_d_a117eece3ea8479ccaef68e9d56e79e08}\label{class_sprite2_d_a117eece3ea8479ccaef68e9d56e79e08}} 
+\index{Sprite2D@{Sprite2D}!GetTextureID@{GetTextureID}}
+\index{GetTextureID@{GetTextureID}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{GetTextureID()}{GetTextureID()}}
+{\footnotesize\ttfamily GLuint Sprite2\+D\+::\+Get\+Texture\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method returns texture id of current sprite. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_sprite}{Sprite}} texture id 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_sprite_a037b294644e9666941cf6d4b914504a1}{Sprite}}.
+
+
+
+Definition at line 103 of file Sprite2\+D.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sprite2_d_a117eece3ea8479ccaef68e9d56e79e08_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite2_d_a47305cfab61267f4bf7cd51ab7fb4733}\label{class_sprite2_d_a47305cfab61267f4bf7cd51ab7fb4733}} 
+\index{Sprite2D@{Sprite2D}!Load@{Load}}
+\index{Load@{Load}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily void Sprite2\+D\+::\+Load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method loads current sprite to texture buffer. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_a7157f052d53e9db60d4d66d3637e172f}{Sprite}}.
+
+
+
+Definition at line 107 of file Sprite2\+D.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{class_sprite2_d_a47305cfab61267f4bf7cd51ab7fb4733_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite2_d_a91f2cd28375e00b9b5709d18ca77ad84}\label{class_sprite2_d_a91f2cd28375e00b9b5709d18ca77ad84}} 
+\index{Sprite2D@{Sprite2D}!SetPixel@{SetPixel}}
+\index{SetPixel@{SetPixel}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{SetPixel()}{SetPixel()}}
+{\footnotesize\ttfamily void Sprite2\+D\+::\+Set\+Pixel (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t \&}]{x,  }\item[{const uint32\+\_\+t \&}]{y,  }\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{color }\end{DoxyParamCaption})}
+
+
+
+Definition at line 93 of file Sprite2\+D.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sprite2_d_a91f2cd28375e00b9b5709d18ca77ad84_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite2_d_a488f08e97cc96a85d17120bcbba306d6}\label{class_sprite2_d_a488f08e97cc96a85d17120bcbba306d6}} 
+\index{Sprite2D@{Sprite2D}!SetTextureAttrib@{SetTextureAttrib}}
+\index{SetTextureAttrib@{SetTextureAttrib}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{SetTextureAttrib()}{SetTextureAttrib()}}
+{\footnotesize\ttfamily void Sprite2\+D\+::\+Set\+Texture\+Attrib (\begin{DoxyParamCaption}\item[{const GLenum \&}]{attrib,  }\item[{const GLint \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method sets value correlated to texture attribute. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_af0935e92c9fae5d97bfadffd5b5dc1e9}{Sprite}}.
+
+
+
+Definition at line 83 of file Sprite2\+D.\+cpp.
+
+\mbox{\Hypertarget{class_sprite2_d_a0f0a5201f4aa2d626c65883c71f40bc4}\label{class_sprite2_d_a0f0a5201f4aa2d626c65883c71f40bc4}} 
+\index{Sprite2D@{Sprite2D}!UnLoad@{UnLoad}}
+\index{UnLoad@{UnLoad}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{UnLoad()}{UnLoad()}}
+{\footnotesize\ttfamily void Sprite2\+D\+::\+Un\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method unloads current sprite from texture buffer. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_ade7895e85f3dc02a8c6334e5647b42dc}{Sprite}}.
+
+
+
+Definition at line 112 of file Sprite2\+D.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{class_sprite2_d_a0f0a5201f4aa2d626c65883c71f40bc4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_sprite2_d_aaa5e68e2b2970bf5854a7e855c92c1d5}\label{class_sprite2_d_aaa5e68e2b2970bf5854a7e855c92c1d5}} 
+\index{Sprite2D@{Sprite2D}!UpdateTexture@{UpdateTexture}}
+\index{UpdateTexture@{UpdateTexture}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{UpdateTexture()}{UpdateTexture()}}
+{\footnotesize\ttfamily void Sprite2\+D\+::\+Update\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} $\ast$}]{pixels,  }\item[{const uint32\+\_\+t \&}]{width,  }\item[{const uint32\+\_\+t \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file Sprite2\+D.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sprite2_d_aaa5e68e2b2970bf5854a7e855c92c1d5_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_sprite2_d_a8cf447daa51d100648e0eb34889f95e0}\label{class_sprite2_d_a8cf447daa51d100648e0eb34889f95e0}} 
+\index{Sprite2D@{Sprite2D}!height@{height}}
+\index{height@{height}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily uint32\+\_\+t Sprite2\+D\+::height = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Sprite2\+D.\+h.
+
+\mbox{\Hypertarget{class_sprite2_d_a18f3b49f4c015a7a9897b9d6413e805d}\label{class_sprite2_d_a18f3b49f4c015a7a9897b9d6413e805d}} 
+\index{Sprite2D@{Sprite2D}!texture@{texture}}
+\index{texture@{texture}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily GLuint Sprite2\+D\+::texture = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 10 of file Sprite2\+D.\+h.
+
+\mbox{\Hypertarget{class_sprite2_d_a46a7d49f35c0cabe49d4a2fde6ecc2ef}\label{class_sprite2_d_a46a7d49f35c0cabe49d4a2fde6ecc2ef}} 
+\index{Sprite2D@{Sprite2D}!width@{width}}
+\index{width@{width}!Sprite2D@{Sprite2D}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily uint32\+\_\+t Sprite2\+D\+::width = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Sprite2\+D.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_sprite2_d_8h}{Sprite2\+D.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_sprite2_d_8cpp}{Sprite2\+D.\+cpp}}\end{DoxyCompactItemize}

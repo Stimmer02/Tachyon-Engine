@@ -1,0 +1,188 @@
+\hypertarget{class_message_bus}{}\doxysection{Message\+Bus Class Reference}
+\label{class_message_bus}\index{MessageBus@{MessageBus}}
+
+
+{\ttfamily \#include $<$Message\+Bus.\+h$>$}
+
+
+
+Collaboration diagram for Message\+Bus\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{class_message_bus__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_message_bus_a484d72d2ea103bb1cbef93fad4a9b0ac}{Subscribe\+To\+Channel}} (const std\+::string \&\+\_\+channel, \mbox{\hyperlink{class_i_client}{IClient}} $\ast$\+\_\+client)
+\begin{DoxyCompactList}\small\item\em Binds client to specified communication channel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_message_bus_a3e1a5d5006b0ae95a4a9a3e55cbe7f90}{Send\+To\+Channel}} (const std\+::string \&\+\_\+channel, const \mbox{\hyperlink{struct_message}{Message}} \&\+\_\+message)
+\begin{DoxyCompactList}\small\item\em Sends message to all users in specified channel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_message_bus_af986137acbdf88d5eb2b248c0cdb5e30}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Updates all channels and removes top messages from queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_message_bus_abb1ea2ac43c53ce88fd6d7de3274ea94}{$\sim$\+Message\+Bus}} ()
+\begin{DoxyCompactList}\small\item\em Clears data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_message_bus}{Message\+Bus}} \& \mbox{\hyperlink{class_message_bus_a5b786830150ec433d819c2ddf2ec7564}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Returns an instance of message bus. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_channel}{Channel}} $\ast$ $>$ \mbox{\hyperlink{class_message_bus_accb5e035c17b0322b6ff19eb36f6aa5a}{channels}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file Message\+Bus.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_message_bus_abb1ea2ac43c53ce88fd6d7de3274ea94}\label{class_message_bus_abb1ea2ac43c53ce88fd6d7de3274ea94}} 
+\index{MessageBus@{MessageBus}!````~MessageBus@{$\sim$MessageBus}}
+\index{````~MessageBus@{$\sim$MessageBus}!MessageBus@{MessageBus}}
+\doxysubsubsection{\texorpdfstring{$\sim$MessageBus()}{~MessageBus()}}
+{\footnotesize\ttfamily Message\+Bus\+::$\sim$\+Message\+Bus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clears data. 
+
+
+
+Definition at line 61 of file Message\+Bus.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_message_bus_a5b786830150ec433d819c2ddf2ec7564}\label{class_message_bus_a5b786830150ec433d819c2ddf2ec7564}} 
+\index{MessageBus@{MessageBus}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!MessageBus@{MessageBus}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_message_bus}{Message\+Bus}} \& Message\+Bus\+::\+Get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns an instance of message bus. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 56 of file Message\+Bus.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_message_bus_a5b786830150ec433d819c2ddf2ec7564_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_message_bus_a3e1a5d5006b0ae95a4a9a3e55cbe7f90}\label{class_message_bus_a3e1a5d5006b0ae95a4a9a3e55cbe7f90}} 
+\index{MessageBus@{MessageBus}!SendToChannel@{SendToChannel}}
+\index{SendToChannel@{SendToChannel}!MessageBus@{MessageBus}}
+\doxysubsubsection{\texorpdfstring{SendToChannel()}{SendToChannel()}}
+{\footnotesize\ttfamily void Message\+Bus\+::\+Send\+To\+Channel (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+channel,  }\item[{const \mbox{\hyperlink{struct_message}{Message}} \&}]{\+\_\+message }\end{DoxyParamCaption})}
+
+
+
+Sends message to all users in specified channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+channel} & \\
+\hline
+{\em \+\_\+message} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 24 of file Message\+Bus.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_message_bus_a3e1a5d5006b0ae95a4a9a3e55cbe7f90_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_message_bus_a3e1a5d5006b0ae95a4a9a3e55cbe7f90_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_message_bus_a484d72d2ea103bb1cbef93fad4a9b0ac}\label{class_message_bus_a484d72d2ea103bb1cbef93fad4a9b0ac}} 
+\index{MessageBus@{MessageBus}!SubscribeToChannel@{SubscribeToChannel}}
+\index{SubscribeToChannel@{SubscribeToChannel}!MessageBus@{MessageBus}}
+\doxysubsubsection{\texorpdfstring{SubscribeToChannel()}{SubscribeToChannel()}}
+{\footnotesize\ttfamily void Message\+Bus\+::\+Subscribe\+To\+Channel (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{\+\_\+channel,  }\item[{\mbox{\hyperlink{class_i_client}{IClient}} $\ast$}]{\+\_\+client }\end{DoxyParamCaption})}
+
+
+
+Binds client to specified communication channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+channel} & \\
+\hline
+{\em \+\_\+client} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 4 of file Message\+Bus.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_message_bus_a484d72d2ea103bb1cbef93fad4a9b0ac_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_message_bus_af986137acbdf88d5eb2b248c0cdb5e30}\label{class_message_bus_af986137acbdf88d5eb2b248c0cdb5e30}} 
+\index{MessageBus@{MessageBus}!Update@{Update}}
+\index{Update@{Update}!MessageBus@{MessageBus}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Message\+Bus\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates all channels and removes top messages from queue. 
+
+
+
+Definition at line 45 of file Message\+Bus.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_message_bus_accb5e035c17b0322b6ff19eb36f6aa5a}\label{class_message_bus_accb5e035c17b0322b6ff19eb36f6aa5a}} 
+\index{MessageBus@{MessageBus}!channels@{channels}}
+\index{channels@{channels}!MessageBus@{MessageBus}}
+\doxysubsubsection{\texorpdfstring{channels}{channels}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{class_channel}{Channel}} $\ast$ $>$ Message\+Bus\+::channels\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Message\+Bus.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_message_bus_8h}{Message\+Bus.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_message_bus_8cpp}{Message\+Bus.\+cpp}}\end{DoxyCompactItemize}

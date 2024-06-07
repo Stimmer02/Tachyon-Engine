@@ -1,0 +1,4 @@
+<map id="IClient::ReceiveMessage" name="IClient::ReceiveMessage">
+<area shape="rect" id="node1" title="Enables handling of received messages." alt="" coords="168,5,351,32"/>
+<area shape="rect" id="node2" href="$class_channel.html#a452b47c1034214b86f07cbe1a5179869" title="Sends oldest message from queue to all or specified client." alt="" coords="5,5,120,32"/>
+</map>

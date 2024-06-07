@@ -1,0 +1,198 @@
+\hypertarget{class_event_register}{}\doxysection{Event\+Register Class Reference}
+\label{class_event_register}\index{EventRegister@{EventRegister}}
+
+
+{\ttfamily \#include $<$Event\+Register.\+h$>$}
+
+
+
+Inheritance diagram for Event\+Register\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{class_event_register__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Event\+Register\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{class_event_register__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_event_register_a2d12c0214a9f7d207917426997a7cc83}{Event\+Register}} (const char $\ast$filepath)
+\item 
+\mbox{\hyperlink{class_event_register_a65be1c4737916db5c6999374e7cae08e}{Event\+Register}} (FILE $\ast$file, bool \mbox{\hyperlink{class_event_register_a3bac785f44ffb7268b8ffbca35ee91e0}{is\+System\+Stream}}=false)
+\item 
+\mbox{\hyperlink{class_event_register_a2acf491bc76d59b6ae684e6cb5c78519}{$\sim$\+Event\+Register}} ()
+\item 
+void \mbox{\hyperlink{class_event_register_a1f630ff4b7e893e27442791791c5e06b}{Write}} (enum \mbox{\hyperlink{_message_type_8h_aa6bd480865d0aa966a942958dcf7290c}{Log\+Message\+Type}} \+\_\+type, const char $\ast$\+\_\+format,...) override
+\item 
+void \mbox{\hyperlink{class_event_register_a769e8c64196397211b7ea79ec131bf31}{Flush}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::priority\+\_\+queue$<$ \mbox{\hyperlink{struct_event_queue_element}{Event\+Queue\+Element}}, std\+::vector$<$ \mbox{\hyperlink{struct_event_queue_element}{Event\+Queue\+Element}} $>$, std\+::greater$<$ \mbox{\hyperlink{struct_event_queue_element}{Event\+Queue\+Element}} $>$ $>$ \mbox{\hyperlink{class_event_register_a7ad13db0e149ceea785ced4703e16b9b}{event\+Queue}}
+\item 
+std\+::mutex \mbox{\hyperlink{class_event_register_a2a99aa6cbdc8696dce693783d3ab96dc}{mut}}
+\item 
+FILE $\ast$ \mbox{\hyperlink{class_event_register_a74fb95a11920e587836bc75f61bf175b}{log\+File}}
+\item 
+bool \mbox{\hyperlink{class_event_register_a3bac785f44ffb7268b8ffbca35ee91e0}{is\+System\+Stream}}
+\item 
+const char $\ast$ \mbox{\hyperlink{class_event_register_a0d4b36121f8f9dd71c00aaeba652ae1e}{types}} \mbox{[}\mbox{\hyperlink{_message_type_8h_aa6bd480865d0aa966a942958dcf7290caf03f11bf987d933c52a4438b206f6b99}{TYPE\+\_\+\+COUNT}}\mbox{]} = \mbox{\hyperlink{_message_type_8h_a09ab4598666644971f702fa928e3281a}{TYPE\+\_\+\+STRINGS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 17 of file Event\+Register.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_event_register_a2d12c0214a9f7d207917426997a7cc83}\label{class_event_register_a2d12c0214a9f7d207917426997a7cc83}} 
+\index{EventRegister@{EventRegister}!EventRegister@{EventRegister}}
+\index{EventRegister@{EventRegister}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{EventRegister()}{EventRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Event\+Register\+::\+Event\+Register (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filepath }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file Event\+Register.\+cpp.
+
+\mbox{\Hypertarget{class_event_register_a65be1c4737916db5c6999374e7cae08e}\label{class_event_register_a65be1c4737916db5c6999374e7cae08e}} 
+\index{EventRegister@{EventRegister}!EventRegister@{EventRegister}}
+\index{EventRegister@{EventRegister}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{EventRegister()}{EventRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Event\+Register\+::\+Event\+Register (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file,  }\item[{bool}]{is\+System\+Stream = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Event\+Register.\+cpp.
+
+\mbox{\Hypertarget{class_event_register_a2acf491bc76d59b6ae684e6cb5c78519}\label{class_event_register_a2acf491bc76d59b6ae684e6cb5c78519}} 
+\index{EventRegister@{EventRegister}!````~EventRegister@{$\sim$EventRegister}}
+\index{````~EventRegister@{$\sim$EventRegister}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{$\sim$EventRegister()}{~EventRegister()}}
+{\footnotesize\ttfamily Event\+Register\+::$\sim$\+Event\+Register (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 21 of file Event\+Register.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_event_register_a769e8c64196397211b7ea79ec131bf31}\label{class_event_register_a769e8c64196397211b7ea79ec131bf31}} 
+\index{EventRegister@{EventRegister}!Flush@{Flush}}
+\index{Flush@{Flush}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{Flush()}{Flush()}}
+{\footnotesize\ttfamily void Event\+Register\+::\+Flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_log_a42bb795acf69eabc014b30b478978e39}{ILog}}.
+
+
+
+Definition at line 56 of file Event\+Register.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{class_event_register_a769e8c64196397211b7ea79ec131bf31_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_event_register_a1f630ff4b7e893e27442791791c5e06b}\label{class_event_register_a1f630ff4b7e893e27442791791c5e06b}} 
+\index{EventRegister@{EventRegister}!Write@{Write}}
+\index{Write@{Write}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily void Event\+Register\+::\+Write (\begin{DoxyParamCaption}\item[{enum \mbox{\hyperlink{_message_type_8h_aa6bd480865d0aa966a942958dcf7290c}{Log\+Message\+Type}}}]{\+\_\+type,  }\item[{const char $\ast$}]{\+\_\+format,  }\item[{}]{... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_log_a9021001a984d5580d089d12e950e6c45}{ILog}}.
+
+
+
+Definition at line 27 of file Event\+Register.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{class_event_register_a1f630ff4b7e893e27442791791c5e06b_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_event_register_a7ad13db0e149ceea785ced4703e16b9b}\label{class_event_register_a7ad13db0e149ceea785ced4703e16b9b}} 
+\index{EventRegister@{EventRegister}!eventQueue@{eventQueue}}
+\index{eventQueue@{eventQueue}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{eventQueue}{eventQueue}}
+{\footnotesize\ttfamily std\+::priority\+\_\+queue$<$\mbox{\hyperlink{struct_event_queue_element}{Event\+Queue\+Element}}, std\+::vector$<$\mbox{\hyperlink{struct_event_queue_element}{Event\+Queue\+Element}}$>$, std\+::greater$<$\mbox{\hyperlink{struct_event_queue_element}{Event\+Queue\+Element}}$>$ $>$ Event\+Register\+::event\+Queue\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file Event\+Register.\+h.
+
+\mbox{\Hypertarget{class_event_register_a3bac785f44ffb7268b8ffbca35ee91e0}\label{class_event_register_a3bac785f44ffb7268b8ffbca35ee91e0}} 
+\index{EventRegister@{EventRegister}!isSystemStream@{isSystemStream}}
+\index{isSystemStream@{isSystemStream}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{isSystemStream}{isSystemStream}}
+{\footnotesize\ttfamily bool Event\+Register\+::is\+System\+Stream\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 24 of file Event\+Register.\+h.
+
+\mbox{\Hypertarget{class_event_register_a74fb95a11920e587836bc75f61bf175b}\label{class_event_register_a74fb95a11920e587836bc75f61bf175b}} 
+\index{EventRegister@{EventRegister}!logFile@{logFile}}
+\index{logFile@{logFile}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{logFile}{logFile}}
+{\footnotesize\ttfamily FILE$\ast$ Event\+Register\+::log\+File\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 23 of file Event\+Register.\+h.
+
+\mbox{\Hypertarget{class_event_register_a2a99aa6cbdc8696dce693783d3ab96dc}\label{class_event_register_a2a99aa6cbdc8696dce693783d3ab96dc}} 
+\index{EventRegister@{EventRegister}!mut@{mut}}
+\index{mut@{mut}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{mut}{mut}}
+{\footnotesize\ttfamily std\+::mutex Event\+Register\+::mut\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file Event\+Register.\+h.
+
+\mbox{\Hypertarget{class_event_register_a0d4b36121f8f9dd71c00aaeba652ae1e}\label{class_event_register_a0d4b36121f8f9dd71c00aaeba652ae1e}} 
+\index{EventRegister@{EventRegister}!types@{types}}
+\index{types@{types}!EventRegister@{EventRegister}}
+\doxysubsubsection{\texorpdfstring{types}{types}}
+{\footnotesize\ttfamily const char$\ast$ Event\+Register\+::types\mbox{[}\mbox{\hyperlink{_message_type_8h_aa6bd480865d0aa966a942958dcf7290caf03f11bf987d933c52a4438b206f6b99}{TYPE\+\_\+\+COUNT}}\mbox{]} = \mbox{\hyperlink{_message_type_8h_a09ab4598666644971f702fa928e3281a}{TYPE\+\_\+\+STRINGS}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file Event\+Register.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_event_register_8h}{Event\+Register.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_event_register_8cpp}{Event\+Register.\+cpp}}\end{DoxyCompactItemize}

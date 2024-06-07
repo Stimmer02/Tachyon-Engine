@@ -1,0 +1,4 @@
+<map id="MessageBus::SendToChannel" name="MessageBus::SendToChannel">
+<area shape="rect" id="node1" title="Sends message to all users in specified channel." alt="" coords="223,5,433,32"/>
+<area shape="rect" id="node2" href="$class_system.html#a26c9fb10762fd84f20b50bf3065d8ea6" title="This method is used to send message to specified channel within message bus scope." alt="" coords="5,5,175,32"/>
+</map>

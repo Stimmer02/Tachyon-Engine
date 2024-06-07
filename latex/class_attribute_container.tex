@@ -1,0 +1,297 @@
+\hypertarget{class_attribute_container}{}\doxysection{Attribute\+Container$<$ Component $>$ Class Template Reference}
+\label{class_attribute_container}\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+
+
+{\ttfamily \#include $<$Attribute\+Container.\+h$>$}
+
+
+
+Collaboration diagram for Attribute\+Container$<$ Component $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_attribute_container__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_attribute_container_a5d5f02ea91562017b91c0a22fb991f55}{Attribute\+Container}} ()
+\item 
+\mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_attribute_container_a0914f4f60fb89369ea6307261e4c18d7}{Add\+Element}} (const uint32\+\_\+t \&\+\_\+id)
+\item 
+\mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_attribute_container_a5e0672dc35607fdc6809ace37b72185a}{Get\+Element}} (const uint32\+\_\+t \&\+\_\+id)
+\item 
+void \mbox{\hyperlink{class_attribute_container_ae09958da92098b7c058fc96e69e847fd}{Remove\+Element}} (const uint32\+\_\+t \&\+\_\+id)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container_aaeb195f8d480cd6e119301f1d9478546}{Get\+Size}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container_a69f1aa4b0b6dd17c42d58e717e6413bf}{Get\+Capacity}} () const
+\item 
+void \mbox{\hyperlink{class_attribute_container_a3fc07feb4587347233c2948f64096df6}{Set\+Remap\+Threshold\+Percentage}} (const float \&min\+Elements)
+\item 
+\mbox{\hyperlink{class_attribute_container_a8ee2223095b2ae13456c625c0523d37b}{$\sim$\+Attribute\+Container}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_attribute_container_a77ace20e8d4f2fa2892d49bef5743630}{Remap\+And\+Resize}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container_a578026c8c54a141d5e7f9069f841ade7}{current\+ID}}
+\item 
+std\+::priority\+\_\+queue$<$ uint32\+\_\+t, std\+::vector$<$ uint32\+\_\+t $>$, std\+::greater$<$ uint32\+\_\+t $>$ $>$ \mbox{\hyperlink{class_attribute_container_aa1518f441f4727e3fb9e1faf992b000b}{free\+IDs}}
+\item 
+std\+::map$<$ uint32\+\_\+t, uint32\+\_\+t $>$ \mbox{\hyperlink{class_attribute_container_a6217216e9947ff0698531c2ca2c4a432}{mapper}}
+\item 
+\mbox{\hyperlink{class_component}{Component}} $\ast$$\ast$ \mbox{\hyperlink{class_attribute_container_a12b3ec7fe8ba07153795f8b7157305b1}{components}}
+\item 
+float \mbox{\hyperlink{class_attribute_container_ac94372e07c5931e12b451117e52a0981}{remap\+Threshold}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container_a9733ffbedc28bd39d9159238b3451793}{capacity}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container_a0ce6e7e0c9b4a1944231f8f6d13a995c}{size}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Component$>$\newline
+class Attribute\+Container$<$ Component $>$}
+
+
+
+Definition at line 10 of file Attribute\+Container.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_attribute_container_a5d5f02ea91562017b91c0a22fb991f55}\label{class_attribute_container_a5d5f02ea91562017b91c0a22fb991f55}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!AttributeContainer@{AttributeContainer}}
+\index{AttributeContainer@{AttributeContainer}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{AttributeContainer()}{AttributeContainer()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+\mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::\mbox{\hyperlink{class_attribute_container}{Attribute\+Container}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 54 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_a8ee2223095b2ae13456c625c0523d37b}\label{class_attribute_container_a8ee2223095b2ae13456c625c0523d37b}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!````~AttributeContainer@{$\sim$AttributeContainer}}
+\index{````~AttributeContainer@{$\sim$AttributeContainer}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$AttributeContainer()}{~AttributeContainer()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+\mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::$\sim$\mbox{\hyperlink{class_attribute_container}{Attribute\+Container}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 138 of file Attribute\+Container.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_attribute_container_a0914f4f60fb89369ea6307261e4c18d7}\label{class_attribute_container_a0914f4f60fb89369ea6307261e4c18d7}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!AddElement@{AddElement}}
+\index{AddElement@{AddElement}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{AddElement()}{AddElement()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+\mbox{\hyperlink{class_component}{Component}}$\ast$ \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::Add\+Element (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t \&}]{\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 62 of file Attribute\+Container.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_attribute_container_a0914f4f60fb89369ea6307261e4c18d7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_container_a69f1aa4b0b6dd17c42d58e717e6413bf}\label{class_attribute_container_a69f1aa4b0b6dd17c42d58e717e6413bf}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!GetCapacity@{GetCapacity}}
+\index{GetCapacity@{GetCapacity}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{GetCapacity()}{GetCapacity()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::Get\+Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 130 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_a5e0672dc35607fdc6809ace37b72185a}\label{class_attribute_container_a5e0672dc35607fdc6809ace37b72185a}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!GetElement@{GetElement}}
+\index{GetElement@{GetElement}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{GetElement()}{GetElement()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+\mbox{\hyperlink{class_component}{Component}}$\ast$ \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::Get\+Element (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t \&}]{\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 96 of file Attribute\+Container.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_attribute_container_a5e0672dc35607fdc6809ace37b72185a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_container_aaeb195f8d480cd6e119301f1d9478546}\label{class_attribute_container_aaeb195f8d480cd6e119301f1d9478546}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::Get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 126 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_a77ace20e8d4f2fa2892d49bef5743630}\label{class_attribute_container_a77ace20e8d4f2fa2892d49bef5743630}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!RemapAndResize@{RemapAndResize}}
+\index{RemapAndResize@{RemapAndResize}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{RemapAndResize()}{RemapAndResize()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+void \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::Remap\+And\+Resize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 26 of file Attribute\+Container.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_container_a77ace20e8d4f2fa2892d49bef5743630_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_container_ae09958da92098b7c058fc96e69e847fd}\label{class_attribute_container_ae09958da92098b7c058fc96e69e847fd}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!RemoveElement@{RemoveElement}}
+\index{RemoveElement@{RemoveElement}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveElement()}{RemoveElement()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+void \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::Remove\+Element (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t \&}]{\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 107 of file Attribute\+Container.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{class_attribute_container_ae09958da92098b7c058fc96e69e847fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_attribute_container_ae09958da92098b7c058fc96e69e847fd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_container_a3fc07feb4587347233c2948f64096df6}\label{class_attribute_container_a3fc07feb4587347233c2948f64096df6}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!SetRemapThresholdPercentage@{SetRemapThresholdPercentage}}
+\index{SetRemapThresholdPercentage@{SetRemapThresholdPercentage}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{SetRemapThresholdPercentage()}{SetRemapThresholdPercentage()}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+void \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::Set\+Remap\+Threshold\+Percentage (\begin{DoxyParamCaption}\item[{const float \&}]{min\+Elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 134 of file Attribute\+Container.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_attribute_container_a9733ffbedc28bd39d9159238b3451793}\label{class_attribute_container_a9733ffbedc28bd39d9159238b3451793}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{capacity}{capacity}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::capacity\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 23 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_a12b3ec7fe8ba07153795f8b7157305b1}\label{class_attribute_container_a12b3ec7fe8ba07153795f8b7157305b1}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!components@{components}}
+\index{components@{components}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+\mbox{\hyperlink{class_component}{Component}}$\ast$$\ast$ \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::components\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_a578026c8c54a141d5e7f9069f841ade7}\label{class_attribute_container_a578026c8c54a141d5e7f9069f841ade7}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!currentID@{currentID}}
+\index{currentID@{currentID}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{currentID}{currentID}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::current\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_aa1518f441f4727e3fb9e1faf992b000b}\label{class_attribute_container_aa1518f441f4727e3fb9e1faf992b000b}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!freeIDs@{freeIDs}}
+\index{freeIDs@{freeIDs}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{freeIDs}{freeIDs}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+std\+::priority\+\_\+queue$<$uint32\+\_\+t, std\+::vector$<$uint32\+\_\+t$>$, std\+::greater$<$uint32\+\_\+t$>$ $>$ \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::free\+IDs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_a6217216e9947ff0698531c2ca2c4a432}\label{class_attribute_container_a6217216e9947ff0698531c2ca2c4a432}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!mapper@{mapper}}
+\index{mapper@{mapper}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{mapper}{mapper}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+std\+::map$<$uint32\+\_\+t, uint32\+\_\+t$>$ \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::mapper\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_ac94372e07c5931e12b451117e52a0981}\label{class_attribute_container_ac94372e07c5931e12b451117e52a0981}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!remapThreshold@{remapThreshold}}
+\index{remapThreshold@{remapThreshold}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{remapThreshold}{remapThreshold}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+float \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::remap\+Threshold\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file Attribute\+Container.\+h.
+
+\mbox{\Hypertarget{class_attribute_container_a0ce6e7e0c9b4a1944231f8f6d13a995c}\label{class_attribute_container_a0ce6e7e0c9b4a1944231f8f6d13a995c}} 
+\index{AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}!size@{size}}
+\index{size@{size}!AttributeContainer$<$ Component $>$@{AttributeContainer$<$ Component $>$}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily template$<$class Component $>$ \\
+uint32\+\_\+t \mbox{\hyperlink{class_attribute_container}{Attribute\+Container}}$<$ \mbox{\hyperlink{class_component}{Component}} $>$\+::size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 24 of file Attribute\+Container.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_attribute_container_8h}{Attribute\+Container.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,6 @@
+<map id="Input::GetInstance" name="Input::GetInstance">
+<area shape="rect" id="node1" title=" " alt="" coords="269,56,411,83"/>
+<area shape="rect" id="node2" href="$class_application.html#afa8cc05ce6b6092be5ecdfdae44e05f8" title=" " alt="" coords="25,5,201,32"/>
+<area shape="rect" id="node3" href="$class_boids_system.html#ad7eab382f16a5b155d8fde8684382e3c" title=" " alt="" coords="13,56,213,83"/>
+<area shape="rect" id="node4" href="$class_fractal_system.html#a01222a036a1fdfb8ec473d2cedeefbf4" title=" " alt="" coords="5,107,221,133"/>
+</map>

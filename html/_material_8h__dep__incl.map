@@ -1,0 +1,15 @@
+<map id="src/GUIRenderer/Material.h" name="src/GUIRenderer/Material.h">
+<area shape="rect" id="node1" title=" " alt="" coords="26,5,225,32"/>
+<area shape="rect" id="node2" href="$_scene_object_8h.html" title=" " alt="" coords="13,80,238,107"/>
+<area shape="rect" id="node3" href="$_attribute_manager_8h.html" title=" " alt="" coords="5,155,245,181"/>
+<area shape="rect" id="node4" href="$_scene_8h.html" title=" " alt="" coords="270,155,453,181"/>
+<area shape="rect" id="node5" href="$_graphic_system_8h.html" title=" " alt="" coords="9,237,236,263"/>
+<area shape="rect" id="node11" href="$_interaction_manager_8h.html" title=" " alt="" coords="260,229,463,271"/>
+<area shape="rect" id="node12" href="$_u_i_manager_8h.html" title=" " alt="" coords="487,237,702,263"/>
+<area shape="rect" id="node6" href="$_application_8h.html" title=" " alt="" coords="140,319,340,345"/>
+<area shape="rect" id="node7" href="$_boids_8h.html" title=" " alt="" coords="44,393,156,420"/>
+<area shape="rect" id="node9" href="$_fractal_8h.html" title=" " alt="" coords="180,393,300,420"/>
+<area shape="rect" id="node10" href="$_lines_8h.html" title=" " alt="" coords="325,393,435,420"/>
+<area shape="rect" id="node8" href="$editor_2main_8cpp.html" title=" " alt="" coords="178,468,302,495"/>
+<area shape="rect" id="node13" href="$_u_i_manager_8cpp.html" title=" " alt="" coords="480,319,709,345"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="TextElement" name="TextElement">
+<area shape="rect" id="node1" title=" " alt="" coords="441,1228,569,1379"/>
+<area shape="rect" id="node2" href="$class_g_u_i_element.html" title=" " alt="" coords="379,1072,515,1179"/>
+<area shape="rect" id="node3" href="$class_transform.html" title=" " alt="" coords="257,800,343,877"/>
+<area shape="rect" id="node4" href="$class_attribute_type.html" title=" " alt="" coords="267,352,471,429"/>
+<area shape="rect" id="node5" href="$class_attribute.html" title=" " alt="" coords="299,5,440,141"/>
+<area shape="rect" id="node6" href="$class_quaternion.html" title=" " alt="" coords="5,264,144,517"/>
+<area shape="rect" id="node7" href="$struct_position.html" title=" " alt="" coords="168,345,243,437"/>
+<area shape="rect" id="node8" href="$class_vector3.html" title=" " alt="" coords="495,191,633,591"/>
+<area shape="rect" id="node9" href="$class_matrix.html" title=" " alt="" coords="367,668,526,1009"/>
+</map>

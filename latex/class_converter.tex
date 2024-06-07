@@ -1,0 +1,244 @@
+\hypertarget{class_converter}{}\doxysection{Converter Class Reference}
+\label{class_converter}\index{Converter@{Converter}}
+
+
+{\ttfamily \#include $<$Converter.\+h$>$}
+
+
+
+Collaboration diagram for Converter\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::list$<$ \mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$ $>$ \mbox{\hyperlink{class_converter_af5f32504f3eb13ea0e5ae8497745cdca}{string\+To\+Glyf\+List}} (const std\+::string \&str)
+\item 
+static void \mbox{\hyperlink{class_converter_ad6a8b5d16dfa05fdb9443b714fe5c53e}{set\+Font\+From\+File}} (const std\+::string \&path, const uint32\+\_\+t \&slice\+\_\+width, const uint32\+\_\+t \&slice\+\_\+height)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_converter_ac5b46bf89d8230f6f2d13611a6d5b024}{set\+Deatful\+Font}} ()
+\item 
+static void \mbox{\hyperlink{class_converter_a8637e964d0e11e3becf7c05cc166025d}{make\+Glyf\+Array}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr std\+::string\+\_\+view \mbox{\hyperlink{class_converter_ac0809a2518bd89a776450c92906f0a3b}{possible\+Symbols}} = \char`\"{} !\textbackslash{}\char`\"{}\#\$\%\&\textquotesingle{}()$\ast$+,-\/./0123456789\+:;$<$=$>$?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\mbox{[}\textbackslash{}\textbackslash{}\mbox{]}$^\wedge$\+\_\+\`{}abcdefghijklmnopqrstuvwxyz\{$\vert$\}$\sim$\textbackslash{}n\char`\"{}
+\item 
+static std\+::map$<$ char, \mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$ $>$ \mbox{\hyperlink{class_converter_a9b6896bc2f2d0c4b00e5d7883f952542}{letter\+Glyf}}
+\item 
+static \mbox{\hyperlink{class_sprite}{Sprite}} $\ast$$\ast$ \mbox{\hyperlink{class_converter_a34a5b1c427fee55fac061aa6cab867a6}{sprites}}
+\item 
+static \mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$$\ast$ \mbox{\hyperlink{class_converter_af3f72df0dca0e74acfa6f63ffffaea66}{glyfs}}
+\item 
+static \mbox{\hyperlink{struct_image}{Image}} $\ast$ \mbox{\hyperlink{class_converter_a37eb741bf7013d8009eafb419c67d7d2}{letters}}
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{class_converter_a1fa2248115d566273936d5886979a228}{letters\+Count}}
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{class_converter_aaf09599399d8c5a157966df00f00f262}{width}}
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{class_converter_aadda80d2dfe35a55d4e89261fd3ea24c}{height}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file Converter.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_converter_a8637e964d0e11e3becf7c05cc166025d}\label{class_converter_a8637e964d0e11e3becf7c05cc166025d}} 
+\index{Converter@{Converter}!makeGlyfArray@{makeGlyfArray}}
+\index{makeGlyfArray@{makeGlyfArray}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{makeGlyfArray()}{makeGlyfArray()}}
+{\footnotesize\ttfamily void Converter\+::make\+Glyf\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 46 of file Converter.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter_a8637e964d0e11e3becf7c05cc166025d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_converter_ac5b46bf89d8230f6f2d13611a6d5b024}\label{class_converter_ac5b46bf89d8230f6f2d13611a6d5b024}} 
+\index{Converter@{Converter}!setDeatfulFont@{setDeatfulFont}}
+\index{setDeatfulFont@{setDeatfulFont}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{setDeatfulFont()}{setDeatfulFont()}}
+{\footnotesize\ttfamily void Converter\+::set\+Deatful\+Font (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 32 of file Converter.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter_ac5b46bf89d8230f6f2d13611a6d5b024_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter_ac5b46bf89d8230f6f2d13611a6d5b024_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_converter_ad6a8b5d16dfa05fdb9443b714fe5c53e}\label{class_converter_ad6a8b5d16dfa05fdb9443b714fe5c53e}} 
+\index{Converter@{Converter}!setFontFromFile@{setFontFromFile}}
+\index{setFontFromFile@{setFontFromFile}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{setFontFromFile()}{setFontFromFile()}}
+{\footnotesize\ttfamily void Converter\+::set\+Font\+From\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{const uint32\+\_\+t \&}]{slice\+\_\+width,  }\item[{const uint32\+\_\+t \&}]{slice\+\_\+height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 36 of file Converter.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter_ad6a8b5d16dfa05fdb9443b714fe5c53e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter_ad6a8b5d16dfa05fdb9443b714fe5c53e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_converter_af5f32504f3eb13ea0e5ae8497745cdca}\label{class_converter_af5f32504f3eb13ea0e5ae8497745cdca}} 
+\index{Converter@{Converter}!stringToGlyfList@{stringToGlyfList}}
+\index{stringToGlyfList@{stringToGlyfList}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{stringToGlyfList()}{stringToGlyfList()}}
+{\footnotesize\ttfamily std\+::list$<$ \mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$ $>$ Converter\+::string\+To\+Glyf\+List (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 11 of file Converter.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter_af5f32504f3eb13ea0e5ae8497745cdca_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_converter_af5f32504f3eb13ea0e5ae8497745cdca_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_converter_af3f72df0dca0e74acfa6f63ffffaea66}\label{class_converter_af3f72df0dca0e74acfa6f63ffffaea66}} 
+\index{Converter@{Converter}!glyfs@{glyfs}}
+\index{glyfs@{glyfs}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{glyfs}{glyfs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$$\ast$ Converter\+::glyfs\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Converter.\+h.
+
+\mbox{\Hypertarget{class_converter_aadda80d2dfe35a55d4e89261fd3ea24c}\label{class_converter_aadda80d2dfe35a55d4e89261fd3ea24c}} 
+\index{Converter@{Converter}!height@{height}}
+\index{height@{height}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily uint32\+\_\+t Converter\+::height\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Converter.\+h.
+
+\mbox{\Hypertarget{class_converter_a9b6896bc2f2d0c4b00e5d7883f952542}\label{class_converter_a9b6896bc2f2d0c4b00e5d7883f952542}} 
+\index{Converter@{Converter}!letterGlyf@{letterGlyf}}
+\index{letterGlyf@{letterGlyf}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{letterGlyf}{letterGlyf}}
+{\footnotesize\ttfamily std\+::map$<$ char, \mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$ $>$ Converter\+::letter\+Glyf\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Converter.\+h.
+
+\mbox{\Hypertarget{class_converter_a37eb741bf7013d8009eafb419c67d7d2}\label{class_converter_a37eb741bf7013d8009eafb419c67d7d2}} 
+\index{Converter@{Converter}!letters@{letters}}
+\index{letters@{letters}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{letters}{letters}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_image}{Image}} $\ast$ Converter\+::letters\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Converter.\+h.
+
+\mbox{\Hypertarget{class_converter_a1fa2248115d566273936d5886979a228}\label{class_converter_a1fa2248115d566273936d5886979a228}} 
+\index{Converter@{Converter}!lettersCount@{lettersCount}}
+\index{lettersCount@{lettersCount}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{lettersCount}{lettersCount}}
+{\footnotesize\ttfamily uint32\+\_\+t Converter\+::letters\+Count\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Converter.\+h.
+
+\mbox{\Hypertarget{class_converter_ac0809a2518bd89a776450c92906f0a3b}\label{class_converter_ac0809a2518bd89a776450c92906f0a3b}} 
+\index{Converter@{Converter}!possibleSymbols@{possibleSymbols}}
+\index{possibleSymbols@{possibleSymbols}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{possibleSymbols}{possibleSymbols}}
+{\footnotesize\ttfamily constexpr std\+::string\+\_\+view Converter\+::possible\+Symbols = \char`\"{} !\textbackslash{}\char`\"{}\#\$\%\&\textquotesingle{}()$\ast$+,-\/./0123456789\+:;$<$=$>$?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\mbox{[}\textbackslash{}\textbackslash{}\mbox{]}$^\wedge$\+\_\+\`{}abcdefghijklmnopqrstuvwxyz\{$\vert$\}$\sim$\textbackslash{}n\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Converter.\+h.
+
+\mbox{\Hypertarget{class_converter_a34a5b1c427fee55fac061aa6cab867a6}\label{class_converter_a34a5b1c427fee55fac061aa6cab867a6}} 
+\index{Converter@{Converter}!sprites@{sprites}}
+\index{sprites@{sprites}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{sprites}{sprites}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite}{Sprite}} $\ast$$\ast$ Converter\+::sprites\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Converter.\+h.
+
+\mbox{\Hypertarget{class_converter_aaf09599399d8c5a157966df00f00f262}\label{class_converter_aaf09599399d8c5a157966df00f00f262}} 
+\index{Converter@{Converter}!width@{width}}
+\index{width@{width}!Converter@{Converter}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily uint32\+\_\+t Converter\+::width\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Converter.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_converter_8h}{Converter.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_converter_8cpp}{Converter.\+cpp}}\end{DoxyCompactItemize}

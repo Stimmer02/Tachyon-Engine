@@ -1,0 +1,352 @@
+\hypertarget{class_transform_stack}{}\doxysection{Transform\+Stack Class Reference}
+\label{class_transform_stack}\index{TransformStack@{TransformStack}}
+
+
+{\ttfamily \#include $<$Transform\+Stack.\+h$>$}
+
+
+
+Collaboration diagram for Transform\+Stack\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_transform_stack__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_transform_stack_a6f15e82f4a143ef3f6b4fa31778f4c82}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initializes transformation stack with identity matrix. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a427d47e0da5dd8946a316dfce01a9d8c}{Push}} ()
+\begin{DoxyCompactList}\small\item\em Creates copy of matrix at the top and pushes it to the stack. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a5c7ff4213713d8926bccea35987ed0e7}{Ortho}} (const float \&left, const float \&right, const float \&bottom, const float \&top, const float \&near, const float \&far)
+\begin{DoxyCompactList}\small\item\em Multiplies top matix with orthogonal projection matrix. Action occurs only if stack is initialized. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a1828af8d580f12e5ad34ad34621b7825}{Frustum}} (const float \&left, const float \&right, const float \&bottom, const float \&top, const float \&near, const float \&far)
+\begin{DoxyCompactList}\small\item\em Multiplies top matix with frustum projection matrix. Action occurs only if stack is initialized. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_af7846731c9f25042ae1d33ed0ad46481}{Translate}} (const float \&x\+Offset, const float \&y\+Offset, const float \&z\+Offset)
+\begin{DoxyCompactList}\small\item\em Multiplies top matix with translation matrix. Action occurs only if stack is initialized. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_ad9ef711075eafcda9b35191afeb92cd2}{Scale}} (const float \&x\+Scale, const float \&y\+Scale, const float \&z\+Scale)
+\begin{DoxyCompactList}\small\item\em Multiplies top matix with scaling matrix. Action occurs only if stack is initialized. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a9d6bc43729d67f6de1bc13673a80be40}{Rotate}} (const float \&angle, float x\+Axis, float y\+Axis, float z\+Axis)
+\begin{DoxyCompactList}\small\item\em Multiplies top matix with rotation matrix. Action occurs only if stack is initialized. If $\vert$\+XYZ$\vert$!=1 then vector will be normalized. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a5fdb6887a0d43796d6c79899439a1bbf}{Mul\+Matrix}} (\mbox{\hyperlink{class_matrix}{Matrix}} \&other)
+\begin{DoxyCompactList}\small\item\em Multiplies matrix at the top of stack with provided matrix. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a7410795576bf87720f4122fa7227a102}{Transpose}} ()
+\begin{DoxyCompactList}\small\item\em Transposes matrix at the top of stack. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a8bc40f6b1f4479e347d17b9af0c99f3c}{Inverse}} ()
+\begin{DoxyCompactList}\small\item\em Replaces matrix at the top of stack with its inverse. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_transform_stack_a6d22e6ac293e17a9dfd148810d219cbf}{Top}} ()
+\begin{DoxyCompactList}\small\item\em Returns copy of matrix at the top. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_transform_stack_a9a3cc62b70d32c520b45bb05bd428926}{Pop}} ()
+\begin{DoxyCompactList}\small\item\em Pops matrix at the top of the stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file Transform\+Stack.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_transform_stack_a1828af8d580f12e5ad34ad34621b7825}\label{class_transform_stack_a1828af8d580f12e5ad34ad34621b7825}} 
+\index{TransformStack@{TransformStack}!Frustum@{Frustum}}
+\index{Frustum@{Frustum}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Frustum()}{Frustum()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Frustum (\begin{DoxyParamCaption}\item[{const float \&}]{left,  }\item[{const float \&}]{right,  }\item[{const float \&}]{bottom,  }\item[{const float \&}]{top,  }\item[{const float \&}]{near,  }\item[{const float \&}]{far }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Multiplies top matix with frustum projection matrix. Action occurs only if stack is initialized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & \\
+\hline
+{\em right} & \\
+\hline
+{\em bottom} & \\
+\hline
+{\em top} & \\
+\hline
+{\em near} & \\
+\hline
+{\em far} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 65 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{class_transform_stack_a1828af8d580f12e5ad34ad34621b7825_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_transform_stack_a6f15e82f4a143ef3f6b4fa31778f4c82}\label{class_transform_stack_a6f15e82f4a143ef3f6b4fa31778f4c82}} 
+\index{TransformStack@{TransformStack}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Initializes transformation stack with identity matrix. 
+
+
+
+Definition at line 13 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_transform_stack_a6f15e82f4a143ef3f6b4fa31778f4c82_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_transform_stack_a8bc40f6b1f4479e347d17b9af0c99f3c}\label{class_transform_stack_a8bc40f6b1f4479e347d17b9af0c99f3c}} 
+\index{TransformStack@{TransformStack}!Inverse@{Inverse}}
+\index{Inverse@{Inverse}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Inverse()}{Inverse()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Inverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Replaces matrix at the top of stack with its inverse. 
+
+
+
+Definition at line 200 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_transform_stack_a8bc40f6b1f4479e347d17b9af0c99f3c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_transform_stack_a5fdb6887a0d43796d6c79899439a1bbf}\label{class_transform_stack_a5fdb6887a0d43796d6c79899439a1bbf}} 
+\index{TransformStack@{TransformStack}!MulMatrix@{MulMatrix}}
+\index{MulMatrix@{MulMatrix}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{MulMatrix()}{MulMatrix()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Mul\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Multiplies matrix at the top of stack with provided matrix. 
+
+
+
+Definition at line 177 of file Transform\+Stack.\+h.
+
+\mbox{\Hypertarget{class_transform_stack_a5c7ff4213713d8926bccea35987ed0e7}\label{class_transform_stack_a5c7ff4213713d8926bccea35987ed0e7}} 
+\index{TransformStack@{TransformStack}!Ortho@{Ortho}}
+\index{Ortho@{Ortho}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Ortho()}{Ortho()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Ortho (\begin{DoxyParamCaption}\item[{const float \&}]{left,  }\item[{const float \&}]{right,  }\item[{const float \&}]{bottom,  }\item[{const float \&}]{top,  }\item[{const float \&}]{near,  }\item[{const float \&}]{far }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Multiplies top matix with orthogonal projection matrix. Action occurs only if stack is initialized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & \\
+\hline
+{\em right} & \\
+\hline
+{\em bottom} & \\
+\hline
+{\em top} & \\
+\hline
+{\em near} & \\
+\hline
+{\em far} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_transform_stack_a5c7ff4213713d8926bccea35987ed0e7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_transform_stack_a9a3cc62b70d32c520b45bb05bd428926}\label{class_transform_stack_a9a3cc62b70d32c520b45bb05bd428926}} 
+\index{TransformStack@{TransformStack}!Pop@{Pop}}
+\index{Pop@{Pop}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Pops matrix at the top of the stack. 
+
+
+
+Definition at line 222 of file Transform\+Stack.\+h.
+
+\mbox{\Hypertarget{class_transform_stack_a427d47e0da5dd8946a316dfce01a9d8c}\label{class_transform_stack_a427d47e0da5dd8946a316dfce01a9d8c}} 
+\index{TransformStack@{TransformStack}!Push@{Push}}
+\index{Push@{Push}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Push (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates copy of matrix at the top and pushes it to the stack. 
+
+
+
+Definition at line 25 of file Transform\+Stack.\+h.
+
+\mbox{\Hypertarget{class_transform_stack_a9d6bc43729d67f6de1bc13673a80be40}\label{class_transform_stack_a9d6bc43729d67f6de1bc13673a80be40}} 
+\index{TransformStack@{TransformStack}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Rotate()}{Rotate()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Rotate (\begin{DoxyParamCaption}\item[{const float \&}]{angle,  }\item[{float}]{x\+Axis,  }\item[{float}]{y\+Axis,  }\item[{float}]{z\+Axis }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Multiplies top matix with rotation matrix. Action occurs only if stack is initialized. If $\vert$\+XYZ$\vert$!=1 then vector will be normalized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angle of rotation \\
+\hline
+{\em x\+Axis} & X coordinate of rotation axis \\
+\hline
+{\em y\+Axis} & Y coordinate of rotation axis \\
+\hline
+{\em z\+Axis} & Z coordinate of rotation axis \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 134 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{class_transform_stack_a9d6bc43729d67f6de1bc13673a80be40_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_transform_stack_ad9ef711075eafcda9b35191afeb92cd2}\label{class_transform_stack_ad9ef711075eafcda9b35191afeb92cd2}} 
+\index{TransformStack@{TransformStack}!Scale@{Scale}}
+\index{Scale@{Scale}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Scale()}{Scale()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Scale (\begin{DoxyParamCaption}\item[{const float \&}]{x\+Scale,  }\item[{const float \&}]{y\+Scale,  }\item[{const float \&}]{z\+Scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Multiplies top matix with scaling matrix. Action occurs only if stack is initialized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Scale} & \\
+\hline
+{\em y\+Scale} & \\
+\hline
+{\em z\+Scale} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 111 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_transform_stack_ad9ef711075eafcda9b35191afeb92cd2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_transform_stack_a6d22e6ac293e17a9dfd148810d219cbf}\label{class_transform_stack_a6d22e6ac293e17a9dfd148810d219cbf}} 
+\index{TransformStack@{TransformStack}!Top@{Top}}
+\index{Top@{Top}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Top()}{Top()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Transform\+Stack\+::\+Top (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Returns copy of matrix at the top. 
+
+\begin{DoxyReturn}{Returns}
+Copy of the top matrix or blank matrix if stack is empty 
+\end{DoxyReturn}
+
+
+Definition at line 213 of file Transform\+Stack.\+h.
+
+\mbox{\Hypertarget{class_transform_stack_af7846731c9f25042ae1d33ed0ad46481}\label{class_transform_stack_af7846731c9f25042ae1d33ed0ad46481}} 
+\index{TransformStack@{TransformStack}!Translate@{Translate}}
+\index{Translate@{Translate}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Translate()}{Translate()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Translate (\begin{DoxyParamCaption}\item[{const float \&}]{x\+Offset,  }\item[{const float \&}]{y\+Offset,  }\item[{const float \&}]{z\+Offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Multiplies top matix with translation matrix. Action occurs only if stack is initialized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Offset} & \\
+\hline
+{\em y\+Offset} & \\
+\hline
+{\em z\+Offset} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 90 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_transform_stack_af7846731c9f25042ae1d33ed0ad46481_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_transform_stack_a7410795576bf87720f4122fa7227a102}\label{class_transform_stack_a7410795576bf87720f4122fa7227a102}} 
+\index{TransformStack@{TransformStack}!Transpose@{Transpose}}
+\index{Transpose@{Transpose}!TransformStack@{TransformStack}}
+\doxysubsubsection{\texorpdfstring{Transpose()}{Transpose()}}
+{\footnotesize\ttfamily static void Transform\+Stack\+::\+Transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Transposes matrix at the top of stack. 
+
+
+
+Definition at line 189 of file Transform\+Stack.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_transform_stack_a7410795576bf87720f4122fa7227a102_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_transform_stack_8h}{Transform\+Stack.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,249 @@
+\hypertarget{class_cube_sprite}{}\doxysection{Cube\+Sprite Class Reference}
+\label{class_cube_sprite}\index{CubeSprite@{CubeSprite}}
+
+
+{\ttfamily \#include $<$Cube\+Sprite.\+h$>$}
+
+
+
+Inheritance diagram for Cube\+Sprite\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_cube_sprite__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Cube\+Sprite\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_cube_sprite__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cube_sprite_aa47a3bf7606c97b4549b19b36fabd8d2}{Cube\+Sprite}} ()
+\item 
+\mbox{\hyperlink{class_cube_sprite_aaf6f93db0966659b7f95f9b6677e6dcf}{Cube\+Sprite}} (const \mbox{\hyperlink{class_cube_sprite}{Cube\+Sprite}} $\ast$sprite)
+\item 
+void \mbox{\hyperlink{class_cube_sprite_ab0b487c266545420799c87b371271bb6}{Update\+Face}} (GLint face, const \mbox{\hyperlink{struct_color}{Color}} $\ast$pixels, const uint32\+\_\+t \&\mbox{\hyperlink{class_cube_sprite_a42b5b069a6cb6234d2d0d9ce1eb7d8d9}{width}}, const uint32\+\_\+t \&\mbox{\hyperlink{class_cube_sprite_ab59af1e55fa6589773df0b658fe8d4a4}{height}})
+\item 
+void \mbox{\hyperlink{class_cube_sprite_ab9374bc080aea5f23b587991998a5459}{Set\+Texture\+Attrib}} (const GLenum \&attrib, const GLint \&value) override
+\begin{DoxyCompactList}\small\item\em Method sets value correlated to texture attribute. \end{DoxyCompactList}\item 
+GLuint \mbox{\hyperlink{class_cube_sprite_a9f721008c561fc916a91cb15daff6100}{Get\+Texture\+ID}} () override
+\begin{DoxyCompactList}\small\item\em Method returns texture id of current sprite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_cube_sprite_a15760112d8624ec17661993555cd442f}{Set\+Pixel}} (const uint32\+\_\+t \&x, const uint32\+\_\+t \&y, const \mbox{\hyperlink{struct_color}{Color}} \&\mbox{\hyperlink{structcolor}{color}})
+\item 
+void \mbox{\hyperlink{class_cube_sprite_aa6436eaa6d9ab24966a843c1ef3a7a96}{Load}} (\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$shader) override
+\begin{DoxyCompactList}\small\item\em Method loads current sprite to texture buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_cube_sprite_a1c1fcbe420e33f722cefdd491cffdaa7}{Un\+Load}} () override
+\begin{DoxyCompactList}\small\item\em Method unloads current sprite from texture buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_cube_sprite_a9d9a68f632bce9fe950aed346cf4dad5}{Clear\+Color}} (const \mbox{\hyperlink{struct_color}{Color}} \&clear\+Color) override
+\begin{DoxyCompactList}\small\item\em Method fills texture with provided color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_cube_sprite_a0ad71c5e5bfab2a51383335ae8b3ee31}{$\sim$\+Cube\+Sprite}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+GLuint \mbox{\hyperlink{class_cube_sprite_a68c8d382519de7e4b7ed6c3779ac3e30}{texture}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_cube_sprite_a42b5b069a6cb6234d2d0d9ce1eb7d8d9}{width}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_cube_sprite_ab59af1e55fa6589773df0b658fe8d4a4}{height}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file Cube\+Sprite.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_cube_sprite_aa47a3bf7606c97b4549b19b36fabd8d2}\label{class_cube_sprite_aa47a3bf7606c97b4549b19b36fabd8d2}} 
+\index{CubeSprite@{CubeSprite}!CubeSprite@{CubeSprite}}
+\index{CubeSprite@{CubeSprite}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{CubeSprite()}{CubeSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Cube\+Sprite\+::\+Cube\+Sprite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Cube\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_cube_sprite_aaf6f93db0966659b7f95f9b6677e6dcf}\label{class_cube_sprite_aaf6f93db0966659b7f95f9b6677e6dcf}} 
+\index{CubeSprite@{CubeSprite}!CubeSprite@{CubeSprite}}
+\index{CubeSprite@{CubeSprite}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{CubeSprite()}{CubeSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Cube\+Sprite\+::\+Cube\+Sprite (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_cube_sprite}{Cube\+Sprite}} $\ast$}]{sprite }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file Cube\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_cube_sprite_a0ad71c5e5bfab2a51383335ae8b3ee31}\label{class_cube_sprite_a0ad71c5e5bfab2a51383335ae8b3ee31}} 
+\index{CubeSprite@{CubeSprite}!````~CubeSprite@{$\sim$CubeSprite}}
+\index{````~CubeSprite@{$\sim$CubeSprite}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{$\sim$CubeSprite()}{~CubeSprite()}}
+{\footnotesize\ttfamily Cube\+Sprite\+::$\sim$\+Cube\+Sprite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file Cube\+Sprite.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_cube_sprite_a9d9a68f632bce9fe950aed346cf4dad5}\label{class_cube_sprite_a9d9a68f632bce9fe950aed346cf4dad5}} 
+\index{CubeSprite@{CubeSprite}!ClearColor@{ClearColor}}
+\index{ClearColor@{ClearColor}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{ClearColor()}{ClearColor()}}
+{\footnotesize\ttfamily void Cube\+Sprite\+::\+Clear\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{clear\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method fills texture with provided color. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_a34404a9e5f31096d75d9a8f22a1d97cc}{Sprite}}.
+
+
+
+Definition at line 35 of file Cube\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_cube_sprite_a9f721008c561fc916a91cb15daff6100}\label{class_cube_sprite_a9f721008c561fc916a91cb15daff6100}} 
+\index{CubeSprite@{CubeSprite}!GetTextureID@{GetTextureID}}
+\index{GetTextureID@{GetTextureID}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{GetTextureID()}{GetTextureID()}}
+{\footnotesize\ttfamily GLuint Cube\+Sprite\+::\+Get\+Texture\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method returns texture id of current sprite. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_sprite}{Sprite}} texture id 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_sprite_a037b294644e9666941cf6d4b914504a1}{Sprite}}.
+
+
+
+Definition at line 22 of file Cube\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_cube_sprite_aa6436eaa6d9ab24966a843c1ef3a7a96}\label{class_cube_sprite_aa6436eaa6d9ab24966a843c1ef3a7a96}} 
+\index{CubeSprite@{CubeSprite}!Load@{Load}}
+\index{Load@{Load}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily void Cube\+Sprite\+::\+Load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method loads current sprite to texture buffer. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_a7157f052d53e9db60d4d66d3637e172f}{Sprite}}.
+
+
+
+Definition at line 27 of file Cube\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_cube_sprite_a15760112d8624ec17661993555cd442f}\label{class_cube_sprite_a15760112d8624ec17661993555cd442f}} 
+\index{CubeSprite@{CubeSprite}!SetPixel@{SetPixel}}
+\index{SetPixel@{SetPixel}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{SetPixel()}{SetPixel()}}
+{\footnotesize\ttfamily void Cube\+Sprite\+::\+Set\+Pixel (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t \&}]{x,  }\item[{const uint32\+\_\+t \&}]{y,  }\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_cube_sprite_ab9374bc080aea5f23b587991998a5459}\label{class_cube_sprite_ab9374bc080aea5f23b587991998a5459}} 
+\index{CubeSprite@{CubeSprite}!SetTextureAttrib@{SetTextureAttrib}}
+\index{SetTextureAttrib@{SetTextureAttrib}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{SetTextureAttrib()}{SetTextureAttrib()}}
+{\footnotesize\ttfamily void Cube\+Sprite\+::\+Set\+Texture\+Attrib (\begin{DoxyParamCaption}\item[{const GLenum \&}]{attrib,  }\item[{const GLint \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method sets value correlated to texture attribute. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_af0935e92c9fae5d97bfadffd5b5dc1e9}{Sprite}}.
+
+
+
+Definition at line 18 of file Cube\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_cube_sprite_a1c1fcbe420e33f722cefdd491cffdaa7}\label{class_cube_sprite_a1c1fcbe420e33f722cefdd491cffdaa7}} 
+\index{CubeSprite@{CubeSprite}!UnLoad@{UnLoad}}
+\index{UnLoad@{UnLoad}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{UnLoad()}{UnLoad()}}
+{\footnotesize\ttfamily void Cube\+Sprite\+::\+Un\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method unloads current sprite from texture buffer. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_ade7895e85f3dc02a8c6334e5647b42dc}{Sprite}}.
+
+
+
+Definition at line 31 of file Cube\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_cube_sprite_ab0b487c266545420799c87b371271bb6}\label{class_cube_sprite_ab0b487c266545420799c87b371271bb6}} 
+\index{CubeSprite@{CubeSprite}!UpdateFace@{UpdateFace}}
+\index{UpdateFace@{UpdateFace}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{UpdateFace()}{UpdateFace()}}
+{\footnotesize\ttfamily void Cube\+Sprite\+::\+Update\+Face (\begin{DoxyParamCaption}\item[{GLint}]{face,  }\item[{const \mbox{\hyperlink{struct_color}{Color}} $\ast$}]{pixels,  }\item[{const uint32\+\_\+t \&}]{width,  }\item[{const uint32\+\_\+t \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file Cube\+Sprite.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_cube_sprite_ab59af1e55fa6589773df0b658fe8d4a4}\label{class_cube_sprite_ab59af1e55fa6589773df0b658fe8d4a4}} 
+\index{CubeSprite@{CubeSprite}!height@{height}}
+\index{height@{height}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily uint32\+\_\+t Cube\+Sprite\+::height = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Cube\+Sprite.\+h.
+
+\mbox{\Hypertarget{class_cube_sprite_a68c8d382519de7e4b7ed6c3779ac3e30}\label{class_cube_sprite_a68c8d382519de7e4b7ed6c3779ac3e30}} 
+\index{CubeSprite@{CubeSprite}!texture@{texture}}
+\index{texture@{texture}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{texture}{texture}}
+{\footnotesize\ttfamily GLuint Cube\+Sprite\+::texture = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 10 of file Cube\+Sprite.\+h.
+
+\mbox{\Hypertarget{class_cube_sprite_a42b5b069a6cb6234d2d0d9ce1eb7d8d9}\label{class_cube_sprite_a42b5b069a6cb6234d2d0d9ce1eb7d8d9}} 
+\index{CubeSprite@{CubeSprite}!width@{width}}
+\index{width@{width}!CubeSprite@{CubeSprite}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily uint32\+\_\+t Cube\+Sprite\+::width = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Cube\+Sprite.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_cube_sprite_8h}{Cube\+Sprite.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_cube_sprite_8cpp}{Cube\+Sprite.\+cpp}}\end{DoxyCompactItemize}

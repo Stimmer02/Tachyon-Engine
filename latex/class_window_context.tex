@@ -1,0 +1,633 @@
+\hypertarget{class_window_context}{}\doxysection{Window\+Context Class Reference}
+\label{class_window_context}\index{WindowContext@{WindowContext}}
+
+
+{\ttfamily \#include $<$Window\+Context.\+h$>$}
+
+
+
+Collaboration diagram for Window\+Context\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{class_window_context__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_window_context_a2fb0c5bb57e9e8ad5d91af3e0c35e61e}{Window\+Context}} (const bool \&suppress\+Visibility=false, const bool \&resizeable=false, const std\+::string \&file=\char`\"{}runtime.\+log\char`\"{})
+\item 
+void \mbox{\hyperlink{class_window_context_a11876f05129b73d4b6a49f900a2e8328}{Open}} (const int \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}=800, const int \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}=600, const std\+::string \&title=\char`\"{}Window\char`\"{})
+\item 
+void \mbox{\hyperlink{class_window_context_ae41ab7989bb1806b804f619ace0b51da}{Set\+VSync}} (const bool \&vsync=true)
+\item 
+void \mbox{\hyperlink{class_window_context_a5f14dc3728973b7f77217e61ed300035}{Set\+ZBuffer}} (const bool \&depth\+Buffer=false)
+\item 
+void \mbox{\hyperlink{class_window_context_a8663b0ab3116e657500144d556328dca}{Bind\+Mouse\+Button\+Callback}} (GLFWmousebuttonfun callback) const
+\item 
+void \mbox{\hyperlink{class_window_context_aac7d40d6a442b60b12ca094fdf8250bd}{Bind\+Key\+Callback}} (GLFWkeyfun callback) const
+\item 
+void \mbox{\hyperlink{class_window_context_ab9fa34e349e909bb92e3270dd3fd6ea2}{Bind\+Resize\+Callback}} (GLFWwindowsizefun callback) const
+\item 
+void \mbox{\hyperlink{class_window_context_a76232b575be443492ce8e01390cf0702}{Bind\+Scroll\+Callback}} (GLFWscrollfun callback) const
+\item 
+void \mbox{\hyperlink{class_window_context_ac88b25c0a4e61c080e204bd4e44fe2c6}{Set\+Internal\+Pointer}} (void $\ast$pointer) const
+\item 
+void $\ast$ \mbox{\hyperlink{class_window_context_ad2413c1761abf6a2c8b93041d692004f}{Get\+Internal\+Pointer}} () const
+\item 
+void \mbox{\hyperlink{class_window_context_a64f94b76d3758d3a15b270b96632e47d}{Check\+Errors}} () const
+\item 
+void \mbox{\hyperlink{class_window_context_a8601ea19b285ca933ed100624b408cee}{Close}} () const
+\item 
+bool \mbox{\hyperlink{class_window_context_a8dcc92189cda1547866910a6e864dc79}{Should\+Close}} () const
+\item 
+void \mbox{\hyperlink{class_window_context_ad207c35e63e5aa26313e264986b30e28}{Pool\+Events}} () const
+\item 
+int \mbox{\hyperlink{class_window_context_ab6d600ae08405eebb46e9f74e01ed316}{Get\+Mouse\+Button}} (const int \&button) const
+\item 
+int \mbox{\hyperlink{class_window_context_a30244a7754dea5019df9412de365d655}{Get\+Keyboard\+Key}} (const int \&key) const
+\item 
+void \mbox{\hyperlink{class_window_context_a16c2f32f03fc8b78deaa28c45c9a7678}{Get\+Mouse\+Pos}} (double \&x, double \&y) const
+\item 
+void \mbox{\hyperlink{class_window_context_a31ab18a77b1fd68c889480be40efb238}{Get\+Window\+Size}} (int \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, int \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}) const
+\item 
+void \mbox{\hyperlink{class_window_context_afa82e3e7a730f7e6f13793255c73802e}{Swap\+Buffers}} () const
+\item 
+void \mbox{\hyperlink{class_window_context_a00a31a8c877202ba9e034cd05444c1a0}{Destroy\+Window}} ()
+\item 
+\mbox{\hyperlink{class_i_log}{ILog}} $\ast$ \mbox{\hyperlink{class_window_context_aa1aa5d4d301ce95390013b98f46dbda3}{Get\+Context\+Logger}} ()
+\item 
+\mbox{\hyperlink{class_window_context_a48c689a550895c9a80bacd15ea5c6a64}{$\sim$\+Window\+Context}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_window_context_a001d491fef8c4befec19748532bef8dc}{Set\+Hints}} (const bool \&suppress\+Visibility, const bool \&resizeable)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::unordered\+\_\+map$<$ GLenum, const char $\ast$ $>$ \mbox{\hyperlink{class_window_context_af13d01b3286cd2bcf69173360d09b6f3}{error\+Map}}
+\item 
+GLbitfield \mbox{\hyperlink{class_window_context_a94ef576ea8650749d6775233fb4843fc}{bufferbits}}
+\item 
+GLFWwindow $\ast$ \mbox{\hyperlink{class_window_context_ab759fcbeef2f200c9b93172f4637eb15}{window}}
+\item 
+\mbox{\hyperlink{class_i_log}{ILog}} $\ast$ \mbox{\hyperlink{class_window_context_a47e87f22962ca7b1af367bc5dd1e632b}{window\+Logger}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 13 of file Window\+Context.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_window_context_a2fb0c5bb57e9e8ad5d91af3e0c35e61e}\label{class_window_context_a2fb0c5bb57e9e8ad5d91af3e0c35e61e}} 
+\index{WindowContext@{WindowContext}!WindowContext@{WindowContext}}
+\index{WindowContext@{WindowContext}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{WindowContext()}{WindowContext()}}
+{\footnotesize\ttfamily Window\+Context\+::\+Window\+Context (\begin{DoxyParamCaption}\item[{const bool \&}]{suppress\+Visibility = {\ttfamily false},  }\item[{const bool \&}]{resizeable = {\ttfamily false},  }\item[{const std\+::string \&}]{file = {\ttfamily \char`\"{}runtime.log\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 54 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a2fb0c5bb57e9e8ad5d91af3e0c35e61e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a48c689a550895c9a80bacd15ea5c6a64}\label{class_window_context_a48c689a550895c9a80bacd15ea5c6a64}} 
+\index{WindowContext@{WindowContext}!````~WindowContext@{$\sim$WindowContext}}
+\index{````~WindowContext@{$\sim$WindowContext}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{$\sim$WindowContext()}{~WindowContext()}}
+{\footnotesize\ttfamily Window\+Context\+::$\sim$\+Window\+Context (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 262 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a48c689a550895c9a80bacd15ea5c6a64_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_window_context_aac7d40d6a442b60b12ca094fdf8250bd}\label{class_window_context_aac7d40d6a442b60b12ca094fdf8250bd}} 
+\index{WindowContext@{WindowContext}!BindKeyCallback@{BindKeyCallback}}
+\index{BindKeyCallback@{BindKeyCallback}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{BindKeyCallback()}{BindKeyCallback()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Bind\+Key\+Callback (\begin{DoxyParamCaption}\item[{GLFWkeyfun}]{callback }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 124 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_aac7d40d6a442b60b12ca094fdf8250bd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a8663b0ab3116e657500144d556328dca}\label{class_window_context_a8663b0ab3116e657500144d556328dca}} 
+\index{WindowContext@{WindowContext}!BindMouseButtonCallback@{BindMouseButtonCallback}}
+\index{BindMouseButtonCallback@{BindMouseButtonCallback}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{BindMouseButtonCallback()}{BindMouseButtonCallback()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Bind\+Mouse\+Button\+Callback (\begin{DoxyParamCaption}\item[{GLFWmousebuttonfun}]{callback }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 115 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_window_context_a8663b0ab3116e657500144d556328dca_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_ab9fa34e349e909bb92e3270dd3fd6ea2}\label{class_window_context_ab9fa34e349e909bb92e3270dd3fd6ea2}} 
+\index{WindowContext@{WindowContext}!BindResizeCallback@{BindResizeCallback}}
+\index{BindResizeCallback@{BindResizeCallback}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{BindResizeCallback()}{BindResizeCallback()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Bind\+Resize\+Callback (\begin{DoxyParamCaption}\item[{GLFWwindowsizefun}]{callback }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 133 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_window_context_ab9fa34e349e909bb92e3270dd3fd6ea2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a76232b575be443492ce8e01390cf0702}\label{class_window_context_a76232b575be443492ce8e01390cf0702}} 
+\index{WindowContext@{WindowContext}!BindScrollCallback@{BindScrollCallback}}
+\index{BindScrollCallback@{BindScrollCallback}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{BindScrollCallback()}{BindScrollCallback()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Bind\+Scroll\+Callback (\begin{DoxyParamCaption}\item[{GLFWscrollfun}]{callback }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 142 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{class_window_context_a76232b575be443492ce8e01390cf0702_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a64f94b76d3758d3a15b270b96632e47d}\label{class_window_context_a64f94b76d3758d3a15b270b96632e47d}} 
+\index{WindowContext@{WindowContext}!CheckErrors@{CheckErrors}}
+\index{CheckErrors@{CheckErrors}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{CheckErrors()}{CheckErrors()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Check\+Errors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 170 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_window_context_a64f94b76d3758d3a15b270b96632e47d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a64f94b76d3758d3a15b270b96632e47d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a8601ea19b285ca933ed100624b408cee}\label{class_window_context_a8601ea19b285ca933ed100624b408cee}} 
+\index{WindowContext@{WindowContext}!Close@{Close}}
+\index{Close@{Close}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 186 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{class_window_context_a8601ea19b285ca933ed100624b408cee_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a8601ea19b285ca933ed100624b408cee_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a00a31a8c877202ba9e034cd05444c1a0}\label{class_window_context_a00a31a8c877202ba9e034cd05444c1a0}} 
+\index{WindowContext@{WindowContext}!DestroyWindow@{DestroyWindow}}
+\index{DestroyWindow@{DestroyWindow}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{DestroyWindow()}{DestroyWindow()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Destroy\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 247 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a00a31a8c877202ba9e034cd05444c1a0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a00a31a8c877202ba9e034cd05444c1a0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_aa1aa5d4d301ce95390013b98f46dbda3}\label{class_window_context_aa1aa5d4d301ce95390013b98f46dbda3}} 
+\index{WindowContext@{WindowContext}!GetContextLogger@{GetContextLogger}}
+\index{GetContextLogger@{GetContextLogger}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{GetContextLogger()}{GetContextLogger()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_log}{ILog}}$\ast$ Window\+Context\+::\+Get\+Context\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 258 of file Window\+Context.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_aa1aa5d4d301ce95390013b98f46dbda3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_ad2413c1761abf6a2c8b93041d692004f}\label{class_window_context_ad2413c1761abf6a2c8b93041d692004f}} 
+\index{WindowContext@{WindowContext}!GetInternalPointer@{GetInternalPointer}}
+\index{GetInternalPointer@{GetInternalPointer}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{GetInternalPointer()}{GetInternalPointer()}}
+{\footnotesize\ttfamily void$\ast$ Window\+Context\+::\+Get\+Internal\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 160 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_window_context_ad2413c1761abf6a2c8b93041d692004f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a30244a7754dea5019df9412de365d655}\label{class_window_context_a30244a7754dea5019df9412de365d655}} 
+\index{WindowContext@{WindowContext}!GetKeyboardKey@{GetKeyboardKey}}
+\index{GetKeyboardKey@{GetKeyboardKey}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{GetKeyboardKey()}{GetKeyboardKey()}}
+{\footnotesize\ttfamily int Window\+Context\+::\+Get\+Keyboard\+Key (\begin{DoxyParamCaption}\item[{const int \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 221 of file Window\+Context.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a30244a7754dea5019df9412de365d655_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_ab6d600ae08405eebb46e9f74e01ed316}\label{class_window_context_ab6d600ae08405eebb46e9f74e01ed316}} 
+\index{WindowContext@{WindowContext}!GetMouseButton@{GetMouseButton}}
+\index{GetMouseButton@{GetMouseButton}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{GetMouseButton()}{GetMouseButton()}}
+{\footnotesize\ttfamily int Window\+Context\+::\+Get\+Mouse\+Button (\begin{DoxyParamCaption}\item[{const int \&}]{button }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 215 of file Window\+Context.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_ab6d600ae08405eebb46e9f74e01ed316_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a16c2f32f03fc8b78deaa28c45c9a7678}\label{class_window_context_a16c2f32f03fc8b78deaa28c45c9a7678}} 
+\index{WindowContext@{WindowContext}!GetMousePos@{GetMousePos}}
+\index{GetMousePos@{GetMousePos}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{GetMousePos()}{GetMousePos()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Get\+Mouse\+Pos (\begin{DoxyParamCaption}\item[{double \&}]{x,  }\item[{double \&}]{y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 227 of file Window\+Context.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a16c2f32f03fc8b78deaa28c45c9a7678_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a31ab18a77b1fd68c889480be40efb238}\label{class_window_context_a31ab18a77b1fd68c889480be40efb238}} 
+\index{WindowContext@{WindowContext}!GetWindowSize@{GetWindowSize}}
+\index{GetWindowSize@{GetWindowSize}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{GetWindowSize()}{GetWindowSize()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Get\+Window\+Size (\begin{DoxyParamCaption}\item[{int \&}]{width,  }\item[{int \&}]{height }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 231 of file Window\+Context.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a31ab18a77b1fd68c889480be40efb238_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a11876f05129b73d4b6a49f900a2e8328}\label{class_window_context_a11876f05129b73d4b6a49f900a2e8328}} 
+\index{WindowContext@{WindowContext}!Open@{Open}}
+\index{Open@{Open}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{Open()}{Open()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Open (\begin{DoxyParamCaption}\item[{const int \&}]{width = {\ttfamily 800},  }\item[{const int \&}]{height = {\ttfamily 600},  }\item[{const std\+::string \&}]{title = {\ttfamily \char`\"{}Window\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 74 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{class_window_context_a11876f05129b73d4b6a49f900a2e8328_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a11876f05129b73d4b6a49f900a2e8328_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_ad207c35e63e5aa26313e264986b30e28}\label{class_window_context_ad207c35e63e5aa26313e264986b30e28}} 
+\index{WindowContext@{WindowContext}!PoolEvents@{PoolEvents}}
+\index{PoolEvents@{PoolEvents}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{PoolEvents()}{PoolEvents()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Pool\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 211 of file Window\+Context.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_ad207c35e63e5aa26313e264986b30e28_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a001d491fef8c4befec19748532bef8dc}\label{class_window_context_a001d491fef8c4befec19748532bef8dc}} 
+\index{WindowContext@{WindowContext}!SetHints@{SetHints}}
+\index{SetHints@{SetHints}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{SetHints()}{SetHints()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Set\+Hints (\begin{DoxyParamCaption}\item[{const bool \&}]{suppress\+Visibility,  }\item[{const bool \&}]{resizeable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 34 of file Window\+Context.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a001d491fef8c4befec19748532bef8dc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_ac88b25c0a4e61c080e204bd4e44fe2c6}\label{class_window_context_ac88b25c0a4e61c080e204bd4e44fe2c6}} 
+\index{WindowContext@{WindowContext}!SetInternalPointer@{SetInternalPointer}}
+\index{SetInternalPointer@{SetInternalPointer}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{SetInternalPointer()}{SetInternalPointer()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Set\+Internal\+Pointer (\begin{DoxyParamCaption}\item[{void $\ast$}]{pointer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 151 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{class_window_context_ac88b25c0a4e61c080e204bd4e44fe2c6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_ae41ab7989bb1806b804f619ace0b51da}\label{class_window_context_ae41ab7989bb1806b804f619ace0b51da}} 
+\index{WindowContext@{WindowContext}!SetVSync@{SetVSync}}
+\index{SetVSync@{SetVSync}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{SetVSync()}{SetVSync()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Set\+VSync (\begin{DoxyParamCaption}\item[{const bool \&}]{vsync = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 93 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{class_window_context_ae41ab7989bb1806b804f619ace0b51da_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_ae41ab7989bb1806b804f619ace0b51da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a5f14dc3728973b7f77217e61ed300035}\label{class_window_context_a5f14dc3728973b7f77217e61ed300035}} 
+\index{WindowContext@{WindowContext}!SetZBuffer@{SetZBuffer}}
+\index{SetZBuffer@{SetZBuffer}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{SetZBuffer()}{SetZBuffer()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Set\+ZBuffer (\begin{DoxyParamCaption}\item[{const bool \&}]{depth\+Buffer = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 100 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{class_window_context_a5f14dc3728973b7f77217e61ed300035_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a5f14dc3728973b7f77217e61ed300035_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_a8dcc92189cda1547866910a6e864dc79}\label{class_window_context_a8dcc92189cda1547866910a6e864dc79}} 
+\index{WindowContext@{WindowContext}!ShouldClose@{ShouldClose}}
+\index{ShouldClose@{ShouldClose}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{ShouldClose()}{ShouldClose()}}
+{\footnotesize\ttfamily bool Window\+Context\+::\+Should\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 200 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{class_window_context_a8dcc92189cda1547866910a6e864dc79_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_a8dcc92189cda1547866910a6e864dc79_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_window_context_afa82e3e7a730f7e6f13793255c73802e}\label{class_window_context_afa82e3e7a730f7e6f13793255c73802e}} 
+\index{WindowContext@{WindowContext}!SwapBuffers@{SwapBuffers}}
+\index{SwapBuffers@{SwapBuffers}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{SwapBuffers()}{SwapBuffers()}}
+{\footnotesize\ttfamily void Window\+Context\+::\+Swap\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 235 of file Window\+Context.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_window_context_afa82e3e7a730f7e6f13793255c73802e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_context_afa82e3e7a730f7e6f13793255c73802e_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_window_context_a94ef576ea8650749d6775233fb4843fc}\label{class_window_context_a94ef576ea8650749d6775233fb4843fc}} 
+\index{WindowContext@{WindowContext}!bufferbits@{bufferbits}}
+\index{bufferbits@{bufferbits}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{bufferbits}{bufferbits}}
+{\footnotesize\ttfamily GLbitfield Window\+Context\+::bufferbits\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file Window\+Context.\+h.
+
+\mbox{\Hypertarget{class_window_context_af13d01b3286cd2bcf69173360d09b6f3}\label{class_window_context_af13d01b3286cd2bcf69173360d09b6f3}} 
+\index{WindowContext@{WindowContext}!errorMap@{errorMap}}
+\index{errorMap@{errorMap}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{errorMap}{errorMap}}
+{\footnotesize\ttfamily const std\+::unordered\+\_\+map$<$GLenum, const char$\ast$$>$ Window\+Context\+::error\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{        \{GL\_NO\_ERROR, \textcolor{stringliteral}{"{}GL\_NO\_ERROR"{}}\},}
+\DoxyCodeLine{        \{GL\_INVALID\_ENUM, \textcolor{stringliteral}{"{}GL\_INVALID\_ENUM"{}}\},}
+\DoxyCodeLine{        \{GL\_INVALID\_VALUE, \textcolor{stringliteral}{"{}GL\_INVALID\_VALUE"{}}\},}
+\DoxyCodeLine{        \{GL\_INVALID\_OPERATION, \textcolor{stringliteral}{"{}GL\_INVALID\_OPERATION"{}}\},}
+\DoxyCodeLine{        \{GL\_STACK\_OVERFLOW, \textcolor{stringliteral}{"{}GL\_STACK\_OVERFLOW"{}}\},}
+\DoxyCodeLine{        \{GL\_STACK\_UNDERFLOW, \textcolor{stringliteral}{"{}GL\_STACK\_UNDERFLOW"{}}\},}
+\DoxyCodeLine{        \{GL\_OUT\_OF\_MEMORY, \textcolor{stringliteral}{"{}GL\_OUT\_OF\_MEMORY"{}}\},}
+\DoxyCodeLine{        \{GL\_INVALID\_FRAMEBUFFER\_OPERATION, \textcolor{stringliteral}{"{}GL\_INVALID\_FRAMEBUFFER\_OPERATION"{}}\},}
+\DoxyCodeLine{        \{GL\_CONTEXT\_LOST, \textcolor{stringliteral}{"{}GL\_CONTEXT\_LOST"{}}\}}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+
+
+Definition at line 15 of file Window\+Context.\+h.
+
+\mbox{\Hypertarget{class_window_context_ab759fcbeef2f200c9b93172f4637eb15}\label{class_window_context_ab759fcbeef2f200c9b93172f4637eb15}} 
+\index{WindowContext@{WindowContext}!window@{window}}
+\index{window@{window}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily GLFWwindow$\ast$ Window\+Context\+::window\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 30 of file Window\+Context.\+h.
+
+\mbox{\Hypertarget{class_window_context_a47e87f22962ca7b1af367bc5dd1e632b}\label{class_window_context_a47e87f22962ca7b1af367bc5dd1e632b}} 
+\index{WindowContext@{WindowContext}!windowLogger@{windowLogger}}
+\index{windowLogger@{windowLogger}!WindowContext@{WindowContext}}
+\doxysubsubsection{\texorpdfstring{windowLogger}{windowLogger}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_log}{ILog}}$\ast$ Window\+Context\+::window\+Logger\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 32 of file Window\+Context.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_window_context_8h}{Window\+Context.\+h}}\end{DoxyCompactItemize}

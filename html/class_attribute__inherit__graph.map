@@ -1,0 +1,10 @@
+<map id="Attribute" name="Attribute">
+<area shape="rect" id="node1" title=" " alt="" coords="387,5,529,141"/>
+<area shape="rect" id="node2" href="$class_attribute_type.html" title=" " alt="" coords="5,189,209,267"/>
+<area shape="rect" id="node4" href="$class_attribute_type.html" title=" " alt="" coords="233,189,459,267"/>
+<area shape="rect" id="node6" href="$class_attribute_type.html" title=" " alt="" coords="483,189,657,267"/>
+<area shape="rect" id="node8" href="$class_attribute_type.html" title=" " alt="" coords="681,189,840,267"/>
+<area shape="rect" id="node3" href="$class_transform.html" title=" " alt="" coords="63,417,152,553"/>
+<area shape="rect" id="node5" href="$class_line_renderer.html" title=" " alt="" coords="255,315,437,656"/>
+<area shape="rect" id="node7" href="$class_mesh.html" title=" " alt="" coords="495,322,645,649"/>
+</map>

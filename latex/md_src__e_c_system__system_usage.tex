@@ -1,0 +1,19 @@
+Represents a system component that can receive, process, and send messages within a message bus.\hypertarget{md_src__e_c_system__system_usage_autotoc_md21}{}\doxysection{Description}\label{md_src__e_c_system__system_usage_autotoc_md21}
+The {\ttfamily \mbox{\hyperlink{class_system}{System}}} class is designed to be inherited by specific system implementations. It provides a framework for initializing, running, and shutting down a system, as well as handling messages and sharing resources within a microkernel scope.\hypertarget{md_src__e_c_system__system_usage_autotoc_md22}{}\doxysection{Members}\label{md_src__e_c_system__system_usage_autotoc_md22}
+
+\begin{DoxyItemize}
+\item {\ttfamily is\+Running}\+: Flag indicating whether the system is running.
+\item {\ttfamily mutex}\+: Mutex for synchronizing access to internal data structures.
+\item {\ttfamily messages}\+: Queue for storing incoming messages.
+\item {\ttfamily message\+Bus}\+: Pointer to the message bus used for communication.
+\end{DoxyItemize}\hypertarget{md_src__e_c_system__system_usage_autotoc_md23}{}\doxysection{Methods}\label{md_src__e_c_system__system_usage_autotoc_md23}
+\hypertarget{md_src__e_c_system__system_usage_autotoc_md24}{}\doxysubsection{$<$tt$>$\+On\+Load()$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md24}
+Callback method called on system startup. Override this method to perform initialization steps.\hypertarget{md_src__e_c_system__system_usage_autotoc_md25}{}\doxysubsection{$<$tt$>$\+Execute()$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md25}
+Abstract method called on each iteration of the system loop. Derived classes must implement this to define system behavior.\hypertarget{md_src__e_c_system__system_usage_autotoc_md26}{}\doxysubsection{$<$tt$>$\+On\+Unload()$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md26}
+Callback method called on system shutdown. Override this to perform cleanup steps.\hypertarget{md_src__e_c_system__system_usage_autotoc_md27}{}\doxysubsection{$<$tt$>$\+Handle\+Message(const Message\& message)$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md27}
+Callback method called when the system has pending messages. Override to define message handling.\hypertarget{md_src__e_c_system__system_usage_autotoc_md28}{}\doxysubsection{$<$tt$>$\+Share()$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md28}
+Method called once after the system is registered within a microkernel scope. Implement to share internal resources.\hypertarget{md_src__e_c_system__system_usage_autotoc_md29}{}\doxysubsection{$<$tt$>$\+Send\+Message(const std\+::string\& channel, IClient$\ast$ receiver, const Message\+Type\& type, void$\ast$ data)$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md29}
+Sends a message to a specified channel within the message bus.\hypertarget{md_src__e_c_system__system_usage_autotoc_md30}{}\doxysubsection{$<$tt$>$\+System(\+Message\+Bus$\ast$ \+\_\+message\+Bus)$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md30}
+Constructor for the \mbox{\hyperlink{class_system}{System}} class.\hypertarget{md_src__e_c_system__system_usage_autotoc_md31}{}\doxysubsection{$<$tt$>$\+Run()$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md31}
+Executes the main loop of the system.\hypertarget{md_src__e_c_system__system_usage_autotoc_md32}{}\doxysubsection{$<$tt$>$\+Stop()$<$/tt$>$}\label{md_src__e_c_system__system_usage_autotoc_md32}
+Sends a stop signal to the system thread. 

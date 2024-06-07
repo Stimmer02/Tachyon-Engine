@@ -1,0 +1,326 @@
+\hypertarget{class_component}{}\doxysection{Component Class Reference}
+\label{class_component}\index{Component@{Component}}
+
+
+{\ttfamily \#include $<$Component.\+h$>$}
+
+
+
+Inheritance diagram for Component\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{class_component__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Component\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_component__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_component_a610626f8f6f15450e5257f97a88cc059}{Component}} (const float \&\+\_\+x, const float \&\+\_\+y, const float \&\+\_\+width, const float \&\+\_\+height)
+\item 
+bool \mbox{\hyperlink{class_component_afd9c73e27ee9bd54f26e30cf50a4b019}{Is\+In\+Bound}} (const float \&\+\_\+x, const float \&\+\_\+y)
+\item 
+void \mbox{\hyperlink{class_component_a75d035a999fc236037bcc96d76cbf7df}{Set\+Color}} (const \mbox{\hyperlink{struct_color}{Color}} \&\+\_\+color)
+\item 
+virtual void \mbox{\hyperlink{class_component_a0c67ccdaf754b96520e3428284a74a7f}{Render}} ()=0
+\item 
+void \mbox{\hyperlink{class_component_a2b4d072ad9753a31c3b465ad747064b8}{Set\+Texture}} (const \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$\+\_\+sprite)
+\item 
+\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} \mbox{\hyperlink{class_component_ab334c75b4667f2a7ca225be244c7774b}{Get\+Texture}} ()
+\item 
+float \mbox{\hyperlink{class_component_a14557c1c6ac359c1b320ac26cc4d20bf}{get\+Width}} ()
+\item 
+float \mbox{\hyperlink{class_component_a58ba2420e6cfdaf4d5621b561a2db65e}{get\+Height}} ()
+\item 
+float \mbox{\hyperlink{class_component_a77192ae1cbf80c09c9918d447ffea099}{getX}} ()
+\item 
+float \mbox{\hyperlink{class_component_a74fab91d6d9fcf533244feea0b30410d}{getY}} ()
+\item 
+\mbox{\hyperlink{struct_color}{Color}} \mbox{\hyperlink{class_component_a314d10f4af1c1e1b3e30f1dea79d27b1}{get\+Color}} ()
+\item 
+bool \mbox{\hyperlink{class_component_a917d5e8d6d0e783bd5f2f20b1e801af3}{operator==}} (const \mbox{\hyperlink{class_component}{Component}} \&other)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_component_a729075b3ea8148bb9d8c8fb2636b6cc7}{height}}
+\item 
+float \mbox{\hyperlink{class_component_aa632c590f9cde779a5f7de81b224585b}{width}}
+\item 
+float \mbox{\hyperlink{class_component_a983197ffe7c916735dc326aca23882ae}{x}}
+\item 
+float \mbox{\hyperlink{class_component_ae00362fa4e86836e72ab06c7ec5411d5}{y}}
+\item 
+\mbox{\hyperlink{struct_color}{Color}} \mbox{\hyperlink{class_component_af7e940f667e1170c30005fd87c84bdbe}{color}}
+\item 
+\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$ \mbox{\hyperlink{class_component_aa6e88a8f51383c6ce0610a9ad7350ccb}{sprite}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file Component.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_component_a610626f8f6f15450e5257f97a88cc059}\label{class_component_a610626f8f6f15450e5257f97a88cc059}} 
+\index{Component@{Component}!Component@{Component}}
+\index{Component@{Component}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{Component()}{Component()}}
+{\footnotesize\ttfamily Component\+::\+Component (\begin{DoxyParamCaption}\item[{const float \&}]{\+\_\+x,  }\item[{const float \&}]{\+\_\+y,  }\item[{const float \&}]{\+\_\+width,  }\item[{const float \&}]{\+\_\+height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Component.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_component_a314d10f4af1c1e1b3e30f1dea79d27b1}\label{class_component_a314d10f4af1c1e1b3e30f1dea79d27b1}} 
+\index{Component@{Component}!getColor@{getColor}}
+\index{getColor@{getColor}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_color}{Color}} Component\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 47 of file Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{class_component_a314d10f4af1c1e1b3e30f1dea79d27b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_component_a58ba2420e6cfdaf4d5621b561a2db65e}\label{class_component_a58ba2420e6cfdaf4d5621b561a2db65e}} 
+\index{Component@{Component}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily float Component\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 35 of file Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{class_component_a58ba2420e6cfdaf4d5621b561a2db65e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_component_ab334c75b4667f2a7ca225be244c7774b}\label{class_component_ab334c75b4667f2a7ca225be244c7774b}} 
+\index{Component@{Component}!GetTexture@{GetTexture}}
+\index{GetTexture@{GetTexture}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{GetTexture()}{GetTexture()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} Component\+::\+Get\+Texture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file Component.\+cpp.
+
+\mbox{\Hypertarget{class_component_a14557c1c6ac359c1b320ac26cc4d20bf}\label{class_component_a14557c1c6ac359c1b320ac26cc4d20bf}} 
+\index{Component@{Component}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily float Component\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{class_component_a14557c1c6ac359c1b320ac26cc4d20bf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_component_a77192ae1cbf80c09c9918d447ffea099}\label{class_component_a77192ae1cbf80c09c9918d447ffea099}} 
+\index{Component@{Component}!getX@{getX}}
+\index{getX@{getX}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily float Component\+::getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{class_component_a77192ae1cbf80c09c9918d447ffea099_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_component_a74fab91d6d9fcf533244feea0b30410d}\label{class_component_a74fab91d6d9fcf533244feea0b30410d}} 
+\index{Component@{Component}!getY@{getY}}
+\index{getY@{getY}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily float Component\+::getY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 43 of file Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{class_component_a74fab91d6d9fcf533244feea0b30410d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_component_afd9c73e27ee9bd54f26e30cf50a4b019}\label{class_component_afd9c73e27ee9bd54f26e30cf50a4b019}} 
+\index{Component@{Component}!IsInBound@{IsInBound}}
+\index{IsInBound@{IsInBound}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{IsInBound()}{IsInBound()}}
+{\footnotesize\ttfamily bool Component\+::\+Is\+In\+Bound (\begin{DoxyParamCaption}\item[{const float \&}]{\+\_\+x,  }\item[{const float \&}]{\+\_\+y }\end{DoxyParamCaption})}
+
+
+
+Definition at line 10 of file Component.\+cpp.
+
+\mbox{\Hypertarget{class_component_a917d5e8d6d0e783bd5f2f20b1e801af3}\label{class_component_a917d5e8d6d0e783bd5f2f20b1e801af3}} 
+\index{Component@{Component}!operator==@{operator==}}
+\index{operator==@{operator==}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Component\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_component}{Component}} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Definition at line 51 of file Component.\+cpp.
+
+\mbox{\Hypertarget{class_component_a0c67ccdaf754b96520e3428284a74a7f}\label{class_component_a0c67ccdaf754b96520e3428284a74a7f}} 
+\index{Component@{Component}!Render@{Render}}
+\index{Render@{Render}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily virtual void Component\+::\+Render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_interactive_component_a5c60fb2df9daab151907701c6316a83b}{Interactive\+Component}}, \mbox{\hyperlink{class_text_a4dd3d430599d8216537c84c95dce8dcb}{Text}}, \mbox{\hyperlink{class_canvas_a65460dda6338bd297868bfb8126e0cc7}{Canvas}}, and \mbox{\hyperlink{class_button_a0e48e98c9c4f41c91c3836357ccac40f}{Button}}.
+
+\mbox{\Hypertarget{class_component_a75d035a999fc236037bcc96d76cbf7df}\label{class_component_a75d035a999fc236037bcc96d76cbf7df}} 
+\index{Component@{Component}!SetColor@{SetColor}}
+\index{SetColor@{SetColor}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{SetColor()}{SetColor()}}
+{\footnotesize\ttfamily void Component\+::\+Set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+Definition at line 19 of file Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_component_a75d035a999fc236037bcc96d76cbf7df_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_component_a2b4d072ad9753a31c3b465ad747064b8}\label{class_component_a2b4d072ad9753a31c3b465ad747064b8}} 
+\index{Component@{Component}!SetTexture@{SetTexture}}
+\index{SetTexture@{SetTexture}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{SetTexture()}{SetTexture()}}
+{\footnotesize\ttfamily void Component\+::\+Set\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$}]{\+\_\+sprite }\end{DoxyParamCaption})}
+
+
+
+Definition at line 23 of file Component.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_component_a2b4d072ad9753a31c3b465ad747064b8_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_component_af7e940f667e1170c30005fd87c84bdbe}\label{class_component_af7e940f667e1170c30005fd87c84bdbe}} 
+\index{Component@{Component}!color@{color}}
+\index{color@{color}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_color}{Color}} Component\+::color\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 17 of file Component.\+h.
+
+\mbox{\Hypertarget{class_component_a729075b3ea8148bb9d8c8fb2636b6cc7}\label{class_component_a729075b3ea8148bb9d8c8fb2636b6cc7}} 
+\index{Component@{Component}!height@{height}}
+\index{height@{height}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily float Component\+::height\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 12 of file Component.\+h.
+
+\mbox{\Hypertarget{class_component_aa6e88a8f51383c6ce0610a9ad7350ccb}\label{class_component_aa6e88a8f51383c6ce0610a9ad7350ccb}} 
+\index{Component@{Component}!sprite@{sprite}}
+\index{sprite@{sprite}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite2_d}{Sprite2D}}$\ast$ Component\+::sprite\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 18 of file Component.\+h.
+
+\mbox{\Hypertarget{class_component_aa632c590f9cde779a5f7de81b224585b}\label{class_component_aa632c590f9cde779a5f7de81b224585b}} 
+\index{Component@{Component}!width@{width}}
+\index{width@{width}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily float Component\+::width\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 13 of file Component.\+h.
+
+\mbox{\Hypertarget{class_component_a983197ffe7c916735dc326aca23882ae}\label{class_component_a983197ffe7c916735dc326aca23882ae}} 
+\index{Component@{Component}!x@{x}}
+\index{x@{x}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily float Component\+::x\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 14 of file Component.\+h.
+
+\mbox{\Hypertarget{class_component_ae00362fa4e86836e72ab06c7ec5411d5}\label{class_component_ae00362fa4e86836e72ab06c7ec5411d5}} 
+\index{Component@{Component}!y@{y}}
+\index{y@{y}!Component@{Component}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily float Component\+::y\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 15 of file Component.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_component_8h}{Component.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_component_8cpp}{Component.\+cpp}}\end{DoxyCompactItemize}

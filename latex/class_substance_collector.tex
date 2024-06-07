@@ -1,0 +1,394 @@
+\hypertarget{class_substance_collector}{}\doxysection{Substance\+Collector Class Reference}
+\label{class_substance_collector}\index{SubstanceCollector@{SubstanceCollector}}
+
+
+{\ttfamily \#include $<$Substance\+Collector.\+h$>$}
+
+
+
+Collaboration diagram for Substance\+Collector\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{class_substance_collector__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_substance_collector_a725119368176d5e0421c2c3df035b8cf}{Substance\+Collector}} ()
+\item 
+char \mbox{\hyperlink{class_substance_collector_a0dc8f9898055c775e1505073306330e9}{parse\+Config}} (std\+::string path)
+\item 
+char \mbox{\hyperlink{class_substance_collector_acf706afb0a65cd8818e7e4951f2a787e}{load\+Properties\+From\+File}} (std\+::string path)
+\item 
+char \mbox{\hyperlink{class_substance_collector_a2f69dc3bb55305b181dd35089c852174}{load\+Substances\+From\+File}} (std\+::string path)
+\item 
+std\+::string \mbox{\hyperlink{class_substance_collector_ab66d011d6f11515f62e066e51d3df171}{create\+Substance\+Cl\+Struct}} ()
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_substance_collector_a797bb27fd5c20da262a05c70c0c4786a}{get\+Substance\+Names}} ()
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{structsubstance}{substance}} $>$ \& \mbox{\hyperlink{class_substance_collector_aabbfdda6986948fc12d8f7d3ee28e1f0}{get\+Substances}} ()
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{structsubstance_field}{substance\+Field}} $>$ \& \mbox{\hyperlink{class_substance_collector_a930039bd7ec6b7599fe1910402fcb99c}{get\+Substance\+Phroperties}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_substance_collector_a09e54161093488fbf457f8ac024ceb16}{get\+Error}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structengine_struct_a8b215f45a596e79c9fb2524147f1d718}{engine\+Struct\+::cl\+\_\+type}} \mbox{\hyperlink{class_substance_collector_a8b53a6f574ce0b18fb9cd423fe2ea3d5}{string\+To\+Cl\+Type}} (std\+::string type)
+\item 
+static std\+::string \mbox{\hyperlink{class_substance_collector_aaae3aec0469c72491c8b08f296205d53}{cl\+Type\+To\+String}} (\mbox{\hyperlink{structengine_struct_a8b215f45a596e79c9fb2524147f1d718}{engine\+Struct\+::cl\+\_\+type}} type)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_substance_collector_a59713db2e1fb6de431bc86634cf91f10}{set\+Default\+Phroperties}} (\mbox{\hyperlink{structsubstance}{substance}} \&\mbox{\hyperlink{structsubstance}{substance}})
+\item 
+void \mbox{\hyperlink{class_substance_collector_a1eaabda0412c68d1da971d76f1337cbd}{load\+Mandatory\+Substances}} ()
+\item 
+void \mbox{\hyperlink{class_substance_collector_aed00d455b786358f1065fdd1821acc8c}{give\+Id\+To\+Substances}} (\mbox{\hyperlink{structsubstance}{substance}} \&\mbox{\hyperlink{structsubstance}{substance}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structsubstance}{substance}} $>$ \mbox{\hyperlink{class_substance_collector_a47530587089241f628f630a3ab8aced2}{substance\+Table}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structsubstance_field}{substance\+Field}} $>$ \mbox{\hyperlink{class_substance_collector_a9cea9a3ac5f09d6d43b9d8bf502998dd}{substance\+Phroperties}}
+\item 
+std\+::string \mbox{\hyperlink{class_substance_collector_afc6569299a730d39e3a19f2276bf01ea}{error}}
+\item 
+uint \mbox{\hyperlink{class_substance_collector_ab4c220c53d1134f3dabbcb77ec43ab70}{id\+Count}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 12 of file Substance\+Collector.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_substance_collector_a725119368176d5e0421c2c3df035b8cf}\label{class_substance_collector_a725119368176d5e0421c2c3df035b8cf}} 
+\index{SubstanceCollector@{SubstanceCollector}!SubstanceCollector@{SubstanceCollector}}
+\index{SubstanceCollector@{SubstanceCollector}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{SubstanceCollector()}{SubstanceCollector()}}
+{\footnotesize\ttfamily Substance\+Collector\+::\+Substance\+Collector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Substance\+Collector.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_substance_collector_aaae3aec0469c72491c8b08f296205d53}\label{class_substance_collector_aaae3aec0469c72491c8b08f296205d53}} 
+\index{SubstanceCollector@{SubstanceCollector}!clTypeToString@{clTypeToString}}
+\index{clTypeToString@{clTypeToString}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{clTypeToString()}{clTypeToString()}}
+{\footnotesize\ttfamily std\+::string Substance\+Collector\+::cl\+Type\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structengine_struct_a8b215f45a596e79c9fb2524147f1d718}{engine\+Struct\+::cl\+\_\+type}}}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 395 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_aaae3aec0469c72491c8b08f296205d53_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_ab66d011d6f11515f62e066e51d3df171}\label{class_substance_collector_ab66d011d6f11515f62e066e51d3df171}} 
+\index{SubstanceCollector@{SubstanceCollector}!createSubstanceClStruct@{createSubstanceClStruct}}
+\index{createSubstanceClStruct@{createSubstanceClStruct}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{createSubstanceClStruct()}{createSubstanceClStruct()}}
+{\footnotesize\ttfamily std\+::string Substance\+Collector\+::create\+Substance\+Cl\+Struct (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 310 of file Substance\+Collector.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_ab66d011d6f11515f62e066e51d3df171_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_ab66d011d6f11515f62e066e51d3df171_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_a09e54161093488fbf457f8ac024ceb16}\label{class_substance_collector_a09e54161093488fbf457f8ac024ceb16}} 
+\index{SubstanceCollector@{SubstanceCollector}!getError@{getError}}
+\index{getError@{getError}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily std\+::string Substance\+Collector\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 342 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a09e54161093488fbf457f8ac024ceb16_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_a797bb27fd5c20da262a05c70c0c4786a}\label{class_substance_collector_a797bb27fd5c20da262a05c70c0c4786a}} 
+\index{SubstanceCollector@{SubstanceCollector}!getSubstanceNames@{getSubstanceNames}}
+\index{getSubstanceNames@{getSubstanceNames}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{getSubstanceNames()}{getSubstanceNames()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ Substance\+Collector\+::get\+Substance\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 326 of file Substance\+Collector.\+cpp.
+
+\mbox{\Hypertarget{class_substance_collector_a930039bd7ec6b7599fe1910402fcb99c}\label{class_substance_collector_a930039bd7ec6b7599fe1910402fcb99c}} 
+\index{SubstanceCollector@{SubstanceCollector}!getSubstancePhroperties@{getSubstancePhroperties}}
+\index{getSubstancePhroperties@{getSubstancePhroperties}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{getSubstancePhroperties()}{getSubstancePhroperties()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{structsubstance_field}{substance\+Field}} $>$ \& Substance\+Collector\+::get\+Substance\+Phroperties (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 338 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a930039bd7ec6b7599fe1910402fcb99c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_aabbfdda6986948fc12d8f7d3ee28e1f0}\label{class_substance_collector_aabbfdda6986948fc12d8f7d3ee28e1f0}} 
+\index{SubstanceCollector@{SubstanceCollector}!getSubstances@{getSubstances}}
+\index{getSubstances@{getSubstances}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{getSubstances()}{getSubstances()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{structsubstance}{substance}} $>$ \& Substance\+Collector\+::get\+Substances (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 334 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_aabbfdda6986948fc12d8f7d3ee28e1f0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_aed00d455b786358f1065fdd1821acc8c}\label{class_substance_collector_aed00d455b786358f1065fdd1821acc8c}} 
+\index{SubstanceCollector@{SubstanceCollector}!giveIdToSubstances@{giveIdToSubstances}}
+\index{giveIdToSubstances@{giveIdToSubstances}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{giveIdToSubstances()}{giveIdToSubstances()}}
+{\footnotesize\ttfamily void Substance\+Collector\+::give\+Id\+To\+Substances (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsubstance}{substance}} \&}]{substance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 454 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_aed00d455b786358f1065fdd1821acc8c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_a1eaabda0412c68d1da971d76f1337cbd}\label{class_substance_collector_a1eaabda0412c68d1da971d76f1337cbd}} 
+\index{SubstanceCollector@{SubstanceCollector}!loadMandatorySubstances@{loadMandatorySubstances}}
+\index{loadMandatorySubstances@{loadMandatorySubstances}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{loadMandatorySubstances()}{loadMandatorySubstances()}}
+{\footnotesize\ttfamily void Substance\+Collector\+::load\+Mandatory\+Substances (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 437 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a1eaabda0412c68d1da971d76f1337cbd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_acf706afb0a65cd8818e7e4951f2a787e}\label{class_substance_collector_acf706afb0a65cd8818e7e4951f2a787e}} 
+\index{SubstanceCollector@{SubstanceCollector}!loadPropertiesFromFile@{loadPropertiesFromFile}}
+\index{loadPropertiesFromFile@{loadPropertiesFromFile}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{loadPropertiesFromFile()}{loadPropertiesFromFile()}}
+{\footnotesize\ttfamily char Substance\+Collector\+::load\+Properties\+From\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+
+
+Definition at line 104 of file Substance\+Collector.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_acf706afb0a65cd8818e7e4951f2a787e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_acf706afb0a65cd8818e7e4951f2a787e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_a2f69dc3bb55305b181dd35089c852174}\label{class_substance_collector_a2f69dc3bb55305b181dd35089c852174}} 
+\index{SubstanceCollector@{SubstanceCollector}!loadSubstancesFromFile@{loadSubstancesFromFile}}
+\index{loadSubstancesFromFile@{loadSubstancesFromFile}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{loadSubstancesFromFile()}{loadSubstancesFromFile()}}
+{\footnotesize\ttfamily char Substance\+Collector\+::load\+Substances\+From\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+
+
+Definition at line 189 of file Substance\+Collector.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a2f69dc3bb55305b181dd35089c852174_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a2f69dc3bb55305b181dd35089c852174_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_a0dc8f9898055c775e1505073306330e9}\label{class_substance_collector_a0dc8f9898055c775e1505073306330e9}} 
+\index{SubstanceCollector@{SubstanceCollector}!parseConfig@{parseConfig}}
+\index{parseConfig@{parseConfig}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{parseConfig()}{parseConfig()}}
+{\footnotesize\ttfamily char Substance\+Collector\+::parse\+Config (\begin{DoxyParamCaption}\item[{std\+::string}]{path }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file Substance\+Collector.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a0dc8f9898055c775e1505073306330e9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a0dc8f9898055c775e1505073306330e9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_a59713db2e1fb6de431bc86634cf91f10}\label{class_substance_collector_a59713db2e1fb6de431bc86634cf91f10}} 
+\index{SubstanceCollector@{SubstanceCollector}!setDefaultPhroperties@{setDefaultPhroperties}}
+\index{setDefaultPhroperties@{setDefaultPhroperties}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{setDefaultPhroperties()}{setDefaultPhroperties()}}
+{\footnotesize\ttfamily void Substance\+Collector\+::set\+Default\+Phroperties (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsubstance}{substance}} \&}]{substance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 425 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a59713db2e1fb6de431bc86634cf91f10_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_substance_collector_a8b53a6f574ce0b18fb9cd423fe2ea3d5}\label{class_substance_collector_a8b53a6f574ce0b18fb9cd423fe2ea3d5}} 
+\index{SubstanceCollector@{SubstanceCollector}!stringToClType@{stringToClType}}
+\index{stringToClType@{stringToClType}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{stringToClType()}{stringToClType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structengine_struct_a8b215f45a596e79c9fb2524147f1d718}{engine\+Struct\+::cl\+\_\+type}} Substance\+Collector\+::string\+To\+Cl\+Type (\begin{DoxyParamCaption}\item[{std\+::string}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 346 of file Substance\+Collector.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_substance_collector_a8b53a6f574ce0b18fb9cd423fe2ea3d5_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_substance_collector_afc6569299a730d39e3a19f2276bf01ea}\label{class_substance_collector_afc6569299a730d39e3a19f2276bf01ea}} 
+\index{SubstanceCollector@{SubstanceCollector}!error@{error}}
+\index{error@{error}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily std\+::string Substance\+Collector\+::error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 34 of file Substance\+Collector.\+h.
+
+\mbox{\Hypertarget{class_substance_collector_ab4c220c53d1134f3dabbcb77ec43ab70}\label{class_substance_collector_ab4c220c53d1134f3dabbcb77ec43ab70}} 
+\index{SubstanceCollector@{SubstanceCollector}!idCount@{idCount}}
+\index{idCount@{idCount}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{idCount}{idCount}}
+{\footnotesize\ttfamily uint Substance\+Collector\+::id\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 36 of file Substance\+Collector.\+h.
+
+\mbox{\Hypertarget{class_substance_collector_a9cea9a3ac5f09d6d43b9d8bf502998dd}\label{class_substance_collector_a9cea9a3ac5f09d6d43b9d8bf502998dd}} 
+\index{SubstanceCollector@{SubstanceCollector}!substancePhroperties@{substancePhroperties}}
+\index{substancePhroperties@{substancePhroperties}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{substancePhroperties}{substancePhroperties}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structsubstance_field}{substance\+Field}}$>$ Substance\+Collector\+::substance\+Phroperties\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 32 of file Substance\+Collector.\+h.
+
+\mbox{\Hypertarget{class_substance_collector_a47530587089241f628f630a3ab8aced2}\label{class_substance_collector_a47530587089241f628f630a3ab8aced2}} 
+\index{SubstanceCollector@{SubstanceCollector}!substanceTable@{substanceTable}}
+\index{substanceTable@{substanceTable}!SubstanceCollector@{SubstanceCollector}}
+\doxysubsubsection{\texorpdfstring{substanceTable}{substanceTable}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structsubstance}{substance}}$>$ Substance\+Collector\+::substance\+Table\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 31 of file Substance\+Collector.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_substance_collector_8h}{Substance\+Collector.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_substance_collector_8cpp}{Substance\+Collector.\+cpp}}\end{DoxyCompactItemize}

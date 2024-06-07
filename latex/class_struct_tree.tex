@@ -1,0 +1,372 @@
+\hypertarget{class_struct_tree}{}\doxysection{Struct\+Tree Class Reference}
+\label{class_struct_tree}\index{StructTree@{StructTree}}
+
+
+{\ttfamily \#include $<$Struct\+Tree.\+h$>$}
+
+
+
+Collaboration diagram for Struct\+Tree\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_struct_tree__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_struct_tree_1_1parsed_struct}{parsed\+Struct}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_struct_tree_a7dd8d269561eeea1ae61616448d4955d}{Struct\+Tree}} ()
+\item 
+\mbox{\hyperlink{class_struct_tree_afe8e89e90481dfac27df8b4619782c21}{Struct\+Tree}} (std\+::string \mbox{\hyperlink{class_struct_tree_a18c44ee79b6719780f46b6ada2b769e1}{struct\+Directory}}, std\+::string root\+Struct\+Name, \mbox{\hyperlink{class_cl_struct_parser}{Cl\+Struct\+Parser}} $\ast$parser)
+\item 
+\mbox{\hyperlink{class_struct_tree_ab6a1f85a1925bb8959d898c4864de121}{$\sim$\+Struct\+Tree}} ()
+\item 
+char \mbox{\hyperlink{class_struct_tree_a5c3a43b52e0c8189c94612104a82c71a}{set\+Root\+Struct}} (std\+::string root\+Struct\+Name, \mbox{\hyperlink{class_cl_struct_parser}{Cl\+Struct\+Parser}} $\ast$parser)
+\item 
+void \mbox{\hyperlink{class_struct_tree_ae90ec27235c12cf0bccb06133c144ad1}{set\+Struct\+Directory}} (std\+::string \mbox{\hyperlink{class_struct_tree_a18c44ee79b6719780f46b6ada2b769e1}{struct\+Directory}})
+\item 
+char \mbox{\hyperlink{class_struct_tree_a258c97224c84893ce8697c789dbafc50}{build}} (\mbox{\hyperlink{class_cl_struct_parser}{Cl\+Struct\+Parser}} $\ast$parser)
+\item 
+char \mbox{\hyperlink{class_struct_tree_ae37074096bc467ac0b23adb349aa9b53}{calculate\+Sizes}} (\mbox{\hyperlink{class_size_calculator}{Size\+Calculator}} $\ast$s\+Calc)
+\item 
+void \mbox{\hyperlink{class_struct_tree_a1770f6e248ad0affa0ceffb4bc1aafac}{print\+Tree}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_struct_tree_ac8c44cb61d396977065f0d42fbc4d549}{get\+Error}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_struct_tree_adfe241f3f4c7a6176d697a2583e5f450}{get\+Structures}} ()
+\item 
+const std\+::vector$<$ const \mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$ $>$ \mbox{\hyperlink{class_struct_tree_a5d2b4993c440173ac16a28a41cd23f4c}{unwind\+Tree}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_struct_tree_a69cb2265e85f1f642dde7ea222a2cca9}{get\+Structures\+Recursive}} (\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$node)
+\item 
+void \mbox{\hyperlink{class_struct_tree_a204306dc2e93846a6c1e07238cbc928b}{set\+Visited\+False}} ()
+\item 
+void \mbox{\hyperlink{class_struct_tree_aa39a02198883b2350129deb8cb4daa6f}{print\+Tree\+Recursive}} (\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$node)
+\item 
+void \mbox{\hyperlink{class_struct_tree_a3b087bd2937df700d1c79e70ec5a41fc}{unwind\+Tree\+Recursive}} (\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$node, std\+::vector$<$ const \mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$ $>$ \&result)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$ \mbox{\hyperlink{class_struct_tree_a98f38c6afba98589400fb1b1663b3036}{root}}
+\item 
+std\+::string \mbox{\hyperlink{class_struct_tree_a18c44ee79b6719780f46b6ada2b769e1}{struct\+Directory}}
+\item 
+std\+::string \mbox{\hyperlink{class_struct_tree_a6d19553125342b37721ca0fe3ae4cd5f}{error}}
+\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{struct_struct_tree_1_1parsed_struct}{parsed\+Struct}} $>$ \mbox{\hyperlink{class_struct_tree_aac24f66d73a54ded22626a902b041fb9}{parsed\+Structs}}
+\item 
+char \mbox{\hyperlink{class_struct_tree_aeb5171826f453b1b983e4f6315cfd059}{status}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 16 of file Struct\+Tree.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_struct_tree_a7dd8d269561eeea1ae61616448d4955d}\label{class_struct_tree_a7dd8d269561eeea1ae61616448d4955d}} 
+\index{StructTree@{StructTree}!StructTree@{StructTree}}
+\index{StructTree@{StructTree}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{StructTree()}{StructTree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Struct\+Tree\+::\+Struct\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 5 of file Struct\+Tree.\+cpp.
+
+\mbox{\Hypertarget{class_struct_tree_afe8e89e90481dfac27df8b4619782c21}\label{class_struct_tree_afe8e89e90481dfac27df8b4619782c21}} 
+\index{StructTree@{StructTree}!StructTree@{StructTree}}
+\index{StructTree@{StructTree}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{StructTree()}{StructTree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Struct\+Tree\+::\+Struct\+Tree (\begin{DoxyParamCaption}\item[{std\+::string}]{struct\+Directory,  }\item[{std\+::string}]{root\+Struct\+Name,  }\item[{\mbox{\hyperlink{class_cl_struct_parser}{Cl\+Struct\+Parser}} $\ast$}]{parser }\end{DoxyParamCaption})}
+
+
+
+Definition at line 10 of file Struct\+Tree.\+cpp.
+
+\mbox{\Hypertarget{class_struct_tree_ab6a1f85a1925bb8959d898c4864de121}\label{class_struct_tree_ab6a1f85a1925bb8959d898c4864de121}} 
+\index{StructTree@{StructTree}!````~StructTree@{$\sim$StructTree}}
+\index{````~StructTree@{$\sim$StructTree}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{$\sim$StructTree()}{~StructTree()}}
+{\footnotesize\ttfamily Struct\+Tree\+::$\sim$\+Struct\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 16 of file Struct\+Tree.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_struct_tree_a258c97224c84893ce8697c789dbafc50}\label{class_struct_tree_a258c97224c84893ce8697c789dbafc50}} 
+\index{StructTree@{StructTree}!build@{build}}
+\index{build@{build}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily char Struct\+Tree\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_cl_struct_parser}{Cl\+Struct\+Parser}} $\ast$}]{parser }\end{DoxyParamCaption})}
+
+
+
+Definition at line 50 of file Struct\+Tree.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_a258c97224c84893ce8697c789dbafc50_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_a258c97224c84893ce8697c789dbafc50_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_struct_tree_ae37074096bc467ac0b23adb349aa9b53}\label{class_struct_tree_ae37074096bc467ac0b23adb349aa9b53}} 
+\index{StructTree@{StructTree}!calculateSizes@{calculateSizes}}
+\index{calculateSizes@{calculateSizes}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{calculateSizes()}{calculateSizes()}}
+{\footnotesize\ttfamily char Struct\+Tree\+::calculate\+Sizes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_size_calculator}{Size\+Calculator}} $\ast$}]{s\+Calc }\end{DoxyParamCaption})}
+
+
+
+Definition at line 103 of file Struct\+Tree.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_ae37074096bc467ac0b23adb349aa9b53_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_ae37074096bc467ac0b23adb349aa9b53_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_struct_tree_ac8c44cb61d396977065f0d42fbc4d549}\label{class_struct_tree_ac8c44cb61d396977065f0d42fbc4d549}} 
+\index{StructTree@{StructTree}!getError@{getError}}
+\index{getError@{getError}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily std\+::string Struct\+Tree\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 164 of file Struct\+Tree.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_ac8c44cb61d396977065f0d42fbc4d549_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_struct_tree_adfe241f3f4c7a6176d697a2583e5f450}\label{class_struct_tree_adfe241f3f4c7a6176d697a2583e5f450}} 
+\index{StructTree@{StructTree}!getStructures@{getStructures}}
+\index{getStructures@{getStructures}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{getStructures()}{getStructures()}}
+{\footnotesize\ttfamily std\+::string Struct\+Tree\+::get\+Structures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 168 of file Struct\+Tree.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_adfe241f3f4c7a6176d697a2583e5f450_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_struct_tree_a69cb2265e85f1f642dde7ea222a2cca9}\label{class_struct_tree_a69cb2265e85f1f642dde7ea222a2cca9}} 
+\index{StructTree@{StructTree}!getStructuresRecursive@{getStructuresRecursive}}
+\index{getStructuresRecursive@{getStructuresRecursive}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{getStructuresRecursive()}{getStructuresRecursive()}}
+{\footnotesize\ttfamily std\+::string Struct\+Tree\+::get\+Structures\+Recursive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 176 of file Struct\+Tree.\+cpp.
+
+\mbox{\Hypertarget{class_struct_tree_a1770f6e248ad0affa0ceffb4bc1aafac}\label{class_struct_tree_a1770f6e248ad0affa0ceffb4bc1aafac}} 
+\index{StructTree@{StructTree}!printTree@{printTree}}
+\index{printTree@{printTree}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{printTree()}{printTree()}}
+{\footnotesize\ttfamily void Struct\+Tree\+::print\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 131 of file Struct\+Tree.\+cpp.
+
+\mbox{\Hypertarget{class_struct_tree_aa39a02198883b2350129deb8cb4daa6f}\label{class_struct_tree_aa39a02198883b2350129deb8cb4daa6f}} 
+\index{StructTree@{StructTree}!printTreeRecursive@{printTreeRecursive}}
+\index{printTreeRecursive@{printTreeRecursive}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{printTreeRecursive()}{printTreeRecursive()}}
+{\footnotesize\ttfamily void Struct\+Tree\+::print\+Tree\+Recursive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 139 of file Struct\+Tree.\+cpp.
+
+\mbox{\Hypertarget{class_struct_tree_a5c3a43b52e0c8189c94612104a82c71a}\label{class_struct_tree_a5c3a43b52e0c8189c94612104a82c71a}} 
+\index{StructTree@{StructTree}!setRootStruct@{setRootStruct}}
+\index{setRootStruct@{setRootStruct}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{setRootStruct()}{setRootStruct()}}
+{\footnotesize\ttfamily char Struct\+Tree\+::set\+Root\+Struct (\begin{DoxyParamCaption}\item[{std\+::string}]{root\+Struct\+Name,  }\item[{\mbox{\hyperlink{class_cl_struct_parser}{Cl\+Struct\+Parser}} $\ast$}]{parser }\end{DoxyParamCaption})}
+
+
+
+Definition at line 20 of file Struct\+Tree.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_a5c3a43b52e0c8189c94612104a82c71a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_a5c3a43b52e0c8189c94612104a82c71a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_struct_tree_ae90ec27235c12cf0bccb06133c144ad1}\label{class_struct_tree_ae90ec27235c12cf0bccb06133c144ad1}} 
+\index{StructTree@{StructTree}!setStructDirectory@{setStructDirectory}}
+\index{setStructDirectory@{setStructDirectory}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{setStructDirectory()}{setStructDirectory()}}
+{\footnotesize\ttfamily void Struct\+Tree\+::set\+Struct\+Directory (\begin{DoxyParamCaption}\item[{std\+::string}]{struct\+Directory }\end{DoxyParamCaption})}
+
+
+
+Definition at line 46 of file Struct\+Tree.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_ae90ec27235c12cf0bccb06133c144ad1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_struct_tree_a204306dc2e93846a6c1e07238cbc928b}\label{class_struct_tree_a204306dc2e93846a6c1e07238cbc928b}} 
+\index{StructTree@{StructTree}!setVisitedFalse@{setVisitedFalse}}
+\index{setVisitedFalse@{setVisitedFalse}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{setVisitedFalse()}{setVisitedFalse()}}
+{\footnotesize\ttfamily void Struct\+Tree\+::set\+Visited\+False (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 198 of file Struct\+Tree.\+cpp.
+
+\mbox{\Hypertarget{class_struct_tree_a5d2b4993c440173ac16a28a41cd23f4c}\label{class_struct_tree_a5d2b4993c440173ac16a28a41cd23f4c}} 
+\index{StructTree@{StructTree}!unwindTree@{unwindTree}}
+\index{unwindTree@{unwindTree}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{unwindTree()}{unwindTree()}}
+{\footnotesize\ttfamily const std\+::vector$<$ const \mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$ $>$ Struct\+Tree\+::unwind\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 204 of file Struct\+Tree.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_struct_tree_a5d2b4993c440173ac16a28a41cd23f4c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_struct_tree_a3b087bd2937df700d1c79e70ec5a41fc}\label{class_struct_tree_a3b087bd2937df700d1c79e70ec5a41fc}} 
+\index{StructTree@{StructTree}!unwindTreeRecursive@{unwindTreeRecursive}}
+\index{unwindTreeRecursive@{unwindTreeRecursive}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{unwindTreeRecursive()}{unwindTreeRecursive()}}
+{\footnotesize\ttfamily void Struct\+Tree\+::unwind\+Tree\+Recursive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$}]{node,  }\item[{std\+::vector$<$ const \mbox{\hyperlink{structengine_struct}{engine\+Struct}} $\ast$ $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 215 of file Struct\+Tree.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_struct_tree_a6d19553125342b37721ca0fe3ae4cd5f}\label{class_struct_tree_a6d19553125342b37721ca0fe3ae4cd5f}} 
+\index{StructTree@{StructTree}!error@{error}}
+\index{error@{error}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily std\+::string Struct\+Tree\+::error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 39 of file Struct\+Tree.\+h.
+
+\mbox{\Hypertarget{class_struct_tree_aac24f66d73a54ded22626a902b041fb9}\label{class_struct_tree_aac24f66d73a54ded22626a902b041fb9}} 
+\index{StructTree@{StructTree}!parsedStructs@{parsedStructs}}
+\index{parsedStructs@{parsedStructs}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{parsedStructs}{parsedStructs}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, \mbox{\hyperlink{struct_struct_tree_1_1parsed_struct}{parsed\+Struct}}$>$ Struct\+Tree\+::parsed\+Structs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 46 of file Struct\+Tree.\+h.
+
+\mbox{\Hypertarget{class_struct_tree_a98f38c6afba98589400fb1b1663b3036}\label{class_struct_tree_a98f38c6afba98589400fb1b1663b3036}} 
+\index{StructTree@{StructTree}!root@{root}}
+\index{root@{root}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structengine_struct}{engine\+Struct}}$\ast$ Struct\+Tree\+::root\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 37 of file Struct\+Tree.\+h.
+
+\mbox{\Hypertarget{class_struct_tree_aeb5171826f453b1b983e4f6315cfd059}\label{class_struct_tree_aeb5171826f453b1b983e4f6315cfd059}} 
+\index{StructTree@{StructTree}!status@{status}}
+\index{status@{status}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily char Struct\+Tree\+::status\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 47 of file Struct\+Tree.\+h.
+
+\mbox{\Hypertarget{class_struct_tree_a18c44ee79b6719780f46b6ada2b769e1}\label{class_struct_tree_a18c44ee79b6719780f46b6ada2b769e1}} 
+\index{StructTree@{StructTree}!structDirectory@{structDirectory}}
+\index{structDirectory@{structDirectory}!StructTree@{StructTree}}
+\doxysubsubsection{\texorpdfstring{structDirectory}{structDirectory}}
+{\footnotesize\ttfamily std\+::string Struct\+Tree\+::struct\+Directory\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 38 of file Struct\+Tree.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_struct_tree_8h}{Struct\+Tree.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_struct_tree_8cpp}{Struct\+Tree.\+cpp}}\end{DoxyCompactItemize}

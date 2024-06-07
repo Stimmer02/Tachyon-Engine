@@ -1,0 +1,8 @@
+<map id="Sprite2D::UpdateTexture" name="Sprite2D::UpdateTexture">
+<area shape="rect" id="node1" title=" " alt="" coords="732,56,913,83"/>
+<area shape="rect" id="node2" href="$class_multi_sprite.html#a5caa3c0ecc29c2e65be6c6ca1db0138f" title=" " alt="" coords="489,5,660,32"/>
+<area shape="rect" id="node5" href="$class_sprite2_d.html#a2c5eff5248b9e0b4034dd33800c9f63c" title=" " alt="" coords="503,56,646,83"/>
+<area shape="rect" id="node6" href="$class_canvas_element.html#adcbf606118ff4a62c5a1252f8cd3db11" title=" " alt="" coords="465,107,684,133"/>
+<area shape="rect" id="node3" href="$class_lines_system.html#a1584568afc9b576aa93e4457fb39b621" title=" " alt="" coords="216,5,417,32"/>
+<area shape="rect" id="node4" href="$class_lines_system.html#a45603bc5268ac28b498d0f9c28c8d79b" title="This method is called on system startup and by default does nothing." alt="" coords="5,5,168,32"/>
+</map>

@@ -1,0 +1,169 @@
+\hypertarget{class_event_manager}{}\doxysection{Event\+Manager Class Reference}
+\label{class_event_manager}\index{EventManager@{EventManager}}
+
+
+{\ttfamily \#include $<$Event\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Event\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{class_event_manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Event\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{class_event_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_event_manager_af05dd0697bc00db48bc31c55b6a36df2}{Subscribe}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event, const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$listener)
+\begin{DoxyCompactList}\small\item\em Method assign provided listener to list of listeners of specified event type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_event_manager_a5cd0bb362dac16a344d6c660b8c3d05e}{Unsubscribe}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event, const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$listener)
+\begin{DoxyCompactList}\small\item\em Method removes provided listener from list of listeners to specified event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_event_manager_aa8a7bbe1267b180afa0eae939e0f360a}{Publish}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event, const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$listener)
+\begin{DoxyCompactList}\small\item\em Method invokes event on specified listener. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_event_manager_a3cc3e53906681aefe83b89ec837ca3af}{Publish}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&event)
+\begin{DoxyCompactList}\small\item\em Method invokes event on all listeners. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, std\+::list$<$ const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$ $>$ $>$ \mbox{\hyperlink{class_event_manager_a2dee07250afd5c85187a9bfe3d3f212f}{listeners}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 9 of file Event\+Manager.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_event_manager_a3cc3e53906681aefe83b89ec837ca3af}\label{class_event_manager_a3cc3e53906681aefe83b89ec837ca3af}} 
+\index{EventManager@{EventManager}!Publish@{Publish}}
+\index{Publish@{Publish}!EventManager@{EventManager}}
+\doxysubsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Event\+Manager\+::\+Publish (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Method invokes event on all listeners. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & tyoe of event \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_event_handling_service_a3e02438a394c6e38fce722034368ae28}{IEvent\+Handling\+Service}}.
+
+
+
+Definition at line 58 of file Event\+Manager.\+cpp.
+
+\mbox{\Hypertarget{class_event_manager_aa8a7bbe1267b180afa0eae939e0f360a}\label{class_event_manager_aa8a7bbe1267b180afa0eae939e0f360a}} 
+\index{EventManager@{EventManager}!Publish@{Publish}}
+\index{Publish@{Publish}!EventManager@{EventManager}}
+\doxysubsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Event\+Manager\+::\+Publish (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event,  }\item[{const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Method invokes event on specified listener. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & type of event \\
+\hline
+{\em listener} & specified listener target \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_event_handling_service_a7f4f9e9a706cf3661209827f0410bc9e}{IEvent\+Handling\+Service}}.
+
+
+
+Definition at line 40 of file Event\+Manager.\+cpp.
+
+\mbox{\Hypertarget{class_event_manager_af05dd0697bc00db48bc31c55b6a36df2}\label{class_event_manager_af05dd0697bc00db48bc31c55b6a36df2}} 
+\index{EventManager@{EventManager}!Subscribe@{Subscribe}}
+\index{Subscribe@{Subscribe}!EventManager@{EventManager}}
+\doxysubsubsection{\texorpdfstring{Subscribe()}{Subscribe()}}
+{\footnotesize\ttfamily void Event\+Manager\+::\+Subscribe (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event,  }\item[{const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Method assign provided listener to list of listeners of specified event type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & type of event \\
+\hline
+{\em listener} & object listening to event occur \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_event_handling_service_a2c2674f6c93aee586bb2a09c46cadd2e}{IEvent\+Handling\+Service}}.
+
+
+
+Definition at line 4 of file Event\+Manager.\+cpp.
+
+\mbox{\Hypertarget{class_event_manager_a5cd0bb362dac16a344d6c660b8c3d05e}\label{class_event_manager_a5cd0bb362dac16a344d6c660b8c3d05e}} 
+\index{EventManager@{EventManager}!Unsubscribe@{Unsubscribe}}
+\index{Unsubscribe@{Unsubscribe}!EventManager@{EventManager}}
+\doxysubsubsection{\texorpdfstring{Unsubscribe()}{Unsubscribe()}}
+{\footnotesize\ttfamily void Event\+Manager\+::\+Unsubscribe (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{event,  }\item[{const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}} $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Method removes provided listener from list of listeners to specified event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & type of event \\
+\hline
+{\em listener} & object listening to event occur \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_i_event_handling_service_aba31bdfbfa92bd7a053f36bcdee05350}{IEvent\+Handling\+Service}}.
+
+
+
+Definition at line 22 of file Event\+Manager.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_event_manager_a2dee07250afd5c85187a9bfe3d3f212f}\label{class_event_manager_a2dee07250afd5c85187a9bfe3d3f212f}} 
+\index{EventManager@{EventManager}!listeners@{listeners}}
+\index{listeners@{listeners}!EventManager@{EventManager}}
+\doxysubsubsection{\texorpdfstring{listeners}{listeners}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, std\+::list$<$const \mbox{\hyperlink{class_i_event_listener}{IEvent\+Listener}}$\ast$$>$ $>$ Event\+Manager\+::listeners\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 32 of file Event\+Manager.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_event_manager_8h}{Event\+Manager.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_event_manager_8cpp}{Event\+Manager.\+cpp}}\end{DoxyCompactItemize}

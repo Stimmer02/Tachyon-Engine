@@ -1,0 +1,5 @@
+<map id="System::System" name="System::System">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,133,57"/>
+<area shape="rect" id="node2" href="$class_message_bus.html#a5b786830150ec433d819c2ddf2ec7564" title="Returns an instance of message bus." alt="" coords="181,5,372,32"/>
+<area shape="rect" id="node3" href="$class_system.html#ac138c3ef20fdf8422d5548a8f005db02" title="This method is called on system startup and by default does nothing." alt="" coords="213,56,341,83"/>
+</map>

@@ -1,0 +1,553 @@
+\hypertarget{class_u_i_builder}{}\doxysection{UIBuilder Class Reference}
+\label{class_u_i_builder}\index{UIBuilder@{UIBuilder}}
+
+
+{\ttfamily \#include $<$UIBuilder.\+h$>$}
+
+
+
+Collaboration diagram for UIBuilder\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_u_i_builder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a7ea01e33f13ebbecf6a13681fdd29047}{Assign\+Event\+Manager}} (\mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$\+\_\+event\+Manager)
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a1c5394bb6a1f767f19acf887ab645dae}{Assign\+Event}} (const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&\+\_\+event, std\+::function$<$ void()$>$)
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a44a6d1834aec1482e41ca8d3d6832529}{Set\+Component\+Type}} (const \mbox{\hyperlink{_component_type_8h_a81f78fc173dedefe5a049c0aa3eed2c0}{Component\+Type}} \&\+\_\+type)
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a47f61af842cdb46b5d802b30198a1642}{Set\+Dimensions}} (const float \&\+\_\+width, const float \&\+\_\+height)
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a21e1cef50bc618fb472b6959d85a75ec}{Set\+Position}} (const float \&\+\_\+x, const float \&\+\_\+y)
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_afc03ad7f690163e19b914c76ca1b78e4}{Set\+Color}} (const \mbox{\hyperlink{struct_color}{Color}} \&\+\_\+color)
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_af388da59a3dd2087b4d45a928ef10976}{Set\+Texture}} (const \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$\+\_\+sprite)
+\item 
+\mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a6e55abd10954b5d79b3324d9a0a2446a}{Set\+Text}} (char $\ast$\+\_\+text, const int \&\+\_\+text\+Len)
+\item 
+\mbox{\hyperlink{class_component}{Component}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a03fe582b30384a0b6e7c39695d71e57b}{Build}} ()
+\item 
+\mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$ \mbox{\hyperlink{class_u_i_builder_a61ae93d8d1fbafc645487d26e2b08d39}{get\+Event\+Manager}} ()
+\item 
+\mbox{\hyperlink{_component_type_8h_a81f78fc173dedefe5a049c0aa3eed2c0}{Component\+Type}} \mbox{\hyperlink{class_u_i_builder_a2ed5d744e1b7b070f14f0520b5846fc4}{get\+Type}} ()
+\item 
+float \mbox{\hyperlink{class_u_i_builder_a9d9d6965b9f7a35bf6f5f0d19d7cac98}{get\+Height}} ()
+\item 
+float \mbox{\hyperlink{class_u_i_builder_a6173847f5d4a213e7e1948443ae3565e}{get\+Width}} ()
+\item 
+float \mbox{\hyperlink{class_u_i_builder_a33269c8f8c16b481af2ff217d170b836}{getX}} ()
+\item 
+float \mbox{\hyperlink{class_u_i_builder_aad5e74664b39e3b81065f26b90ff7eae}{getY}} ()
+\item 
+\mbox{\hyperlink{struct_color}{Color}} \mbox{\hyperlink{class_u_i_builder_a996f956d4b12e0f80ab6a5ffa309147b}{get\+Color}} ()
+\item 
+std\+::map$<$ \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, std\+::function$<$ void()$>$ $>$ \mbox{\hyperlink{class_u_i_builder_acff45c314b916838c4fe144de3481d7c}{get\+Events}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{class_u_i_builder_ac9b0145faabbb6711e9aa405b4f50550}{get\+Text}} ()
+\item 
+int \mbox{\hyperlink{class_u_i_builder_adee743fa5c117b4a0ea95e19514a609f}{get\+Text\+Len}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$ \mbox{\hyperlink{class_u_i_builder_af0b7fab66668d98053f6027bbf8fd2b0}{event\+Manager}}
+\item 
+\mbox{\hyperlink{_component_type_8h_a81f78fc173dedefe5a049c0aa3eed2c0}{Component\+Type}} \mbox{\hyperlink{class_u_i_builder_a4c124a66829816622f41787eb3ed7cf9}{type}}
+\item 
+float \mbox{\hyperlink{class_u_i_builder_aa30048ce3a329bb47a39d733f12f7437}{height}}
+\item 
+float \mbox{\hyperlink{class_u_i_builder_a3a6c7f8523e1106840b4801c568b4fe3}{width}}
+\item 
+float \mbox{\hyperlink{class_u_i_builder_a5689d834362f73a7736eeee0748ab252}{x}}
+\item 
+float \mbox{\hyperlink{class_u_i_builder_ad9574e8be495830fee6eba0d671145b7}{y}}
+\item 
+\mbox{\hyperlink{struct_color}{Color}} \mbox{\hyperlink{class_u_i_builder_a3198a8f3c2f737e915cc3e51a168cbad}{color}}
+\item 
+\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$ \mbox{\hyperlink{class_u_i_builder_ae81a0198b6774f2f242b221555fc0f51}{sprite}}
+\item 
+std\+::map$<$ \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, std\+::function$<$ void()$>$ $>$ \mbox{\hyperlink{class_u_i_builder_ab8835481ff4441b7bebda8a65d99480b}{events}}
+\item 
+char $\ast$ \mbox{\hyperlink{class_u_i_builder_ad1e01a2f151e6729267c0e572171f2fa}{text}}
+\item 
+int \mbox{\hyperlink{class_u_i_builder_a61d8c22c3cad8b480f66e82a5f37e0f3}{text\+Len}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 19 of file UIBuilder.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_u_i_builder_a1c5394bb6a1f767f19acf887ab645dae}\label{class_u_i_builder_a1c5394bb6a1f767f19acf887ab645dae}} 
+\index{UIBuilder@{UIBuilder}!AssignEvent@{AssignEvent}}
+\index{AssignEvent@{AssignEvent}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{AssignEvent()}{AssignEvent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Assign\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}} \&}]{\+\_\+event,  }\item[{std\+::function$<$ void()$>$}]{\+\_\+delegate }\end{DoxyParamCaption})}
+
+
+
+Definition at line 11 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{class_u_i_builder_a1c5394bb6a1f767f19acf887ab645dae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a7ea01e33f13ebbecf6a13681fdd29047}\label{class_u_i_builder_a7ea01e33f13ebbecf6a13681fdd29047}} 
+\index{UIBuilder@{UIBuilder}!AssignEventManager@{AssignEventManager}}
+\index{AssignEventManager@{AssignEventManager}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{AssignEventManager()}{AssignEventManager()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Assign\+Event\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$}]{\+\_\+event\+Manager }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_u_i_builder_a7ea01e33f13ebbecf6a13681fdd29047_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a03fe582b30384a0b6e7c39695d71e57b}\label{class_u_i_builder_a03fe582b30384a0b6e7c39695d71e57b}} 
+\index{UIBuilder@{UIBuilder}!Build@{Build}}
+\index{Build@{Build}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_component}{Component}} $\ast$ UIBuilder\+::\+Build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 55 of file UIBulider.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_u_i_builder_a03fe582b30384a0b6e7c39695d71e57b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{class_u_i_builder_a03fe582b30384a0b6e7c39695d71e57b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a996f956d4b12e0f80ab6a5ffa309147b}\label{class_u_i_builder_a996f956d4b12e0f80ab6a5ffa309147b}} 
+\index{UIBuilder@{UIBuilder}!getColor@{getColor}}
+\index{getColor@{getColor}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_color}{Color}} UIBuilder\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 125 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{class_u_i_builder_a996f956d4b12e0f80ab6a5ffa309147b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a61ae93d8d1fbafc645487d26e2b08d39}\label{class_u_i_builder_a61ae93d8d1fbafc645487d26e2b08d39}} 
+\index{UIBuilder@{UIBuilder}!getEventManager@{getEventManager}}
+\index{getEventManager@{getEventManager}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getEventManager()}{getEventManager()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}} $\ast$ UIBuilder\+::get\+Event\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 107 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{class_u_i_builder_a61ae93d8d1fbafc645487d26e2b08d39_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_acff45c314b916838c4fe144de3481d7c}\label{class_u_i_builder_acff45c314b916838c4fe144de3481d7c}} 
+\index{UIBuilder@{UIBuilder}!getEvents@{getEvents}}
+\index{getEvents@{getEvents}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getEvents()}{getEvents()}}
+{\footnotesize\ttfamily std\+::map$<$ \mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, std\+::function$<$ void()$>$ $>$ UIBuilder\+::get\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 128 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{class_u_i_builder_acff45c314b916838c4fe144de3481d7c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a9d9d6965b9f7a35bf6f5f0d19d7cac98}\label{class_u_i_builder_a9d9d6965b9f7a35bf6f5f0d19d7cac98}} 
+\index{UIBuilder@{UIBuilder}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily float UIBuilder\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 113 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{class_u_i_builder_a9d9d6965b9f7a35bf6f5f0d19d7cac98_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_ac9b0145faabbb6711e9aa405b4f50550}\label{class_u_i_builder_ac9b0145faabbb6711e9aa405b4f50550}} 
+\index{UIBuilder@{UIBuilder}!getText@{getText}}
+\index{getText@{getText}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getText()}{getText()}}
+{\footnotesize\ttfamily char $\ast$ UIBuilder\+::get\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 131 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{class_u_i_builder_ac9b0145faabbb6711e9aa405b4f50550_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_adee743fa5c117b4a0ea95e19514a609f}\label{class_u_i_builder_adee743fa5c117b4a0ea95e19514a609f}} 
+\index{UIBuilder@{UIBuilder}!getTextLen@{getTextLen}}
+\index{getTextLen@{getTextLen}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getTextLen()}{getTextLen()}}
+{\footnotesize\ttfamily int UIBuilder\+::get\+Text\+Len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 134 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{class_u_i_builder_adee743fa5c117b4a0ea95e19514a609f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a2ed5d744e1b7b070f14f0520b5846fc4}\label{class_u_i_builder_a2ed5d744e1b7b070f14f0520b5846fc4}} 
+\index{UIBuilder@{UIBuilder}!getType@{getType}}
+\index{getType@{getType}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_component_type_8h_a81f78fc173dedefe5a049c0aa3eed2c0}{Component\+Type}} UIBuilder\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 110 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{class_u_i_builder_a2ed5d744e1b7b070f14f0520b5846fc4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a6173847f5d4a213e7e1948443ae3565e}\label{class_u_i_builder_a6173847f5d4a213e7e1948443ae3565e}} 
+\index{UIBuilder@{UIBuilder}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily float UIBuilder\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 116 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{class_u_i_builder_a6173847f5d4a213e7e1948443ae3565e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a33269c8f8c16b481af2ff217d170b836}\label{class_u_i_builder_a33269c8f8c16b481af2ff217d170b836}} 
+\index{UIBuilder@{UIBuilder}!getX@{getX}}
+\index{getX@{getX}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily float UIBuilder\+::getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 119 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=247pt]{class_u_i_builder_a33269c8f8c16b481af2ff217d170b836_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_aad5e74664b39e3b81065f26b90ff7eae}\label{class_u_i_builder_aad5e74664b39e3b81065f26b90ff7eae}} 
+\index{UIBuilder@{UIBuilder}!getY@{getY}}
+\index{getY@{getY}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily float UIBuilder\+::getY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 122 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{class_u_i_builder_aad5e74664b39e3b81065f26b90ff7eae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_afc03ad7f690163e19b914c76ca1b78e4}\label{class_u_i_builder_afc03ad7f690163e19b914c76ca1b78e4}} 
+\index{UIBuilder@{UIBuilder}!SetColor@{SetColor}}
+\index{SetColor@{SetColor}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{SetColor()}{SetColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{class_u_i_builder_afc03ad7f690163e19b914c76ca1b78e4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a44a6d1834aec1482e41ca8d3d6832529}\label{class_u_i_builder_a44a6d1834aec1482e41ca8d3d6832529}} 
+\index{UIBuilder@{UIBuilder}!SetComponentType@{SetComponentType}}
+\index{SetComponentType@{SetComponentType}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{SetComponentType()}{SetComponentType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Set\+Component\+Type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_component_type_8h_a81f78fc173dedefe5a049c0aa3eed2c0}{Component\+Type}} \&}]{\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{class_u_i_builder_a44a6d1834aec1482e41ca8d3d6832529_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a47f61af842cdb46b5d802b30198a1642}\label{class_u_i_builder_a47f61af842cdb46b5d802b30198a1642}} 
+\index{UIBuilder@{UIBuilder}!SetDimensions@{SetDimensions}}
+\index{SetDimensions@{SetDimensions}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{SetDimensions()}{SetDimensions()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Set\+Dimensions (\begin{DoxyParamCaption}\item[{const float \&}]{\+\_\+width,  }\item[{const float \&}]{\+\_\+height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{class_u_i_builder_a47f61af842cdb46b5d802b30198a1642_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a21e1cef50bc618fb472b6959d85a75ec}\label{class_u_i_builder_a21e1cef50bc618fb472b6959d85a75ec}} 
+\index{UIBuilder@{UIBuilder}!SetPosition@{SetPosition}}
+\index{SetPosition@{SetPosition}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{SetPosition()}{SetPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Set\+Position (\begin{DoxyParamCaption}\item[{const float \&}]{\+\_\+x,  }\item[{const float \&}]{\+\_\+y }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{class_u_i_builder_a21e1cef50bc618fb472b6959d85a75ec_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_a6e55abd10954b5d79b3324d9a0a2446a}\label{class_u_i_builder_a6e55abd10954b5d79b3324d9a0a2446a}} 
+\index{UIBuilder@{UIBuilder}!SetText@{SetText}}
+\index{SetText@{SetText}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{SetText()}{SetText()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Set\+Text (\begin{DoxyParamCaption}\item[{char $\ast$}]{\+\_\+text,  }\item[{const int \&}]{\+\_\+text\+Len }\end{DoxyParamCaption})}
+
+
+
+Definition at line 49 of file UIBulider.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{class_u_i_builder_a6e55abd10954b5d79b3324d9a0a2446a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_builder_af388da59a3dd2087b4d45a928ef10976}\label{class_u_i_builder_af388da59a3dd2087b4d45a928ef10976}} 
+\index{UIBuilder@{UIBuilder}!SetTexture@{SetTexture}}
+\index{SetTexture@{SetTexture}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{SetTexture()}{SetTexture()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_u_i_builder}{UIBuilder}} $\ast$ UIBuilder\+::\+Set\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$}]{\+\_\+sprite }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file UIBulider.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_u_i_builder_a3198a8f3c2f737e915cc3e51a168cbad}\label{class_u_i_builder_a3198a8f3c2f737e915cc3e51a168cbad}} 
+\index{UIBuilder@{UIBuilder}!color@{color}}
+\index{color@{color}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_color}{Color}} UIBuilder\+::color\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_af0b7fab66668d98053f6027bbf8fd2b0}\label{class_u_i_builder_af0b7fab66668d98053f6027bbf8fd2b0}} 
+\index{UIBuilder@{UIBuilder}!eventManager@{eventManager}}
+\index{eventManager@{eventManager}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{eventManager}{eventManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_event_handling_service}{IEvent\+Handling\+Service}}$\ast$ UIBuilder\+::event\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_ab8835481ff4441b7bebda8a65d99480b}\label{class_u_i_builder_ab8835481ff4441b7bebda8a65d99480b}} 
+\index{UIBuilder@{UIBuilder}!events@{events}}
+\index{events@{events}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{_event_type_8h_a81f552260f0c0292621c51971af0dc25}{Event\+Type}}, std\+::function$<$void()$>$ $>$ UIBuilder\+::events\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 30 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_aa30048ce3a329bb47a39d733f12f7437}\label{class_u_i_builder_aa30048ce3a329bb47a39d733f12f7437}} 
+\index{UIBuilder@{UIBuilder}!height@{height}}
+\index{height@{height}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily float UIBuilder\+::height\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 24 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_ae81a0198b6774f2f242b221555fc0f51}\label{class_u_i_builder_ae81a0198b6774f2f242b221555fc0f51}} 
+\index{UIBuilder@{UIBuilder}!sprite@{sprite}}
+\index{sprite@{sprite}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite2_d}{Sprite2D}}$\ast$ UIBuilder\+::sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_ad1e01a2f151e6729267c0e572171f2fa}\label{class_u_i_builder_ad1e01a2f151e6729267c0e572171f2fa}} 
+\index{UIBuilder@{UIBuilder}!text@{text}}
+\index{text@{text}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{text}{text}}
+{\footnotesize\ttfamily char$\ast$ UIBuilder\+::text\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 31 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_a61d8c22c3cad8b480f66e82a5f37e0f3}\label{class_u_i_builder_a61d8c22c3cad8b480f66e82a5f37e0f3}} 
+\index{UIBuilder@{UIBuilder}!textLen@{textLen}}
+\index{textLen@{textLen}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{textLen}{textLen}}
+{\footnotesize\ttfamily int UIBuilder\+::text\+Len\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 32 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_a4c124a66829816622f41787eb3ed7cf9}\label{class_u_i_builder_a4c124a66829816622f41787eb3ed7cf9}} 
+\index{UIBuilder@{UIBuilder}!type@{type}}
+\index{type@{type}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_component_type_8h_a81f78fc173dedefe5a049c0aa3eed2c0}{Component\+Type}} UIBuilder\+::type\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 23 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_a3a6c7f8523e1106840b4801c568b4fe3}\label{class_u_i_builder_a3a6c7f8523e1106840b4801c568b4fe3}} 
+\index{UIBuilder@{UIBuilder}!width@{width}}
+\index{width@{width}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily float UIBuilder\+::width\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_a5689d834362f73a7736eeee0748ab252}\label{class_u_i_builder_a5689d834362f73a7736eeee0748ab252}} 
+\index{UIBuilder@{UIBuilder}!x@{x}}
+\index{x@{x}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily float UIBuilder\+::x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file UIBuilder.\+h.
+
+\mbox{\Hypertarget{class_u_i_builder_ad9574e8be495830fee6eba0d671145b7}\label{class_u_i_builder_ad9574e8be495830fee6eba0d671145b7}} 
+\index{UIBuilder@{UIBuilder}!y@{y}}
+\index{y@{y}!UIBuilder@{UIBuilder}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily float UIBuilder\+::y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file UIBuilder.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_u_i_builder_8h}{UIBuilder.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_u_i_bulider_8cpp}{UIBulider.\+cpp}}\end{DoxyCompactItemize}

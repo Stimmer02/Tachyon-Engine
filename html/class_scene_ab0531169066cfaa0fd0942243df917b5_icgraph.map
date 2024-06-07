@@ -1,0 +1,5 @@
+<map id="Scene::AddEntityToScene" name="Scene::AddEntityToScene">
+<area shape="rect" id="node1" title=" " alt="" coords="217,31,403,57"/>
+<area shape="rect" id="node2" href="$class_boids_system.html#a1c37923a26b13b6e08070adeabbdbc31" title="This method is called on system startup and by default does nothing." alt="" coords="5,5,169,32"/>
+<area shape="rect" id="node3" href="$class_lines_system.html#a45603bc5268ac28b498d0f9c28c8d79b" title="This method is called on system startup and by default does nothing." alt="" coords="6,56,169,83"/>
+</map>

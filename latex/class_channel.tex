@@ -1,0 +1,222 @@
+\hypertarget{class_channel}{}\doxysection{Channel Class Reference}
+\label{class_channel}\index{Channel@{Channel}}
+
+
+{\ttfamily \#include $<$Channel.\+h$>$}
+
+
+
+Collaboration diagram for Channel\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{class_channel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_channel_a159132a2d2bcd653dd4b54e6867ace32}{Channel}} (const std\+::string \+\_\+name)
+\begin{DoxyCompactList}\small\item\em Creates channel with specified name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_channel_a3a96c555f704bb8bcdf2eb60de13419c}{Bind\+Client}} (\mbox{\hyperlink{class_i_client}{IClient}} $\ast$\+\_\+client)
+\begin{DoxyCompactList}\small\item\em Binds client to current channel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_channel_a43bfa0d9477e5d7207bf2bbcf2f3efe3}{Emplace\+Message}} (const \mbox{\hyperlink{struct_message}{Message}} \&\+\_\+message)
+\begin{DoxyCompactList}\small\item\em Emplaces message on message queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_channel_a452b47c1034214b86f07cbe1a5179869}{Send}} ()
+\begin{DoxyCompactList}\small\item\em Sends oldest message from queue to all or specified client. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{class_channel_ae1861cb9fb2ce4c850c4cd0e082897d5}{Get\+Client\+Count}} ()
+\begin{DoxyCompactList}\small\item\em Returns number of clients present in current channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_channel_ae080e1afd52f3b70e04c62fea46447aa}{name}}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{struct_message}{Message}} $>$ \mbox{\hyperlink{class_channel_abc692e0fa13a6ba732ce20cf204e691a}{messages}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_i_client}{IClient}} $\ast$ $>$ \mbox{\hyperlink{class_channel_a8830cd1d67d1d140a8dea48763710f02}{clients}}
+\item 
+std\+::mutex \mbox{\hyperlink{class_channel_a38b557d3542728acd91b9ec7b61065cc}{mutex}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 11 of file Channel.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_channel_a159132a2d2bcd653dd4b54e6867ace32}\label{class_channel_a159132a2d2bcd653dd4b54e6867ace32}} 
+\index{Channel@{Channel}!Channel@{Channel}}
+\index{Channel@{Channel}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{Channel()}{Channel()}}
+{\footnotesize\ttfamily Channel\+::\+Channel (\begin{DoxyParamCaption}\item[{const std\+::string}]{\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Creates channel with specified name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+name} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 4 of file Channel.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_channel_a3a96c555f704bb8bcdf2eb60de13419c}\label{class_channel_a3a96c555f704bb8bcdf2eb60de13419c}} 
+\index{Channel@{Channel}!BindClient@{BindClient}}
+\index{BindClient@{BindClient}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{BindClient()}{BindClient()}}
+{\footnotesize\ttfamily void Channel\+::\+Bind\+Client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_client}{IClient}} $\ast$}]{\+\_\+client }\end{DoxyParamCaption})}
+
+
+
+Binds client to current channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+client} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 8 of file Channel.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_channel_a3a96c555f704bb8bcdf2eb60de13419c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_channel_a43bfa0d9477e5d7207bf2bbcf2f3efe3}\label{class_channel_a43bfa0d9477e5d7207bf2bbcf2f3efe3}} 
+\index{Channel@{Channel}!EmplaceMessage@{EmplaceMessage}}
+\index{EmplaceMessage@{EmplaceMessage}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{EmplaceMessage()}{EmplaceMessage()}}
+{\footnotesize\ttfamily void Channel\+::\+Emplace\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_message}{Message}} \&}]{\+\_\+message }\end{DoxyParamCaption})}
+
+
+
+Emplaces message on message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+message} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 12 of file Channel.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_channel_a43bfa0d9477e5d7207bf2bbcf2f3efe3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_channel_ae1861cb9fb2ce4c850c4cd0e082897d5}\label{class_channel_ae1861cb9fb2ce4c850c4cd0e082897d5}} 
+\index{Channel@{Channel}!GetClientCount@{GetClientCount}}
+\index{GetClientCount@{GetClientCount}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{GetClientCount()}{GetClientCount()}}
+{\footnotesize\ttfamily int32\+\_\+t Channel\+::\+Get\+Client\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns number of clients present in current channel. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 38 of file Channel.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_channel_ae1861cb9fb2ce4c850c4cd0e082897d5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_channel_a452b47c1034214b86f07cbe1a5179869}\label{class_channel_a452b47c1034214b86f07cbe1a5179869}} 
+\index{Channel@{Channel}!Send@{Send}}
+\index{Send@{Send}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily void Channel\+::\+Send (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sends oldest message from queue to all or specified client. 
+
+
+
+Definition at line 17 of file Channel.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_channel_a452b47c1034214b86f07cbe1a5179869_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_channel_a8830cd1d67d1d140a8dea48763710f02}\label{class_channel_a8830cd1d67d1d140a8dea48763710f02}} 
+\index{Channel@{Channel}!clients@{clients}}
+\index{clients@{clients}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{clients}{clients}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_i_client}{IClient}} $\ast$$>$ Channel\+::clients\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Channel.\+h.
+
+\mbox{\Hypertarget{class_channel_abc692e0fa13a6ba732ce20cf204e691a}\label{class_channel_abc692e0fa13a6ba732ce20cf204e691a}} 
+\index{Channel@{Channel}!messages@{messages}}
+\index{messages@{messages}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{messages}{messages}}
+{\footnotesize\ttfamily std\+::queue$<$\mbox{\hyperlink{struct_message}{Message}}$>$ Channel\+::messages\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Channel.\+h.
+
+\mbox{\Hypertarget{class_channel_a38b557d3542728acd91b9ec7b61065cc}\label{class_channel_a38b557d3542728acd91b9ec7b61065cc}} 
+\index{Channel@{Channel}!mutex@{mutex}}
+\index{mutex@{mutex}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{mutex}{mutex}}
+{\footnotesize\ttfamily std\+::mutex Channel\+::mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Channel.\+h.
+
+\mbox{\Hypertarget{class_channel_ae080e1afd52f3b70e04c62fea46447aa}\label{class_channel_ae080e1afd52f3b70e04c62fea46447aa}} 
+\index{Channel@{Channel}!name@{name}}
+\index{name@{name}!Channel@{Channel}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily std\+::string Channel\+::name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Channel.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_channel_8h}{Channel.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_channel_8cpp}{Channel.\+cpp}}\end{DoxyCompactItemize}

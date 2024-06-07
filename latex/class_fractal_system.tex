@@ -1,0 +1,336 @@
+\hypertarget{class_fractal_system}{}\doxysection{Fractal\+System Class Reference}
+\label{class_fractal_system}\index{FractalSystem@{FractalSystem}}
+
+
+{\ttfamily \#include $<$Fractal.\+h$>$}
+
+
+
+Inheritance diagram for Fractal\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_fractal_system__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Fractal\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fractal_system__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_fractal_system_a01222a036a1fdfb8ec473d2cedeefbf4}{Fractal\+System}} ()
+\item 
+\mbox{\hyperlink{class_fractal_system_afbbdca557e900a9043c960150e04de31}{$\sim$\+Fractal\+System}} ()
+\item 
+void \mbox{\hyperlink{class_fractal_system_a561d77400b6937c319cb7a4e8b5b487f}{On\+Load}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_fractal_system_ac185e348e9742b1886ac3d90b4e3cd18}{Share}} (\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$\mbox{\hyperlink{class_fractal_system_a61c0f1f16bc2034c0ec1628497ff261f}{resource\+Manager}}) override
+\begin{DoxyCompactList}\small\item\em This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_fractal_system_a232fa11379eed24cfb3bdb38ac5fa39f}{Populate\+Color\+Lookup}} ()
+\item 
+\mbox{\hyperlink{struct_color}{Color}} \mbox{\hyperlink{class_fractal_system_af658327338205e2d1a4d60a6b19cb8a2}{Calculate\+Color}} (int iteration)
+\item 
+void \mbox{\hyperlink{class_fractal_system_a8a656d45d3d591d14acb54fdacb29e9d}{Execute}} () override
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene}{Scene}} $\ast$ \mbox{\hyperlink{class_fractal_system_a4015b668c645dbef8a9e1e261c406b91}{scene}}
+\item 
+\mbox{\hyperlink{class_timer}{Timer}} $\ast$ \mbox{\hyperlink{class_fractal_system_a7181f881477f8c0c2c716861199f1580}{timer}}
+\item 
+\mbox{\hyperlink{struct_image}{Image}} \mbox{\hyperlink{class_fractal_system_a15dd187cba712cd56102876500037099}{img}}
+\item 
+int \mbox{\hyperlink{class_fractal_system_a989248aae393d0ed201d8ec6fd2bc6ca}{cell\+Size}}
+\item 
+\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$ \mbox{\hyperlink{class_fractal_system_a3b72a86af0795518cca50fb01d2b6c13}{sprite}}
+\item 
+\mbox{\hyperlink{class_canvas_element}{Canvas\+Element}} $\ast$ \mbox{\hyperlink{class_fractal_system_ac63e63ca633be1e448bb3702399e2950}{canvas}}
+\item 
+\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$ \mbox{\hyperlink{class_fractal_system_a61c0f1f16bc2034c0ec1628497ff261f}{resource\+Manager}}
+\item 
+\mbox{\hyperlink{class_input}{Input}} $\ast$ \mbox{\hyperlink{class_fractal_system_a461272ed4204738e8955d7d812dfa9a9}{input}}
+\item 
+\mbox{\hyperlink{struct_color}{Color}} \mbox{\hyperlink{class_fractal_system_a5849916c908b27a68ff6d23c398a57ca}{color\+Lookup}} \mbox{[}\mbox{\hyperlink{class_fractal_system_a78dbefa225dfc6f5015bfd8287da1c09}{max\+Iteration}}\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{class_fractal_system_a78dbefa225dfc6f5015bfd8287da1c09}{max\+Iteration}} = 16
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 11 of file Fractal.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_fractal_system_a01222a036a1fdfb8ec473d2cedeefbf4}\label{class_fractal_system_a01222a036a1fdfb8ec473d2cedeefbf4}} 
+\index{FractalSystem@{FractalSystem}!FractalSystem@{FractalSystem}}
+\index{FractalSystem@{FractalSystem}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{FractalSystem()}{FractalSystem()}}
+{\footnotesize\ttfamily Fractal\+System\+::\+Fractal\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 77 of file Fractal.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fractal_system_a01222a036a1fdfb8ec473d2cedeefbf4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_fractal_system_afbbdca557e900a9043c960150e04de31}\label{class_fractal_system_afbbdca557e900a9043c960150e04de31}} 
+\index{FractalSystem@{FractalSystem}!````~FractalSystem@{$\sim$FractalSystem}}
+\index{````~FractalSystem@{$\sim$FractalSystem}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{$\sim$FractalSystem()}{~FractalSystem()}}
+{\footnotesize\ttfamily Fractal\+System\+::$\sim$\+Fractal\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 87 of file Fractal.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_fractal_system_af658327338205e2d1a4d60a6b19cb8a2}\label{class_fractal_system_af658327338205e2d1a4d60a6b19cb8a2}} 
+\index{FractalSystem@{FractalSystem}!CalculateColor@{CalculateColor}}
+\index{CalculateColor@{CalculateColor}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{CalculateColor()}{CalculateColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_color}{Color}} Fractal\+System\+::\+Calculate\+Color (\begin{DoxyParamCaption}\item[{int}]{iteration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 33 of file Fractal.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fractal_system_af658327338205e2d1a4d60a6b19cb8a2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_fractal_system_a8a656d45d3d591d14acb54fdacb29e9d}\label{class_fractal_system_a8a656d45d3d591d14acb54fdacb29e9d}} 
+\index{FractalSystem@{FractalSystem}!Execute@{Execute}}
+\index{Execute@{Execute}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void Fractal\+System\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implements \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{System}}.
+
+
+
+Definition at line 43 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a561d77400b6937c319cb7a4e8b5b487f}\label{class_fractal_system_a561d77400b6937c319cb7a4e8b5b487f}} 
+\index{FractalSystem@{FractalSystem}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void Fractal\+System\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{System}}.
+
+
+
+Definition at line 92 of file Fractal.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fractal_system_a561d77400b6937c319cb7a4e8b5b487f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_fractal_system_a232fa11379eed24cfb3bdb38ac5fa39f}\label{class_fractal_system_a232fa11379eed24cfb3bdb38ac5fa39f}} 
+\index{FractalSystem@{FractalSystem}!PopulateColorLookup@{PopulateColorLookup}}
+\index{PopulateColorLookup@{PopulateColorLookup}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{PopulateColorLookup()}{PopulateColorLookup()}}
+{\footnotesize\ttfamily void Fractal\+System\+::\+Populate\+Color\+Lookup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 27 of file Fractal.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fractal_system_a232fa11379eed24cfb3bdb38ac5fa39f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fractal_system_a232fa11379eed24cfb3bdb38ac5fa39f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_fractal_system_ac185e348e9742b1886ac3d90b4e3cd18}\label{class_fractal_system_ac185e348e9742b1886ac3d90b4e3cd18}} 
+\index{FractalSystem@{FractalSystem}!Share@{Share}}
+\index{Share@{Share}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily void Fractal\+System\+::\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$}]{resource\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}{System}}.
+
+
+
+Definition at line 100 of file Fractal.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fractal_system_ac185e348e9742b1886ac3d90b4e3cd18_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_fractal_system_ac63e63ca633be1e448bb3702399e2950}\label{class_fractal_system_ac63e63ca633be1e448bb3702399e2950}} 
+\index{FractalSystem@{FractalSystem}!canvas@{canvas}}
+\index{canvas@{canvas}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{canvas}{canvas}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_canvas_element}{Canvas\+Element}}$\ast$ Fractal\+System\+::canvas\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a989248aae393d0ed201d8ec6fd2bc6ca}\label{class_fractal_system_a989248aae393d0ed201d8ec6fd2bc6ca}} 
+\index{FractalSystem@{FractalSystem}!cellSize@{cellSize}}
+\index{cellSize@{cellSize}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{cellSize}{cellSize}}
+{\footnotesize\ttfamily int Fractal\+System\+::cell\+Size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a5849916c908b27a68ff6d23c398a57ca}\label{class_fractal_system_a5849916c908b27a68ff6d23c398a57ca}} 
+\index{FractalSystem@{FractalSystem}!colorLookup@{colorLookup}}
+\index{colorLookup@{colorLookup}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{colorLookup}{colorLookup}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_color}{Color}} Fractal\+System\+::color\+Lookup\mbox{[}\mbox{\hyperlink{class_fractal_system_a78dbefa225dfc6f5015bfd8287da1c09}{max\+Iteration}}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a15dd187cba712cd56102876500037099}\label{class_fractal_system_a15dd187cba712cd56102876500037099}} 
+\index{FractalSystem@{FractalSystem}!img@{img}}
+\index{img@{img}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{img}{img}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_image}{Image}} Fractal\+System\+::img\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a461272ed4204738e8955d7d812dfa9a9}\label{class_fractal_system_a461272ed4204738e8955d7d812dfa9a9}} 
+\index{FractalSystem@{FractalSystem}!input@{input}}
+\index{input@{input}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_input}{Input}}$\ast$ Fractal\+System\+::input\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a78dbefa225dfc6f5015bfd8287da1c09}\label{class_fractal_system_a78dbefa225dfc6f5015bfd8287da1c09}} 
+\index{FractalSystem@{FractalSystem}!maxIteration@{maxIteration}}
+\index{maxIteration@{maxIteration}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{maxIteration}{maxIteration}}
+{\footnotesize\ttfamily constexpr int Fractal\+System\+::max\+Iteration = 16\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Definition at line 23 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a61c0f1f16bc2034c0ec1628497ff261f}\label{class_fractal_system_a61c0f1f16bc2034c0ec1628497ff261f}} 
+\index{FractalSystem@{FractalSystem}!resourceManager@{resourceManager}}
+\index{resourceManager@{resourceManager}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{resourceManager}{resourceManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}}$\ast$ Fractal\+System\+::resource\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a4015b668c645dbef8a9e1e261c406b91}\label{class_fractal_system_a4015b668c645dbef8a9e1e261c406b91}} 
+\index{FractalSystem@{FractalSystem}!scene@{scene}}
+\index{scene@{scene}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene}{Scene}}$\ast$ Fractal\+System\+::scene\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a3b72a86af0795518cca50fb01d2b6c13}\label{class_fractal_system_a3b72a86af0795518cca50fb01d2b6c13}} 
+\index{FractalSystem@{FractalSystem}!sprite@{sprite}}
+\index{sprite@{sprite}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite2_d}{Sprite2D}}$\ast$ Fractal\+System\+::sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Fractal.\+h.
+
+\mbox{\Hypertarget{class_fractal_system_a7181f881477f8c0c2c716861199f1580}\label{class_fractal_system_a7181f881477f8c0c2c716861199f1580}} 
+\index{FractalSystem@{FractalSystem}!timer@{timer}}
+\index{timer@{timer}!FractalSystem@{FractalSystem}}
+\doxysubsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer}{Timer}}$\ast$ Fractal\+System\+::timer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Fractal.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+editor/\mbox{\hyperlink{_fractal_8h}{Fractal.\+h}}\end{DoxyCompactItemize}

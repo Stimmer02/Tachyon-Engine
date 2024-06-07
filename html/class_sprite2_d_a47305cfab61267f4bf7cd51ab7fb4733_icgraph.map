@@ -1,0 +1,5 @@
+<map id="Sprite2D::Load" name="Sprite2D::Load">
+<area shape="rect" id="node1" title="Method loads current sprite to texture buffer." alt="" coords="177,31,295,57"/>
+<area shape="rect" id="node2" href="$class_button.html#a0e48e98c9c4f41c91c3836357ccac40f" title="Renders current component on screen." alt="" coords="8,5,127,32"/>
+<area shape="rect" id="node3" href="$class_canvas.html#a65460dda6338bd297868bfb8126e0cc7" title="Renders current component on screen." alt="" coords="5,56,129,83"/>
+</map>

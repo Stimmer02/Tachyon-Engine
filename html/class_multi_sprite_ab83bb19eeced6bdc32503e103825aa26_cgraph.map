@@ -1,0 +1,5 @@
+<map id="MultiSprite::Load" name="MultiSprite::Load">
+<area shape="rect" id="node1" title="Method loads current sprite to texture buffer." alt="" coords="5,5,137,32"/>
+<area shape="rect" id="node2" href="$class_g_l_shader.html#a52a56546d0a1f4b6bb06e67f0dd75466" title=" " alt="" coords="185,5,388,32"/>
+<area shape="rect" id="node3" href="$class_g_l_shader.html#ac85dbe6852f4fcf6ffa880ad6599da52" title=" " alt="" coords="436,5,659,32"/>
+</map>

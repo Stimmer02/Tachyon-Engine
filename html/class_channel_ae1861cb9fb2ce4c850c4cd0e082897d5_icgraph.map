@@ -1,0 +1,5 @@
+<map id="Channel::GetClientCount" name="Channel::GetClientCount">
+<area shape="rect" id="node1" title="Returns number of clients present in current channel." alt="" coords="481,5,664,32"/>
+<area shape="rect" id="node2" href="$class_message_bus.html#a3e1a5d5006b0ae95a4a9a3e55cbe7f90" title="Sends message to all users in specified channel." alt="" coords="223,5,433,32"/>
+<area shape="rect" id="node3" href="$class_system.html#a26c9fb10762fd84f20b50bf3065d8ea6" title="This method is used to send message to specified channel within message bus scope." alt="" coords="5,5,175,32"/>
+</map>

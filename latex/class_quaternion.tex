@@ -1,0 +1,273 @@
+\hypertarget{class_quaternion}{}\doxysection{Quaternion Class Reference}
+\label{class_quaternion}\index{Quaternion@{Quaternion}}
+
+
+{\ttfamily \#include $<$Quaternion.\+h$>$}
+
+
+
+Collaboration diagram for Quaternion\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{class_quaternion__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_quaternion_a7c9a23ebddb8f9771678ca8f96bf6dc1}{Quaternion}} (const float \&\mbox{\hyperlink{class_quaternion_a8b80f191a3155cc0158d2b4f4d50b2cb}{x}}, const float \&\mbox{\hyperlink{class_quaternion_a3bd3f270462944423611f44e19d2511b}{y}}, const float \&\mbox{\hyperlink{class_quaternion_a625cb732d8ff3083e7852b86b736ab29}{z}}, const float \&\mbox{\hyperlink{class_quaternion_aa44a65ab99e36f6ab8771030eed8a7ad}{w}})
+\item 
+\mbox{\hyperlink{class_quaternion_abcc01358aada56ea5f0db4da18aaf77d}{Quaternion}} ()
+\item 
+\mbox{\hyperlink{class_quaternion}{Quaternion}} \mbox{\hyperlink{class_quaternion_a56430c456bde4c58e9e72ac4e4137cbd}{Normalize}} ()
+\item 
+\mbox{\hyperlink{class_quaternion}{Quaternion}} \mbox{\hyperlink{class_quaternion_a36087d26b41bb9a72555c448ac797e4c}{operator+}} (const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&q) const
+\item 
+\mbox{\hyperlink{class_quaternion}{Quaternion}} \mbox{\hyperlink{class_quaternion_a41023b9620b60364be0f9a6a2095ee89}{operator-\/}} (const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&q) const
+\item 
+\mbox{\hyperlink{class_quaternion}{Quaternion}} \mbox{\hyperlink{class_quaternion_ab178e12364d87fb676d85695e491361f}{operator$\ast$}} (const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&q) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{class_quaternion_a5eda6dd55d50fd705cffaf69d2b2c048}{Dot}} (const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&a, const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&b)
+\item 
+static \mbox{\hyperlink{class_quaternion}{Quaternion}} \mbox{\hyperlink{class_quaternion_abdfc79653639fccd94c59f58818549d5}{To\+Quaternion}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&euler)
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_quaternion_a973512571448871ccf7d87a8a93245e5}{To\+Euler\+Angles}} (const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&q)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_quaternion_a8b80f191a3155cc0158d2b4f4d50b2cb}{x}}
+\item 
+float \mbox{\hyperlink{class_quaternion_a3bd3f270462944423611f44e19d2511b}{y}}
+\item 
+float \mbox{\hyperlink{class_quaternion_a625cb732d8ff3083e7852b86b736ab29}{z}}
+\item 
+float \mbox{\hyperlink{class_quaternion_aa44a65ab99e36f6ab8771030eed8a7ad}{w}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_quaternion_a65314bc9b0696fe84ac7e94508a726cd}{Magnitude}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 8 of file Quaternion.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_quaternion_a7c9a23ebddb8f9771678ca8f96bf6dc1}\label{class_quaternion_a7c9a23ebddb8f9771678ca8f96bf6dc1}} 
+\index{Quaternion@{Quaternion}!Quaternion@{Quaternion}}
+\index{Quaternion@{Quaternion}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{Quaternion()}{Quaternion()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Quaternion\+::\+Quaternion (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y,  }\item[{const float \&}]{z,  }\item[{const float \&}]{w }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 22 of file Quaternion.\+h.
+
+\mbox{\Hypertarget{class_quaternion_abcc01358aada56ea5f0db4da18aaf77d}\label{class_quaternion_abcc01358aada56ea5f0db4da18aaf77d}} 
+\index{Quaternion@{Quaternion}!Quaternion@{Quaternion}}
+\index{Quaternion@{Quaternion}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{Quaternion()}{Quaternion()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Quaternion\+::\+Quaternion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 29 of file Quaternion.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_quaternion_abcc01358aada56ea5f0db4da18aaf77d_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_quaternion_a5eda6dd55d50fd705cffaf69d2b2c048}\label{class_quaternion_a5eda6dd55d50fd705cffaf69d2b2c048}} 
+\index{Quaternion@{Quaternion}!Dot@{Dot}}
+\index{Dot@{Dot}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{Dot()}{Dot()}}
+{\footnotesize\ttfamily static float Quaternion\+::\+Dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 42 of file Quaternion.\+h.
+
+\mbox{\Hypertarget{class_quaternion_a65314bc9b0696fe84ac7e94508a726cd}\label{class_quaternion_a65314bc9b0696fe84ac7e94508a726cd}} 
+\index{Quaternion@{Quaternion}!Magnitude@{Magnitude}}
+\index{Magnitude@{Magnitude}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{Magnitude()}{Magnitude()}}
+{\footnotesize\ttfamily float Quaternion\+::\+Magnitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Quaternion.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_quaternion_a65314bc9b0696fe84ac7e94508a726cd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_quaternion_a56430c456bde4c58e9e72ac4e4137cbd}\label{class_quaternion_a56430c456bde4c58e9e72ac4e4137cbd}} 
+\index{Quaternion@{Quaternion}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_quaternion}{Quaternion}} Quaternion\+::\+Normalize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 36 of file Quaternion.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_quaternion_a56430c456bde4c58e9e72ac4e4137cbd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_quaternion_ab178e12364d87fb676d85695e491361f}\label{class_quaternion_ab178e12364d87fb676d85695e491361f}} 
+\index{Quaternion@{Quaternion}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_quaternion}{Quaternion}} Quaternion\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&}]{q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 95 of file Quaternion.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_quaternion_ab178e12364d87fb676d85695e491361f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_quaternion_a36087d26b41bb9a72555c448ac797e4c}\label{class_quaternion_a36087d26b41bb9a72555c448ac797e4c}} 
+\index{Quaternion@{Quaternion}!operator+@{operator+}}
+\index{operator+@{operator+}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_quaternion}{Quaternion}} Quaternion\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&}]{q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 87 of file Quaternion.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_quaternion_a36087d26b41bb9a72555c448ac797e4c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_quaternion_a41023b9620b60364be0f9a6a2095ee89}\label{class_quaternion_a41023b9620b60364be0f9a6a2095ee89}} 
+\index{Quaternion@{Quaternion}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_quaternion}{Quaternion}} Quaternion\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&}]{q }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 91 of file Quaternion.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_quaternion_a41023b9620b60364be0f9a6a2095ee89_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_quaternion_a973512571448871ccf7d87a8a93245e5}\label{class_quaternion_a973512571448871ccf7d87a8a93245e5}} 
+\index{Quaternion@{Quaternion}!ToEulerAngles@{ToEulerAngles}}
+\index{ToEulerAngles@{ToEulerAngles}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{ToEulerAngles()}{ToEulerAngles()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_vector3}{Vector3}} Quaternion\+::\+To\+Euler\+Angles (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&}]{q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 66 of file Quaternion.\+h.
+
+\mbox{\Hypertarget{class_quaternion_abdfc79653639fccd94c59f58818549d5}\label{class_quaternion_abdfc79653639fccd94c59f58818549d5}} 
+\index{Quaternion@{Quaternion}!ToQuaternion@{ToQuaternion}}
+\index{ToQuaternion@{ToQuaternion}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{ToQuaternion()}{ToQuaternion()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_quaternion}{Quaternion}} Quaternion\+::\+To\+Quaternion (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{euler }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 46 of file Quaternion.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_quaternion_abdfc79653639fccd94c59f58818549d5_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_quaternion_aa44a65ab99e36f6ab8771030eed8a7ad}\label{class_quaternion_aa44a65ab99e36f6ab8771030eed8a7ad}} 
+\index{Quaternion@{Quaternion}!w@{w}}
+\index{w@{w}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily float Quaternion\+::w}
+
+
+
+Definition at line 20 of file Quaternion.\+h.
+
+\mbox{\Hypertarget{class_quaternion_a8b80f191a3155cc0158d2b4f4d50b2cb}\label{class_quaternion_a8b80f191a3155cc0158d2b4f4d50b2cb}} 
+\index{Quaternion@{Quaternion}!x@{x}}
+\index{x@{x}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily float Quaternion\+::x}
+
+
+
+Definition at line 17 of file Quaternion.\+h.
+
+\mbox{\Hypertarget{class_quaternion_a3bd3f270462944423611f44e19d2511b}\label{class_quaternion_a3bd3f270462944423611f44e19d2511b}} 
+\index{Quaternion@{Quaternion}!y@{y}}
+\index{y@{y}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily float Quaternion\+::y}
+
+
+
+Definition at line 18 of file Quaternion.\+h.
+
+\mbox{\Hypertarget{class_quaternion_a625cb732d8ff3083e7852b86b736ab29}\label{class_quaternion_a625cb732d8ff3083e7852b86b736ab29}} 
+\index{Quaternion@{Quaternion}!z@{z}}
+\index{z@{z}!Quaternion@{Quaternion}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily float Quaternion\+::z}
+
+
+
+Definition at line 19 of file Quaternion.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_quaternion_8h}{Quaternion.\+h}}\end{DoxyCompactItemize}

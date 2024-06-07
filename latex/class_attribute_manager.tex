@@ -1,0 +1,184 @@
+\hypertarget{class_attribute_manager}{}\doxysection{Attribute\+Manager Class Reference}
+\label{class_attribute_manager}\index{AttributeManager@{AttributeManager}}
+
+
+{\ttfamily \#include $<$Attribute\+Manager.\+h$>$}
+
+
+
+Collaboration diagram for Attribute\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{class_attribute_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_attribute_manager_a9702295c7170b6befd2209ed8c2101e0}{Destroy\+Entity}} (const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&ID)
+\item 
+{\footnotesize template$<$typename T , typename... Args$>$ }\\T $\ast$ \mbox{\hyperlink{class_attribute_manager_abba0e3fb83a25eeafd899aacf9774968}{Add\+Attribute}} (const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&ID, Args \&\&... args)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_attribute_manager_ada19b642ad837e4cdce664178687d193}{Remove\+Attribute}} (const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&ID)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \mbox{\hyperlink{class_attribute_manager_a1afdd72dbbb3258d863db1e6aeeb93ad}{Get\+Attribute}} (const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&ID)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_attribute_manager}{Attribute\+Manager}} \& \mbox{\hyperlink{class_attribute_manager_a8ba29da4935728d141b836772730ca1a}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_attribute_manager_a4f01fe13d93917848f362e4872fcf64b}{Attribute\+Manager}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::type\+\_\+index, std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}, \mbox{\hyperlink{class_attribute}{Attribute}} $\ast$ $>$ $>$ \mbox{\hyperlink{class_attribute_manager_abf7ad81237a03a14509b18f661469a3f}{components}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 12 of file Attribute\+Manager.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_attribute_manager_a4f01fe13d93917848f362e4872fcf64b}\label{class_attribute_manager_a4f01fe13d93917848f362e4872fcf64b}} 
+\index{AttributeManager@{AttributeManager}!AttributeManager@{AttributeManager}}
+\index{AttributeManager@{AttributeManager}!AttributeManager@{AttributeManager}}
+\doxysubsubsection{\texorpdfstring{AttributeManager()}{AttributeManager()}}
+{\footnotesize\ttfamily Attribute\+Manager\+::\+Attribute\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Attribute\+Manager.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_attribute_manager_abba0e3fb83a25eeafd899aacf9774968}\label{class_attribute_manager_abba0e3fb83a25eeafd899aacf9774968}} 
+\index{AttributeManager@{AttributeManager}!AddAttribute@{AddAttribute}}
+\index{AddAttribute@{AddAttribute}!AttributeManager@{AttributeManager}}
+\doxysubsubsection{\texorpdfstring{AddAttribute()}{AddAttribute()}}
+{\footnotesize\ttfamily template$<$typename T , typename... Args$>$ \\
+T$\ast$ Attribute\+Manager\+::\+Add\+Attribute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&}]{ID,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 39 of file Attribute\+Manager.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_manager_abba0e3fb83a25eeafd899aacf9774968_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_manager_abba0e3fb83a25eeafd899aacf9774968_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_manager_a9702295c7170b6befd2209ed8c2101e0}\label{class_attribute_manager_a9702295c7170b6befd2209ed8c2101e0}} 
+\index{AttributeManager@{AttributeManager}!DestroyEntity@{DestroyEntity}}
+\index{DestroyEntity@{DestroyEntity}!AttributeManager@{AttributeManager}}
+\doxysubsubsection{\texorpdfstring{DestroyEntity()}{DestroyEntity()}}
+{\footnotesize\ttfamily void Attribute\+Manager\+::\+Destroy\+Entity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&}]{ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 22 of file Attribute\+Manager.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_manager_a9702295c7170b6befd2209ed8c2101e0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_manager_a1afdd72dbbb3258d863db1e6aeeb93ad}\label{class_attribute_manager_a1afdd72dbbb3258d863db1e6aeeb93ad}} 
+\index{AttributeManager@{AttributeManager}!GetAttribute@{GetAttribute}}
+\index{GetAttribute@{GetAttribute}!AttributeManager@{AttributeManager}}
+\doxysubsubsection{\texorpdfstring{GetAttribute()}{GetAttribute()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$ Attribute\+Manager\+::\+Get\+Attribute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&}]{ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 84 of file Attribute\+Manager.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_manager_a1afdd72dbbb3258d863db1e6aeeb93ad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_manager_a8ba29da4935728d141b836772730ca1a}\label{class_attribute_manager_a8ba29da4935728d141b836772730ca1a}} 
+\index{AttributeManager@{AttributeManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!AttributeManager@{AttributeManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_attribute_manager}{Attribute\+Manager}}\& Attribute\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 103 of file Attribute\+Manager.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_manager_a8ba29da4935728d141b836772730ca1a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_attribute_manager_ada19b642ad837e4cdce664178687d193}\label{class_attribute_manager_ada19b642ad837e4cdce664178687d193}} 
+\index{AttributeManager@{AttributeManager}!RemoveAttribute@{RemoveAttribute}}
+\index{RemoveAttribute@{RemoveAttribute}!AttributeManager@{AttributeManager}}
+\doxysubsubsection{\texorpdfstring{RemoveAttribute()}{RemoveAttribute()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Attribute\+Manager\+::\+Remove\+Attribute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}} \&}]{ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 57 of file Attribute\+Manager.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_attribute_manager_ada19b642ad837e4cdce664178687d193_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_attribute_manager_abf7ad81237a03a14509b18f661469a3f}\label{class_attribute_manager_abf7ad81237a03a14509b18f661469a3f}} 
+\index{AttributeManager@{AttributeManager}!components@{components}}
+\index{components@{components}!AttributeManager@{AttributeManager}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ std\+::type\+\_\+index, std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{_entity_container_8h_aff1ac8fd0b927c16980eeb4053d1d5ca}{Entity}}, \mbox{\hyperlink{class_attribute}{Attribute}}$\ast$ $>$ $>$ Attribute\+Manager\+::components\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 109 of file Attribute\+Manager.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_attribute_manager_8h}{Attribute\+Manager.\+h}}\end{DoxyCompactItemize}

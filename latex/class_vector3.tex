@@ -1,0 +1,534 @@
+\hypertarget{class_vector3}{}\doxysection{Vector3 Class Reference}
+\label{class_vector3}\index{Vector3@{Vector3}}
+
+
+{\ttfamily \#include $<$Vector3.\+h$>$}
+
+
+
+Collaboration diagram for Vector3\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{class_vector3__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector3_a5b502d6411c822f196278d8bb1971222}{Vector3}} (const float \&\mbox{\hyperlink{class_vector3_a7e2d3237b29a2f29d7b3d8b2934e35f2}{x}}, const float \&\mbox{\hyperlink{class_vector3_a86eb35a9fa2d5a49e7fad66a35fa9c13}{y}}, const float \&\mbox{\hyperlink{class_vector3_aa8c9461eb24bd2c364258078811a3e9d}{z}})
+\item 
+\mbox{\hyperlink{class_vector3_a3e8cf5f628bbf062f96bc396ba002797}{Vector3}} (const float \&\mbox{\hyperlink{class_vector3_a7e2d3237b29a2f29d7b3d8b2934e35f2}{x}}, const float \&\mbox{\hyperlink{class_vector3_a86eb35a9fa2d5a49e7fad66a35fa9c13}{y}})
+\item 
+\mbox{\hyperlink{class_vector3_a0f49191f7e001e7f7ae1cb49522118b4}{Vector3}} ()
+\item 
+float \mbox{\hyperlink{class_vector3_a94c30ca7427965f94ae1af09a9c67179}{Magnitude}} () const
+\item 
+float \mbox{\hyperlink{class_vector3_af89f4e09c6006e4171cbdfe1499a4689}{Magnitude\+Sqr}} () const
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_a8a8cb236aae8602af246f4f56495f159}{Normalize}} ()
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_abf9f28941176a900c57dad4596ae52b7}{operator-\/}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v) const
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_a79356953b808ee103afc0d445030e778}{operator+}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v) const
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_af04cbf03bf6a5f61aa8a9de6d3562d5f}{operator$\ast$}} (const float \&scalar) const
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_a9356f81ead60660195323c33bff96d12}{operator/}} (const float \&scalar) const
+\item 
+bool \mbox{\hyperlink{class_vector3_a3037bb6d6c81c7873652e37515412541}{operator==}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v) const
+\item 
+bool \mbox{\hyperlink{class_vector3_aa596840a684c36ec665ecc646d40a4be}{operator!=}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v) const
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \& \mbox{\hyperlink{class_vector3_a71213d42653da63b32e8446e5aab2d85}{operator+=}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v)
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \& \mbox{\hyperlink{class_vector3_ada02500b3dcf525adcde4489b9aa059b}{operator-\/=}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v)
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \& \mbox{\hyperlink{class_vector3_a01a012a9f1e18d950031e8e2a9dd07b8}{operator$\ast$=}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v)
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \& \mbox{\hyperlink{class_vector3_a9417f6f5f6bcbed81cb6036c47a0a51c}{operator/=}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&v)
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \& \mbox{\hyperlink{class_vector3_aa70b39859d73b47ca598d5c074f3eeab}{operator/=}} (const float \&scalar)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{class_vector3_ab1763ab65a51577c944dd74a94e49761}{Dot}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b)
+\item 
+static float \mbox{\hyperlink{class_vector3_a81ff34a4a113d796a33bab3d82aa04d8}{Distance}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b)
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_a18ee4be607a73523d3b5b3e7d0582699}{Cross}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b)
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_ac0f31fd1cfdabc24d45dc4d6c3bc0df1}{Max}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b)
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_ad8fd66aa4dc64f76170057da267ee695}{Min}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b)
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_a04e6c6dfbb54d76c48e6b14f0f2e5b5f}{Lerp}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b, float t)
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_a771bfa65e655b79f5994d5e7dff812a1}{Scale}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b)
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_vector3_aad136546f71dff9f5edaf2b280770604}{Reflect}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&incoming, const \mbox{\hyperlink{class_vector3}{Vector3}} \&normal)
+\item 
+static float \mbox{\hyperlink{class_vector3_ae4abfffcaa413fc6b81e899bf8085721}{Angle}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&a, const \mbox{\hyperlink{class_vector3}{Vector3}} \&b)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_vector3_a7e2d3237b29a2f29d7b3d8b2934e35f2}{x}}
+\item 
+float \mbox{\hyperlink{class_vector3_a86eb35a9fa2d5a49e7fad66a35fa9c13}{y}}
+\item 
+float \mbox{\hyperlink{class_vector3_aa8c9461eb24bd2c364258078811a3e9d}{z}}
+\item 
+float \mbox{\hyperlink{class_vector3_a3727fdc95de6570ebf7b70791326f4da}{w}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file Vector3.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_vector3_a5b502d6411c822f196278d8bb1971222}\label{class_vector3_a5b502d6411c822f196278d8bb1971222}} 
+\index{Vector3@{Vector3}!Vector3@{Vector3}}
+\index{Vector3@{Vector3}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Vector3()}{Vector3()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Vector3\+::\+Vector3 (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y,  }\item[{const float \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 15 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a3e8cf5f628bbf062f96bc396ba002797}\label{class_vector3_a3e8cf5f628bbf062f96bc396ba002797}} 
+\index{Vector3@{Vector3}!Vector3@{Vector3}}
+\index{Vector3@{Vector3}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Vector3()}{Vector3()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Vector3\+::\+Vector3 (\begin{DoxyParamCaption}\item[{const float \&}]{x,  }\item[{const float \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 22 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a0f49191f7e001e7f7ae1cb49522118b4}\label{class_vector3_a0f49191f7e001e7f7ae1cb49522118b4}} 
+\index{Vector3@{Vector3}!Vector3@{Vector3}}
+\index{Vector3@{Vector3}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Vector3()}{Vector3()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Vector3\+::\+Vector3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 29 of file Vector3.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vector3_a0f49191f7e001e7f7ae1cb49522118b4_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vector3_ae4abfffcaa413fc6b81e899bf8085721}\label{class_vector3_ae4abfffcaa413fc6b81e899bf8085721}} 
+\index{Vector3@{Vector3}!Angle@{Angle}}
+\index{Angle@{Angle}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Angle()}{Angle()}}
+{\footnotesize\ttfamily static float Vector3\+::\+Angle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 92 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{class_vector3_ae4abfffcaa413fc6b81e899bf8085721_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_a18ee4be607a73523d3b5b3e7d0582699}\label{class_vector3_a18ee4be607a73523d3b5b3e7d0582699}} 
+\index{Vector3@{Vector3}!Cross@{Cross}}
+\index{Cross@{Cross}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Cross()}{Cross()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::\+Cross (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 61 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{class_vector3_a18ee4be607a73523d3b5b3e7d0582699_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vector3_a18ee4be607a73523d3b5b3e7d0582699_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_a81ff34a4a113d796a33bab3d82aa04d8}\label{class_vector3_a81ff34a4a113d796a33bab3d82aa04d8}} 
+\index{Vector3@{Vector3}!Distance@{Distance}}
+\index{Distance@{Distance}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Distance()}{Distance()}}
+{\footnotesize\ttfamily static float Vector3\+::\+Distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 57 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_ab1763ab65a51577c944dd74a94e49761}\label{class_vector3_ab1763ab65a51577c944dd74a94e49761}} 
+\index{Vector3@{Vector3}!Dot@{Dot}}
+\index{Dot@{Dot}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Dot()}{Dot()}}
+{\footnotesize\ttfamily static float Vector3\+::\+Dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 53 of file Vector3.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vector3_ab1763ab65a51577c944dd74a94e49761_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_a04e6c6dfbb54d76c48e6b14f0f2e5b5f}\label{class_vector3_a04e6c6dfbb54d76c48e6b14f0f2e5b5f}} 
+\index{Vector3@{Vector3}!Lerp@{Lerp}}
+\index{Lerp@{Lerp}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Lerp()}{Lerp()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::\+Lerp (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b,  }\item[{float}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 78 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a94c30ca7427965f94ae1af09a9c67179}\label{class_vector3_a94c30ca7427965f94ae1af09a9c67179}} 
+\index{Vector3@{Vector3}!Magnitude@{Magnitude}}
+\index{Magnitude@{Magnitude}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Magnitude()}{Magnitude()}}
+{\footnotesize\ttfamily float Vector3\+::\+Magnitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 36 of file Vector3.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vector3_a94c30ca7427965f94ae1af09a9c67179_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_af89f4e09c6006e4171cbdfe1499a4689}\label{class_vector3_af89f4e09c6006e4171cbdfe1499a4689}} 
+\index{Vector3@{Vector3}!MagnitudeSqr@{MagnitudeSqr}}
+\index{MagnitudeSqr@{MagnitudeSqr}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{MagnitudeSqr()}{MagnitudeSqr()}}
+{\footnotesize\ttfamily float Vector3\+::\+Magnitude\+Sqr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 40 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_ac0f31fd1cfdabc24d45dc4d6c3bc0df1}\label{class_vector3_ac0f31fd1cfdabc24d45dc4d6c3bc0df1}} 
+\index{Vector3@{Vector3}!Max@{Max}}
+\index{Max@{Max}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Max()}{Max()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::\+Max (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 70 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_vector3_ac0f31fd1cfdabc24d45dc4d6c3bc0df1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_ad8fd66aa4dc64f76170057da267ee695}\label{class_vector3_ad8fd66aa4dc64f76170057da267ee695}} 
+\index{Vector3@{Vector3}!Min@{Min}}
+\index{Min@{Min}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Min()}{Min()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::\+Min (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 74 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{class_vector3_ad8fd66aa4dc64f76170057da267ee695_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_a8a8cb236aae8602af246f4f56495f159}\label{class_vector3_a8a8cb236aae8602af246f4f56495f159}} 
+\index{Vector3@{Vector3}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::\+Normalize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 44 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{class_vector3_a8a8cb236aae8602af246f4f56495f159_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vector3_a8a8cb236aae8602af246f4f56495f159_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_aa596840a684c36ec665ecc646d40a4be}\label{class_vector3_aa596840a684c36ec665ecc646d40a4be}} 
+\index{Vector3@{Vector3}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Vector3\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 129 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_af04cbf03bf6a5f61aa8a9de6d3562d5f}\label{class_vector3_af04cbf03bf6a5f61aa8a9de6d3562d5f}} 
+\index{Vector3@{Vector3}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const float \&}]{scalar }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 116 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_vector3_af04cbf03bf6a5f61aa8a9de6d3562d5f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_a01a012a9f1e18d950031e8e2a9dd07b8}\label{class_vector3_a01a012a9f1e18d950031e8e2a9dd07b8}} 
+\index{Vector3@{Vector3}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}}\& Vector3\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 147 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a79356953b808ee103afc0d445030e778}\label{class_vector3_a79356953b808ee103afc0d445030e778}} 
+\index{Vector3@{Vector3}!operator+@{operator+}}
+\index{operator+@{operator+}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 112 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{class_vector3_a79356953b808ee103afc0d445030e778_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_a71213d42653da63b32e8446e5aab2d85}\label{class_vector3_a71213d42653da63b32e8446e5aab2d85}} 
+\index{Vector3@{Vector3}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}}\& Vector3\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 133 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_abf9f28941176a900c57dad4596ae52b7}\label{class_vector3_abf9f28941176a900c57dad4596ae52b7}} 
+\index{Vector3@{Vector3}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 108 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{class_vector3_abf9f28941176a900c57dad4596ae52b7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_ada02500b3dcf525adcde4489b9aa059b}\label{class_vector3_ada02500b3dcf525adcde4489b9aa059b}} 
+\index{Vector3@{Vector3}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}}\& Vector3\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 140 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a9356f81ead60660195323c33bff96d12}\label{class_vector3_a9356f81ead60660195323c33bff96d12}} 
+\index{Vector3@{Vector3}!operator/@{operator/}}
+\index{operator/@{operator/}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::operator/ (\begin{DoxyParamCaption}\item[{const float \&}]{scalar }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 120 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{class_vector3_a9356f81ead60660195323c33bff96d12_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_aa70b39859d73b47ca598d5c074f3eeab}\label{class_vector3_aa70b39859d73b47ca598d5c074f3eeab}} 
+\index{Vector3@{Vector3}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}}\& Vector3\+::operator/= (\begin{DoxyParamCaption}\item[{const float \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 161 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a9417f6f5f6bcbed81cb6036c47a0a51c}\label{class_vector3_a9417f6f5f6bcbed81cb6036c47a0a51c}} 
+\index{Vector3@{Vector3}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}}\& Vector3\+::operator/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 154 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a3037bb6d6c81c7873652e37515412541}\label{class_vector3_a3037bb6d6c81c7873652e37515412541}} 
+\index{Vector3@{Vector3}!operator==@{operator==}}
+\index{operator==@{operator==}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Vector3\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{v }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 125 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_aad136546f71dff9f5edaf2b280770604}\label{class_vector3_aad136546f71dff9f5edaf2b280770604}} 
+\index{Vector3@{Vector3}!Reflect@{Reflect}}
+\index{Reflect@{Reflect}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Reflect()}{Reflect()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::\+Reflect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{incoming,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 87 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{class_vector3_aad136546f71dff9f5edaf2b280770604_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_vector3_a771bfa65e655b79f5994d5e7dff812a1}\label{class_vector3_a771bfa65e655b79f5994d5e7dff812a1}} 
+\index{Vector3@{Vector3}!Scale@{Scale}}
+\index{Scale@{Scale}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{Scale()}{Scale()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_vector3}{Vector3}} Vector3\+::\+Scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{a,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 83 of file Vector3.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{class_vector3_a771bfa65e655b79f5994d5e7dff812a1_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_vector3_a3727fdc95de6570ebf7b70791326f4da}\label{class_vector3_a3727fdc95de6570ebf7b70791326f4da}} 
+\index{Vector3@{Vector3}!w@{w}}
+\index{w@{w}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily float Vector3\+::w}
+
+
+
+Definition at line 13 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a7e2d3237b29a2f29d7b3d8b2934e35f2}\label{class_vector3_a7e2d3237b29a2f29d7b3d8b2934e35f2}} 
+\index{Vector3@{Vector3}!x@{x}}
+\index{x@{x}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily float Vector3\+::x}
+
+
+
+Definition at line 10 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_a86eb35a9fa2d5a49e7fad66a35fa9c13}\label{class_vector3_a86eb35a9fa2d5a49e7fad66a35fa9c13}} 
+\index{Vector3@{Vector3}!y@{y}}
+\index{y@{y}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily float Vector3\+::y}
+
+
+
+Definition at line 11 of file Vector3.\+h.
+
+\mbox{\Hypertarget{class_vector3_aa8c9461eb24bd2c364258078811a3e9d}\label{class_vector3_aa8c9461eb24bd2c364258078811a3e9d}} 
+\index{Vector3@{Vector3}!z@{z}}
+\index{z@{z}!Vector3@{Vector3}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily float Vector3\+::z}
+
+
+
+Definition at line 12 of file Vector3.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_vector3_8h}{Vector3.\+h}}\end{DoxyCompactItemize}

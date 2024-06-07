@@ -1,0 +1,4 @@
+<map id="BoidsSystem::GetNearbyBoids" name="BoidsSystem::GetNearbyBoids">
+<area shape="rect" id="node1" title=" " alt="" coords="220,5,441,32"/>
+<area shape="rect" id="node2" href="$class_boids_system.html#ac9a830ceb3cb401526fb0242adbb8978" title="This abstract method is called every iteration of system loop and must be defined by specified system..." alt="" coords="5,5,172,32"/>
+</map>

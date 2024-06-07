@@ -1,0 +1,578 @@
+\hypertarget{class_matrix}{}\doxysection{Matrix Class Reference}
+\label{class_matrix}\index{Matrix@{Matrix}}
+
+
+{\ttfamily \#include $<$Matrix.\+h$>$}
+
+
+
+Collaboration diagram for Matrix\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{class_matrix__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_matrix_a2dba13c45127354c9f75ef576f49269b}{Matrix}} ()
+\item 
+\mbox{\hyperlink{class_matrix_a190366bd80dea2a573c415a19946698c}{Matrix}} (const \mbox{\hyperlink{class_matrix}{Matrix}} \&other\+Matrix)
+\item 
+void \mbox{\hyperlink{class_matrix_ad1c2f3688b51b531b6927f29a660b01e}{Load\+Identity}} ()
+\item 
+void \mbox{\hyperlink{class_matrix_a56b80ab6d217060323cc70fa824cc08a}{Zeros}} ()
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_ad0c96cdea0d2ae3403653ca90aa70796}{Transpose}} () const
+\item 
+float \& \mbox{\hyperlink{class_matrix_a90f53940c4b35757b3a1271fd402e10a}{operator\mbox{[}$\,$\mbox{]}}} (const int \&index)
+\item 
+void \mbox{\hyperlink{class_matrix_a851b1609bb3ebe21def76af3809e77f0}{LUDecompositon}} (\mbox{\hyperlink{class_matrix}{Matrix}} \&L, \mbox{\hyperlink{class_matrix}{Matrix}} \&U)
+\item 
+float \mbox{\hyperlink{class_matrix_a1960e8bd2a01c25ac29c99f176a9a830}{Determinant}} ()
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_ac1e575ac083839c44cd50f56e627a320}{Inverse}} ()
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_ac0934563f66bd5000bf93706e12a2c24}{operator$\ast$}} (\mbox{\hyperlink{class_matrix}{Matrix}} \&othermatrix) const
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_ae1820affdd79832ccf54bef3a49b52e6}{operator$\ast$}} (const float \&scalar) const
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a6aab81de20a6407bfc7741287f1cc22b}{operator+}} (\mbox{\hyperlink{class_matrix}{Matrix}} \&othermatrix) const
+\item 
+\mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a2bc73403a071c7cb500fc906c3d04610}{operator-\/}} (\mbox{\hyperlink{class_matrix}{Matrix}} \&othermatrix) const
+\item 
+void \mbox{\hyperlink{class_matrix_a93813833453ccd3b3b45bc0fa1ce3739}{operator=}} (const \mbox{\hyperlink{class_matrix}{Matrix}} \&othermatrix)
+\item 
+float $\ast$ \mbox{\hyperlink{class_matrix_a84b5ab1357d3d33a5266507d3c9b0767}{Data}} ()
+\item 
+void \mbox{\hyperlink{class_matrix_a4e48a53d11bd68c0bed29c3cb1a3e79e}{Show}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a1be1d8bd0a8c5ba9c37558069149dfdd}{Ortho}} (const float \&left, const float \&right, const float \&bottom, const float \&top, const float \&near\+Val, const float \&far\+Val)
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a9b1394b6de44d63d44c049c8a06b62f3}{Frustum}} (const float \&left, const float \&right, const float \&bottom, const float \&top, const float \&near\+Val, const float \&far\+Val)
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_aea09d6e52a209619c603c9327d2c60fd}{Look\+At}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&\mbox{\hyperlink{structposition}{position}}, const \mbox{\hyperlink{class_vector3}{Vector3}} \&front, const \mbox{\hyperlink{class_vector3}{Vector3}} \&up, const \mbox{\hyperlink{class_vector3}{Vector3}} \&right)
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a6e9b7dd3f616d78205347e16ca1a5a94}{Perspective}} (const float \&fov, const float \&aspect, const float \&near\+Val, const float \&far\+Val)
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a87c27740981207e72537caf9afe4fede}{Translate}} (const float \&x\+Offset, const float \&y\+Offset, const float \&z\+Offset)
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_a4cd5d0ac89f4a6f64ca49c27f2327078}{Rotate}} (const float \&angle, float x\+Axis, float y\+Axis, float z\+Axis)
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_abba4c5f0af01c81bd179e94317a593bb}{Rotate}} (const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&q)
+\item 
+static \mbox{\hyperlink{class_matrix}{Matrix}} \mbox{\hyperlink{class_matrix_ad62ce5040524d0ef8f6faba4af13c70e}{Scale}} (const float \&x\+Scale, const float \&y\+Scale, const float \&z\+Scale)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_matrix_a2260e7b5ad738abaf05151ce335dbab4}{matrix}} \mbox{[}16\mbox{]} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 12 of file Matrix.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_matrix_a2dba13c45127354c9f75ef576f49269b}\label{class_matrix_a2dba13c45127354c9f75ef576f49269b}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 20 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=317pt]{class_matrix_a2dba13c45127354c9f75ef576f49269b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a190366bd80dea2a573c415a19946698c}\label{class_matrix_a190366bd80dea2a573c415a19946698c}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Matrix\+::\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}} \&}]{other\+Matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 24 of file Matrix.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_matrix_a84b5ab1357d3d33a5266507d3c9b0767}\label{class_matrix_a84b5ab1357d3d33a5266507d3c9b0767}} 
+\index{Matrix@{Matrix}!Data@{Data}}
+\index{Data@{Data}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily float$\ast$ Matrix\+::\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 329 of file Matrix.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a84b5ab1357d3d33a5266507d3c9b0767_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a1960e8bd2a01c25ac29c99f176a9a830}\label{class_matrix_a1960e8bd2a01c25ac29c99f176a9a830}} 
+\index{Matrix@{Matrix}!Determinant@{Determinant}}
+\index{Determinant@{Determinant}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Determinant()}{Determinant()}}
+{\footnotesize\ttfamily float Matrix\+::\+Determinant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 110 of file Matrix.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a1960e8bd2a01c25ac29c99f176a9a830_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a9b1394b6de44d63d44c049c8a06b62f3}\label{class_matrix_a9b1394b6de44d63d44c049c8a06b62f3}} 
+\index{Matrix@{Matrix}!Frustum@{Frustum}}
+\index{Frustum@{Frustum}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Frustum()}{Frustum()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Frustum (\begin{DoxyParamCaption}\item[{const float \&}]{left,  }\item[{const float \&}]{right,  }\item[{const float \&}]{bottom,  }\item[{const float \&}]{top,  }\item[{const float \&}]{near\+Val,  }\item[{const float \&}]{far\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 360 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{class_matrix_a9b1394b6de44d63d44c049c8a06b62f3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_ac1e575ac083839c44cd50f56e627a320}\label{class_matrix_ac1e575ac083839c44cd50f56e627a320}} 
+\index{Matrix@{Matrix}!Inverse@{Inverse}}
+\index{Inverse@{Inverse}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Inverse()}{Inverse()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Inverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 122 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_ac1e575ac083839c44cd50f56e627a320_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_matrix_ac1e575ac083839c44cd50f56e627a320_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_ad1c2f3688b51b531b6927f29a660b01e}\label{class_matrix_ad1c2f3688b51b531b6927f29a660b01e}} 
+\index{Matrix@{Matrix}!LoadIdentity@{LoadIdentity}}
+\index{LoadIdentity@{LoadIdentity}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{LoadIdentity()}{LoadIdentity()}}
+{\footnotesize\ttfamily void Matrix\+::\+Load\+Identity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 28 of file Matrix.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_ad1c2f3688b51b531b6927f29a660b01e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_aea09d6e52a209619c603c9327d2c60fd}\label{class_matrix_aea09d6e52a209619c603c9327d2c60fd}} 
+\index{Matrix@{Matrix}!LookAt@{LookAt}}
+\index{LookAt@{LookAt}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{LookAt()}{LookAt()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Look\+At (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{position,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{front,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{up,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 379 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{class_matrix_aea09d6e52a209619c603c9327d2c60fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_aea09d6e52a209619c603c9327d2c60fd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a851b1609bb3ebe21def76af3809e77f0}\label{class_matrix_a851b1609bb3ebe21def76af3809e77f0}} 
+\index{Matrix@{Matrix}!LUDecompositon@{LUDecompositon}}
+\index{LUDecompositon@{LUDecompositon}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{LUDecompositon()}{LUDecompositon()}}
+{\footnotesize\ttfamily void Matrix\+::\+LUDecompositon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}} \&}]{L,  }\item[{\mbox{\hyperlink{class_matrix}{Matrix}} \&}]{U }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 79 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{class_matrix_a851b1609bb3ebe21def76af3809e77f0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a851b1609bb3ebe21def76af3809e77f0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_ae1820affdd79832ccf54bef3a49b52e6}\label{class_matrix_ae1820affdd79832ccf54bef3a49b52e6}} 
+\index{Matrix@{Matrix}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const float \&}]{scalar }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 219 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{class_matrix_ae1820affdd79832ccf54bef3a49b52e6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_ac0934563f66bd5000bf93706e12a2c24}\label{class_matrix_ac0934563f66bd5000bf93706e12a2c24}} 
+\index{Matrix@{Matrix}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}} \&}]{othermatrix }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 158 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{class_matrix_ac0934563f66bd5000bf93706e12a2c24_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a6aab81de20a6407bfc7741287f1cc22b}\label{class_matrix_a6aab81de20a6407bfc7741287f1cc22b}} 
+\index{Matrix@{Matrix}!operator+@{operator+}}
+\index{operator+@{operator+}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}} \&}]{othermatrix }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 255 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{class_matrix_a6aab81de20a6407bfc7741287f1cc22b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a2bc73403a071c7cb500fc906c3d04610}\label{class_matrix_a2bc73403a071c7cb500fc906c3d04610}} 
+\index{Matrix@{Matrix}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::operator-\/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_matrix}{Matrix}} \&}]{othermatrix }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 290 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_matrix_a2bc73403a071c7cb500fc906c3d04610_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a93813833453ccd3b3b45bc0fa1ce3739}\label{class_matrix_a93813833453ccd3b3b45bc0fa1ce3739}} 
+\index{Matrix@{Matrix}!operator=@{operator=}}
+\index{operator=@{operator=}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void Matrix\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_matrix}{Matrix}} \&}]{othermatrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 325 of file Matrix.\+h.
+
+\mbox{\Hypertarget{class_matrix_a90f53940c4b35757b3a1271fd402e10a}\label{class_matrix_a90f53940c4b35757b3a1271fd402e10a}} 
+\index{Matrix@{Matrix}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily float\& Matrix\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const int \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 74 of file Matrix.\+h.
+
+\mbox{\Hypertarget{class_matrix_a1be1d8bd0a8c5ba9c37558069149dfdd}\label{class_matrix_a1be1d8bd0a8c5ba9c37558069149dfdd}} 
+\index{Matrix@{Matrix}!Ortho@{Ortho}}
+\index{Ortho@{Ortho}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Ortho()}{Ortho()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Ortho (\begin{DoxyParamCaption}\item[{const float \&}]{left,  }\item[{const float \&}]{right,  }\item[{const float \&}]{bottom,  }\item[{const float \&}]{top,  }\item[{const float \&}]{near\+Val,  }\item[{const float \&}]{far\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 343 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{class_matrix_a1be1d8bd0a8c5ba9c37558069149dfdd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a1be1d8bd0a8c5ba9c37558069149dfdd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a6e9b7dd3f616d78205347e16ca1a5a94}\label{class_matrix_a6e9b7dd3f616d78205347e16ca1a5a94}} 
+\index{Matrix@{Matrix}!Perspective@{Perspective}}
+\index{Perspective@{Perspective}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Perspective()}{Perspective()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Perspective (\begin{DoxyParamCaption}\item[{const float \&}]{fov,  }\item[{const float \&}]{aspect,  }\item[{const float \&}]{near\+Val,  }\item[{const float \&}]{far\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 410 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{class_matrix_a6e9b7dd3f616d78205347e16ca1a5a94_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a6e9b7dd3f616d78205347e16ca1a5a94_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a4cd5d0ac89f4a6f64ca49c27f2327078}\label{class_matrix_a4cd5d0ac89f4a6f64ca49c27f2327078}} 
+\index{Matrix@{Matrix}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Rotate()}{Rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Rotate (\begin{DoxyParamCaption}\item[{const float \&}]{angle,  }\item[{float}]{x\+Axis,  }\item[{float}]{y\+Axis,  }\item[{float}]{z\+Axis }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 445 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{class_matrix_a4cd5d0ac89f4a6f64ca49c27f2327078_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a4cd5d0ac89f4a6f64ca49c27f2327078_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_abba4c5f0af01c81bd179e94317a593bb}\label{class_matrix_abba4c5f0af01c81bd179e94317a593bb}} 
+\index{Matrix@{Matrix}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Rotate()}{Rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Rotate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_quaternion}{Quaternion}} \&}]{q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 482 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{class_matrix_abba4c5f0af01c81bd179e94317a593bb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_ad62ce5040524d0ef8f6faba4af13c70e}\label{class_matrix_ad62ce5040524d0ef8f6faba4af13c70e}} 
+\index{Matrix@{Matrix}!Scale@{Scale}}
+\index{Scale@{Scale}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Scale()}{Scale()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Scale (\begin{DoxyParamCaption}\item[{const float \&}]{x\+Scale,  }\item[{const float \&}]{y\+Scale,  }\item[{const float \&}]{z\+Scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 516 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{class_matrix_ad62ce5040524d0ef8f6faba4af13c70e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_ad62ce5040524d0ef8f6faba4af13c70e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a4e48a53d11bd68c0bed29c3cb1a3e79e}\label{class_matrix_a4e48a53d11bd68c0bed29c3cb1a3e79e}} 
+\index{Matrix@{Matrix}!Show@{Show}}
+\index{Show@{Show}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Show()}{Show()}}
+{\footnotesize\ttfamily void Matrix\+::\+Show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 333 of file Matrix.\+h.
+
+\mbox{\Hypertarget{class_matrix_a87c27740981207e72537caf9afe4fede}\label{class_matrix_a87c27740981207e72537caf9afe4fede}} 
+\index{Matrix@{Matrix}!Translate@{Translate}}
+\index{Translate@{Translate}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Translate()}{Translate()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Translate (\begin{DoxyParamCaption}\item[{const float \&}]{x\+Offset,  }\item[{const float \&}]{y\+Offset,  }\item[{const float \&}]{z\+Offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 432 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{class_matrix_a87c27740981207e72537caf9afe4fede_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a87c27740981207e72537caf9afe4fede_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_ad0c96cdea0d2ae3403653ca90aa70796}\label{class_matrix_ad0c96cdea0d2ae3403653ca90aa70796}} 
+\index{Matrix@{Matrix}!Transpose@{Transpose}}
+\index{Transpose@{Transpose}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Transpose()}{Transpose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix}{Matrix}} Matrix\+::\+Transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 40 of file Matrix.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{class_matrix_ad0c96cdea0d2ae3403653ca90aa70796_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_ad0c96cdea0d2ae3403653ca90aa70796_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_matrix_a56b80ab6d217060323cc70fa824cc08a}\label{class_matrix_a56b80ab6d217060323cc70fa824cc08a}} 
+\index{Matrix@{Matrix}!Zeros@{Zeros}}
+\index{Zeros@{Zeros}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{Zeros()}{Zeros()}}
+{\footnotesize\ttfamily void Matrix\+::\+Zeros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 36 of file Matrix.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_matrix_a56b80ab6d217060323cc70fa824cc08a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_matrix_a2260e7b5ad738abaf05151ce335dbab4}\label{class_matrix_a2260e7b5ad738abaf05151ce335dbab4}} 
+\index{Matrix@{Matrix}!matrix@{matrix}}
+\index{matrix@{matrix}!Matrix@{Matrix}}
+\doxysubsubsection{\texorpdfstring{matrix}{matrix}}
+{\footnotesize\ttfamily float Matrix\+::matrix\mbox{[}16\mbox{]} = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Matrix.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_matrix_8h}{Matrix.\+h}}\end{DoxyCompactItemize}

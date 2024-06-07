@@ -1,0 +1,249 @@
+\hypertarget{class_multi_sprite}{}\doxysection{Multi\+Sprite Class Reference}
+\label{class_multi_sprite}\index{MultiSprite@{MultiSprite}}
+
+
+{\ttfamily \#include $<$Multi\+Sprite.\+h$>$}
+
+
+
+Inheritance diagram for Multi\+Sprite\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_multi_sprite__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Multi\+Sprite\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_multi_sprite__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_multi_sprite_a9f60e045a17164e3ad7f82ef5f15614c}{Multi\+Sprite}} ()
+\item 
+\mbox{\hyperlink{class_multi_sprite_a2b434dd4a62dfc0b7ea9150f96bf355e}{Multi\+Sprite}} (const \mbox{\hyperlink{class_multi_sprite}{Multi\+Sprite}} $\ast$sprite)
+\item 
+void \mbox{\hyperlink{class_multi_sprite_a5caa3c0ecc29c2e65be6c6ca1db0138f}{Set\+Texture}} (const std\+::string \&tex\+Name, const \mbox{\hyperlink{struct_color}{Color}} $\ast$pixels, const uint32\+\_\+t \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}, const uint32\+\_\+t \&\mbox{\hyperlink{_open_c_l-_open_g_l_01__test_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}})
+\item 
+void \mbox{\hyperlink{class_multi_sprite_aff59be13f2259024085ae0e6c9dabb6d}{Set\+Texture\+Attrib}} (const GLenum \&attrib, const GLint \&value) override
+\begin{DoxyCompactList}\small\item\em Method sets value correlated to texture attribute. \end{DoxyCompactList}\item 
+GLuint \mbox{\hyperlink{class_multi_sprite_a27f95e0683bcd60532ca81cd45a0baca}{Get\+Texture\+ID}} () override
+\begin{DoxyCompactList}\small\item\em Method returns texture id of current sprite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_multi_sprite_ab83bb19eeced6bdc32503e103825aa26}{Load}} (\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$shader) override
+\begin{DoxyCompactList}\small\item\em Method loads current sprite to texture buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_multi_sprite_a4893fd6443bb47f7f37a9fdbde59e3f1}{Un\+Load}} () override
+\begin{DoxyCompactList}\small\item\em Method unloads current sprite from texture buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_multi_sprite_a2c636b5c4337ff7a86e7ddad9dcba581}{Clear\+Color}} (const \mbox{\hyperlink{struct_color}{Color}} \&clear\+Color) override
+\begin{DoxyCompactList}\small\item\em Method fills texture with provided color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_multi_sprite_aecd36e8ecfb83661d67fd3ea3f1c65ac}{$\sim$\+Multi\+Sprite}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$ $>$ \mbox{\hyperlink{class_multi_sprite_a1edf998f34ec63f04b96897fb44fc21a}{textures}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 7 of file Multi\+Sprite.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_multi_sprite_a9f60e045a17164e3ad7f82ef5f15614c}\label{class_multi_sprite_a9f60e045a17164e3ad7f82ef5f15614c}} 
+\index{MultiSprite@{MultiSprite}!MultiSprite@{MultiSprite}}
+\index{MultiSprite@{MultiSprite}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{MultiSprite()}{MultiSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Multi\+Sprite\+::\+Multi\+Sprite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file Multi\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_multi_sprite_a2b434dd4a62dfc0b7ea9150f96bf355e}\label{class_multi_sprite_a2b434dd4a62dfc0b7ea9150f96bf355e}} 
+\index{MultiSprite@{MultiSprite}!MultiSprite@{MultiSprite}}
+\index{MultiSprite@{MultiSprite}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{MultiSprite()}{MultiSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Multi\+Sprite\+::\+Multi\+Sprite (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_multi_sprite}{Multi\+Sprite}} $\ast$}]{sprite }\end{DoxyParamCaption})}
+
+
+
+Definition at line 8 of file Multi\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_multi_sprite_aecd36e8ecfb83661d67fd3ea3f1c65ac}\label{class_multi_sprite_aecd36e8ecfb83661d67fd3ea3f1c65ac}} 
+\index{MultiSprite@{MultiSprite}!````~MultiSprite@{$\sim$MultiSprite}}
+\index{````~MultiSprite@{$\sim$MultiSprite}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{$\sim$MultiSprite()}{~MultiSprite()}}
+{\footnotesize\ttfamily Multi\+Sprite\+::$\sim$\+Multi\+Sprite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 79 of file Multi\+Sprite.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_multi_sprite_a2c636b5c4337ff7a86e7ddad9dcba581}\label{class_multi_sprite_a2c636b5c4337ff7a86e7ddad9dcba581}} 
+\index{MultiSprite@{MultiSprite}!ClearColor@{ClearColor}}
+\index{ClearColor@{ClearColor}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{ClearColor()}{ClearColor()}}
+{\footnotesize\ttfamily void Multi\+Sprite\+::\+Clear\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{clear\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method fills texture with provided color. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_a34404a9e5f31096d75d9a8f22a1d97cc}{Sprite}}.
+
+
+
+Definition at line 72 of file Multi\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_multi_sprite_a27f95e0683bcd60532ca81cd45a0baca}\label{class_multi_sprite_a27f95e0683bcd60532ca81cd45a0baca}} 
+\index{MultiSprite@{MultiSprite}!GetTextureID@{GetTextureID}}
+\index{GetTextureID@{GetTextureID}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{GetTextureID()}{GetTextureID()}}
+{\footnotesize\ttfamily GLuint Multi\+Sprite\+::\+Get\+Texture\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method returns texture id of current sprite. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_sprite}{Sprite}} texture id 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_sprite_a037b294644e9666941cf6d4b914504a1}{Sprite}}.
+
+
+
+Definition at line 41 of file Multi\+Sprite.\+cpp.
+
+\mbox{\Hypertarget{class_multi_sprite_ab83bb19eeced6bdc32503e103825aa26}\label{class_multi_sprite_ab83bb19eeced6bdc32503e103825aa26}} 
+\index{MultiSprite@{MultiSprite}!Load@{Load}}
+\index{Load@{Load}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily void Multi\+Sprite\+::\+Load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$}]{shader }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method loads current sprite to texture buffer. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_a7157f052d53e9db60d4d66d3637e172f}{Sprite}}.
+
+
+
+Definition at line 48 of file Multi\+Sprite.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_multi_sprite_ab83bb19eeced6bdc32503e103825aa26_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_multi_sprite_a5caa3c0ecc29c2e65be6c6ca1db0138f}\label{class_multi_sprite_a5caa3c0ecc29c2e65be6c6ca1db0138f}} 
+\index{MultiSprite@{MultiSprite}!SetTexture@{SetTexture}}
+\index{SetTexture@{SetTexture}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{SetTexture()}{SetTexture()}}
+{\footnotesize\ttfamily void Multi\+Sprite\+::\+Set\+Texture (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tex\+Name,  }\item[{const \mbox{\hyperlink{struct_color}{Color}} $\ast$}]{pixels,  }\item[{const uint32\+\_\+t \&}]{width,  }\item[{const uint32\+\_\+t \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Definition at line 15 of file Multi\+Sprite.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_multi_sprite_a5caa3c0ecc29c2e65be6c6ca1db0138f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_multi_sprite_a5caa3c0ecc29c2e65be6c6ca1db0138f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_multi_sprite_aff59be13f2259024085ae0e6c9dabb6d}\label{class_multi_sprite_aff59be13f2259024085ae0e6c9dabb6d}} 
+\index{MultiSprite@{MultiSprite}!SetTextureAttrib@{SetTextureAttrib}}
+\index{SetTextureAttrib@{SetTextureAttrib}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{SetTextureAttrib()}{SetTextureAttrib()}}
+{\footnotesize\ttfamily void Multi\+Sprite\+::\+Set\+Texture\+Attrib (\begin{DoxyParamCaption}\item[{const GLenum \&}]{attrib,  }\item[{const GLint \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method sets value correlated to texture attribute. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_af0935e92c9fae5d97bfadffd5b5dc1e9}{Sprite}}.
+
+
+
+Definition at line 31 of file Multi\+Sprite.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_multi_sprite_aff59be13f2259024085ae0e6c9dabb6d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_multi_sprite_a4893fd6443bb47f7f37a9fdbde59e3f1}\label{class_multi_sprite_a4893fd6443bb47f7f37a9fdbde59e3f1}} 
+\index{MultiSprite@{MultiSprite}!UnLoad@{UnLoad}}
+\index{UnLoad@{UnLoad}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{UnLoad()}{UnLoad()}}
+{\footnotesize\ttfamily void Multi\+Sprite\+::\+Un\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Method unloads current sprite from texture buffer. 
+
+
+
+Implements \mbox{\hyperlink{class_sprite_ade7895e85f3dc02a8c6334e5647b42dc}{Sprite}}.
+
+
+
+Definition at line 60 of file Multi\+Sprite.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_multi_sprite_a1edf998f34ec63f04b96897fb44fc21a}\label{class_multi_sprite_a1edf998f34ec63f04b96897fb44fc21a}} 
+\index{MultiSprite@{MultiSprite}!textures@{textures}}
+\index{textures@{textures}!MultiSprite@{MultiSprite}}
+\doxysubsubsection{\texorpdfstring{textures}{textures}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{class_sprite2_d}{Sprite2D}}$\ast$ $>$ Multi\+Sprite\+::textures\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 10 of file Multi\+Sprite.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_multi_sprite_8h}{Multi\+Sprite.\+h}}\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_multi_sprite_8cpp}{Multi\+Sprite.\+cpp}}\end{DoxyCompactItemize}

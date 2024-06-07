@@ -1,0 +1,14 @@
+<map id="SceneObject" name="SceneObject">
+<area shape="rect" id="node1" title=" " alt="" coords="595,1072,754,1369"/>
+<area shape="rect" id="node2" href="$class_material.html" title=" " alt="" coords="237,763,408,914"/>
+<area shape="rect" id="node3" href="$class_sprite.html" title=" " alt="" coords="5,315,157,466"/>
+<area shape="rect" id="node4" href="$class_vector3.html" title=" " alt="" coords="385,191,522,591"/>
+<area shape="rect" id="node7" href="$class_transform.html" title=" " alt="" coords="541,800,627,877"/>
+<area shape="rect" id="node5" href="$class_g_l_shader.html" title=" " alt="" coords="181,249,360,532"/>
+<area shape="rect" id="node6" href="$class_attribute_manager.html" title=" " alt="" coords="651,763,810,914"/>
+<area shape="rect" id="node8" href="$class_attribute_type.html" title=" " alt="" coords="646,352,850,429"/>
+<area shape="rect" id="node9" href="$class_attribute.html" title=" " alt="" coords="677,5,819,141"/>
+<area shape="rect" id="node10" href="$class_quaternion.html" title=" " alt="" coords="875,264,1013,517"/>
+<area shape="rect" id="node11" href="$struct_position.html" title=" " alt="" coords="547,345,621,437"/>
+<area shape="rect" id="node12" href="$class_matrix.html" title=" " alt="" coords="834,668,993,1009"/>
+</map>

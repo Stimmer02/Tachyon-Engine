@@ -1,0 +1,210 @@
+\hypertarget{struct_glyf}{}\doxysection{Glyf Struct Reference}
+\label{struct_glyf}\index{Glyf@{Glyf}}
+
+
+This class represents single character.  
+
+
+
+
+{\ttfamily \#include $<$Glyf.\+h$>$}
+
+
+
+Collaboration diagram for Glyf\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{struct_glyf__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_glyf_a3c6bdb1267d9b7893d807fe98fe99f69}{Glyf}} (const char \&\mbox{\hyperlink{struct_glyf_a23edd8bc03c6b2ee5020b583a35e03c8}{character}}, const int \&\mbox{\hyperlink{struct_glyf_a7846f5400bd4c95f89eaf067fff7840c}{width}}, const int \&\mbox{\hyperlink{struct_glyf_a4f60825d87b0f86eeebb678682458ebb}{height}}, \mbox{\hyperlink{class_sprite}{Sprite}} $\ast$\mbox{\hyperlink{struct_glyf_a6548ad3b406c643f3727acfefb05151b}{sprite}})
+\item 
+void \mbox{\hyperlink{struct_glyf_a150a6e14515c9d9a76021fb2d1be71ca}{Render}} ()
+\item 
+\mbox{\hyperlink{struct_glyf_aaa5a37cce10805a8500cba342ece92fb}{$\sim$\+Glyf}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$ \mbox{\hyperlink{struct_glyf_a6548ad3b406c643f3727acfefb05151b}{sprite}}
+\item 
+char \mbox{\hyperlink{struct_glyf_a23edd8bc03c6b2ee5020b583a35e03c8}{character}}
+\item 
+int \mbox{\hyperlink{struct_glyf_a7846f5400bd4c95f89eaf067fff7840c}{width}}
+\item 
+int \mbox{\hyperlink{struct_glyf_a4f60825d87b0f86eeebb678682458ebb}{height}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{struct_glyf_a592552536605120f1bba3a5b25f967ff}{Allocate\+Buffers}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+GLuint \mbox{\hyperlink{struct_glyf_a0a03d2b5f7097eba9230f7c74fa017fc}{vao}} = 0
+\item 
+GLuint \mbox{\hyperlink{struct_glyf_a92a8b6b10e38395c484d0d48ca75fb1b}{vbo}} = 0
+\item 
+GLuint \mbox{\hyperlink{struct_glyf_a1db7ff1437e8dbc5fc23d757ff1fec2d}{tbo}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents single character. 
+
+Definition at line 11 of file Glyf.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_glyf_a3c6bdb1267d9b7893d807fe98fe99f69}\label{struct_glyf_a3c6bdb1267d9b7893d807fe98fe99f69}} 
+\index{Glyf@{Glyf}!Glyf@{Glyf}}
+\index{Glyf@{Glyf}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{Glyf()}{Glyf()}}
+{\footnotesize\ttfamily Glyf\+::\+Glyf (\begin{DoxyParamCaption}\item[{const char \&}]{character,  }\item[{const int \&}]{width,  }\item[{const int \&}]{height,  }\item[{\mbox{\hyperlink{class_sprite}{Sprite}} $\ast$}]{sprite }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 65 of file Glyf.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{struct_glyf_a3c6bdb1267d9b7893d807fe98fe99f69_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{struct_glyf_aaa5a37cce10805a8500cba342ece92fb}\label{struct_glyf_aaa5a37cce10805a8500cba342ece92fb}} 
+\index{Glyf@{Glyf}!````~Glyf@{$\sim$Glyf}}
+\index{````~Glyf@{$\sim$Glyf}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{$\sim$Glyf()}{~Glyf()}}
+{\footnotesize\ttfamily Glyf\+::$\sim$\+Glyf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 94 of file Glyf.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_glyf_a592552536605120f1bba3a5b25f967ff}\label{struct_glyf_a592552536605120f1bba3a5b25f967ff}} 
+\index{Glyf@{Glyf}!AllocateBuffers@{AllocateBuffers}}
+\index{AllocateBuffers@{AllocateBuffers}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{AllocateBuffers()}{AllocateBuffers()}}
+{\footnotesize\ttfamily void Glyf\+::\+Allocate\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Glyf.\+h.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{struct_glyf_a592552536605120f1bba3a5b25f967ff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{struct_glyf_a150a6e14515c9d9a76021fb2d1be71ca}\label{struct_glyf_a150a6e14515c9d9a76021fb2d1be71ca}} 
+\index{Glyf@{Glyf}!Render@{Render}}
+\index{Render@{Render}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily void Glyf\+::\+Render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 80 of file Glyf.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{struct_glyf_a150a6e14515c9d9a76021fb2d1be71ca_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_glyf_a23edd8bc03c6b2ee5020b583a35e03c8}\label{struct_glyf_a23edd8bc03c6b2ee5020b583a35e03c8}} 
+\index{Glyf@{Glyf}!character@{character}}
+\index{character@{character}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{character}{character}}
+{\footnotesize\ttfamily char Glyf\+::character}
+
+
+
+Definition at line 61 of file Glyf.\+h.
+
+\mbox{\Hypertarget{struct_glyf_a4f60825d87b0f86eeebb678682458ebb}\label{struct_glyf_a4f60825d87b0f86eeebb678682458ebb}} 
+\index{Glyf@{Glyf}!height@{height}}
+\index{height@{height}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily int Glyf\+::height}
+
+
+
+Definition at line 63 of file Glyf.\+h.
+
+\mbox{\Hypertarget{struct_glyf_a6548ad3b406c643f3727acfefb05151b}\label{struct_glyf_a6548ad3b406c643f3727acfefb05151b}} 
+\index{Glyf@{Glyf}!sprite@{sprite}}
+\index{sprite@{sprite}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite}{Sprite}}$\ast$ Glyf\+::sprite}
+
+
+
+Definition at line 59 of file Glyf.\+h.
+
+\mbox{\Hypertarget{struct_glyf_a1db7ff1437e8dbc5fc23d757ff1fec2d}\label{struct_glyf_a1db7ff1437e8dbc5fc23d757ff1fec2d}} 
+\index{Glyf@{Glyf}!tbo@{tbo}}
+\index{tbo@{tbo}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{tbo}{tbo}}
+{\footnotesize\ttfamily GLuint Glyf\+::tbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Glyf.\+h.
+
+\mbox{\Hypertarget{struct_glyf_a0a03d2b5f7097eba9230f7c74fa017fc}\label{struct_glyf_a0a03d2b5f7097eba9230f7c74fa017fc}} 
+\index{Glyf@{Glyf}!vao@{vao}}
+\index{vao@{vao}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{vao}{vao}}
+{\footnotesize\ttfamily GLuint Glyf\+::vao = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Glyf.\+h.
+
+\mbox{\Hypertarget{struct_glyf_a92a8b6b10e38395c484d0d48ca75fb1b}\label{struct_glyf_a92a8b6b10e38395c484d0d48ca75fb1b}} 
+\index{Glyf@{Glyf}!vbo@{vbo}}
+\index{vbo@{vbo}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{vbo}{vbo}}
+{\footnotesize\ttfamily GLuint Glyf\+::vbo = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Glyf.\+h.
+
+\mbox{\Hypertarget{struct_glyf_a7846f5400bd4c95f89eaf067fff7840c}\label{struct_glyf_a7846f5400bd4c95f89eaf067fff7840c}} 
+\index{Glyf@{Glyf}!width@{width}}
+\index{width@{width}!Glyf@{Glyf}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily int Glyf\+::width}
+
+
+
+Definition at line 62 of file Glyf.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_glyf_8h}{Glyf.\+h}}\end{DoxyCompactItemize}

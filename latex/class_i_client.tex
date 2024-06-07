@@ -1,0 +1,100 @@
+\hypertarget{class_i_client}{}\doxysection{IClient Class Reference}
+\label{class_i_client}\index{IClient@{IClient}}
+
+
+{\ttfamily \#include $<$IClient.\+h$>$}
+
+
+
+Inheritance diagram for IClient\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_i_client__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for IClient\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{class_i_client__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_client_a7fb9ed7e2ac8a31a71230f6b440adbbf}{Send\+Message}} (const std\+::string \&channel, \mbox{\hyperlink{class_i_client}{IClient}} $\ast$receiver, const \mbox{\hyperlink{_message_8h_ac6606ebe91c8ac66a2c314c79f5ab013}{Message\+Type}} \&type, void $\ast$data)=0
+\begin{DoxyCompactList}\small\item\em Emplaces message with specified parameters at the end of channel\textquotesingle{}s queue. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_client_ad7663ac69905b527453712d2de8a3ea4}{Receive\+Message}} (const \mbox{\hyperlink{struct_message}{Message}} \&message)=0
+\begin{DoxyCompactList}\small\item\em Enables handling of received messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file IClient.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_client_ad7663ac69905b527453712d2de8a3ea4}\label{class_i_client_ad7663ac69905b527453712d2de8a3ea4}} 
+\index{IClient@{IClient}!ReceiveMessage@{ReceiveMessage}}
+\index{ReceiveMessage@{ReceiveMessage}!IClient@{IClient}}
+\doxysubsubsection{\texorpdfstring{ReceiveMessage()}{ReceiveMessage()}}
+{\footnotesize\ttfamily virtual void IClient\+::\+Receive\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_message}{Message}} \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Enables handling of received messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_system_a818016e4e14758f964f054b5d8a7f23a}{System}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_i_client_ad7663ac69905b527453712d2de8a3ea4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_i_client_a7fb9ed7e2ac8a31a71230f6b440adbbf}\label{class_i_client_a7fb9ed7e2ac8a31a71230f6b440adbbf}} 
+\index{IClient@{IClient}!SendMessage@{SendMessage}}
+\index{SendMessage@{SendMessage}!IClient@{IClient}}
+\doxysubsubsection{\texorpdfstring{SendMessage()}{SendMessage()}}
+{\footnotesize\ttfamily virtual void IClient\+::\+Send\+Message (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{channel,  }\item[{\mbox{\hyperlink{class_i_client}{IClient}} $\ast$}]{receiver,  }\item[{const \mbox{\hyperlink{_message_8h_ac6606ebe91c8ac66a2c314c79f5ab013}{Message\+Type}} \&}]{type,  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Emplaces message with specified parameters at the end of channel\textquotesingle{}s queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & \\
+\hline
+{\em receiver} & \\
+\hline
+{\em type} & \\
+\hline
+{\em data} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_system_a26c9fb10762fd84f20b50bf3065d8ea6}{System}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_i_client_8h}{IClient.\+h}}\end{DoxyCompactItemize}

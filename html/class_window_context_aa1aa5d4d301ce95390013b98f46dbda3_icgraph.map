@@ -1,0 +1,6 @@
+<map id="WindowContext::GetContextLogger" name="WindowContext::GetContextLogger">
+<area shape="rect" id="node1" title=" " alt="" coords="236,49,443,90"/>
+<area shape="rect" id="node2" href="$class_application.html#afa8cc05ce6b6092be5ecdfdae44e05f8" title=" " alt="" coords="9,5,185,32"/>
+<area shape="rect" id="node3" href="$class_graphic_system.html#a7451b4acda7534324269e532cc7c286d" title="This method is called on system startup and by default does nothing." alt="" coords="7,56,186,83"/>
+<area shape="rect" id="node4" href="$class_physics_processor_system.html#ad96a65a96076a972a58415ed18cab779" title="This method is called once after registration system within microkernel scope it is used to share int..." alt="" coords="5,107,188,149"/>
+</map>

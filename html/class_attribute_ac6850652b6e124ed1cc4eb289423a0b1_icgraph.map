@@ -1,0 +1,6 @@
+<map id="Attribute::SetParent" name="Attribute::SetParent">
+<area shape="rect" id="node1" title=" " alt="" coords="733,5,883,32"/>
+<area shape="rect" id="node2" href="$class_attribute_manager.html#abba0e3fb83a25eeafd899aacf9774968" title=" " alt="" coords="459,5,685,32"/>
+<area shape="rect" id="node3" href="$class_scene_object.html#aaa879a14cc761e54b110239807e6f2b0" title=" " alt="" coords="217,5,411,32"/>
+<area shape="rect" id="node4" href="$class_boids_system.html#a1c37923a26b13b6e08070adeabbdbc31" title="This method is called on system startup and by default does nothing." alt="" coords="5,5,169,32"/>
+</map>

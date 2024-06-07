@@ -1,0 +1,5 @@
+<map id="Glyf::Render" name="Glyf::Render">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,108,57"/>
+<area shape="rect" id="node2" href="$class_sprite.html#a7157f052d53e9db60d4d66d3637e172f" title="Method loads current sprite to texture buffer." alt="" coords="165,5,264,32"/>
+<area shape="rect" id="node3" href="$class_sprite.html#ade7895e85f3dc02a8c6334e5647b42dc" title="Method unloads current sprite from texture buffer." alt="" coords="156,56,273,83"/>
+</map>

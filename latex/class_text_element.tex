@@ -1,0 +1,170 @@
+\hypertarget{class_text_element}{}\doxysection{Text\+Element Class Reference}
+\label{class_text_element}\index{TextElement@{TextElement}}
+
+
+{\ttfamily \#include $<$Text\+Element.\+h$>$}
+
+
+
+Inheritance diagram for Text\+Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{class_text_element__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Text\+Element\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_text_element__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_text_element_ae7b4c9d294c2354b9bb26215b3e5c533}{Text\+Element}} (const std\+::string \&text, const \mbox{\hyperlink{class_vector3}{Vector3}} \&\mbox{\hyperlink{structcolor}{color}}=\mbox{\hyperlink{class_vector3}{Vector3}}(1.\+0f, 1.\+0f, 1.\+0f))
+\item 
+void \mbox{\hyperlink{class_text_element_a2c9ac729bac22ed25dfe05cc251bbe57}{Pop}} ()
+\item 
+void \mbox{\hyperlink{class_text_element_af8d5e9d66595615a8230d33195f7c0e8}{Push}} (\mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$glyf)
+\item 
+void \mbox{\hyperlink{class_text_element_a70b3fdfbaecafc28202a573069fa9fe8}{Set\+Color}} (const \mbox{\hyperlink{class_vector3}{Vector3}} \&\mbox{\hyperlink{structcolor}{color}})
+\item 
+void \mbox{\hyperlink{class_text_element_a7a61532ce302e910c59cf9c6cb7512ed}{Set\+Font\+Size}} (const float \&pt\+Size=12, const float \&min\+Scale=0.\+1f, const float \&max\+Scale=1000.\+0f)
+\item 
+void \mbox{\hyperlink{class_text_element_a1adc9f3c483f07c160cd433d7837ede0}{Render}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ \mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$ $>$ \mbox{\hyperlink{class_text_element_a4b74d7a48d7287136f2ea0c80f24169a}{glyfs}}
+\item 
+\mbox{\hyperlink{class_vector3}{Vector3}} \mbox{\hyperlink{class_text_element_aad7c95258a1dd214b22d8a0461e6ce9b}{color}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 11 of file Text\+Element.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_text_element_ae7b4c9d294c2354b9bb26215b3e5c533}\label{class_text_element_ae7b4c9d294c2354b9bb26215b3e5c533}} 
+\index{TextElement@{TextElement}!TextElement@{TextElement}}
+\index{TextElement@{TextElement}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{TextElement()}{TextElement()}}
+{\footnotesize\ttfamily Text\+Element\+::\+Text\+Element (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text,  }\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{color = {\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}}(1.0f,~1.0f,~1.0f)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 20 of file Text\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_text_element_ae7b4c9d294c2354b9bb26215b3e5c533_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_text_element_a2c9ac729bac22ed25dfe05cc251bbe57}\label{class_text_element_a2c9ac729bac22ed25dfe05cc251bbe57}} 
+\index{TextElement@{TextElement}!Pop@{Pop}}
+\index{Pop@{Pop}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}}
+{\footnotesize\ttfamily void Text\+Element\+::\+Pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 26 of file Text\+Element.\+h.
+
+\mbox{\Hypertarget{class_text_element_af8d5e9d66595615a8230d33195f7c0e8}\label{class_text_element_af8d5e9d66595615a8230d33195f7c0e8}} 
+\index{TextElement@{TextElement}!Push@{Push}}
+\index{Push@{Push}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily void Text\+Element\+::\+Push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_glyf}{Glyf}} $\ast$}]{glyf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 33 of file Text\+Element.\+h.
+
+\mbox{\Hypertarget{class_text_element_a1adc9f3c483f07c160cd433d7837ede0}\label{class_text_element_a1adc9f3c483f07c160cd433d7837ede0}} 
+\index{TextElement@{TextElement}!Render@{Render}}
+\index{Render@{Render}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily void Text\+Element\+::\+Render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_g_u_i_element_a3c418360b395c87ef1e74c2f01114300}{GUIElement}}.
+
+
+
+Definition at line 47 of file Text\+Element.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_text_element_a1adc9f3c483f07c160cd433d7837ede0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_text_element_a70b3fdfbaecafc28202a573069fa9fe8}\label{class_text_element_a70b3fdfbaecafc28202a573069fa9fe8}} 
+\index{TextElement@{TextElement}!SetColor@{SetColor}}
+\index{SetColor@{SetColor}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{SetColor()}{SetColor()}}
+{\footnotesize\ttfamily void Text\+Element\+::\+Set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector3}{Vector3}} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 37 of file Text\+Element.\+h.
+
+\mbox{\Hypertarget{class_text_element_a7a61532ce302e910c59cf9c6cb7512ed}\label{class_text_element_a7a61532ce302e910c59cf9c6cb7512ed}} 
+\index{TextElement@{TextElement}!SetFontSize@{SetFontSize}}
+\index{SetFontSize@{SetFontSize}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{SetFontSize()}{SetFontSize()}}
+{\footnotesize\ttfamily void Text\+Element\+::\+Set\+Font\+Size (\begin{DoxyParamCaption}\item[{const float \&}]{pt\+Size = {\ttfamily 12},  }\item[{const float \&}]{min\+Scale = {\ttfamily 0.1f},  }\item[{const float \&}]{max\+Scale = {\ttfamily 1000.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 41 of file Text\+Element.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_text_element_aad7c95258a1dd214b22d8a0461e6ce9b}\label{class_text_element_aad7c95258a1dd214b22d8a0461e6ce9b}} 
+\index{TextElement@{TextElement}!color@{color}}
+\index{color@{color}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} Text\+Element\+::color\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Text\+Element.\+h.
+
+\mbox{\Hypertarget{class_text_element_a4b74d7a48d7287136f2ea0c80f24169a}\label{class_text_element_a4b74d7a48d7287136f2ea0c80f24169a}} 
+\index{TextElement@{TextElement}!glyfs@{glyfs}}
+\index{glyfs@{glyfs}!TextElement@{TextElement}}
+\doxysubsubsection{\texorpdfstring{glyfs}{glyfs}}
+{\footnotesize\ttfamily std\+::list$<$\mbox{\hyperlink{struct_glyf}{Glyf}}$\ast$$>$ Text\+Element\+::glyfs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Text\+Element.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+GUIRenderer/\mbox{\hyperlink{_text_element_8h}{Text\+Element.\+h}}\end{DoxyCompactItemize}

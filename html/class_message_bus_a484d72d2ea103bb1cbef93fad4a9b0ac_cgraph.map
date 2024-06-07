@@ -1,0 +1,4 @@
+<map id="MessageBus::SubscribeToChannel" name="MessageBus::SubscribeToChannel">
+<area shape="rect" id="node1" title="Binds client to specified communication channel." alt="" coords="5,5,248,32"/>
+<area shape="rect" id="node2" href="$class_channel.html#a3a96c555f704bb8bcdf2eb60de13419c" title="Binds client to current channel." alt="" coords="296,5,447,32"/>
+</map>

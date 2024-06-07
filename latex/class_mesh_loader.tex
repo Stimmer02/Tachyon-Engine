@@ -1,0 +1,433 @@
+\hypertarget{class_mesh_loader}{}\doxysection{Mesh\+Loader Class Reference}
+\label{class_mesh_loader}\index{MeshLoader@{MeshLoader}}
+
+
+{\ttfamily \#include $<$Mesh\+Loader.\+h$>$}
+
+
+
+Collaboration diagram for Mesh\+Loader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_mesh_loader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_a13368c5301087a16f34f098fd2059ac9}{add\+Single\+Vertex}} (const std\+::string \&vertex\+Line)
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_a66bca9086601ceba9b4e954de8504380}{add\+Single\+Normal}} (const std\+::string \&normal)
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_a8a43abdc2eb87da6c74ae9eaedbd51a5}{add\+Single\+Index}} (const std\+::string \&index\+Line)
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_a066c1b87b0bb40ed71703261c4bc2cd7}{add\+Single\+Tex\+Coord}} (const std\+::string \&tex\+Coord\+Line)
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_ad8a9fd128bd874505961401774b844d9}{do\+Nothing}} (const std\+::string \&comment)
+\item 
+static std\+::vector$<$ int $>$ \mbox{\hyperlink{class_mesh_loader_a1ad98aceaf23315f0c77e16e3f69404b}{compute\+Triangulation}} (const std\+::vector$<$ int $>$ \&input\+Points)
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_a09f81d719bcde788f4dce32aadce8e0f}{init}} ()
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_a0c986e9d5f501b0fb175f7bc5153d213}{finalize\+Parsing}} (\mbox{\hyperlink{class_mesh}{Mesh}} $\ast$mesh)
+\item 
+static void \mbox{\hyperlink{class_mesh_loader_adacb04bf449ebf6d0f231f9d3dc38bb9}{parse\+Mesh}} (const std\+::string \&path\+To\+File, \mbox{\hyperlink{class_mesh}{Mesh}} $\ast$mesh)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \mbox{\hyperlink{class_mesh_loader_a35ea733ada560aa333c31adc24813247}{num\+Vertices}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ \mbox{\hyperlink{class_mesh_loader_aa52a6c647cb37742fba7f4ea55d5483e}{vertices\+Vector}}
+\item 
+static \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$ \mbox{\hyperlink{class_mesh_loader_ae0e4779e2576072e1225c652adbbf468}{normals}}
+\item 
+static unsigned int \mbox{\hyperlink{class_mesh_loader_aa10072b982f39356d41458a07ca958f8}{num\+Normals}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ \mbox{\hyperlink{class_mesh_loader_a1011ffd2bef4435f90ebd479a08ed801}{normals\+Vector}}
+\item 
+static int \mbox{\hyperlink{class_mesh_loader_a67e6d25904e6f0e1dd2f5955d011c4e7}{case\+Id}} = 0
+\item 
+static unsigned int \mbox{\hyperlink{class_mesh_loader_aa27ac3d44349c9e4151f32c3a4a1ec22}{num\+Indices}}
+\item 
+static std\+::vector$<$ unsigned int $>$ \mbox{\hyperlink{class_mesh_loader_aef3b75393557d18edb6041c400ab0bb9}{indices\+Vector}}
+\item 
+static unsigned int \mbox{\hyperlink{class_mesh_loader_a652d7fecb6beaa94311a4ce1ef609a82}{num\+Tex\+Coords}}
+\item 
+static std\+::vector$<$ float $>$ \mbox{\hyperlink{class_mesh_loader_a0c7abb9d3608abbbe3b6443ef47fbc1a}{tex\+Coords\+Vector}}
+\item 
+static std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ $>$ \mbox{\hyperlink{class_mesh_loader_a62599d29068ad7b1395a925cad8a6c77}{normals\+List}}
+\item 
+static std\+::vector$<$ int $>$ \mbox{\hyperlink{class_mesh_loader_ad43022b4757b924265561adb2b143649}{textures\+Idx}}
+\item 
+static const int \mbox{\hyperlink{class_mesh_loader_adac1c1ebc12c7736bdc255a310048cfc}{functions\+Array\+Size}} = 256 $\ast$ 256
+\item 
+static const int \mbox{\hyperlink{class_mesh_loader_ac3bb42ed2af5d7de8459034d24018e8e}{char\+Size}} = 256
+\item 
+static void($\ast$ \mbox{\hyperlink{class_mesh_loader_a0e70f5ff4d01451b98056c05cf1943a1}{functions\+Arr}} \mbox{[}\mbox{\hyperlink{class_mesh_loader_adac1c1ebc12c7736bdc255a310048cfc}{functions\+Array\+Size}}\mbox{]})(const std\+::string \&)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 19 of file Mesh\+Loader.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mesh_loader_a8a43abdc2eb87da6c74ae9eaedbd51a5}\label{class_mesh_loader_a8a43abdc2eb87da6c74ae9eaedbd51a5}} 
+\index{MeshLoader@{MeshLoader}!addSingleIndex@{addSingleIndex}}
+\index{addSingleIndex@{addSingleIndex}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{addSingleIndex()}{addSingleIndex()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::add\+Single\+Index (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{index\+Line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 104 of file Mesh\+Loader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a8a43abdc2eb87da6c74ae9eaedbd51a5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a8a43abdc2eb87da6c74ae9eaedbd51a5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_a66bca9086601ceba9b4e954de8504380}\label{class_mesh_loader_a66bca9086601ceba9b4e954de8504380}} 
+\index{MeshLoader@{MeshLoader}!addSingleNormal@{addSingleNormal}}
+\index{addSingleNormal@{addSingleNormal}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{addSingleNormal()}{addSingleNormal()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::add\+Single\+Normal (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 57 of file Mesh\+Loader.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a66bca9086601ceba9b4e954de8504380_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_a066c1b87b0bb40ed71703261c4bc2cd7}\label{class_mesh_loader_a066c1b87b0bb40ed71703261c4bc2cd7}} 
+\index{MeshLoader@{MeshLoader}!addSingleTexCoord@{addSingleTexCoord}}
+\index{addSingleTexCoord@{addSingleTexCoord}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{addSingleTexCoord()}{addSingleTexCoord()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::add\+Single\+Tex\+Coord (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tex\+Coord\+Line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 79 of file Mesh\+Loader.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a066c1b87b0bb40ed71703261c4bc2cd7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_a13368c5301087a16f34f098fd2059ac9}\label{class_mesh_loader_a13368c5301087a16f34f098fd2059ac9}} 
+\index{MeshLoader@{MeshLoader}!addSingleVertex@{addSingleVertex}}
+\index{addSingleVertex@{addSingleVertex}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{addSingleVertex()}{addSingleVertex()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::add\+Single\+Vertex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{vertex\+Line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 23 of file Mesh\+Loader.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a13368c5301087a16f34f098fd2059ac9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_a1ad98aceaf23315f0c77e16e3f69404b}\label{class_mesh_loader_a1ad98aceaf23315f0c77e16e3f69404b}} 
+\index{MeshLoader@{MeshLoader}!computeTriangulation@{computeTriangulation}}
+\index{computeTriangulation@{computeTriangulation}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{computeTriangulation()}{computeTriangulation()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ Mesh\+Loader\+::compute\+Triangulation (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{input\+Points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 323 of file Mesh\+Loader.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a1ad98aceaf23315f0c77e16e3f69404b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_ad8a9fd128bd874505961401774b844d9}\label{class_mesh_loader_ad8a9fd128bd874505961401774b844d9}} 
+\index{MeshLoader@{MeshLoader}!doNothing@{doNothing}}
+\index{doNothing@{doNothing}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{doNothing()}{doNothing()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::do\+Nothing (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{comment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 221 of file Mesh\+Loader.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_ad8a9fd128bd874505961401774b844d9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_a0c986e9d5f501b0fb175f7bc5153d213}\label{class_mesh_loader_a0c986e9d5f501b0fb175f7bc5153d213}} 
+\index{MeshLoader@{MeshLoader}!finalizeParsing@{finalizeParsing}}
+\index{finalizeParsing@{finalizeParsing}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{finalizeParsing()}{finalizeParsing()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::finalize\+Parsing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_mesh}{Mesh}} $\ast$}]{mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 242 of file Mesh\+Loader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a0c986e9d5f501b0fb175f7bc5153d213_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a0c986e9d5f501b0fb175f7bc5153d213_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_a09f81d719bcde788f4dce32aadce8e0f}\label{class_mesh_loader_a09f81d719bcde788f4dce32aadce8e0f}} 
+\index{MeshLoader@{MeshLoader}!init@{init}}
+\index{init@{init}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 223 of file Mesh\+Loader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a09f81d719bcde788f4dce32aadce8e0f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_a09f81d719bcde788f4dce32aadce8e0f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_mesh_loader_adacb04bf449ebf6d0f231f9d3dc38bb9}\label{class_mesh_loader_adacb04bf449ebf6d0f231f9d3dc38bb9}} 
+\index{MeshLoader@{MeshLoader}!parseMesh@{parseMesh}}
+\index{parseMesh@{parseMesh}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{parseMesh()}{parseMesh()}}
+{\footnotesize\ttfamily void Mesh\+Loader\+::parse\+Mesh (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path\+To\+File,  }\item[{\mbox{\hyperlink{class_mesh}{Mesh}} $\ast$}]{mesh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 334 of file Mesh\+Loader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mesh_loader_adacb04bf449ebf6d0f231f9d3dc38bb9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{class_mesh_loader_adacb04bf449ebf6d0f231f9d3dc38bb9_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_mesh_loader_a67e6d25904e6f0e1dd2f5955d011c4e7}\label{class_mesh_loader_a67e6d25904e6f0e1dd2f5955d011c4e7}} 
+\index{MeshLoader@{MeshLoader}!caseId@{caseId}}
+\index{caseId@{caseId}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{caseId}{caseId}}
+{\footnotesize\ttfamily int Mesh\+Loader\+::case\+Id = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 28 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_ac3bb42ed2af5d7de8459034d24018e8e}\label{class_mesh_loader_ac3bb42ed2af5d7de8459034d24018e8e}} 
+\index{MeshLoader@{MeshLoader}!charSize@{charSize}}
+\index{charSize@{charSize}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{charSize}{charSize}}
+{\footnotesize\ttfamily const int Mesh\+Loader\+::char\+Size = 256\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 40 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_a0e70f5ff4d01451b98056c05cf1943a1}\label{class_mesh_loader_a0e70f5ff4d01451b98056c05cf1943a1}} 
+\index{MeshLoader@{MeshLoader}!functionsArr@{functionsArr}}
+\index{functionsArr@{functionsArr}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{functionsArr}{functionsArr}}
+{\footnotesize\ttfamily void($\ast$ Mesh\+Loader\+::functions\+Arr\mbox{[}\mbox{\hyperlink{class_mesh_loader_adac1c1ebc12c7736bdc255a310048cfc}{functions\+Array\+Size}}\mbox{]})(const std\+::string \&)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 42 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_adac1c1ebc12c7736bdc255a310048cfc}\label{class_mesh_loader_adac1c1ebc12c7736bdc255a310048cfc}} 
+\index{MeshLoader@{MeshLoader}!functionsArraySize@{functionsArraySize}}
+\index{functionsArraySize@{functionsArraySize}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{functionsArraySize}{functionsArraySize}}
+{\footnotesize\ttfamily const int Mesh\+Loader\+::functions\+Array\+Size = 256 $\ast$ 256\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 39 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_aef3b75393557d18edb6041c400ab0bb9}\label{class_mesh_loader_aef3b75393557d18edb6041c400ab0bb9}} 
+\index{MeshLoader@{MeshLoader}!indicesVector@{indicesVector}}
+\index{indicesVector@{indicesVector}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{indicesVector}{indicesVector}}
+{\footnotesize\ttfamily std\+::vector$<$ unsigned int $>$ Mesh\+Loader\+::indices\+Vector\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 30 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_ae0e4779e2576072e1225c652adbbf468}\label{class_mesh_loader_ae0e4779e2576072e1225c652adbbf468}} 
+\index{MeshLoader@{MeshLoader}!normals@{normals}}
+\index{normals@{normals}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{normals}{normals}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector3}{Vector3}} $\ast$ Mesh\+Loader\+::normals\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 24 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_a62599d29068ad7b1395a925cad8a6c77}\label{class_mesh_loader_a62599d29068ad7b1395a925cad8a6c77}} 
+\index{MeshLoader@{MeshLoader}!normalsList@{normalsList}}
+\index{normalsList@{normalsList}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{normalsList}{normalsList}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ $>$ Mesh\+Loader\+::normals\+List\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 36 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_a1011ffd2bef4435f90ebd479a08ed801}\label{class_mesh_loader_a1011ffd2bef4435f90ebd479a08ed801}} 
+\index{MeshLoader@{MeshLoader}!normalsVector@{normalsVector}}
+\index{normalsVector@{normalsVector}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{normalsVector}{normalsVector}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ Mesh\+Loader\+::normals\+Vector\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 26 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_aa27ac3d44349c9e4151f32c3a4a1ec22}\label{class_mesh_loader_aa27ac3d44349c9e4151f32c3a4a1ec22}} 
+\index{MeshLoader@{MeshLoader}!numIndices@{numIndices}}
+\index{numIndices@{numIndices}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{numIndices}{numIndices}}
+{\footnotesize\ttfamily unsigned int Mesh\+Loader\+::num\+Indices\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 29 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_aa10072b982f39356d41458a07ca958f8}\label{class_mesh_loader_aa10072b982f39356d41458a07ca958f8}} 
+\index{MeshLoader@{MeshLoader}!numNormals@{numNormals}}
+\index{numNormals@{numNormals}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{numNormals}{numNormals}}
+{\footnotesize\ttfamily unsigned int Mesh\+Loader\+::num\+Normals\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 25 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_a652d7fecb6beaa94311a4ce1ef609a82}\label{class_mesh_loader_a652d7fecb6beaa94311a4ce1ef609a82}} 
+\index{MeshLoader@{MeshLoader}!numTexCoords@{numTexCoords}}
+\index{numTexCoords@{numTexCoords}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{numTexCoords}{numTexCoords}}
+{\footnotesize\ttfamily unsigned int Mesh\+Loader\+::num\+Tex\+Coords\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 32 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_a35ea733ada560aa333c31adc24813247}\label{class_mesh_loader_a35ea733ada560aa333c31adc24813247}} 
+\index{MeshLoader@{MeshLoader}!numVertices@{numVertices}}
+\index{numVertices@{numVertices}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{numVertices}{numVertices}}
+{\footnotesize\ttfamily unsigned int Mesh\+Loader\+::num\+Vertices\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 21 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_a0c7abb9d3608abbbe3b6443ef47fbc1a}\label{class_mesh_loader_a0c7abb9d3608abbbe3b6443ef47fbc1a}} 
+\index{MeshLoader@{MeshLoader}!texCoordsVector@{texCoordsVector}}
+\index{texCoordsVector@{texCoordsVector}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{texCoordsVector}{texCoordsVector}}
+{\footnotesize\ttfamily std\+::vector$<$ float $>$ Mesh\+Loader\+::tex\+Coords\+Vector\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 33 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_ad43022b4757b924265561adb2b143649}\label{class_mesh_loader_ad43022b4757b924265561adb2b143649}} 
+\index{MeshLoader@{MeshLoader}!texturesIdx@{texturesIdx}}
+\index{texturesIdx@{texturesIdx}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{texturesIdx}{texturesIdx}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ Mesh\+Loader\+::textures\+Idx\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 37 of file Mesh\+Loader.\+h.
+
+\mbox{\Hypertarget{class_mesh_loader_aa52a6c647cb37742fba7f4ea55d5483e}\label{class_mesh_loader_aa52a6c647cb37742fba7f4ea55d5483e}} 
+\index{MeshLoader@{MeshLoader}!verticesVector@{verticesVector}}
+\index{verticesVector@{verticesVector}!MeshLoader@{MeshLoader}}
+\doxysubsubsection{\texorpdfstring{verticesVector}{verticesVector}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_vector3}{Vector3}} $>$ Mesh\+Loader\+::vertices\+Vector\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 22 of file Mesh\+Loader.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+ECSystem/\mbox{\hyperlink{_mesh_loader_8h}{Mesh\+Loader.\+h}}\item 
+src/\+ECSystem/\mbox{\hyperlink{_mesh_loader_8cpp}{Mesh\+Loader.\+cpp}}\end{DoxyCompactItemize}

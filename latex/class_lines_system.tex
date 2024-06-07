@@ -1,0 +1,277 @@
+\hypertarget{class_lines_system}{}\doxysection{Lines\+System Class Reference}
+\label{class_lines_system}\index{LinesSystem@{LinesSystem}}
+
+
+{\ttfamily \#include $<$Lines.\+h$>$}
+
+
+
+Inheritance diagram for Lines\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_lines_system__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Lines\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_lines_system__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lines_system_a777b7d18f00e77c1fe6887947b2007cf}{Lines\+System}} ()
+\item 
+void \mbox{\hyperlink{class_lines_system_a45603bc5268ac28b498d0f9c28c8d79b}{On\+Load}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lines_system_ab723d4c56894a739f84d83cb4f2766d4}{Share}} (\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$resource\+Manager) override
+\begin{DoxyCompactList}\small\item\em This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_lines_system_aa460b4e2a8a801417dc041dc9df631e6}{Execute}} () override
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_lines_system_a1584568afc9b576aa93e4457fb39b621}{Create\+Shader}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene}{Scene}} $\ast$ \mbox{\hyperlink{class_lines_system_ac10428d20c41a3b4c18a7e8d0c204015}{scene}}
+\item 
+\mbox{\hyperlink{class_scene_object}{Scene\+Object}} $\ast$ \mbox{\hyperlink{class_lines_system_a4ee380a58aae179e5b5a7e9ec17a97f2}{object}}
+\item 
+\mbox{\hyperlink{class_timer}{Timer}} $\ast$ \mbox{\hyperlink{class_lines_system_a5c4806021d9403ef93965d362d8e0c72}{timer}}
+\item 
+\mbox{\hyperlink{class_mesh}{Mesh}} $\ast$ \mbox{\hyperlink{class_lines_system_a078b734289e02741feb7ea900feed051}{renderer}}
+\item 
+\mbox{\hyperlink{class_g_l_shader}{GLShader}} $\ast$ \mbox{\hyperlink{class_lines_system_a88a1229223eb0f0abc2fa8ebf77f60e7}{shader}}
+\item 
+\mbox{\hyperlink{class_material}{Material}} $\ast$ \mbox{\hyperlink{class_lines_system_af93fd7a91e681a9bd1898c8101733ffa}{mat}}
+\item 
+\mbox{\hyperlink{class_multi_sprite}{Multi\+Sprite}} $\ast$ \mbox{\hyperlink{class_lines_system_ac79c7cd00925fd63591a23aca201f84e}{multi\+Sprite}}
+\item 
+\mbox{\hyperlink{class_sprite2_d}{Sprite2D}} $\ast$ \mbox{\hyperlink{class_lines_system_a1cf8cc09eb835f3e96b41940386254e6}{sprite}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 6 of file Lines.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_lines_system_a777b7d18f00e77c1fe6887947b2007cf}\label{class_lines_system_a777b7d18f00e77c1fe6887947b2007cf}} 
+\index{LinesSystem@{LinesSystem}!LinesSystem@{LinesSystem}}
+\index{LinesSystem@{LinesSystem}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{LinesSystem()}{LinesSystem()}}
+{\footnotesize\ttfamily Lines\+System\+::\+Lines\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 69 of file Lines.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_lines_system_a1584568afc9b576aa93e4457fb39b621}\label{class_lines_system_a1584568afc9b576aa93e4457fb39b621}} 
+\index{LinesSystem@{LinesSystem}!CreateShader@{CreateShader}}
+\index{CreateShader@{CreateShader}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{CreateShader()}{CreateShader()}}
+{\footnotesize\ttfamily void Lines\+System\+::\+Create\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 35 of file Lines.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_lines_system_a1584568afc9b576aa93e4457fb39b621_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_lines_system_a1584568afc9b576aa93e4457fb39b621_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_lines_system_aa460b4e2a8a801417dc041dc9df631e6}\label{class_lines_system_aa460b4e2a8a801417dc041dc9df631e6}} 
+\index{LinesSystem@{LinesSystem}!Execute@{Execute}}
+\index{Execute@{Execute}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void Lines\+System\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implements \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{System}}.
+
+
+
+Definition at line 20 of file Lines.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_lines_system_aa460b4e2a8a801417dc041dc9df631e6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_lines_system_a45603bc5268ac28b498d0f9c28c8d79b}\label{class_lines_system_a45603bc5268ac28b498d0f9c28c8d79b}} 
+\index{LinesSystem@{LinesSystem}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void Lines\+System\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{System}}.
+
+
+
+Definition at line 73 of file Lines.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_lines_system_a45603bc5268ac28b498d0f9c28c8d79b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_lines_system_ab723d4c56894a739f84d83cb4f2766d4}\label{class_lines_system_ab723d4c56894a739f84d83cb4f2766d4}} 
+\index{LinesSystem@{LinesSystem}!Share@{Share}}
+\index{Share@{Share}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily void Lines\+System\+::\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$}]{resource\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}{System}}.
+
+
+
+Definition at line 92 of file Lines.\+h.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_lines_system_ab723d4c56894a739f84d83cb4f2766d4_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_lines_system_af93fd7a91e681a9bd1898c8101733ffa}\label{class_lines_system_af93fd7a91e681a9bd1898c8101733ffa}} 
+\index{LinesSystem@{LinesSystem}!mat@{mat}}
+\index{mat@{mat}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{mat}{mat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_material}{Material}}$\ast$ Lines\+System\+::mat\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Lines.\+h.
+
+\mbox{\Hypertarget{class_lines_system_ac79c7cd00925fd63591a23aca201f84e}\label{class_lines_system_ac79c7cd00925fd63591a23aca201f84e}} 
+\index{LinesSystem@{LinesSystem}!multiSprite@{multiSprite}}
+\index{multiSprite@{multiSprite}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{multiSprite}{multiSprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_multi_sprite}{Multi\+Sprite}}$\ast$ Lines\+System\+::multi\+Sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Lines.\+h.
+
+\mbox{\Hypertarget{class_lines_system_a4ee380a58aae179e5b5a7e9ec17a97f2}\label{class_lines_system_a4ee380a58aae179e5b5a7e9ec17a97f2}} 
+\index{LinesSystem@{LinesSystem}!object@{object}}
+\index{object@{object}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{object}{object}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_object}{Scene\+Object}}$\ast$ Lines\+System\+::object\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Lines.\+h.
+
+\mbox{\Hypertarget{class_lines_system_a078b734289e02741feb7ea900feed051}\label{class_lines_system_a078b734289e02741feb7ea900feed051}} 
+\index{LinesSystem@{LinesSystem}!renderer@{renderer}}
+\index{renderer@{renderer}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{renderer}{renderer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_mesh}{Mesh}}$\ast$ Lines\+System\+::renderer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Lines.\+h.
+
+\mbox{\Hypertarget{class_lines_system_ac10428d20c41a3b4c18a7e8d0c204015}\label{class_lines_system_ac10428d20c41a3b4c18a7e8d0c204015}} 
+\index{LinesSystem@{LinesSystem}!scene@{scene}}
+\index{scene@{scene}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene}{Scene}}$\ast$ Lines\+System\+::scene\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 10 of file Lines.\+h.
+
+\mbox{\Hypertarget{class_lines_system_a88a1229223eb0f0abc2fa8ebf77f60e7}\label{class_lines_system_a88a1229223eb0f0abc2fa8ebf77f60e7}} 
+\index{LinesSystem@{LinesSystem}!shader@{shader}}
+\index{shader@{shader}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{shader}{shader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_shader}{GLShader}}$\ast$ Lines\+System\+::shader\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Lines.\+h.
+
+\mbox{\Hypertarget{class_lines_system_a1cf8cc09eb835f3e96b41940386254e6}\label{class_lines_system_a1cf8cc09eb835f3e96b41940386254e6}} 
+\index{LinesSystem@{LinesSystem}!sprite@{sprite}}
+\index{sprite@{sprite}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sprite2_d}{Sprite2D}}$\ast$ Lines\+System\+::sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Lines.\+h.
+
+\mbox{\Hypertarget{class_lines_system_a5c4806021d9403ef93965d362d8e0c72}\label{class_lines_system_a5c4806021d9403ef93965d362d8e0c72}} 
+\index{LinesSystem@{LinesSystem}!timer@{timer}}
+\index{timer@{timer}!LinesSystem@{LinesSystem}}
+\doxysubsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer}{Timer}}$\ast$ Lines\+System\+::timer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Lines.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+editor/\mbox{\hyperlink{_lines_8h}{Lines.\+h}}\end{DoxyCompactItemize}

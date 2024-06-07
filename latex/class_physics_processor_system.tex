@@ -1,0 +1,276 @@
+\hypertarget{class_physics_processor_system}{}\doxysection{Physics\+Processor\+System Class Reference}
+\label{class_physics_processor_system}\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+
+
+{\ttfamily \#include $<$Physics\+Processor\+System.\+h$>$}
+
+
+
+Inheritance diagram for Physics\+Processor\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_physics_processor_system__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Physics\+Processor\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_physics_processor_system__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_physics_processor_system_a1480a8560ff76ba3fd8f828f46ce8409}{Physics\+Processor\+System}} ()
+\item 
+\mbox{\hyperlink{class_physics_processor_system_a9768223612639dccb80836b261df1c8d}{$\sim$\+Physics\+Processor\+System}} ()
+\item 
+void \mbox{\hyperlink{class_physics_processor_system_ad96a65a96076a972a58415ed18cab779}{Share}} (\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$snr) override
+\begin{DoxyCompactList}\small\item\em This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_physics_processor_system_a97a20d1bc5573cd0d264ee5d87d7095a}{On\+Load}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system startup and by default does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_physics_processor_system_aeedb40af64cc3372f2f96d7b9bfe6b20}{On\+Unload}} () override
+\begin{DoxyCompactList}\small\item\em This method is called on system shutdown and by default does nothing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_physics_processor_system_a341bffe39467948fe01950b3f6fb0484}{Execute}} () override
+\begin{DoxyCompactList}\small\item\em This abstract method is called every iteration of system loop and must be defined by specified system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_physics_processor}{Physics\+Processor}} $\ast$ \mbox{\hyperlink{class_physics_processor_system_a6c790482cdfd014cc60a6107a0a058a7}{physics\+Processor}}
+\item 
+\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$ \mbox{\hyperlink{class_physics_processor_system_a063073fba1f8323cc8e5c7d48b015eb7}{resource\+Manager}}
+\item 
+GLuint \mbox{\hyperlink{class_physics_processor_system_a5f7c2a45eb3b29e9b277e5b045f97c34}{TBO}}
+\item 
+const char $\ast$ \mbox{\hyperlink{class_physics_processor_system_a067353040f67760fe5f22d0f24934ebe}{PPConfig\+Path}}
+\item 
+std\+::function$<$ void(std\+::string)$>$ $\ast$ \mbox{\hyperlink{class_physics_processor_system_a0900d23c3d31d5a574d196013f444fa3}{error\+Function}}
+\item 
+\mbox{\hyperlink{class_i_log}{ILog}} $\ast$ \mbox{\hyperlink{class_physics_processor_system_acf4e7140772531980b8e29baa9436ee5}{log}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_physics_processor_system_a7e11037edc7618218a3fde3a16cca7f8}{Physics\+Processor\+Builder}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 10 of file Physics\+Processor\+System.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_physics_processor_system_a1480a8560ff76ba3fd8f828f46ce8409}\label{class_physics_processor_system_a1480a8560ff76ba3fd8f828f46ce8409}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{PhysicsProcessorSystem()}{PhysicsProcessorSystem()}}
+{\footnotesize\ttfamily Physics\+Processor\+System\+::\+Physics\+Processor\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Physics\+Processor\+System.\+cpp.
+
+\mbox{\Hypertarget{class_physics_processor_system_a9768223612639dccb80836b261df1c8d}\label{class_physics_processor_system_a9768223612639dccb80836b261df1c8d}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!````~PhysicsProcessorSystem@{$\sim$PhysicsProcessorSystem}}
+\index{````~PhysicsProcessorSystem@{$\sim$PhysicsProcessorSystem}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{$\sim$PhysicsProcessorSystem()}{~PhysicsProcessorSystem()}}
+{\footnotesize\ttfamily Physics\+Processor\+System\+::$\sim$\+Physics\+Processor\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 10 of file Physics\+Processor\+System.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_physics_processor_system_a341bffe39467948fe01950b3f6fb0484}\label{class_physics_processor_system_a341bffe39467948fe01950b3f6fb0484}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!Execute@{Execute}}
+\index{Execute@{Execute}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily void Physics\+Processor\+System\+::\+Execute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+This abstract method is called every iteration of system loop and must be defined by specified system. 
+
+
+
+Implements \mbox{\hyperlink{class_system_ada4f1974bb3502185af62cd51c8fce30}{System}}.
+
+
+
+Definition at line 95 of file Physics\+Processor\+System.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_physics_processor_system_a341bffe39467948fe01950b3f6fb0484_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_physics_processor_system_a97a20d1bc5573cd0d264ee5d87d7095a}\label{class_physics_processor_system_a97a20d1bc5573cd0d264ee5d87d7095a}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!OnLoad@{OnLoad}}
+\index{OnLoad@{OnLoad}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{OnLoad()}{OnLoad()}}
+{\footnotesize\ttfamily void Physics\+Processor\+System\+::\+On\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system startup and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_ac138c3ef20fdf8422d5548a8f005db02}{System}}.
+
+
+
+Definition at line 32 of file Physics\+Processor\+System.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_physics_processor_system_a97a20d1bc5573cd0d264ee5d87d7095a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_physics_processor_system_aeedb40af64cc3372f2f96d7b9bfe6b20}\label{class_physics_processor_system_aeedb40af64cc3372f2f96d7b9bfe6b20}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!OnUnload@{OnUnload}}
+\index{OnUnload@{OnUnload}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{OnUnload()}{OnUnload()}}
+{\footnotesize\ttfamily void Physics\+Processor\+System\+::\+On\+Unload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called on system shutdown and by default does nothing. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a79d6f674effc2030b94f439543b9bbaa}{System}}.
+
+
+
+Definition at line 91 of file Physics\+Processor\+System.\+cpp.
+
+\mbox{\Hypertarget{class_physics_processor_system_ad96a65a96076a972a58415ed18cab779}\label{class_physics_processor_system_ad96a65a96076a972a58415ed18cab779}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!Share@{Share}}
+\index{Share@{Share}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{Share()}{Share()}}
+{\footnotesize\ttfamily void Physics\+Processor\+System\+::\+Share (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}} $\ast$}]{resource\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method is called once after registration system within microkernel scope it is used to share internal resources with rest of system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_system_a6bdd5fc1fcae7148d8fb6baea981ffd6}{System}}.
+
+
+
+Definition at line 17 of file Physics\+Processor\+System.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_physics_processor_system_ad96a65a96076a972a58415ed18cab779_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_physics_processor_system_a7e11037edc7618218a3fde3a16cca7f8}\label{class_physics_processor_system_a7e11037edc7618218a3fde3a16cca7f8}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!PhysicsProcessorBuilder@{PhysicsProcessorBuilder}}
+\index{PhysicsProcessorBuilder@{PhysicsProcessorBuilder}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{PhysicsProcessorBuilder}{PhysicsProcessorBuilder}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_physics_processor_builder}{Physics\+Processor\+Builder}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 12 of file Physics\+Processor\+System.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_physics_processor_system_a0900d23c3d31d5a574d196013f444fa3}\label{class_physics_processor_system_a0900d23c3d31d5a574d196013f444fa3}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!errorFunction@{errorFunction}}
+\index{errorFunction@{errorFunction}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{errorFunction}{errorFunction}}
+{\footnotesize\ttfamily std\+::function$<$void(std\+::string)$>$$\ast$ Physics\+Processor\+System\+::error\+Function\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file Physics\+Processor\+System.\+h.
+
+\mbox{\Hypertarget{class_physics_processor_system_acf4e7140772531980b8e29baa9436ee5}\label{class_physics_processor_system_acf4e7140772531980b8e29baa9436ee5}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!log@{log}}
+\index{log@{log}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{log}{log}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_log}{ILog}}$\ast$ Physics\+Processor\+System\+::log\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file Physics\+Processor\+System.\+h.
+
+\mbox{\Hypertarget{class_physics_processor_system_a6c790482cdfd014cc60a6107a0a058a7}\label{class_physics_processor_system_a6c790482cdfd014cc60a6107a0a058a7}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!physicsProcessor@{physicsProcessor}}
+\index{physicsProcessor@{physicsProcessor}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{physicsProcessor}{physicsProcessor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_physics_processor}{Physics\+Processor}}$\ast$ Physics\+Processor\+System\+::physics\+Processor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 24 of file Physics\+Processor\+System.\+h.
+
+\mbox{\Hypertarget{class_physics_processor_system_a067353040f67760fe5f22d0f24934ebe}\label{class_physics_processor_system_a067353040f67760fe5f22d0f24934ebe}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!PPConfigPath@{PPConfigPath}}
+\index{PPConfigPath@{PPConfigPath}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{PPConfigPath}{PPConfigPath}}
+{\footnotesize\ttfamily const char$\ast$ Physics\+Processor\+System\+::\+PPConfig\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file Physics\+Processor\+System.\+h.
+
+\mbox{\Hypertarget{class_physics_processor_system_a063073fba1f8323cc8e5c7d48b015eb7}\label{class_physics_processor_system_a063073fba1f8323cc8e5c7d48b015eb7}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!resourceManager@{resourceManager}}
+\index{resourceManager@{resourceManager}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{resourceManager}{resourceManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_shared_name_resolver}{Shared\+Name\+Resolver}}$\ast$ Physics\+Processor\+System\+::resource\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file Physics\+Processor\+System.\+h.
+
+\mbox{\Hypertarget{class_physics_processor_system_a5f7c2a45eb3b29e9b277e5b045f97c34}\label{class_physics_processor_system_a5f7c2a45eb3b29e9b277e5b045f97c34}} 
+\index{PhysicsProcessorSystem@{PhysicsProcessorSystem}!TBO@{TBO}}
+\index{TBO@{TBO}!PhysicsProcessorSystem@{PhysicsProcessorSystem}}
+\doxysubsubsection{\texorpdfstring{TBO}{TBO}}
+{\footnotesize\ttfamily GLuint Physics\+Processor\+System\+::\+TBO\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file Physics\+Processor\+System.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_physics_processor_system_8h}{Physics\+Processor\+System.\+h}}\item 
+src/\+Physics\+Processor/\mbox{\hyperlink{_physics_processor_system_8cpp}{Physics\+Processor\+System.\+cpp}}\end{DoxyCompactItemize}

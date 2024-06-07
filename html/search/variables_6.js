@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['g_1865',['G',['../structsubstance.html#abf2c1d2dc1d5467a2201d9e214cad067',1,'substance::G()'],['../structcolor.html#a15be6fddaac7bcb6908aad5e970a7fc8',1,'color::G()']]],
+  ['g_1866',['g',['../structv_color.html#a02416d21a1cf7c49cbea20adefe800e3',1,'vColor']]],
+  ['g_1867',['G',['../struct_color.html#a783ba31724cf38fc5c0e34b503142af1',1,'Color']]],
+  ['gamma_5fblue_1868',['gamma_blue',['../struct_info.html#ace068a80e64b4ed97e2ef3a71f6b636c',1,'Info']]],
+  ['gamma_5fgreen_1869',['gamma_green',['../struct_info.html#a942c446ca08f6a6d481487cae53851e4',1,'Info']]],
+  ['gamma_5fred_1870',['gamma_red',['../struct_info.html#a5e8f1317f9cec9a98feca6da15388aef',1,'Info']]],
+  ['globalworksize_1871',['globalWorkSize',['../class_physics_processor.html#a3de2510a18134e813ff4fbc8195d7af7',1,'PhysicsProcessor']]],
+  ['glyfs_1872',['glyfs',['../class_text_element.html#a4b74d7a48d7287136f2ea0c80f24169a',1,'TextElement::glyfs()'],['../class_converter.html#af3f72df0dca0e74acfa6f63ffffaea66',1,'Converter::glyfs()']]],
+  ['graphics_1873',['graphics',['../class_application.html#ad68718d62500e8d1bdc307f4d0190633',1,'Application']]],
+  ['green_5fmask_1874',['green_mask',['../struct_info.html#a9cce72467ca973319bc54e35a290cb34',1,'Info']]],
+  ['green_5fx_1875',['green_x',['../struct_info.html#a1cda916409f65915eec327b0faef2c50',1,'Info']]],
+  ['green_5fy_1876',['green_y',['../struct_info.html#a6d405c6622293fab69961e29d7962f61',1,'Info']]],
+  ['green_5fz_1877',['green_z',['../struct_info.html#a4b4d8e04d687ff0f0f90425e4cc8ab46',1,'Info']]],
+  ['grid_1878',['grid',['../class_boids_system.html#a751b09b615becb244773238afc281ac1',1,'BoidsSystem']]],
+  ['guiobjects_1879',['guiObjects',['../class_scene.html#a5c71ff4cc506ed3aab449b1f0c3a07a7',1,'Scene']]],
+  ['guiprojectionmatrix_1880',['guiProjectionMatrix',['../class_graphic_system.html#a82a332bb4249b5e12ab1e9555c2a6af6',1,'GraphicSystem']]],
+  ['guishader_1881',['guiShader',['../class_graphic_system.html#a3b6a26d8cd194e42e21c9a712b1ee30d',1,'GraphicSystem']]]
+];
