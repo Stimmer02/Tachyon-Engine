@@ -33,8 +33,8 @@ public:
 
     Material(const GLShader * shader){
         this->shader = (GLShader *)shader;
-        this->checksum = CalculateChecksum();
         this->color = Vector3(1.0f, 1.0f, 1.0f);
+        this->checksum = CalculateChecksum();
     }
 
     Material(const Material * material){
@@ -42,6 +42,10 @@ public:
         this->mainTexture = material->mainTexture;
         this->color = material->color;
         this->checksum = material->checksum;
+    }
+
+    void RecalculateChecksum(){
+        this->checksum = CalculateChecksum();
     }
 
     virtual void Use(){

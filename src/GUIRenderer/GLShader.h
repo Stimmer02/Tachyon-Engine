@@ -167,6 +167,40 @@ public:
 
     }
 
+    void TransferToShader(const std::string & uniformName, const float * values, int count){
+
+        GLint location = GetUniformLocation(uniformName);
+
+        if( location == -1 )
+            return;
+
+        glUniform1fv(location, count, values);
+
+    }
+
+    void TransferToShader(const std::string & uniformName, const int * values, int count){
+
+        GLint location = GetUniformLocation(uniformName);
+
+        if( location == -1 )
+            return;
+
+        glUniform1iv(location, count, values);
+
+    }
+
+    void TransferToShader(const std::string & uniformName, const Vector3 * vectors, int count){
+
+        GLint location = GetUniformLocation(uniformName);
+
+        if( location == -1 )
+            return;
+
+        glUniform3fv(location, count, (GLfloat*)vectors);
+
+    }
+
+
     void TransferToShader(const std::string & uniformName, const Matrix & matrix){
 
         GLint location = GetUniformLocation(uniformName);

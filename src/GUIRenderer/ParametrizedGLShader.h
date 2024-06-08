@@ -32,6 +32,12 @@ private:
                 case DataType::Int:
                     TransferToShader(entry.first,  *((int*)pair.second) );
                     break;
+                case DataType::Vector:
+                    TransferToShader(entry.first,  *((Vector3*)pair.second) );
+                    break;
+                case DataType::Matrix:
+                    TransferToShader(entry.first,  *((Matrix*)pair.second) );
+                    break;
 
             }
 
