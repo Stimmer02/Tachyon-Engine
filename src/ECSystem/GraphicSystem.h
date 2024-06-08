@@ -57,6 +57,7 @@ private:
         Archetype archetype = object->GetArchetype() & (RenderingAttributes::ATTRIB_MAX - 1);
         archetypeFunc[archetype](object);
 
+        object->material->Dispose();
         object->Update();
 
     }

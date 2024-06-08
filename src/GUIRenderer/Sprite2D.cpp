@@ -107,9 +107,16 @@ GLuint Sprite2D::GetTextureID(){
 void Sprite2D::Load(GLShader * shader){
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
+
+    if( isTransparent ){
+        glEnable(GL_BLEND);
+        glBlendFunc(sfactor, dfactor);
+    }
+
 }
 
 void Sprite2D::UnLoad(){
+    glDisable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 

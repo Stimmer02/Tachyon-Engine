@@ -50,6 +50,11 @@ public:
         this->shader->TransferToShader("u_color", color);
     }
 
+    virtual void Dispose(){
+        this->shader->Dispose();
+        this->mainTexture->UnLoad();
+    }
+
     bool operator==(const Material& other) const {
         return checksum == other.checksum;
     }

@@ -42,24 +42,22 @@ public:
 	}
 
 	void RemoveEntityFromScene(SceneObject * object){
+		if (object == nullptr)
+        	return;
+
 		Entity ID = object->GetEntityID();
 		entities.Destroy( ID );
 
-		for (auto it = objects.begin(); it != objects.end(); ++it) {
-			if (*it == object) {
-				objects.erase(it);
-				delete object;
+    auto it = std::find(objects.begin(), objects.end(), object);
+    if ( it == objects.end() )
+		return;
+
+    objects.erase(it);
+    delete object;
 
 #ifdef DEBUG
-
-		fprintf(stdout, "[DEBUG] Removed entity %d\n", ID);
-
+        fprintf(stdout, "[DEBUG] Removed entity %d\n", ID);
 #endif
-
-				break;
-			}
-		}
-
 
 	}
 

@@ -18,7 +18,7 @@ class GLShader;
 static GLShader * currentShader;
 
 class GLShader{
-private:
+protected:
 
     std::list<GLuint> shaders;
     std::map<std::string, GLint> uniforms;
@@ -108,7 +108,7 @@ public:
 
     }
 
-    void Use(){
+    virtual void Use(){
         currentShader = this;
         glUseProgram(shaderProgram);
     }
@@ -178,7 +178,7 @@ public:
 
     }
 
-    ~GLShader(){
+    virtual ~GLShader(){
 
 #ifdef DEBUG
 

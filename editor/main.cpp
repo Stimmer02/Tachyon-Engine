@@ -1,6 +1,7 @@
 #include "Boids.h"
 #include "Fractal.h"
 #include "Lines.h"
+#include "Snake.h"
 
 int main(){
 
@@ -9,7 +10,7 @@ int main(){
     Scene scene;
     app.LoadScene(scene);
 
-    LinesSystem * fract = new LinesSystem();
+    SnakeSystem * fract = new SnakeSystem();
     app.RegisterSystem(fract);
 
     app.Loop();
