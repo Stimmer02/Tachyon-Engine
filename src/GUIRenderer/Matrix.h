@@ -376,11 +376,15 @@ public:
 
     }
 
-    static Matrix LookAt(const Vector3 & position, const Vector3 & front, const Vector3 & up, const Vector3 & right){
+    static Matrix LookAt(const Vector3 & position, const Vector3 & target, const Vector3 & worldUp){
 
         Matrix look;
 
         float * data = look.Data();
+
+        Vector3 front = (position - target).Normalize();
+        Vector3 right = Vector3::Cross(worldUp, front).Normalize();
+        Vector3 up = Vector3::Cross(front, right).Normalize();
 
         data[0] = right.x;
         data[1] = right.y;

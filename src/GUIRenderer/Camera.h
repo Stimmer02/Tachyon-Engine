@@ -51,17 +51,23 @@ public:
         this->position = Vector3(0.0f, 0.0f, 0.0f);
         this->front = Vector3(0.0f, 0.0f, 1.0f);
         this->up = worldUp;
-        this->right = Vector3::Cross(front, worldUp).Normalize();
+        this->right = Vector3::Cross(worldUp, front).Normalize();
         this->yaw = -90.0f;
         this->pitch = 0.0f;
     }
 
-    Matrix GetViewMatrix() const{
-
-        Vector3 right = Vector3::Cross(up, front).Normalize();
-        return Matrix::LookAt(position, front, up, right);
-
+    Matrix GetViewMatrix() const {
+        return Matrix::LookAt(position, position + front, up);
     }
+
+    Matrix GetProjectionMatrix(float aspectRatio) const {
+        return Matrix::Perspective(fov, aspectRatio, 0.1f, 1000.0f);
+    }
+
+    Matrix GetRotationMatrix() const {
+        return GetViewMatrix().Inverse();
+    }
+
 
     void ResetView(){
 
@@ -95,7 +101,7 @@ public:
         this->yaw += scaledXOffset;
         this->pitch += scaledYOffset;
 
-        pitch = std::fmax(-89.0f , std::fmin(pitch, 89.0f));
+        pitch = std::fmax(-44.0f , std::fmin(pitch, 44.0f));
 
         UpdateVectors();
 

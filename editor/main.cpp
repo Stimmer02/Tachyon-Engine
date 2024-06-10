@@ -2,7 +2,7 @@
 #include "Fractal.h"
 #include "Lines.h"
 #include "Snake.h"
-#include "Landscape.h"
+#include "Water.h"
 
 int main(){
 
@@ -11,7 +11,7 @@ int main(){
     Scene scene;
     app.LoadScene(scene);
 
-    LandscapeSystem * fract = new LandscapeSystem();
+    BoidsSystem * fract = new BoidsSystem();
     app.RegisterSystem(fract);
 
     app.Loop();

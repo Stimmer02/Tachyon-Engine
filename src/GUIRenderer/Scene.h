@@ -6,6 +6,7 @@
 #include "SceneObject.h"
 #include "GUIElement.h"
 #include "Sprite.h"
+#include <algorithm>
 #include <stdio.h>
 #include <vector>
 
@@ -48,12 +49,12 @@ public:
 		Entity ID = object->GetEntityID();
 		entities.Destroy( ID );
 
-    auto it = std::find(objects.begin(), objects.end(), object);
-    if ( it == objects.end() )
-		return;
+		auto it = std::find(objects.begin(), objects.end(), object);
+		if ( it == objects.end() )
+			return;
 
-    objects.erase(it);
-    delete object;
+		objects.erase(it);
+		delete object;
 
 #ifdef DEBUG
         fprintf(stdout, "[DEBUG] Removed entity %d\n", ID);

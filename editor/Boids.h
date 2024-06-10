@@ -133,7 +133,7 @@ class BoidsSystem : public System {
                 boid->transform.position.y = 0;
 
             if (velocities[i].Magnitude() > 0)
-                boid->transform.rotation = Quaternion::ToQuaternion(velocities[i].Normalize() + Vector3(0.0f, 0.0f, 90.0f));
+                boid->transform.rotation = Quaternion::ToQuaternion(velocities[i].Normalize() - Vector3(0.0f, 0.0f, 90.0f));
         }
     }
 

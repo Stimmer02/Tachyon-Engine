@@ -25,11 +25,12 @@ GLuint CubeSprite::GetTextureID(){
 
 
 void CubeSprite::Load(GLShader * shader){
-
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 }
 
 void CubeSprite::UnLoad(){
-
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
 void CubeSprite::ClearColor(const Color & clearColor){
@@ -37,5 +38,5 @@ void CubeSprite::ClearColor(const Color & clearColor){
 }
 
 CubeSprite::~CubeSprite(){
-
+    glDeleteTextures(1, &texture);
 }

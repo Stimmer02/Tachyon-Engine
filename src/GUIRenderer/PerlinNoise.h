@@ -68,7 +68,7 @@ public:
         Grad(p[BA], x - 1, y)),
         Lerp(u, Grad(p[AB], x, y - 1),
         Grad(p[BB], x - 1, y - 1))
-        ) * 0.5 + 0.5;
+        );
     }
 
 };

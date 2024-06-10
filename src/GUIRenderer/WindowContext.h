@@ -102,13 +102,15 @@ public:
         if( depthBuffer ){
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
+            bufferbits |= GL_DEPTH_BUFFER_BIT;
+
         }else{
             glDisable(GL_DEPTH_TEST);
+            bufferbits ^= GL_DEPTH_BUFFER_BIT;
         }
 
         windowLogger->Write(LogMessageType::M_INFO, "Current Z-Buffer state : %s\n", depthBuffer?"Enabled":"Disabled");
 
-        bufferbits ^= GL_DEPTH_BUFFER_BIT;
 
     }
 

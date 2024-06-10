@@ -106,7 +106,7 @@ Image BitmapReader::ReadFile(const char * filename){
     ParseHeader(raw_data, offset);
     ParseInfo(raw_data, offset);
 
-    if (infoHeader.bits_per_pixel != 24 && infoHeader.bits_per_pixel != 32) {
+    if (infoHeader.bits_per_pixel % 8 != 0) {
         fprintf(stderr, "Unsupported pixel format: %u bits per pixel\n", infoHeader.bits_per_pixel);
         delete[] raw_data;
         return Image();
@@ -118,7 +118,14 @@ Image BitmapReader::ReadFile(const char * filename){
 
 
     Color * pixels = new Color[pixel_count];
-    unsigned char tempColor[4] = {0};
+    unsigned char *tempColor = new unsigned char[bytes_per_pixel];
+
+    unsigned char *color_palette = nullptr;
+    if (infoHeader.bits_per_pixel <= 8) {
+        uint32_t palette_size = (infoHeader.colors_used == 0 ? 1 << infoHeader.bits_per_pixel : infoHeader.colors_used) * 4;
+        color_palette = new unsigned char[palette_size];
+        ParseData((char*)color_palette, raw_data, offset, palette_size);
+    }
 
     // Read data
     for (uint32_t y = 0; y < (uint32_t)infoHeader.height; ++y) {
@@ -127,17 +134,34 @@ Image BitmapReader::ReadFile(const char * filename){
 
             uint32_t id = (infoHeader.height - 1 - y) * infoHeader.width + x;
 
-            unsigned char* data = (unsigned char*)&pixels[id];
+            unsigned char *data = (unsigned char*)&pixels[id];
 
-            data[0] = tempColor[2];
-            data[1] = tempColor[1];
-            data[2] = tempColor[0];
-            data[3] = (bytes_per_pixel == 4) ? tempColor[3] : 255;
+            if (color_palette && bytes_per_pixel == 1) {
+                int palette_index = tempColor[0];
+                data[0] = color_palette[palette_index * 4 + 2]; // Blue
+                data[1] = color_palette[palette_index * 4 + 1]; // Green
+                data[2] = color_palette[palette_index * 4 + 0]; // Red
+                data[3] = 255; // Alpha
+            } else if (bytes_per_pixel == 1) {
+                data[0] = tempColor[0];
+                data[1] = tempColor[0];
+                data[2] = tempColor[0];
+                data[3] = 255;
+            } else {
+                data[0] = tempColor[2]; // Blue
+                data[1] = tempColor[1]; // Green
+                data[2] = tempColor[0]; // Red
+                data[3] = (bytes_per_pixel == 4) ? tempColor[3] : 255; // Alpha
+            }
         }
         offset += (row_size - infoHeader.width * bytes_per_pixel);
     }
 
     delete[] raw_data;
+    delete[] tempColor;
+
+    if (color_palette)
+        delete[] color_palette;
 
     Image image;
     image.width = infoHeader.width;

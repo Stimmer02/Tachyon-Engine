@@ -160,9 +160,9 @@ public:
         float aspect = GraphicConfig::windowWidth/(float) GraphicConfig::windowHeight;
 
         if(GraphicConfig::useOrthographicProjection){
-            this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -200.0f, 200.0f);
+            this->projectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -400.0f, 400.0f);
         }else{
-            this->projectionMatrix = Matrix::Perspective(60.0f, aspect, 0.1f, 1000.0f);
+            this->projectionMatrix = Matrix::Perspective(45.0f, aspect, 0.1f, 2000.0f);
         }
 
         this->guiProjectionMatrix = Matrix::Ortho(0, GraphicConfig::windowWidth, 0, GraphicConfig::windowHeight, -1, 10);

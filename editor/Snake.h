@@ -12,6 +12,8 @@ class SnakeSystem : public System {
 
     Mesh * mesh;
 
+    GLShader * snakeShader;
+
     Material * fruitMaterial;
     Material * bodyMaterial, * tailMaterial;
     Material * backgroundMaterial;
@@ -37,14 +39,14 @@ class SnakeSystem : public System {
     void RotateTowards(SceneObject* segment, const Vector3& targetPosition) {
         Vector3 directionToTarget = targetPosition - segment->transform.position;
         float angle = atan2(directionToTarget.y, directionToTarget.x);
-        segment->transform.rotation = Quaternion::ToQuaternion(Vector3(0.0f, 0.0f, angle - M_PI/2.0f));
+        segment->transform.rotation = Quaternion::ToQuaternion(Vector3(0.0f, 0.0f, angle + M_PI/2.0f));
     }
 
     void GenerateBackground(){
 
         sprites.push_back(new Sprite2D("resources/sprites/tiles_check.bmp"));
 
-        backgroundMaterial = new Material(defaultMaterial);
+        backgroundMaterial = new Material(snakeShader);
         backgroundMaterial->mainTexture = sprites.back();
 
         background = scene->CreateEntity();
@@ -184,6 +186,12 @@ public:
 
     void OnLoad() override {
 
+        snakeShader = new GLShader();
+        snakeShader->LinkShader("resources/shaders/scanlines.vert", GL_VERTEX_SHADER);
+        snakeShader->LinkShader("resources/shaders/scanlines.frag", GL_FRAGMENT_SHADER);
+        snakeShader->Build();
+
+
         sprites.push_back(new Sprite2D("resources/sprites/fruit_1.bmp"));
         sprites.back()->EnableTransparency();
         sprites.push_back(new Sprite2D("resources/sprites/fruit_2.bmp"));
@@ -200,14 +208,14 @@ public:
         mesh = new Mesh();
         mesh->GenQuad(segmentDistance, segmentDistance);
 
-        bodyMaterial = new Material(defaultMaterial);
+        bodyMaterial = new Material(snakeShader);
         bodyMaterial->mainTexture = sprites[3];
 
-        tailMaterial = new Material(defaultMaterial);
+        tailMaterial = new Material(snakeShader);
         tailMaterial->mainTexture = sprites[4];
 
         SceneObject * head = scene->CreateEntity();
-        head->material = new Material(defaultMaterial);
+        head->material = new Material(snakeShader);
         head->material->mainTexture = sprites[2];
 
         scene->AddEntityToScene(head);
@@ -224,7 +232,7 @@ public:
             snake.push_back(segment);
         }
 
-        fruitMaterial = new Material(defaultMaterial);
+        fruitMaterial = new Material(snakeShader);
         fruitMaterial->mainTexture = sprites[0];
 
         fruit = scene->CreateEntity();

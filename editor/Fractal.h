@@ -6,7 +6,11 @@
 #include <thread>
 #include <cmath>
 #include <mutex>
+#include <future>
 #include <queue>
+#include <atomic>
+
+#define NUMTHREADS 4
 
 class FractalSystem : public System {
     Scene* scene;
@@ -38,37 +42,59 @@ class FractalSystem : public System {
         }
     }
 
-    void Execute() override {
-        static int currentY = 0;
+    void ComputeFractalRow(int startRow, int endRow, int imgWidth, int imgHeight, int maxIteration, float cx, float cy) {
+        for (int currentY = startRow; currentY < endRow; currentY++) {
+            for (int currentX = 0; currentX < imgWidth; currentX++) {
+                float x0 = (float)currentX / imgWidth * 3.5f - 2.0f;
+                float y0 = (float)currentY / imgHeight * 2.0f - 1.0f;
+                float x = x0;
+                float y = y0;
+                int iteration = 0;
 
-        Vector3 pos = input->GetMousePosition();
-        float cx = ((pos.x - GraphicConfig::windowWidth * 0.5f) / GraphicConfig::windowWidth) + 0.5f;
-        float cy = ((pos.y - GraphicConfig::windowHeight * 0.5f) / GraphicConfig::windowHeight) + 0.5f;
+                while (x*x + y*y <= 4 && iteration < maxIteration) {
+                    float xtemp = x*x - y*y + cx;
+                    y = 2*x*y + cy;
+                    x = xtemp;
+                    iteration++;
+                }
 
-        for (int currentX = 0; currentX < img.width; currentX++) {
-
-            float x = (float)currentX / img.width * 3.5f - 2.0f;
-            float y = (float)currentY / img.height * 2.0f - 1.0f;
-            int iteration = 0;
-
-            while (x*x + y*y <= 4 && iteration < maxIteration) {
-                float xtemp = x*x - y*y + cx;
-                y = 2*x*y + cy;
-                x = xtemp;
-                iteration++;
+                img.pixels[currentY * imgWidth + currentX] = colorLookup[iteration];
             }
+        }
+    }
 
-            img.pixels[currentY * img.width + currentX] = colorLookup[iteration];
+    void Execute() override {
+        static float angle = 0.0f;
+
+        float cx = cos(angle) + 0.5f;
+        float cy = sin(angle) + 0.5f;
+
+        int imgWidth = img.width;
+        int imgHeight = img.height;
+
+        std::vector<std::thread> threads;
+        std::atomic<int> nextRow(0);
+
+        auto threadFunc = [&]() {
+            int currentRow;
+            while ((currentRow = nextRow.fetch_add(1)) < imgHeight) {
+                ComputeFractalRow(currentRow, currentRow + 1, imgWidth, imgHeight, maxIteration, cx, cy);
+            }
+        };
+
+        for (int i = 0; i < NUMTHREADS; i++) {
+            threads.emplace_back(threadFunc);
+        }
+
+        for (auto& thread : threads) {
+            if (thread.joinable()) {
+                thread.join();
+            }
         }
 
         canvas->UploadImage(img);
 
-        currentY++;
-
-        if( currentY >= img.height ){
-            currentY = 0;
-        }
-
+        angle += timer->GetDeltaFrame();
     }
 
 public:

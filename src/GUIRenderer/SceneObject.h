@@ -86,19 +86,18 @@ public:
         Matrix rotation = Matrix::Rotate(transform.rotation);
         Matrix scale = Matrix::Scale(transform.scale.x, transform.scale.y, transform.scale.z);
 
+        Matrix localTransform = translation * rotation * scale;
+
         if( parent == nullptr ){
-            model = translation * rotation * scale;
+            model = localTransform;
         }else{
-            model = parent->model * translation * rotation * scale;
+            model = parent->model * localTransform;
         }
 
-        for(std::vector<SceneObject*>::iterator it = childrens.begin(); it != childrens.end(); it++){
-            SceneObject * children = *it;
-
-            if(children == nullptr)
-                continue;
-
-            children->Update();
+        for (SceneObject * child : childrens) {
+            if (child != nullptr) {
+                child->Update();
+            }
         }
 
     }
